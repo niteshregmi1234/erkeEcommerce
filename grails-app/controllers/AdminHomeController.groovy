@@ -1,0 +1,6 @@
+
+
+class AdminHomeController {
+
+    def adminHome() { }
+}

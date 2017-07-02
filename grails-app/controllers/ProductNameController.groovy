@@ -1,0 +1,6 @@
+
+
+class ProductNameController {
+
+    def index() {}
+}
