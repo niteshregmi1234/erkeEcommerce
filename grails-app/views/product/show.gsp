@@ -81,7 +81,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Name:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.name}</div>
+                <div style="margin-top: 7px;">${productInstance.productName.productName}</div>
             </div>
         </div>
     </div>

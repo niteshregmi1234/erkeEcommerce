@@ -43,10 +43,11 @@ def checkPhoto(){
             product.frontImageName=upLoadFrontImage()
             product.sideImageName=uploadSideImage()
             product.backImageName=uploadBackImage()
-            product.name=params.name
+            product.productName=Product.get(params.productName)
             product.productBrand=ProductBrand.get(params.productBrand)
             product.price=params.price as float
-            product.isSale=params.isSale as boolean
+            product.isSale=params.isSale
+            print product.isSale
             if(product.isSale==true){
                 product.discountPercentage=params.discountPercentage as float
             }
@@ -55,7 +56,7 @@ def checkPhoto(){
             }
             product.isFeatured=params.isFeatured as boolean
             product.isLatest=params.isLatest as boolean
-            product.isMenuBar=params.isMenuBar as boolean
+            product.isMenuBar=params.isMenuBar
             product.description=params.description
             product.save(flush: true)
             redirect(action: "show" ,id:product.id)
@@ -69,10 +70,11 @@ def checkPhoto(){
             product.frontImageName=editFrontImage(product.frontImageName)
             product.sideImageName=editSideImage(product.sideImageName)
             product.backImageName=editBackImage(product.backImageName)
-            product.name=params.name
+            product.productName=Product.get(params.productName)
             product.productBrand=ProductBrand.get(params.productBrand)
             product.price=params.price as float
             product.isSale=params.isSale as boolean
+            print params.isSale
             if(product.isSale==true){
                 product.discountPercentage=params.discountPercentage as float
             }
@@ -83,7 +85,7 @@ def checkPhoto(){
             product.isLatest=params.isLatest as boolean
             product.description=params.description
             print params.isMenuBar
-            product.isMenuBar=params.isMenuBar as boolean
+            product.isMenuBar=params.isMenuBar
             product.save(flush: true)
             redirect(action: "show" ,id:product.id)
         }

@@ -82,6 +82,8 @@
                     <li><g:link action="list" controller="productColor">Product Color</g:link></li>
                     <li><g:link action="list" controller="productSize">Product Size</g:link></li>
                     <li><g:link action="list" controller="productBrand">Product Brand</g:link></li>
+
+                    <li><g:link action="list" controller="productName">Product Name</g:link></li>
                     <li><g:link action="list" controller="seasons">Season</g:link></li>
 
                 </ul>

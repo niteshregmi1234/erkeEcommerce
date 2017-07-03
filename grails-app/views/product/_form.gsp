@@ -7,9 +7,7 @@
                 <g:select class="selectpicker" id="productCategory" name="productCategory" value="${productInstance?.productCategory?.id}"
                           from="${ProductCategory.findAllByStatusShow(true)}" optionKey="id" optionValue="categoryName" data-show-subtext="true"
                           data-live-search="true" title="choose Category "/>
-                %{--<g:textField name="categoryName" id="categoryName" value="${productCategoryInstance?.categoryName}" class="form-control"/>--}%
-                %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%
-                %{--<input type="email" class="form-control" id="email" placeholder="Enter email">--}%
+
             </div>
         </div>
     </div>
@@ -21,10 +19,7 @@
                 <g:select class="selectpicker" id="productSubCategory" name="productSubCategory" value="${productInstance?.productSubCategory?.id}"
                           from="${ProductSubCategory.findAllByStatusShow(true)}" optionKey="id" optionValue="subCategoryName" data-show-subtext="true"
                           data-live-search="true" title="choose Sub-Category "/>
-                %{--<g:select name="statusShow" from="${[true: 'TRUE', false: 'FALSE']}"--}%
-                              %{--optionKey="key" optionValue="value"  value="${productCategoryInstance?.statusShow}" class="form-control"/>--}%
-                %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%
-                %{--<input type="email" class="form-control" id="email" placeholder="Enter email">--}%
+
             </div>
         </div>
     </div>
@@ -36,10 +31,7 @@
                 <g:select class="selectpicker" id="productSize" name="productSize" value="${productInstance?.productSize?.id}"
                           from="${ProductSize.findAllByStatusShow(true)}" optionKey="id" optionValue="sizeName" data-show-subtext="true"
                           data-live-search="true" title="choose size "/>
-                %{--<g:select name="statusShow" from="${[true: 'TRUE', false: 'FALSE']}"--}%
-                %{--optionKey="key" optionValue="value"  value="${productCategoryInstance?.statusShow}" class="form-control"/>--}%
-                %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%
-                %{--<input type="email" class="form-control" id="email" placeholder="Enter email">--}%
+
             </div>
         </div>
     </div>
@@ -51,10 +43,6 @@
                 <g:select class="selectpicker" id="productColor" name="productColor" value="${productInstance?.productColor?.id}"
                           from="${ProductColor.findAllByStatusShow(true)}" optionKey="id" optionValue="colorName" data-show-subtext="true"
                           data-live-search="true" title="choose color "/>
-                %{--<g:select name="statusShow" from="${[true: 'TRUE', false: 'FALSE']}"--}%
-                %{--optionKey="key" optionValue="value"  value="${productCategoryInstance?.statusShow}" class="form-control"/>--}%
-                %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%
-                %{--<input type="email" class="form-control" id="email" placeholder="Enter email">--}%
             </div>
         </div>
     </div>
@@ -88,9 +76,12 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group">
-            <label class="control-label col-sm-4">Name:</label>
+            <label class="control-label col-sm-4">Choose Name:</label>
             <div class="col-sm-6">
-                <g:textField name="name" id="name" class="form-control" value="${productInstance?.name}"/>
+                <g:select class="selectpicker" id="productName" name="productName" value="${productInstance?.productName?.id}"
+                          from="${ProductName.list()}" optionKey="id" optionValue="productName" data-show-subtext="true"
+                          data-live-search="true" title="choose name"/>
+
             </div>
         </div>
     </div>
@@ -160,8 +151,8 @@
         <div class="form-group">
             <label class="control-label col-sm-2">IsMenuBar:</label>
             <div class="col-sm-3">
-                <g:select name="active" from="${['TRUE','FALSE']}"
-                          keys="${[true,false]}" value="${productInstance?.isMenuBar}" class="form-control"/>
+                <g:select name="isMenuBar" from="${['Enabled','Disabled']}"
+                          keys="${[1,0]}" value="${productInstance?.isMenuBar}" class="form-control"/>
             </div>
         </div>
     </div>
@@ -189,10 +180,11 @@
             var productSubCategory = document.getElementById("productSubCategory").value;
             var productColor = document.getElementById("productColor").value;
             var productSize = document.getElementById("productSize").value;
-            var name = document.getElementById("name").value;
             var productBrand = document.getElementById("productBrand").value;
             var price = document.getElementById("price").value;
             var isSale = document.getElementById("isSale").value;
+            var productName = document.getElementById("productName").value;
+
 
             var discountPercentage = document.getElementById("discountPercentage").value;
             var description = document.getElementById("descriptionArea").value;
@@ -401,12 +393,12 @@ if(discountPercentage.length>0){
                 return false;
             }
 
-            else if(name==''){
+            else if(productName==''){
                 bootbox.alert({
-                    message: "name must not be blank",
+                    message: "name must be selected",
                     size: 'small'
                 });
-                document.getElementById("name").focus();
+                document.getElementById("productName").focus();
                 return false;
             }
 

@@ -7,7 +7,7 @@ ProductCategory productCategory
     String frontImageName
     String sideImageName
     String backImageName
-    String name
+    ProductName productName
     ProductBrand productBrand
     boolean isSale
     float discountPercentage
