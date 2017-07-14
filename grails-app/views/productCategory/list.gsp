@@ -24,7 +24,6 @@
     <tr>
         <th>SN</th>
         <th>View</th>
-
         <th>Category Name</th>
         <th>Show Status</th>
     </tr>

@@ -15,9 +15,9 @@
 <g:form action="save" controller="seasonsManagement" class="form-horizontal"  onsubmit="return ValidateUpdate();">
     <g:hiddenField name="id" value="${seasonsManagementInstance?.id}"></g:hiddenField>
 
-    <div class="col-lg-6" style="margin-top: 15%;">
+    <div class="col-lg-12" style="margin-top: 15%;">
         <div class="form-group">
-            <label class="control-label col-sm-4">Choose Season:</label>
+            <label class="control-label col-sm-4">Choose ${seasonsManagementInstance.seasonStatusName} Season:</label>
             <div class="col-sm-6">
                 <g:select class="selectpicker" id="season" name="season" value="${seasonsManagementInstance?.seasons?.id}"
                           from="${Seasons.list()}" optionKey="id" optionValue="seasonName" data-show-subtext="true"

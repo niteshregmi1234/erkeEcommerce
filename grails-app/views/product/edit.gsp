@@ -36,22 +36,15 @@
 
     function ValidateUpdate(oForm) {
         var responseValue;
-        var productCategory = document.getElementById("productCategory").value;
-        var productSubCategory = document.getElementById("productSubCategory").value;
         var productColor = document.getElementById("productColor").value;
-        var productSize = document.getElementById("productSize").value;
-        var name = document.getElementById("name").value;
-        var productBrand = document.getElementById("productBrand").value;
-        var price = document.getElementById("price").value;
-        var isSale = document.getElementById("isSale").value;
-
-        var discountPercentage = document.getElementById("discountPercentage").value;
-        var description = document.getElementById("descriptionArea").value;
+        var productDetails = document.getElementById("productDetails").value;
 
         var frontImageName = document.getElementById("frontImageName").value;
         var backImageName = document.getElementById("backImageName").value;
         var sideImageName = document.getElementById("sideImageName").value;
-        if(frontImageName.length>0 || backImageName.length>0 || sideImageName.length>0) {
+        var specialImageName = document.getElementById("specialImageName").value;
+
+        if(frontImageName.length>0 || backImageName.length>0 || sideImageName.length>0 ||specialImageName.length>0) {
             var arrInputs = oForm.getElementsByTagName("input");
             for (var i = 0; i < arrInputs.length; i++) {
                 var oInput = arrInputs[i];
@@ -164,70 +157,37 @@
                 }
             });
         }
-        if(price.length>0){
-            var price = document.getElementById("price").value;
+        if(specialImageName.length>0){
 
-            var valid = (price.match(/^-?\d*(\.\d+)?$/));
+            var jForm = new FormData();
 
-            if(!valid){
-                document.getElementById("price").focus();
-                bootbox.alert({
-                    message: "invalid price",
-                    size: 'small'
-                });
-                return false;
+            jForm.append("Image", $('#specialImageName').get(0).files[0]);
+            $.ajax({
+                url: "${createLink(controller:'product', action:'checkPhoto')}",
+                type: "POST",
+                data: jForm,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                async: false,
+                success: function (result) {
+                    if(result=="Photo bad format"){
+                        bootbox.alert({
+                            message: "Image bad format",
+                            size: 'small'
+                        });
+                        responseValue=false;
 
-            }
-        }
-        if(discountPercentage.length>0){
-            var discountPercentage = document.getElementById("discountPercentage").value;
+                    }
 
-            var valid = (discountPercentage.match(/^-?\d*(\.\d+)?$/));
-
-            if(!valid){
-                document.getElementById("discountPercentage").focus();
-                bootbox.alert({
-                    message: "invalid discount",
-                    size: 'small'
-                });
-                return false;
-
-            }
-            else if(discountPercentage<0 ||discountPercentage>100 ){
-                document.getElementById("discountPercentage").focus();
-                bootbox.alert({
-                    message: "discount % must be between 0 and 100",
-                    size: 'small'
-                });
-                return false;
-
-            }
-        }
-        if(productCategory==''){
-            bootbox.alert({
-                message: "Category must be selected",
-                size: 'small'
+                    else{
+                        responseValue=true;
+                    }
+                }
             });
-            document.getElementById("productCategory").focus();
-            return false;
-        }
-        else if(productSubCategory==''){
-            bootbox.alert({
-                message: "sub-Category must be selected",
-                size: 'small'
-            });
-            document.getElementById("productSubCategory").focus();
-            return false;
         }
 
-        else if(productSize==''){
-            bootbox.alert({
-                message: "Size must be selected",
-                size: 'small'
-            });
-            document.getElementById("productSize").focus();
-            return false;
-        }
         else if(productColor==''){
             bootbox.alert({
                 message: "Color must be selected",
@@ -237,54 +197,15 @@
             return false;
         }
 
-        else if(name==''){
+        else if(productDetails==''){
             bootbox.alert({
-                message: "name must not be blank",
+                message: "product name must be choosen",
                 size: 'small'
             });
-            document.getElementById("name").focus();
+            document.getElementById("productDetails").focus();
             return false;
         }
 
-        else if(productBrand==''){
-            bootbox.alert({
-                message: "brand must be selected",
-                size: 'small'
-            });
-            document.getElementById("productBrand").focus();
-            return false;
-        }
-        else if(price==''){
-            bootbox.alert({
-                message: "price must not be blank",
-                size: 'small'
-            });
-            document.getElementById("price").focus();
-            return false;
-        }
-        else if(description==''){
-            bootbox.alert({
-                message: "description must not be blank",
-                size: 'small'
-            });
-            document.getElementById("descriptionArea").focus();
-            return false;
-        }
-
-        else if(isSale=="true") {
-
-            if (discountPercentage == '') {
-
-                bootbox.alert({
-                    message: "discount must not be blank",
-                    size: 'small'
-                });
-                document.getElementById("discountPercentage").focus();
-                return false;
-            }
-
-
-        }
 
 
 

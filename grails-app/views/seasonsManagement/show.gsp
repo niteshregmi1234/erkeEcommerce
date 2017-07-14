@@ -20,7 +20,7 @@
 
     <div class="col-lg-12" style="margin-top: 15%;">
         <div class="form-group">
-            <label class="control-label col-sm-2">Season:</label>
+            <label class="control-label col-sm-4">${seasonsManagementInstance.seasonStatusName} Season:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${seasonsManagementInstance.seasons.seasonName}</div>
 

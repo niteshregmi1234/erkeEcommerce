@@ -24,17 +24,9 @@
     <tr>
         <th>SN</th>
         <th>View</th>
-        <th>Category</th>
-        <th>Sub-Category</th>
         <th>Color</th>
-        <th>Size</th>
-        <th>Brand</th>
-        <th>IsSale</th>
-        <th>Discount(%)</th>
         <th>IsLatest</th>
         <th>IsFeatured</th>
-        <th>Price</th>
-        <th>IsMenuBar</th>
     </tr>
     </thead>
     <tbody>
@@ -42,18 +34,10 @@
         <tr>
             <td>${i+1}</td>
             <td> <g:link action="show" id="${list?.id}" controller="product" class="btn btn-primary btn-sm">view</g:link></td>
-            <td>${list.productCategory.categoryName}</td>
-            <td>${list.productSubCategory.subCategoryName}</td>
 
             <td>${list.productColor.colorName}</td>
-            <td>${list.productSize.sizeName}</td>
-            <td>${list.productBrand.brandName}</td>
-            <td>${list.isSale}</td>
-            <td>${list.discountPercentage}</td>
             <td>${list.isLatest}</td>
             <td>${list.isFeatured}</td>
-            <td>${list.price}</td>
-<td>${list.isMenuBar}</td>
         </tr>
     </g:each>
     </tbody>

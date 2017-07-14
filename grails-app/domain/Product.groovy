@@ -1,21 +1,15 @@
 
 class Product {
-ProductCategory productCategory
-    ProductSubCategory productSubCategory
+    ProductDetails productDetails
     ProductColor productColor
-    ProductSize productSize
     String frontImageName
     String sideImageName
     String backImageName
-    ProductName productName
-    ProductBrand productBrand
-    boolean isSale
-    float discountPercentage
+    Seasons seasons
     boolean isLatest
     boolean isFeatured
-    float price
-    String description
-    boolean isMenuBar
+    String productSpecificationName
+    String specialImageName
     static constraints = {
 
     }

@@ -27,6 +27,53 @@
     </div>
     <div class="col-lg-12">
         <div class="form-group ">
+            <label class="control-label col-sm-2">Cover Image:</label>
+            <div class="col-sm-6">
+                <img src="${resource(dir: "images/categoryImage",file: "${productCategoryInstance.coverImageName}")}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Shop Image:</label>
+            <div class="col-sm-6">
+                <img src="${resource(dir: "images/categoryImage",file: "${productCategoryInstance.shoppingImageName}")}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Menu Image1:</label>
+            <div class="col-sm-6">
+                <img src="${resource(dir: "images/categoryImage",file: "${productCategoryInstance.menuImage1}")}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Menu Image2:</label>
+            <div class="col-sm-6">
+                <img src="${resource(dir: "images/categoryImage",file: "${productCategoryInstance.menuImage2}")}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Menu Image3:</label>
+            <div class="col-sm-6">
+                <img src="${resource(dir: "images/categoryImage",file: "${productCategoryInstance.menuImage3}")}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group ">
             <label class="control-label col-sm-2">Show Status:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${productCategoryInstance.statusShow} </div>

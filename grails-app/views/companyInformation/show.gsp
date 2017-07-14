@@ -33,35 +33,60 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group ">
-            <label class="control-label col-sm-4">Location:</label>
+            <label class="control-label col-sm-4">Location1:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${companyInformationInstance.location}</div>
+                <div style="margin-top: 7px;">${companyInformationInstance.location1}</div>
             </div>
         </div>
     </div>
     <div class="col-lg-6">
         <div class="form-group ">
-            <label class="control-label col-sm-4">Email Address:</label>
+            <label class="control-label col-sm-4">Location2:</label>
             <div class="col-sm-6">
+                <div style="margin-top: 7px;">${companyInformationInstance.location2}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group ">
+            <label class="control-label col-sm-4">Location3:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;">${companyInformationInstance.location3}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group ">
+            <label class="control-label col-sm-4">Location4:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;">${companyInformationInstance.location4}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Email Address:</label>
+            <div class="col-sm-3">
                 <div style="margin-top: 7px;">${companyInformationInstance.emailAddress}</div>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="form-group ">
-            <label class="control-label col-sm-4">Mobile No:</label>
-            <div class="col-sm-6">
+            <label class="control-label col-sm-2">Mobile No:</label>
+            <div class="col-sm-3">
                 <div style="margin-top: 7px;">${companyInformationInstance.mobileNUmber}</div>
 
 
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="form-group ">
-            <label class="control-label col-sm-4">Phone No:</label>
-            <div class="col-sm-6">
+            <label class="control-label col-sm-2">Phone No:</label>
+            <div class="col-sm-3">
                 <div style="margin-top: 7px;">${companyInformationInstance.phoneNumber}</div>
 
 
@@ -72,17 +97,57 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Logo:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/logo",file: "${companyInformationInstance.logoImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${resource(dir: "images/companyInformation",file: "${companyInformationInstance.logoImageName}")}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group ">
+            <label class="control-label col-sm-4">Cover Image:</label>
+            <div class="col-sm-6">
+                <img src="${resource(dir: "images/companyInformation",file: "${companyInformationInstance.coverImageName}")}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group ">
+            <label class="control-label col-sm-4">Shop View:</label>
+            <div class="col-sm-6">
+                <img src="${resource(dir: "images/companyInformation",file: "${companyInformationInstance.shopInsideViewImageName}")}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group ">
+            <label class="control-label col-sm-4">Map View:</label>
+            <div class="col-sm-6">
+                <img src="${resource(dir: "images/companyInformation",file: "${companyInformationInstance.mapImageName}")}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Where we are:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;">${companyInformationInstance.descriptionWhereWeAre}</div>
+
 
             </div>
         </div>
     </div>
 
 </form>
-
-<div class="col-lg-12">
+<div class="col-lg-6">
+    <div class="form-group ">
+        <label class="control-label col-sm-4"></label>
+<div class="col-sm-6">
     <g:link action="edit" id="${companyInformationInstance?.id}" controller="companyInformation" class="btn btn-primary navbar-btn">Edit</g:link>
 
 </div>
+        </div></div>
 </body>
 </html>

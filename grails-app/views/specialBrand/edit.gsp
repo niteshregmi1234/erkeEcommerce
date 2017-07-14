@@ -141,8 +141,7 @@
         }
         if(brandMainImageName.length>0){
             var arrInputs = oForm.getElementsByTagName("input");
-                    for (var i = 0; i < arrInputs.length; i++) {
-                        var oInput = arrInputs[i];
+                        var oInput = arrInputs[2];
                         if (oInput.type == "file") {
                             var sFileName = oInput.value;
                     if (sFileName.length > 0) {
@@ -155,51 +154,46 @@
                         }
 
                         if (!blnValidBrandMainImageName) {
-                            bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
-                            return false;
+                            bootbox.alert("Sorry, " + sFileName+ " for mainImage is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                            responseValue=false;
+                        }
+                        else {
+                            var jForm = new FormData();
+
+                            jForm.append("Image", $('#brandMainImageName').get(0).files[0]);
+                            $.ajax({
+                                url: "${createLink(controller:'companyInformation', action:'checkPhoto')}",
+                                type: "POST",
+                                data: jForm,
+                                mimeType: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                async: false,
+                                success: function (result) {
+                                    if(result=="Photo bad format"){
+                                        bootbox.alert({
+                                            message: "main Image bad format",
+                                            size: 'small'
+                                        });
+                                        responseValue=false;
+
+                                    }
+
+                                }
+                            });
                         }
 
 
-            }
-                        }
-
-        }       }
-
-
-
-if(blnValidBrandMainImageName==true){
-            var jForm = new FormData();
-
-            jForm.append("Image", $('#brandMainImageName').get(0).files[0]);
-            $.ajax({
-                url: "${createLink(controller:'companyInformation', action:'checkPhoto')}",
-                type: "POST",
-                data: jForm,
-                mimeType: "multipart/form-data",
-                contentType: false,
-                cache: false,
-                processData: false,
-                async: false,
-                success: function (result) {
-                    if(result=="Photo bad format"){
-                        bootbox.alert({
-                            message: "main Image bad format",
-                            size: 'small'
-                        });
-                        responseValue=false;
 
                     }
+                        }
 
-
-                }
-            });
-        }
-
+              }
         if(brandSub1ImageName.length>0){
             var arrInputs = oForm.getElementsByTagName("input");
-            for (var i = 0; i < arrInputs.length; i++) {
 
-                var oInput = arrInputs[i];
+                var oInput = arrInputs[3];
                 if (oInput.type == "file") {
                     var sFileName = oInput.value;
                     if (sFileName.length > 0) {
@@ -212,50 +206,52 @@ if(blnValidBrandMainImageName==true){
                         }
 
                         if (!blnValidBrandSub1ImageName) {
-                            bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
-                            return false;
+                            bootbox.alert("Sorry, " + sFileName + " for sub1 Image is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                            responseValue=false;
+
+                        }
+                        else {
+                            var jForm = new FormData();
+
+                            jForm.append("Image", $('#brandSub1ImageName').get(0).files[0]);
+                            $.ajax({
+                                url: "${createLink(controller:'companyInformation', action:'checkPhoto')}",
+                                type: "POST",
+                                data: jForm,
+                                mimeType: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                async: false,
+                                success: function (result) {
+                                    if(result=="Photo bad format"){
+                                        bootbox.alert({
+                                            message: "sub1-Image bad format",
+                                            size: 'small'
+                                        });
+                                        responseValue=false;
+
+                                    }
+
+
+                                }
+                            });
                         }
 
 
+
                     }
                 }
 
-            }       }
+                  }
 
 
 
-        if(blnValidBrandSub1ImageName==true){
-            var jForm = new FormData();
-
-            jForm.append("Image", $('#brandSub1ImageName').get(0).files[0]);
-            $.ajax({
-                url: "${createLink(controller:'companyInformation', action:'checkPhoto')}",
-                type: "POST",
-                data: jForm,
-                mimeType: "multipart/form-data",
-                contentType: false,
-                cache: false,
-                processData: false,
-                async: false,
-                success: function (result) {
-                    if(result=="Photo bad format"){
-                        bootbox.alert({
-                            message: "sub1-Image bad format",
-                            size: 'small'
-                        });
-                        responseValue=false;
-
-                    }
-
-
-                }
-            });
-        }
         if(brandSub2ImageName.length>0){
             var arrInputs = oForm.getElementsByTagName("input");
-            for (var i = 0; i < arrInputs.length; i++) {
 
-                var oInput = arrInputs[i];
+
+                var oInput = arrInputs[5];
                 if (oInput.type == "file") {
                     var sFileName = oInput.value;
                     if (sFileName.length > 0) {
@@ -268,48 +264,50 @@ if(blnValidBrandMainImageName==true){
                         }
 
                         if (!blnValidBrandSub2ImageName) {
-                            bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
-                            return false;
+                            bootbox.alert("Sorry, " + sFileName + " for sub2 Image is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                            responseValue=false;
+
+                        }
+                        else {
+                            var jForm = new FormData();
+
+                            jForm.append("Image", $('#brandSub2ImageName').get(0).files[0]);
+                            $.ajax({
+                                url: "${createLink(controller:'companyInformation', action:'checkPhoto')}",
+                                type: "POST",
+                                data: jForm,
+                                mimeType: "multipart/form-data",
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                async: false,
+                                success: function (result) {
+                                    if(result=="Photo bad format"){
+                                        bootbox.alert({
+                                            message: "sub2 Image Image bad format",
+                                            size: 'small'
+                                        });
+                                        responseValue=false;
+
+                                    }
+
+
+                                }
+                            });
                         }
 
 
+
                     }
                 }
 
-            }       }
+                  }
 
 
-
-        if(blnValidBrandSub2ImageName==true){
-            var jForm = new FormData();
-
-            jForm.append("Image", $('#brandSub2ImageName').get(0).files[0]);
-            $.ajax({
-                url: "${createLink(controller:'companyInformation', action:'checkPhoto')}",
-                type: "POST",
-                data: jForm,
-                mimeType: "multipart/form-data",
-                contentType: false,
-                cache: false,
-                processData: false,
-                async: false,
-                success: function (result) {
-                    if(result=="Photo bad format"){
-                        bootbox.alert({
-                            message: "main Image bad format",
-                            size: 'small'
-                        });
-                        responseValue=false;
-
-                    }
-
-
-                }
-            });
-        }
 
 
         return responseValue;
+
     }
 
 </script>

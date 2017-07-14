@@ -19,33 +19,18 @@
 <form class="form-horizontal">
     <div class="col-lg-6">
         <div class="form-group ">
-            <label class="control-label col-sm-4">Category:</label>
+            <label class="control-label col-sm-4">Product Name:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.productCategory.categoryName}</div>
+                <div style="margin-top: 7px;">${productInstance.productDetails.productName}</div>
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="form-group ">
-            <label class="control-label col-sm-4">Sub-category:</label>
-            <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.productSubCategory.subCategoryName} </div>
-            </div>
-        </div>
-    </div>
+
     <div class="col-lg-6">
         <div class="form-group ">
             <label class="control-label col-sm-4">Color:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${productInstance.productColor.colorName}</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="form-group ">
-            <label class="control-label col-sm-4">Size:</label>
-            <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.productSize.sizeName}</div>
             </div>
         </div>
     </div>
@@ -79,45 +64,14 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group ">
-            <label class="control-label col-sm-4">Name:</label>
+            <label class="control-label col-sm-4">Special Image:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.productName.productName}</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="form-group ">
-            <label class="control-label col-sm-4">Price:</label>
-            <div class="col-sm-6">
-                <div style="margin-top: 7px;">Rs.${productInstance.price}</div>
+                <img src="${resource(dir: "images/allProducts/specialImage",file: "${productInstance.specialImageName}")}" height="100" style="margin-left: -1%">
+
             </div>
         </div>
     </div>
 
-    <div class="col-lg-6">
-        <div class="form-group ">
-            <label class="control-label col-sm-4">Brand:</label>
-            <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.productBrand.brandName}</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="form-group ">
-            <label class="control-label col-sm-4">IsSale:</label>
-            <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.isSale}</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="form-group ">
-            <label class="control-label col-sm-4">Discount Percentage:</label>
-            <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.discountPercentage} %</div>
-            </div>
-        </div>
-    </div>
     <div class="col-lg-6">
         <div class="form-group ">
             <label class="control-label col-sm-4">IsLatest:</label>
@@ -134,23 +88,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class="form-group ">
-            <label class="control-label col-sm-2">IsMenuBar:</label>
-            <div class="col-sm-3">
-                <div style="margin-top: 7px;">${productInstance.isMenuBar}</div>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-lg-12">
-        <div class="form-group ">
-            <label class="control-label col-sm-2">Description:</label>
-            <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.description}</div>
-            </div>
-        </div>
-    </div>
 
 </form>
 %{--<img src="${resource(dir: "images/allProducts",file: "${productInstance.image_name}")}" height="100" style="margin-left: 25%">--}%

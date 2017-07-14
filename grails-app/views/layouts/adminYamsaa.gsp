@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/jquery.dataTables.min.css')}" type="text/css"
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap-datepicker.min.css')}" type="text/css">
+    %{--<asset:stylesheet src="yamsaa/styleVideo.css"></asset:stylesheet>--}%
+    %{--<asset:javascript src="yamsaa/script.js"></asset:javascript>--}%
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap-datepicker.min.js')}" type="text/javascript"
             charset="utf-8"></script>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap-select.min.css')}" type="text/css">
@@ -82,8 +84,7 @@
                     <li><g:link action="list" controller="productColor">Product Color</g:link></li>
                     <li><g:link action="list" controller="productSize">Product Size</g:link></li>
                     <li><g:link action="list" controller="productBrand">Product Brand</g:link></li>
-
-                    <li><g:link action="list" controller="productName">Product Name</g:link></li>
+                    <li><g:link action="list" controller="productDetails">Product Details</g:link></li>
                     <li><g:link action="list" controller="seasons">Season</g:link></li>
 
                 </ul>
@@ -97,8 +98,18 @@
 
                 </ul>
             </li>
-            <li><g:link action="show" controller="companyInformation" id="${CompanyInformation.list()[0].id}">Company Information</g:link></li>
-            <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[0].id}">Manage Season</g:link></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Manage<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><g:link action="show" controller="aboutUs" id="${AboutUs.list()[0].id}">About Us</g:link></li>
+
+                    <li><g:link action="show" controller="companyInformation" id="${CompanyInformation.list()[0].id}">Company Information</g:link></li>
+
+                    <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[0].id}">Upcoming Season</g:link></li>
+                    <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[1].id}">Present Season</g:link></li>
+
+                </ul>
+            </li>
+
 
 
 

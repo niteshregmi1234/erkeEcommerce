@@ -1,5 +1,3 @@
-
-
 class ProductSize {
 String sizeName
     boolean statusShow

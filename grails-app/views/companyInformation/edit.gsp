@@ -33,21 +33,48 @@
                 <g:textField name="proprietorName" id="proprietorName" class="form-control" value="${companyInformationInstance?.proprietorName}"/>
             </div>
         </div>
+
+
     </div>
 
     <div class="col-lg-6">
         <div class="form-group">
-            <label class="control-label col-sm-4">Location:</label>
+            <label class="control-label col-sm-4">Location1:</label>
             <div class="col-sm-6">
-                <g:textField name="location" id="location" class="form-control" value="${companyInformationInstance?.location}"/>
+                <g:textField name="location1" id="location1" class="form-control" value="${companyInformationInstance?.location1}"/>
             </div>
         </div>
     </div>
     <div class="col-lg-6">
         <div class="form-group">
+            <label class="control-label col-sm-4">Location2:</label>
+            <div class="col-sm-6">
+                <g:textField name="location2" id="location2" class="form-control" value="${companyInformationInstance?.location2}"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">Location3:</label>
+            <div class="col-sm-6">
+                <g:textField name="location3" id="location3" class="form-control" value="${companyInformationInstance?.location3}"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">Location4:</label>
+            <div class="col-sm-6">
+                <g:textField name="location4" id="location4" class="form-control" value="${companyInformationInstance?.location4}"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
             <label class="control-label col-sm-4">Email Address:</label>
 
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <g:textField name="emailAddress" id="emailAddress" placeholder="example@email.com" class="form-control" value="${companyInformationInstance?.emailAddress}"/>
             </div>
 
@@ -58,7 +85,7 @@
     <div class="col-lg-12">
         <div class="form-group">
             <label class="control-label col-sm-2">Mobile No:</label>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
                 <g:textField name="mobileNumber" id="mobileNumber" class="form-control" value="${companyInformationInstance?.mobileNUmber}"/>
             </div>
         </div>
@@ -66,7 +93,7 @@
     <div class="col-lg-12">
         <div class="form-group">
             <label class="control-label col-sm-2">Phone No::</label>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
                 <g:textField name="phoneNumber" id="phoneNumber" class="form-control" value="${companyInformationInstance?.phoneNumber}"/>
             </div>
         </div>
@@ -77,10 +104,42 @@
             <label class="control-label col-sm-4">Upload logo:</label>
             <div class="col-sm-6">
                 <g:field type="file" name="logoImageName" class="form-control-file" id="logoImageName"/>
-                %{--<small id="fileHelp" class="form-text text-muted"></small>--}%
             </div>
         </div>
     </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">Upload coverImage:</label>
+            <div class="col-sm-6">
+                <g:field type="file" name="coverImageName" class="form-control-file" id="coverImageName"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">Upload Shop View:</label>
+            <div class="col-sm-6">
+                <g:field type="file" name="shopInsideViewImageName" class="form-control-file" id="shopInsideViewImageName"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">Upload map View:</label>
+            <div class="col-sm-6">
+                <g:field type="file" name="mapImageName" class="form-control-file" id="mapImageName"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Where we are::</label>
+            <div class="col-sm-6">
+                <g:textArea name="describeWhereWeAre" id="describeWhereWeAre" class="form-control" value="${companyInformationInstance?.descriptionWhereWeAre}"/>
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-12">
     <div class="form-group">
         <label class="control-label col-sm-2"></label>
@@ -100,15 +159,22 @@
     var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 
     function ValidateUpdate(oForm) {
-        var blnValid=false;
+
         var responseValue;
         var companyName = document.getElementById("companyName").value;
         var logoImageName = document.getElementById("logoImageName").value;
-        var location = document.getElementById("location").value;
+        var location1 = document.getElementById("location1").value;
+        var location2 = document.getElementById("location2").value;
+        var location3 = document.getElementById("location3").value;
+        var location4 = document.getElementById("location4").value;
+
         var emailAddress = document.getElementById("emailAddress").value;
         var mobileNumber = document.getElementById("mobileNumber").value;
         var phoneNumber = document.getElementById("phoneNumber").value;
         var proprietorName = document.getElementById("proprietorName").value;
+        var coverImageName = document.getElementById("coverImageName").value;
+        var shopInsideViewImageName = document.getElementById("shopInsideViewImageName").value;
+        var mapImageName = document.getElementById("mapImageName").value;
 
         if(companyName==''){
             bootbox.alert({
@@ -127,14 +193,39 @@
             return false;
         }
 
-        else if(location==''){
+        else if(location1==''){
             bootbox.alert({
-                message: "location must not be blank",
+                message: "location1 must not be blank",
                 size: 'small'
             });
-            document.getElementById("location").focus();
+            document.getElementById("location1").focus();
             return false;
         }
+        else if(location2==''){
+            bootbox.alert({
+                message: "location2 must not be blank",
+                size: 'small'
+            });
+            document.getElementById("location2").focus();
+            return false;
+        }
+        else if(location3==''){
+            bootbox.alert({
+                message: "location3 must not be blank",
+                size: 'small'
+            });
+            document.getElementById("location3").focus();
+            return false;
+        }
+        else if(location4==''){
+            bootbox.alert({
+                message: "location4 must not be blank",
+                size: 'small'
+            });
+            document.getElementById("location4").focus();
+            return false;
+        }
+
         if(emailAddress==''){
             bootbox.alert({
                 message: "emailAddress must not be blank",
@@ -173,61 +264,211 @@
             document.getElementById("phoneNumber").focus();
             return false;
         }
-        else if(logoImageName.length>0){
+        if(logoImageName.length>0) {
             var arrInputs = oForm.getElementsByTagName("input");
-            for (var i = 0; i < arrInputs.length; i++) {
-                var oInput = arrInputs[i];
-                if (oInput.type == "file") {
-                    var sFileName = oInput.value;
-                    if (sFileName.length > 0) {
-                        for (var j = 0; j < _validFileExtensions.length; j++) {
-                            var sCurExtension = _validFileExtensions[j];
-                            if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
-                                blnValid = true;
-                                break;
-                            }
+            var oInput = arrInputs[10];
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFileExtensions.length; j++) {
+                        var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                            blnValid = true;
+                            break;
                         }
-
-                        if (!blnValid) {
-                            bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
-                            return false;
-                        }
-
-
                     }
 
-                }
-            }
-
-        }
-if(blnValid==true){
-            var jForm = new FormData();
-
-            jForm.append("Image", $('#logoImageName').get(0).files[0]);
-            $.ajax({
-                url: "${createLink(controller:'companyInformation', action:'checkPhoto')}",
-                type: "POST",
-                data: jForm,
-                mimeType: "multipart/form-data",
-                contentType: false,
-                cache: false,
-                processData: false,
-                async: false,
-                success: function (result) {
-                    if(result=="Photo bad format"){
-                        bootbox.alert({
-                            message: "Image bad format",
-                            size: 'small'
-                        });
+                    if (!blnValid) {
+                        bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
                         responseValue=false;
+                    }
+                    else{
+                        var jForm = new FormData();
 
+                        jForm.append("Image", $('#logoImageName').get(0).files[0]);
+                        $.ajax({
+                            url: "${createLink(controller:'product', action:'checkPhoto')}",
+                            type: "POST",
+                            data: jForm,
+                            mimeType: "multipart/form-data",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            async: false,
+                            success: function (result) {
+                                if(result=="Photo bad format"){
+                                    bootbox.alert({
+                                        message: "Image bad format",
+                                        size: 'small'
+                                    });
+                                    responseValue=false;
+
+                                }
+
+
+                            }
+                        });
                     }
 
-
                 }
-            });
+
+            }
         }
 
+        if(coverImageName.length>0) {
+            var arrInputs = oForm.getElementsByTagName("input");
+            var oInput = arrInputs[11];
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFileExtensions.length; j++) {
+                        var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                            blnValid = true;
+                            break;
+                        }
+                    }
+
+                    if (!blnValid) {
+                        bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                        responseValue=false;
+                    }
+                    else{
+                        var jForm = new FormData();
+
+                        jForm.append("Image", $('#coverImageName').get(0).files[0]);
+                        $.ajax({
+                            url: "${createLink(controller:'product', action:'checkPhoto')}",
+                            type: "POST",
+                            data: jForm,
+                            mimeType: "multipart/form-data",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            async: false,
+                            success: function (result) {
+                                if(result=="Photo bad format"){
+                                    bootbox.alert({
+                                        message: "Image bad format",
+                                        size: 'small'
+                                    });
+                                    responseValue=false;
+
+                                }
+
+
+                            }
+                        });
+                    }
+
+                }
+
+            }
+        }
+        if(shopInsideViewImageName.length>0) {
+            var arrInputs = oForm.getElementsByTagName("input");
+            var oInput = arrInputs[12];
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFileExtensions.length; j++) {
+                        var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                            blnValid = true;
+                            break;
+                        }
+                    }
+
+                    if (!blnValid) {
+                        bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                        responseValue=false;
+                    }
+                    else{
+                        var jForm = new FormData();
+
+                        jForm.append("Image", $('#shopInsideViewImageName').get(0).files[0]);
+                        $.ajax({
+                            url: "${createLink(controller:'product', action:'checkPhoto')}",
+                            type: "POST",
+                            data: jForm,
+                            mimeType: "multipart/form-data",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            async: false,
+                            success: function (result) {
+                                if(result=="Photo bad format"){
+                                    bootbox.alert({
+                                        message: "Image bad format",
+                                        size: 'small'
+                                    });
+                                    responseValue=false;
+
+                                }
+
+
+                            }
+                        });
+                    }
+
+                }
+
+            }
+        }
+        if(mapImageName.length>0) {
+            var arrInputs = oForm.getElementsByTagName("input");
+            var oInput = arrInputs[13];
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFileExtensions.length; j++) {
+                        var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                            blnValid = true;
+                            break;
+                        }
+                    }
+
+                    if (!blnValid) {
+                        bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                        responseValue=false;
+                    }
+                    else{
+                        var jForm = new FormData();
+
+                        jForm.append("Image", $('#mapImageName').get(0).files[0]);
+                        $.ajax({
+                            url: "${createLink(controller:'product', action:'checkPhoto')}",
+                            type: "POST",
+                            data: jForm,
+                            mimeType: "multipart/form-data",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            async: false,
+                            success: function (result) {
+                                if(result=="Photo bad format"){
+                                    bootbox.alert({
+                                        message: "Image bad format",
+                                        size: 'small'
+                                    });
+                                    responseValue=false;
+
+                                }
+
+
+                            }
+                        });
+                    }
+
+                }
+
+            }
+        }
 
 
         return responseValue;

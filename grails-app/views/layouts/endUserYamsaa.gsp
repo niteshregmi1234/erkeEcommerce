@@ -12,6 +12,7 @@
     <title>Yamsaa
     </title>
     <!-- Meta-Tags -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="application/x-javascript">
@@ -34,25 +35,19 @@
     <!-- //Custom-StyleSheet-Links -->
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700" type="text/css" media="all">
-    <!-- //Fonts -->
-    <style>
-    body {
-        font-family: 'Noto', serif;
-        /*font-family: 'Montserrat', serif;*/
-        /*font-family: 'Roboto', serif;*/
-    }
-    </style>
+
+
     <!-- Font-Awesome-File-Links -->
-    <asset:stylesheet src="yamsaa/font-awesome.css" id="fluid_dg-css"/>
 
     <!-- CSS -->
     <asset:stylesheet src="yamsaa/font-awesome.css" id="fluid_dg-css"/>
+    <asset:stylesheet src="yamsaa/flexslider.css"/>
+
+
     <asset:stylesheet src="fonts/fontawesome-webfont.ttf"/>
 
     <!-- //Font-Awesome-File-Links -->
     <asset:javascript src="yamsaa/modernizr-2.6.2-respond-1.1.0.min.js"/>
-    <asset:javascript src="yamsaa/jquery-2.2.3.js"></asset:javascript>
     <asset:javascript src="yamsaa/modernizr.custom.js"></asset:javascript>
 
     <!-- Custom-JavaScript-File-Links -->
@@ -71,8 +66,20 @@
     <asset:javascript src="yamsaa/jquery.film_roll.js"></asset:javascript>
 
     <asset:javascript src="yamsaa/bootstrap.js"></asset:javascript>
+    <asset:javascript src="yamsaa/jquery-2.2.3.js"></asset:javascript>
+
+    %{--<script src="${resource(dir: 'js', file: 'yamsaa/jquery.min.js')}" type="text/javascript"--}%
+            %{--charset="utf-8"></script>--}%
     <asset:javascript src="yamsaa/jquery.flexslider.js"></asset:javascript>
     <asset:javascript src="yamsaa/imagezoom.js"></asset:javascript>
+    <asset:javascript src="yamsaa/cbpShop.min.js"></asset:javascript>
+
+    <style>
+    .container {
+        margin: 0 auto;
+        width: 100%;
+    }
+    </style>
 
 </head>
 <!-- //Head -->
@@ -88,6 +95,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-default w3ls navbar-fixed-top">
         <div class="container">
+            <div class="col-lg-12">
             <div class="navbar-header wthree nav_2">
                 <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse"
                         data-target="#bs-megadropdown-tabs">
@@ -96,7 +104,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand agileinfo" href="endUserYamsaa.html"><span>GROOVY</span> APPAREL</a>
+                <g:link class="navbar-brand agileinfo" action="endUserHome" controller="endUser"><span>YAMSAA</span>.COM</g:link>
                 <ul class="w3header-cart">
                     <li class="wthreecartaits"><span class="my-cart-icon"><i class="fa fa-cart-arrow-down"
                                                                              aria-hidden="true"></i><span
@@ -114,33 +122,44 @@
                                 <div class="row">
                                     <div class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-1">
                                         <ul class="multi-column-dropdown">
-                                            <li class="heading">FEATURED</li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right"
-                                                                       aria-hidden="true"></i>New Arrivals</a></li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right"
-                                                                       aria-hidden="true"></i>Online Only</a></li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right"
-                                                                       aria-hidden="true"></i>Brands</a></li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right"
-                                                                       aria-hidden="true"></i>Clearance Sale</a></li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right"
-                                                                       aria-hidden="true"></i>Discount Store</a></li>
-                                            <li><a href="mens.html"><i class="fa fa-angle-right"
-                                                                       aria-hidden="true"></i>Editor's Pick</a></li>
+                                            <li class="heading">Categories</li>
+                        <g:each in="${ProductSubCategory.findAllByStatusShow(true)}" var="subCategoryList">
+
+                            <li><g:link action="listProduct" params="[id1:list.id,id2:subCategoryList.id]"><i class="fa fa-angle-right"
+                                                                       aria-hidden="true"></i>${subCategoryList.subCategoryName}</g:link></li>
+</g:each>
+                                            %{--<li><a href="categoryProducts.gsp"><i class="fa fa-angle-right"--}%
+                                                                       %{--aria-hidden="true"></i>Online Only</a></li>--}%
+                                            %{--<li><a href="categoryProducts.gsp"><i class="fa fa-angle-right"--}%
+                                                                       %{--aria-hidden="true"></i>Brands</a></li>--}%
+                                            %{--<li><a href="categoryProducts.gsp"><i class="fa fa-angle-right"--}%
+                                                                       %{--aria-hidden="true"></i>Clearance Sale</a></li>--}%
+                                            %{--<li><a href="categoryProducts.gsp"><i class="fa fa-angle-right"--}%
+                                                                       %{--aria-hidden="true"></i>Discount Store</a></li>--}%
+                                            %{--<li><a href="categoryProducts.gsp"><i class="fa fa-angle-right"--}%
+                                                                       %{--aria-hidden="true"></i>Editor's Pick</a></li>--}%
                                         </ul>
                                     </div>
 
-                                    <g:each in="${Product.findAllByIsMenuBarAndProductCategory(true, list)}"
-                                            var="productList">
                                         <div  class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
-                                            <p>${productList.productSubCategory.subCategoryName}</p>
-                                            <a href="mens.html">
+                                            <g:link action="allCategoryProducts" controller="endUser" id="${list.id}">
                                                 <img
-                                                     src="${resource(dir: "images/allProducts/frontImage", file: "${productList.frontImageName}")}" height="170">
-</a>
+                                                     src="${resource(dir: "images/categoryImage", file: "${list.menuImage1}")}" height="170">
+</g:link>
                                         </div>
+                                    <div  class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+                                        <g:link action="allCategoryProducts" controller="endUser" id="${list.id}">
+                                            <img
+                                                    src="${resource(dir: "images/categoryImage", file: "${list.menuImage2}")}" height="170">
+                                        </g:link>
+                                    </div>
+                                    <div  class="col-sm-3 w3layouts-nav-agile w3layouts-mens-nav-agileits w3layouts-mens-nav-agileits-2">
+                                        <g:link action="allCategoryProducts" controller="endUser" id="${list.id}">
+                                            <img
+                                                    src="${resource(dir: "images/categoryImage", file: "${list.menuImage3}")}" height="170">
+                                        </g:link>
+                                    </div>
 
-                                    </g:each>
 
 
 
@@ -155,7 +174,7 @@
                     </g:each>
 
 
-                    <li><a href="about.html">ABOUT</a></li>
+                    <li><g:link action="aboutCompany" controller="endUser">ABOUT</g:link></li>
                     <li class="wthreesearch">
                         <form action="#" method="post">
                             <input type="search" name="Search" placeholder="Search for a Product" required="">
@@ -176,7 +195,9 @@
             </div>
 
         </div>
-    </nav>
+
+            </div>
+</nav>
     <!-- //Navigation -->
 
 
@@ -185,18 +206,14 @@
     <div class="agileheader-topbar">
         <div class="container">
             <div class="col-md-6 agileheader-topbar-grid agileheader-topbar-grid1">
-                <p>Free shipping on orders over $150. <a href="payment.html">Details</a></p>
+                %{--<p>Free shipping on orders over $150. <a href="payment.html">Details</a></p>--}%
             </div>
 
             <div class="col-md-6 agileheader-topbar-grid agileheader-topbar-grid2">
                 <ul>
-                    <li><a href="stores.html">Store Locator</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
                     <li><a class="popup-with-zoom-anim" href="#small-dialog1">Login</a></li>
                     <li><a class="popup-with-zoom-anim" href="#small-dialog2">Sign Up</a></li>
-                    <li><a href="codes.html">Codes</a></li>
-                    <li><a href="icons.html">Icons</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><g:link controller="endUser" action="contact">Contact</g:link></li>
                 </ul>
             </div>
 
@@ -256,9 +273,9 @@
 
 </div>
 <!-- //Header -->
-
+<div class="container">
 <g:layoutBody></g:layoutBody>
-
+</div>
 <!-- Model-Slider -->
 <!-- //Newsletter -->
 
@@ -271,19 +288,16 @@
         <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid1">
             <ul>
                 <li><a href="about.html">ABOUT</a></li>
-                <li><a href="mens.html">MEN'S</a></li>
-                <li><a href="mens_accessories.html">MEN'S ACCESSORIES</a></li>
-                <li><a href="womens.html">WOMEN'S</a></li>
-                <li><a href="womens_accessories.html">WOMEN'S ACCESSORIES</a></li>
+                <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="list">
+                    <li><g:link action="allCategoryProducts" controller="endUser" id="${list.id}">${list.categoryName}'S</g:link></li>
+
+                </g:each>
             </ul>
         </div>
 
         <div class="col-md-4 agileinfofooter-grid agileinfofooter-grid2">
             <ul>
                 <li><a href="stores.html">STORE LOCATOR</a></li>
-                <li><a href="faq.html">FAQs</a></li>
-                <li><a href="codes.html">CODES</a></li>
-                <li><a href="icons.html">ICONS</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
             </ul>
         </div>
@@ -292,10 +306,7 @@
             <address>
                 <ul>
                     <li>40019 Parma Via Modena</li>
-                    <li>Sant'Agata Bolognese</li>
-                    <li>BO, Italy</li>
-                    <li>+1 (734) 123-4567</li>
-                    <li><a class="mail" href="mailto:mail@example.com">info@example.com</a></li>
+                    <li><a class="mail" href="mailto:mail@example.com">${CompanyInformation.list()[0].emailAddress}</a></li>
                 </ul>
             </address>
         </div>
@@ -311,8 +322,7 @@
 <!-- Copyright -->
 <div class="w3lscopyrightaits">
     <div class="col-md-8 w3lscopyrightaitsgrid w3lscopyrightaitsgrid1">
-        <p>© 2017 Groovy Apparel. All Rights Reserved | Design by <a href="http://w3layouts.com/"
-                                                                     target="=_blank">W3layouts</a></p>
+        <p>© 2017 YAMSAA.COM. All Rights Reserved | Design by <a target="=_blank">Hemanta Ghimire</a></p>
     </div>
 
     <div class="col-md-4 w3lscopyrightaitsgrid w3lscopyrightaitsgrid2">
@@ -344,7 +354,7 @@
 
 
 <script>
-    w3l.render();
+//    w3l.render();
 
     w3l.cart.on('w3agile_checkout', function (evt) {
         var items, len, i;
@@ -362,22 +372,22 @@
 
 <!-- Header-Slider-JavaScript-Files -->
 
-<script type="application/javascript">jQuery(document).ready(function () {
-    jQuery(function () {
-        jQuery('#fluid_dg_wrap_4').fluid_dg({
-            height: 'auto',
-            loader: 'bar',
-            pagination: false,
-            thumbnails: true,
-            hover: false,
-            opacityOnGrid: false,
-            imagePath: '',
-            time: 4000,
-            transPeriod: 2000,
-        });
-    });
-})
-</script>
+%{--<script type="application/javascript">jQuery(document).ready(function () {--}%
+    %{--jQuery(function () {--}%
+        %{--jQuery('#fluid_dg_wrap_4').fluid_dg({--}%
+            %{--height: 'auto',--}%
+            %{--loader: 'bar',--}%
+%{--//            pagination: false,--}%
+            %{--thumbnails: true,--}%
+            %{--hover: false,--}%
+            %{--opacityOnGrid: false,--}%
+            %{--imagePath: '',--}%
+            %{--time: 4000,--}%
+            %{--transPeriod: 2000,--}%
+        %{--});--}%
+    %{--});--}%
+%{--})--}%
+%{--</script>--}%
 <!-- //Header-Slider-JavaScript-Files -->
 
 <!-- Dropdown-Menu-JavaScript -->

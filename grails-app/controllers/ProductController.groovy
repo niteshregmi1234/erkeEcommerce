@@ -36,60 +36,93 @@ def checkPhoto(){
     def save(){
         if(!params.id){
             def product=new Product()
-            product.productCategory=ProductCategory.get(params.productCategory)
-            product.productSubCategory=ProductSubCategory.get(params.productSubCategory)
-            product.productColor=ProductColor.get(params.productColor)
-            product.productSize=ProductSize.get(params.productSize)
+                      product.productColor=ProductColor.get(params.productColor)
+            product.productDetails=ProductDetails.get(params.productDetails)
+            product.isFeatured=params.isFeatured as boolean
+            product.isLatest=params.isLatest as boolean
+            product.seasons=SeasonManagement.list()[1].seasons
+            product.productSpecificationName=product.productDetails.productName+"-"+product.productColor.colorName
             product.frontImageName=upLoadFrontImage()
             product.sideImageName=uploadSideImage()
             product.backImageName=uploadBackImage()
-            product.productName=Product.get(params.productName)
-            product.productBrand=ProductBrand.get(params.productBrand)
-            product.price=params.price as float
-            product.isSale=params.isSale
-            print product.isSale
-            if(product.isSale==true){
-                product.discountPercentage=params.discountPercentage as float
-            }
-            else{
-                product.discountPercentage=0
-            }
-            product.isFeatured=params.isFeatured as boolean
-            product.isLatest=params.isLatest as boolean
-            product.isMenuBar=params.isMenuBar
-            product.description=params.description
+            product.specialImageName=uploadSpecialImage()
             product.save(flush: true)
             redirect(action: "show" ,id:product.id)
         }
         else{
             def product=Product.get(params.id)
-            product.productCategory=ProductCategory.get(params.productCategory)
-            product.productSubCategory=ProductSubCategory.get(params.productSubCategory)
             product.productColor=ProductColor.get(params.productColor)
-            product.productSize=ProductSize.get(params.productSize)
+            product.productDetails=ProductDetails.get(params.productDetails)
+            product.isFeatured=params.isFeatured as boolean
+            product.isLatest=params.isLatest as boolean
+            product.productSpecificationName=product.productDetails.productName+"-"+product.productColor.colorName
+
             product.frontImageName=editFrontImage(product.frontImageName)
             product.sideImageName=editSideImage(product.sideImageName)
             product.backImageName=editBackImage(product.backImageName)
-            product.productName=Product.get(params.productName)
-            product.productBrand=ProductBrand.get(params.productBrand)
-            product.price=params.price as float
-            product.isSale=params.isSale as boolean
-            print params.isSale
-            if(product.isSale==true){
-                product.discountPercentage=params.discountPercentage as float
-            }
-            else{
-                product.discountPercentage=0
-            }
-            product.isFeatured=params.isFeatured as boolean
-            product.isLatest=params.isLatest as boolean
-            product.description=params.description
-            print params.isMenuBar
-            product.isMenuBar=params.isMenuBar
+            product.specialImageName=editSpecialImage( product.specialImageName)
+
             product.save(flush: true)
             redirect(action: "show" ,id:product.id)
         }
     }
+    def uploadSpecialImage(){
+        def mp = (MultipartHttpServletRequest) request
+        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialImageName")
+        String fileName = file.originalFilename
+        abc:
+        boolean check = new File("web-app/images/allProducts/specialImage", fileName).exists()
+        if (check == true) {
+            Matcher m = PATTERN.matcher(fileName);
+            if (m.matches()) {
+                String prefix = m.group(1);
+                String last = m.group(2);
+                String suffix = m.group(3);
+                if (suffix == null) suffix = "";
+                int count = last != null ? Integer.parseInt(last) : 0;
+                count++;
+                fileName = prefix + "(" + count + ")" + suffix;
+                continue abc
+            }
+        }
+        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/allProducts/specialImage/${fileName}")
+        file.transferTo(new File(realFilePath))
+        def imageName = fileName
+        return imageName
+
+    }
+    def editSpecialImage(String imageNameOld){
+        def mp = (MultipartHttpServletRequest) request
+        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialImageName")
+        if(file.size>0){
+            File fileOld= new File("web-app/images/allProducts/specialImage/${imageNameOld}")
+            fileOld.delete();
+            String fileName = file.originalFilename
+            abc:
+            boolean check = new File("web-app/images/allProducts/specialImage", fileName).exists()
+            if (check == true) {
+                Matcher m = PATTERN.matcher(fileName);
+                if (m.matches()) {
+                    String prefix = m.group(1);
+                    String last = m.group(2);
+                    String suffix = m.group(3);
+                    if (suffix == null) suffix = "";
+                    int count = last != null ? Integer.parseInt(last) : 0;
+                    count++;
+                    fileName = prefix + "(" + count + ")" + suffix;
+                    continue abc
+                }
+            }
+            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/allProducts/specialImage/${fileName}")
+            file.transferTo(new File(realFilePath))
+            def imageName = fileName
+            return imageName}
+        else{
+            return imageNameOld
+        }
+
+    }
+
     def editFrontImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("frontImageName")
@@ -301,4 +334,10 @@ if(file.size>0){
 
     }
 
-}
+
+
+
+
+    }
+
+
