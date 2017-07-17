@@ -72,6 +72,9 @@
     <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/favicon.png')}">
 
 <style>
+    .product{
+        box-shadow: 5px 5px 5px #888888;
+    }
 @media screen and (max-width:320px){
     .lead1{
         font-size:10px !important;
