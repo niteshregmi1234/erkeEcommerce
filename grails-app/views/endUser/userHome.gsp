@@ -10,7 +10,7 @@
 <head>
     <meta name="layout" content="userYarsaa">
     <title></title>
-    I am at userhome
+
 </head>
 
 <body>
