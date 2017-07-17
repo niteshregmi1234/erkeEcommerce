@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="layout" content="userYarsaa">
-    <title>I am hemanta I am bonishgit</title>
+    <title></title>
 </head>
 
 <body>
