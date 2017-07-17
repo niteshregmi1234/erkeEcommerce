@@ -1,6 +1,9 @@
 import grails.converters.JSON
 
 class EndUserController {
+    def a(){
+
+    }
 def contact(){
 
 }
@@ -22,7 +25,7 @@ def contact(){
         def downCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "DOWN")
         def latestProductList = Product.findAllByIsLatestAndSeasons(true, SeasonManagement.list()[1].seasons)
         def specialBrandInstance = SpecialBrand.list()[0]
-        def productList = Product.findAllByIsFeaturedAndSeasons(true, SeasonManagement.list()[0].seasons)
+        def productList = Product.findAllByIsFeaturedAndSeasons(true, SeasonManagement.list()[1].seasons)
         def seasonManagementInstance = SeasonManagement.list()[0]
         [upCoverImageList: upCoverImageList, downCoverImageList: downCoverImageList, latestProductList: latestProductList, specialBrandInstance: specialBrandInstance, seasonManagementInstance: seasonManagementInstance,featuredProductList:productList]
     }
@@ -53,7 +56,7 @@ def contact(){
         render totalImageUrl as JSON
     }
 
-    def listProduct() {
+    def subCategoryList() {
         def productDetailsList = ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.get(params.id1), ProductSubCategory.get(params.id2))
         List<Product> productList = new ArrayList<>()
         for (ProductDetails productDetails : productDetailsList) {
@@ -63,7 +66,7 @@ def contact(){
             }
         }
         Collections.shuffle(productList)
-        render(view: "subCategoryProducts", model: [productList: productList, productSubCategory: ProductSubCategory.get(params.id2)])
+        render(view: "subCategoryList", model: [productList: productList, productSubCategory: ProductSubCategory.get(params.id2),productCategory: ProductCategory.get(params.id1),productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
     }
 
     def allCategoryProducts(Long id) {
@@ -77,7 +80,7 @@ def contact(){
                 }
             }
             Collections.shuffle(productList)
-            render(view: "categoryProducts", model: [productList: productList, productCategory: ProductCategory.get(params.id)])
+            render(view: "categoryList", model: [productList: productList, productCategory: ProductCategory.get(params.id)])
 
         } else {
             render "error"
@@ -119,7 +122,10 @@ def contact(){
 
 
     }
-
+def about(){
+    def aboutUsInstance = AboutUs.list()[0]
+    [aboutUsInstance: aboutUsInstance]
+}
     def aboutCompany() {
         def aboutUsInstance = AboutUs.list()[0]
         [aboutUsInstance: aboutUsInstance]

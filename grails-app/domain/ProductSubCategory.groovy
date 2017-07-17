@@ -1,7 +1,8 @@
 
 
 class ProductSubCategory {
-String subCategoryName
+    String subCategoryName
+    ProductSubCategorySpecify productSubCategorySpecify
     String coverImageName
 
     boolean statusShow

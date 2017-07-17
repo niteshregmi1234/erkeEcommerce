@@ -18,6 +18,7 @@ class ProductSubCategoryController {
         if(!params.id){
             def productSubCategoryInstance=new ProductSubCategory()
             productSubCategoryInstance.subCategoryName=params.subCategoryName
+            productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
             productSubCategoryInstance.statusShow=params.statusShow as boolean
             productSubCategoryInstance.coverImageName=uploadCoverImage()
             productSubCategoryInstance.save(flush: true)
@@ -27,6 +28,8 @@ class ProductSubCategoryController {
             def productSubCategoryInstance=ProductSubCategory.get(params.id)
 
             productSubCategoryInstance.subCategoryName=params.subCategoryName
+            productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
+
             productSubCategoryInstance.statusShow=params.statusShow as boolean
             productSubCategoryInstance.coverImageName=editCoverImage(productSubCategoryInstance.coverImageName)
 

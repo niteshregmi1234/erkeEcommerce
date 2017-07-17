@@ -24,6 +24,7 @@
     <tr>
         <th>SN</th>
         <th>View</th>
+        <th>Specification</th>
 
         <th>Sub-Category Name</th>
         <th>Show Status</th>
@@ -36,6 +37,8 @@
             <td> <g:link action="show" id="${list?.id}" controller="productSubCategory" class="btn btn-primary btn-sm">view</g:link></td>
 
             <td>${i+1}</td>
+            <td>${list.productSubCategorySpecify.specificationName}</td>
+
             <td>${list.subCategoryName}</td>
             <td>${list.statusShow}</td>
         </tr>

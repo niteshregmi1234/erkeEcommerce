@@ -110,8 +110,7 @@
 
 		<div id="small-dialog4" class="mfp-hide agileinfo">
 			<div class="pop_up">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/${aboutUsInstance.videoName}" frameborder="0" allowfullscreen></iframe>
-
+				<iframe src="https://player.vimeo.com/video/184401441"></iframe>
 			</div>
 			<button title="Close this" type="button" class="mfp-close">×</button>
 		</div>

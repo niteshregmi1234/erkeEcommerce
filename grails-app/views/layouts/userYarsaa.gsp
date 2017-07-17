@@ -21,7 +21,9 @@
     <!-- styles -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/font-awesome.css')}" type="text/css"
           media="all"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.min.css')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.css')}" type="text/css"
+          media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/iframex.css')}" type="text/css"
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/animate.min.css')}" type="text/css"
           media="all"/>
@@ -29,13 +31,42 @@
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/owl.theme.css')}" type="text/css"
           media="all"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.default.css')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"${"style."+StyleManagement.list()[0].style.name+".css"}")}" type="text/css"
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css')}" type="text/css"
           media="all"/>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/respond.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+
+    <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
+    %{--<script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.8.3.min.js')}" type="text/javascript"--}%
+    %{--charset="utf-8"></script>--}%
+
+    %{--<script src="${resource(dir: 'js', file: 'yarsaa/jquery.elevateZoom-3.0.8.min.js')}" type="text/javascript"--}%
+    %{--charset="utf-8"></script>--}%
+    %{--<script>--}%
+
+    %{--$(".image-zoom").elevateZoom();--}%
+
+    %{--</script>--}%
+
+    <script src="${resource(dir: 'js', file: 'yarsaa/bootstrap.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/jquery.cookie.js')}" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/waypoints.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/modernizr.js')}" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/bootstrap-hover-dropdown.js')}" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/owl.carousel.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/front.js')}" type="text/javascript"
+            charset="utf-8"></script>
+
 
 
     <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/favicon.png')}">
@@ -65,7 +96,7 @@
        height:300px!important;
    }
     .coverUp img{
-        height: 100px !important;
+        height: 120px !important;
         width: 260px !important;
 
     }
@@ -177,8 +208,7 @@
                 </li>
                 <li><a href="contact.html">Contact</a>
                 </li>
-                <li><a href="#">Recently viewed</a>
-                </li>
+
             </ul>
         </div>
     </div>
@@ -225,8 +255,8 @@
         <div class="navbar-header">
 
             <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
-                <img src="img/logo.png" alt="Obaju logo" class="hidden-xs">
-                <img src="img/logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
+                <img src="img/logo.png" alt="yarsaa logo" class="hidden-xs">
+                <img src="img/logo-small.png" alt="yarsaa logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
             </a>
             <div class="navbar-buttons">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
@@ -247,237 +277,142 @@
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="index.html">Home</a>
+                <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
+                <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
                 <li class="dropdown yamm-fw">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Men <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">${categoryList.categoryName}<b class="caret"></b></a href="#">
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
                                 <div class="row">
+                                    <g:each in="${ProductSubCategorySpecify.list()}" var="specifyList">
                                     <div class="col-sm-3">
-                                        <h5>Clothing</h5>
+                                        <h5>${specifyList.specificationName}</h5>
                                         <ul>
-                                            <li><a href="category.html">T-shirts</a>
-                                            </li>
-                                            <li><a href="category.html">Shirts</a>
-                                            </li>
-                                            <li><a href="category.html">Pants</a>
-                                            </li>
-                                            <li><a href="category.html">Accessories</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Shoes</h5>
-                                        <ul>
-                                            <li><a href="category.html">Trainers</a>
-                                            </li>
-                                            <li><a href="category.html">Sandals</a>
-                                            </li>
-                                            <li><a href="category.html">Hiking shoes</a>
-                                            </li>
-                                            <li><a href="category.html">Casual</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Accessories</h5>
-                                        <ul>
-                                            <li><a href="category.html">Trainers</a>
-                                            </li>
-                                            <li><a href="category.html">Sandals</a>
-                                            </li>
-                                            <li><a href="category.html">Hiking shoes</a>
-                                            </li>
-                                            <li><a href="category.html">Casual</a>
-                                            </li>
-                                            <li><a href="category.html">Hiking shoes</a>
-                                            </li>
-                                            <li><a href="category.html">Casual</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Featured</h5>
-                                        <ul>
-                                            <li><a href="category.html">Trainers</a>
-                                            </li>
-                                            <li><a href="category.html">Sandals</a>
-                                            </li>
-                                            <li><a href="category.html">Hiking shoes</a>
-                                            </li>
-                                        </ul>
-                                        <h5>Looks and trends</h5>
-                                        <ul>
-                                            <li><a href="category.html">Trainers</a>
-                                            </li>
-                                            <li><a href="category.html">Sandals</a>
-                                            </li>
-                                            <li><a href="category.html">Hiking shoes</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.yamm-content -->
-                        </li>
-                    </ul>
-                </li>
+                                        <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecifyAndStatusShow(specifyList,true)}" var="subCategoryList">
 
-                <li class="dropdown yamm-fw">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Ladies <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="yamm-content">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h5>Clothing</h5>
-                                        <ul>
-                                            <li><a href="category.html">T-shirts</a>
+                                            <li><g:link action="subCategoryList" controller="endUser" params="[id1:categoryList.id,id2:subCategoryList.id]">${subCategoryList.subCategoryName}</g:link>
                                             </li>
-                                            <li><a href="category.html">Shirts</a>
-                                            </li>
-                                            <li><a href="category.html">Pants</a>
-                                            </li>
-                                            <li><a href="category.html">Accessories</a>
-                                            </li>
+
+                                            </g:each>
                                         </ul>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <h5>Shoes</h5>
-                                        <ul>
-                                            <li><a href="category.html">Trainers</a>
-                                            </li>
-                                            <li><a href="category.html">Sandals</a>
-                                            </li>
-                                            <li><a href="category.html">Hiking shoes</a>
-                                            </li>
-                                            <li><a href="category.html">Casual</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Accessories</h5>
-                                        <ul>
-                                            <li><a href="category.html">Trainers</a>
-                                            </li>
-                                            <li><a href="category.html">Sandals</a>
-                                            </li>
-                                            <li><a href="category.html">Hiking shoes</a>
-                                            </li>
-                                            <li><a href="category.html">Casual</a>
-                                            </li>
-                                            <li><a href="category.html">Hiking shoes</a>
-                                            </li>
-                                            <li><a href="category.html">Casual</a>
-                                            </li>
-                                        </ul>
-                                        <h5>Looks and trends</h5>
-                                        <ul>
-                                            <li><a href="category.html">Trainers</a>
-                                            </li>
-                                            <li><a href="category.html">Sandals</a>
-                                            </li>
-                                            <li><a href="category.html">Hiking shoes</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+
+                                    </g:each>
                                     <div class="col-sm-3">
                                         <div class="banner">
-                                            <a href="#">
-                                                <img src="img/banner.jpg" class="img img-responsive" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="banner">
-                                            <a href="#">
-                                                <img src="img/banner2.jpg" class="img img-responsive" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.yamm-content -->
-                        </li>
-                    </ul>
-                </li>
+                    <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.id}">
 
-                <li class="dropdown yamm-fw">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Template <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="yamm-content">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h5>Shop</h5>
-                                        <ul>
-                                            <li><a href="index.html">Homepage</a>
-                                            </li>
-                                            <li><a href="category.html">Category - sidebar left</a>
-                                            </li>
-                                            <li><a href="category-right.html">Category - sidebar right</a>
-                                            </li>
-                                            <li><a href="category-full.html">Category - full width</a>
-                                            </li>
-                                            <li><a href="detail.html">Product detail</a>
-                                            </li>
-                                        </ul>
+
+                                                <img src="${resource(dir: "images/categoryImage",file: "${categoryList.menuImage1}")}" alt="" class="img-responsive">
+
+                                            </g:link>
+                                        </div>
+
+                                        <div class="banner">
+                                            <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.id}">
+                                                <img src="${resource(dir: "images/categoryImage",file: "${categoryList.menuImage2}")}" alt="" class="img-responsive">
+
+                                            </g:link>
+                                        </div>
+
+
                                     </div>
-                                    <div class="col-sm-3">
-                                        <h5>User</h5>
-                                        <ul>
-                                            <li><a href="register.html">Register / login</a>
-                                            </li>
-                                            <li><a href="customer-orders.html">Orders history</a>
-                                            </li>
-                                            <li><a href="customer-order.html">Order history detail</a>
-                                            </li>
-                                            <li><a href="customer-wishlist.html">Wishlist</a>
-                                            </li>
-                                            <li><a href="customer-account.html">Customer account / change password</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Order process</h5>
-                                        <ul>
-                                            <li><a href="basket.html">Shopping cart</a>
-                                            </li>
-                                            <li><a href="checkout1.html">Checkout - step 1</a>
-                                            </li>
-                                            <li><a href="checkout2.html">Checkout - step 2</a>
-                                            </li>
-                                            <li><a href="checkout3.html">Checkout - step 3</a>
-                                            </li>
-                                            <li><a href="checkout4.html">Checkout - step 4</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Pages and blog</h5>
-                                        <ul>
-                                            <li><a href="blog.html">Blog listing</a>
-                                            </li>
-                                            <li><a href="post.html">Blog Post</a>
-                                            </li>
-                                            <li><a href="faq.html">FAQ</a>
-                                            </li>
-                                            <li><a href="text.html">Text page</a>
-                                            </li>
-                                            <li><a href="text-right.html">Text page - right sidebar</a>
-                                            </li>
-                                            <li><a href="404.html">404 page</a>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+
+                                    %{--<div class="col-sm-3">--}%
+                                        %{--<h5>Featured</h5>--}%
+                                        %{--<ul>--}%
+                                            %{--<li><a href="category.html">Trainers</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Sandals</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
+                                            %{--</li>--}%
+                                        %{--</ul>--}%
+                                        %{--<h5>Looks and trends</h5>--}%
+                                        %{--<ul>--}%
+                                            %{--<li><a href="category.html">Trainers</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Sandals</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
+                                            %{--</li>--}%
+                                        %{--</ul>--}%
+                                    %{--</div>--}%
                                 </div>
                             </div>
                             <!-- /.yamm-content -->
                         </li>
                     </ul>
                 </li>
+                </g:each>
+                %{--<li class="dropdown yamm-fw">--}%
+                    %{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Ladies <b class="caret"></b></a>--}%
+                    %{--<ul class="dropdown-menu">--}%
+                        %{--<li>--}%
+                            %{--<div class="yamm-content">--}%
+                                %{--<div class="row">--}%
+                                    %{--<div class="col-sm-3">--}%
+                                        %{--<h5>Clothing</h5>--}%
+                                        %{--<ul>--}%
+                                            %{--<li><a href="category.html">T-shirts</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Shirts</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Pants</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Accessories</a>--}%
+                                            %{--</li>--}%
+                                        %{--</ul>--}%
+                                    %{--</div>--}%
+                                    %{--<div class="col-sm-3">--}%
+                                        %{--<h5>Shoes</h5>--}%
+                                        %{--<ul>--}%
+                                            %{--<li><a href="category.html">Trainers</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Sandals</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Casual</a>--}%
+                                            %{--</li>--}%
+                                        %{--</ul>--}%
+                                    %{--</div>--}%
+                                    %{--<div class="col-sm-3">--}%
+                                        %{--<h5>Accessories</h5>--}%
+                                        %{--<ul>--}%
+                                            %{--<li><a href="category.html">Trainers</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Sandals</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Casual</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Casual</a>--}%
+                                            %{--</li>--}%
+                                        %{--</ul>--}%
+                                        %{--<h5>Looks and trends</h5>--}%
+                                        %{--<ul>--}%
+                                            %{--<li><a href="category.html">Trainers</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Sandals</a>--}%
+                                            %{--</li>--}%
+                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
+                                            %{--</li>--}%
+                                        %{--</ul>--}%
+                                    %{--</div>--}%
+                                %{--</div>--}%
+                            %{--</div>--}%
+                            %{--<!-- /.yamm-content -->--}%
+                        %{--</li>--}%
+                    %{--</ul>--}%
+                %{--</li>--}%
+                <li><g:link action="aboutCompany" controller="endUser">About</g:link></li>
+
             </ul>
 
         </div>
@@ -695,35 +630,6 @@
 
 <!-- *** SCRIPTS TO INCLUDE ***
  _________________________________________________________ -->
-<script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
-        charset="utf-8"></script>
-%{--<script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.8.3.min.js')}" type="text/javascript"--}%
-        %{--charset="utf-8"></script>--}%
-
-%{--<script src="${resource(dir: 'js', file: 'yarsaa/jquery.elevateZoom-3.0.8.min.js')}" type="text/javascript"--}%
-        %{--charset="utf-8"></script>--}%
-%{--<script>--}%
-
-    %{--$(".image-zoom").elevateZoom();--}%
-
-%{--</script>--}%
-
-<script src="${resource(dir: 'js', file: 'yarsaa/bootstrap.min.js')}" type="text/javascript"
-        charset="utf-8"></script>
-<script src="${resource(dir: 'js', file: 'yarsaa/jquery.cookie.js')}" type="text/javascript"
-        charset="utf-8"></script>
-<script src="${resource(dir: 'js', file: 'yarsaa/waypoints.min.js')}" type="text/javascript"
-        charset="utf-8"></script>
-<script src="${resource(dir: 'js', file: 'yarsaa/modernizr.js')}" type="text/javascript"
-        charset="utf-8"></script>
-<script src="${resource(dir: 'js', file: 'yarsaa/bootstrap-hover-dropdown.js')}" type="text/javascript"
-        charset="utf-8"></script>
-<script src="${resource(dir: 'js', file: 'yarsaa/owl.carousel.min.js')}" type="text/javascript"
-        charset="utf-8"></script>
-<script src="${resource(dir: 'js', file: 'yarsaa/front.js')}" type="text/javascript"
-        charset="utf-8"></script>
-
-
 
 </body>
 

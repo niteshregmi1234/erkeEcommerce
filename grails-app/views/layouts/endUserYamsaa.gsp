@@ -66,7 +66,7 @@
     <asset:javascript src="yamsaa/jquery.film_roll.js"></asset:javascript>
 
     <asset:javascript src="yamsaa/bootstrap.js"></asset:javascript>
-    <asset:javascript src="yamsaa/jquery-2.2.3.js"></asset:javascript>
+    <script src="js/jquery-2.2.3.js"></script>
 
     %{--<script src="${resource(dir: 'js', file: 'yamsaa/jquery.min.js')}" type="text/javascript"--}%
             %{--charset="utf-8"></script>--}%
@@ -410,20 +410,21 @@
 <!-- Pricing-Popup-Box-JavaScript -->
 
 <script>
-    $(document).ready(function () {
-        $('.popup-with-zoom-anim').magnificPopup({
-            type: 'inline',
-            fixedContentPos: false,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            closeBtnInside: true,
-            preloader: false,
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-zoom-in'
-        });
-    });
+$(document).ready(function() {
+$('.popup-with-zoom-anim').magnificPopup({
+type: 'inline',
+fixedContentPos: false,
+fixedBgPos: true,
+overflowY: 'auto',
+closeBtnInside: true,
+preloader: false,
+midClick: true,
+removalDelay: 300,
+mainClass: 'my-mfp-zoom-in'
+});
+});
 </script>
+
 <!-- //Pricing-Popup-Box-JavaScript -->
 
 <!-- Model-Slider-JavaScript-Files -->

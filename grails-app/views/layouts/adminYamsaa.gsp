@@ -80,17 +80,18 @@
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Set Up<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="list" controller="productCategory">Product Category</g:link></li>
+                    <li><g:link action="list" controller="productSubCategorySpecify">Specify Product SubCategory</g:link></li>
                     <li><g:link action="list" controller="productSubCategory">Product SubCategory</g:link></li>
                     <li><g:link action="list" controller="productColor">Product Color</g:link></li>
                     <li><g:link action="list" controller="productSize">Product Size</g:link></li>
                     <li><g:link action="list" controller="productBrand">Product Brand</g:link></li>
-                    <li><g:link action="list" controller="productDetails">Product Details</g:link></li>
                     <li><g:link action="list" controller="seasons">Season</g:link></li>
 
                 </ul>
             </li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Items<span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                    <li><g:link action="list" controller="productDetails">Product Details</g:link></li>
                     <li><g:link action="list" controller="product">Product</g:link></li>
                     <li><g:link action="list" controller="coverImage">Cover Image</g:link></li>
                     <li><g:link action="show" controller="specialBrand" id="${SpecialBrand.list()[0].id}">Special Brand</g:link></li>
@@ -106,6 +107,7 @@
 
                     <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[0].id}">Upcoming Season</g:link></li>
                     <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[1].id}">Present Season</g:link></li>
+                    <li><g:link action="show" controller="style" id="${StyleManagement.list()[0].id}">Style</g:link></li>
 
                 </ul>
             </li>

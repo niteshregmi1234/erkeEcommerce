@@ -19,6 +19,15 @@
 <form class="form-horizontal">
     <div class="col-lg-12">
         <div class="form-group ">
+            <label class="control-label col-sm-2">Specification Name:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;">${productSubCategoryInstance.productSubCategorySpecify.specificationName}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group ">
             <label class="control-label col-sm-2">Sub-Category Name:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${productSubCategoryInstance.subCategoryName}</div>

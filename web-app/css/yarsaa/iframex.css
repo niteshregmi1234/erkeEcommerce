@@ -1,0 +1,370 @@
+
+/*-- Popup-Box --*/
+
+
+div#small-dialog4 {
+	padding: 30px;
+	width: 20%;
+	height: 100%;
+	margin: 0 auto;
+	background: #F5F5F5;
+}
+
+.my-mfp-zoom-in #small-dialog1, .my-mfp-zoom-in #small-dialog2, .my-mfp-zoom-in #small-dialog3, .my-mfp-zoom-in #small-dialog4 {
+	opacity: 0;
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	-webkit-transform: scale(0.8);
+	-moz-transform: scale(0.8);
+	-ms-transform: scale(0.8);
+	-o-transform: scale(0.8);
+	transform: scale(0.8);
+}
+
+.my-mfp-zoom-in.mfp-ready #small-dialog1, .my-mfp-zoom-in.mfp-ready #small-dialog2, .my-mfp-zoom-in.mfp-ready #small-dialog3, .my-mfp-zoom-in.mfp-ready #small-dialog4 {
+	opacity: 1;
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	/*-- w3ls --*/
+	/*-- agileits --*/
+	-o-transform: scale(1);
+	transform: scale(1);
+}
+
+.my-mfp-zoom-in.mfp-removing #small-dialog1, .my-mfp-zoom-in.mfp-removing #small-dialog2, .my-mfp-zoom-in.mfp-removing #small-dialog3, .my-mfp-zoom-in.mfp-removing #small-dialog4 {
+	-webkit-transform: scale(0.8);
+	-moz-transform: scale(0.8);
+	-ms-transform: scale(0.8);
+	-o-transform: scale(0.8);
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	transform: scale(0.8);
+	opacity: 0;
+}
+
+.my-mfp-zoom-in.mfp-bg {
+	opacity: 0;
+	/*-- w3ls --*/
+	/*-- agileits --*/
+	-webkit-transition: opacity 0.3s ease-out;
+	-moz-transition: opacity 0.3s ease-out;
+	-o-transition: opacity 0.3s ease-out;
+	transition: opacity 0.3s ease-out;
+}
+
+.my-mfp-zoom-in.mfp-ready.mfp-bg {
+	opacity: 0.97;
+}
+
+.my-mfp-zoom-in.mfp-removing.mfp-bg {
+	opacity: 0;
+}
+
+.mfp-bg {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1042;
+	overflow: hidden;
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	position: fixed;
+	background: rgba(0,0,0,0.50);
+	opacity: 0.97;
+	filter: alpha(opacity=80);
+}
+
+.mfp-wrap {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1043;
+	position: fixed;
+	outline: none !important;
+	-webkit-backface-visibility: hidden;
+}
+
+.mfp-container {
+	text-align: center;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	/*-- w3layouts --*/
+	/*-- agileinfo --*/
+	right: 0;
+	top: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: rgba(0,0,0,0.50);
+}
+
+.mfp-container:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.mfp-align-top .mfp-container:before {
+	display: none;
+}
+
+.mfp-content {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 auto;
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	text-align: left;
+	z-index: 1045;
+}
+
+.mfp-inline-holder .mfp-content, .mfp-ajax-holder .mfp-content {
+	width: 100%;
+	cursor: auto;
+}
+
+.mfp-ajax-cur {
+	cursor: progress;
+}
+
+.mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+	cursor: -moz-zoom-out;
+	cursor: -webkit-zoom-out;
+	cursor: zoom-out;
+}
+
+.mfp-zoom {
+	cursor: pointer;
+	cursor: -webkit-zoom-in;
+	cursor: -moz-zoom-in;
+	/*-- w3layouts --*/
+	/*-- agileinfo --*/
+	cursor: zoom-in;
+}
+
+.mfp-auto-cursor .mfp-content {
+	cursor: auto;
+}
+
+.mfp-close, .mfp-arrow, .mfp-preloader, .mfp-counter {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+.mfp-loading.mfp-figure {
+	display: none;
+}
+
+.mfp-hide {
+	display: none !important;
+}
+
+.mfp-content iframe{
+	width: 100%;
+	min-height: 500px;
+}
+
+.mfp-preloader {
+	color: #cccccc;
+	position: absolute;
+	/*-- wthree --*/
+	/*-- agileits --*/
+	top: 50%;
+	width: auto;
+	text-align: center;
+	margin-top: -0.8em;
+	left: 8px;
+	right: 8px;
+	z-index: 1044;
+}
+
+.mfp-preloader a {
+	color: #cccccc;
+}
+
+.mfp-preloader a:hover {
+	color: white;
+}
+
+.mfp-s-ready .mfp-preloader {
+	display: none;
+}
+
+.mfp-s-error .mfp-content {
+	display: none;
+}
+
+button.mfp-close, button.mfp-arrow {
+	overflow: visible;
+	cursor: pointer;
+	border: 0;
+	background: transparent;
+	-webkit-appearance: none;
+	display: block;
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	padding: 0;
+	z-index: 1046;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+.mfp-close {
+	width: 17px;
+	height: 32px;
+	line-height: 1;
+	position: absolute;
+	right: 0;
+	top: -32px;
+	/*-- wthree --*/
+	/*-- agileits --*/
+	text-decoration: none;
+	text-align: center;
+	padding: 0 0 18px 10px;
+	color: white;
+	font-style: normal;
+	font-size: 28px;
+	outline: none;
+}
+
+.mfp-close:hover, .mfp-close:focus {
+	opacity: 1;
+}
+
+.mfp-close-btn-in .mfp-close {
+	color: #FFF;
+	padding: 0;
+}
+
+.mfp-image-holder .mfp-close, .mfp-iframe-holder .mfp-close {
+	color: white;
+	right: -6px;
+	text-align: right;
+	/*-- w3layouts --*/
+	/*-- agileits --*/
+	padding-right: 6px;
+	width: 100%;
+}
+
+/*-- //Popup-Box --*/
+
+/*-- Header-Topbar-Login --*/
+
+#small-dialog1 h3, #small-dialog2 h3, #small-dialog3 h4 {
+	font-size: 25px;
+	margin-bottom: 30px;
+	color: #000;
+}
+
+
+@media (max-width: 580px) {
+
+	div#small-dialog4 {
+		width: 75%;
+	}
+
+	/*-- //Commercial --*/
+
+}
+
+/*-- Accessories --*/
+
+
+
+/*-- Men's-Page-Styling --*/
+
+
+
+
+
+
+
+@media screen and (max-width: 1440px) {
+
+	div#small-dialog1, div#small-dialog2, div#small-dialog3, div#small-dialog4 {
+		width: 25%;
+	}
+
+}
+
+
+
+@media screen and (max-width: 1080px) {
+
+	div#small-dialog1, div#small-dialog2, div#small-dialog3, div#small-dialog4 {
+		width: 30%;
+	}
+
+}
+
+
+@media screen and (max-width: 1024px) {
+	div#small-dialog1, div#small-dialog2, div#small-dialog3, div#small-dialog4 {
+		width: 32%;
+	}
+
+}
+
+
+@media screen and (max-width: 960px) {
+
+	div#small-dialog1, div#small-dialog2, div#small-dialog3, div#small-dialog4 {
+		width: 35%;
+	}
+
+}
+@media screen and (max-width: 800px) {
+	div#small-dialog1, div#small-dialog2, div#small-dialog3, div#small-dialog4 {
+		width: 40%;
+	}
+}
+
+
+@media screen and (max-width: 736px) {
+	div#small-dialog1, div#small-dialog2, div#small-dialog3, div#small-dialog4 {
+		width: 45%;
+		padding: 20px;
+	}
+
+}
+@media screen and (max-width: 667px) {
+
+	div#small-dialog1, div#small-dialog2, div#small-dialog3, div#small-dialog4 {
+		width: 60%;
+	}
+	#small-dialog1 h3, #small-dialog2 h3, #small-dialog3 h4 {
+		margin-bottom: 20px;
+	}
+
+}
+
+@media screen and (max-width: 414px) {
+	div#small-dialog1, div#small-dialog2, div#small-dialog3, div#small-dialog4 {
+		width: 75%;
+	}
+
+}
+
+
+@media screen and (max-width: 320px) {
+	#small-dialog1 h3, #small-dialog2 h3, #small-dialog3 h4 {
+		font-size: 20px;
+	}
+
+}
+/*-- //Responsive-Code --*/

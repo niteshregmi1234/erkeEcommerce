@@ -1,4 +1,16 @@
 
+<div class="col-lg-12">
+    <div class="form-group ">
+        <label class="control-label col-sm-2" for="productSubCategorySpecify">Choose Specification:</label>
+
+        <div class="col-sm-6">
+            <g:select class="selectpicker" id="productSubCategorySpecify" name="productSubCategorySpecify" value="${productSubCategoryInstance?.productSubCategorySpecify?.id}"
+                      from="${ProductSubCategorySpecify.list()}" optionKey="id" optionValue="specificationName" data-show-subtext="true"
+                      data-live-search="true" title="choose specification "/>
+        </div>
+    </div>
+</div>
+
     <div class="col-lg-12">
         <div class="form-group ">
             <label class="control-label col-sm-2" for="subCategoryName">Sub-Category Name:</label>
@@ -42,10 +54,19 @@
 
         function Validate(oForm) {
             var responseValue;
+            var productSubCategorySpecify = document.getElementById("productSubCategorySpecify").value;
             var subCategoryName = document.getElementById("subCategoryName").value;
-            var coverImageName = document.getElementById("coverImageName").value;
 
-            if(subCategoryName==''){
+            var coverImageName = document.getElementById("coverImageName").value;
+            if(productSubCategorySpecify==''){
+                $("#subCategoryName").css("border", "1px solid red");
+                bootbox.alert({
+                    message: "specification must be choosen!",
+                    size: 'small'
+                });
+                document.getElementById("productSubCategorySpecify").focus();
+                return false;}
+            else if(subCategoryName==''){
     $("#subCategoryName").css("border", "1px solid red");
     bootbox.alert({
         message: "Sub-Category Name must not be blank!",
@@ -54,9 +75,9 @@
     document.getElementById("subCategoryName").focus();
     return false;
 }
-            else{
+            else if(coverImageName.length==0){
                 bootbox.alert({
-                    message: "coverImageName Name must be choosen!",
+                    message: "coverImageName must be choosen!",
                     size: 'small'
                 });
                 document.getElementById("coverImageName").focus();
