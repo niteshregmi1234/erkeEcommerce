@@ -53,45 +53,55 @@
 
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked category-menu">
-                                <li>
-                                    <a href="category.html">Men <span class="badge pull-right">42</span></a>
+                                <g:each in="${productCategoryList}" var="categoryList">
+                                    <g:if test="${categoryList.equals(productCategory)}">
+                                        <li class="active">
+                                    </g:if>
+                                    <g:if test="${categoryList!=(productCategory)}">
+                                        <li>
+
+                                    </g:if>
+                                    <g:link action="allCategoryProducts" id="${categoryList.id}" controller="endUser">${categoryList.categoryName} <span class="badge pull-right"></span></g:link>
                                     <ul>
-                                        <li><a href="category.html">T-shirts</a>
-                                        </li>
-                                        <li><a href="category.html">Shirts</a>
-                                        </li>
-                                        <li><a href="category.html">Pants</a>
-                                        </li>
-                                        <li><a href="category.html">Accessories</a>
-                                        </li>
+                                        <g:each in="${productSubCategoryList}" var="subCategoryList">
+                                            <li><g:link action="subCategoryList" controller="endUser" params="[id1:categoryList.id,id2:subCategoryList.id]">${subCategoryList.subCategoryName}</g:link>
+
+                                            </li>
+                                        %{--<li><a href="category.html">Shirts</a>--}%
+                                        </g:each>   %{--</li>--}%
+                                    %{--<li><a href="category.html">Pants</a>--}%
+                                    %{--</li>--}%
+                                    %{--<li><a href="category.html">Accessories</a>--}%
+                                    %{--</li>--}%
                                     </ul>
-                                </li>
-                                <li class="active">
-                                    <a href="category.html">Ladies  <span class="badge pull-right">123</span></a>
-                                    <ul>
-                                        <li><a href="category.html">T-shirts</a>
-                                        </li>
-                                        <li><a href="category.html">Skirts</a>
-                                        </li>
-                                        <li><a href="category.html">Pants</a>
-                                        </li>
-                                        <li><a href="category.html">Accessories</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="category.html">Kids  <span class="badge pull-right">11</span></a>
-                                    <ul>
-                                        <li><a href="category.html">T-shirts</a>
-                                        </li>
-                                        <li><a href="category.html">Skirts</a>
-                                        </li>
-                                        <li><a href="category.html">Pants</a>
-                                        </li>
-                                        <li><a href="category.html">Accessories</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                    </li>
+                                </g:each>
+                            %{--<li class="active">--}%
+                            %{--<a href="category.html">Ladies  <span class="badge pull-right">123</span></a>--}%
+                            %{--<ul>--}%
+                            %{--<li><a href="category.html">T-shirts</a>--}%
+                            %{--</li>--}%
+                            %{--<li><a href="category.html">Skirts</a>--}%
+                            %{--</li>--}%
+                            %{--<li><a href="category.html">Pants</a>--}%
+                            %{--</li>--}%
+                            %{--<li><a href="category.html">Accessories</a>--}%
+                            %{--</li>--}%
+                            %{--</ul>--}%
+                            %{--</li>--}%
+                            %{--<li>--}%
+                            %{--<a href="category.html">Kids  <span class="badge pull-right">11</span></a>--}%
+                            %{--<ul>--}%
+                            %{--<li><a href="category.html">T-shirts</a>--}%
+                            %{--</li>--}%
+                            %{--<li><a href="category.html">Skirts</a>--}%
+                            %{--</li>--}%
+                            %{--<li><a href="category.html">Pants</a>--}%
+                            %{--</li>--}%
+                            %{--<li><a href="category.html">Accessories</a>--}%
+                            %{--</li>--}%
+                            %{--</ul>--}%
+                            %{--</li>--}%
 
                             </ul>
 
@@ -101,38 +111,25 @@
                     <div class="panel panel-default sidebar-menu">
 
                         <div class="panel-heading">
-                            <h3 class="panel-title">Brands <a class="btn btn-xs btn-danger pull-right" href="#"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                            <h3 class="panel-title">Brands </h3>
                         </div>
 
                         <div class="panel-body">
 
-                            <form>
+                            <g:form action="abc" controller="endUser">
                                 <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">Armani (10)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">Versace (12)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">Carlo Bruni (15)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">Jack Honey (14)
-                                        </label>
-                                    </div>
+                                    <g:each in="${productBrandList}" var="brandList">
+                                        <div class="checkbox">
+                                            <label>
+                                                <g:checkBox name="brand" value="${brandList.id}"  />${brandList.brandName}
+                                            </label>
+                                        </div>
+                                    </g:each>
                                 </div>
 
                                 <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
 
-                            </form>
+                            </g:form>
 
                         </div>
                     </div>
@@ -140,38 +137,41 @@
                     <div class="panel panel-default sidebar-menu">
 
                         <div class="panel-heading">
-                            <h3 class="panel-title">Colours <a class="btn btn-xs btn-danger pull-right" href="#"><i class="fa fa-times-circle"></i> Clear</a></h3>
+                            <h3 class="panel-title">Colours</h3>
                         </div>
 
                         <div class="panel-body">
 
                             <form>
                                 <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour white"></span> White (14)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour blue"></span> Blue (10)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour green"></span> Green (20)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour yellow"></span> Yellow (13)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> <span class="colour red"></span> Red (10)
-                                        </label>
-                                    </div>
+                                    <g:each in="${productColourList}" var="colourList">
+                                        <div class="checkbox">
+                                            <label>
+                                                <g:checkBox name="colour" value="${colourList.id}"/>${colourList.colorName}
+
+                                            </label>
+                                        </div>
+                                    </g:each>
+                                %{--<div class="checkbox">--}%
+                                %{--<label>--}%
+                                %{--<input type="checkbox"> <span class="colour blue"></span> Blue (10)--}%
+                                %{--</label>--}%
+                                %{--</div>--}%
+                                %{--<div class="checkbox">--}%
+                                %{--<label>--}%
+                                %{--<input type="checkbox"> <span class="colour green"></span> Green (20)--}%
+                                %{--</label>--}%
+                                %{--</div>--}%
+                                %{--<div class="checkbox">--}%
+                                %{--<label>--}%
+                                %{--<input type="checkbox"> <span class="colour yellow"></span> Yellow (13)--}%
+                                %{--</label>--}%
+                                %{--</div>--}%
+                                %{--<div class="checkbox">--}%
+                                %{--<label>--}%
+                                %{--<input type="checkbox"> <span class="colour red"></span> Red (10)--}%
+                                %{--</label>--}%
+                                %{--</div>--}%
                                 </div>
 
                                 <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
@@ -183,12 +183,13 @@
 
                     <!-- *** MENUS AND FILTERS END *** -->
 
-                    <div class="banner">
-                        <a href="#">
-                            <img src="img/banner.jpg" alt="sales 2014" class="img-responsive">
-                        </a>
-                    </div>
+                    %{--<div class="banner">--}%
+                    %{--<a href="#">--}%
+                    %{--<img src="img/banner.jpg" alt="sales 2014" class="img-responsive">--}%
+                    %{--</a>--}%
+                    %{--</div>--}%
                 </div>
+
 
                 <div class="col-md-9">
                     <div class="row" id="productMain">
