@@ -77,7 +77,7 @@
     .all{
         padding: 70px;
     }
-    .menu {
+    .menu1 {
         height:2em;
         position:absolute;
         top:50px;
@@ -224,9 +224,9 @@
     <script>
         $(window).bind('scroll', function () {
             if ($(window).scrollTop() > 50) {
-                $('.menu').addClass('fixed');
+                $('.menu1').addClass('fixed');
             } else {
-                $('.menu').removeClass('fixed');
+                $('.menu1').removeClass('fixed');
             }
         });
     </script>
@@ -293,7 +293,7 @@
 <!-- *** NAVBAR ***
  _________________________________________________________ -->
 
-<div class="navbar navbar-default yamm menu" role="navigation" id="navbar">
+<div class="navbar navbar-default yamm menu1" role="navigation" id="navbar">
     <div class="container">
         <div class="navbar-header">
 

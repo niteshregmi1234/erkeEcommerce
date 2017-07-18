@@ -250,7 +250,7 @@
         <img src="${resource(dir: "images/seasonsImage",file: "${seasonManagementInstance.seasons.imageName}")}" alt="" class="img-responsive">
 
                     <div class="middle">
-                        <div class="text">
+                        <div class="text1">
                            <h3> <p class="text-center lead1">${seasonManagementInstance.seasons.greetings}</p></h3>
 
 
@@ -298,7 +298,7 @@
                     <div class="imgwrapper">
                         <img class="img-responsive " src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance?.brandMainImageName}")}">
                         <div class="middle">
-                            <div class="text">
+                            <div class="text1">
                                 <h5>aaaaaaaaa</h5>
                                 <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
                         </div>
@@ -310,7 +310,7 @@
                     <div class="imgwrapper">
                         <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance?.brandSub1ImageName}")}">
                         <div class="middle">
-                            <div class="text">
+                            <div class="text1">
                                 <h5>aaaaaaaaa</h5>
                                 <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
                         </div>
@@ -321,7 +321,7 @@
                     <div class="imgwrapper">
                         <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance?.brandSub1ImageName}")}">
                         <div class="middle">
-                            <div class="text">
+                            <div class="text1">
                                 <h5>aaaaaaaaa</h5>
                                 <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
                         </div>
@@ -459,7 +459,7 @@
 }
 
 
-.text {
+.text1 {
     font-family: 'Sintony', sans-serif;
     color: #ffffff;
     font-size: 16px;
