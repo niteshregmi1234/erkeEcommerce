@@ -9,11 +9,11 @@
 <html>
 <head>
     <meta name="layout" content="userYarsaa">
-    <title>yesssss I am hemanta rajesh</title>
+    <title></title>
 </head>
 
 <body>
-<div id="content">
+<div id="content" style="padding-top: 85px;">
 
     <div class="container">
         <div class="col-md-12">
@@ -249,7 +249,8 @@
                 <div id="thumbnail text-center nomargin">
         <img src="${resource(dir: "images/seasonsImage",file: "${seasonManagementInstance.seasons.imageName}")}" alt="" class="img-responsive">
 
-                       <div class="caption1 col-sm-offset-4 col-sm-5">
+                    <div class="middle">
+                        <div class="text">
                            <h3> <p class="text-center lead1">${seasonManagementInstance.seasons.greetings}</p></h3>
 
 
@@ -257,6 +258,8 @@
                            <a href="#" class="btn btn-primary subButton" style="margin-bottom: 10px;">${seasonManagementInstance.seasons.askingForShopping}</a>
 
                        </div>
+                    </div>
+
                         </div>
 
 
@@ -286,7 +289,6 @@
             </div>
         </div>
     </div>
-
     <div class="container">
 
         <div class="col-md-12" data-animate="fadeInUp">
@@ -294,9 +296,11 @@
             <div id="blog-homepage" class="row">
                 <div class="col-sm-6">
                     <div class="imgwrapper">
-                        <img class="img-responsive image" src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance?.brandMainImageName}")}">
+                        <img class="img-responsive " src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance?.brandMainImageName}")}">
                         <div class="middle">
-                            <div class="text">                        <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
+                            <div class="text">
+                                <h5>aaaaaaaaa</h5>
+                                <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
                         </div>
 
                     </div>
@@ -305,14 +309,22 @@
                 <div class="col-sm-6">
                     <div class="imgwrapper">
                         <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance?.brandSub1ImageName}")}">
-
+                        <div class="middle">
+                            <div class="text">
+                                <h5>aaaaaaaaa</h5>
+                                <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
+                        </div>
                     </div>
 
                 </div>
                 <div class="col-sm-6">
                     <div class="imgwrapper">
                         <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance?.brandSub1ImageName}")}">
-
+                        <div class="middle">
+                            <div class="text">
+                                <h5>aaaaaaaaa</h5>
+                                <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
+                        </div>
                     </div>
 
                 </div>
@@ -322,7 +334,7 @@
             <!-- /#blog-homepage -->
         </div>
     </div>
-
+<br/>
     <!-- /.container -->
 
     <!-- *** BLOG HOMEPAGE END *** -->
@@ -426,12 +438,12 @@
 
 .middle {
     transition: .5s ease;
-    opacity: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%)
+    -ms-transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.75);
 }
 .agileinfonewsl {
     /*background-image: url("../../imagess/yamsaa/newsletter.jpg");*/
@@ -446,16 +458,10 @@
     width: 1110px;
 }
 
-.imgwrapper:hover .image {
-    opacity: 0.3;
-}
-
-.imgwrapper:hover .middle {
-    opacity: 1;
-}
 
 .text {
-    color: #0c099e;
+    font-family: 'Sintony', sans-serif;
+    color: #ffffff;
     font-size: 16px;
     padding: 16px 32px;
 }

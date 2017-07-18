@@ -72,8 +72,22 @@
     <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/favicon.png')}">
 
 <style>
-    .product{
-        box-shadow: 5px 5px 5px #888888;
+    .all{
+        padding: 70px;
+    }
+    .menu {
+        height:2em;
+        position:absolute;
+        top:50px;
+        width:100%;
+        z-index: 6;
+}
+.fixed {
+    position:fixed;
+    top:0;
+}
+    .product:hover{
+        box-shadow: 0 0 5px #888888;
     }
 @media screen and (max-width:320px){
     .lead1{
@@ -133,7 +147,7 @@
 
     }
     .agileinfonewsl{
-        width: 260px!important;
+        width: 100% !important;
         height:300px!important;
     }
     .coverUp img{
@@ -171,7 +185,7 @@
 
     }
     .agileinfonewsl{
-        width: 260px!important;
+        width: 100%!important;
         height:300px!important;
     }
     .coverUp img{
@@ -188,9 +202,33 @@
     .food1 img {
         height: 300px!important;
     }
+
 }
+    @media screen and (min-width: 641px) and (max-width: 768px) {
+        .agileinfonewsl {
+            width: 100% !important;
+            height: 600px !important;
+
+        }
+    }
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .agileinfonewsl {
+            width: 100% !important;
+            height: 800px !important;
+        }
+    }
 
 </style>
+    <script>
+        $(window).bind('scroll', function () {
+            if ($(window).scrollTop() > 50) {
+                $('.menu').addClass('fixed');
+            } else {
+                $('.menu').removeClass('fixed');
+            }
+        });
+    </script>
+
 
 </head>
 
@@ -253,7 +291,7 @@
 <!-- *** NAVBAR ***
  _________________________________________________________ -->
 
-<div class="navbar navbar-default yamm" role="navigation" id="navbar">
+<div class="navbar navbar-default yamm menu" role="navigation" id="navbar">
     <div class="container">
         <div class="navbar-header">
 
@@ -459,7 +497,6 @@
 <!-- /#navbar -->
 
 <!-- *** NAVBAR END *** -->
-
 
 
 <div id="all">
