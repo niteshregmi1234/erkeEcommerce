@@ -135,7 +135,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Where we are::</label>
             <div class="col-sm-6">
-                <g:textArea name="describeWhereWeAre" id="describeWhereWeAre" class="form-control" value="${companyInformationInstance?.descriptionWhereWeAre}"/>
+                <g:textArea name="descriptionWhereWeAre" id="descriptionWhereWeAre" class="form-control" value="${companyInformationInstance?.descriptionWhereWeAre}"/>
             </div>
         </div>
     </div>

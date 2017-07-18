@@ -1,18 +1,16 @@
 import grails.converters.JSON
 
 class EndUserController {
-    def a(){
 
-    }
 def contact(){
-
+[companyInformation:CompanyInformation.list()[0]]
 }
     def singleProduct(Long id) {
         if (id != null) {
             def productInstance = Product.get(id)
             if (productInstance) {
                 def sameProductList = Product.findAllByProductDetailsAndSeasonsAndIdNotEqual(productInstance.productDetails, SeasonManagement.list()[1].seasons, productInstance.id)
-               render(view: "detail", model :[productInstance: productInstance, sameProductList: sameProductList])
+               render(view: "detail", model :[productInstance: productInstance, sameProductList: sameProductList,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
             }
         } else {
             print "error is error"
@@ -32,13 +30,9 @@ def contact(){
 
     def fetchAboutUrl() {
         def aboutUsInstance = AboutUs.list()[0]
-        def url1 = "../images/otherStuffs/" + aboutUsInstance.quoteLeftImage;
-        def url2 = "../images/otherStuffs/" + aboutUsInstance.quoteRightImage;
-        def url3 = "../images/otherStuffs/" + aboutUsInstance.specialProductSubCategoryImage;
         def url4 = "../images/otherStuffs/" + aboutUsInstance.backgroundImage;
 
-        def totalImageUrl = [url1, url2, url3, url4]
-        render totalImageUrl as JSON
+        render url4
     }
 
     def fetchUrl() {

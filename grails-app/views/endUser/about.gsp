@@ -137,8 +137,8 @@
                 <div class="col-sm-6">
                     <div class="box">
                     <h2>SHOPPING VIDEO</h2>
-                    <p>${aboutUsInstance.videoDescription}</p>
-                    <p>Check out our latest commercial, teaser and behind the scenes film.</p>
+                    <p>${aboutUsInstance.videoDescription} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo varius vehicula. Mauris porta metus vitae nulla dignissim egestas. Aliquam sed molestie eros, in pharetra purus. Praesent consequat porta viverra. Praesent gravida dapibus condimentum. Vestibulum vel lacus aliquet, laoreet mi eu, tempor est. Quisque volutpat finibus tristique. Duis at nibh eget nulla pretium pretium. Quisque arcu sem, dignissim eu egestas quis, vulputate non mauris.</p>
+                    <p>Check out our latest commercial commercial commercial commercialcommercial commercial commercial commercial commercial commercial commercial commercial commercial commercial commercial, teaser and behind the scenes film.</p>
                         <p class="read-more"><a href="#small-dialog4" class="popup-with-zoom-anim btn btn-primary">WATCH NOW</a></p>
 
                     </div>
@@ -166,16 +166,262 @@
             <!-- /#blog-homepage -->
         </div>
 
+    <div class="col-md-12">
+        &nbsp;
     </div>
-    <!-- /#content -->
+        <div class="col-md-12" data-animate="fadeInUp">
+
+            <div class="row products" id="myList">
+            <g:if test="${aboutUsInstance.specialProduct1.productDetails==false}">
+                <div class="col-md-6 col-sm-6 a">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front product">
+                                    <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">
+                                        <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive">
+
+                                    </g:link>
+                                </div>
+                                <div class="back product">
+                                    <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">
+                                        <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive">
+
+                                    </g:link>
+                                </div>
+                            </div>
+                        </div>
+                        <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}" class="invisible product">
+                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive">
+
+                        </g:link>
+                        <div class="text">
+                            <h3><g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">${aboutUsInstance.specialProduct1.productDetails.productName+" "+aboutUsInstance.specialProduct1.productColor+" "+aboutUsInstance.specialProduct1.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct1.productDetails.productName}</g:link></h3>
+                            <p class="price">Rs.${aboutUsInstance.specialProduct1.productDetails.price}</p>
+                            <p class="buttons">
+                                <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}" class="btn btn-default">View detail</g:link>
+                                <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </p>
+                        </div>
+                        <!-- /.text -->
+                    </div>
+                    <!-- /.product -->
+                </div>
+
+            </g:if>
+            <g:if test="${aboutUsInstance.specialProduct1.productDetails.isSale==true}">
+
+                <div class="col-md-6 col-sm-4 6">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front product">
+                                    <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">
+                                        <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive">
+
+                                    </g:link>
+                                </div>
+                                <div class="back product">
+                                    <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">
+
+                                        <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive">
+
+                                    </g:link>
+                                </div>
+                            </div>
+                        </div>
+                        <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}" class="invisible product">
+                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive">
+
+                        </g:link>
+                        <div class="text">
+                            <h3><g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">${aboutUsInstance.specialProduct1.productColor.colorName+" "+aboutUsInstance.specialProduct1.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct1.productDetails.productName}</g:link></h3>
+                            <p class="price"><del>Rs.${aboutUsInstance.specialProduct1.productDetails.price}</del> Rs.${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}</p>
+                            <p class="buttons">
+                                <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}" class="btn btn-default">View detail</g:link>
+                                <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </p>
+                        </div>
+
+                        <!-- /.text -->
+
+                        <div class="ribbon sale">
+                            <div class="theribbon">SALE</div>
+                            <div class="ribbon-background"></div>
+                        </div>
+                        <!-- /.ribbon -->
+
+                        %{--<div class="ribbon new">--}%
+                        %{--<div class="theribbon">NEW</div>--}%
+                        %{--<div class="ribbon-background"></div>--}%
+                        %{--</div>--}%
+                        %{--<!-- /.ribbon -->--}%
+
+                        %{--<div class="ribbon gift">--}%
+                        %{--<div class="theribbon">GIFT</div>--}%
+                        %{--<div class="ribbon-background"></div>--}%
+                        %{--</div>--}%
+                        %{--<!-- /.ribbon -->--}%
+                    </div>
+                    <!-- /.product -->
+                </div>
+            </g:if>
+                <g:if test="${aboutUsInstance.specialProduct2.productDetails==false}">
+                    <div class="col-md-6 col-sm-6 a">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front product">
+                                        <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">
+                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive">
+
+                                        </g:link>
+                                    </div>
+                                    <div class="back product">
+                                        <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">
+                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive">
+
+                                        </g:link>
+                                    </div>
+                                </div>
+                            </div>
+                            <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="invisible product">
+                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive">
+
+                            </g:link>
+                            <div class="text">
+                                <h3><g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">${aboutUsInstance.specialProduct1.productDetails.productName+" "+aboutUsInstance.specialProduct1.productColor+" "+aboutUsInstance.specialProduct1.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct1.productDetails.productName}</g:link></h3>
+                                <p class="price">Rs.${aboutUsInstance.specialProduct2.productDetails.price}</p>
+                                <p class="buttons">
+                                    <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="btn btn-default">View detail</g:link>
+                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </p>
+                            </div>
+                            <!-- /.text -->
+                        </div>
+                        <!-- /.product -->
+                    </div>
+
+                </g:if>
+                <g:if test="${aboutUsInstance.specialProduct2.productDetails.isSale==true}">
+
+                    <div class="col-md-6 col-sm-6 a">
+                        <div class="product">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front product">
+                                        <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">
+                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive">
+
+                                        </g:link>
+                                    </div>
+                                    <div class="back product">
+                                        <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">
+
+                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive">
+
+                                        </g:link>
+                                    </div>
+                                </div>
+                            </div>
+                            <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="invisible product">
+                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive">
+
+                            </g:link>
+                            <div class="text">
+                                <h3><g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">${aboutUsInstance.specialProduct2.productColor.colorName+" "+aboutUsInstance.specialProduct2.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct2.productDetails.productName}</g:link></h3>
+                                <p class="price"><del>Rs.${aboutUsInstance.specialProduct2.productDetails.price}</del> Rs.${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct2.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}</p>
+                                <p class="buttons">
+                                    <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="btn btn-default">View detail</g:link>
+                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                </p>
+                            </div>
+
+                            <!-- /.text -->
+
+                            <div class="ribbon sale">
+                                <div class="theribbon">SALE</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                            <!-- /.ribbon -->
+
+                            %{--<div class="ribbon new">--}%
+                            %{--<div class="theribbon">NEW</div>--}%
+                            %{--<div class="ribbon-background"></div>--}%
+                            %{--</div>--}%
+                            %{--<!-- /.ribbon -->--}%
+
+                            %{--<div class="ribbon gift">--}%
+                            %{--<div class="theribbon">GIFT</div>--}%
+                            %{--<div class="ribbon-background"></div>--}%
+                            %{--</div>--}%
+                            %{--<!-- /.ribbon -->--}%
+                        </div>
+                        <!-- /.product -->
+                    </div>
+                </g:if>
+
+            <!-- /.col-md-4 -->
+    </div>
+    </div>
+        <div class="col-md-12" data-animate="fadeInUp">
+            <div class="imgwrapper">
+                <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.specialProductSubCategoryImage}")}">
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="col-md-12 " >
+
+            <div class="agilenwew3lsfashions">
+
+
+        </div>
+</div>
+    </div>
+
 </div>
 
 <style>
-    .quote img{
+.agilenwew3lsfashions {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-attachment: fixed;
+    padding: 150px 0;
+    text-align: center;
+    color: #FFF;
+}
+
+.quote img{
         height:600px;
         width: 525px;
     }
 </style>
+<script>
+
+    window.onload=function () {
+        $.ajax({
+            url: "${createLink(controller:'endUser', action:'fetchAboutUrl')}"
+        }).done(function(fileLocation){
+                        $('.agilenwew3lsfashions').css('background-image', 'url(' + fileLocation + ')');
+
+
+
+        });
+
+
+    };
+
+</script>
+
 <script>
     $(document).ready(function() {
         $('.popup-with-zoom-anim').magnificPopup({

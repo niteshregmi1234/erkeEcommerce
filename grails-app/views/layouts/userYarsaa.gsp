@@ -2,6 +2,18 @@
 <html lang="en">
 
 <head>
+
+
+    <!-- styles -->
+
+    <!-- theme stylesheet -->
+
+    <!-- your stylesheet with modifications -->
+
+
+
+
+
     <meta charset="utf-8">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
@@ -41,17 +53,6 @@
 
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
             charset="utf-8"></script>
-    %{--<script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.8.3.min.js')}" type="text/javascript"--}%
-    %{--charset="utf-8"></script>--}%
-
-    %{--<script src="${resource(dir: 'js', file: 'yarsaa/jquery.elevateZoom-3.0.8.min.js')}" type="text/javascript"--}%
-    %{--charset="utf-8"></script>--}%
-    %{--<script>--}%
-
-    %{--$(".image-zoom").elevateZoom();--}%
-
-    %{--</script>--}%
-
     <script src="${resource(dir: 'js', file: 'yarsaa/bootstrap.min.js')}" type="text/javascript"
             charset="utf-8"></script>
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery.cookie.js')}" type="text/javascript"
@@ -67,6 +68,7 @@
     <script src="${resource(dir: 'js', file: 'yarsaa/front.js')}" type="text/javascript"
             charset="utf-8"></script>
 
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 
 
     <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/favicon.png')}">
@@ -247,7 +249,7 @@
                 </li>
                 <li><a href="register.html">Register</a>
                 </li>
-                <li><a href="contact.html">Contact</a>
+                <li><g:link action="contact" controller="endUser">Contact</g:link>
                 </li>
 
             </ul>
@@ -452,7 +454,7 @@
                         %{--</li>--}%
                     %{--</ul>--}%
                 %{--</li>--}%
-                <li><g:link action="aboutCompany" controller="endUser">About</g:link></li>
+                <li><g:link action="about" controller="endUser">About</g:link></li>
 
             </ul>
 
@@ -575,16 +577,15 @@
 
                     <h4>Where to find us</h4>
 
-                    <p><strong>Obaju Ltd.</strong>
-                        <br>13/25 New Avenue
-                        <br>New Heaven
-                        <br>45Y 73J
-                        <br>England
+                    <p><strong>Yarsaa Ltd.</strong>
+                        <br>Mitrapark
+                        <br>Chabhil
+                        <br>Kathmandu
                         <br>
-                        <strong>Great Britain</strong>
+                        <strong>Buddha Nepal</strong>
                     </p>
 
-                    <a href="contact.html">Go to contact page</a>
+                    <g:link action="contact" controller="endUser">Go to contact page</g:link>
 
                     <hr class="hidden-md hidden-lg">
 
@@ -652,7 +653,7 @@
 
             </div>
             <div class="col-md-6">
-                <p class="pull-right">Template by <a href="https://bootstrapious.com/e-commerce-templates">Bootstrapious.com</a>
+                <p class="pull-right">Template by Bonish Thapa</a>
                     <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
                 </p>
             </div>

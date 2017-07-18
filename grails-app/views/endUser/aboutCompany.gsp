@@ -223,10 +223,8 @@
 		$.ajax({
 			url: "${createLink(controller:'endUser', action:'fetchAboutUrl')}"
 		}).done(function(fileLocation){
-			$('.aitsyourself-grid1').css('background-image', 'url(' + fileLocation[0] + ')');
-			$('.aitsyourself-grid3').css('background-image', 'url(' + fileLocation[1] + ')');
-			$('.w3lsshoesaits').css('background-image', 'url(' + fileLocation[2] + ')');
-			$('.agilenwew3lsfashions').css('background-image', 'url(' + fileLocation[3] + ')');
+
+			$('.agilenwew3lsfashions').css('background-image', 'url(' + fileLocation + ')');
 
 
 
