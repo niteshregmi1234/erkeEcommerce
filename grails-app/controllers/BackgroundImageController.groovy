@@ -7,7 +7,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class BackgroundImageController {
-
+static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){
         def Image = request.getFile('Image')
@@ -73,9 +73,8 @@ def list(){
         def backgroundImageInstance=BackgroundImage.get(id)
         [backgroundImageInstance:backgroundImageInstance]}
 
-    def edit(){
-        def backgroundImageInstance=BackgroundImage.get(params.id)
-
+    def edit(Long id){
+        def backgroundImageInstance=BackgroundImage.get(id)
         [backgroundImageInstance:backgroundImageInstance]
     }
 }

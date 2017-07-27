@@ -18,6 +18,19 @@ h1 {
   font-weight: 700;
   font-size: 40px;
 }
+.pannel-tab .panel-heading{
+  background-color: #dd8bc1;
+}
+.btn-success{
+  background-color: #dd8bc1;
+  border-color: #d777b6;
+}
+.btn-sucess:hover, .btn-sucess:focus, .btn-sucess:active, .btn-sucess.active, .open .dropdown-toggle.btn-sucess {
+  color: #ffffff;
+  background-color: #dd8bc1;
+  border-color: #d777b6;
+
+}
 #top {
   background: #555555;
   padding: 10px 0;
@@ -557,7 +570,7 @@ h1 {
 #content .product .text h3 {
   font-size: 18px;
   font-weight: 700;
-  height: 39.6px;
+  /*height: 39.6px;*/
   text-align: center;
   overflow: hidden;
 }

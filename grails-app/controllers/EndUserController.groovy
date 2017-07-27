@@ -1,16 +1,41 @@
 import grails.converters.JSON
-
 class EndUserController {
+    def notfound(){}
+    def a(){
+session.endUser=null;
+    }
+    def allProducts={
+        def productDetailsList=ProductDetails.list();
+        List<Product> productList = new ArrayList<>()
+        for (ProductDetails productDetails : productDetailsList) {
+            def product = Product.findByProductDetailsAndSeasons(productDetails, SeasonManagement.list()[1].seasons)
+            if (product) {
+                productList.add(product)
+            }
+        }
+        Collections.shuffle(productList)
+        render(view: "allProducts", model: [productList: productList,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
 
+    }
 def contact(){
 [companyInformation:CompanyInformation.list()[0]]
 }
     def singleProduct(Long id) {
         if (id != null) {
-            def productInstance = Product.get(id)
-            if (productInstance) {
-                def sameProductList = Product.findAllByProductDetailsAndSeasonsAndIdNotEqual(productInstance.productDetails, SeasonManagement.list()[1].seasons, productInstance.id)
-               render(view: "detail", model :[productInstance: productInstance, sameProductList: sameProductList,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
+            def productInstance1 = Product.get(id)
+            if (productInstance1) {
+                def productDetailsList=ProductDetails.findAllByProductSubCategoryAndProductCategoryAndIdNotEqual(productInstance1.productDetails.productSubCategory,productInstance1.productDetails.productCategory,productInstance1.productDetails.id)
+                List<Product> relatedProductList = new ArrayList<>()
+
+                for (ProductDetails productDetails : productDetailsList) {
+                    def product = Product.findAllByProductDetailsAndSeasons(productDetails, SeasonManagement.list()[1].seasons)
+                    if (product) {
+                        relatedProductList.add(product[0])
+                    }
+                }
+                Collections.shuffle(relatedProductList)
+
+                render(view: "detail", model :[relatedProductList:relatedProductList,productInstance: productInstance1,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
             }
         } else {
             print "error is error"
@@ -120,10 +145,10 @@ def about(){
     def aboutUsInstance = AboutUs.list()[0]
     [aboutUsInstance: aboutUsInstance]
 }
-    def aboutCompany() {
-        def aboutUsInstance = AboutUs.list()[0]
-        [aboutUsInstance: aboutUsInstance]
-    }
+//    def aboutCompany() {
+//        def aboutUsInstance = AboutUs.list()[0]
+//        [aboutUsInstance: aboutUsInstance]
+//    }
 
     def allSubCategoryProducts(Long id) {
         if (id != null) {

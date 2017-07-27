@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<div id="content" style="padding-top: 85px;">
+<div id="content">
 
     <div class="container">
         <div class="col-md-12">
@@ -97,7 +97,7 @@
 <g:each in="${latestProductList}" var="list">
 
                 <div class="item">
-                    <div class="product">
+                    <div class="product product-height">
                         <div class="flip-container">
                             <div class="flipper">
                                 <div class="front food1">
@@ -122,15 +122,29 @@
                         </g:link>
                         <div class="text">
                             <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
-                            <p class="price">Rs.${list.productDetails.price}</p>
+                            <g:if test="${list.productDetails.isSale==true}">
+                                <p class="price"><del>Rs.${list.productDetails.price}</del> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}</p>
+                            </g:if>
+                            <g:if test="${list.productDetails.isSale==false}">
+
+        <p class="price">Rs.${list.productDetails.price}</p>
+        </g:if>
                         </div>
                         <!-- /.text -->
-
-                        <div class="ribbon new">
-                            <div class="theribbon">NEW</div>
+                        <g:if test="${list.productDetails.isSale==true}">
+                        <div class="ribbon sale">
+                            <div class="theribbon">SALE</div>
                             <div class="ribbon-background"></div>
                         </div>
-                        <!-- /.ribbon -->
+                        </g:if>
+                        <g:if test="${list.isLatest==true}">
+                            <div class="ribbon new">
+                                <div class="theribbon">NEW</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                        </g:if>
+
+                    <!-- /.ribbon -->
                     </div>
                     <!-- /.product -->
                 </div>
@@ -196,45 +210,61 @@
                 <g:each in="${featuredProductList}" var="list">
 
                     <div class="item">
-                        <div class="product">
+                        <div class="product product-height">
                             <div class="flip-container">
                                 <div class="flipper">
                                     <div class="front food1">
-                                        <a href="detail.gsp">
-                                            <img src="${resource(dir: "images/allProducts/frontImage",file: "${list.frontImageName}")}" alt="" class="img-responsive">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
 
-                                        </a>
+                                        </g:link>
                                     </div>
                                     <div class="back food1">
-                                        <a href="detail.gsp">
-                                            <img src="${resource(dir: "images/allProducts/frontImage",file: "${list.frontImageName}")}" alt="" class="img-responsive">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.id}">
 
-                                        </a>
+                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+
+                                        </g:link>
                                     </div>
                                 </div>
                             </div>
-                            <a href="detail.gsp" class="invisible food1">
-                                <img src="${resource(dir: "images/allProducts/frontImage",file: "${list.frontImageName}")}" alt="" class="img-responsive">
+                            <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
+                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
 
 
-                            </a>
+                            </g:link>
                             <div class="text">
-                                <h3><a href="detail.gsp">White Blouse Versace</a></h3>
-                                <p class="price">$143.00</p>
-                            </div>
-                            <!-- /.text -->
+                                <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
+                                <g:if test="${list.productDetails.isSale==true}">
+                                    <p class="price"><del>Rs.${list.productDetails.price}</del> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}</p>
+                                </g:if>
+                                <g:if test="${list.productDetails.isSale==false}">
 
-                            <div class="ribbon new">
-                                <div class="theribbon">NEW</div>
-                                <div class="ribbon-background"></div>
+                                    <p class="price">Rs.${list.productDetails.price}</p>
+                                </g:if>
                             </div>
-                            <!-- /.ribbon -->
+                        <!-- /.text -->
+                            <g:if test="${list.productDetails.isSale==true}">
+                                <div class="ribbon sale">
+                                    <div class="theribbon">SALE</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                            </g:if>
+                            <g:if test="${list.isLatest==true}">
+                                <div class="ribbon new">
+                                    <div class="theribbon">NEW</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                            </g:if>
+
+                        <!-- /.ribbon -->
                         </div>
                         <!-- /.product -->
                     </div>
 
                 </g:each>
             </div>
+
             <!-- /.product-slider -->
         </div>
         <!-- /.container -->
@@ -247,30 +277,31 @@
             <div class="box slideshow">
 
                 <div id="thumbnail text-center nomargin">
-        <img src="${resource(dir: "images/seasonsImage",file: "${seasonManagementInstance.seasons.imageName}")}" alt="" class="img-responsive">
+                    <img src="${resource(dir: "images/seasonsImage",file: "${seasonManagementInstance.seasons.imageName}")}" alt="" class="img-responsive image-nomargin">
 
-                    <div class="middle">
+                    <div class="middle1 col-sm-offset-4 col-sm-5">
                         <div class="text1">
-                           <h3> <p class="text-center lead1">${seasonManagementInstance.seasons.greetings}</p></h3>
+                            <h3> <p class="text-center lead1">${seasonManagementInstance.seasons.greetings}</p></h3>
 
 
-                           <p class="text-center lead lead2">${seasonManagementInstance.seasons.descriptionOfSeason}</p>
-                           <a href="#" class="btn btn-primary subButton" style="margin-bottom: 10px;">${seasonManagementInstance.seasons.askingForShopping}</a>
-
-                       </div>
+                            <p class="text-center lead lead2">${seasonManagementInstance.seasons.descriptionOfSeason}</p>
+                            <div class="wthreeshop-a">
+                                <a href="#">${seasonManagementInstance.seasons.askingForShopping}</a>
+                            </div>
+                        </div>
                     </div>
 
-                        </div>
+                </div>
 
 
 
             </div>
 
-                </div>
+        </div>
 
     </div>
 
-<style>
+    <style>
     .caption1{
         position:absolute;
         top:30%;
@@ -278,7 +309,7 @@
         background: rgba(255,255,255,0.44);
     }
 
-</style>
+    </style>
     <div class="box text-center" data-animate="fadeInUp">
         <div class="container">
             <div class="col-md-12">
@@ -334,7 +365,7 @@
             <!-- /#blog-homepage -->
         </div>
     </div>
-<br/>
+    <br/>
     <!-- /.container -->
 
     <!-- *** BLOG HOMEPAGE END *** -->
@@ -388,15 +419,15 @@
     <div class="container">
         <div class="col-md-12">
 
-        <div class="agileinfonewsl">
+            <div class="agileinfonewsl">
 
 
-        <!-- Popup-Box -->
-        <!-- //Popup-Box -->
+                <!-- Popup-Box -->
+                <!-- //Popup-Box -->
 
-    </div>
             </div>
-</div>
+        </div>
+    </div>
 
 </div>    <!-- /.container -->
 
@@ -433,39 +464,6 @@
         }
     }
 </script>
-    <!-- *** BLOG HOMEPAGE END *** -->
-<style>
-
-.middle {
-    transition: .5s ease;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.75);
-}
-.agileinfonewsl {
-    /*background-image: url("../../imagess/yamsaa/newsletter.jpg");*/
-    background-position: center center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-attachment: fixed;
-    text-align: center;
-    height: 600px;
-    width: 1110px;
-}
-
-
-.text1 {
-    font-family: 'Sintony', sans-serif;
-    color: #ffffff;
-    font-size: 16px;
-    padding: 16px 32px;
-}
-</style>
 
 
 

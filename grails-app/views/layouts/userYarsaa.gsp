@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-
-    <!-- styles -->
-
-    <!-- theme stylesheet -->
-
-    <!-- your stylesheet with modifications -->
-
-
-
-
-
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Obaju e-commerce template">
     <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
     <meta name="keywords" content="">
-
+    <meta name="google-site-verification" content="yFlo6Uspjm1tOF27VK5uKuiAs9_i9sCkqM1A049MKu4" />
     <title>
         Yarsaa
     </title>
@@ -53,8 +39,15 @@
 
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+<script src="${resource(dir: 'js', file: 'yarsaa/jquery.elevateZoom-3.0.8.min.js')}" type="text/javascript"
+        charset="utf-8"></script>
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
     <script src="${resource(dir: 'js', file: 'yarsaa/bootstrap.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yamsaa/bootbox.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
+
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery.cookie.js')}" type="text/javascript"
             charset="utf-8"></script>
     <script src="${resource(dir: 'js', file: 'yarsaa/waypoints.min.js')}" type="text/javascript"
@@ -68,168 +61,17 @@
     <script src="${resource(dir: 'js', file: 'yarsaa/front.js')}" type="text/javascript"
             charset="utf-8"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
-
-
     <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/favicon.png')}">
 
-<style>
-    .all{
-        padding: 70px;
-    }
-    .menu1 {
-        height:2em;
-        position:absolute;
-        top:50px;
-        width:100%;
-        z-index: 6;
-}
-.fixed {
-    position:fixed;
-    top:0;
-}
-    .product:hover{
-        box-shadow: 0 0 5px #888888;
-    }
-@media screen and (max-width:320px){
-    .lead1{
-        font-size:10px !important;
-        margin-top: 15%!important;
-        margin-bottom: -10px!important;
-
-    }
-   .lead2{
-       font-size: 8px!important;
-   }
-   .caption1{
-       top:2%!important;
-       left:51px!important;
-   }
-   .subButton{
-       margin-top: -27px!important;
-       font-size: 6px!important;
-
-   }
-   .agileinfonewsl{
-       width: 260px!important;
-       height:300px!important;
-   }
-    .coverUp img{
-        height: 120px !important;
-        width: 260px !important;
-
-    }
-    .coverDown img{
-        height: 120px !important;
-        width: 260px !important;
-
-    }
-
- .food1 img {
-     height: 300px!important;
- }
-}
-@media screen and (min-width: 321px) and (max-width:480px){
-    .lead1{
-        font-size:10px !important;
-        margin-top: 15%!important;
-        margin-bottom: -10px!important;
-
-    }
-    .lead2{
-        font-size: 8px!important;
-    }
-    .caption1{
-        top:2%!important;
-        left:51px!important;
-    }
-    .subButton{
-        margin-top: -27px!important;
-        font-size: 6px!important;
-
-    }
-    .agileinfonewsl{
-        width: 100% !important;
-        height:300px!important;
-    }
-    .coverUp img{
-        width: 420px !important;
-        height: 165px !important;
-
-    }
-    .coverDown img{
-        height: 150px !important;
-        width: 420px !important;
-
-    }
-
-    .food1 img {
-        height: 300px!important;
-    }
-}
-@media screen and (min-width:481px) and (max-width: 640px){
-    .lead1{
-        font-size:10px !important;
-        margin-top: 15%!important;
-        margin-bottom: -10px!important;
-
-    }
-    .lead2{
-        font-size: 8px!important;
-    }
-    .caption1{
-        top:2%!important;
-        left:51px!important;
-    }
-    .subButton{
-        margin-top: -27px!important;
-        font-size: 6px!important;
-
-    }
-    .agileinfonewsl{
-        width: 100%!important;
-        height:300px!important;
-    }
-    .coverUp img{
-        width: 580px !important;
-        height: 230px !important;
-
-    }
-    .coverDown img{
-        height: 150px !important;
-        width: 420px !important;
-
-    }
-
-    .food1 img {
-        height: 300px!important;
-    }
-
-}
-    @media screen and (min-width: 641px) and (max-width: 768px) {
-        .agileinfonewsl {
-            width: 100% !important;
-            height: 600px !important;
-
+<script>
+    $(window).bind('scroll', function () {
+        if ($(window).scrollTop() > 50) {
+            $('.menu2').addClass('fixed');
+        } else {
+            $('.menu2').removeClass('fixed');
         }
-    }
-    @media screen and (min-width: 769px) and (max-width: 1024px) {
-        .agileinfonewsl {
-            width: 100% !important;
-            height: 800px !important;
-        }
-    }
-
-</style>
-    <script>
-        $(window).bind('scroll', function () {
-            if ($(window).scrollTop() > 50) {
-                $('.menu1').addClass('fixed');
-            } else {
-                $('.menu1').removeClass('fixed');
-            }
-        });
-    </script>
+    });
+</script>
 
 
 </head>
@@ -247,7 +89,11 @@
             <ul class="menu">
                 <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
                 </li>
-                <li><a href="register.html">Register</a>
+                %{--<g:if test="${session.endUser}">--}%
+                %{--<li><a href="#" onclick="logoutUser();">Logout</a>--}%
+                %{--</li>--}%
+                %{--</g:if>--}%
+                <li><g:link action="register" controller="endUserInformation">Register</g:link>
                 </li>
                 <li><g:link action="contact" controller="endUser">Contact</g:link>
                 </li>
@@ -258,18 +104,29 @@
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
         <div class="modal-dialog modal-sm">
 
-            <div class="modal-content">
+            <div class="modal-content" id="loginReset">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" onclick="closeLoginModal();" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="Login">Customer login</h4>
                 </div>
+
+
                 <div class="modal-body">
-                    <form action="customer-orders.html" method="post">
+                    <form method="post" onsubmit="return loginValid();">
+                        <small style="color: #a94442; display: none;" id="error" >email or password does not exist</small>
+
                         <div class="form-group">
-                            <input type="text" class="form-control" id="email-modal" placeholder="email">
+                            <input type="text" class="form-control" id="login_email" placeholder="email">
+                            <small style="color: #a94442; display: none;" id="login_emailBlank">
+                                Please supply your email</small>
+                            <small style="color: #a94442; display: none;" id="login_emailInvalid">
+                                Invalid email Address</small>
+
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password-modal" placeholder="password">
+                            <input type="password" class="form-control" id="login_password" placeholder="password">
+                            <small style="color: #a94442; display: none;" id="login_passwordBlank">
+                                Please supply your password</small>
                         </div>
 
                         <p class="text-center">
@@ -279,12 +136,95 @@
                     </form>
 
                     <p class="text-center text-muted">Not registered yet?</p>
-                    <p class="text-center text-muted"><a href="register.html"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
+                    <p class="text-center text-muted"><g:link action="register" controller="endUserInformation"><strong>Register now</strong></g:link>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
 
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        var modal = document.getElementById('login-modal');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                $('#loginReset').load(document.URL +  ' #loginReset');
+
+            }
+        }
+        function closeLoginModal(){
+            $('#loginReset').load(document.URL +  ' #loginReset');
+
+        }
+        function loginValid(){
+            var responseValue;
+            var emailAddress= $("#login_email").val();
+            var array = [];
+            array[0] = $("#login_email").val();
+            array[1] = $("#login_password").val();
+            if(array[0]==''){
+                $('#login_emailInvalid').hide();
+                $("#login_email").css("border", "1px solid #a94442");
+                $('#login_emailBlank').show();
+                document.getElementById("login_email").focus();
+                responseValue=false;
+            }
+            if(emailAddress!=''){
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if(!emailAddress.match(re)){
+                    $("#login_email").css("border", "1px solid #a94442");
+                    $('#login_emailBlank').hide();
+                    $('#login_emailInvalid').show();
+
+                    document.getElementById("login_email").focus();
+                    return false;
+
+
+                }}
+            if(array[1]==''){
+                $("#login_password").css("border", "1px solid #a94442");
+                $('#login_passwordBlank').show();
+                document.getElementById("login_password").focus();
+                responseValue=false;
+            }
+            else {
+                $.ajax({
+                    url: "${createLink(controller:'endUserInformation', action:'checkLogin')}",
+                    type : 'POST',
+                    dataType: 'json',
+                    data: { "array": JSON.stringify(array) },
+                    async : false,
+                    success: function(result) {
+                        if(result==false){
+                            $('#login_passwordBlank').hide();
+                            $('#login_emailBlank').hide();
+                            $('#login_emailInvalid').hide();
+                            $('#error').show();
+                            responseValue=false;
+
+                        }
+                        else if(result==true){
+                            bootbox.alert({
+                                message: "successfully logged in.",
+                                size: 'small',
+                                callback: function(){
+                                    location.reload();
+                                }
+
+                            });
+                            $('#login-modal').modal('toggle');
+                            responseValue=false;
+                        }
+                    }
+                });
+
+            }
+            return responseValue;
+
+        }
+
+    </script>
+
 
 </div>
 
@@ -293,7 +233,7 @@
 <!-- *** NAVBAR ***
  _________________________________________________________ -->
 
-<div class="navbar navbar-default yamm menu1" role="navigation" id="navbar">
+<div class="navbar navbar-default yamm menu2" role="navigation" id="navbar">
     <div class="container">
         <div class="navbar-header">
 
@@ -310,9 +250,9 @@
                     <span class="sr-only">Toggle search</span>
                     <i class="fa fa-search"></i>
                 </button>
-                <a class="btn btn-default navbar-toggle" href="basket.html">
-                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
-                </a>
+                <g:link class="btn btn-default navbar-toggle" action="cart" controller="cart">
+                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">${Cart.findAllByEndUserInformation(session.endUser).size()} items in cart</span>
+                </g:link>
             </div>
         </div>
         <!--/.navbar-header -->
@@ -464,7 +404,7 @@
         <div class="navbar-buttons">
 
             <div class="navbar-collapse collapse right" id="basket-overview">
-                <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
+                <g:link action="cart" controller="cart" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">${Cart.findAllByEndUserInformation(session.endUser).size()} items in cart</span></g:link>
             </div>
             <!--/.nav-collapse -->
 
@@ -515,13 +455,13 @@
                     <h4>Pages</h4>
 
                     <ul>
-                        <li><a href="text.html">About us</a>
+                        <li><g:link action="about" controller="endUser">About us</g:link>
                         </li>
                         <li><a href="text.html">Terms and conditions</a>
                         </li>
-                        <li><a href="faq.html">FAQ</a>
-                        </li>
-                        <li><a href="contact.html">Contact us</a>
+                        %{--<li><a href="faq.html">FAQ</a>--}%
+                        %{--</li>--}%
+                        <li><g:link action="contact" controller="endUser">Contact us</g:link>
                         </li>
                     </ul>
 
@@ -532,7 +472,7 @@
                     <ul>
                         <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
                         </li>
-                        <li><a href="register.html">Regiter</a>
+                        <li><g:link action="register" controller="endUserInformation">Register</g:link>
                         </li>
                     </ul>
 
@@ -544,29 +484,18 @@
                 <div class="col-md-3 col-sm-6">
 
                     <h4>Top categories</h4>
-
-                    <h5>Men</h5>
+<g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
+                    <h5>${categoryList.categoryName}</h5>
 
                     <ul>
-                        <li><a href="category.html">T-shirts</a>
-                        </li>
-                        <li><a href="category.html">Shirts</a>
-                        </li>
-                        <li><a href="category.html">Accessories</a>
-                        </li>
-                    </ul>
+                        <g:each in="${ProductSubCategory.findAllByStatusShow(true)}" var="subCategoryList">
+                            <li><g:link action="subCategoryList" controller="endUser" params="[id1:categoryList.id,id2:subCategoryList.id]">${subCategoryList.subCategoryName}</g:link>
+                            </li>
+                        </g:each>
 
-                    <h5>Ladies</h5>
-                    <ul>
-                        <li><a href="category.html">T-shirts</a>
-                        </li>
-                        <li><a href="category.html">Skirts</a>
-                        </li>
-                        <li><a href="category.html">Pants</a>
-                        </li>
-                        <li><a href="category.html">Accessories</a>
-                        </li>
                     </ul>
+                </g:each>
+
 
                     <hr class="hidden-md hidden-lg">
 
@@ -577,12 +506,12 @@
 
                     <h4>Where to find us</h4>
 
-                    <p><strong>Yarsaa Ltd.</strong>
-                        <br>Mitrapark
-                        <br>Chabhil
-                        <br>Kathmandu
+                    <p><strong>${CompanyInformation.list()[0].companyName}.</strong>
+                        <br>${CompanyInformation.list()[0].location1}
+                        <br>${CompanyInformation.list()[0].location2}
+                        <br>${CompanyInformation.list()[0].location3}
                         <br>
-                        <strong>Buddha Nepal</strong>
+                        <strong>${CompanyInformation.list()[0].location4}</strong>
                     </p>
 
                     <g:link action="contact" controller="endUser">Go to contact page</g:link>

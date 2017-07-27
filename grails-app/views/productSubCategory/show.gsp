@@ -34,11 +34,14 @@
             </div>
         </div>
     </div>
+
     <div class="col-lg-12">
         <div class="form-group ">
             <label class="control-label col-sm-2">Cover Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/subCategoryImage",file: "${productSubCategoryInstance.coverImageName}")}" height="100" style="margin-left: -1%">
+                %{--<img src="${createLink(controller: 'productSubCategory', action:'renderImage',params: [imageName:productSubCategoryInstance.coverImageName])}" height="100" style="margin-left: -1%">--}%
+                %{--<ii:imageTag src="/home/hemanta/image/${productSubCategoryInstance.coverImageName}" height="100" style="margin-left: -1%"/>--}%
+                <img src="${resource(dir: "images/subCategoryImage", file: "${productSubCategoryInstance.coverImageName}")}" height="100" style="margin-left: -1%">
 
             </div>
         </div>

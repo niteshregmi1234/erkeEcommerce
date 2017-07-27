@@ -1,0 +1,6 @@
+
+
+class AdminUserInformationController {
+
+    def index() {}
+}

@@ -15,6 +15,8 @@
 
     <script src="${resource(dir: 'js', file: 'yamsaa/jquery.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+
     <script src="${resource(dir: 'js', file: 'yamsaa/jquery-ui.js')}" type="text/javascript"
             charset="utf-8"></script>
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap.min.js')}" type="text/javascript"
@@ -86,6 +88,8 @@
                     <li><g:link action="list" controller="productSize">Product Size</g:link></li>
                     <li><g:link action="list" controller="productBrand">Product Brand</g:link></li>
                     <li><g:link action="list" controller="seasons">Season</g:link></li>
+                    <li><g:link action="list" controller="paymentMethod">Payment</g:link></li>
+                    <li><g:link action="list" controller="deliveryMethod">Delivery</g:link></li>
 
                 </ul>
             </li>
@@ -104,6 +108,7 @@
                     <li><g:link action="show" controller="aboutUs" id="${AboutUs.list()[0].id}">About Us</g:link></li>
 
                     <li><g:link action="show" controller="companyInformation" id="${CompanyInformation.list()[0].id}">Company Information</g:link></li>
+                    <li><g:link action="show" controller="otherCosts" id="${OtherCosts.list()[0].id}">Other Costs</g:link></li>
 
                     <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[0].id}">Upcoming Season</g:link></li>
                     <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[1].id}">Present Season</g:link></li>

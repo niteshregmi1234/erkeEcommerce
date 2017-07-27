@@ -10,6 +10,7 @@ class ProductDetails {
         float price
     String briefDescription
     String detailDescription
+
     static constraints = {
 
     }

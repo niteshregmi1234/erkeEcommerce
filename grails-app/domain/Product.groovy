@@ -10,6 +10,7 @@ class Product {
     boolean isFeatured
     String productSpecificationName
     String specialImageName
+
     static constraints = {
 
     }

@@ -18,6 +18,9 @@ h1 {
   font-weight: 700;
   font-size: 40px;
 }
+.pannel-tab .panel-heading{
+  background-color: #4993e4;
+}
 #top {
   background: #555555;
   padding: 10px 0;
@@ -557,7 +560,7 @@ h1 {
 #content .product .text h3 {
   font-size: 18px;
   font-weight: 700;
-  height: 39.6px;
+  /*height: 39.6px;*/
   text-align: center;
   overflow: hidden;
 }
@@ -1223,6 +1226,15 @@ h1 {
 .navbar-btn.btn-sm {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+.btn-success{
+  background-color: #4993e4;
+  border-color: #3386e1;
+}
+.btn-sucess:hover, .btn-sucess:focus, .btn-sucess:active, .btn-sucess.active, .open .dropdown-toggle.btn-sucess {
+  color: #ffffff;
+  background-color: #4993e4;
+  border-color: #3386e1;
 }
 .navbar-btn.btn-xs {
   margin-top: 24px;

@@ -31,13 +31,13 @@
 
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a>
+                        <li><g:link action="userHome" controller="endUser">Home</g:link>
                         </li>
                         <li><a href="#">Ladies</a>
                         </li>
                         <li><a href="#">Tops</a>
                         </li>
-                        <li>White Blouse Armani</li>
+                        <li>${productInstance.productColor.colorName+" "+productInstance.productDetails.productBrand.brandName+" "+productInstance.productDetails.productName}</li>
                     </ul>
 
                 </div>
@@ -54,14 +54,15 @@
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked category-menu">
                                 <g:each in="${productCategoryList}" var="categoryList">
-                                    <g:if test="${categoryList.equals(productCategory)}">
+                                    <g:if test="${categoryList.id==productInstance.productDetails.productCategory.id}">
+
                                         <li class="active">
                                     </g:if>
-                                    <g:if test="${categoryList!=(productCategory)}">
-                                        <li>
+                                <g:if test="${categoryList.id!=productInstance.productDetails.productCategory.id}">
 
+                                        <li>
                                     </g:if>
-                                    <g:link action="allCategoryProducts" id="${categoryList.id}" controller="endUser">${categoryList.categoryName} <span class="badge pull-right"></span></g:link>
+                                    <g:link action="allCategoryProducts" id="${categoryList.id}" controller="endUser">${categoryList.categoryName}<span class="badge pull-right"></span></g:link>
                                     <ul>
                                         <g:each in="${productSubCategoryList}" var="subCategoryList">
                                             <li><g:link action="subCategoryList" controller="endUser" params="[id1:categoryList.id,id2:subCategoryList.id]">${subCategoryList.subCategoryName}</g:link>
@@ -194,135 +195,17 @@
                 <div class="col-md-9">
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
-                            <div id="mainImage" class="coverDown">
-                                    <img id="myImg" src="${resource(dir: "images/allProducts/frontImage",file: "${productInstance.frontImageName}")}" alt="" class="img-responsive image-zoom">
+                                        <div id="mainImage"class="mainImage-coverDown mainImage-height">
+                                            <img class="img-responsive mainImage-height" id="myImg" src="${resource(dir: "images/allProducts/frontImage",file: "${productInstance.frontImageName}")}" data-zoom-image="${resource(dir: "images/allProducts/frontImage",file: "${productInstance.frontImageName}")}">
 
-                            </div>
-                            <style>
-                            .coverDown img{
-                                height: 599px;
-                                width: 397px; !important;
+                                        </div>
 
-                            }
-                            </style>
-                            <div class="ribbon sale">
+
+                                                       <div class="ribbon sale">
                                 <div class="theribbon">SALE</div>
                                 <div class="ribbon-background"></div>
                             </div>
-                            <div id="myModal" class="modal">
-                                <span id="a" class="close">x</span>
-                                <img class="modal-content" id="img01">
-                                <div id="caption"></div>
-                            </div>
-                            <style>
-                            #myImg {
-                                border-radius: 5px;
-                                cursor: pointer;
-                                transition: 0.3s;
-                            }
 
-                            #myImg:hover {opacity: 0.7;}
-
-                            /* The Modal (background) */
-                            .modal {
-                                display: none; /* Hidden by default */
-                                position: fixed; /* Stay in place */
-                                z-index: 1; /* Sit on top */
-                                padding-top: 50px; /* Location of the box */
-                                left: 0;
-                                top: 0;
-                                width: 100%; /* Full width */
-                                height: 100%; /* Full height */
-                                overflow: auto; /* Enable scroll if needed */
-                                background-color: rgb(0,0,0); /* Fallback color */
-                                background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-                            }
-
-                            /* Modal Content (image) */
-                            .modal-content {
-                                margin: auto;
-                                display: block;
-                                width: 800px;
-                                height:1000px;
-                            }
-
-                            /* Caption of Modal Image */
-                            #caption {
-                                margin: auto;
-                                display: block;
-                                width: 80%;
-                                max-width: 700px;
-                                text-align: center;
-                                color: #ccc;
-                                height: 150px;
-                            }
-
-                            /* Add Animation */
-                            .modal-content, #caption {
-                                -webkit-animation-name: zoom;
-                                -webkit-animation-duration: 0.6s;
-                                animation-name: zoom;
-                                animation-duration: 0.6s;
-                            }
-
-                            @-webkit-keyframes zoom {
-                                from {-webkit-transform:scale(0)}
-                                to {-webkit-transform:scale(1)}
-                            }
-
-                            @keyframes zoom {
-                                from {transform:scale(0)}
-                                to {transform:scale(1)}
-                            }
-
-                            /* The Close Button */
-                            .close {
-                                position: absolute;
-                                top: 15px;
-                                right: 35px;
-                                color: #f1f1f1;
-                                font-size: 40px;
-                                font-weight: bold;
-                                transition: 0.3s;
-                            }
-
-                            .close:hover,
-                            .close:focus {
-                                color: #bbb;
-                                text-decoration: none;
-                                cursor: pointer;
-                            }
-
-                            /* 100% Image Width on Smaller Screens */
-                            @media only screen and (max-width: 700px){
-                                .modal-content {
-                                    width: 100%;
-                                }
-                            }
-                            </style>
-
-                            <script>
-                                // Get the modal
-                                var modal = document.getElementById('myModal');
-                                var span = document.getElementById("a");
-
-                                // Get the image and insert it inside the modal - use its "alt" text as a caption
-                                var img = document.getElementById('myImg');
-                                var modalImg = document.getElementById("img01");
-                                var captionText = document.getElementById("caption");
-                                img.onclick = function(){
-                                    modal.style.display = "block";
-                                    modalImg.src = this.src;
-                                    captionText.innerHTML = this.alt;
-                                }
-
-                                // Get the <span> element that closes the modal
-
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function() {
-                                    modal.style.display ="none";
-                                }
-                            </script>
 
                             <!-- /.ribbon -->
                             <div class="ribbon new">
@@ -333,37 +216,58 @@
 
                         </div>
                         <div class="col-sm-6">
-                            <div class="box">
+                            <div class="box box-height" id="detailInfo">
                                 <h1 class="text-center">White Blouse Armani</h1>
                                 <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
                                 </p>
-                                <p class="price">$124.00</p>
+                                <div class="price">
+                                    <ul style="list-style: none;">
+                                        <li>$124.00</li>
+                                        <li>
+                                            <small><del>$200</del></small>
+                                        </li>
+                                    </ul>
+                                </div>
 
+                                <g:if test="${session.endUser}">
                                 <p class="text-center buttons">
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a> 
-                                    <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
+                                    <g:form action="addToCart" controller="cart" class="text-center buttons" onsubmit="return ValidShopping();">
+                                        <g:hiddenField name="id" value="${productInstance.id}"></g:hiddenField>
+                                    <button class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                                    </g:form>
+                                    %{--<a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>--}%
                                 </p>
+</g:if>
+                                <g:if test="${session.endUser==null}">
+                                    <h4 class="text-center">You must login first to shop product</h4>
 
+
+                                    <p class="text-center buttons">
+                                    <a href="#" data-toggle="modal" data-target="#login-modal" class="btn btn-primary" >Login</a>
+                                        <g:link action="register"  controller="endUserInformation" class="btn btn-primary">Register</g:link>
+                                    </p>
+                                </g:if>
 
                             </div>
 
-                            <div class="row" id="thumbs">
+                            <div class="row"  id="thumbs">
                                 <div class="col-xs-4">
-                                    <a href="${resource(dir: "images/allProducts/frontImage",file: "${productInstance.frontImageName}")}" class="thumb">
-                                        <img src="${resource(dir: "images/allProducts/frontImage",file: "${productInstance.frontImageName}")}" alt="" class="img-responsive" data-zoom-image="${resource(dir: "images/allProducts/frontImage",file: "${productInstance.frontImageName}")}">
+                                    <a href="${resource(dir: "images/allProducts/frontImage",file: "${productInstance.frontImageName}")}" class="thumb" >
+
+                                        <img src="${resource(dir: "images/allProducts/frontImage",file: "${productInstance.frontImageName}")}" alt="" class="img-responsive img-thumb">
 
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${resource(dir: "images/allProducts/sideImage",file: "${productInstance.sideImageName}")}" class="thumb">
-                                        <img src="${resource(dir: "images/allProducts/sideImage",file: "${productInstance.sideImageName}")}" alt="" class="img-responsive" data-zoom-image="${resource(dir: "images/allProducts/sideImage",file: "${productInstance.sideImageName}")}">
+                                    <a href="${resource(dir: "images/allProducts/sideImage",file: "${productInstance.sideImageName}")}" class="thumb" >
+                                        <img src="${resource(dir: "images/allProducts/sideImage",file: "${productInstance.sideImageName}")}" alt="" class="img-responsive img-thumb" >
 
 
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${resource(dir: "images/allProducts/backImage",file: "${productInstance.backImageName}")}" class="thumb">
-                                        <img src="${resource(dir: "images/allProducts/backImage",file: "${productInstance.backImageName}")}" alt="" class="img-responsive" data-zoom-image="${resource(dir: "images/allProducts/backImage",file: "${productInstance.backImageName}")}" data-zoom-image="${resource(dir: "images/allProducts/backImage",file: "${productInstance.backImageName}")}">
+                                    <a href="${resource(dir: "images/allProducts/backImage",file: "${productInstance.backImageName}")}" class="thumb" >
+                                        <img src="${resource(dir: "images/allProducts/backImage",file: "${productInstance.backImageName}")}" alt="" class="img-responsive img-thumb">
 </a>
                                 </div>
                             </div>
@@ -372,222 +276,335 @@
                     </div>
 
 
+
                     <div class="box" id="details">
-                        <p>
-                            <h4>Product details</h4>
-                            <p>White lace top, woven, has a round neck, short sleeves, has knitted lining attached</p>
-                            <h4>Material & care</h4>
-                            <ul>
-                                <li>Polyester</li>
-                                <li>Machine wash</li>
-                            </ul>
-                            <h4>Size & Fit</h4>
-                            <ul>
-                                <li>Regular fit</li>
-                                <li>The model (height 5'8" and chest 33") is wearing a size S</li>
-                            </ul>
+                        <div class="pannel-tab">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title asd">
+                                            <a class="pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Description <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body panel_text">
+                                            <div class="scrollbar" id="style-2">
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingTwo">
+                                        <h4 class="panel-title asd">
+                                            <a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">More Colors (2) <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true"></span><i class="glyphicon glyphicon-menu-up" aria-hidden="true"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="accordion-image">
+                                            <div class="ac-img">
+                                                <a href="#"><img src="images/product-11.jpg" alt="Groovy Apparel"></a>
+                                            </div>
+                                            <div class="ac-img">
+                                                <a href="#"><img src="images/product-12.jpg" alt="Groovy Apparel"></a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <blockquote>
-                                <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em>
-                                </p>
-                            </blockquote>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingThree">
+                                        <h4 class="panel-title asd">
+                                            <a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Rating & Reviews (40+) <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true"></span><i class="glyphicon glyphicon-menu-up" aria-hidden="true"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                        <h3>"Excellent Quality & Fitting!"</h3>
+                                        <h4>Mathilda, Certified Buyer.</h4>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                        <span>5 Stars</span>
+                                        <a href="#" class="next">Next Review &rarr;</a>
+                                    </div>
+                                </div>
 
-                            <hr>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingFour">
+                                        <h4 class="panel-title asd">
+                                            <a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Shipping Info <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true"></span><i class="glyphicon glyphicon-menu-up" aria-hidden="true"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                        <h3>Shipping</h3>
+                                        <ul class="ship">
+                                            <li class="day"><i class="fa fa-calendar" aria-hidden="true"></i> 5-10 Business Days</li>
+                                            <li class="home"><i class="fa fa-truck" aria-hidden="true"></i> Free Home Delivery</li>
+                                            <li class="cod"><i class="fa fa-male" aria-hidden="true"></i> Cash On Delivery Available*</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
                             <div class="social">
                                 <h4>Show it to your friends</h4>
                                 <p>
-                                    <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
-                                    <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
-                                    <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
-                                </p>
+                                    <a id="btn_shareFacebook" class="facebook customer share" title="Facebook share" data-animate-hover="pulse" target="_blank"><i class="fa fa-facebook"></i></a>
+                                    <a id="btn_shareTWI" class="twitter customer share" href="" title="Twitter share" data-animate-hover="pulse" target="_blank"><i class="fa fa-twitter"></i></a>
+                                    <a id="btn_shareExternalGplus" class="gplus google_plus customer share" data-animate-hover="pulse" href="" title="Google Plus Share" target="_blank"><i class="fa fa-google-plus"></i></a>
+                                    <a id="btn_shareLinkedIn" class="a btn btn-linkedin customer share" href="" title="linkedin Share" target="_blank" data-animate-hover="pulse"><i class="fa fa-linkedin"></i>
+                                    </a>
+                                    %{--<a id="btn_shareInstagram" title="instagram Share" class="btn btn-instagram a" data-animate-hover="pulse" href="">--}%
+                                        %{--<i class="fa fa-instagram"></i>--}%
+                                    %{--</a>--}%
+                                                                   </p>
                             </div>
                     </div>
 
+<script>
+    function ValidShopping(){
+        var responseValue;
+        $.ajax({
+            url: "${createLink(controller:'cart', action:'checkUser')}",
+            async : false,
+            success: function(result) {
+                if(result=="notOk"){
+                   bootbox.alert("Sorry, your session has expired or you are not logged in. Try to login again.");
+                    $('#detailInfo').load(document.URL +  ' #detailInfo');
+
+                    responseValue=false;
+
+                }
+            }
+        });
+return responseValue;
+    }
+    (function($){
+
+
+        $.fn.customerPopup = function (e, intWidth, intHeight, blnResize) {
+
+            // Prevent default anchor event
+            e.preventDefault();
+
+            // Set values for window
+            intWidth = intWidth || '500';
+            intHeight = intHeight || '400';
+            strResize = (blnResize ? 'yes' : 'no');
+
+            // Set title and open popup with focus on it
+            var strTitle = ((typeof this.attr('title') !== 'undefined') ? this.attr('title') : 'Social Share'),
+                    strParam = 'width=' + intWidth + ',height=' + intHeight + ',resizable=' + strResize,
+                    objWindow = window.open(this.attr('href'), strTitle, strParam).focus();
+        }
+
+        /* ================================================== */
+
+        $(document).ready(function ($) {
+            $('.customer.share').on("click", function(e) {
+                var url=document.URL;
+                document.getElementById("btn_shareTWI").href="https://twitter.com/share?url="+url;
+                document.getElementById("btn_shareFacebook").href="https://www.facebook.com/sharer.php?u="+url;
+                document.getElementById("btn_shareExternalGplus").href="https://plus.google.com/share?url="+url;
+                document.getElementById("btn_shareLinkedIn").href="https://www.linkedin.com/shareArticle?mini=true&url="+url;
+
+                $(this).customerPopup(e);
+            });
+        });
+
+    }(jQuery));
+
+</script>
+                    <style>
+
+                    .btn-linkedin{
+                        background-color: #0976B4;
+
+                    }
+                        .a{
+                            border: none;
+                            line-height: 40px;
+                            border-radius: 20px;
+                            outline: 0;
+                            overflow:hidden;
+                            position: relative;
+                            position: relative;
+                            padding: 0;
+                            margin: 10px 1px;
+                            font-size: 16px;
+                            font-weight: 400;
+                            text-transform: uppercase;
+                            letter-spacing: 0;
+                            color: #FFF;
+                            will-change: box-shadow, transform;
+                            transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                            box-shadow: 0 2px 2px 0 rgba(153, 153, 153, 0.14), 0 3px 1px -2px rgba(153, 153, 153, 0.2), 0 1px 5px 0 rgba(153, 153, 153, 0.12);
+
+                        }
+
+                    </style>
                     <div class="row same-height-row">
                         <div class="col-md-3 col-sm-6">
                             <div class="box same-height">
                                 <h3>You may also like these products</h3>
                             </div>
                         </div>
-
+<g:each in="${relatedProductList}" var="list">
                         <div class="col-md-3 col-sm-6">
                             <div class="product same-height">
                                 <div class="flip-container">
                                     <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.gsp">
-                                                <img src="img/product2.jpg" alt="" class="img-responsive">
-                                            </a>
+                                        <div class="front food1">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+
+                                            </g:link>
                                         </div>
-                                        <div class="back">
-                                            <a href="detail.gsp">
-                                                <img src="img/product2_2.jpg" alt="" class="img-responsive">
-                                            </a>
+                                        <div class="back food1">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+
+                                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+
+                                            </g:link>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="detail.gsp" class="invisible">
-                                    <img src="img/product2.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
+                                <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
+                                    <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
 
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.gsp">
-                                                <img src="img/product1.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.gsp">
-                                                <img src="img/product1_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
+
+                                </g:link>
+                                <div class="text">
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
+                                    <g:if test="${list.productDetails.isSale==true}">
+                                        <p class="price"><del>Rs.${list.productDetails.price}</del> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}</p>
+                                    </g:if>
+                                    <g:if test="${list.productDetails.isSale==false}">
+
+                                        <p class="price">Rs.${list.productDetails.price}</p>
+                                    </g:if>
+                                </div>
+                            <!-- /.text -->
+                                <g:if test="${list.productDetails.isSale==true}">
+                                    <div class="ribbon sale">
+                                        <div class="theribbon">SALE</div>
+                                        <div class="ribbon-background"></div>
                                     </div>
-                                </div>
-                                <a href="detail.gsp" class="invisible">
-                                    <img src="img/product1.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
-
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.gsp">
-                                                <img src="img/product3.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.gsp">
-                                                <img src="img/product3_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
+                                </g:if>
+                                <g:if test="${list.isLatest==true}">
+                                    <div class="ribbon new">
+                                        <div class="theribbon">NEW</div>
+                                        <div class="ribbon-background"></div>
                                     </div>
-                                </div>
-                                <a href="detail.gsp" class="invisible">
-                                    <img src="img/product3.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
+                                </g:if>
 
-                                </div>
+
                             </div>
                             <!-- /.product -->
                         </div>
+</g:each>
+
+
 
                     </div>
 
-                    <div class="row same-height-row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="box same-height">
-                                <h3>Products viewed recently</h3>
-                            </div>
-                        </div>
+                    %{--<div class="row same-height-row">--}%
+                        %{--<div class="col-md-3 col-sm-6">--}%
+                            %{--<div class="box same-height">--}%
+                                %{--<h3>Products viewed recently</h3>--}%
+                            %{--</div>--}%
+                        %{--</div>--}%
 
 
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.gsp">
-                                                <img src="img/product2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.gsp">
-                                                <img src="img/product2_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="detail.gsp" class="invisible">
-                                    <img src="img/product2.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
+                        %{--<div class="col-md-3 col-sm-6">--}%
+                            %{--<div class="product same-height">--}%
+                                %{--<div class="flip-container">--}%
+                                    %{--<div class="flipper">--}%
+                                        %{--<div class="front">--}%
+                                            %{--<a href="detail.gsp">--}%
+                                                %{--<img src="img/product2.jpg" alt="" class="img-responsive">--}%
+                                            %{--</a>--}%
+                                        %{--</div>--}%
+                                        %{--<div class="back">--}%
+                                            %{--<a href="detail.gsp">--}%
+                                                %{--<img src="img/product2_2.jpg" alt="" class="img-responsive">--}%
+                                            %{--</a>--}%
+                                        %{--</div>--}%
+                                    %{--</div>--}%
+                                %{--</div>--}%
+                                %{--<a href="detail.gsp" class="invisible">--}%
+                                    %{--<img src="img/product2.jpg" alt="" class="img-responsive">--}%
+                                %{--</a>--}%
+                                %{--<div class="text">--}%
+                                    %{--<h3>Fur coat</h3>--}%
+                                    %{--<p class="price">$143</p>--}%
+                                %{--</div>--}%
+                            %{--</div>--}%
+                            %{--<!-- /.product -->--}%
+                        %{--</div>--}%
 
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.gsp">
-                                                <img src="img/product1.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.gsp">
-                                                <img src="img/product1_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="detail.gsp" class="invisible">
-                                    <img src="img/product1.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
+                        %{--<div class="col-md-3 col-sm-6">--}%
+                            %{--<div class="product same-height">--}%
+                                %{--<div class="flip-container">--}%
+                                    %{--<div class="flipper">--}%
+                                        %{--<div class="front">--}%
+                                            %{--<a href="detail.gsp">--}%
+                                                %{--<img src="img/product1.jpg" alt="" class="img-responsive">--}%
+                                            %{--</a>--}%
+                                        %{--</div>--}%
+                                        %{--<div class="back">--}%
+                                            %{--<a href="detail.gsp">--}%
+                                                %{--<img src="img/product1_2.jpg" alt="" class="img-responsive">--}%
+                                            %{--</a>--}%
+                                        %{--</div>--}%
+                                    %{--</div>--}%
+                                %{--</div>--}%
+                                %{--<a href="detail.gsp" class="invisible">--}%
+                                    %{--<img src="img/product1.jpg" alt="" class="img-responsive">--}%
+                                %{--</a>--}%
+                                %{--<div class="text">--}%
+                                    %{--<h3>Fur coat</h3>--}%
+                                    %{--<p class="price">$143</p>--}%
+                                %{--</div>--}%
+                            %{--</div>--}%
+                            %{--<!-- /.product -->--}%
+                        %{--</div>--}%
 
 
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href="detail.gsp">
-                                                <img src="img/product3.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href="detail.gsp">
-                                                <img src="img/product3_2.jpg" alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="detail.gsp" class="invisible">
-                                    <img src="img/product3.jpg" alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3>Fur coat</h3>
-                                    <p class="price">$143</p>
+                        %{--<div class="col-md-3 col-sm-6">--}%
+                            %{--<div class="product same-height">--}%
+                                %{--<div class="flip-container">--}%
+                                    %{--<div class="flipper">--}%
+                                        %{--<div class="front">--}%
+                                            %{--<a href="detail.gsp">--}%
+                                                %{--<img src="img/product3.jpg" alt="" class="img-responsive">--}%
+                                            %{--</a>--}%
+                                        %{--</div>--}%
+                                        %{--<div class="back">--}%
+                                            %{--<a href="detail.gsp">--}%
+                                                %{--<img src="img/product3_2.jpg" alt="" class="img-responsive">--}%
+                                            %{--</a>--}%
+                                        %{--</div>--}%
+                                    %{--</div>--}%
+                                %{--</div>--}%
+                                %{--<a href="detail.gsp" class="invisible">--}%
+                                    %{--<img src="img/product3.jpg" alt="" class="img-responsive">--}%
+                                %{--</a>--}%
+                                %{--<div class="text">--}%
+                                    %{--<h3>Fur coat</h3>--}%
+                                    %{--<p class="price">$143</p>--}%
 
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
+                                %{--</div>--}%
+                            %{--</div>--}%
+                            %{--<!-- /.product -->--}%
+                        %{--</div>--}%
 
-                    </div>
+                    %{--</div>--}%
 
                 </div>
                 <!-- /.col-md-9 -->
@@ -614,18 +631,6 @@
 
     </div>
     <!-- /#all -->
-
-
-    
-
-    <!-- *** SCRIPTS TO INCLUDE ***
- _________________________________________________________ -->
-
-
-
-
-
-
 </body>
 
 </html>

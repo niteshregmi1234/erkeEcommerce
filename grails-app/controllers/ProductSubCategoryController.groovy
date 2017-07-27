@@ -1,10 +1,13 @@
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
+import javax.imageio.ImageIO
+import java.awt.image.BufferedImage
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductSubCategoryController {
+    static allowedMethods = [save: "POST",delete: "DELETE",show: "GET",uploadCoverImage:"POST"]
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 
     def list() {
@@ -39,6 +42,8 @@ class ProductSubCategoryController {
         }
     }
     def uploadCoverImage(){
+        def f = request.getFile('coverImageName')
+
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImageName")
         String fileName = file.originalFilename
@@ -57,8 +62,12 @@ class ProductSubCategoryController {
                 continue abc
             }
         }
-        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/subCategoryImage/${fileName}")
-        file.transferTo(new File(realFilePath))
+        def homeDir = new File(System.getProperty("user.home"))
+        File fileDest = new File(homeDir,"image/${fileName}")
+//        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/subCategoryImage/${fileName}")
+//file.transferTo(new File(fileDest))
+        f.transferTo(fileDest)
+
         def imageName = fileName
         return imageName
 
@@ -94,7 +103,28 @@ class ProductSubCategoryController {
         }
 
     }
+    def renderImage = {
 
+        String profileImagePath = "/home/hemanta/image/"
+        String image = params.imageName // or whatever name you saved in your db
+        File imageFile =new File(profileImagePath+image);
+
+        BufferedImage originalImage=ImageIO.read(imageFile);
+
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+
+        ImageIO.write(originalImage, "png", baos );
+
+        byte[] imageInByte=baos.toByteArray();
+
+//        response.setHeader('Content-length', imageInByte.length.toString())
+
+        response.contentType = 'image/png' // or the appropriate image content type
+
+        response.outputStream << imageInByte
+        response.outputStream.flush()
+
+    }
     def show(Long id){
         def productSubCategoryInstance=ProductSubCategory.get(id)
 

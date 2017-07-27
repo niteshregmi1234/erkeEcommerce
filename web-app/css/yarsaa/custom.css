@@ -1,1 +1,324 @@
-/** Your theme modifications here **/
+.wthreeshop-a {
+    margin-top: 30px;
+    padding-bottom: 10px;
+}
+.wthreeshop-a a {
+    padding: 10px 50px;
+    border: 2px solid #FFF;
+    color: #FFF;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+}
+.product-img{
+    height: 620px;
+    width: 100%;
+}
+.ribbon{
+    z-index:0 !important;
+}
+.img-about{
+    height:355px;
+    width:100%;
+}
+.box-height{
+    height:400px;
+}
+.same-height{
+    height: 405px;
+}
+.height-same{
+    height: 600px;
+}
+.about-background{
+    margin-bottom: 40px;
+}
+.price ul li {
+    font-size: 16px;
+    line-height: 40px;
+    display: block;
+    color: #000;
+}
+.lead1{
+    white-space: nowrap;
+    width: 20em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.lead2{
+    white-space: nowrap;
+    width: 22em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mainImage-height{
+    height: 597px;
+}
+.price ul li:nth-child(1) {
+    font-size: 50px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pannel-tab .panel-heading {
+    padding: 15px;
+    border: none;
+    color: #FFF;
+    border-radius: 0;
+}
+.quote1{
+    padding: 0 !important;
+}
+.middle {
+    transition: .5s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    /*background: rgba(0, 0, 0, 0.75);*/
+}
+.thumb{
+    height: 167px;
+}
+.img-thumb{
+    height: 163px;
+}
+.middle1 {
+    position: absolute;
+    top: 25%;
+    left: -75px;
+    background: rgba(255, 255, 255, 0.22);
+    width:50%;
+    word-break: keep-all;
+}
+.agileinfonewsl {
+    /*background-image: url("../../imagess/yamsaa/newsletter.jpg");*/
+    background-position: center center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+    height: 600px;
+    width: 1110px;
+}
+
+
+.text1 {
+    font-family: 'Sintony', sans-serif;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 16px 32px;
+}
+#content{
+    padding-top: 110px;
+}
+.product-height{
+    height: 372px;
+}
+.flip-height{
+    height: 241px;
+}
+.all{
+    padding: 70px;
+}
+.menu2 {
+    height:2em;
+    position:absolute;
+    width:100%;
+    z-index: 6;
+}
+.fixed {
+    position:fixed;
+    top:0;
+}
+.product:hover{
+    box-shadow: 0 0 5px #888888;
+}
+.front-img{
+    height: 360px;
+    width: 539px;
+}
+@media screen and (max-width:320px){
+
+    #content {
+        padding-top: 115px;
+    }
+    .box-height{
+        height: 480px;
+    }
+    .text1{
+        padding: 6px 9px;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 30px;
+    }
+    .mainImage-coverDown{
+        height:250px;
+        width: 100%;
+    }
+    .lead1{
+        font-size:10px !important;
+        margin-top: 15%!important;
+        margin-bottom: -10px!important;
+        width: 0;
+    }
+    .lead2{
+        font-size: 8px!important;
+        width: 0;
+    }
+    .middle1{
+        top:0%!important;
+        left:75px!important;
+    }
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+    }
+    .imgage-nomargin{
+        height: 86px;
+    }
+    .agileinfonewsl{
+        width: 260px!important;
+        height:300px!important;
+    }
+    .coverUp img{
+        height: 120px !important;
+        width: 260px !important;
+
+    }
+    .coverDown img{
+        height: 120px !important;
+        width: 260px !important;
+
+    }
+
+    .food1 img {
+        height: 300px!important;
+    }
+    .product-img{
+        height: 390px;
+    }
+    .small-screen{
+        padding-top: 20px;
+    }
+    .about-img{
+        height: 280px !important;
+    }
+    .height-same{
+        height: 450px;
+    }
+}
+@media screen and (min-width: 321px) and (max-width:480px){
+    .box-height{
+        height: 425px;
+    }
+    .product-img{
+        height: 450px;
+    }
+    .lead1{
+        font-size:10px !important;
+        margin-top: 15%!important;
+        margin-bottom: -10px!important;
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+    .middle1{
+        top:2%!important;
+        left:51px!important;
+    }
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+
+    }
+    .agileinfonewsl{
+        width: 100% !important;
+        height:300px!important;
+    }
+    .coverUp img{
+        width: 420px !important;
+        height: 165px !important;
+
+    }
+    .coverDown img{
+        height: 150px !important;
+        width: 420px !important;
+    }
+    .food1 img {
+        height: 300px!important;
+    }
+    .small-screen{
+        padding-top: 20px;
+    }
+    .about-img{
+        height: 280px !important;
+    }
+    .height-same{
+        height: 450px;
+    }
+}
+@media screen and (min-width:481px) and (max-width: 640px){
+    .lead1{
+        font-size:10px !important;
+        margin-top: 15%!important;
+        margin-bottom: -10px!important;
+
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+    .middle1{
+        top:2%!important;
+        left:51px!important;
+    }
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+
+    }
+    .agileinfonewsl{
+        width: 100%!important;
+        height:300px!important;
+    }
+    .coverUp img{
+        width: 580px !important;
+        height: 230px !important;
+
+    }
+    .coverDown img{
+        height: 150px !important;
+        width: 420px !important;
+
+    }
+
+    .food1 img {
+        height: 300px!important;
+    }
+
+}
+@media screen and (min-width: 641px) and (max-width: 768px) {
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 600px !important;
+    }
+    .product-img{
+        height: 490px;
+    }
+    .screen1{
+        padding-top: 20px;
+    }
+    .box-text{
+        white-space: nowrap;
+        width: 22em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 800px !important;
+    }
+}

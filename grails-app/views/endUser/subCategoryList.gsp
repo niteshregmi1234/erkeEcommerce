@@ -234,20 +234,20 @@
                                 <div class="flipper">
                                     <div class="front product">
                                         <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                            <img src="${resource(dir: "images/allProducts/frontImage",file: "${list.frontImageName}")}" alt="" class="img-responsive">
+                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
 
                                         </g:link>
                                     </div>
                                     <div class="back product">
                                         <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                            <img src="${resource(dir: "images/allProducts/backImage",file: "${list.backImageName}")}" alt="" class="img-responsive">
+                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
 
                                         </g:link>
                                     </div>
                                 </div>
                             </div>
                             <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible product">
-                                <img src="${resource(dir: "images/allProducts/frontImage",file: "${list.frontImageName}")}" alt="" class="img-responsive">
+                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
 
                             </g:link>
                             <div class="text">
@@ -255,10 +255,18 @@
                                 <p class="price">Rs.${list.productDetails.price}</p>
                                 <p class="buttons">
                                     <g:link action="singleProduct" controller="endUser" id="${list.id}" class="btn btn-default">View detail</g:link>
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                 </p>
                             </div>
-                            <!-- /.text -->
+                            <g:if test="${list.isLatest==true}">
+                                <div class="ribbon new">
+                                    <div class="theribbon">NEW</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                            </g:if>
+
+                        <!-- /.text -->
                         </div>
                         <!-- /.product -->
                     </div>
@@ -272,21 +280,21 @@
                                         <div class="flipper">
                                             <div class="front product">
                                                 <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                                    <img src="${resource(dir: "images/allProducts/frontImage",file: "${list.frontImageName}")}" alt="" class="img-responsive">
+                                                    <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
 
                                                 </g:link>
                                             </div>
                                             <div class="back product">
                             <g:link action="singleProduct" controller="endUser" id="${list.id}">
 
-                                                    <img src="${resource(dir: "images/allProducts/backImage",file: "${list.backImageName}")}" alt="" class="img-responsive">
+                                                    <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
 
                                                 </g:link>
                                             </div>
                                         </div>
                                     </div>
                                     <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible product">
-                                        <img src="${resource(dir: "images/allProducts/frontImage",file: "${list.frontImageName}")}" alt="" class="img-responsive">
+                                        <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
 
                                     </g:link>
                                     <div class="text">
@@ -294,7 +302,9 @@
                                         <p class="price"><del>Rs.${list.productDetails.price}</del> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}</p>
                                         <p class="buttons">
                                             <g:link action="singleProduct" controller="endUser" id="${list.id}" class="btn btn-default">View detail</g:link>
-                                            <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
+
                                         </p>
                                     </div>
 
@@ -304,7 +314,14 @@
                                 <div class="theribbon">SALE</div>
                                 <div class="ribbon-background"></div>
                             </div>
-                            <!-- /.ribbon -->
+                                    <g:if test="${list.isLatest==true}">
+                                        <div class="ribbon new">
+                                            <div class="theribbon">NEW</div>
+                                            <div class="ribbon-background"></div>
+                                        </div>
+                                    </g:if>
+
+                                <!-- /.ribbon -->
 
                             %{--<div class="ribbon new">--}%
                                 %{--<div class="theribbon">NEW</div>--}%
@@ -427,6 +444,38 @@
                 /*color:black;*/
                 /*}*/
                 </style>
+                <script>
+                    function checkAddToCart(id){
+                        alert(id);
+                        var responseValue;
+                        $.ajax({
+                            url: "${createLink(controller:'cart', action:'checkAddToCart')}",
+                            type: "POST",
+                            data: {id1:id},
+                            async : false,
+                            cache:false,
+                            success: function(result) {
+                                if(result=="ok"){
+                                    bootbox.alert({
+                                        message: "successfully added to cart.",
+                                        size: 'small',
+                                        callback: function(){
+                                            location.reload();
+                                        }
+
+                                    });
+                                    responseValue=false;
+
+                                }
+                                else if(result=="notOk"){
+                                    $('#login-modal').modal('toggle');
+                                }
+                            }
+                        });
+                        return responseValue;
+
+                    }
+                </script>
 
                 %{--<ul class="pagination">--}%
                         %{--<li><a href="#">&laquo;</a>--}%
