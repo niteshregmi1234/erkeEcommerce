@@ -102,17 +102,15 @@
     height: 600px;
     width: 1110px;
 }
-
-
 .text1 {
     font-family: 'Sintony', sans-serif;
     color: #ffffff;
     font-size: 16px;
     padding: 16px 32px;
 }
-#content{
-    padding-top: 110px;
-}
+/*#content{*/
+    /*padding-top: 110px;*/
+/*}*/
 .product-height{
     height: 372px;
 }
@@ -123,8 +121,8 @@
     padding: 70px;
 }
 .menu2 {
-    height:2em;
-    position:absolute;
+    /*height:2em;*/
+    /*position:absolute;*/
     width:100%;
     z-index: 6;
 }
@@ -139,11 +137,15 @@
     height: 360px;
     width: 539px;
 }
+.del-price{
+    font-size: 14px;
+    text-align: center;
+}
 @media screen and (max-width:320px){
 
-    #content {
-        padding-top: 115px;
-    }
+    /*#content {*/
+        /*padding-top: 115px;*/
+    /*}*/
     .box-height{
         height: 480px;
     }
@@ -208,6 +210,10 @@
     .height-same{
         height: 450px;
     }
+    .product-height {
+        height: 435px;
+    }
+
 }
 @media screen and (min-width: 321px) and (max-width:480px){
     .box-height{

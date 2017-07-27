@@ -123,7 +123,8 @@
                         <div class="text">
                             <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
                             <g:if test="${list.productDetails.isSale==true}">
-                                <p class="price"><del>Rs.${list.productDetails.price}</del> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}</p>
+                                <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
+                                    <del class="del-price">Rs.${list.productDetails.price}</del></p>
                             </g:if>
                             <g:if test="${list.productDetails.isSale==false}">
 
