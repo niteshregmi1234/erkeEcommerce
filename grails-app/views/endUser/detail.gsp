@@ -33,11 +33,11 @@
                     <ul class="breadcrumb">
                         <li><g:link action="userHome" controller="endUser">Home</g:link>
                         </li>
-                        <li><a href="#">Ladies</a>
+                        <li>${productInstance.productDetails.productCategory.categoryName}
                         </li>
-                        <li><a href="#">Tops</a>
+                        <li>${productInstance.productDetails.productSubCategory.subCategoryName}
                         </li>
-                        <li>${productInstance.productColor.colorName+" "+productInstance.productDetails.productBrand.brandName+" "+productInstance.productDetails.productName}</li>
+                        <li>${productInstance.productColor.colorName+" "+productInstance.productDetails.productName+" "+productInstance.productDetails.productBrand.brandName}</li>
                     </ul>
 
                 </div>
@@ -109,50 +109,50 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default sidebar-menu">
+                    %{--<div class="panel panel-default sidebar-menu">--}%
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Brands </h3>
-                        </div>
+                        %{--<div class="panel-heading">--}%
+                            %{--<h3 class="panel-title">Brands </h3>--}%
+                        %{--</div>--}%
 
-                        <div class="panel-body">
+                        %{--<div class="panel-body">--}%
 
-                            <g:form action="abc" controller="endUser">
-                                <div class="form-group">
-                                    <g:each in="${productBrandList}" var="brandList">
-                                        <div class="checkbox">
-                                            <label>
-                                                <g:checkBox name="brand" value="${brandList.id}"  />${brandList.brandName}
-                                            </label>
-                                        </div>
-                                    </g:each>
-                                </div>
+                            %{--<g:form action="abc" controller="endUser">--}%
+                                %{--<div class="form-group">--}%
+                                    %{--<g:each in="${productBrandList}" var="brandList">--}%
+                                        %{--<div class="checkbox">--}%
+                                            %{--<label>--}%
+                                                %{--<g:checkBox name="brand" value="${brandList.id}"  />${brandList.brandName}--}%
+                                            %{--</label>--}%
+                                        %{--</div>--}%
+                                    %{--</g:each>--}%
+                                %{--</div>--}%
 
-                                <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                                %{--<button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>--}%
 
-                            </g:form>
+                            %{--</g:form>--}%
 
-                        </div>
-                    </div>
+                        %{--</div>--}%
+                    %{--</div>--}%
 
-                    <div class="panel panel-default sidebar-menu">
+                    %{--<div class="panel panel-default sidebar-menu">--}%
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Colours</h3>
-                        </div>
+                        %{--<div class="panel-heading">--}%
+                            %{--<h3 class="panel-title">Colours</h3>--}%
+                        %{--</div>--}%
 
-                        <div class="panel-body">
+                        %{--<div class="panel-body">--}%
 
-                            <form>
-                                <div class="form-group">
-                                    <g:each in="${productColourList}" var="colourList">
-                                        <div class="checkbox">
-                                            <label>
-                                                <g:checkBox name="colour" value="${colourList.id}"/>${colourList.colorName}
+                            %{--<form>--}%
+                                %{--<div class="form-group">--}%
+                                    %{--<g:each in="${productColourList}" var="colourList">--}%
+                                        %{--<div class="checkbox">--}%
+                                            %{--<label>--}%
+                                                %{--<g:checkBox name="colour" value="${colourList.id}"/>${colourList.colorName}--}%
 
-                                            </label>
-                                        </div>
-                                    </g:each>
+                                            %{--</label>--}%
+                                        %{--</div>--}%
+                                    %{--</g:each>--}%
                                 %{--<div class="checkbox">--}%
                                 %{--<label>--}%
                                 %{--<input type="checkbox"> <span class="colour blue"></span> Blue (10)--}%
@@ -173,14 +173,14 @@
                                 %{--<input type="checkbox"> <span class="colour red"></span> Red (10)--}%
                                 %{--</label>--}%
                                 %{--</div>--}%
-                                </div>
+                                %{--</div>--}%
 
-                                <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                                %{--<button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>--}%
 
-                            </form>
+                            %{--</form>--}%
 
-                        </div>
-                    </div>
+                        %{--</div>--}%
+                    %{--</div>--}%
 
                     <!-- *** MENUS AND FILTERS END *** -->
 
@@ -200,32 +200,34 @@
 
                                         </div>
 
-
+<g:if test="${productInstance.productDetails.isSale}">
                                                        <div class="ribbon sale">
                                 <div class="theribbon">SALE</div>
                                 <div class="ribbon-background"></div>
                             </div>
-
-
+</g:if>
+<g:if test="${productInstance.isLatest}">
                             <!-- /.ribbon -->
                             <div class="ribbon new">
                                 <div class="theribbon">NEW</div>
                                 <div class="ribbon-background"></div>
                             </div>
                             <!-- /.ribbon -->
-
+</g:if>
                         </div>
                         <div class="col-sm-6">
                             <div class="box box-height" id="detailInfo">
-                                <h1 class="text-center">White Blouse Armani</h1>
-                                <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
+                                <h1 class="text-center">${productInstance.productColor.colorName+" "+productInstance.productDetails.productName+" "+productInstance.productDetails.productBrand.brandName}</h1>
+                                <p class="goToDescription"><a href="#details" class="scroll-to">${productInstance.productDetails.briefDescription}-Scroll to know more about this product </a>
                                 </p>
                                 <div class="price">
                                     <ul style="list-style: none;">
-                                        <li>$124.00</li>
+                                        <li>Rs.${productInstance.productDetails.price-(productInstance.productDetails.discountPercentage*productInstance.productDetails.price/100)}</li>
+                                        <g:if test="${productInstance.productDetails.isSale}">
                                         <li>
-                                            <small><del>$200</del></small>
+                                            <small><del>Rs.${productInstance.productDetails.price}</del></small>
                                         </li>
+                                        </g:if>
                                     </ul>
                                 </div>
 
@@ -289,7 +291,7 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                                    ${productInstance.productDetails.detailDescription}
                                 </div>
                             </div>
                         </div>
@@ -297,61 +299,105 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                        More Colors (2)</a>
+                                        More Colors (${moreColorsList.size()})</a>
                                         <i class="indicator glyphicon glyphicon-plus  pull-right"></i>
                             </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="accordion-image">
+                                        <g:each in="${moreColorsList}" var="list">
                                     <div class="ac-img">
-                                        <a href="#"><img src="images/product-11.jpg" alt="Groovy Apparel"></a>
+                                        <div class="col-md-3 col-sm-6">
+                                            <div class="product same-height">
+                                                <div class="flip-container">
+                                                    <div class="flipper">
+                                                        <div class="front food1">
+                                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+
+                                                            </g:link>
+                                                        </div>
+                                                        <div class="back food1">
+                                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+
+                                                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+
+                                                            </g:link>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
+                                                    <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+
+
+                                                </g:link>
+
+                                            <!-- /.text -->
+                                                <g:if test="${list.productDetails.isSale==true}">
+                                                    <div class="ribbon sale">
+                                                        <div class="theribbon">SALE</div>
+                                                        <div class="ribbon-background"></div>
+                                                    </div>
+                                                </g:if>
+                                                <g:if test="${list.isLatest==true}">
+                                                    <div class="ribbon new">
+                                                        <div class="theribbon">NEW</div>
+                                                        <div class="ribbon-background"></div>
+                                                    </div>
+                                                </g:if>
+
+
+                                            </div>
+                                            <!-- /.product -->
+                                        </div>
                                     </div>
-                                    <div class="ac-img">
-                                        <a href="#"><img src="images/product-12.jpg" alt="Groovy Apparel"></a>
-                                    </div>
+                                        </g:each>
+                                    %{--<div class="ac-img">--}%
+                                        %{--<a href="#"><img src="images/product-12.jpg" alt="Groovy Apparel"></a>--}%
+                                    %{--</div>--}%
                                     <div class="clearfix"></div>
                                 </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                        Rating & Reviews (40+)</a>
-                                        <i class="indicator glyphicon glyphicon-plus pull-right"></i>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <h3>"Excellent Quality & Fitting!"</h3>
-                                    <h4>Mathilda, Certified Buyer.</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                    <span>5 Stars</span>
-                                    <a href="#" class="next">Next Review &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                        Shipping Info</a>
-                                        <i class="indicator glyphicon glyphicon-plus pull-right"></i>
-                                </h4>
-                            </div>
-                            <div id="collapseFour" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <h3>Shipping</h3>
-                                    <ul class="ship">
-                                        <li class="day"><i class="fa fa-calendar" aria-hidden="true"></i> 5-10 Business Days</li>
-                                        <li class="home"><i class="fa fa-truck" aria-hidden="true"></i> Free Home Delivery</li>
-                                        <li class="cod"><i class="fa fa-male" aria-hidden="true"></i> Cash On Delivery Available*</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        %{--<div class="panel panel-default">--}%
+                            %{--<div class="panel-heading">--}%
+                                %{--<h4 class="panel-title">--}%
+                                    %{--<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">--}%
+                                        %{--Rating & Reviews (40+)</a>--}%
+                                        %{--<i class="indicator glyphicon glyphicon-plus pull-right"></i>--}%
+                                %{--</h4>--}%
+                            %{--</div>--}%
+                            %{--<div id="collapseThree" class="panel-collapse collapse">--}%
+                                %{--<div class="panel-body">--}%
+                                    %{--<h3>"Excellent Quality & Fitting!"</h3>--}%
+                                    %{--<h4>Mathilda, Certified Buyer.</h4>--}%
+                                    %{--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>--}%
+                                    %{--<span>5 Stars</span>--}%
+                                    %{--<a href="#" class="next">Next Review &rarr;</a>--}%
+                                %{--</div>--}%
+                            %{--</div>--}%
+                        %{--</div>--}%
+                        %{--<div class="panel panel-default">--}%
+                            %{--<div class="panel-heading">--}%
+                                %{--<h4 class="panel-title">--}%
+                                    %{--<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">--}%
+                                        %{--Shipping Info</a>--}%
+                                        %{--<i class="indicator glyphicon glyphicon-plus pull-right"></i>--}%
+                                %{--</h4>--}%
+                            %{--</div>--}%
+                            %{--<div id="collapseFour" class="panel-collapse collapse">--}%
+                                %{--<div class="panel-body">--}%
+                                    %{--<h3>Shipping</h3>--}%
+                                    %{--<ul class="ship">--}%
+                                        %{--<li class="day"><i class="fa fa-calendar" aria-hidden="true"></i> 5-10 Business Days</li>--}%
+                                        %{--<li class="home"><i class="fa fa-truck" aria-hidden="true"></i> Free Home Delivery</li>--}%
+                                        %{--<li class="cod"><i class="fa fa-male" aria-hidden="true"></i> Cash On Delivery Available*</li>--}%
+                                    %{--</ul>--}%
+                                %{--</div>--}%
+                            %{--</div>--}%
+                        %{--</div>--}%
                     </div>
                     </div>
                     <hr>

@@ -158,12 +158,6 @@
 
     </div>
     <!-- /#hot -->
-<style>
-.food1 img {
-    height: 235px;
-}
-
-</style>
     <!-- *** HOT END *** -->
 
     <!-- *** GET INSPIRED ***
@@ -287,7 +281,7 @@
 
                             <p class="text-center lead lead2">${seasonManagementInstance.seasons.descriptionOfSeason}</p>
                             <div class="wthreeshop-a">
-                                <a href="#">${seasonManagementInstance.seasons.askingForShopping}</a>
+                                <g:link action="upcomingSeasonProducts">${seasonManagementInstance.seasons.askingForShopping}</g:link>
                             </div>
                         </div>
                     </div>

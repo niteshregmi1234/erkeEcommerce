@@ -8,7 +8,7 @@ session.endUser=null;
         def productDetailsList=ProductDetails.list();
         List<Product> productList = new ArrayList<>()
         for (ProductDetails productDetails : productDetailsList) {
-            def product = Product.findByProductDetailsAndSeasons(productDetails, SeasonManagement.list()[1].seasons)
+            def product = Product.findByProductDetails(productDetails)
             if (product) {
                 productList.add(product)
             }
@@ -25,17 +25,18 @@ def contact(){
             def productInstance1 = Product.get(id)
             if (productInstance1) {
                 def productDetailsList=ProductDetails.findAllByProductSubCategoryAndProductCategoryAndIdNotEqual(productInstance1.productDetails.productSubCategory,productInstance1.productDetails.productCategory,productInstance1.productDetails.id)
+                def moreColorsList=Product.findAllByProductDetailsAndIdNotEqual(productInstance1.productDetails,productInstance1.id)
                 List<Product> relatedProductList = new ArrayList<>()
 
                 for (ProductDetails productDetails : productDetailsList) {
-                    def product = Product.findAllByProductDetailsAndSeasons(productDetails, SeasonManagement.list()[1].seasons)
+                    def product = Product.findAllByProductDetails(productDetails)
                     if (product) {
                         relatedProductList.add(product[0])
                     }
                 }
                 Collections.shuffle(relatedProductList)
 
-                render(view: "detail", model :[relatedProductList:relatedProductList,productInstance: productInstance1,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
+                render(view: "detail", model :[moreColorsList:moreColorsList,relatedProductList:relatedProductList,productInstance: productInstance1,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
             }
         } else {
             print "error is error"
@@ -46,9 +47,9 @@ def contact(){
     def userHome() {
         def upCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "UP")
         def downCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "DOWN")
-        def latestProductList = Product.findAllByIsLatestAndSeasons(true, SeasonManagement.list()[1].seasons)
+        def latestProductList = Product.findAllByIsLatest(true)
         def specialBrandInstance = SpecialBrand.list()[0]
-        def productList = Product.findAllByIsFeaturedAndSeasons(true, SeasonManagement.list()[1].seasons)
+        def productList = Product.findAllByIsFeatured(true)
         def seasonManagementInstance = SeasonManagement.list()[0]
         [upCoverImageList: upCoverImageList, downCoverImageList: downCoverImageList, latestProductList: latestProductList, specialBrandInstance: specialBrandInstance, seasonManagementInstance: seasonManagementInstance,featuredProductList:productList]
     }
@@ -79,7 +80,7 @@ def contact(){
         def productDetailsList = ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.get(params.id1), ProductSubCategory.get(params.id2))
         List<Product> productList = new ArrayList<>()
         for (ProductDetails productDetails : productDetailsList) {
-            def product = Product.findByProductDetailsAndSeasons(productDetails, SeasonManagement.list()[1].seasons)
+            def product = Product.findByProductDetails(productDetails)
             if (product) {
                 productList.add(product)
             }
@@ -93,7 +94,7 @@ def contact(){
             def productDetailsList = ProductDetails.findAllByProductCategory(ProductCategory.get(id))
             List<Product> productList = new ArrayList<>()
             for (ProductDetails productDetails : productDetailsList) {
-                def product = Product.findAllByProductDetailsAndSeasons(productDetails, SeasonManagement.list()[1].seasons)
+                def product = Product.findAllByProductDetails(productDetails)
                 if (product) {
                     productList.add(product[0])
                 }
@@ -111,7 +112,7 @@ def contact(){
             def productDetailsList = ProductDetails.findAllByProductBrand(SpecialBrand.get(id).productBrand)
             List<Product> productList = new ArrayList<>()
             for (ProductDetails productDetails : productDetailsList) {
-                def product = Product.findByProductDetailsAndSeasons(productDetails, SeasonManagement.list()[1].seasons)
+                def product = Product.findByProductDetails(productDetails)
                 if (product) {
                     productList.add(product)
                 }
@@ -124,48 +125,17 @@ def contact(){
         }
     }
 
-    def upcomingSeasonProducts(Long id) {
-        if (id != null) {
-            def productList = Product.findAllBySeasons(SeasonManagement.get(id).seasons)
-            render(view: "upcomingSeasonProducts", model: [productList: productList, seasonInstance: SeasonManagement.get(id).seasons])
-        } else {
-            render "error"
+    def upcomingSeasonProducts() {
+            def productList = Product.findAllBySeasons(SeasonManagement.list()[0].seasons)
+            render(view: "upComingSeasonProducts", model: [productList: productList, seasonInstance: SeasonManagement.list()[0].seasons])
         }
-    }
-
-    def featuredProducts() {
-        def productList = Product.findAllByIsFeaturedAndSeasons(true, SeasonManagement.list()[1].seasons)
-        def coverImageList = CoverImage.findAllBySlidePlaceAndStatusShow("UP", true)
-        Collections.shuffle(coverImageList)
-        render(view: "featuredProducts", model: [productList: productList, coverImage: coverImageList[0]])
 
 
-    }
+
 def about(){
     def aboutUsInstance = AboutUs.list()[0]
     [aboutUsInstance: aboutUsInstance]
 }
-//    def aboutCompany() {
-//        def aboutUsInstance = AboutUs.list()[0]
-//        [aboutUsInstance: aboutUsInstance]
-//    }
 
-    def allSubCategoryProducts(Long id) {
-        if (id != null) {
-            def productDetailsList = ProductDetails.findAllByProductSubCategory(ProductSubCategory.get(id))
-            List<Product> productList = new ArrayList<>()
-            for (ProductDetails productDetails : productDetailsList) {
-                def product = Product.findAllByProductDetailsAndSeasons(productDetails, SeasonManagement.list()[1].seasons)
-                if (product) {
-                    productList.add(product[0])
-                }
-            }
-            Collections.shuffle(productList)
-            render(view: "subCategoryProducts", model: [productList: productList, productSubCategory: ProductSubCategory.get(params.id)])
 
-        }
-        else {
-            render "error"
-        }
-    }
 }
