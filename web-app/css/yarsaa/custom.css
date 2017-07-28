@@ -141,6 +141,16 @@
     font-size: 14px;
     text-align: center;
 }
+.panel-heading a{
+    color:#FFFFFF;
+    outline:0 !important;
+    text-decoration: none;
+}
+.panel-heading a:focus a:hover a:active{
+    color:#FFFFFF;
+    outline: 0 !important;
+    text-decoration: none;
+}
 @media screen and (max-width:320px){
 
     /*#content {*/
