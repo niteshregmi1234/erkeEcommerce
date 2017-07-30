@@ -372,8 +372,16 @@
         </div>
         <div class="col-md-12" data-animate="fadeInUp">
             <div class="imgwrapper">
-                <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.specialProductSubCategoryImage}")}">
-
+                <img class="img-responsive text-img" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.specialProductSubCategoryImage}")}">
+                <div class="container">
+                    <div class="middle">
+                    <h1 class="about-text1">BRACE YOURSELVES! WINTER IS COMING...</h1>
+                    <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <div class="wthreeshop-a">
+                        <a href="womens.html">SHOP WINTER COLLECTION</a>
+                    </div>
+                    </div>
+                </div>
 
             </div>
 

@@ -326,11 +326,11 @@
                         <div class="middle">
                             <div class="text1">
                                 <h5>aaaaaaaaa</h5>
-                                <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
+                                <div class="wthreeshop-a"><a href="#">Shop Now</a>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
-
                 </div>
                 <div class="col-sm-6">
                     <div class="imgwrapper">
@@ -338,10 +338,9 @@
                         <div class="middle">
                             <div class="text1">
                                 <h5>aaaaaaaaa</h5>
-                                <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-sm-6">
                     <div class="imgwrapper">
@@ -349,13 +348,10 @@
                         <div class="middle">
                             <div class="text1">
                                 <h5>aaaaaaaaa</h5>
-                                <a href="http://bootstrapthemes.co/" target="_blank" class="btn btn-primary" data-animation="animated fadeInLeft">Shop Now</a></div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
             <!-- /#blog-homepage -->
         </div>
