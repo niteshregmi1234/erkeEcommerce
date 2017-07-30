@@ -27,6 +27,12 @@
 .box-height{
     height:400px;
 }
+.product-color{
+    height:240px;
+}
+/*.product-color img{*/
+    /*height: 238px;*/
+/*}*/
 .same-height{
     height: 405px;
 }

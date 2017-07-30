@@ -295,9 +295,7 @@
                                     </g:each>
                                     <div class="col-sm-3">
                                         <div class="banner">
-                    <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.id}">
-
-
+                                            <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.id}">
                                                 <img src="${resource(dir: "images/categoryImage",file: "${categoryList.menuImage1}")}" alt="" class="img-responsive">
 
                                             </g:link>

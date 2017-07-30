@@ -309,7 +309,7 @@
                                         <g:each in="${moreColorsList}" var="list">
                                     <div class="ac-img">
                                         <div class="col-md-3 col-sm-6">
-                                            <div class="product same-height">
+                                            <div class="product product-color">
                                                 <div class="flip-container">
                                                     <div class="flipper">
                                                         <div class="front food1">
@@ -361,43 +361,6 @@
                                 </div>
                             </div>
                         </div>
-                        %{--<div class="panel panel-default">--}%
-                            %{--<div class="panel-heading">--}%
-                                %{--<h4 class="panel-title">--}%
-                                    %{--<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">--}%
-                                        %{--Rating & Reviews (40+)</a>--}%
-                                        %{--<i class="indicator glyphicon glyphicon-plus pull-right"></i>--}%
-                                %{--</h4>--}%
-                            %{--</div>--}%
-                            %{--<div id="collapseThree" class="panel-collapse collapse">--}%
-                                %{--<div class="panel-body">--}%
-                                    %{--<h3>"Excellent Quality & Fitting!"</h3>--}%
-                                    %{--<h4>Mathilda, Certified Buyer.</h4>--}%
-                                    %{--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>--}%
-                                    %{--<span>5 Stars</span>--}%
-                                    %{--<a href="#" class="next">Next Review &rarr;</a>--}%
-                                %{--</div>--}%
-                            %{--</div>--}%
-                        %{--</div>--}%
-                        %{--<div class="panel panel-default">--}%
-                            %{--<div class="panel-heading">--}%
-                                %{--<h4 class="panel-title">--}%
-                                    %{--<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">--}%
-                                        %{--Shipping Info</a>--}%
-                                        %{--<i class="indicator glyphicon glyphicon-plus pull-right"></i>--}%
-                                %{--</h4>--}%
-                            %{--</div>--}%
-                            %{--<div id="collapseFour" class="panel-collapse collapse">--}%
-                                %{--<div class="panel-body">--}%
-                                    %{--<h3>Shipping</h3>--}%
-                                    %{--<ul class="ship">--}%
-                                        %{--<li class="day"><i class="fa fa-calendar" aria-hidden="true"></i> 5-10 Business Days</li>--}%
-                                        %{--<li class="home"><i class="fa fa-truck" aria-hidden="true"></i> Free Home Delivery</li>--}%
-                                        %{--<li class="cod"><i class="fa fa-male" aria-hidden="true"></i> Cash On Delivery Available*</li>--}%
-                                    %{--</ul>--}%
-                                %{--</div>--}%
-                            %{--</div>--}%
-                        %{--</div>--}%
                     </div>
                     </div>
                     <hr>
