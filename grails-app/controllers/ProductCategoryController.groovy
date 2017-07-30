@@ -378,6 +378,7 @@ if(productCategoryInstance){
 
 
         if(productCategoryInstance) {
+            productCategoryInstance.delete()
                 File coverImage= new File("web-app/images/categoryImage/${productCategoryInstance.coverImageName}")
                 File shopImage= new File("web-app/images/categoryImage/${productCategoryInstance.shoppingImageName}")
                 File menuImage1= new File("web-app/images/categoryImage/${productCategoryInstance.menuImage1}")

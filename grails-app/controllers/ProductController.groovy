@@ -364,13 +364,13 @@ if(file.size>0){
 
 
         if(productInstance) {
+            productInstance.delete(flush: true)
             File frontImage= new File("web-app/images/allProducts/frontImage/${productInstance.frontImageName}")
                 File backImage= new File("web-app/images/allProducts/backImage/${productInstance.backImageName}")
                 File sideImage= new File("web-app/images/allProducts/sideImage/${productInstance.sideImageName}")
                 frontImage.delete();
                 backImage.delete();
                 sideImage.delete();
-            productInstance.delete(flush: true)
             flash.message="Successfully deleted."
         }
         else{

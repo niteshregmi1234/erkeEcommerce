@@ -156,10 +156,11 @@ def checkPhoto(){
         try{
         def coverImageInstance=CoverImage.get(params.id)
         if(coverImageInstance) {
-                def imageName=coverImageInstance.imageName
+            coverImageInstance.delete(flush: true)
+
+            def imageName=coverImageInstance.imageName
                 File file= new File("web-app/images/coverImage/${imageName}")
                 file.delete();
-                coverImageInstance.delete(flush: true)
                 flash.message="Successfully deleted."
         }
         else{

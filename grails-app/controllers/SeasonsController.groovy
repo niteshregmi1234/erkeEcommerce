@@ -166,8 +166,7 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSeasonImage: 'POS
 
         if(seasonsInstance) {
             seasonsInstance.delete(flush: true)
-            def imageName=seasonsInstance.imageName
-                File file= new File("web-app/images/seasonsImage/${imageName}")
+                File file= new File("web-app/images/seasonsImage/${seasonsInstance.imageName}")
                 file.delete();
                 flash.message="Successfully deleted."
             }
