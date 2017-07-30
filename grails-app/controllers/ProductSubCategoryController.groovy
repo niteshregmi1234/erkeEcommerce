@@ -1,3 +1,4 @@
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
@@ -7,17 +8,23 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductSubCategoryController {
-    static allowedMethods = [save: "POST",delete: "DELETE",show: "GET",uploadCoverImage:"POST"]
+    static allowedMethods = [save: "POST",uploadCoverImage:"POST",editCoverImage: "POST",renderImage: "POST"]
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 
     def list() {
+        try{
         def productSubCategoryList=ProductSubCategory.list()
         render(view: "list",model: [productSubCategoryList:productSubCategoryList])
+    }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
     }
     def create(){
 
     }
     def save(){
+        try{
         if(!params.id){
             def productSubCategoryInstance=new ProductSubCategory()
             productSubCategoryInstance.subCategoryName=params.subCategoryName
@@ -29,7 +36,7 @@ class ProductSubCategoryController {
         }
         else{
             def productSubCategoryInstance=ProductSubCategory.get(params.id)
-
+if(productSubCategoryInstance){
             productSubCategoryInstance.subCategoryName=params.subCategoryName
             productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
 
@@ -38,11 +45,19 @@ class ProductSubCategoryController {
 
             productSubCategoryInstance.save(flush: true)
 
-            redirect(action: "show" ,id:productSubCategoryInstance.id)
+            redirect(action: "show" ,id:productSubCategoryInstance.id)}
+            else {
+    redirect(action: "notfound",controller: "errorPage")
+
+}
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def uploadCoverImage(){
-        def f = request.getFile('coverImageName')
+//        def f = request.getFile('coverImageName')
 
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImageName")
@@ -62,11 +77,13 @@ class ProductSubCategoryController {
                 continue abc
             }
         }
-        def homeDir = new File(System.getProperty("user.home"))
-        File fileDest = new File(homeDir,"image/${fileName}")
-//        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/subCategoryImage/${fileName}")
+//        def homeDir = new File(System.getProperty("user.home"))
+//        File fileDest = new File(homeDir,"image/${fileName}")
+        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/subCategoryImage/${fileName}")
 //file.transferTo(new File(fileDest))
-        f.transferTo(fileDest)
+        file.transferTo(new File(realFilePath))
+
+//        f.transferTo(fileDest)
 
         def imageName = fileName
         return imageName
@@ -126,15 +143,20 @@ class ProductSubCategoryController {
 
     }
     def show(Long id){
+        try{
         def productSubCategoryInstance=ProductSubCategory.get(id)
 
         if(productSubCategoryInstance){
             [productSubCategoryInstance:productSubCategoryInstance]}
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
         }
     }
     def edit(){
+        try{
         def productSubCategoryInstance=ProductSubCategory.get(params.id)
 
         if(productSubCategoryInstance){
@@ -142,20 +164,26 @@ class ProductSubCategoryController {
         }
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def delete(){
-        def productSubCategoryInstance=ProductSubCategory.get(params.id)
+        try{
+
+            def productSubCategoryInstance=ProductSubCategory.get(params.id)
 
 
         if(productSubCategoryInstance) {
-            try{
                 productSubCategoryInstance.delete(flush: true)
+            def imageName=productSubCategoryInstance.coverImageName
+            File file= new File("web-app/images/subCategoryImage/${imageName}")
+            file.delete();
                 flash.message="Successfully deleted."
-            }
-            catch (Exception e){
-                flash.message="Sorry! cannot delete this data. It is used as foreign key in another table."
-            }
+
+
         }
         else{
             flash.message="Unable to delete the already deleted item."
@@ -164,6 +192,15 @@ class ProductSubCategoryController {
         }
         redirect(action: "list")
 
+    }
+        catch (DataIntegrityViolationException e){
+            flash.message="Sorry! cannot delete this data."
+            redirect(action: "list")
+        }
+        catch ( Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
     }
 
 }

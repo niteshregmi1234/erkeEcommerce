@@ -1,72 +1,105 @@
-
+import org.springframework.dao.DataIntegrityViolationException
 
 class ProductSizeController {
+    static allowedMethods = [save: 'POST']
 
     def list() {
-        def productSizeList=ProductSize.list()
-        render(view: "list",model: [productSizeList:productSizeList])
-    }
-    def create(){
-
-    }
-    def save(){
-        if(!params.id){
-            def productSizeInstance=new ProductSize()
-            productSizeInstance.sizeName=params.sizeName
-            productSizeInstance.statusShow=params.statusShow as boolean
-            productSizeInstance.save(flush: true)
-            redirect(action: "show" ,id:productSizeInstance.id)
+        try {
+            def productSizeList = ProductSize.list()
+            render(view: "list", model: [productSizeList: productSizeList])
         }
-        else{
-            def productSizeInstance=ProductSize.get(params.id)
-
-            productSizeInstance.sizeName=params.sizeName
-            productSizeInstance.statusShow=params.statusShow as boolean
-
-            productSizeInstance.save(flush: true)
-            redirect(action: "show" ,id:productSizeInstance.id)
+        catch (Exception e) {
+            redirect(action: "notfound", controller: "errorPage")
         }
     }
-    def show(Long id){
-        def productSizeInstance=ProductSize.get(id)
 
+    def create() {
 
-        if(productSizeInstance){
-            [productSizeInstance:productSizeInstance]}
-        else{
-            redirect(action: "list")
+    }
+
+    def save() {
+        try {
+            if (!params.id) {
+                def productSizeInstance = new ProductSize()
+                productSizeInstance.sizeName = params.sizeName
+                productSizeInstance.statusShow = params.statusShow as boolean
+                productSizeInstance.save(flush: true)
+                redirect(action: "show", id: productSizeInstance.id)
+            } else {
+                def productSizeInstance = ProductSize.get(params.id)
+                if (productSizeInstance) {
+                    productSizeInstance.sizeName = params.sizeName
+                    productSizeInstance.statusShow = params.statusShow as boolean
+                    productSizeInstance.save(flush: true)
+                    redirect(action: "show", id: productSizeInstance.id)
+                } else {
+                    redirect(action: "notfound", controller: "errorPage")
+
+                }
+            }
+        }
+        catch (Exception e) {
+            redirect(action: "notfound", controller: "errorPage")
         }
     }
-    def edit(){
-        def productSizeInstance=ProductSize.get(params.id)
 
-        if(productSizeInstance){
-            [productSizeInstance:productSizeInstance]
+    def show(Long id) {
+        try {
+            def productSizeInstance = ProductSize.get(id)
+            if (productSizeInstance) {
+                [productSizeInstance: productSizeInstance]
+            } else {
+                redirect(action: "list")
+            }
         }
-        else{
-            redirect(action: "list")
+        catch (Exception e) {
+            redirect(action: "notfound", controller: "errorPage")
+
         }
     }
-    def delete(){
-        def productSizeInstance=ProductSize.get(params.id)
+
+    def edit() {
+        try {
+            def productSizeInstance = ProductSize.get(params.id)
+
+            if (productSizeInstance) {
+                [productSizeInstance: productSizeInstance]
+            } else {
+                redirect(action: "list")
+            }
+        }
+        catch (Exception e) {
+            redirect(action: "notfound", controller: "errorPage")
+
+        }
+    }
+
+    def delete() {
+        try {
+            def productSizeInstance = ProductSize.get(params.id)
 
 
-        if(productSizeInstance) {
-            try{
+            if (productSizeInstance) {
+
                 productSizeInstance.delete(flush: true)
-                flash.message="Successfully deleted."
+                flash.message = "Successfully deleted."
+
+
+            } else {
+                flash.message = "Unable to delete the already deleted item."
+
+
             }
-            catch (Exception e){
-                flash.message="Sorry! cannot delete this data. It is used as foreign key in another table."
-            }
+            redirect(action: "list")
         }
-        else{
-            flash.message="Unable to delete the already deleted item."
-
+        catch (DataIntegrityViolationException e) {
+            flash.message = "Sorry! cannot delete this data."
+            redirect(action: "list")
+        }
+        catch (Exception e) {
+            redirect(action: "notfound", controller: "errorPage")
 
         }
-        redirect(action: "list")
-
     }
 
 }

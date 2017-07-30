@@ -1,3 +1,4 @@
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
@@ -7,9 +8,10 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class SeasonsController {
-
+static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSeasonImage: 'POST',editSeasonImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){
+        try{
         def Image = request.getFile('Image')
 
         def checkFile
@@ -24,16 +26,25 @@ class SeasonsController {
         else{
             checkFile="perfect"
             render checkFile
+        }}
+        catch (Exception e){
+
         }
     }
     def list() {
+        try{
         def seasonsList=Seasons.list()
-        render(view: "list",model: [seasonsList:seasonsList])
+        render(view: "list",model: [seasonsList:seasonsList])}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
     }
     def create(){
 
     }
     def save(){
+        try{
         if(!params.id){
             def seasonsInstance=new Seasons()
             seasonsInstance.seasonName=params.seasonName
@@ -46,13 +57,22 @@ class SeasonsController {
         }
         else{
             def seasonsInstance=Seasons.get(params.id)
+            if(seasonsInstance){
             seasonsInstance.seasonName=params.seasonName
             seasonsInstance.greetings=params.greetings
             seasonsInstance.descriptionOfSeason=params.descriptionOfSeason
             seasonsInstance.askingForShopping=params.askingForShopping
             seasonsInstance.imageName=editSeasonImage(seasonsInstance.imageName)
             seasonsInstance.save(flush: true)
-            redirect(action: "show" ,id:seasonsInstance.id)        }
+            redirect(action: "show" ,id:seasonsInstance.id) }
+            else {
+                redirect(action: "notfound",controller: "errorPage")
+            }
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
     }
     def uploadSeasonImage(){
         def mp = (MultipartHttpServletRequest) request
@@ -110,6 +130,7 @@ class SeasonsController {
         }
     }
     def show(Long id){
+        try{
         def seasonsInstance=Seasons.get(id)
 
 
@@ -117,41 +138,57 @@ class SeasonsController {
             [seasonsInstance:seasonsInstance]}
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+          redirect(action:"notfound" ,controller: "errorPage")
         }
     }
     def edit(){
-        def seasonsInstance=Seasons.get(params.id)
-
-
-        if(seasonsInstance){
-            [seasonsInstance:seasonsInstance]
+        try{
+            def seasonsInstance=Seasons.get(params.id)
+            if(seasonsInstance){
+                [seasonsInstance:seasonsInstance]
+            }
+            else{
+                redirect(action: "list")
+            }
         }
-        else{
-            redirect(action: "list")
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def delete(){
-        def seasonsInstance=Seasons.get(params.id)
+        try{
+
+            def seasonsInstance=Seasons.get(params.id)
 
 
         if(seasonsInstance) {
-            try{
-                def imageName=seasonsInstance.imageName
+            seasonsInstance.delete(flush: true)
+            def imageName=seasonsInstance.imageName
                 File file= new File("web-app/images/seasonsImage/${imageName}")
                 file.delete();
-                seasonsInstance.delete(flush: true)
                 flash.message="Successfully deleted."
             }
-            catch (Exception e){
-                flash.message="Sorry! cannot delete this data. It is used as foreign key in another table."
-            }
-        }
+
+
         else{
             flash.message="Unable to delete the already deleted item."
 
 
         }
         redirect(action: "list")
+        }
+        catch (DataIntegrityViolationException e){
+            flash.message="Sorry! cannot delete this data."
+            redirect(action: "list")
+        }
+        catch ( Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+
 
     }
 

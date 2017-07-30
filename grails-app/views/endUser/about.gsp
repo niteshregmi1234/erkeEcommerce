@@ -415,7 +415,7 @@
 
     window.onload=function () {
         $.ajax({
-            url: "${createLink(controller:'endUser', action:'fetchAboutUrl')}"
+            url: "${createLink(controller:'endUser', action:'fetchAboutUrl',params: ["urlBackground":"urlBackground"])}"
         }).done(function(fileLocation){
             $('.agilenwew3lsfashions').css('background-image', 'url(' + fileLocation + ')');
 

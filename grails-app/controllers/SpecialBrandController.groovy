@@ -7,9 +7,10 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class SpecialBrandController {
-
+static allowedMethods = [checkPhoto: "POST",save: "POST",editBrandMainImage: "POST",editBrandSub1Image: "POST",editBrandSub2Image: "POST"]
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){
+        try{
         def Image = request.getFile('Image')
 
         def checkFile
@@ -24,12 +25,17 @@ class SpecialBrandController {
         else{
             checkFile="perfect"
             render checkFile
+        }}
+        catch (Exception e){
+
         }
     }
 
 
     def save() {
+        try{
         def specialBrandInstance=SpecialBrand.get(params.id)
+        if(specialBrandInstance){
         specialBrandInstance.productBrand=ProductBrand.get(params.productBrand)
         specialBrandInstance.brandMainImageName=editBrandMainImage(specialBrandInstance.brandMainImageName)
         specialBrandInstance.descriptionMainImage=params.descriptionMainImage
@@ -37,10 +43,17 @@ class SpecialBrandController {
         specialBrandInstance.titleForSub1Image=params.titleForSub1Image
         specialBrandInstance.descriptionSub1Image=params.descriptionSub1Image
         specialBrandInstance.brandSub2ImageName=editBrandSub2Image(specialBrandInstance.brandSub2ImageName)
-                specialBrandInstance.titleForSub2Image=params.titleForSub2Image
+        specialBrandInstance.titleForSub2Image=params.titleForSub2Image
         specialBrandInstance.descriptionSub2Image=params.descriptionSub2Image
         specialBrandInstance.save(flush: true)
-        redirect(action: "show",id:specialBrandInstance.id)
+        redirect(action: "show")}
+        else {
+            redirect(action: "notfound",controller: "errorPage")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
 
     }
     def editBrandSub1Image(String imageNameOld){
@@ -137,13 +150,35 @@ class SpecialBrandController {
             return imageNameOld
         }
     }
-    def show(Long id){
-        def specialBrandInstance=SpecialBrand.get(id)
-        [specialBrandInstance:specialBrandInstance]}
+    def show(){
+        try{
+        def specialBrandInstance=SpecialBrand.list()[0]
+        if(specialBrandInstance) {
+            [specialBrandInstance: specialBrandInstance]
+        }
+        else {
+            redirect(action: "notfound",controller: "errorPage")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+    }
 
     def edit(){
-
+try{
         def specialBrandInstance=SpecialBrand.get(params.id)
-        [specialBrandInstance:specialBrandInstance]
+        if(specialBrandInstance) {
+
+            [specialBrandInstance: specialBrandInstance]
+        }
+    else {
+            redirect(action: "notfound",controller: "errorPage")
+
+        }}
+    catch (Exception e){
+        redirect(action: "notfound",controller: "errorPage")
+
+    }
     }
 }

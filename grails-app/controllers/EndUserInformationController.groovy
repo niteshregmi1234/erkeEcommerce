@@ -9,6 +9,7 @@ class EndUserInformationController {
     }
 
     def save() {
+        try{
         def endUserInformationInstance = new EndUserInformation()
         endUserInformationInstance.firstName = params.first_name
         endUserInformationInstance.lastName = params.last_name
@@ -23,15 +24,19 @@ class EndUserInformationController {
         } else {
             flash.message = "Please don't enter already used email "
             redirect(action: "register")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
         }
     }
 
     def login() {
-redirect(action: "userHome",controller: "endUser")
+redirect(action: "allProducts",controller: "endUser")
 
     }
 
     def checkEmail() {
+        try{
         def isAvailable = false
         def endUserInstance = EndUserInformation.findByEmail(params.email)
         if (!endUserInstance) {
@@ -43,10 +48,14 @@ redirect(action: "userHome",controller: "endUser")
             [
                     "valid": isAvailable,
             ]
+        }}
+        catch (Exception e){
+
         }
     }
 
     def checkLogin() {
+        try{
         def obj= JSON.parse(params.array)
 
         def endUserInformationInstance = EndUserInformation.findByEmail(obj[0])
@@ -59,5 +68,9 @@ redirect(action: "userHome",controller: "endUser")
 
         }
           render status
-}
+}catch (Exception e){
+
+        }
+    }
+
 }

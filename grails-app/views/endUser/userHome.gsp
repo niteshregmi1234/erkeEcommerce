@@ -351,7 +351,10 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+
+
             </div>
             <!-- /#blog-homepage -->
         </div>
@@ -425,7 +428,7 @@
 <script>
     window.onload=function () {
         $.ajax({
-            url: "${createLink(controller:'endUser', action:'fetchUrl')}",
+            url: "${createLink(controller:'endUser', action:'fetchUrl',params: ["urlBackground":"urlBackground"])}",
         }).done(function(imageUrl){
             fileExists(imageUrl);
         });

@@ -1,6 +1,7 @@
 class CheckOutController {
     static allowedMethods = [placeOrder: 'POST',checkCart: 'POST']
     def checkCart(){
+        try{
         if(session.endUser!=null){
         def cartList=Cart.findAllByEndUserInformation(session.endUser)
             if(cartList.size()==0){
@@ -9,6 +10,9 @@ class CheckOutController {
         }
         else{
             render "sessionNull"
+        }}
+        catch (Exception e){
+
         }
 
     }

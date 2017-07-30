@@ -1,3 +1,4 @@
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
@@ -6,15 +7,20 @@ import java.util.regex.Pattern
 
 class ProductCategoryController {
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
-
+static allowedMethods = [save: 'POST',uploadCoverImage: 'POST',editCoverImage: 'POST',uploadMenuImage1: 'POST',editMenu1Image: 'POST',uploadMenuImage2: 'POST',editMenu2Image: 'POST',uploadMenuImage3: 'POST',editMenu3Image: 'POST',uploadShoppingImage: 'POST',editShopImage: 'POST']
     def list() {
+        try{
 def productCategoryList=ProductCategory.list()
-        render(view: "list",model: [productCategoryList:productCategoryList])
+        render(view: "list",model: [productCategoryList:productCategoryList])}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
     }
     def create(){
 
     }
     def save(){
+        try{
         if(!params.id){
             def productCategoryInstance=new ProductCategory()
             productCategoryInstance.categoryName=params.categoryName
@@ -30,7 +36,7 @@ def productCategoryList=ProductCategory.list()
         }
         else{
             def productCategoryInstance=ProductCategory.get(params.id)
-
+if(productCategoryInstance){
             productCategoryInstance.categoryName=params.categoryName
             productCategoryInstance.statusShow=params.statusShow as boolean
             productCategoryInstance.coverImageName=editCoverImage(productCategoryInstance.coverImageName)
@@ -42,6 +48,15 @@ def productCategoryList=ProductCategory.list()
             productCategoryInstance.save(flush: true)
 
             redirect(action: "show" ,id:productCategoryInstance.id)
+        }
+        else{
+    redirect(action: "notfound",controller: "errorPage")
+
+}
+        }
+        }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
         }
     }
     def uploadMenuImage1(){
@@ -327,15 +342,21 @@ def productCategoryList=ProductCategory.list()
 
     }
     def show(Long id){
+        try{
         def productCategoryInstance=ProductCategory.get(id)
 
         if(productCategoryInstance){
             [productCategoryInstance:productCategoryInstance]}
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def edit(){
+        try{
         def productCategoryInstance=ProductCategory.get(params.id)
 
         if(productCategoryInstance){
@@ -343,15 +364,20 @@ def productCategoryList=ProductCategory.list()
         }
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def delete(){
-        def productCategoryInstance=ProductCategory.get(params.id)
+        try{
+
+            def productCategoryInstance=ProductCategory.get(params.id)
 
 
 
         if(productCategoryInstance) {
-            try{
                 File coverImage= new File("web-app/images/categoryImage/${productCategoryInstance.coverImageName}")
                 File shopImage= new File("web-app/images/categoryImage/${productCategoryInstance.shoppingImageName}")
                 File menuImage1= new File("web-app/images/categoryImage/${productCategoryInstance.menuImage1}")
@@ -363,12 +389,9 @@ def productCategoryList=ProductCategory.list()
                 menuImage1.delete()
                 menuImage2.delete()
                 menuImage3.delete()
-                productCategoryInstance.delete(flush: true)
                 flash.message="Successfully deleted."
-            }
-            catch (Exception e){
-                flash.message="Sorry! cannot delete this data. It is used as foreign key in another table."
-            }
+
+
         }
         else{
             flash.message="Unable to delete the already deleted item."
@@ -378,6 +401,16 @@ def productCategoryList=ProductCategory.list()
         redirect(action: "list")
 
     }
+        catch (DataIntegrityViolationException e) {
+            flash.message = "Sorry! cannot delete this data."
+            redirect(action: "list")
+        }
+        catch (Exception e) {
+            redirect(action: "notfound", controller: "errorPage")
+
+        }
+    }
+
 
 
 }

@@ -98,7 +98,7 @@
                     <li><g:link action="list" controller="productDetails">Product Details</g:link></li>
                     <li><g:link action="list" controller="product">Product</g:link></li>
                     <li><g:link action="list" controller="coverImage">Cover Image</g:link></li>
-                    <li><g:link action="show" controller="specialBrand" id="${SpecialBrand.list()[0].id}">Special Brand</g:link></li>
+                    <li><g:link action="show" controller="specialBrand">Special Brand</g:link></li>
                     <li><g:link action="list" controller="backgroundImage" >Other Images</g:link></li>
 
                 </ul>
@@ -108,11 +108,11 @@
                     <li><g:link action="show" controller="aboutUs">About Us</g:link></li>
 
                     <li><g:link action="show" controller="companyInformation">Company Information</g:link></li>
-                    <li><g:link action="show" controller="otherCosts" id="${OtherCosts.list()[0].id}">Other Costs</g:link></li>
+                    <li><g:link action="show" controller="otherCosts">Other Costs</g:link></li>
 
                     <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[0].id}">Upcoming Season</g:link></li>
                     <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[1].id}">Present Season</g:link></li>
-                    <li><g:link action="show" controller="style" id="${StyleManagement.list()[0].id}">Style</g:link></li>
+                    <li><g:link action="show" controller="style">Style</g:link></li>
 
                 </ul>
             </li>

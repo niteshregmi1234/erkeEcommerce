@@ -1,15 +1,20 @@
-
+import org.springframework.dao.DataIntegrityViolationException
 
 class ProductDetailsController {
-
+static allowedMethods = [save: 'POST']
     def list() {
+        try{
         def productDetailsList=ProductDetails.list()
-        render(view: "list",model: [productDetailsList:productDetailsList])
+        render(view: "list",model: [productDetailsList:productDetailsList])}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
     }
     def create(){
 
     }
     def save(){
+        try{
         if(!params.id){
             def productDetails=new ProductDetails()
             productDetails.productCategory=ProductCategory.get(params.productCategory)
@@ -31,6 +36,7 @@ class ProductDetailsController {
         }
         else{
             def productDetails=ProductDetails.get(params.id)
+            if(productDetails){
             productDetails.productCategory=ProductCategory.get(params.productCategory)
             productDetails.productSubCategory=ProductSubCategory.get(params.productSubCategory)
             productDetails.productName=params.productName
@@ -48,19 +54,35 @@ class ProductDetailsController {
             productDetails.save(flush: true)
             redirect(action: "show" ,id:productDetails.id)
         }
+            else {
+                redirect(action: "notfound",controller: "errorPage")
+
+            }
+        }
+        }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
     }
 
 
     def show(Long id){
+        try{
         def productDetailsInstance=ProductDetails.get(id)
 
         if(productDetailsInstance){
             [productDetailsInstance:productDetailsInstance]}
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def edit(){
+        try{
         def productDetailsInstance=ProductDetails.get(params.id)
 
         if(productDetailsInstance){
@@ -68,28 +90,37 @@ class ProductDetailsController {
         }
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def delete(){
-        def productDetailsInstance=ProductDetails.get(params.id)
+        try {
+            def productDetailsInstance = ProductDetails.get(params.id)
 
 
-        if(productDetailsInstance) {
-            try{
+            if (productDetailsInstance) {
+
                 productDetailsInstance.delete(flush: true)
-                flash.message="Successfully deleted."
+                flash.message = "Successfully deleted."
+
+
+            } else {
+                flash.message = "Unable to delete the already deleted item."
+
+
             }
-            catch (Exception e){
-                flash.message="Sorry! cannot delete this data. It is used as foreign key in another table."
-            }
+            redirect(action: "list")
         }
-        else{
-            flash.message="Unable to delete the already deleted item."
-
+        catch (DataIntegrityViolationException e) {
+            flash.message = "Sorry! cannot delete this data."
+            redirect(action: "list")
+        }
+        catch (Exception e) {
+            redirect(action: "notfound", controller: "errorPage")
 
         }
-        redirect(action: "list")
-
     }
-
 }

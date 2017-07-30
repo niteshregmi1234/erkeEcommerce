@@ -1,4 +1,4 @@
-import grails.converters.JSON
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
@@ -8,9 +8,11 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductController {
+    static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSpecialImage: 'POST',editSpecialImage: 'POST',upLoadFrontImage: 'POST',editFrontImage: 'POST',uploadSideImage: 'POST',editSideImage: 'POST',uploadBackImage: 'POST',editBackImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 
 def checkPhoto(){
+    try{
     def Image = request.getFile('Image')
 
     def checkFile
@@ -25,16 +27,24 @@ def checkPhoto(){
     else{
         checkFile="perfect"
         render checkFile
+    }}
+    catch (Exception e){
+
     }
 }
     def list() {
+        try{
         def productList=Product.list()
-        render(view: "list",model: [productList:productList])
+        render(view: "list",model: [productList:productList])}
+        catch (Exception e){
+            redirect(action: "notfound",controller:"errorPage")
+        }
     }
     def create(){
 
     }
     def save(){
+        try{
         if(!params.id){
             def product=new Product()
                       product.productColor=ProductColor.get(params.productColor)
@@ -52,6 +62,7 @@ def checkPhoto(){
         }
         else{
             def product=Product.get(params.id)
+            if(product){
             product.productColor=ProductColor.get(params.productColor)
             product.productDetails=ProductDetails.get(params.productDetails)
             product.isFeatured=params.isFeatured as boolean
@@ -64,7 +75,14 @@ def checkPhoto(){
             product.specialImageName=editSpecialImage( product.specialImageName)
 
             product.save(flush: true)
-            redirect(action: "show" ,id:product.id)
+            redirect(action: "show" ,id:product.id)}
+            else{
+         redirect(action: "notfound",controller: "errorPage")
+            }
+        }
+        }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
         }
     }
     def bloodHound(){
@@ -308,15 +326,25 @@ if(file.size>0){
         return imageName
     }
     def show(Long id){
+        try {
+
+
         def productInstance=Product.get(id)
 
         if(productInstance){
             [productInstance:productInstance]}
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def edit(){
+        try {
+
+
         def productInstance=Product.get(params.id)
 
         if(productInstance){
@@ -324,26 +352,26 @@ if(file.size>0){
         }
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def delete(){
+        try{
         def productInstance=Product.get(params.id)
 
 
         if(productInstance) {
-            try{
-                File frontImage= new File("web-app/images/allProducts/frontImage/${productInstance.frontImageName}")
+            File frontImage= new File("web-app/images/allProducts/frontImage/${productInstance.frontImageName}")
                 File backImage= new File("web-app/images/allProducts/backImage/${productInstance.backImageName}")
                 File sideImage= new File("web-app/images/allProducts/sideImage/${productInstance.sideImageName}")
                 frontImage.delete();
                 backImage.delete();
                 sideImage.delete();
-                productInstance.delete(flush: true)
-                flash.message="Successfully deleted."
-            }
-            catch (Exception e){
-                flash.message="Sorry! cannot delete this data. It is used as foreign key in another table."
-            }
+            productInstance.delete(flush: true)
+            flash.message="Successfully deleted."
         }
         else{
             flash.message="Unable to delete the already deleted item."
@@ -353,11 +381,15 @@ if(file.size>0){
         redirect(action: "list")
 
     }
+        catch (DataIntegrityViolationException e) {
+            flash.message = "Sorry! cannot delete this data."
+            redirect(action: "list")
+        }
+        catch (Exception e) {
+            redirect(action: "notfound", controller: "errorPage")
 
-
-
-
-
+        }
     }
+}
 
 

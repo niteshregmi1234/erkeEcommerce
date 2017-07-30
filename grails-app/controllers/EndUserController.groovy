@@ -1,6 +1,5 @@
 import grails.converters.JSON
 class EndUserController {
-//    static allowedMethods = [fetchAboutUrl: "POST",fetchUrl: "POST"]
     def a(){
 def productDetails=Product.list()
         [productDetails:productDetails]
@@ -81,13 +80,24 @@ catch (Exception e){
     }
 
     def fetchAboutUrl() {
+        try{
+        if(params.urlBackground=="urlBackground"){
         def aboutUsInstance = AboutUs.list()[0]
         def url4 = "../images/otherStuffs/" + aboutUsInstance.backgroundImage;
 
-        render url4
+        render url4}
+        else {
+            redirect(action: "notfound",controller: "errorPage")
+        }}
+        catch (Exception e){
+
+        }
+
     }
 
     def fetchUrl() {
+        try{
+        if(params.urlBackground=="urlBackground"){
         def seasonManagementInstance = SeasonManagement.list()[0].seasons.imageName
         def backgroundImage1 = BackgroundImage.list()[0].imageName
         def backgroundImage2 = BackgroundImage.list()[1].imageName
@@ -100,6 +110,13 @@ catch (Exception e){
 
         def totalImageUrl = [imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6]
         render totalImageUrl as JSON
+    }
+        else {
+            redirect(action: "notfound",controller: "errorPage")
+        }}
+        catch (Exception e){
+
+        }
     }
 
     def subCategoryList() {
@@ -129,8 +146,8 @@ catch (Exception e){
     def allCategoryProducts(Long id) {
         try{
         if (id != null) {
-            def productDetailsList = ProductDetails.findAllByProductCategory(ProductCategory.get(id))
-            if(productDetailsList){
+            if(ProductCategory.get(id)){
+                def productDetailsList = ProductDetails.findAllByProductCategory(ProductCategory.get(id))
             List<Product> productList = new ArrayList<>()
             for (ProductDetails productDetails : productDetailsList) {
                 def product = Product.findAllByProductDetails(productDetails)
