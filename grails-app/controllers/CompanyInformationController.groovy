@@ -6,9 +6,10 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class CompanyInformationController {
-
+static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImage: 'POST',editshopInsideViewImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){
+        try{
         def Image = request.getFile('Image')
 
         def checkFile
@@ -23,12 +24,17 @@ class CompanyInformationController {
         else{
             checkFile="perfect"
             render checkFile
+        }}
+        catch (Exception e){
+
         }
     }
 
 
     def save() {
+        try{
         def companyInformationInstance=CompanyInformation.get(params.id)
+        if(companyInformationInstance){
         companyInformationInstance.companyName=params.companyName
         companyInformationInstance.emailAddress=params.emailAddress
         companyInformationInstance.location1=params.location1
@@ -47,7 +53,14 @@ class CompanyInformationController {
         companyInformationInstance.mapImageName=editMapImage(companyInformationInstance.mapImageName)
 
         companyInformationInstance.save(flush: true)
-        redirect(action: "show",id:companyInformationInstance.id)
+        redirect(action: "show")}
+        else{
+            redirect(action: "notfound",controller: "errorPage")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
 
     }
     def editcoverImage(String imageNameOld){
@@ -175,20 +188,43 @@ class CompanyInformationController {
             return imageNameOld
         }
     }
-    def show(Long id){
-        def companyInformationInstance=CompanyInformation.get(id)
+    def show(){
+        try{
+        def companyInformationInstance=CompanyInformation.list()[0]
+        if(companyInformationInstance){
+            render(view: "show",model:[companyInformationInstance:companyInformationInstance] )
 
+        }
+    else{
+            redirect(action: "notfound",controller: "errorPage")
+        }
+        }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
 
-            [companyInformationInstance:companyInformationInstance]}
+        }
+    }
 
     def edit(){
+        try {
+
         def companyInformationInstance=CompanyInformation.get(params.id)
 
+if(companyInformationInstance){
+            [companyInformationInstance:companyInformationInstance]}
+        else{
+    redirect(action: "notfound",controller: "errorPage")
 
-            [companyInformationInstance:companyInformationInstance]
 
 
     }
+        }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+    }
+
 
 
 }

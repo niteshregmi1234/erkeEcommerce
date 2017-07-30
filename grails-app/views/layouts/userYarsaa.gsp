@@ -33,6 +33,10 @@
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css')}" type="text/css"
           media="all"/>
+<link rel="stylesheet" href="${resource(dir: 'js', file: 'yarsaa/typeahead.css')}" type="text/css"
+      media="all"/>
+<link rel="stylesheet" href="${resource(dir: 'js', file: 'yarsaa/typeahead.scss')}" type="text/css"
+      media="all"/>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/respond.min.js')}" type="text/javascript"
             charset="utf-8"></script>
@@ -45,7 +49,13 @@
     <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
     <script src="${resource(dir: 'js', file: 'yarsaa/bootstrap.min.js')}" type="text/javascript"
             charset="utf-8"></script>
-    <script src="${resource(dir: 'js', file: 'yamsaa/bootbox.min.js')}" type="text/javascript"
+<script src="${resource(dir: 'js', file: 'yarsaa/typeahead.js')}" type="text/javascript"
+        charset="utf-8"></script>
+
+%{--<script src="${resource(dir: 'js', file: 'yarsaa/jquery.typeahead.js')}" type="text/javascript"--}%
+        %{--charset="utf-8"></script>--}%
+
+<script src="${resource(dir: 'js', file: 'yamsaa/bootbox.min.js')}" type="text/javascript"
             charset="utf-8"></script>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery.cookie.js')}" type="text/javascript"
@@ -83,7 +93,7 @@
 <div id="top">
     <div class="container">
         <div class="col-md-6 offer" data-animate="fadeInDown">
-            <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 35% off on orders over $50!</a>
+            <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 10% off on orders over Rs.10000!</a>
         </div>
         <div class="col-md-6" data-animate="fadeInDown">
             <ul class="menu">

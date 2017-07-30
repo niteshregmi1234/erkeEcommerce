@@ -105,9 +105,9 @@
             </li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Manage<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><g:link action="show" controller="aboutUs" id="${AboutUs.list()[0].id}">About Us</g:link></li>
+                    <li><g:link action="show" controller="aboutUs">About Us</g:link></li>
 
-                    <li><g:link action="show" controller="companyInformation" id="${CompanyInformation.list()[0].id}">Company Information</g:link></li>
+                    <li><g:link action="show" controller="companyInformation">Company Information</g:link></li>
                     <li><g:link action="show" controller="otherCosts" id="${OtherCosts.list()[0].id}">Other Costs</g:link></li>
 
                     <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[0].id}">Upcoming Season</g:link></li>

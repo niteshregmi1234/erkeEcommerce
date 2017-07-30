@@ -1,0 +1,9 @@
+
+
+class ErrorPageController {
+
+    def notfound(){
+
+    }
+
+}

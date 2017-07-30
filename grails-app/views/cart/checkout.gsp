@@ -98,10 +98,8 @@
                                     <td>Rs.${list.product.productDetails.price}</td>
                                     <td>${list.product.productDetails.discountPercentage}%</td>
                                     <td>Rs.${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}</td>
-                                    <g:if test="${Cart.findAllByEndUserInformation(session.endUser).size()>1}">
                                     <td><a class="deleteCart" onclick="deleteProduct(${list.id},this);"><i class="fa fa-trash-o"></i></a>
                                     </td>
-                                    </g:if>
                                 </tr>
                             </g:each>
                             </tbody>
@@ -547,7 +545,6 @@ ${list.quantity}
                 $('.quantity').keydown(function() {
                     return false;
                 });
-                if ($(".deleteCart").length < 2) $(".deleteCart").hide();
             });
 
 
@@ -607,11 +604,13 @@ return responseValue
                             $('.tax').html("Rs."+text[2]);
                             $('.totalPriceTotal').html("Rs."+text[3]);
                             $('.hidden-sm').load(document.URL +  ' .hidden-sm');
-                            $('.hidden-xs').load(document.URL +  ' .hidden-xs');
+//                            $('.hidden-xs').load(document.URL +  ' .hidden-xs');
 
                             $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
                             $('#totalPrice1').html("Rs."+text[0]);
-                            if ($(".deleteCart").length < 2) $(".deleteCart").hide();
+                            if ($(".deleteCart").length < 2){
+                                location.reload();
+                            }
 
                         }
 
@@ -635,11 +634,13 @@ return responseValue
                         $('.tax').html("Rs."+text[2]);
                         $('.totalPriceTotal').html("Rs."+text[3]);
                         $('.hidden-sm').load(document.URL +  ' .hidden-sm');
-                        $('.hidden-xs').load(document.URL +  ' .hidden-xs');
 
                         $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
                         $('#totalPrice1').html("Rs."+text[0]);
-                        if ($(".deleteCart").length < 2) $(".deleteCart").hide();
+                        if ($(".deleteCart").length < 2)
+                        {
+                            location.reload();
+                        }
 
 
                     }

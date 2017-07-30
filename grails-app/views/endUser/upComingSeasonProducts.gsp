@@ -21,23 +21,7 @@
 <!-- *** NAVBAR END *** -->
 
 
-    <div id="content">
-    <div class="container">
-        <div class="col-md-12">
-            <div id="main-slider">
-                <div class="item coverUp">
-                    <img src="${resource(dir: "images/categoryImage",file: "${productCategory.coverImageName}")}" alt="" class="img-responsive">
-                </div>
-            </div>
-            <!-- /#main-slider -->
-        </div>
-    </div>
-    <style>
-    .coverUp img{
-        height:520px;
-        width: 1108px;
-    }
-    </style>
+<div id="content">
 
     <div class="container">
 
@@ -45,14 +29,14 @@
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
-                <li>${productCategory.categoryName}</li>
+                <li>${seasonInstance.seasonName}</li>
             </ul>
 
 
 
             <div class="box b">
-                <h1>${productCategory.categoryName}</h1>
-                <p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>
+                <h1>${seasonInstance.seasonName}</h1>
+                <p>In this season we offer wide selection of the best products we have found and carefully selected worldwide. Enjoy pre-season in Yarsaa.</p>
             </div>
 
             %{--<div class="box info-bar">--}%
@@ -165,37 +149,37 @@
                                         <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </p>
                                 </div>
-<script>
-    function checkAddToCart(id){
-        var responseValue;
-        $.ajax({
-            url: "${createLink(controller:'cart', action:'checkAddToCart')}",
-            type: "POST",
-        data: {id1:id},
-            async : false,
-            cache:false,
-            success: function(result) {
-                if(result=="ok"){
-                    bootbox.alert({
-                        message: "successfully added to cart.",
-                        size: 'small',
-                        callback: function(){
-                            location.reload();
-                        }
+                                <script>
+                                    function checkAddToCart(id){
+                                        var responseValue;
+                                        $.ajax({
+                                            url: "${createLink(controller:'cart', action:'checkAddToCart')}",
+                                            type: "POST",
+                                            data: {id1:id},
+                                            async : false,
+                                            cache:false,
+                                            success: function(result) {
+                                                if(result=="ok"){
+                                                    bootbox.alert({
+                                                        message: "successfully added to cart.",
+                                                        size: 'small',
+                                                        callback: function(){
+                                                            location.reload();
+                                                        }
 
-                    });
-                    responseValue=false;
+                                                    });
+                                                    responseValue=false;
 
-                }
-                else if(result=="notOk"){
-                    $('#login-modal').modal('toggle');
-                }
-            }
-        });
-        return responseValue;
+                                                }
+                                                else if(result=="notOk"){
+                                                    $('#login-modal').modal('toggle');
+                                                }
+                                            }
+                                        });
+                                        return responseValue;
 
-    }
-</script>
+                                    }
+                                </script>
                                 <!-- /.text -->
 
                                 <div class="ribbon sale">
@@ -347,7 +331,7 @@
 
 
 
-        <!-- /.col-md-9 -->
+            <!-- /.col-md-9 -->
 
         </div>
         <!-- /.container -->
@@ -355,18 +339,18 @@
     <!-- /#content -->
 </div>
 
-    <!-- *** FOOTER ***
+<!-- *** FOOTER ***
  _________________________________________________________ -->
-    <!-- /#footer -->
+<!-- /#footer -->
 
-    <!-- *** FOOTER END *** -->
-
-
+<!-- *** FOOTER END *** -->
 
 
-    <!-- *** COPYRIGHT ***
+
+
+<!-- *** COPYRIGHT ***
  _________________________________________________________ -->
-    <!-- *** COPYRIGHT END *** -->
+<!-- *** COPYRIGHT END *** -->
 
 
 

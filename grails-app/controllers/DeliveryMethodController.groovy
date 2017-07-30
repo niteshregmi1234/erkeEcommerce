@@ -1,15 +1,20 @@
-
+import org.springframework.dao.DataIntegrityViolationException
 
 class DeliveryMethodController {
-
+static  allowedMethods = [save: 'POST']
     def list() {
+        try{
         def deliveryMethodList=DeliveryMethod.list()
-        render(view: "list",model: [deliveryMethodList:deliveryMethodList])
+        render(view: "list",model: [deliveryMethodList:deliveryMethodList])}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
     }
     def create(){
 
     }
     def save(){
+        try{
         if(!params.id){
             def deliveryMethodInstance=new DeliveryMethod()
             deliveryMethodInstance.briefDescribe=params.briefDescribe
@@ -21,25 +26,39 @@ class DeliveryMethodController {
         }
         else{
             def deliveryMethodInstance=DeliveryMethod.get(params.id)
-            deliveryMethodInstance.briefDescribe=params.briefDescribe
-            deliveryMethodInstance.detailDescribe=params.detailDescribe
-            deliveryMethodInstance.isShowStatus=params.isShowStatus
-            deliveryMethodInstance.save(flush: true)
-            redirect(action: "show" ,id:deliveryMethodInstance.id)
+            if(deliveryMethodInstance) {
+                deliveryMethodInstance.briefDescribe = params.briefDescribe
+                deliveryMethodInstance.detailDescribe = params.detailDescribe
+                deliveryMethodInstance.isShowStatus = params.isShowStatus
+                deliveryMethodInstance.save(flush: true)
+                redirect(action: "show", id: deliveryMethodInstance.id)
+            }
+        else {
+           redirect(action: "notfound",controller: "errorPage")
+        }}}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
         }
     }
 
 
     def show(Long id){
+        try {
+
         def deliveryMethodInstance=DeliveryMethod.get(id)
 
         if(deliveryMethodInstance){
             [deliveryMethodInstance:deliveryMethodInstance]}
         else{
             redirect(action: "list")
-        }
+        }        }
+catch (Exception e){
+    redirect(action: "notfound",controller: "errorPage")
+
+}
     }
     def edit(){
+        try{
         def deliveryMethodInstance=DeliveryMethod.get(params.id)
 
         if(deliveryMethodInstance){
@@ -47,29 +66,37 @@ class DeliveryMethodController {
         }
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def delete(){
-        def deliveryMethodInstance=DeliveryMethod.get(params.id)
+        try{
 
-
-
+            def deliveryMethodInstance=DeliveryMethod.get(params.id)
         if(deliveryMethodInstance) {
-            try{
 
                 deliveryMethodInstance.delete(flush: true)
                 flash.message="Successfully deleted."
-            }
-            catch (Exception e){
-                flash.message="Sorry! cannot delete this data. It is used as foreign key in another table."
-            }
+            redirect(action: "list")
+
+
         }
         else{
             flash.message="Unable to delete the already deleted item."
+            redirect(action: "list")
 
 
+        }}
+        catch (DataIntegrityViolationException e){
+            flash.message="Sorry! cannot delete this data."
+            redirect(action: "list")
         }
-        redirect(action: "list")
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
 
     }
 

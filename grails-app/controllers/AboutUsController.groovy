@@ -7,8 +7,11 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class AboutUsController {
+    static allowedMethods = [checkPhoto: 'POST', save: 'POST', updateAboutUs1Image: 'POST', updateAboutUs2Image: 'POST', updateAboutUs3Image: 'POST', updateAboutUs4Image: 'POST', updateBackgroundImage: 'POST', updateCoverImage: 'POST', updateQuoteLeftImage: 'POST', updateQuoteRightImage: 'POST', updateSpecialProductSubCategoryImage: 'POST', updateVideoDescriptionImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
-    def checkPhoto(){
+
+    def checkPhoto() {
+        try{
         def Image = request.getFile('Image')
 
         def checkFile
@@ -18,45 +21,56 @@ class AboutUsController {
 
             checkFile = "Photo bad format"
             render checkFile
-        }
-
-        else{
-            checkFile="perfect"
+        } else {
+            checkFile = "perfect"
             render checkFile
+        }}
+        catch (Exception e){
+
         }
     }
 
 
     def save() {
-        def aboutUsInstance=AboutUs.get(params.id)
+        try{
+        def aboutUsInstance = AboutUs.get(params.id)
+        if (aboutUsInstance) {
+            aboutUsInstance.aboutUsDescription = params.aboutUsDescription
+            aboutUsInstance.quote = params.quote
 
-        aboutUsInstance.aboutUsDescription= params.aboutUsDescription
-               aboutUsInstance.quote= params.quote
+            aboutUsInstance.videoDescription = params.videoDescription
+            aboutUsInstance.specialProduct1 = Product.get(params.specialProduct1)
+            aboutUsInstance.specialProduct2 = Product.get(params.specialProduct2)
+            aboutUsInstance.specialProductSubCategory = ProductSubCategory.get(params.specialProductSubCategory)
+            aboutUsInstance.coverImage = updateCoverImage(aboutUsInstance.coverImage)
+            aboutUsInstance.aboutUs1Image = updateAboutUs1Image(aboutUsInstance.aboutUs1Image)
+            aboutUsInstance.aboutUs2Image = updateAboutUs2Image(aboutUsInstance.aboutUs2Image)
+            aboutUsInstance.aboutUs3Image = updateAboutUs3Image(aboutUsInstance.aboutUs3Image)
+            aboutUsInstance.aboutUs4Image = updateAboutUs4Image(aboutUsInstance.aboutUs4Image)
+            aboutUsInstance.quoteLeftImage = updateQuoteLeftImage(aboutUsInstance.quoteLeftImage)
+            aboutUsInstance.quoteRightImage = updateQuoteRightImage(aboutUsInstance.quoteRightImage)
+            aboutUsInstance.videoName = params.videoName
+            aboutUsInstance.videoDescrptionImage = updateVideoDescriptionImage(aboutUsInstance.videoDescrptionImage)
+            aboutUsInstance.specialProductSubCategoryImage = updateSpecialProductSubCategoryImage(aboutUsInstance.specialProductSubCategoryImage)
+            aboutUsInstance.backgroundImage = updateBackgroundImage(aboutUsInstance.backgroundImage)
+            aboutUsInstance.save(flush: true)
+            redirect(action: "show")
+        } else {
+            redirect(action: "notfound", controller: "errorPage")
 
-        aboutUsInstance.videoDescription= params.videoDescription
-        aboutUsInstance.specialProduct1= Product.get(params.specialProduct1)
-        aboutUsInstance.specialProduct2= Product.get(params.specialProduct2)
-        aboutUsInstance.specialProductSubCategory=ProductSubCategory.get(params.specialProductSubCategory)
-        aboutUsInstance.coverImage=updateCoverImage(aboutUsInstance.coverImage)
-        aboutUsInstance.aboutUs1Image= updateAboutUs1Image(aboutUsInstance.aboutUs1Image)
-        aboutUsInstance.aboutUs2Image= updateAboutUs2Image(aboutUsInstance.aboutUs2Image)
-        aboutUsInstance.aboutUs3Image= updateAboutUs3Image(aboutUsInstance.aboutUs3Image)
-        aboutUsInstance.aboutUs4Image= updateAboutUs4Image(aboutUsInstance.aboutUs4Image)
-        aboutUsInstance.quoteLeftImage= updateQuoteLeftImage(aboutUsInstance.quoteLeftImage)
-        aboutUsInstance.quoteRightImage= updateQuoteRightImage(aboutUsInstance.quoteRightImage)
-        aboutUsInstance.videoName=params.videoName
-        aboutUsInstance.videoDescrptionImage= updateVideoDescriptionImage(aboutUsInstance.videoDescrptionImage)
-        aboutUsInstance.specialProductSubCategoryImage= updateSpecialProductSubCategoryImage(aboutUsInstance.specialProductSubCategoryImage)
-        aboutUsInstance.backgroundImage= updateBackgroundImage(aboutUsInstance.backgroundImage)
-        aboutUsInstance.save(flush: true)
-        redirect(action: "show",id:aboutUsInstance.id)
+        }}
+        catch(Exception e){
+            redirect(action: "notfound", controller: "errorPage")
+
+        }
 
     }
-    def updateCoverImage(String imageNameOld){
+
+    def updateCoverImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImage")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -78,16 +92,16 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
-    def updateAboutUs1Image(String imageNameOld){
+
+    def updateAboutUs1Image(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs1Image")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -109,16 +123,16 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
-    def updateAboutUs2Image(String imageNameOld){
+
+    def updateAboutUs2Image(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs2Image")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -140,16 +154,16 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
-    def updateAboutUs3Image(String imageNameOld){
+
+    def updateAboutUs3Image(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs3Image")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -171,16 +185,16 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
-    def updateAboutUs4Image(String imageNameOld){
+
+    def updateAboutUs4Image(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs4Image")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -202,17 +216,16 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
 
-    def updateQuoteLeftImage(String imageNameOld){
+    def updateQuoteLeftImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("quoteLeftImage")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -234,16 +247,16 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
-    def updateQuoteRightImage(String imageNameOld){
+
+    def updateQuoteRightImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("quoteRightImage")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -265,16 +278,16 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
-    def updateVideoDescriptionImage(String imageNameOld){
+
+    def updateVideoDescriptionImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("videoDescrptionImage")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -296,16 +309,16 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
-    def updateSpecialProductSubCategoryImage(String imageNameOld){
+
+    def updateSpecialProductSubCategoryImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialProductSubCategoryImage")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -327,16 +340,16 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
-    def updateBackgroundImage(String imageNameOld){
+
+    def updateBackgroundImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backgroundImage")
-        if(file.size>0){
-            File fileOld= new File("web-app/images/otherStuffs/${imageNameOld}")
+        if (file.size > 0) {
+            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -358,20 +371,40 @@ class AboutUsController {
             file.transferTo(new File(realFilePath))
             def imageName = fileName
             return imageName
-        }
-        else{
+        } else {
             return imageNameOld
         }
     }
 
-    def show(Long id){
-        def aboutUsInstance=AboutUs.get(id)
-        [aboutUsInstance:aboutUsInstance]}
+    def show() {
+        try{
+        def aboutUsInstance = AboutUs.list()[0]
+        if (aboutUsInstance) {
 
-    def edit(){
-        def aboutUsInstance=AboutUs.get(params.id)
+            render(view: "show", model: [aboutUsInstance: aboutUsInstance])
+        } else {
+            redirect(action: "notfound", controller: "errorPage")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound", controller: "errorPage")
 
-        [aboutUsInstance:aboutUsInstance]
+        }
+    }
+
+    def edit() {
+        try{
+        def aboutUsInstance = AboutUs.get(params.id)
+        if (aboutUsInstance) {
+            [aboutUsInstance: aboutUsInstance]
+        } else {
+            redirect(action: "notfound", controller: "errorPage")
+        }
+
+    }
+        catch (Exception e){
+            redirect(action: "notfound", controller: "errorPage")
+
+        }
     }
 
 }

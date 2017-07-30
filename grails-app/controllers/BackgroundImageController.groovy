@@ -10,6 +10,7 @@ class BackgroundImageController {
 static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){
+        try{
         def Image = request.getFile('Image')
 
         def checkFile
@@ -24,18 +25,36 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
         else{
             checkFile="perfect"
             render checkFile
+        }}
+        catch (Exception e){
+
         }
     }
 
 def list(){
-    def backgroundImageList= BackgroundImage.list()
-    [backgroundImageList:backgroundImageList]
+    try {
+        def backgroundImageList= BackgroundImage.list()
+        [backgroundImageList:backgroundImageList]
+    }
+  catch (Exception e){
+      redirect(action: "notfound", controller: "errorPage")
+  }
 }
     def save() {
+        try{
         def backgroundImageInstance=BackgroundImage.get(params.id)
+        if(backgroundImageInstance){
         backgroundImageInstance.imageName=editBackgroundImage(backgroundImageInstance.imageName)
         backgroundImageInstance.save(flush: true)
-        redirect(action: "show",id:backgroundImageInstance.id)
+        redirect(action: "show",id:backgroundImageInstance.id)}
+        else{
+            redirect(action: "notfound", controller: "errorPage")
+
+        }}
+        catch (Exception e){
+            redirect(action: "notfound", controller: "errorPage")
+
+        }
 
     }
     def editBackgroundImage(String imageNameOld){
@@ -70,11 +89,36 @@ def list(){
         }
     }
        def show(Long id){
+           try{
         def backgroundImageInstance=BackgroundImage.get(id)
+           if(backgroundImageInstance){
         [backgroundImageInstance:backgroundImageInstance]}
+    else{
+        redirect(action: "notfound", controller: "errorPage")
+
+    }}
+           catch (Exception e){
+               redirect(action: "notfound", controller: "errorPage")
+
+           }
+           }
 
     def edit(Long id){
+        try {
+
         def backgroundImageInstance=BackgroundImage.get(id)
-        [backgroundImageInstance:backgroundImageInstance]
+        if(backgroundImageInstance){
+        [backgroundImageInstance:backgroundImageInstance]}
+        else{
+            redirect(action: "notfound", controller: "errorPage")
+
+        }
+        }
+        catch (Exception e){
+            redirect(action: "notfound", controller: "errorPage")
+
+        }
+
     }
 }
+

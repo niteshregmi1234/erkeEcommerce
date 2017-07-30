@@ -1,114 +1,105 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>
 
-    </title>
-    <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
-            charset="utf-8"></script>
+
+    <meta name="layout" content="userYarsaa">
+
 </head>
 <body>
-<!-- Lets make a simple image magnifier -->
-<div class="magnify">
 
-    <!-- This is the magnifying glass which will contain the original/large version -->
-    <div class="large"></div>
 
-    <!-- This is the small image -->
-    <img class="small" src="http://thecodeplayer.com/uploads/media/iphone.jpg" width="200"/>
 
+<div class="container">
+    <div class="row">
+        <div class="well">
+            <form>
+                <fieldset>
+                    <div class="form-group">
+                        <label for="query">Search:</label>
+                        <input class="form-control" name="query" id="query" placeholder="Start typing something to search..." type="text">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>
 <style>
-* {margin: 0; padding: 0;}
-.magnify {width: 200px; margin: 50px auto; position: relative; cursor: none}
-
-/*Lets create the magnifying glass*/
-.large {
-    width: 175px; height: 175px;
-    position: absolute;
-    border-radius: 100%;
-
-    /*Multiple box shadows to achieve the glass effect*/
-    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85),
-    0 0 7px 7px rgba(0, 0, 0, 0.25),
-    inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
-
-    /*hide the glass by default*/
-    display: none;
+.twitter-typeahead{
+    width:100%;
 }
 
-/*To solve overlap bug at the edges during magnification*/
-.small { display: block; }
+.twitter-typeahead .tt-query,
+.twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+}
+.tt-dropdown-menu {
+    min-width: 160px;
+    margin-top: 2px;
+    padding: 5px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.2);
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    width:100%;
+}
+
+.tt-suggestion {
+    display: block;
+    padding: 3px 20px;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+    color: #fff;
+    background-color: #0081c2;
+    background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+    background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+    background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+    background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0)
+}
+
+.tt-suggestion.tt-is-under-cursor a {
+    color: #fff;
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
 </style>
 <script>
-    $(document).ready(function(){
+    /*!
+     * typeahead.js 0.9.3
+     * https://github.com/twitter/typeahead
+     * Copyright 2013 Twitter, Inc. and other contributors; Licensed MIT
+     */
 
-        var native_width = 0;
-        var native_height = 0;
-        $(".large").css("background","url('" + $(".small").attr("src") + "') no-repeat");
 
-        //Now the mousemove function
-        $(".magnify").mousemove(function(e){
-            //When the user hovers on the image, the script will first calculate
-            //the native dimensions if they don't exist. Only after the native dimensions
-            //are available, the script will show the zoomed version.
-            if(!native_width && !native_height)
-            {
-                //This will create a new image object with the same image as that in .small
-                //We cannot directly get the dimensions from .small because of the
-                //width specified to 200px in the html. To get the actual dimensions we have
-                //created this image object.
-                var image_object = new Image();
-                image_object.src = $(".small").attr("src");
+    $('#query').typeahead({
+        local: [
+        <g:each in="${productDetails}" var="list">
+                '${list.productDetails.productName}',
+            </g:each>
+        ]
 
-                //This code is wrapped in the .load function which is important.
-                //width and height of the object would return 0 if accessed before
-                //the image gets loaded.
-                native_width = image_object.width;
-                native_height = image_object.height;
-            }
-            else
-            {
-                //x/y coordinates of the mouse
-                //This is the position of .magnify with respect to the document.
-                var magnify_offset = $(this).offset();
-                //We will deduct the positions of .magnify from the mouse positions with
-                //respect to the document to get the mouse positions with respect to the
-                //container(.magnify)
-                var mx = e.pageX - magnify_offset.left;
-                var my = e.pageY - magnify_offset.top;
+    });
 
-                //Finally the code to fade out the glass if the mouse is outside the container
-                if(mx < $(this).width() && my < $(this).height() && mx > 0 && my > 0)
-                {
-                    $(".large").fadeIn(100);
-                }
-                else
-                {
-                    $(".large").fadeOut(100);
-                }
-                if($(".large").is(":visible"))
-                {
-                    //The background position of .large will be changed according to the position
-                    //of the mouse over the .small image. So we will get the ratio of the pixel
-                    //under the mouse pointer with respect to the image and use that to position the
-                    //large image inside the magnifying glass
-                    var rx = Math.round(mx/$(".small").width()*native_width - $(".large").width()/2)*-1;
-                    var ry = Math.round(my/$(".small").height()*native_height - $(".large").height()/2)*-1;
-                    var bgp = rx + "px " + ry + "px";
-
-                    //Time to move the magnifying glass with the mouse
-                    var px = mx - $(".large").width()/2;
-                    var py = my - $(".large").height()/2;
-                    //Now the glass moves with the mouse
-                    //The logic is to deduct half of the glass's width and height from the
-                    //mouse coordinates to place it with its center at the mouse coordinates
-
-                    //If you hover on the image now, you should see the magnifying glass in action
-                    $(".large").css({left: px, top: py, backgroundPosition: bgp});
-                }
-            }
-        })
-    })
+    $('.tt-query').css('background-color','#fff');
 </script>
+
+
 </body>
 </html>

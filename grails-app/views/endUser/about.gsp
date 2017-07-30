@@ -202,7 +202,8 @@
                                 <p class="price">Rs.${aboutUsInstance.specialProduct1.productDetails.price}</p>
                                 <p class="buttons">
                                     <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}" class="btn btn-default">View detail</g:link>
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct1.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                 </p>
                             </div>
                             <!-- /.text -->
@@ -241,7 +242,8 @@
                                 <p class="price"><del>Rs.${aboutUsInstance.specialProduct1.productDetails.price}</del> Rs.${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}</p>
                                 <p class="buttons">
                                     <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}" class="btn btn-default">View detail</g:link>
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct1.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                 </p>
                             </div>
 
@@ -296,7 +298,8 @@
                                 <p class="price">Rs.${aboutUsInstance.specialProduct2.productDetails.price}</p>
                                 <p class="buttons">
                                     <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="btn btn-default">View detail</g:link>
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct2.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                 </p>
                             </div>
                             <!-- /.text -->
@@ -335,7 +338,8 @@
                                 <p class="price"><del>Rs.${aboutUsInstance.specialProduct2.productDetails.price}</del> Rs.${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct2.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}</p>
                                 <p class="buttons">
                                     <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="btn btn-default">View detail</g:link>
-                                    <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct2.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                 </p>
                             </div>
 
@@ -441,5 +445,38 @@
 </script>
 <script src="${resource(dir: 'js', file: 'yarsaa/jquery.magnific-popup.js')}" type="text/javascript"
         charset="utf-8"></script>
+<script>
+    function checkAddToCart(id){
+
+        var responseValue;
+        $.ajax({
+            url: "${createLink(controller:'cart', action:'checkAddToCart')}",
+            type: "POST",
+            data: {id1:id},
+            async : false,
+            cache:false,
+            success: function(result) {
+                if(result=="ok"){
+                    bootbox.alert({
+                        message: "successfully added to cart.",
+                        size: 'small',
+                        callback: function(){
+                            location.reload();
+                        }
+
+                    });
+                    responseValue=false;
+
+                }
+                else if(result=="notOk"){
+                    $('#login-modal').modal('toggle');
+                }
+            }
+        });
+        return responseValue;
+
+    }
+</script>
+
 </body>
 </html>

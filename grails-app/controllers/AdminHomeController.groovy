@@ -2,11 +2,10 @@ import javax.mail.internet.InternetAddress
 
 class AdminHomeController {
 
-    def adminHome() {}
+    def adminHome() {
 
-    def error() {
-        render "not allowed by u"
     }
+
 
     def save() {
         def test = new Test(params)

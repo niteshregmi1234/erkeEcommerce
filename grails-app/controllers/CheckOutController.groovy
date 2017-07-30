@@ -13,9 +13,9 @@ class CheckOutController {
 
     }
     def placeOrder(){
-        def success="false"
         try{
-        def cartList=Cart.findAllByEndUserInformation(session.endUser)
+            def success="false"
+            def cartList=Cart.findAllByEndUserInformation(session.endUser)
         def totalPrice=0
         for(Cart cart:cartList){
             totalPrice=totalPrice+((cart.product.productDetails.price*cart.quantity)-(cart.product.productDetails.discountPercentage*(cart.product.productDetails.price*cart.quantity)/100))
@@ -32,14 +32,13 @@ class CheckOutController {
         }
     catch(Exception e){
         success="false";
-     e.printStackTrace()
     }
        if(success=="true"){
            flash.message="your enquiry has been successfully sent.Please,visit again.Thank you!!"
            redirect(action: "cart",controller: "cart")
        }
         else if(success=="false"){
-           flash.message="your enquiry has been not been sent due to some problems.PLease try again later"
+           flash.message="your enquiry has been not been sent due to some problems.Please try again later"
            redirect(action: "cart",controller: "cart")
 
        }

@@ -1,3 +1,4 @@
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import javax.imageio.ImageIO
@@ -6,8 +7,10 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class CoverImageController {
+    static allowedMethods = [checkPhoto: 'POST',editCoverImage: 'POST',uploadCoverImage: 'POST',save: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 def checkPhoto(){
+    try{
     def Image = request.getFile('Image')
 
     def checkFile
@@ -22,16 +25,26 @@ def checkPhoto(){
     else{
         checkFile="perfect"
         render checkFile
+    }}
+    catch (Exception  e){
+
     }
 }
     def list() {
+        try {
+
+
         def coverImageList=CoverImage.list()
-        render(view: "list",model: [coverImageList:coverImageList])
+        render(view: "list",model: [coverImageList:coverImageList])}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
     }
     def create(){
 
     }
     def save(){
+        try{
         if(!params.id){
             def coverImageInstance=new CoverImage()
             coverImageInstance.imageName=uploadCoverImage()
@@ -42,11 +55,20 @@ def checkPhoto(){
         }
         else{
             def coverImageInstance=CoverImage.get(params.id)
+            if(coverImageInstance){
             coverImageInstance.imageName=editCoverImage(coverImageInstance.imageName)
             coverImageInstance.statusShow=params.statusShow as boolean
             coverImageInstance.slidePlace=params.slidePlace
             coverImageInstance.save(flush: true)
-            redirect(action: "show" ,id:coverImageInstance.id)
+            redirect(action: "show" ,id:coverImageInstance.id)}
+            else{
+                redirect(action: "notfound",controller: "errorPage")
+
+            }
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def uploadCoverImage(){
@@ -105,40 +127,40 @@ def checkPhoto(){
         }
     }
     def show(Long id){
+        try{
         def coverImageInstance=CoverImage.get(id)
-
-
         if(coverImageInstance){
             [coverImageInstance:coverImageInstance]}
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
         }
     }
     def edit(){
+        try{
         def coverImageInstance=CoverImage.get(params.id)
-
         if(coverImageInstance){
             [coverImageInstance:coverImageInstance]
         }
         else{
             redirect(action: "list")
+        }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
     }
     def delete(){
+        try{
         def coverImageInstance=CoverImage.get(params.id)
-
-
         if(coverImageInstance) {
-            try{
                 def imageName=coverImageInstance.imageName
                 File file= new File("web-app/images/coverImage/${imageName}")
                 file.delete();
                 coverImageInstance.delete(flush: true)
                 flash.message="Successfully deleted."
-            }
-            catch (Exception e){
-                flash.message="Sorry! cannot delete this data. It is used as foreign key in another table."
-            }
         }
         else{
             flash.message="Unable to delete the already deleted item."
@@ -146,6 +168,16 @@ def checkPhoto(){
 
         }
         redirect(action: "list")
+        }
+        catch (DataIntegrityViolationException e){
+            flash.message="Sorry! cannot delete this data."
+            redirect(action: "list")
+        }
+        catch ( Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+
 
     }
 

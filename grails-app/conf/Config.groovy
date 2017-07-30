@@ -43,6 +43,7 @@ grails.controllers.defaultScope = 'prototype'
 
 // GSP settings
 grails {
+    try{
     mail {
 
         host = "smtp.gmail.com"
@@ -62,6 +63,9 @@ grails {
                  "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
 
                  "mail.smtp.socketFactory.fallback":"false"]
+
+    }}
+    catch (Exception e){
 
     }
 

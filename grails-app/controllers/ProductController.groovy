@@ -1,3 +1,4 @@
+import grails.converters.JSON
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
@@ -66,6 +67,25 @@ def checkPhoto(){
             redirect(action: "show" ,id:product.id)
         }
     }
+    def bloodHound(){
+        def criteria = ProductDetails.createCriteria();
+        def productDetails = criteria.list {
+            or {
+
+                like("productName", "%" + params.keyCode + "%")
+                like("briefDescription", "%" + params.keyCode + "%")
+
+            }
+        }
+        print productDetails
+        def productNameList=[]
+        for(int i=0;i<productDetails.size();i++){
+            productNameList.add(productDetails[i].productName)
+        }
+        print productNameList
+
+    }
+
     def uploadSpecialImage(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialImageName")

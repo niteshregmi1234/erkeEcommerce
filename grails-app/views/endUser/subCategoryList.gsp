@@ -446,7 +446,6 @@
                 </style>
                 <script>
                     function checkAddToCart(id){
-                        alert(id);
                         var responseValue;
                         $.ajax({
                             url: "${createLink(controller:'cart', action:'checkAddToCart')}",

@@ -3,6 +3,7 @@ import grails.converters.JSON
 class CartController {
 static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket: 'POST',delete: 'POST',checkUser: 'POST']
     def checkAddToCart(){
+        try{
       if(session.endUser){
           def id=params.id1 as long
           def productInstance=Product.get(id)
@@ -22,9 +23,13 @@ static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket:
       }
         else{
           render "notOk"
-      }
+      }}
+        catch (Exception e){
+
+        }
     }
     def updateBasket(){
+        try{
         def totalPrice=0
         def obj= JSON.parse(params.array)
         for(int i=0;i<obj[0].size();i++){
@@ -39,16 +44,25 @@ static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket:
         def tax=OtherCosts.list()[0].taxPercentage*totalPrice1/100
         def totalPriceTotal=totalPrice1+tax
 def totalUnits=[totalPrice,shippingAndHandling,tax,totalPriceTotal]
-        render totalUnits as JSON
+        render totalUnits as JSON}
+        catch (Exception e){
+
+        }
 
     }
     def checkUser(){
+        try{
         if(session.endUser==null){
             render "notOk"
+        }}
+        catch (Exception e){
+
         }
     }
     def addToCart() {
+        try{
         def productInstance=Product.get(params.id)
+        if(productInstance){
         def cartInstanceCheck=Cart.findByEndUserInformationAndProduct(session.endUser,productInstance)
         if(cartInstanceCheck){
          cartInstanceCheck.quantity=cartInstanceCheck.quantity+1
@@ -61,9 +75,14 @@ def totalUnits=[totalPrice,shippingAndHandling,tax,totalPriceTotal]
         cartInstance.endUserInformation=session.endUser
         cartInstance.save(flush: true)}
         redirect(action: "cart")
+        }}
+        catch (Exception e){
+     redirect(action: "notfound",controller: "errorPage")
+        }
     }
     def cart()
     {
+        try{
     def cartList=Cart.findAllByEndUserInformation(session.endUser)
         def totalPrice=0
         def shippingAndHandling=0
@@ -89,10 +108,14 @@ shippingAndHandling= OtherCosts.list()[0].shippingAndHandlingPercentage*totalPri
         }
         Collections.shuffle(relatedProductList)}
 
-        render(view: "checkout", model:[totalPrice:totalPrice,relatedProductList:relatedProductList,shippingAndHandling:shippingAndHandling,tax:tax,totalPriceTotal:totalPriceTotal])
+        render(view: "checkout", model:[totalPrice:totalPrice,relatedProductList:relatedProductList,shippingAndHandling:shippingAndHandling,tax:tax,totalPriceTotal:totalPriceTotal])}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
 
 }
     def delete(){
+        try{
         def id=params.id as long
         def cartInstance=Cart.get(id)
         if(cartInstance){
@@ -111,4 +134,9 @@ shippingAndHandling= OtherCosts.list()[0].shippingAndHandlingPercentage*totalPri
         render totalUnits as JSON
 
     }
+        catch (Exception e){
+
+        }
+    }
+
 }
