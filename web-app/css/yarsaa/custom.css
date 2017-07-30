@@ -173,37 +173,19 @@
         height:250px;
         width: 100%;
     }
-    .about-text{
-        font-size: 10px;
-        width: 25em;
-    }
-    .about-text1{
-        width: 20em;
-        font-size: 12px;
-    }
-    .text-img{
-        height: 220px;
-    }
     .lead1{
         font-size:10px !important;
-        /*margin-top: 15%!important;*/
-        /*margin-bottom: -10px!important;*/
-        /*width: 0;*/
-        width: 100%;
+        margin-top: 15%!important;
+        margin-bottom: -10px!important;
+        width: 0;
     }
     .lead2{
         font-size: 8px!important;
-        /*width: 0;*/
-        margin-top:-10px;
-        width: 100%;
-    }
-    .wthreeshop-a{
-        margin-top: 10px;
+        width: 0;
     }
     .middle1{
         top:0%!important;
-        left:0px!important;
-        width: 100%;
+        left:75px!important;
     }
     .subButton{
         margin-top: -27px!important;
@@ -245,9 +227,6 @@
     .product-height {
         height: 435px;
     }
-    .wthreeshop-a a{
-        padding: 0px 5px;
-    }
 
 }
 @media screen and (min-width: 321px) and (max-width:480px){
@@ -259,15 +238,15 @@
     }
     .lead1{
         font-size:10px !important;
-        /*margin-top: 15%!important;*/
-        /*margin-bottom: -10px!important;*/
+        margin-top: 15%!important;
+        margin-bottom: -10px!important;
     }
     .lead2{
         font-size: 8px!important;
     }
     .middle1{
         top:2%!important;
-        left:0px!important;
+        left:51px!important;
     }
     .subButton{
         margin-top: -27px!important;

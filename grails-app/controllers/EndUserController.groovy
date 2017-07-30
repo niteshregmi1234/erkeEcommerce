@@ -1,6 +1,6 @@
 import grails.converters.JSON
 class EndUserController {
-    static allowedMethods = [fetchAboutUrl: "POST",fetchUrl: "POST"]
+//    static allowedMethods = [fetchAboutUrl: "POST",fetchUrl: "POST"]
     def a(){
 def productDetails=Product.list()
         [productDetails:productDetails]
