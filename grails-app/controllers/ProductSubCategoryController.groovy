@@ -57,13 +57,17 @@ if(productSubCategoryInstance){
         }
     }
     def uploadCoverImage(){
-//        def f = request.getFile('coverImageName')
-
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImageName")
-        String fileName = file.originalFilename
+        def fileName=file.originalFilename
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+        }
+
         abc:
-        boolean check = new File("web-app/images/subCategoryImage", fileName).exists()
+        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
         if (check == true) {
             Matcher m = PATTERN.matcher(fileName);
             if (m.matches()) {
@@ -77,27 +81,26 @@ if(productSubCategoryInstance){
                 continue abc
             }
         }
-//        def homeDir = new File(System.getProperty("user.home"))
-//        File fileDest = new File(homeDir,"image/${fileName}")
-        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/subCategoryImage/${fileName}")
-//file.transferTo(new File(fileDest))
-        file.transferTo(new File(realFilePath))
-
-//        f.transferTo(fileDest)
-
-        def imageName = fileName
-        return imageName
+        File fileDest = new File(homeDir,"yarsaa/${fileName}")
+        file.transferTo(fileDest)
+        return fileName
 
     }
     def editCoverImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImageName")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/subCategoryImage/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/subCategoryImage", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -111,16 +114,17 @@ if(productSubCategoryInstance){
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/subCategoryImage/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName}
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
         else{
             return imageNameOld
         }
-
     }
     def renderImage = {
+        def validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 
         String profileImagePath = "/home/hemanta/image/"
         String image = params.imageName // or whatever name you saved in your db
@@ -179,7 +183,8 @@ if(productSubCategoryInstance){
         if(productSubCategoryInstance) {
                 productSubCategoryInstance.delete(flush: true)
             def imageName=productSubCategoryInstance.coverImageName
-            File file= new File("web-app/images/subCategoryImage/${imageName}")
+            def homeDir = new File(System.getProperty("user.home"))
+            File file= new File(homeDir,"yarsaa/${imageName}")
             file.delete();
                 flash.message="Successfully deleted."
 

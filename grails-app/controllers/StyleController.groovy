@@ -42,7 +42,8 @@ if(styleManagementInstance){
         else{
     redirect(action: "notfound",controller: "errorPage")
 
-}}
+}
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 

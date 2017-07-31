@@ -21,12 +21,12 @@
         <div class="form-group ">
             <label class="control-label col-sm-2">Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/coverImage",file: "${coverImageInstance.imageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:coverImageInstance.imageName])}" height="100" style="margin-left: -1%">
 
-                <div style="margin-top: 7px;">${coverImageInstance.imageName}</div>
-            </div>
+
         </div>
     </div>
+        </div>
     <div class="col-lg-12">
         <div class="form-group ">
             <label class="control-label col-sm-2">Show Status:</label>

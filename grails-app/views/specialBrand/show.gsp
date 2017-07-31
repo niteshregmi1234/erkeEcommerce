@@ -31,7 +31,8 @@
         <div class="form-group">
             <label class="control-label col-sm-4">MainImage:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance.brandMainImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:specialBrandInstance.brandMainImageName])}" height="100" style="margin-left: -1%">
+
 
             </div>
         </div>
@@ -50,7 +51,8 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Sub-1-Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance.brandSub1ImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:specialBrandInstance.brandSub1ImageName])}" height="100" style="margin-left: -1%">
+
 
             </div>
         </div>
@@ -80,7 +82,8 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Sub-2-Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance.brandSub2ImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:specialBrandInstance.brandSub2ImageName])}" height="100" style="margin-left: -1%">
+
 
             </div>
         </div>

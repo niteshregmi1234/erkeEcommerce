@@ -74,9 +74,15 @@ def checkPhoto(){
     def uploadCoverImage(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
-        String fileName = file.originalFilename
+        def fileName=file.originalFilename
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+        }
+
         abc:
-        boolean check = new File("web-app/images/coverImage", fileName).exists()
+        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
         if (check == true) {
             Matcher m = PATTERN.matcher(fileName);
             if (m.matches()) {
@@ -90,37 +96,43 @@ def checkPhoto(){
                 continue abc
             }
         }
-        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/coverImage/${fileName}")
-        file.transferTo(new File(realFilePath))
-        def imageName = fileName
-        return imageName
+        File fileDest = new File(homeDir,"yarsaa/${fileName}")
+        file.transferTo(fileDest)
+        return fileName
+
     }
     def editCoverImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
-        if(file.size>0){
-        File fileOld= new File("web-app/images/coverImage/${imageNameOld}")
-        fileOld.delete();
-        String fileName = file.originalFilename
-        abc:
-        boolean check = new File("web-app/images/coverImage", fileName).exists()
-        if (check == true) {
-            Matcher m = PATTERN.matcher(fileName);
-            if (m.matches()) {
-                String prefix = m.group(1);
-                String last = m.group(2);
-                String suffix = m.group(3);
-                if (suffix == null) suffix = "";
-                int count = last != null ? Integer.parseInt(last) : 0;
-                count++;
-                fileName = prefix + "(" + count + ")" + suffix;
-                continue abc
-            }
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
         }
-        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/coverImage/${fileName}")
-        file.transferTo(new File(realFilePath))
-        def imageName = fileName
-        return imageName
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
+            fileOld.delete();
+            String fileName = file.originalFilename
+            abc:
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
+            if (check == true) {
+                Matcher m = PATTERN.matcher(fileName);
+                if (m.matches()) {
+                    String prefix = m.group(1);
+                    String last = m.group(2);
+                    String suffix = m.group(3);
+                    if (suffix == null) suffix = "";
+                    int count = last != null ? Integer.parseInt(last) : 0;
+                    count++;
+                    fileName = prefix + "(" + count + ")" + suffix;
+                    continue abc
+                }
+            }
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
         }
         else{
             return imageNameOld
@@ -159,7 +171,8 @@ def checkPhoto(){
             coverImageInstance.delete(flush: true)
 
             def imageName=coverImageInstance.imageName
-                File file= new File("web-app/images/coverImage/${imageName}")
+            def homeDir = new File(System.getProperty("user.home"))
+                File file= new File(homeDir,"yarsaa/${imageName}")
                 file.delete();
                 flash.message="Successfully deleted."
         }

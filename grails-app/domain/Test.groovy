@@ -7,6 +7,7 @@ class Test {
 
 String name
     String role
+    String imageName
     static constraints = {
     }
     static mapping = {

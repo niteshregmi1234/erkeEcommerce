@@ -39,7 +39,9 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Front Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/allProducts/frontImage",file: "${productInstance.frontImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.frontImageName])}" height="100" style="margin-left: -1%">
+
+
 
             </div>
         </div>
@@ -48,7 +50,9 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Back Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/allProducts/backImage",file: "${productInstance.backImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.backImageName])}" height="100" style="margin-left: -1%">
+
+
 
             </div>
         </div>
@@ -57,7 +61,9 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Side Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/allProducts/sideImage",file: "${productInstance.sideImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.sideImageName])}" height="100" style="margin-left: -1%">
+
+
 
             </div>
         </div>
@@ -66,7 +72,9 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Special Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/allProducts/specialImage",file: "${productInstance.specialImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.specialImageName])}" height="100" style="margin-left: -1%">
+
+
 
             </div>
         </div>
@@ -91,7 +99,6 @@
 
 
 </form>
-%{--<img src="${resource(dir: "images/allProducts",file: "${productInstance.image_name}")}" height="100" style="margin-left: 25%">--}%
 
 <div class="col-lg-12">
     <g:link action="edit" id="${productInstance?.id}" controller="product" class="btn btn-primary navbar-btn">Edit</g:link>

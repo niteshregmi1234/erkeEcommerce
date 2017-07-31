@@ -62,9 +62,15 @@ if(productCategoryInstance){
     def uploadMenuImage1(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("menuImage1")
-        String fileName = file.originalFilename
+        def fileName=file.originalFilename
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+        }
+
         abc:
-        boolean check = new File("web-app/images/categoryImage", fileName).exists()
+        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
         if (check == true) {
             Matcher m = PATTERN.matcher(fileName);
             if (m.matches()) {
@@ -78,18 +84,23 @@ if(productCategoryInstance){
                 continue abc
             }
         }
-        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-        file.transferTo(new File(realFilePath))
-        def imageName = fileName
-        return imageName
+        File fileDest = new File(homeDir,"yarsaa/${fileName}")
+        file.transferTo(fileDest)
+        return fileName
 
     }
     def uploadMenuImage2(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("menuImage2")
-        String fileName = file.originalFilename
+        def fileName=file.originalFilename
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+        }
+
         abc:
-        boolean check = new File("web-app/images/categoryImage", fileName).exists()
+        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
         if (check == true) {
             Matcher m = PATTERN.matcher(fileName);
             if (m.matches()) {
@@ -103,18 +114,23 @@ if(productCategoryInstance){
                 continue abc
             }
         }
-        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-        file.transferTo(new File(realFilePath))
-        def imageName = fileName
-        return imageName
+        File fileDest = new File(homeDir,"yarsaa/${fileName}")
+        file.transferTo(fileDest)
+        return fileName
 
     }
     def uploadMenuImage3(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("menuImage3")
-        String fileName = file.originalFilename
+        def fileName=file.originalFilename
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+        }
+
         abc:
-        boolean check = new File("web-app/images/categoryImage", fileName).exists()
+        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
         if (check == true) {
             Matcher m = PATTERN.matcher(fileName);
             if (m.matches()) {
@@ -128,21 +144,26 @@ if(productCategoryInstance){
                 continue abc
             }
         }
-        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-        file.transferTo(new File(realFilePath))
-        def imageName = fileName
-        return imageName
+        File fileDest = new File(homeDir,"yarsaa/${fileName}")
+        file.transferTo(fileDest)
+        return fileName
 
     }
     def editMenu1Image(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("menuImage1")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/categoryImage/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/categoryImage", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -156,24 +177,30 @@ if(productCategoryInstance){
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName}
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
         else{
             return imageNameOld
         }
-
     }
     def editMenu2Image(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("menuImage2")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/categoryImage/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/categoryImage", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -187,24 +214,30 @@ if(productCategoryInstance){
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName}
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
         else{
             return imageNameOld
         }
-
     }
     def editMenu3Image(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("menuImage3")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/categoryImage/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/categoryImage", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -218,22 +251,28 @@ if(productCategoryInstance){
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName}
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
         else{
             return imageNameOld
         }
-
     }
 
     def uploadShoppingImage(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("shoppingImageName")
-        String fileName = file.originalFilename
+        def fileName=file.originalFilename
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+        }
+
         abc:
-        boolean check = new File("web-app/images/categoryImage", fileName).exists()
+        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
         if (check == true) {
             Matcher m = PATTERN.matcher(fileName);
             if (m.matches()) {
@@ -247,46 +286,56 @@ if(productCategoryInstance){
                 continue abc
             }
         }
-        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-        file.transferTo(new File(realFilePath))
-        def imageName = fileName
-        return imageName
+        File fileDest = new File(homeDir,"yarsaa/${fileName}")
+        file.transferTo(fileDest)
+        return fileName
 
     }
     def uploadCoverImage(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImageName")
-        String fileName = file.originalFilename
-            abc:
-            boolean check = new File("web-app/images/categoryImage", fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
+        def fileName=file.originalFilename
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+        }
+
+        abc:
+        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
+        if (check == true) {
+            Matcher m = PATTERN.matcher(fileName);
+            if (m.matches()) {
+                String prefix = m.group(1);
+                String last = m.group(2);
+                String suffix = m.group(3);
+                if (suffix == null) suffix = "";
+                int count = last != null ? Integer.parseInt(last) : 0;
+                count++;
+                fileName = prefix + "(" + count + ")" + suffix;
+                continue abc
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
+        }
+        File fileDest = new File(homeDir,"yarsaa/${fileName}")
+        file.transferTo(fileDest)
+        return fileName
 
     }
     def editShopImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("shoppingImageName")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/categoryImage/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/categoryImage", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -300,25 +349,31 @@ if(productCategoryInstance){
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName}
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
         else{
             return imageNameOld
         }
-
     }
 
     def editCoverImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImageName")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/categoryImage/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/categoryImage", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -332,14 +387,14 @@ if(productCategoryInstance){
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/categoryImage/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName}
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
         else{
             return imageNameOld
         }
-
     }
     def show(Long id){
         try{
@@ -375,15 +430,14 @@ if(productCategoryInstance){
 
             def productCategoryInstance=ProductCategory.get(params.id)
 
-
-
-        if(productCategoryInstance) {
+            if(productCategoryInstance) {
             productCategoryInstance.delete()
-                File coverImage= new File("web-app/images/categoryImage/${productCategoryInstance.coverImageName}")
-                File shopImage= new File("web-app/images/categoryImage/${productCategoryInstance.shoppingImageName}")
-                File menuImage1= new File("web-app/images/categoryImage/${productCategoryInstance.menuImage1}")
-                File menuImage2= new File("web-app/images/categoryImage/${productCategoryInstance.menuImage2}")
-                File menuImage3= new File("web-app/images/categoryImage/${productCategoryInstance.menuImage3}")
+                def homeDir = new File(System.getProperty("user.home"))
+                File coverImage= new File(homeDir,"yarsaa/${productCategoryInstance.coverImageName}")
+                File shopImage=  new File(homeDir,"yarsaa/${productCategoryInstance.shoppingImageName}")
+                File menuImage1=  new File(homeDir,"yarsaa/${productCategoryInstance.menuImage1}")
+                File menuImage2=  new File(homeDir,"yarsaa/${productCategoryInstance.menuImage2}")
+                File menuImage3=  new File(homeDir,"yarsaa/${productCategoryInstance.menuImage3}")
 
                 coverImage.delete();
                 shopImage.delete();

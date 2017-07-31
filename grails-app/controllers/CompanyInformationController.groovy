@@ -46,8 +46,7 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
         companyInformationInstance.proprietorName=params.proprietorName
         companyInformationInstance.phoneNumber=params.phoneNumber
         companyInformationInstance.descriptionWhereWeAre=params.descriptionWhereWeAre
-
-        companyInformationInstance.logoImageName=editLogoImage(companyInformationInstance.logoImageName)
+            companyInformationInstance.logoImageName=editLogoImage(companyInformationInstance.logoImageName)
         companyInformationInstance.coverImageName=editcoverImage(companyInformationInstance.coverImageName)
         companyInformationInstance.shopInsideViewImageName=editshopInsideViewImage(companyInformationInstance.shopInsideViewImageName)
         companyInformationInstance.mapImageName=editMapImage(companyInformationInstance.mapImageName)
@@ -66,12 +65,18 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
     def editcoverImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImageName")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/companyInformation/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/companyInformation", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -85,10 +90,10 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/companyInformation/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
         }
         else{
             return imageNameOld
@@ -97,12 +102,18 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
     def editshopInsideViewImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("shopInsideViewImageName")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/companyInformation/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/companyInformation", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -116,10 +127,10 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/companyInformation/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
         }
         else{
             return imageNameOld
@@ -127,13 +138,19 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
     }
     def editMapImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("mapImageName")
+        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("map ImageName")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/companyInformation/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/companyInformation", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -147,10 +164,10 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/companyInformation/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
         }
         else{
             return imageNameOld
@@ -160,12 +177,18 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
     def editLogoImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("logoImageName")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/companyInformation/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/companyInformation", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -179,10 +202,10 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/companyInformation/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
         }
         else{
             return imageNameOld

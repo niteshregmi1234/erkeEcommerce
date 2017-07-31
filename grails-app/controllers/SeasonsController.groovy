@@ -77,9 +77,15 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSeasonImage: 'POS
     def uploadSeasonImage(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
-        String fileName = file.originalFilename
+        def fileName=file.originalFilename
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+        }
+
         abc:
-        boolean check = new File("web-app/images/seasonsImage", fileName).exists()
+        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
         if (check == true) {
             Matcher m = PATTERN.matcher(fileName);
             if (m.matches()) {
@@ -93,20 +99,26 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSeasonImage: 'POS
                 continue abc
             }
         }
-        def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/seasonsImage/${fileName}")
-        file.transferTo(new File(realFilePath))
-        def imageName = fileName
-        return imageName
+        File fileDest = new File(homeDir,"yarsaa/${fileName}")
+        file.transferTo(fileDest)
+        return fileName
+
     }
     def editSeasonImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
         if(file.size>0){
-            File fileOld= new File("web-app/images/seasonsImage/${imageNameOld}")
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/seasonsImage", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -120,15 +132,14 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSeasonImage: 'POS
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/seasonsImage/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
         }
         else{
             return imageNameOld
-        }
-    }
+        }    }
     def show(Long id){
         try{
         def seasonsInstance=Seasons.get(id)
@@ -166,7 +177,8 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSeasonImage: 'POS
 
         if(seasonsInstance) {
             seasonsInstance.delete(flush: true)
-                File file= new File("web-app/images/seasonsImage/${seasonsInstance.imageName}")
+            def homeDir = new File(System.getProperty("user.home"))
+            File file= new File(homeDir,"yarsaa/${seasonsInstance.imageName}")
                 file.delete();
                 flash.message="Successfully deleted."
             }

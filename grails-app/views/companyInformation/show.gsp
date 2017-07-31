@@ -97,7 +97,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Logo:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/companyInformation",file: "${companyInformationInstance.logoImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformationInstance.logoImageName])}" height="100" style="margin-left: -1%">
 
             </div>
         </div>
@@ -106,7 +106,8 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Cover Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/companyInformation",file: "${companyInformationInstance.coverImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformationInstance.coverImageName])}" height="100" style="margin-left: -1%">
+
 
             </div>
         </div>
@@ -115,7 +116,8 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Shop View:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/companyInformation",file: "${companyInformationInstance.shopInsideViewImageName}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformationInstance.shopInsideViewImageName])}" height="100" style="margin-left: -1%">
+
 
             </div>
         </div>
@@ -124,8 +126,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Map View:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/companyInformation",file: "${companyInformationInstance.mapImageName}")}" height="100" style="margin-left: -1%">
-
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformationInstance.mapImageName])}" height="100" style="margin-left: -1%">
             </div>
         </div>
     </div>
@@ -133,6 +134,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-2">Where we are:</label>
             <div class="col-sm-6">
+
                 <div style="margin-top: 7px;">${companyInformationInstance.descriptionWhereWeAre}</div>
 
 

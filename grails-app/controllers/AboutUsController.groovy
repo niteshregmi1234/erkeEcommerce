@@ -69,12 +69,18 @@ class AboutUsController {
     def updateCoverImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImage")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -88,11 +94,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
@@ -100,12 +107,18 @@ class AboutUsController {
     def updateAboutUs1Image(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs1Image")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -119,11 +132,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
@@ -131,12 +145,18 @@ class AboutUsController {
     def updateAboutUs2Image(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs2Image")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -150,11 +170,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
@@ -162,12 +183,18 @@ class AboutUsController {
     def updateAboutUs3Image(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs3Image")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -181,11 +208,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
@@ -193,12 +221,18 @@ class AboutUsController {
     def updateAboutUs4Image(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs4Image")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -212,11 +246,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
@@ -224,12 +259,18 @@ class AboutUsController {
     def updateQuoteLeftImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("quoteLeftImage")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -243,11 +284,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
@@ -255,12 +297,18 @@ class AboutUsController {
     def updateQuoteRightImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("quoteRightImage")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -274,11 +322,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
@@ -286,12 +335,18 @@ class AboutUsController {
     def updateVideoDescriptionImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("videoDescrptionImage")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -305,11 +360,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
@@ -317,12 +373,18 @@ class AboutUsController {
     def updateSpecialProductSubCategoryImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialProductSubCategoryImage")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -336,11 +398,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
@@ -348,12 +411,18 @@ class AboutUsController {
     def updateBackgroundImage(String imageNameOld) {
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backgroundImage")
-        if (file.size > 0) {
-            File fileOld = new File("web-app/images/otherStuffs/${imageNameOld}")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+            print"yes"
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
-            boolean check = new File("web-app/images/otherStuffs", fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -367,11 +436,12 @@ class AboutUsController {
                     continue abc
                 }
             }
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/otherStuffs/${fileName}")
-            file.transferTo(new File(realFilePath))
-            def imageName = fileName
-            return imageName
-        } else {
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }
+        else{
             return imageNameOld
         }
     }
