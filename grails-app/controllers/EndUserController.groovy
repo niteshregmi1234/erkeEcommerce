@@ -1,4 +1,3 @@
-import grails.converters.JSON
 class EndUserController {
     def a(){
 def productDetails=Product.list()
