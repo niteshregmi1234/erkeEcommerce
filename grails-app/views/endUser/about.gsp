@@ -17,7 +17,8 @@
         <div class="col-md-12">
             <div id="main-slider">
                 <div class="item coverUp">
-                    <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.coverImage}")}" alt="" class="img-responsive">
+                    <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.coverImage])}" class="img-responsive">
+
                 </div>
             </div>
             <!-- /#main-slider -->
@@ -44,7 +45,8 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="imgwrapper">
-                        <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.aboutUs1Image}")}" width="321" height="215">
+                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs1Image])}" width="321" height="215" class="img-responsive">
+
 
 
                     </div>
@@ -52,7 +54,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="imgwrapper">
-                        <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.aboutUs1Image}")}" width="321" height="215">
+                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs2Image])}" width="321" height="215" class="img-responsive">
 
 
                     </div>
@@ -62,15 +64,15 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="imgwrapper">
-                        <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.aboutUs1Image}")}" width="321" height="215">
 
+                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs3Image])}" width="321" height="215" class="img-responsive">
 
                     </div>
 
                 </div>
                 <div class="col-sm-6">
                     <div class="imgwrapper">
-                        <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.aboutUs1Image}")}" width="321" height="215">
+                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs4Image])}" width="321" height="215" class="img-responsive">
 
 
                     </div>
@@ -101,7 +103,7 @@
             <div class="row">
                 <div class="col-sm-5 quote1">
                     <div class="imgwrapper quote">
-                        <img class="img-responsive about-img" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.quoteLeftImage}")}">
+                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.quoteLeftImage])}" class="img-responsive about-img">
 
 
                     </div>
@@ -119,7 +121,7 @@
                 </div>
                 <div class="col-sm-5">
                     <div class="imgwrapper quote">
-                        <img class="img-responsive about-img" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.quoteRightImage}")}">
+                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.quoteRightImage])}" class="img-responsive about-img">
 
 
                     </div>
@@ -157,7 +159,7 @@
 
                 <div class="col-sm-6">
                     <div class="imgwrapper">
-                        <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.videoDescrptionImage}")}" width="645" height="431">
+                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.videoDescrptionImage])}" class="img-responsive" width="645" height="431">
 
 
                     </div>
@@ -181,20 +183,20 @@
                                 <div class="flipper">
                                     <div class="front product">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">
-                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive product-img">
+                                            <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
 
                                         </g:link>
                                     </div>
                                     <div class="back product">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">
-                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive product-img">
+                                            <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
 
                                         </g:link>
                                     </div>
                                 </div>
                             </div>
                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}" class="invisible product">
-                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive">
+                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive">
 
                             </g:link>
                             <div class="text">
@@ -220,21 +222,21 @@
                                 <div class="flipper">
                                     <div class="front product">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">
-                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive product-img">
+                                                                                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
 
                                         </g:link>
                                     </div>
                                     <div class="back product">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">
 
-                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive product-img">
+                                            <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
 
                                         </g:link>
                                     </div>
                                 </div>
                             </div>
                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}" class="invisible product">
-                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct1.specialImageName}")}" alt="" class="img-responsive">
+                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive">
 
                             </g:link>
                             <div class="text">
@@ -277,20 +279,20 @@
                                 <div class="flipper">
                                     <div class="front product">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">
-                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive product-img">
+                                            <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
 
                                         </g:link>
                                     </div>
                                     <div class="back product">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">
-                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive product-img">
+                                            <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
 
                                         </g:link>
                                     </div>
                                 </div>
                             </div>
                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="invisible product">
-                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive">
+                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive">
 
                             </g:link>
                             <div class="text">
@@ -316,21 +318,21 @@
                                 <div class="flipper">
                                     <div class="front product">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">
-                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive product-img">
+                                            <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
 
                                         </g:link>
                                     </div>
                                     <div class="back product">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">
+                                            <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
 
-                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive product-img">
 
                                         </g:link>
                                     </div>
                                 </div>
                             </div>
                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="invisible product">
-                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${aboutUsInstance.specialProduct2.specialImageName}")}" alt="" class="img-responsive">
+                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive">
 
                             </g:link>
                             <div class="text">
@@ -372,7 +374,7 @@
         </div>
         <div class="col-md-12" data-animate="fadeInUp">
             <div class="imgwrapper">
-                <img class="img-responsive" src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.specialProductSubCategoryImage}")}">
+                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProductSubCategoryImage])}" class="img-responsive">
 
 
             </div>
@@ -383,7 +385,7 @@
     <div class="container">
         <div class="col-md-12 " >
 
-            <div class="agilenwew3lsfashions about-background">
+            <div class="agilenwew3lsfashions about-background" style="background-image:url('${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:AboutUs.list()[0].backgroundImage])}')">
 
 
             </div>
@@ -413,18 +415,6 @@
 </style>
 <script>
 
-    window.onload=function () {
-        $.ajax({
-            url: "${createLink(controller:'endUser', action:'fetchAboutUrl',params: ["urlBackground":"urlBackground"])}"
-        }).done(function(fileLocation){
-            $('.agilenwew3lsfashions').css('background-image', 'url(' + fileLocation + ')');
-
-
-
-        });
-
-
-    };
 
 </script>
 

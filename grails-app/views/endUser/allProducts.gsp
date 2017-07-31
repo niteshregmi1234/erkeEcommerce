@@ -221,20 +221,20 @@
                                     <div class="flipper">
                                         <div class="front product">
                                             <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                         <div class="back product">
                                             <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible product">
-                                    <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+                                    <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                 </g:link>
                                 <div class="text">
@@ -268,21 +268,21 @@
                                     <div class="flipper">
                                         <div class="front product">
                                             <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                         <div class="back product">
                                             <g:link action="singleProduct" controller="endUser" id="${list.id}">
 
-                                                <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible product">
-                                    <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.specialImageName}")}" alt="" class="img-responsive">
+                                    <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                 </g:link>
                                 <div class="text">

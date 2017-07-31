@@ -419,7 +419,7 @@
     <div class="container">
         <div class="col-md-12">
 
-            <div class="agileinfonewsl">
+            <div class="agileinfonewsl" style="background-image:url('${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:BackgroundImage.list()[1].imageName])}')">
 
 
                 <!-- Popup-Box -->
@@ -431,38 +431,5 @@
 
 </div>    <!-- /.container -->
 
-<script>
-    window.onload=function () {
-        $.ajax({
-            url: "${createLink(controller:'endUser', action:'fetchUrl',params: ["urlBackground":"urlBackground"])}",
-        }).done(function(imageUrl){
-            fileExists(imageUrl);
-        });
-
-    };
-    function fileExists(fileLocation) {
-        var fileLocation1=fileLocation[0];
-        var response = $.ajax({
-            url: fileLocation1,
-            type: 'HEAD',
-            cache:false,
-            async: false
-        }).status;
-        if(response==200) {
-
-            $('.wthreewinter-coll').css('background-image', 'url(' + fileLocation[0] + ')');
-            $('.aitsclearance-sales').css('background-image', 'url(' + fileLocation[2] + ')');
-            $('.agileinfonewsl').css('background-image', 'url(' + fileLocation[4] + ')');
-
-        }
-        else{
-
-            $('.wthreewinter-coll').css('background-image', 'url(' + fileLocation[1] + ')');
-            $('.aitsclearance-sales').css('background-image', 'url(' + fileLocation[3] + ')');
-            $('.agileinfonewsl').css('background-image', 'url(' + fileLocation[5] + ')');
-
-        }
-    }
-</script>
 </body>
 </html>

@@ -25,7 +25,8 @@
 		<div class="col-md-12">
 			<div id="main-slider">
 				<div class="item coverUp">
-					<img src="${resource(dir: "images/companyInformation",file: "${companyInformation.coverImageName}")}" alt="" class="img-responsive">
+					<img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformation.coverImageName])}" class="img-responsive">
+
 				</div>
 			</div>
 			<!-- /#main-slider -->
@@ -56,7 +57,8 @@
 		<div class="col-md-12" data-animate="fadeInUp">
 			<div class="col-md-6">
 				<div class="imgwrapper">
-					<img class="img-responsive" src="${resource(dir: "images/companyInformation",file: "${companyInformation.shopInsideViewImageName}")}">
+					<img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformation.shopInsideViewImageName])}" class="img-responsive">
+
 
 
 				</div>
