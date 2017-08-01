@@ -178,6 +178,8 @@
 }
 .img-texts{
     position: relative;
+    height: 500px;
+    width: 100%;
 }
 .w3lsshoesaits-info{
     position: absolute;
@@ -186,7 +188,7 @@
     left: 10%;
 }
 .height-img{
-    height: 360px;
+    height: 500px;
 }
 .quote img{
     height:600px;
@@ -207,6 +209,9 @@
 .coverUp img {
     height: 520px;
     width: 1138px;
+}
+.about-product{
+    height: 857px;
 }
 @media screen and (max-width:320px){
 
@@ -319,6 +324,12 @@
     .img-texts{
         height: 200px;
     }
+    .about-product{
+        height: 645px;
+    }
+    .text-margin{
+        margin-top: -50px;
+    }
 }
 @media screen and (min-width: 321px) and (max-width:480px){
     .sildeshow1 {
@@ -406,6 +417,9 @@
     }
     .height-img{
         height: 142px;
+    }
+    .about-product {
+        height: 700px;
     }
 }
 @media screen and (min-width:481px) and (max-width: 640px){

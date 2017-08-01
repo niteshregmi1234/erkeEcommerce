@@ -138,7 +138,7 @@
                 <div class="row products" id="myList">
                     <g:if test="${aboutUsInstance.specialProduct1.productDetails==false}">
                         <div class="col-md-6 col-sm-6 a">
-                            <div class="product">
+                            <div class="product about-product">
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front product">
@@ -173,7 +173,7 @@
                     </g:if>
                     <g:if test="${aboutUsInstance.specialProduct1.productDetails.isSale==true}">
                         <div class="col-md-6 col-sm-6">
-                            <div class="product">
+                            <div class="product about-product">
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front product">
@@ -195,7 +195,7 @@
                                     <h3>
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}">${aboutUsInstance.specialProduct1.productColor.colorName+" "+aboutUsInstance.specialProduct1.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct1.productDetails.productName}</g:link>
                                     </h3>
-                                    <p class="price"><del>Rs.${aboutUsInstance.specialProduct1.productDetails.price}</del> Rs.${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}</p>
+                                    <p class="price">Rs.${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}<br><del class="del-price">Rs.${aboutUsInstance.specialProduct1.productDetails.price}</del></p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.id}" class="btn btn-default">View detail</g:link>
                                         <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct1.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -213,7 +213,7 @@
                     </g:if>
                     <g:if test="${aboutUsInstance.specialProduct2.productDetails==false}">
                         <div class="col-md-6 col-sm-6 a">
-                            <div class="product">
+                            <div class="product about-product">
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front product">
@@ -248,7 +248,7 @@
                     </g:if>
                     <g:if test="${aboutUsInstance.specialProduct2.productDetails.isSale==true}">
                         <div class="col-md-6 col-sm-6 a">
-                            <div class="product">
+                            <div class="product about-product">
                                 <div class="flip-container flip-height">
                                     <div class="flipper">
                                         <div class="front product">
@@ -266,11 +266,11 @@
                                 <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="invisible product">
                                     <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive">
                                 </g:link>
-                                <div class="text">
+                                <div class="text text-margin">
                                     <h3>
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}">${aboutUsInstance.specialProduct2.productColor.colorName+" "+aboutUsInstance.specialProduct2.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct2.productDetails.productName}</g:link>
                                     </h3>
-                                    <p class="price"><del>Rs.${aboutUsInstance.specialProduct2.productDetails.price}</del> Rs.${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct2.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}</p>
+                                    <p class="price">Rs.${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct2.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}<br><del class="del-price">Rs.${aboutUsInstance.specialProduct2.productDetails.price}</del></p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.id}" class="btn btn-default">View detail</g:link>
                                         <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct2.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>

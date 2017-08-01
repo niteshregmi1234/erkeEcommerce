@@ -20,9 +20,10 @@
                         <div class="login-panel panel panel-default">
                             <div class="panel-body">
                                 <div class="logo-segment">
-                                    <img src="css/images/logo.png" class="img-responsive logo-login"><center><h2 class="logo-title"> Login</h2></center>
+                                    %{--<img src="css/images/logo.png" class="img-responsive logo-login">--}%
+                                    <center><h2 class="logo-title"> Login</h2></center>
                                 </div>
-                                <form role="form">
+                                <form role="form" class="form-fix">
                                     <div class="form-group">
                                         <label>Username</label>
                                         <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>

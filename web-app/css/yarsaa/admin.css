@@ -12,17 +12,21 @@
     margin-top: 30%;
     max-height: 100%;
     max-width: 100%;
-    margin-bottom: 50%;
-    box-shadow: 0 25px 30px -13px rgba(40, 40, 40, 0.4);
+    margin-bottom: 59% !important;
+    box-shadow: 0 25px 30px -13px rgba(40, 40, 40, 0.4) !important;
+    border-color: transparent !important;
 }
 .logo-segment {
     margin-bottom: 20%;
     margin-left: 40px;
 }
 .logo-title {
-    margin-top: -40px;
+    /*margin-top: -40px;*/
 }
-btn-block {
+.btn-block {
     width: 50%;
     margin-bottom: 20px;
+}
+.form-fix{
+    margin-top: -25px;
 }
