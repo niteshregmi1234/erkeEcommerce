@@ -50,13 +50,13 @@
 }
 .lead1{
     white-space: nowrap;
-    width: 20em;
+    width: 17em;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 .lead2{
     white-space: nowrap;
-    width: 22em;
+    width: 21em;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -94,7 +94,7 @@
 }
 .middle1 {
     position: absolute;
-    top: 25%;
+    top: 10%;
     left: -75px;
     background: rgba(255, 255, 255, 0.22);
     width:50%;
@@ -147,9 +147,13 @@
     height: 360px;
     width: 539px;
 }
-.del-price{
-    font-size: 14px;
+#content .product .text del.del-price{
+    font-size: 12px;
     text-align: center;
+    font-style: italic;
+}
+.sildeshow1{
+    height: 370px;
 }
 .panel-heading a{
     color:#FFFFFF;
@@ -160,6 +164,49 @@
     color:#FFFFFF;
     outline: 0 !important;
     text-decoration: none;
+}
+.w3lsshoesaits-info h3 {
+    font-size: 50px;
+    color: #FFF;
+    text-shadow: 3px 3px #c41228;
+}
+.w3lsshoesaits-info p {
+    width: 50%;
+    line-height: 25px;
+    color: #FFF;
+    margin: 30px auto;
+}
+.img-texts{
+    position: relative;
+}
+.w3lsshoesaits-info{
+    position: absolute;
+    top: 20%;
+    text-align: center;
+    left: 10%;
+}
+.height-img{
+    height: 360px;
+}
+.quote img{
+    height:600px;
+    width: 525px;
+}
+.agilenwew3lsfashions {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-attachment: fixed;
+    padding: 150px 0;
+    text-align: center;
+    color: #FFF;
+}
+.coverUp img {
+    height: 520px;
+    width: 1138px;
 }
 @media screen and (max-width:320px){
 
@@ -181,17 +228,23 @@
     }
     .lead1{
         font-size:10px !important;
-        margin-top: 15%!important;
+        margin-top: -10%!important;
         margin-bottom: -10px!important;
-        width: 0;
     }
     .lead2{
         font-size: 8px!important;
-        width: 0;
     }
     .middle1{
-        top:0%!important;
-        left:75px!important;
+        top: 18% !important;
+        left: 4px !important;
+        height: 75px;
+        width: 100%;
+    }
+    .shop-button{
+        margin-top:0px !important;
+    }
+    .sildeshow1{
+        height: auto;
     }
     .subButton{
         margin-top: -27px!important;
@@ -233,9 +286,48 @@
     .product-height {
         height: 435px;
     }
-
+    .wthreeshop-a a{
+        font-size: 7px;
+    }
+    .wthreeshop-a{
+        margin-top: -20px;
+    }
+    .w3lsshoesaits-info{
+        top: 0px;
+    }
+    .w3lsshoesaits-info h3 {
+        font-size: 16px;
+    }
+    .w3lsshoesaits-info p {
+        line-height: 25px;
+        color: #FFF;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        width: 18em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    a.a-buttonsize{
+        font-size: 10px!important;
+    }
+    .height-img{
+        height: 200px;
+    }
+    .img-texts{
+        height: 200px;
+    }
 }
 @media screen and (min-width: 321px) and (max-width:480px){
+    .sildeshow1 {
+        height: 120px;
+    }
+    .wthreeshop-a a{
+        padding: 0 !important;
+        font-size:14px;
+    }
     .box-height{
         height: 425px;
     }
@@ -244,7 +336,7 @@
     }
     .lead1{
         font-size:10px !important;
-        margin-top: 15%!important;
+        margin-top: -8%!important;
         margin-bottom: -10px!important;
     }
     .lead2{
@@ -252,7 +344,11 @@
     }
     .middle1{
         top:2%!important;
-        left:51px!important;
+        left:15px!important;
+        width: 100%;
+    }
+    .wthreeshop-a{
+        margin-top: 0px;
     }
     .subButton{
         margin-top: -27px!important;
@@ -283,6 +379,33 @@
     }
     .height-same{
         height: 450px;
+    }
+    .wthreeshop-a{
+        margin-top: -20px;
+    }
+    .w3lsshoesaits-info{
+        top: 0;
+    }
+    .w3lsshoesaits-info h3 {
+        font-size: 16px;
+    }
+    .w3lsshoesaits-info p {
+        line-height: 25px;
+        color: #FFF;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        width: 18em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    a.a-buttonsize{
+        font-size: 10px!important;
+    }
+    .height-img{
+        height: 142px;
     }
 }
 @media screen and (min-width:481px) and (max-width: 640px){
@@ -322,6 +445,12 @@
     .food1 img {
         height: 300px!important;
     }
+    .height-img{
+        height: 306px;
+    }
+    .w3lsshoesaits-info{
+        top: 10%;
+    }
 
 }
 @media screen and (min-width: 641px) and (max-width: 768px) {
@@ -340,6 +469,16 @@
         width: 22em;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+    .middle1{
+        left:0;
+        width: 100%;
+    }
+    .sildeshow1 {
+        height: 240px;
+    }
+    .height-img{
+        height: 365px;
     }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
