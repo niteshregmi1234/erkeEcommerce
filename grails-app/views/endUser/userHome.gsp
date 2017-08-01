@@ -103,7 +103,7 @@
                             <div class="flipper">
                                 <div class="front food1">
                                     <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive ">
 
 
                                     </g:link>
