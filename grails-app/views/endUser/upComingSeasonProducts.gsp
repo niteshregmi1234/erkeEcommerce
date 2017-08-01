@@ -29,6 +29,8 @@
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
+                <li>season</li>
+
                 <li>${seasonInstance.seasonName}</li>
             </ul>
 

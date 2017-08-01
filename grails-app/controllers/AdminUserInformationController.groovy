@@ -2,5 +2,5 @@
 
 class AdminUserInformationController {
 
-    def index() {}
+    def adminLogin() {}
 }

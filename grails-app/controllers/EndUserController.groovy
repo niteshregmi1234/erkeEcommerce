@@ -23,8 +23,12 @@ def productDetails=Product.list()
     }
 def contact(){
     try {
+if(CompanyInformation.list()[0]){
+[companyInformation:CompanyInformation.list()[0]]  }
+    else{
+    redirect(action: "notfound",controller: "errorPage")
 
-[companyInformation:CompanyInformation.list()[0]]    }
+}}
 catch (Exception e){
     redirect(action: "notfound",controller: "errorPage")
 
@@ -134,28 +138,42 @@ catch (Exception e){
         }
     }
 
-    def specialBrandProducts(Long id) {
-        if (id != null) {
-            def productDetailsList = ProductDetails.findAllByProductBrand(SpecialBrand.get(id).productBrand)
-            List<Product> productList = new ArrayList<>()
-            for (ProductDetails productDetails : productDetailsList) {
-                def product = Product.findByProductDetails(productDetails)
-                if (product) {
-                    productList.add(product)
+    def specialBrandProducts() {
+        try{
+            if(SpecialBrand.list()[0].productBrand) {
+                def productDetailsList = ProductDetails.findAllByProductBrand(SpecialBrand.list()[0].productBrand)
+                List<Product> productList = new ArrayList<>()
+                for (ProductDetails productDetails : productDetailsList) {
+                    def product = Product.findByProductDetails(productDetails)
+                    if (product) {
+                        productList.add(product)
+                    }
                 }
+                Collections.shuffle(productList)
+                render(view: "specialBrandProducts", model: [productList: productList, specialBrandInstance: SpecialBrand.list()[0].productBrand])
             }
-            Collections.shuffle(productList)
-            render(view: "specialBrandProducts", model: [productList: productList, specialBrandInstance: SpecialBrand.get(id)])
+            else{
+                redirect(action: "notfound",controller: "errorPage")
 
-        } else {
-            render "error"
+            }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
         }
+
     }
 
     def upcomingSeasonProducts() {
         try{
+            if(SeasonManagement.list()[0].seasons){
             def productList = Product.findAllBySeasons(SeasonManagement.list()[0].seasons)
+                Collections.shuffle(productList)
             render(view: "upComingSeasonProducts", model: [productList: productList, seasonInstance: SeasonManagement.list()[0].seasons])
+        }
+            else{
+                redirect(action: "notfound",controller: "errorPage")
+
+            }
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
@@ -167,7 +185,13 @@ catch (Exception e){
 def about(){
     try{
     def aboutUsInstance = AboutUs.list()[0]
+        if(aboutUsInstance){
     [aboutUsInstance: aboutUsInstance]}
+        else{
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+    }
     catch (Exception e){
         redirect(action: "notfound",controller: "errorPage")
 

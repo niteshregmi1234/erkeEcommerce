@@ -1,585 +1,375 @@
-<!--
-	Author: W3layouts
-	Author URL: http://w3layouts.com
-	License: Creative Commons Attribution 3.0 Unported
-	License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
-<html lang="zxx">
-<!-- Head -->
+<html lang="en">
+
 <head>
-    <title>Yamsaa</title>
 
-    <!-- Meta-Tags -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="keywords" content="Groovy Apparel a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
-    <!-- //Meta-Tags -->
-    <!-- //Font-Awesome-File-Links -->
-    <meta name="layout" content="endUserYamsaa">
+    <meta name="layout" content="userYarsaa">
+
 </head>
-<!-- //Head -->
 
-
-
-<!-- Body -->
 <body>
+<!-- *** TOPBAR ***
+ _________________________________________________________ -->
+
+<!-- *** TOP BAR END *** -->
+
+<!-- *** NAVBAR ***
+ _________________________________________________________ -->
+
+<!-- /#navbar -->
+
+<!-- *** NAVBAR END *** -->
 
 
+<div id="content">
 
-<!-- Header -->
-<!-- //Header -->
-
-<div class="agileheader-banner">
-    <img src="${resource(dir: "images/otherStuffs",file: "${specialBrandInstance.brandMainImageName}")}" width="1291" height="379">
-
-</div>
-
-
-<!-- Heading -->
-<h1 class="w3wthreeheadingaits">${specialBrandInstance.productBrand.brandName}</h1>
-<!-- //Heading -->
-
-
-
-<!-- Men's-Product-Display -->
-<div class="wthreeproductdisplay">
-    <div id="cbp-pgcontainer" class="cbp-pgcontainer">
-        <ul class="cbp-pggrid">
-            <g:each in="${productList}" var="list">
-                <li class="wthree aits w3l">
-                    <div class="cbp-pgcontent" id="men-8">
-                        <span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>
-                        <a href="mens_single.html">
-                            <div class="cbp-pgitem a3ls">
-                                <div class="cbp-pgitem-flip">
-                                    <g:link action="singleProduct" id="${list.id}" controller="endUser">
-                                        <img src="${resource(dir: "images/allProducts/frontImage",file: "${list.frontImageName}")}" height="276.217" width="276.217">
-
-                                        <img src="${resource(dir: "images/allProducts/backImage",file: "${list.backImageName}")}" height="276.217" width="276.217">
-                                    </g:link>
-
-                                </div>
-                            </div>
-                        </a>
-                        <ul class="cbp-pgoptions w3l">
-                            <li class="cbp-pgoptcompare">
-                                <input type="checkbox" name="checkboxG8" id="checkboxG8" class="css-checkbox w3"><label for="checkboxG8" class="css-label"></label>
-                            </li>
-                            <li class="cbp-pgoptfav">
-                                <span>5 <i class="fa fa-star" aria-hidden="true"></i></span>
-                            </li>
-                            <li class="cbp-pgoptsize agile">
-                                <span data-size="XL">XL</span>
-                                <div class="cbp-pgopttooltip">
-                                    <span data-size="XL">XL</span>
-                                    <span data-size="L">L</span>
-                                    <span data-size="M">M</span>
-                                    <span data-size="S">S</span>
-                                </div>
-                            </li>
-                            <li class="cbp-pgoptcart">
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="w3l_item" value="Sweater ">
-                                    <input type="hidden" name="amount" value="25.00">
-                                    <button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-                                    <span class="w3-agile-line"> </span>
-                                    <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                    <a href="mens_single.html">
-                        <div class="cbp-pginfo w3layouts">
-                            <h3>Sweater</h3>
-                            <span class="cbp-pgprice">$25</span>
-                        </div>
-                    </a>
-                </li>
-            </g:each>
-        %{--<li class="wthree aits w3l">--}%
-        %{--<div class="cbp-pgcontent" id="men-8">--}%
-        %{--<span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pgitem a3ls">--}%
-        %{--<div class="cbp-pgitem-flip">--}%
-        %{--<img src="images/2-front.jpg" alt="Groovy Apparel">--}%
-        %{--<img src="images/2-back.jpg" alt="Groovy Apparel">--}%
-        %{--</div>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--<ul class="cbp-pgoptions w3l">--}%
-        %{--<li class="cbp-pgoptcompare">--}%
-        %{--<input type="checkbox" name="checkboxG8" id="checkboxG8" class="css-checkbox w3"><label for="checkboxG8" class="css-label"></label>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptfav">--}%
-        %{--<span>5 <i class="fa fa-star" aria-hidden="true"></i></span>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptsize agile">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<div class="cbp-pgopttooltip">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<span data-size="L">L</span>--}%
-        %{--<span data-size="M">M</span>--}%
-        %{--<span data-size="S">S</span>--}%
-        %{--</div>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptcart">--}%
-        %{--<form action="#" method="post">--}%
-        %{--<input type="hidden" name="cmd" value="_cart">--}%
-        %{--<input type="hidden" name="add" value="1"> --}%
-        %{--<input type="hidden" name="w3l_item" value="Grey T-Shirt "> --}%
-        %{--<input type="hidden" name="amount" value="15.00"> --}%
-        %{--<button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>--}%
-        %{--<span class="w3-agile-line"> </span>--}%
-        %{--<a href="#" data-toggle="modal" data-target="#myModal1"></a>--}%
-        %{--</form>--}%
-        %{--</li>--}%
-        %{--</ul>--}%
-        %{--</div>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pginfo w3layouts">--}%
-        %{--<h3>Grey T-Shirt</h3>--}%
-        %{--<span class="cbp-pgprice">$15</span>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--</li>--}%
-        %{--<li class="wthree aits w3l">--}%
-        %{--<div class="cbp-pgcontent" id="men-8">--}%
-        %{--<span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pgitem a3ls">--}%
-        %{--<div class="cbp-pgitem-flip">--}%
-        %{--<img src="images/3-front.jpg" alt="Groovy Apparel">--}%
-        %{--<img src="images/3-back.jpg" alt="Groovy Apparel">--}%
-        %{--</div>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--<ul class="cbp-pgoptions w3l">--}%
-        %{--<li class="cbp-pgoptcompare">--}%
-        %{--<input type="checkbox" name="checkboxG8" id="checkboxG8" class="css-checkbox w3"><label for="checkboxG8" class="css-label"></label>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptfav">--}%
-        %{--<span>5 <i class="fa fa-star" aria-hidden="true"></i></span>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptsize agile">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<div class="cbp-pgopttooltip">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<span data-size="L">L</span>--}%
-        %{--<span data-size="M">M</span>--}%
-        %{--<span data-size="S">S</span>--}%
-        %{--</div>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptcart">--}%
-        %{--<form action="#" method="post">--}%
-        %{--<input type="hidden" name="cmd" value="_cart">--}%
-        %{--<input type="hidden" name="add" value="1"> --}%
-        %{--<input type="hidden" name="w3l_item" value="White T-Shirt "> --}%
-        %{--<input type="hidden" name="amount" value="15.00"> --}%
-        %{--<button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>--}%
-        %{--<span class="w3-agile-line"> </span>--}%
-        %{--<a href="#" data-toggle="modal" data-target="#myModal1"></a>--}%
-        %{--</form>--}%
-        %{--</li>--}%
-        %{--</ul>--}%
-        %{--</div>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pginfo w3layouts">--}%
-        %{--<h3>White T-Shirt</h3>--}%
-        %{--<span class="cbp-pgprice">$15</span>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--</li>--}%
-        %{--<li class="wthree aits w3l">--}%
-        %{--<div class="cbp-pgcontent" id="men-7">--}%
-        %{--<span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pgitem a3ls">--}%
-        %{--<div class="cbp-pgitem-flip">--}%
-        %{--<img src="images/4-front.jpg" alt="Groovy Apparel">--}%
-        %{--<img src="images/4-back.jpg" alt="Groovy Apparel">--}%
-        %{--</div>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--<ul class="cbp-pgoptions w3l">--}%
-        %{--<li class="cbp-pgoptcompare">--}%
-        %{--<input type="checkbox" name="checkboxG7" id="checkboxG7" class="css-checkbox w3"><label for="checkboxG7" class="css-label"></label>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptfav">--}%
-        %{--<span>4.5 <i class="fa fa-star" aria-hidden="true"></i></span>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptsize agile">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<div class="cbp-pgopttooltip">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<span data-size="L">L</span>--}%
-        %{--<span data-size="M">M</span>--}%
-        %{--<span data-size="S">S</span>--}%
-        %{--</div>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptcart">--}%
-        %{--<form action="#" method="post">--}%
-        %{--<input type="hidden" name="cmd" value="_cart">--}%
-        %{--<input type="hidden" name="add" value="1"> --}%
-        %{--<input type="hidden" name="w3l_item" value="Denim Jaket "> --}%
-        %{--<input type="hidden" name="amount" value="15.00"> --}%
-        %{--<button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>--}%
-        %{--<span class="w3-agile-line"> </span>--}%
-        %{--<a href="#" data-toggle="modal" data-target="#myModal1"></a>--}%
-        %{--</form>--}%
-        %{--</li>--}%
-        %{--</ul>--}%
-        %{--</div>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pginfo w3layouts">--}%
-        %{--<h3>Denim Jacket</h3>--}%
-        %{--<span class="cbp-pgprice">$15</span>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--</li>--}%
-        %{--<li class="wthree aits w3l">--}%
-        %{--<div class="cbp-pgcontent" id="men-8">--}%
-        %{--<span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pgitem a3ls">--}%
-        %{--<div class="cbp-pgitem-flip">--}%
-        %{--<img src="images/5-front.jpg" alt="Groovy Apparel">--}%
-        %{--<img src="images/5-back.jpg" alt="Groovy Apparel">--}%
-        %{--</div>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--<ul class="cbp-pgoptions w3l">--}%
-        %{--<li class="cbp-pgoptcompare">--}%
-        %{--<input type="checkbox" name="checkboxG8" id="checkboxG8" class="css-checkbox w3"><label for="checkboxG8" class="css-label"></label>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptfav">--}%
-        %{--<span>5 <i class="fa fa-star" aria-hidden="true"></i></span>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptsize agile">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<div class="cbp-pgopttooltip">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<span data-size="L">L</span>--}%
-        %{--<span data-size="M">M</span>--}%
-        %{--<span data-size="S">S</span>--}%
-        %{--</div>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptcart">--}%
-        %{--<form action="#" method="post">--}%
-        %{--<input type="hidden" name="cmd" value="_cart">--}%
-        %{--<input type="hidden" name="add" value="1"> --}%
-        %{--<input type="hidden" name="w3l_item" value="Blue Jeans "> --}%
-        %{--<input type="hidden" name="amount" value="20.00"> --}%
-        %{--<button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>--}%
-        %{--<span class="w3-agile-line"> </span>--}%
-        %{--<a href="#" data-toggle="modal" data-target="#myModal1"></a>--}%
-        %{--</form>--}%
-        %{--</li>--}%
-        %{--</ul>--}%
-        %{--</div>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pginfo w3layouts">--}%
-        %{--<h3>Blue Jeans</h3>--}%
-        %{--<span class="cbp-pgprice">$20</span>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--</li>--}%
-        %{--<li class="wthree aits w3l">--}%
-        %{--<div class="cbp-pgcontent" id="men-9">--}%
-        %{--<span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pgitem a3ls">--}%
-        %{--<div class="cbp-pgitem-flip">--}%
-        %{--<img src="images/6-front.jpg" alt="Groovy Apparel">--}%
-        %{--<img src="images/6-back.jpg" alt="Groovy Apparel">--}%
-        %{--</div>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--<ul class="cbp-pgoptions w3l">--}%
-        %{--<li class="cbp-pgoptcompare">--}%
-        %{--<input type="checkbox" name="checkboxG9" id="checkboxG9" class="css-checkbox w3"><label for="checkboxG9" class="css-label"></label>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptfav">--}%
-        %{--<span>5 <i class="fa fa-star" aria-hidden="true"></i></span>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptsize agile">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<div class="cbp-pgopttooltip">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<span data-size="L">L</span>--}%
-        %{--<span data-size="M">M</span>--}%
-        %{--<span data-size="S">S</span>--}%
-        %{--</div>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptcart">--}%
-        %{--<form action="#" method="post">--}%
-        %{--<input type="hidden" name="cmd" value="_cart">--}%
-        %{--<input type="hidden" name="add" value="1"> --}%
-        %{--<input type="hidden" name="w3l_item" value="Green Trousers "> --}%
-        %{--<input type="hidden" name="amount" value="18.00"> --}%
-        %{--<button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>--}%
-        %{--<span class="w3-agile-line"> </span>--}%
-        %{--<a href="#" data-toggle="modal" data-target="#myModal1"></a>--}%
-        %{--</form>--}%
-        %{--</li>--}%
-        %{--</ul>--}%
-        %{--</div>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pginfo w3layouts">--}%
-        %{--<h3>Green Trousers</h3>--}%
-        %{--<span class="cbp-pgprice">$18</span>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--</li>--}%
-        %{--<li class="wthree aits w3l">--}%
-        %{--<div class="cbp-pgcontent" id="men-7">--}%
-        %{--<span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pgitem a3ls">--}%
-        %{--<div class="cbp-pgitem-flip">--}%
-        %{--<img src="images/7-front.jpg" alt="Groovy Apparel">--}%
-        %{--<img src="images/7-back.jpg" alt="Groovy Apparel">--}%
-        %{--</div>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--<ul class="cbp-pgoptions w3l">--}%
-        %{--<li class="cbp-pgoptcompare">--}%
-        %{--<input type="checkbox" name="checkboxG7" id="checkboxG7" class="css-checkbox w3"><label for="checkboxG7" class="css-label"></label>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptfav">--}%
-        %{--<span>4.5 <i class="fa fa-star" aria-hidden="true"></i></span>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptsize agile">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<div class="cbp-pgopttooltip">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<span data-size="L">L</span>--}%
-        %{--<span data-size="M">M</span>--}%
-        %{--<span data-size="S">S</span>--}%
-        %{--</div>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptcart">--}%
-        %{--<form action="#" method="post">--}%
-        %{--<input type="hidden" name="cmd" value="_cart">--}%
-        %{--<input type="hidden" name="add" value="1"> --}%
-        %{--<input type="hidden" name="w3l_item" value="Red Shorts "> --}%
-        %{--<input type="hidden" name="amount" value="15.00"> --}%
-        %{--<button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>--}%
-        %{--<span class="w3-agile-line"> </span>--}%
-        %{--<a href="#" data-toggle="modal" data-target="#myModal1"></a>--}%
-        %{--</form>--}%
-        %{--</li>--}%
-        %{--</ul>--}%
-        %{--</div>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pginfo w3layouts">--}%
-        %{--<h3>Red Shorts</h3>--}%
-        %{--<span class="cbp-pgprice">$15</span>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--</li>--}%
-        %{--<li class="wthree aits w3l">--}%
-        %{--<div class="cbp-pgcontent" id="men-8">--}%
-        %{--<span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pgitem a3ls">--}%
-        %{--<div class="cbp-pgitem-flip">--}%
-        %{--<img src="images/8-front.jpg" alt="Groovy Apparel">--}%
-        %{--<img src="images/8-back.jpg" alt="Groovy Apparel">--}%
-        %{--</div>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--<ul class="cbp-pgoptions w3l">--}%
-        %{--<li class="cbp-pgoptcompare">--}%
-        %{--<input type="checkbox" name="checkboxG8" id="checkboxG8" class="css-checkbox w3"><label for="checkboxG8" class="css-label"></label>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptfav">--}%
-        %{--<span>5 <i class="fa fa-star" aria-hidden="true"></i></span>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptsize agile">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<div class="cbp-pgopttooltip">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<span data-size="L">L</span>--}%
-        %{--<span data-size="M">M</span>--}%
-        %{--<span data-size="S">S</span>--}%
-        %{--</div>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptcart">--}%
-        %{--<form action="#" method="post">--}%
-        %{--<input type="hidden" name="cmd" value="_cart">--}%
-        %{--<input type="hidden" name="add" value="1"> --}%
-        %{--<input type="hidden" name="w3l_item" value="Black Jacket "> --}%
-        %{--<input type="hidden" name="amount" value="35.00"> --}%
-        %{--<button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>--}%
-        %{--<span class="w3-agile-line"> </span>--}%
-        %{--<a href="#" data-toggle="modal" data-target="#myModal1"></a>--}%
-        %{--</form>--}%
-        %{--</li>--}%
-        %{--</ul>--}%
-        %{--</div>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pginfo w3layouts">--}%
-        %{--<h3>Black Jacket</h3>--}%
-        %{--<span class="cbp-pgprice">$35</span>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--</li>--}%
-        %{--<li class="wthree aits w3l">--}%
-        %{--<div class="cbp-pgcontent" id="men-7">--}%
-        %{--<span class="cbp-pgrotate"><i class="fa fa-exchange" aria-hidden="true"></i></span>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pgitem a3ls">--}%
-        %{--<div class="cbp-pgitem-flip">--}%
-        %{--<img src="images/4-front.jpg" alt="Groovy Apparel">--}%
-        %{--<img src="images/4-back.jpg" alt="Groovy Apparel">--}%
-        %{--</div>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--<ul class="cbp-pgoptions w3l">--}%
-        %{--<li class="cbp-pgoptcompare">--}%
-        %{--<input type="checkbox" name="checkboxG7" id="checkboxG7" class="css-checkbox w3"><label for="checkboxG7" class="css-label"></label>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptfav">--}%
-        %{--<span>4.5 <i class="fa fa-star" aria-hidden="true"></i></span>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptsize agile">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<div class="cbp-pgopttooltip">--}%
-        %{--<span data-size="XL">XL</span>--}%
-        %{--<span data-size="L">L</span>--}%
-        %{--<span data-size="M">M</span>--}%
-        %{--<span data-size="S">S</span>--}%
-        %{--</div>--}%
-        %{--</li>--}%
-        %{--<li class="cbp-pgoptcart">--}%
-        %{--<form action="#" method="post">--}%
-        %{--<input type="hidden" name="cmd" value="_cart">--}%
-        %{--<input type="hidden" name="add" value="1"> --}%
-        %{--<input type="hidden" name="w3l_item" value="Denim Jaket "> --}%
-        %{--<input type="hidden" name="amount" value="15.00"> --}%
-        %{--<button type="submit" class="w3l-cart pw3l-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>--}%
-        %{--<span class="w3-agile-line"> </span>--}%
-        %{--<a href="#" data-toggle="modal" data-target="#myModal1"></a>--}%
-        %{--</form>--}%
-        %{--</li>--}%
-        %{--</ul>--}%
-        %{--</div>--}%
-        %{--<a href="mens_single.html">--}%
-        %{--<div class="cbp-pginfo w3layouts">--}%
-        %{--<h3>Denim Jacket</h3>--}%
-        %{--<span class="cbp-pgprice">$15</span>--}%
-        %{--</div>--}%
-        %{--</a>--}%
-        %{--</li>--}%
-        </ul>
-    </div>
-</div>
-<!-- //Men's-Product-Display -->
-
-
-
-<!-- Newsletter -->
-<div class="w3lsnewsletter" id="w3lsnewsletter">
     <div class="container">
-        <div class="w3lsnewsletter-grids">
-            <div class="col-md-5 w3lsnewsletter-grid w3lsnewsletter-grid-1 subscribe">
-                <h2>Subscribe to our Newsletter</h2>
+
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li><g:link action="userHome" controller="endUser">Home</g:link>
+                </li>
+                <li>Brand</li>
+
+                <li>${specialBrandInstance.brandName}</li>
+            </ul>
+
+
+
+            <div class="box b">
+                <h1>${specialBrandInstance.brandName}</h1>
+                <p>Most sold brand in Yarsaa.</p>
             </div>
-            <div class="col-md-7 w3lsnewsletter-grid w3lsnewsletter-grid-2 email-form">
-                <form action="#" method="post">
-                    <input class="email" type="email" name="Email" placeholder="Email Address" required="">
-                    <input type="submit" class="submit" value="SUBSCRIBE">
-                </form>
+
+            %{--<div class="box info-bar">--}%
+            %{--<div class="row">--}%
+            %{--<div class="col-sm-12 col-md-4 products-showing">--}%
+            %{--Showing <strong>12</strong> of <strong>${productList.size()}</strong> products--}%
+            %{--</div>--}%
+
+            %{--<div class="col-sm-12 col-md-8  products-number-sort">--}%
+            %{--<div class="row">--}%
+            %{--<form class="form-inline">--}%
+            %{--<div class="col-md-6 col-sm-6">--}%
+            %{--<div class="products-number">--}%
+            %{--<strong>Show</strong>  <a href="#" class="btn btn-default btn-sm btn-primary">12</a>  <a href="#" class="btn btn-default btn-sm">24</a>  <a href="#" class="btn btn-default btn-sm">All</a> products--}%
+            %{--</div>--}%
+            %{--</div>--}%
+            %{--<div class="col-md-6 col-sm-6">--}%
+            %{--<div class="products-sort-by">--}%
+            %{--<strong>Sort by</strong>--}%
+            %{--<select name="sort-by" class="form-control">--}%
+            %{--<option>Price</option>--}%
+            %{--<option>Name</option>--}%
+            %{--<option>Sales first</option>--}%
+            %{--</select>--}%
+            %{--</div>--}%
+            %{--</div>--}%
+            %{--</form>--}%
+            %{--</div>--}%
+            %{--</div>--}%
+            %{--</div>--}%
+            %{--</div>--}%
+
+            <div class="row products" id="myList">
+                <g:each in="${productList}" var="list">
+                    <g:if test="${list.productDetails.isSale==false}">
+                        <div class="col-md-3 col-sm-4 a">
+                            <div class="product">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front product">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+
+                                            </g:link>
+                                        </div>
+                                        <div class="back product">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+
+                                            </g:link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible product">
+                                    <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+                                </g:link>
+                                <div class="text">
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName+" "+list.productColor+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                    <p class="price">Rs.${list.productDetails.price}</p>
+                                    <p class="buttons">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.id}" class="btn btn-default">View detail</g:link>
+                                        <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
+                                    </p>
+                                </div>
+                                <g:if test="${list.isLatest==true}">
+                                    <div class="ribbon new">
+                                        <div class="theribbon">NEW</div>
+                                        <div class="ribbon-background"></div>
+                                    </div>
+                                </g:if>
+
+                            <!-- /.text -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+
+                    </g:if>
+                    <g:if test="${list.productDetails.isSale==true}">
+
+                        <div class="col-md-3 col-sm-4 a">
+                            <div class="product">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front product">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+                                            </g:link>
+                                        </div>
+                                        <div class="back product">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+
+                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+                                            </g:link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible product">
+                                    <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+                                </g:link>
+                                <div class="text">
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                    <p class="price"><del>Rs.${list.productDetails.price}</del> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}</p>
+                                    <p class="buttons">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.id}" class="btn btn-default">View detail</g:link>
+                                        <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    </p>
+                                </div>
+                                <script>
+                                    function checkAddToCart(id){
+                                        var responseValue;
+                                        $.ajax({
+                                            url: "${createLink(controller:'cart', action:'checkAddToCart')}",
+                                            type: "POST",
+                                            data: {id1:id},
+                                            async : false,
+                                            cache:false,
+                                            success: function(result) {
+                                                if(result=="ok"){
+                                                    bootbox.alert({
+                                                        message: "successfully added to cart.",
+                                                        size: 'small',
+                                                        callback: function(){
+                                                            location.reload();
+                                                        }
+
+                                                    });
+                                                    responseValue=false;
+
+                                                }
+                                                else if(result=="notOk"){
+                                                    $('#login-modal').modal('toggle');
+                                                }
+                                            }
+                                        });
+                                        return responseValue;
+
+                                    }
+                                </script>
+                                <!-- /.text -->
+
+                                <div class="ribbon sale">
+                                    <div class="theribbon">SALE</div>
+                                    <div class="ribbon-background"></div>
+                                </div>
+                                <!-- /.ribbon -->
+
+                                %{--<div class="ribbon new">--}%
+                                %{--<div class="theribbon">NEW</div>--}%
+                                %{--<div class="ribbon-background"></div>--}%
+                                %{--</div>--}%
+                                %{--<!-- /.ribbon -->--}%
+
+                                %{--<div class="ribbon gift">--}%
+                                %{--<div class="theribbon">GIFT</div>--}%
+                                %{--<div class="ribbon-background"></div>--}%
+                                %{--</div>--}%
+                                %{--<!-- /.ribbon -->--}%
+                            </div>
+                            <!-- /.product -->
+                        </div>
+                    </g:if>
+                </g:each>
+            <!-- /.col-md-4 -->
             </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-<!-- //Newsletter -->
-
-
-
-<!-- Footer -->
-<!-- //Footer -->
-
-
-
-<!-- Copyright -->
-<!-- //Copyright -->
-<!-- Custom-JavaScript-File-Links -->
-<!-- Default-JavaScript -->
-
-
-
-<!-- Shopping-Cart-JavaScript -->
-<!-- cart-js -->
-<script>
-    w3l.render();
-
-    w3l.cart.on('w3agile_checkout', function (evt) {
-        var items, len, i;
-
-        if (this.subtotal() > 0) {
-            items = this.items();
-
-            for (i = 0, len = items.length; i < len; i++) {
+            <style>
+            .product img{
+                height:338px;
+                width:251px;
             }
-        }
-    });
-</script>
-<!-- //cart-js -->
+            </style>
+            <!-- /.products -->
+            <div class="pages">
 
-<!-- Shopping-Cart-JavaScript -->
+                <p class="loadMore">
+                    <a class="btn btn-primary btn-lg" id="loadMore"><i class="fa fa-chevron-down"></i> Load more</a>
+                </p>
+                <p class="loadLess">
+                    <a class="btn btn-primary btn-lg" id="showLess"><i class="fa fa-chevron-up"></i> Show less</a>
+                </p>
 
-<!-- Dropdown-Menu-JavaScript -->
-<script>
-    $(document).ready(function(){
-        $(".dropdown").hover(
-                function() {
-                    $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-                    $(this).toggleClass('open');
-                },
-                function() {
-                    $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-                    $(this).toggleClass('open');
+                <script>
+                    $(document).ready(function () {
+                        var size_li = $("#myList .a").size();
+                        var x=6;
+                        var c;
+                        var b=6;
+                        var a=0;
+                        if($("#myList .a").size()<=6){
+                            $("#loadMore").hide();
+
+                        }
+                        $('#myList .a:lt('+x+')').show();
+                        $('#loadMore').click(function () {
+                            $('html, body').animate({
+                                scrollTop: $(".loadMore").offset().top
+                            }, 2000);
+                            x= (x+3 <= size_li) ? x+3 : size_li;
+                            $('#myList .a:lt('+x+')').show();
+                            a=a+1;
+                            b=b+3;
+                            c=6+(3*a);
+                            if(b>=size_li){
+                                $("#loadMore").hide();
+
+                            }
+                            if(a>0){
+                                $("#showLess").show();
+                            }
+
+                        });
+                        $('#showLess').click(function () {
+
+                            if(c==x+2){
+                                x=(x-1<0) ? 6 : x-1;
+                                $('#myList .a').not(':lt('+x+')').hide();
+                                c=x;
+                            }
+                            else if(c==x+1){
+                                x=(x-2<0) ? 6 : x-2;
+                                $('#myList .a').not(':lt('+x+')').hide();
+                                c=x;
+                            }
+                            else{
+                                x=(x-3<0) ? 6 : x-3;
+                                $('#myList .a').not(':lt('+x+')').hide();
+                            }
+                            a=a-1;
+                            b=b-3;
+
+                            if(a==0){
+                                $("#showLess").hide();
+                            }
+                            if(b<size_li){
+                                $("#loadMore").show();
+
+                            }
+
+                            $('html, body').animate({
+                                scrollTop: $(".a").offset().top
+                            }, 2000);
+
+                        });
+                        $("#showLess").hide();
+
+                        $('html, body').animate({
+                            scrollTop: $(".b").offset().top
+                        }, 2000);
+                    });
+                </script>
+                <style>
+                #myList .a{ display:none;
                 }
-        );
-    });
-</script>
-<!-- //Dropdown-Menu-JavaScript -->
+                /*#loadMore {*/
+                /*color:green;*/
+                /*cursor:pointer;*/
+                /*}*/
+                /*#loadMore:hover {*/
+                /*color:black;*/
+                /*}*/
+                /*#showLess {*/
+                /*color:red;*/
+                /*cursor:pointer;*/
+                /*}*/
+                /*#showLess:hover {*/
+                /*color:black;*/
+                /*}*/
+                </style>
 
-<!-- Popup-Box-JavaScript -->
-<script>
-    $(document).ready(function() {
-        $('.popup-with-zoom-anim').magnificPopup({
-            type: 'inline',
-            fixedContentPos: false,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            closeBtnInside: true,
-            preloader: false,
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-zoom-in'
-        });
-    });
-</script>
-<!-- //Popup-Box-JavaScript -->
+                %{--<ul class="pagination">--}%
+                %{--<li><a href="#">&laquo;</a>--}%
+                %{--</li>--}%
+                %{--<li class="active"><a href="#">1</a>--}%
+                %{--</li>--}%
+                %{--<li><a href="#">2</a>--}%
+                %{--</li>--}%
+                %{--<li><a href="#">3</a>--}%
+                %{--</li>--}%
+                %{--<li><a href="#">4</a>--}%
+                %{--</li>--}%
+                %{--<li><a href="#">5</a>--}%
+                %{--</li>--}%
+                %{--<li><a href="#">&raquo;</a>--}%
+                %{--</li>--}%
+                %{--</ul>--}%
+            </div>
 
-<script>
-    var shop = new cbpShop( document.getElementById( 'cbp-pgcontainer' ) );
-</script>
 
-<!-- //Custom-JavaScript-File-Links -->
+
+
+            <!-- /.col-md-9 -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /#content -->
+</div>
+
+<!-- *** FOOTER ***
+ _________________________________________________________ -->
+<!-- /#footer -->
+
+<!-- *** FOOTER END *** -->
+
+
+
+
+<!-- *** COPYRIGHT ***
+ _________________________________________________________ -->
+<!-- *** COPYRIGHT END *** -->
+
+
+
+<!-- /#all -->
+
+
+
+
+<!-- *** SCRIPTS TO INCLUDE ***
+ _________________________________________________________ -->
+
+
+
 
 
 </body>
-<!-- //Body -->
-
-
 
 </html>

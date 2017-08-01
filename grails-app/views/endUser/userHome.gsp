@@ -331,7 +331,7 @@
                         <div class="middle">
                             <div class="text1">
                                 <h5>aaaaaaaaa</h5>
-                                <div class="wthreeshop-a shop-button"><a href="#">Shop Now</a>
+                                <div class="wthreeshop-a shop-button"><g:link action="specialBrandProducts" controller="endUser">Shop Now</g:link>
                                 </div>
                             </div>
                         </div>
