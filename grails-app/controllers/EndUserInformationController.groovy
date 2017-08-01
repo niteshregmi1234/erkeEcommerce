@@ -7,6 +7,20 @@ class EndUserInformationController {
     def register() {
 
     }
+    def logout(){
+        try{
+        if(session.endUser){
+        session.endUser=null
+            render "logoutSuccess"
+        }
+        else{
+            render "logoutUnSuccess"
+        }
+        }
+        catch (Exception e){
+
+        }
+    }
 
     def save() {
         try{
@@ -20,6 +34,7 @@ class EndUserInformationController {
         endUserInformationInstance.password = endUserInformationService.encryptedPassword(params.password)
         if (endUserInformationInstance.validate()) {
             endUserInformationInstance.save(flush: true)
+            flash.message1="you are successfully registered"
             redirect(action: "register")
         } else {
             flash.message = "Please don't enter already used email "
@@ -31,6 +46,7 @@ class EndUserInformationController {
     }
 
     def login() {
+        flash.message="successfully logged in."
 redirect(action: "allProducts",controller: "endUser")
 
     }

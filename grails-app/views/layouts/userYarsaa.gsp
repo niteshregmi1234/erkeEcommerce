@@ -81,13 +81,12 @@
             $('.menu2').removeClass('fixed');
         }
     });
-</script>
 
+</script>
 
 </head>
 
 <body>
-
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
 <div id="top">
@@ -99,10 +98,10 @@
             <ul class="menu">
                 <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
                 </li>
-                %{--<g:if test="${session.endUser}">--}%
-                %{--<li><a href="#" onclick="logoutUser();">Logout</a>--}%
-                %{--</li>--}%
-                %{--</g:if>--}%
+                <g:if test="${session.endUser}">
+                <li><a href="#" onclick="logoutUser();">Logout</a>
+                </li>
+                </g:if>
                 <li><g:link action="register" controller="endUserInformation">Register</g:link>
                 </li>
                 <li><g:link action="contact" controller="endUser">Contact</g:link>
@@ -230,6 +229,39 @@
 
             }
             return responseValue;
+
+        }
+        function logoutUser(){
+            var responseValue;
+            $.ajax({
+                url: "${createLink(controller:'endUserInformation', action:'logout')}",
+//                type : 'POST',
+                async : false,
+                success: function(result) {
+                    if(result=="logoutUnSuccess"){
+                        bootbox.alert({
+                            message: "not logged in to log out.",
+                            size: 'small',
+                            callback: function(){
+                                location.reload();
+                            }
+
+                        });
+                        responseValue=false;
+                    }
+                    else if(result=="logoutSuccess"){
+                        bootbox.alert({
+                            message: "successfully logged out.",
+                            size: 'small',
+                            callback: function(){
+                                location.reload();
+                            }
+
+                        });
+                        responseValue=false;
+                    }
+                }
+            });
 
         }
 

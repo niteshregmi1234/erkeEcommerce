@@ -357,6 +357,22 @@
  _________________________________________________________ -->
 
 
+<g:if test="${flash.message1}">
+    <script>
+        window.addEventListener("load",function(){
+            bootbox.alert({
+                message:"${flash.message1}",
+                size: 'small',
+                callback: function(){
+                    location.reload();
+                }
+
+            });
+
+        });
+
+    </script>
+</g:if>
 
 </body>
 
