@@ -234,7 +234,8 @@
                             <div class="text">
                                 <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
                                 <g:if test="${list.productDetails.isSale==true}">
-                                    <p class="price"><del>Rs.${list.productDetails.price}</del> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}</p>
+                                    <p class="price">Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}
+                                       <br> <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                 </g:if>
                                 <g:if test="${list.productDetails.isSale==false}">
 
@@ -272,7 +273,7 @@
 
         <div class="col-md-12">
 
-            <div class="box slideshow">
+            <div class="box slideshow sildeshow1">
 
                 <div id="thumbnail text-center nomargin">
                     <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:seasonManagementInstance.seasons.imageName])}" class="img-responsive image-nomargin">
@@ -324,13 +325,13 @@
 
             <div id="blog-homepage" class="row">
                 <div class="col-sm-6">
-                    <div class="imgwrapper">
+                    <div class="imgwrapper ">
                         <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:specialBrandInstance?.brandMainImageName])}" class="img-responsive">
 
                         <div class="middle">
                             <div class="text1">
                                 <h5>aaaaaaaaa</h5>
-                                <div class="wthreeshop-a"><a href="#">Shop Now</a>
+                                <div class="wthreeshop-a shop-button"><a href="#">Shop Now</a>
                                 </div>
                             </div>
                         </div>
