@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <meta charset="utf-8">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
@@ -302,7 +303,7 @@
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li><g:link action="userHome" controller="endUser">Home</g:link>
+                <li class="active"><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
                 <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
                 <li class="dropdown yamm-fw">
@@ -371,75 +372,18 @@
                     </ul>
                 </li>
                 </g:each>
-                %{--<li class="dropdown yamm-fw">--}%
-                    %{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Ladies <b class="caret"></b></a>--}%
-                    %{--<ul class="dropdown-menu">--}%
-                        %{--<li>--}%
-                            %{--<div class="yamm-content">--}%
-                                %{--<div class="row">--}%
-                                    %{--<div class="col-sm-3">--}%
-                                        %{--<h5>Clothing</h5>--}%
-                                        %{--<ul>--}%
-                                            %{--<li><a href="category.html">T-shirts</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Shirts</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Pants</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Accessories</a>--}%
-                                            %{--</li>--}%
-                                        %{--</ul>--}%
-                                    %{--</div>--}%
-                                    %{--<div class="col-sm-3">--}%
-                                        %{--<h5>Shoes</h5>--}%
-                                        %{--<ul>--}%
-                                            %{--<li><a href="category.html">Trainers</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Sandals</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Casual</a>--}%
-                                            %{--</li>--}%
-                                        %{--</ul>--}%
-                                    %{--</div>--}%
-                                    %{--<div class="col-sm-3">--}%
-                                        %{--<h5>Accessories</h5>--}%
-                                        %{--<ul>--}%
-                                            %{--<li><a href="category.html">Trainers</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Sandals</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Casual</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Casual</a>--}%
-                                            %{--</li>--}%
-                                        %{--</ul>--}%
-                                        %{--<h5>Looks and trends</h5>--}%
-                                        %{--<ul>--}%
-                                            %{--<li><a href="category.html">Trainers</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Sandals</a>--}%
-                                            %{--</li>--}%
-                                            %{--<li><a href="category.html">Hiking shoes</a>--}%
-                                            %{--</li>--}%
-                                        %{--</ul>--}%
-                                    %{--</div>--}%
-                                %{--</div>--}%
-                            %{--</div>--}%
-                            %{--<!-- /.yamm-content -->--}%
-                        %{--</li>--}%
-                    %{--</ul>--}%
-                %{--</li>--}%
+
                 <li><g:link action="about" controller="endUser">About</g:link></li>
 
             </ul>
 
         </div>
+        <script>
+            $(document).ready(function() {
+                $('li.active').removeClass('active');
+                $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+            });
+        </script>
         <!--/.nav-collapse -->
 
         <div class="navbar-buttons">

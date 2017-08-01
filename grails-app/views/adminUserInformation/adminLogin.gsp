@@ -31,11 +31,6 @@
                                         <label>Password</label>
                                         <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                        </label>
-                                    </div>
                                     <a href="index.html" class="btn btn-lg btn-primary btn-block">Login</a>
                                 </form>
                             </div>
