@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Login</title>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/admin.css')}" type="text/css"
-          media="all"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.css')}" type="text/css"
-          media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/admin.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.css')}" type="text/css" media="all"/>
 
 </head>
 
@@ -20,7 +18,7 @@
                         <div class="login-panel panel panel-default">
                             <div class="panel-body">
                                 <div class="logo-segment">
-                                    <img src="css/images/logo.png" class="img-responsive logo-login"><center><h2 class="logo-title"> Login</h2></center>
+                                    <img src="" class="img-responsive logo-login"><center><h2 class="logo-title"> Login</h2></center>
                                 </div>
                                 <form role="form">
                                     <div class="form-group">
