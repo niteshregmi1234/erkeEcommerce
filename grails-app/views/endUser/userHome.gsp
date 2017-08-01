@@ -330,7 +330,7 @@
                         <div class="middle">
                             <div class="text1">
                                 <h5>aaaaaaaaa</h5>
-                                <div class="wthreeshop-a"><a href="#">Shop Now</a>
+                                <div class="wthreeshop-a"><g:link action="specialBrandProducts" controller="endUser">Shop Now</g:link>
                                 </div>
                             </div>
                         </div>
