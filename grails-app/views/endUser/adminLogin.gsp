@@ -5,7 +5,12 @@
     <title>Admin Login</title>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/admin.css')}" type="text/css" media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.css')}" type="text/css" media="all"/>
-
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.default.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.blue.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.green.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.mono.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.pink.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.violet.css.css')}" type="text/css" media="all"/>
 </head>
 
 <body>

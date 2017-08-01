@@ -33,9 +33,9 @@
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css')}" type="text/css"
           media="all"/>
-<link rel="stylesheet" href="${resource(dir: 'js', file: 'yarsaa/typeahead.css')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'js', file: 'yarsaa/typeahead.css')}" type="text/css"
       media="all"/>
-<link rel="stylesheet" href="${resource(dir: 'js', file: 'yarsaa/typeahead.scss')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'js', file: 'yarsaa/typeahead.scss')}" type="text/css"
       media="all"/>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/respond.min.js')}" type="text/javascript"

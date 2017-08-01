@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Login</title>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/admin.css')}" type="text/css"
-          media="all"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.css')}" type="text/css"
-          media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/admin.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.default.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.blue.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.green.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.mono.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.pink.css.css')}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/style.violet.css.css')}" type="text/css" media="all"/>
 
 </head>
 
@@ -21,7 +25,7 @@
                             <div class="panel-body">
                                 <div class="logo-segment">
                                     %{--<img src="css/images/logo.png" class="img-responsive logo-login">--}%
-                                    <center><h2 class="logo-title"> Login</h2></center>
+                                    <h2 class="logo-title"> Login</h2>
                                 </div>
                                 <form role="form" class="form-fix">
                                     <div class="form-group">
@@ -37,7 +41,7 @@
                                             <input name="remember" type="checkbox" value="Remember Me">Remember Me
                                         </label>
                                     </div>
-                                    <center><a href="index.html" class="btn btn-lg btn-warning btn-block">Login</a><center>
+                                    <a href="index.html" class="btn btn-lg btn-primary btn-block">Login</a>
                                 </form>
                             </div>
                         </div>

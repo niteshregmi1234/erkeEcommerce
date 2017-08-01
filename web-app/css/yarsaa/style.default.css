@@ -41,6 +41,12 @@ h1 {
 #top .offer .btn {
   text-transform: uppercase;
 }
+.login-color{
+  background-color: #4fbfa8;
+}
+.btn-block{
+  background-color: #4fbfa8;
+}
 @media (max-width: 991px) {
   #top .offer {
     margin-bottom: 10px;
