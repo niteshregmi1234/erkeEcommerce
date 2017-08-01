@@ -13,7 +13,7 @@
 
 %{--<div id="all">--}%
 
-    <div id="content bbbb">
+    <div id="content">
     <div class="container">
         <div class="col-md-12">
             <div id="main-slider">
@@ -232,7 +232,7 @@
                     <div class="col-md-4 col-sm-6 a">
                         <div class="product">
                             <div class="flip-container">
-                                <div class="flipper mmmm">
+                                <div class="flipper">
                                     <div class="front product">
                                         <g:link action="singleProduct" controller="endUser" id="${list.id}">
                                             <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
