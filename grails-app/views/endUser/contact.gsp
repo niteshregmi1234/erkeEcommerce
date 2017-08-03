@@ -41,8 +41,7 @@
 	</style>
 
 	<div class="container">
-
-			<div class="col-md-12">
+		<div class="col-md-12">
 				<ul class="breadcrumb">
 					<li><g:link action="userHome" controller="endUser">Home</g:link>
 					</li>
@@ -50,70 +49,63 @@
 				</ul>
 
 			</div>
-
+	</div>
+	<div class="container">
 		<div class="col-md-12">
 			&nbsp;
-</div>
-		<div class="col-md-12" data-animate="fadeInUp">
+		</div>
+	</div>
+	<div class="container">
+		<div data-animate="fadeInUp">
 			<div class="col-md-6">
 				<div class="imgwrapper">
-					<img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformation.shopInsideViewImageName])}" class="img-responsive">
-
-
-
+					<img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformation.shopInsideViewImageName])}" class="img-responsive contact-img">
 				</div>
-
 			</div>
 			<div class="col-md-6">
 				<div class="box" style="height: 393px;">
-<div>
-	&nbsp;
-</div>
-					<h1>Where We Are</h1>
-					<p>${companyInformation.descriptionWhereWeAre}</p>
+					<div>
+						&nbsp;
+					</div>
+						<h1>Where We Are</h1>
+							<p>${companyInformation.descriptionWhereWeAre}</p>
 				</div>
-
-
 			</div>
 		</div>
+	</div>
+	<div class="container">
 		<div class="col-md-12">
 			&nbsp;
-</div>
-			<div class="col-md-12" data-animate="fadeInUp">
-
-
-				<div class="box" id="contact">
-					<h1>Contact</h1>
-
-					<p class="lead">Are you curious about something? Do you have some kind of problem with our products?</p>
-					<p>Please feel free to contact us, our customer service center is working for you 24/7.</p>
-
-					<hr>
-
-					<div class="row">
-						<div class="col-sm-4">
-							<h3><i class="fa fa-map-marker"></i> Address</h3>
-							<p>Something mall
-								<br>${companyInformation.location1}
-								<br>${companyInformation.location2}
-								<br>${companyInformation.location3}
-								<br>
-								<strong>${companyInformation.location4}</strong>
-							</p>
-						</div>
-						<!-- /.col-sm-4 -->
-						<div class="col-sm-4">
-							<h3><i class="fa fa-phone"></i> Call center</h3>
-							<p class="text-muted">This number is toll free if calling from Nepal otherwise we advise you to use the electronic form of communication.</p>
-							<p><strong>${companyInformation.mobileNUmber}/${companyInformation.phoneNumber}</strong>
-
+		</div>
+		<div class="col-md-12" data-animate="fadeInUp">
+			<div class="box" id="contact">
+				<h1>Contact</h1>
+				<p class="lead">Are you curious about something? Do you have some kind of problem with our products?</p>
+				<p>Please feel free to contact us, our customer service center is working for you 24/7.</p>
+				<hr>
+				<div class="row">
+					<div class="col-sm-4">
+						<h3><i class="fa fa-map-marker"></i> Address</h3>
+						<p>Something mall
+							<br>${companyInformation.location1}
+							<br>${companyInformation.location2}
+							<br>${companyInformation.location3}
+							<br>
+							<strong>${companyInformation.location4}</strong>
 						</p>
-						</div>
+					</div>
+					<!-- /.col-sm-4 -->
+					<div class="col-sm-4">
+						<h3><i class="fa fa-phone"></i> Call center</h3>
+						<p class="text-muted">This number is toll free if calling from Nepal otherwise we advise you to use the electronic form of communication.</p>
+						<p><strong>${companyInformation.mobileNUmber}/${companyInformation.phoneNumber}</strong>
+						</p>
+					</div>
 						<!-- /.col-sm-4 -->
 						<div class="col-sm-4">
 							<h3><i class="fa fa-envelope"></i> Electronic support</h3>
 							<p class="text-muted">Please feel free to write an email to us or to use our electronic ticketing system.</p>
-							<ul>
+							<ul class="contact-email">
 								<li><strong><a href="mailto:">${companyInformation.emailAddress}</a></strong>
 								</li>
 							</ul>
@@ -121,16 +113,11 @@
 						<!-- /.col-sm-4 -->
 					</div>
 					<!-- /.row -->
-
 					<hr>
-
 					<div id="map">
-
 					</div>
-
 					<hr>
 					<h2>Contact form</h2>
-
 					<form>
 						<div class="row">
 							<div class="col-sm-6">

@@ -216,6 +216,13 @@
 .food1-img{
     width: 100%;
 }
+.contact-img{
+    width: 100%;
+    height: 390px;
+}
+.contact-email{
+    word-break: break-all;
+}
 @media screen and (max-width:320px){
 
     /*#content {*/
@@ -351,6 +358,9 @@
     .sub-flipperHeight{
         height:225px;
     }
+    .contact-img{
+        height: 240px;
+    }
 }
 @media screen and (min-width: 321px) and (max-width:480px){
     .sildeshow1 {
@@ -442,6 +452,9 @@
     .about-product {
         height: 700px;
     }
+    .contact-img{
+        height: 240px;
+    }
 }
 @media screen and (min-width:481px) and (max-width: 640px){
     .lead1{
@@ -514,6 +527,9 @@
     }
     .height-img{
         height: 365px;
+    }
+    .contact-img{
+        height: 270px;
     }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
