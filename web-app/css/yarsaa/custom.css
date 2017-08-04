@@ -361,6 +361,9 @@
     .contact-img{
         height: 240px;
     }
+    .boxsize-small{
+        margin-top: 30px;
+    }
 }
 @media screen and (min-width: 321px) and (max-width:480px){
     .sildeshow1 {
@@ -455,6 +458,9 @@
     .contact-img{
         height: 240px;
     }
+    .boxsize-small{
+        margin-top: 30px;
+    }
 }
 @media screen and (min-width:481px) and (max-width: 640px){
     .lead1{
@@ -487,7 +493,6 @@
     .coverDown img{
         height: 150px !important;
         width: 420px !important;
-
     }
 
     .food1 img {
@@ -498,6 +503,9 @@
     }
     .w3lsshoesaits-info{
         top: 10%;
+    }
+    .boxsize-small{
+        margin-top: 30px;
     }
 
 }
@@ -530,6 +538,9 @@
     }
     .contact-img{
         height: 270px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
     }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
