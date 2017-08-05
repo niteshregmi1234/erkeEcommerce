@@ -223,6 +223,12 @@
 .contact-email{
     word-break: break-all;
 }
+.name4{
+    width: 32% !important;
+    border-radius: 0px !important;
+    float: left;
+    margin-left: 50px;
+}
 @media screen and (max-width:320px){
 
     /*#content {*/
@@ -364,6 +370,10 @@
     .boxsize-small{
         margin-top: 30px;
     }
+    .name4{
+        width: 55%;
+        margin-bottom: 30px;
+    }
 }
 @media screen and (min-width: 321px) and (max-width:480px){
     .sildeshow1 {
@@ -460,6 +470,13 @@
     }
     .boxsize-small{
         margin-top: 30px;
+    }
+    .name4{
+        width: 47% !important;
+        border-radius: 0px !important;
+        float: left;
+        margin-left: 70px;
+        margin-bottom: 10px;
     }
 }
 @media screen and (min-width:481px) and (max-width: 640px){
