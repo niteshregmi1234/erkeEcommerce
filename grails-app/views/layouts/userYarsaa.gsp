@@ -303,7 +303,7 @@
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li class="active"><g:link action="userHome" controller="endUser">Home</g:link>
+                <li class="active menuBar"><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
                 <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
                 <li class="dropdown yamm-fw">
@@ -373,14 +373,14 @@
                 </li>
                 </g:each>
 
-                <li><g:link action="about" controller="endUser">About</g:link></li>
+                <li class="menuBar"><g:link action="about" controller="endUser">About</g:link></li>
 
             </ul>
 
         </div>
         <script>
             $(document).ready(function() {
-                $('li.active').removeClass('active');
+                $('li.menuBar').removeClass('active');
                 $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
             });
         </script>

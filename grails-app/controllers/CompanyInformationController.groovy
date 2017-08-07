@@ -6,7 +6,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class CompanyInformationController {
-static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImage: 'POST',editshopInsideViewImage: 'POST']
+static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',editLogoImage: 'POST',editshopInsideViewImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){
         try{
@@ -41,8 +41,7 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
         companyInformationInstance.location2=params.location2
         companyInformationInstance.location3=params.location3
         companyInformationInstance.location4=params.location4
-
-        companyInformationInstance.mobileNUmber=params.mobileNumber
+            companyInformationInstance.mobileNUmber=params.mobileNumber
         companyInformationInstance.proprietorName=params.proprietorName
         companyInformationInstance.phoneNumber=params.phoneNumber
         companyInformationInstance.descriptionWhereWeAre=params.descriptionWhereWeAre
@@ -50,13 +49,14 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
         companyInformationInstance.coverImageName=editcoverImage(companyInformationInstance.coverImageName)
         companyInformationInstance.shopInsideViewImageName=editshopInsideViewImage(companyInformationInstance.shopInsideViewImageName)
         companyInformationInstance.mapImageName=editMapImage(companyInformationInstance.mapImageName)
-
-        companyInformationInstance.save(flush: true)
+            companyInformationInstance.save(flush: true)
         redirect(action: "show")}
         else{
+            print "a"
             redirect(action: "notfound",controller: "errorPage")
         }}
         catch (Exception e){
+            print "b"
             redirect(action: "notfound",controller: "errorPage")
 
         }
@@ -138,7 +138,7 @@ static  allowedMethods = [checkPhoto: 'POST',editcoverImage: 'POST',editLogoImag
     }
     def editMapImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("map ImageName")
+        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("mapImageName")
         def homeDir = new File(System.getProperty("user.home"))
         File theDir = new File(homeDir,"yarsaa");
         if (! theDir.exists()){
