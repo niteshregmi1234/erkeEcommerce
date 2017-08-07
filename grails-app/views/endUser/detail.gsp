@@ -247,7 +247,7 @@
                                 </p>
 </g:if>
                                 <g:if test="${session.endUser==null}">
-                                    <h4 class="text-center">You must login first to shop product</h4>
+                                    <h5 class="text-center">You must login first to shop product</h5>
 
 
                                     <p class="text-center buttons">
