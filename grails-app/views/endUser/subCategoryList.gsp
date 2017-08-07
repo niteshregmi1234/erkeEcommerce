@@ -253,6 +253,7 @@
                             </g:link>
                             <div class="text">
                                 <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName+" "+list.productColor+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+
                                 <p class="price">Rs.${list.productDetails.price}</p>
                                 <p class="buttons">
                                     <g:link action="singleProduct" controller="endUser" id="${list.id}" class="btn btn-default">View detail</g:link>
@@ -298,9 +299,11 @@
                                         <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                     </g:link>
+
                                     <div class="text">
                                         <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
-                                        <p class="price"><del>Rs.${list.productDetails.price}</del> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}</p>
+                                        <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
+                                            <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                         <p class="buttons">
                                             <g:link action="singleProduct" controller="endUser" id="${list.id}" class="btn btn-default">View detail</g:link>
                                             <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
