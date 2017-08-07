@@ -251,8 +251,8 @@
 
 
                                     <p class="text-center buttons">
-                                    <a href="#" data-toggle="modal" data-target="#login-modal" class="btn btn-primary" >Login</a>
-                                        <g:link action="register"  controller="endUserInformation" class="btn btn-primary">Register</g:link>
+                                    <a href="#" data-toggle="modal" data-target="#login-modal" class="btn btn-primary" ><i class="fa fa-sign-in"></i> Log in</a>
+                                        <g:link action="register"  controller="endUserInformation" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</g:link>
                                     </p>
                                 </g:if>
 
