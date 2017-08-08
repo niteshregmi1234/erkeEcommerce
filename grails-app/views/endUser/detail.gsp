@@ -482,7 +482,8 @@ return responseValue;
                                 <h3>You may also like these products</h3>
                             </div>
                         </div>
-<g:each in="${relatedProductList}" var="list">
+<g:each in="${relatedProductList}" var="list" status="i">
+    <g:if test="${i<3}">
                         <div class="col-md-3 col-sm-6">
                             <div class="product same-height">
                                 <div class="flip-container">
@@ -510,7 +511,8 @@ return responseValue;
                                 <div class="text">
                                     <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
                                     <g:if test="${list.productDetails.isSale==true}">
-                                        <p class="price"><del>Rs.${list.productDetails.price}</del> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}</p>
+                                        <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
+                                            <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                     </g:if>
                                     <g:if test="${list.productDetails.isSale==false}">
 
@@ -535,6 +537,7 @@ return responseValue;
                             </div>
                             <!-- /.product -->
                         </div>
+    </g:if>
 </g:each>
 
 

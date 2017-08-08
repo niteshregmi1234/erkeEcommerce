@@ -162,6 +162,29 @@ catch (Exception e){
         }
 
     }
+    def specialSubCategory(){
+        try{
+            if(AboutUs.list()[0].specialProductSubCategory) {
+                def productDetailsList = ProductDetails.findAllByProductSubCategory(AboutUs.list()[0].specialProductSubCategory)
+                List<Product> productList = new ArrayList<>()
+                for (ProductDetails productDetails : productDetailsList) {
+                    def product = Product.findByProductDetails(productDetails)
+                    if (product) {
+                        productList.add(product)
+                    }
+                }
+                Collections.shuffle(productList)
+                render(view: "specialSubCategory", model: [productList: productList, specialCategoryInstance: AboutUs.list()[0].specialProductSubCategory])
+            }
+            else{
+                redirect(action: "notfound",controller: "errorPage")
+
+            }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+    }
 
     def upcomingSeasonProducts() {
         try{

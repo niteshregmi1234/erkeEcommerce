@@ -31,14 +31,14 @@
                 </li>
                 <li>Brand</li>
 
-                <li>${specialBrandInstance.brandName}</li>
+                <li>${specialCategoryInstance.subCategoryName}</li>
             </ul>
 
 
 
             <div class="box b">
-                <h1>${specialBrandInstance.brandName}</h1>
-                <p>Most sold brand in Yarsaa.</p>
+                <h1>${specialCategoryInstance.subCategoryName}</h1>
+                <p>Most sold category in Yarsaa.</p>
             </div>
 
             %{--<div class="box info-bar">--}%

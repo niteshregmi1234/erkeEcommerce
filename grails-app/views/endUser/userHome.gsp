@@ -330,8 +330,10 @@
 
                         <div class="middle">
                             <div class="text1">
-                                <h5>aaaaaaaaa</h5>
-                                <div class="wthreeshop-a shop-button"><g:link action="specialBrandProducts" controller="endUser">Shop Now</g:link>
+                                <h3>${specialBrandInstance.productBrand.brandName}</h3>
+                                <p>${specialBrandInstance.descriptionMainImage}</p>
+
+                                <div class="wthreeshop-a shop-button"><g:link action="specialBrandProducts" controller="endUser">SHOP ${specialBrandInstance.productBrand.brandName} COLLECTION</g:link>
                                 </div>
                             </div>
                         </div>
@@ -343,7 +345,9 @@
 
                         <div class="middle">
                             <div class="text1">
-                                <h5>aaaaaaaaa</h5>
+                                <h3>${specialBrandInstance.titleForSub1Image}</h3>
+                                <p>${specialBrandInstance.descriptionSub1Image}</p>
+
                             </div>
                         </div>
                     </div>
@@ -354,7 +358,9 @@
 
                         <div class="middle">
                             <div class="text1">
-                                <h5>aaaaaaaaa</h5>
+                                <h3>${specialBrandInstance.titleForSub2Image}</h3>
+                                <p>${specialBrandInstance.descriptionSub2Image}</p>
+
                             </div>
                         </div>
                     </div>

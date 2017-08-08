@@ -109,8 +109,8 @@
                 <div class="col-sm-6">
                     <div class="box ">
                         <h2>SHOPPING VIDEO</h2>
-                        <p class="box-text">${aboutUsInstance.videoDescription} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo varius vehicula. Mauris porta metus vitae nulla dignissim egestas. Aliquam sed molestie eros, in pharetra purus. Praesent consequat porta viverra. Praesent gravida dapibus condimentum. Vestibulum vel lacus aliquet, laoreet mi eu, tempor est. Quisque volutpat finibus tristique. Duis at nibh eget nulla pretium pretium. Quisque arcu sem, dignissim eu egestas quis, vulputate non mauris.</p>
-                        <p class="box-text">Check out our latest commercial commercial commercial commercialcommercial commercial commercial commercial commercial commercial commercial commercial commercial commercial commercial, teaser and behind the scenes film.</p>
+                        <p class="box-text">${aboutUsInstance.videoDescription}.</p>
+                        <p class="box-text">Watch our commercial videos.</p>
                         <p class="read-more"><a href="#small-dialog4" class="popup-with-zoom-anim btn btn-primary">WATCH NOW</a>
                         </p>
                     </div>
@@ -297,10 +297,10 @@
                 <div class="imgwrapper height-img">
                     <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProductSubCategoryImage])}" class="img-responsive img-texts">
                     <div class="w3lsshoesaits-info">
-                        <h3>SHOES TO DIE FOR</h3>
+                        <h3>${aboutUsInstance.specialProductSubCategory.subCategoryName} TO DIE FOR</h3>
                         <p>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.</p>
                         <div class="wthreeshop-a a-buttonsize">
-                            <a href="womens_accessories.html">SHOP WOMEN'S SHOES</a>
+                            <g:link action="specialSubCategory" controller="endUser">SHOP ${aboutUsInstance.specialProductSubCategory.subCategoryName}</g:link>
                         </div>
                     </div>
                 </div>

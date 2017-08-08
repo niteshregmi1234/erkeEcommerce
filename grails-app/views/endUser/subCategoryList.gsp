@@ -108,50 +108,50 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default sidebar-menu">
+                %{--<div class="panel panel-default sidebar-menu">--}%
 
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Brands </h3>
-                    </div>
+                    %{--<div class="panel-heading">--}%
+                        %{--<h3 class="panel-title">Brands </h3>--}%
+                    %{--</div>--}%
 
-                    <div class="panel-body">
+                    %{--<div class="panel-body">--}%
 
-                        <g:form action="abc" controller="endUser">
-                            <div class="form-group">
-                                <g:each in="${productBrandList}" var="brandList">
-                                <div class="checkbox">
-                                    <label>
-                                        <g:checkBox name="brand" value="${brandList.id}"  />${brandList.brandName}
-                                    </label>
-                                </div>
-                                    </g:each>
-                                                           </div>
+                        %{--<g:form action="abc" controller="endUser">--}%
+                            %{--<div class="form-group">--}%
+                                %{--<g:each in="${productBrandList}" var="brandList">--}%
+                                %{--<div class="checkbox">--}%
+                                    %{--<label>--}%
+                                        %{--<g:checkBox name="brand" value="${brandList.id}"  />${brandList.brandName}--}%
+                                    %{--</label>--}%
+                                %{--</div>--}%
+                                    %{--</g:each>--}%
+                                                           %{--</div>--}%
 
-                            <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                            %{--<button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>--}%
 
-                        </g:form>
+                        %{--</g:form>--}%
 
-                    </div>
-                </div>
+                    %{--</div>--}%
+                %{--</div>--}%
 
-                <div class="panel panel-default sidebar-menu">
+                %{--<div class="panel panel-default sidebar-menu">--}%
 
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Colours</h3>
-                    </div>
+                    %{--<div class="panel-heading">--}%
+                        %{--<h3 class="panel-title">Colours</h3>--}%
+                    %{--</div>--}%
 
-                    <div class="panel-body">
+                    %{--<div class="panel-body">--}%
 
-                        <form>
-                            <div class="form-group">
-                                <g:each in="${productColourList}" var="colourList">
-                                <div class="checkbox">
-                                    <label>
-                                        <g:checkBox name="colour" value="${colourList.id}"/>${colourList.colorName}
+                        %{--<form>--}%
+                            %{--<div class="form-group">--}%
+                                %{--<g:each in="${productColourList}" var="colourList">--}%
+                                %{--<div class="checkbox">--}%
+                                    %{--<label>--}%
+                                        %{--<g:checkBox name="colour" value="${colourList.id}"/>${colourList.colorName}--}%
 
-                                    </label>
-                                </div>
-                                </g:each>
+                                    %{--</label>--}%
+                                %{--</div>--}%
+                                %{--</g:each>--}%
                                 %{--<div class="checkbox">--}%
                                     %{--<label>--}%
                                         %{--<input type="checkbox"> <span class="colour blue"></span> Blue (10)--}%
@@ -172,14 +172,14 @@
                                         %{--<input type="checkbox"> <span class="colour red"></span> Red (10)--}%
                                     %{--</label>--}%
                                 %{--</div>--}%
-                            </div>
+                            %{--</div>--}%
 
-                            <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
+                            %{--<button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>--}%
 
-                        </form>
+                        %{--</form>--}%
 
-                    </div>
-                </div>
+                    %{--</div>--}%
+                %{--</div>--}%
 
                 <!-- *** MENUS AND FILTERS END *** -->
 
