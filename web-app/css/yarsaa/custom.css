@@ -1,5 +1,6 @@
 .food1 img {
     height: 235px;
+    width: 100%;
 }
 
 .wthreeshop-a {
@@ -94,7 +95,7 @@
 }
 .middle1 {
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: -75px;
     background: rgba(255, 255, 255, 0.22);
     width:50%;
@@ -398,8 +399,8 @@
         font-size: 8px!important;
     }
     .middle1{
-        top:2%!important;
-        left:15px!important;
+        top:10%!important;
+        left:10px!important;
         width: 100%;
     }
     .wthreeshop-a{
@@ -435,7 +436,7 @@
     .height-same{
         height: 450px;
     }
-    .wthreeshop-a{
+    .button-a{
         margin-top: -20px;
     }
     .w3lsshoesaits-info{
@@ -477,6 +478,12 @@
         float: left;
         margin-left: 70px;
         margin-bottom: 10px;
+    }
+    .food1 img {
+        height: 300px;
+    }
+    .product-height{
+        height: 430px;
     }
 }
 @media screen and (min-width:481px) and (max-width: 640px){
@@ -544,8 +551,9 @@
         text-overflow: ellipsis;
     }
     .middle1{
-        left:0;
+        left:-240px;
         width: 100%;
+        top: 5%;
     }
     .sildeshow1 {
         height: 240px;
@@ -564,5 +572,12 @@
     .agileinfonewsl {
         width: 100% !important;
         height: 800px !important;
+    }
+    .slideshow1{
+        height: 250px;
+    }
+    .middle1{
+        top:0 !important;
+        left: -65px;
     }
 }

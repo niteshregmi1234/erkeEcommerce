@@ -284,7 +284,7 @@
 
 
                             <p class="text-center lead lead2">${seasonManagementInstance.seasons.descriptionOfSeason}</p>
-                            <div class="wthreeshop-a">
+                            <div class="wthreeshop-a button-a">
                                 <g:link action="upcomingSeasonProducts">${seasonManagementInstance.seasons.askingForShopping}</g:link>
                             </div>
                         </div>
