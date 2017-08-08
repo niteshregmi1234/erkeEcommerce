@@ -26,6 +26,7 @@
 <table border="3px" width="50px">
 <tr>
     <th>Product</th>
+    <th>Size</th>
     <th>Quantity</th>
     <th>Unit price</th>
     <th>Discount</th>
@@ -38,6 +39,7 @@
 
             <td>${list.product.productColor.colorName+" "+list.product.productDetails.productName+" "+list.product.productDetails.productBrand.brandName}
             </td>
+            <td>${list.productSize.sizeName}</td>
             <td>
 ${list.quantity}
 
@@ -52,6 +54,7 @@ ${list.quantity}
 <tr>
 
     <th>Total</th>
+    <th>${""}</th>
     <th>${""}</th>
     <th>${""}</th>
     <th>${""}</th>

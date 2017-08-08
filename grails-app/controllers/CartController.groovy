@@ -34,7 +34,8 @@ static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket:
         def obj= JSON.parse(params.array)
         for(int i=0;i<obj[0].size();i++){
             def id=obj[0][i] as long
-            def cartInstance=Cart.findByEndUserInformationAndProduct(session.endUser,Product.get(id))
+            def sizeId=obj[2][i] as long
+            def cartInstance=Cart.findByEndUserInformationAndProductAndProductSize(session.endUser,Product.get(id),ProductSize.get(sizeId))
     cartInstance.quantity=obj[1][i] as int
             cartInstance.save(flush: true)
             totalPrice=totalPrice+((cartInstance.product.productDetails.price*cartInstance.quantity)-(cartInstance.product.productDetails.discountPercentage*(cartInstance.product.productDetails.price*cartInstance.quantity)/100))
@@ -63,7 +64,7 @@ def totalUnits=[totalPrice,shippingAndHandling,tax,totalPriceTotal]
         try{
         def productInstance=Product.get(params.id)
         if(productInstance){
-        def cartInstanceCheck=Cart.findByEndUserInformationAndProduct(session.endUser,productInstance)
+        def cartInstanceCheck=Cart.findByEndUserInformationAndProductAndProductSize(session.endUser,productInstance,ProductSize.get(params.size))
         if(cartInstanceCheck){
          cartInstanceCheck.quantity=cartInstanceCheck.quantity+1
             cartInstanceCheck.save(flush: true)
@@ -72,7 +73,9 @@ def totalUnits=[totalPrice,shippingAndHandling,tax,totalPriceTotal]
         def cartInstance=new Cart()
         cartInstance.product=productInstance
         cartInstance.quantity=1
-        cartInstance.endUserInformation=session.endUser
+            cartInstance.productSize=ProductSize.get(params.size)
+
+            cartInstance.endUserInformation=session.endUser
         cartInstance.save(flush: true)}
         redirect(action: "cart")
         }}

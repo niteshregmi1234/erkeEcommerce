@@ -235,12 +235,9 @@
                                 <p class="text-center buttons">
                                     <g:form action="addToCart" controller="cart" class="text-center buttons" onsubmit="return ValidShopping();">
                                         <g:hiddenField name="id" value="${productInstance.id}"></g:hiddenField>
-                                        <select class="form-control name4">
-                                            <option>Size</option>
-                                            <option>Small(S)</option>
-                                            <option>Medium(M)</option>
-                                            <option>Large(L)</option>
-                                        </select>
+                                        <g:select class="form-control name4" name="size"
+                                                  from="${ProductSize.findAllByStatusShow(true)}" optionKey="id" optionValue="sizeName"
+                                                  title="select size"/>
                                         <p><button class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</button></p>
                                     </g:form>
                                     %{--<a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>--}%

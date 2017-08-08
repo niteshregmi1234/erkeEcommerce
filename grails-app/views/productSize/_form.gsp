@@ -1,5 +1,4 @@
-
-    <div class="col-lg-12">
+ <div class="col-lg-12">
         <div class="form-group ">
             <label class="control-label col-sm-2" for="sizeName">Size Name:</label>
 

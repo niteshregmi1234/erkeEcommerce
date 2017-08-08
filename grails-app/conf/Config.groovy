@@ -52,7 +52,7 @@ grails {
 
         username = "rockingguyheman.hg1@gmail.com"
 
-        password = "hemanta123..."
+        password = "hem1234...."
 
         props = ["mail.smtp.auth":"true",
 

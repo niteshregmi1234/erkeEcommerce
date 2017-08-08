@@ -75,6 +75,7 @@
                             <thead>
                             <tr>
                                 <th colspan="2">Product</th>
+                                <th>Size</th>
                                 <th>Quantity</th>
                                 <th>Unit price</th>
                                 <th>Discount</th>
@@ -83,7 +84,10 @@
                             </thead>
                             <tbody>
                             <g:each in="${Cart.findAllByEndUserInformation(session.endUser)}" var="list">
-                                <g:hiddenField name="id" value="${list?.product.id}"></g:hiddenField>
+                                <g:hiddenField name="id" value="${list?.product.id}"> </g:hiddenField>
+
+                                <g:hiddenField name="size" value="${list?.productSize.id}"> </g:hiddenField>
+
                                 <tr>
                                     <td><a>
                                         <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.product.specialImageName])}">
@@ -92,6 +96,8 @@
                                     </td>
                                     <td>${list.product.productColor.colorName+" "+list.product.productDetails.productName+" "+list.product.productDetails.productBrand.brandName}
                                     </td>
+                                    <td>${list.productSize.sizeName}</td>
+
                                     <td>
 
                                         <g:field  type="number" name="quantity" value="${list?.quantity}" min="1"  class="form-control quantity"/>
@@ -106,7 +112,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th colspan="5">Total</th>
+                                <th colspan="6">Total</th>
                                 <th colspan="2" class="totalPrice">Rs.${totalPrice}</th>
                             </tr>
                             </tfoot>
@@ -448,6 +454,7 @@
                                 <thead>
                                 <tr>
                                     <th colspan="2">Product</th>
+                                    <th>Size</th>
                                     <th>Quantity</th>
                                     <th>Unit price</th>
                                     <th>Discount</th>
@@ -463,6 +470,8 @@
                                         </td>
                                         <td>${list.product.productColor.colorName+" "+list.product.productDetails.productName+" "+list.product.productDetails.productBrand.brandName}
                                         </td>
+                                        <td>${list.productSize.sizeName}</td>
+
                                         <td>
 ${list.quantity}
                                         </td>
@@ -476,7 +485,7 @@ ${list.quantity}
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th colspan="5">Total</th>
+                                    <th colspan="6">Total</th>
                                     <th id="totalPrice1">Rs.${totalPrice}</th>
                                 </tr>
                                 </tfoot>
@@ -584,17 +593,22 @@ return responseValue
             $(function() {
                 $("#updateBasket").click(function(evt) {
                     var quantity=document.getElementsByName("quantity");
+                    var size=document.getElementsByName("size");
 
                     var id=document.getElementsByName("id");
                     var idList=[];
                     var quantityList=[];
+                    var sizeList=[];
                     for (var i = 0; i < id.length; i++) {
                         idList.push(id[i].value);
                         quantityList.push(quantity[i].value)
+                        sizeList.push(size[i].value)
+
                     }
                     var array = [];
                     array[0] = idList;
                     array[1] = quantityList;
+                    array[2]=sizeList
                     $.ajax({
                         url: "${createLink(controller:'cart', action:'updateBasket')}",
                         global: false,
