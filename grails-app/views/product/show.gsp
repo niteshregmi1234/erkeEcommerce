@@ -39,7 +39,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Front Image:</label>
             <div class="col-sm-6">
-                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.frontImageName])}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.frontImageName])}" height="100" style="margin-left: -1%">
 
 
 
@@ -50,7 +50,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Back Image:</label>
             <div class="col-sm-6">
-                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.backImageName])}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.backImageName])}" height="100" style="margin-left: -1%">
 
 
 
@@ -61,7 +61,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Side Image:</label>
             <div class="col-sm-6">
-                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.sideImageName])}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.sideImageName])}" height="100" style="margin-left: -1%">
 
 
 
@@ -72,7 +72,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Special Image:</label>
             <div class="col-sm-6">
-                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.specialImageName])}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" height="100" style="margin-left: -1%">
 
 
 

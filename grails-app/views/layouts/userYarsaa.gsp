@@ -329,7 +329,7 @@
                                     <div class="col-sm-3">
                                         <div class="banner">
                                             <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.id}">
-                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:categoryList.menuImage1])}" class="img-responsive">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:categoryList.menuImage1])}" class="img-responsive">
 
 
                                             </g:link>
@@ -337,7 +337,7 @@
 
                                         <div class="banner">
                                             <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.id}">
-                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:categoryList.menuImage2])}" class="img-responsive">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:categoryList.menuImage2])}" class="img-responsive">
 
                                             </g:link>
                                         </div>

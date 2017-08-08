@@ -26,7 +26,7 @@
                                     %{--<img src="css/images/logo.png" class="img-responsive logo-login">--}%
                                     <h2 class="logo-title"> Login</h2>
                                 </div>
-                                <form method="POST" action="/adminUserInformation/login" role="form" class="form-fix" id="login">
+                                <form method="POST" action="/login/login" role="form" class="form-fix" id="login">
                                     <small style="color: #a94442;" >${flash.message}</small>
 
                                     <div class="form-group">

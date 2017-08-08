@@ -1,6 +1,6 @@
 import org.springframework.dao.DataIntegrityViolationException
 
-class ProductColorController {
+class ProductColorController extends BaseController{
 static allowedMethods = [save: 'POST']
     def list() {
         try{

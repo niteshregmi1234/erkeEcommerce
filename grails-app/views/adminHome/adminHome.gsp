@@ -13,6 +13,21 @@
     <title>Yamsaa</title>
 </head>
 <body>
+<g:if test="${flash.message}">
+    <script>
+        window.addEventListener("load",function(){
+            bootbox.alert({
+                message:"${flash.message+" "+session.adminUser.firstName}",
+                callback: function(){
+                    location.reload();
+                }
+
+            });
+
+        });
+
+    </script>
+</g:if>
 
 </body>
 </html>

@@ -12,8 +12,8 @@ class UrlMappings {
 //       "/subCategory/$subCategoryId"(controller: "productSubCategory",action: "show")
 
 //        "/login"(controller: 'endUserInformation',action: "login")
-        "/testId/$testId"(controller:"adminHome", action: "show")
-        "/testIdAll/$id3/$id4"(controller:"adminHome", action: "showNow")
+        "/testId/$testId"(controller:"imageRender", action: "show")
+        "/testIdAll/$id3/$id4"(controller:"imageRender", action: "showNow")
         "/"(action: "userHome",controller: "endUser")
 //        "/"(view:"/index")
         "500"(view:'/error')

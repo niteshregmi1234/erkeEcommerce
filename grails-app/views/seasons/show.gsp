@@ -55,7 +55,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Image:</label>
             <div class="col-sm-6">
-                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:seasonsInstance.imageName])}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:seasonsInstance.imageName])}" height="100" style="margin-left: -1%">
 
             </div>
         </div>

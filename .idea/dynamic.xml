@@ -11,6 +11,14 @@
               <option name="myProperties">
                 <set>
                   <DPropertyElement>
+                    <option name="name" value="adminUser" />
+                    <option name="static" value="false" />
+                    <option name="type" value="AdminUserInformation" />
+                    <option name="myType" value="AdminUserInformation" />
+                    <option name="myStatic" value="false" />
+                    <option name="myName" value="adminUser" />
+                  </DPropertyElement>
+                  <DPropertyElement>
                     <option name="name" value="endUser" />
                     <option name="static" value="false" />
                     <option name="type" value="EndUserInformation" />

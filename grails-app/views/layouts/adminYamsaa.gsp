@@ -79,6 +79,8 @@
         </div>
         <ul class="nav navbar-nav">
             <li><g:link action="adminHome" controller="adminHome">Home</g:link></li>
+            <li><g:link action="list" controller="adminUserInformation">Admins</g:link></li>
+
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Set Up<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="list" controller="productCategory">Product Category</g:link></li>
@@ -118,6 +120,7 @@
             </li>
 
 
+            <li><g:link action="logout" controller="logout">Logout</g:link></li>
 
 
         </ul>

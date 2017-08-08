@@ -32,7 +32,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">BackGround Image:</label>
             <div class="col-sm-3">
-                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:backgroundImageInstance.imageName])}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:backgroundImageInstance.imageName])}" height="100" style="margin-left: -1%">
 
 
             </div>

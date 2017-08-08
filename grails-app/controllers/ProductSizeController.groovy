@@ -1,6 +1,6 @@
 import org.springframework.dao.DataIntegrityViolationException
 
-class ProductSizeController {
+class ProductSizeController extends BaseController{
     static allowedMethods = [save: 'POST']
 
     def list() {

@@ -25,7 +25,7 @@
 		<div class="col-md-12">
 			<div id="main-slider">
 				<div class="item coverUp">
-					<img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformation.coverImageName])}" class="img-responsive">
+					<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:companyInformation.coverImageName])}" class="img-responsive">
 
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 		<div data-animate="fadeInUp">
 			<div class="col-md-6">
 				<div class="imgwrapper">
-					<img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:companyInformation.shopInsideViewImageName])}" class="img-responsive contact-img">
+					<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:companyInformation.shopInsideViewImageName])}" class="img-responsive contact-img">
 				</div>
 			</div>
 			<div class="col-md-6">

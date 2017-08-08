@@ -1,6 +1,6 @@
 import org.springframework.dao.DataIntegrityViolationException
 
-class ProductBrandController {
+class ProductBrandController extends BaseController{
 static allowedMethods = [save: 'POST']
     def list() {
         try{

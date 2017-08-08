@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class ProductSubCategoryController {
+class ProductSubCategoryController extends BaseController{
     static allowedMethods = [save: "POST",uploadCoverImage:"POST",editCoverImage: "POST",renderImage: "POST"]
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 

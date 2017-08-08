@@ -86,7 +86,7 @@
                                 <g:hiddenField name="id" value="${list?.product.id}"></g:hiddenField>
                                 <tr>
                                     <td><a>
-                                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.product.specialImageName])}">
+                                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.product.specialImageName])}">
 
                                     </a>
                                     </td>
@@ -152,13 +152,13 @@
                                 <div class="flipper">
                                     <div class="front food1">
                                         <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                            <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                         </g:link>
                                     </div>
                                     <div class="back food1">
                                         <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                            <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
 
                                         </g:link>
@@ -167,7 +167,7 @@
                             </div>
                             <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
 
-                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                             </g:link>
                             <div class="text">

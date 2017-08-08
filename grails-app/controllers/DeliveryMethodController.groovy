@@ -1,6 +1,6 @@
 import org.springframework.dao.DataIntegrityViolationException
 
-class DeliveryMethodController {
+class DeliveryMethodController extends BaseController{
 static  allowedMethods = [save: 'POST']
     def list() {
         try{

@@ -5,7 +5,7 @@ import java.awt.Image
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class CompanyInformationController {
+class CompanyInformationController extends BaseController{
 static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',editLogoImage: 'POST',editshopInsideViewImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){

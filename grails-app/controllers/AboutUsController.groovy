@@ -6,7 +6,7 @@ import java.awt.Image
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class AboutUsController {
+class AboutUsController extends BaseController {
     static allowedMethods = [checkPhoto: 'POST', save: 'POST', updateAboutUs1Image: 'POST', updateAboutUs2Image: 'POST', updateAboutUs3Image: 'POST', updateAboutUs4Image: 'POST', updateBackgroundImage: 'POST', updateCoverImage: 'POST', updateQuoteLeftImage: 'POST', updateQuoteRightImage: 'POST', updateSpecialProductSubCategoryImage: 'POST', updateVideoDescriptionImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 

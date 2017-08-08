@@ -5,7 +5,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class ProductCategoryController {
+class ProductCategoryController extends BaseController{
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 static allowedMethods = [save: 'POST',uploadCoverImage: 'POST',editCoverImage: 'POST',uploadMenuImage1: 'POST',editMenu1Image: 'POST',uploadMenuImage2: 'POST',editMenu2Image: 'POST',uploadMenuImage3: 'POST',editMenu3Image: 'POST',uploadShoppingImage: 'POST',editShopImage: 'POST']
     def list() {

@@ -1,6 +1,6 @@
 import org.springframework.dao.DataIntegrityViolationException
 
-class PaymentMethodController {
+class PaymentMethodController extends BaseController{
 static allowedMethods = [save: 'POST']
     def list() {
         try{

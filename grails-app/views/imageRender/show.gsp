@@ -14,8 +14,8 @@
 <body>
 ${test.name}
 ${test.role}
-<img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:test.imageName])}" height="100" style="margin-left: -1%">
+<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:test.imageName])}" height="100" style="margin-left: -1%">
 
-<g:link action="edit"  controller="adminHome" id="${test.id}">Edit</g:link>
+<g:link action="edit" controller="imageRender" id="${test.id}">Edit</g:link>
 </body>
 </html>

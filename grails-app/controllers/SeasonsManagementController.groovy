@@ -1,5 +1,5 @@
 
-class SeasonsManagementController {
+class SeasonsManagementController extends BaseController{
 static allowedMethods = [save: 'POST']
     def save() {
         try{

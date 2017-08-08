@@ -196,7 +196,7 @@
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                                         <div id="mainImage"class="mainImage-coverDown mainImage-height">
-                                            <img id="myImg" src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="img-responsive mainImage-height">
+                                            <img id="myImg" src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="img-responsive mainImage-height">
 
                                         </div>
 
@@ -260,22 +260,22 @@
 
                             <div class="row"  id="thumbs">
                                 <div class="col-xs-4">
-                                    <a href="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="thumb" >
-                                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="img-responsive img-thumb">
+                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="thumb" >
+                                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="img-responsive img-thumb">
 
 
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.sideImageName])}" class="thumb" >
+                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.sideImageName])}" class="thumb" >
 
-                                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.sideImageName])}" class="img-responsive img-thumb">
+                                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.sideImageName])}" class="img-responsive img-thumb">
 
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.backImageName])}" class="thumb" >
-                                        <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.backImageName])}" class="img-responsive img-thumb">
+                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.backImageName])}" class="thumb" >
+                                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.backImageName])}" class="img-responsive img-thumb">
 
 </a>
                                 </div>
@@ -321,20 +321,20 @@
                                                     <div class="flipper">
                                                         <div class="front food1">
                                                             <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
+                                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
 
                                                             </g:link>
                                                         </div>
                                                         <div class="back food1">
                                                             <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
+                                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
 
                                                             </g:link>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
-                                                    <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
+                                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
 
                                                 </g:link>
 
@@ -489,21 +489,21 @@ return responseValue;
                                     <div class="flipper">
                                         <div class="front food1">
                                             <g:link action="singleProduct" controller="endUser" id="${list.id}">
-                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                         <div class="back food1">
                                             <g:link action="singleProduct" controller="endUser" id="${list.id}">
 
-                                                <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
-                                    <img src="${createLink(controller: 'adminHome', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
 
 
                                 </g:link>

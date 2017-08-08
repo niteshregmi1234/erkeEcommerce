@@ -1,6 +1,6 @@
 
 
-class StyleController {
+class StyleController extends BaseController{
     static allowedMethods =[save: 'POST']
     def save() {
         try{

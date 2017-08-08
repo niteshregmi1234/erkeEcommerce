@@ -7,7 +7,7 @@ import java.awt.Image
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class SeasonsController {
+class SeasonsController extends BaseController{
 static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSeasonImage: 'POST',editSeasonImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){

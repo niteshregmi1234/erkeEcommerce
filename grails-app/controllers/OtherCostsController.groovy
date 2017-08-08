@@ -1,6 +1,6 @@
 
 
-class OtherCostsController {
+class OtherCostsController extends BaseController{
 static  allowedMethods = [save: 'POST']
 
 
