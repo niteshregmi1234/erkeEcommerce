@@ -79,14 +79,14 @@
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front product">
-                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
 
                                             </g:link>
                                         </div>
                                         <div class="back product">
-                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
 
@@ -94,15 +94,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible product">
+                                <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
                                     <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                 </g:link>
                                 <div class="text">
-                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName+" "+list.productColor+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName+" "+list.productColor+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
                                     <p class="price">Rs.${list.productDetails.price}</p>
                                     <p class="buttons">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.id}" class="btn btn-default">View detail</g:link>
+                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
                                         <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 
                                     </p>
@@ -127,13 +127,13 @@
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front product">
-                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                         <div class="back product">
-                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
 
                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
@@ -141,16 +141,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible product">
+                                <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
                                     <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                 </g:link>
                                 <div class="text">
-                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
                                     <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
                                         <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                     <p class="buttons">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.id}" class="btn btn-default">View detail</g:link>
+                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
                                         <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </p>
                                 </div>

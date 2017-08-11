@@ -1,3 +1,4 @@
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class ProductDetailsController extends BaseController{
@@ -16,7 +17,14 @@ static allowedMethods = [save: 'POST']
     def save(){
         try{
         if(!params.id){
+
             def productDetails=new ProductDetails()
+            def productSizeId=params.productSizeId
+            String productSizes=""
+            for(int i=0;i<productSizeId.size();i++){
+                productSizes=productSizes + productSizeId[i]+","
+            }
+            productDetails.productSizes=productSizes
             productDetails.productCategory=ProductCategory.get(params.productCategory)
             productDetails.productSubCategory=ProductSubCategory.get(params.productSubCategory)
             productDetails.productName=params.productName
@@ -32,12 +40,19 @@ static allowedMethods = [save: 'POST']
                        productDetails.briefDescription=params.briefDescription
             productDetails.detailDescription=params.detailDescription
             productDetails.save(flush: true)
+
             redirect(action: "show" ,id:productDetails.id)
         }
         else{
             def productDetails=ProductDetails.get(params.id)
             if(productDetails){
-            productDetails.productCategory=ProductCategory.get(params.productCategory)
+                def productSizeId=params.productSizeId
+                String productSizes=""
+                for(int i=0;i<productSizeId.size();i++){
+                    productSizes=productSizes + productSizeId[i]+","
+                }
+                productDetails.productSizes=productSizes
+                productDetails.productCategory=ProductCategory.get(params.productCategory)
             productDetails.productSubCategory=ProductSubCategory.get(params.productSubCategory)
             productDetails.productName=params.productName
             productDetails.productBrand=ProductBrand.get(params.productBrand)
@@ -52,7 +67,8 @@ static allowedMethods = [save: 'POST']
                         productDetails.briefDescription=params.briefDescription
             productDetails.detailDescription=params.detailDescription
             productDetails.save(flush: true)
-            redirect(action: "show" ,id:productDetails.id)
+
+                redirect(action: "show" ,id:productDetails.id)
         }
             else {
                 redirect(action: "notfound",controller: "errorPage")
@@ -72,7 +88,15 @@ static allowedMethods = [save: 'POST']
         def productDetailsInstance=ProductDetails.get(id)
 
         if(productDetailsInstance){
-            [productDetailsInstance:productDetailsInstance]}
+            def sizeString=productDetailsInstance.productSizes
+            String[] stringArraySize= sizeString.split(",")
+            List<ProductSize> productSizeList=new ArrayList<>()
+            for(int i=0;i<stringArraySize.size();i++){
+                def sizeId=stringArraySize[i] as long
+                productSizeList.add(ProductSize.get(sizeId))
+            }
+            [productDetailsInstance:productDetailsInstance,productSizeList:productSizeList]
+        }
         else{
             redirect(action: "list")
         }}
@@ -86,11 +110,15 @@ static allowedMethods = [save: 'POST']
         def productDetailsInstance=ProductDetails.get(params.id)
 
         if(productDetailsInstance){
-            [productDetailsInstance:productDetailsInstance]
+def sizeString=productDetailsInstance.productSizes
+            String[] stringArray = sizeString.split(",");
+
+            [productDetailsInstance:productDetailsInstance,stringArray:stringArray]
         }
         else{
             redirect(action: "list")
-        }}
+        }
+    }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 

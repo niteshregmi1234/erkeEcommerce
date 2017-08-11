@@ -1,7 +1,10 @@
 
 
 class ProductCategory {
-String categoryName
+    String categoryId = UUID.randomUUID().toString()
+
+
+    String categoryName
     String coverImageName
     String shoppingImageName
     boolean statusShow
@@ -10,5 +13,7 @@ String categoryName
     String menuImage3
 
     static constraints = {
+        categoryId generator:'assigned'
+
     }
 }

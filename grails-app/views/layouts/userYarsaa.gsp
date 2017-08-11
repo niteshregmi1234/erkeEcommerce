@@ -318,7 +318,7 @@
                                         <ul>
                                         <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecifyAndStatusShow(specifyList,true)}" var="subCategoryList">
 
-                                            <li><g:link action="subCategoryList" controller="endUser" params="[id1:categoryList.id,id2:subCategoryList.id]">${subCategoryList.subCategoryName}</g:link>
+                                            <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
                                             </li>
 
                                             </g:each>
@@ -328,7 +328,7 @@
                                     </g:each>
                                     <div class="col-sm-3">
                                         <div class="banner">
-                                            <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.id}">
+                                            <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.categoryId}">
                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:categoryList.menuImage1])}" class="img-responsive">
 
 
@@ -336,7 +336,7 @@
                                         </div>
 
                                         <div class="banner">
-                                            <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.id}">
+                                            <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.categoryId}">
                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:categoryList.menuImage2])}" class="img-responsive">
 
                                             </g:link>
@@ -474,7 +474,7 @@
 
                     <ul>
                         <g:each in="${ProductSubCategory.findAllByStatusShow(true)}" var="subCategoryList">
-                            <li><g:link action="subCategoryList" controller="endUser" params="[id1:categoryList.id,id2:subCategoryList.id]">${subCategoryList.subCategoryName}</g:link>
+                            <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory: subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
                             </li>
                         </g:each>
 

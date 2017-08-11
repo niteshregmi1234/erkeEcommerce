@@ -16,7 +16,8 @@
     <g:hiddenField name="id" value="${productDetailsInstance?.id}"></g:hiddenField>
 
 <g:render template="form"></g:render>
-<div class="col-lg-12">
+
+    <div class="col-lg-12">
     <div class="form-group">
         <label class="control-label col-sm-2"></label>
 

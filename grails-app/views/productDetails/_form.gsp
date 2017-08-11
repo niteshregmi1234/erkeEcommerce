@@ -47,6 +47,19 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Select Sizes:</label>
+            <div class="col-sm-6">
+                <g:select class="selectpicker" multiple="multiple" id="productSizeId" name="productSizeId"
+                          from="${ProductSize.findAllByStatusShow(true)}" optionKey="id" optionValue="sizeName" data-show-subtext="true"
+                          data-live-search="true" title="choose sizes"/>
+
+
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-6">
         <div class="form-group">
             <label class="control-label col-sm-4">Price:</label>
@@ -94,6 +107,16 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            <%
+            def stringArray1="${stringArray}";
+                %>
+
+            $('#productSizeId').selectpicker('val', ${stringArray1});
+        });
+    </script>
+
     <script>
         function preventMultipleSubmissions() {
             $('#submit_Id').prop('disabled', true);
@@ -102,7 +125,7 @@
         window.onbeforeunload = preventMultipleSubmissions;
 
         function Validate() {
-
+            productSizeId
             var productCategory = document.getElementById("productCategory").value;
             var productSubCategory = document.getElementById("productSubCategory").value;
             var productBrand = document.getElementById("productBrand").value;
@@ -110,6 +133,7 @@
             var isSale = document.getElementById("isSale").value;
             var productName = document.getElementById("productName").value;
 
+            var productSizeId = document.getElementById("productSizeId").value;
 
             var discountPercentage = document.getElementById("discountPercentage").value;
             var detailDescription = document.getElementById("detailDescription").value;
@@ -189,6 +213,15 @@ if(discountPercentage.length>0){
                 document.getElementById("productBrand").focus();
                 return false;
             }
+            else if(productSizeId==''){
+                bootbox.alert({
+                    message: "size must be selected",
+                    size: 'small'
+                });
+                document.getElementById("productBrand").focus();
+                return false;
+            }
+
             else if(price==''){
                 bootbox.alert({
                     message: "price must not be blank",

@@ -62,10 +62,10 @@
 
                                         <li>
                                     </g:if>
-                                    <g:link action="allCategoryProducts" id="${categoryList.id}" controller="endUser">${categoryList.categoryName}<span class="badge pull-right"></span></g:link>
+                                    <g:link action="allCategoryProducts" id="${categoryList.categoryId}" controller="endUser">${categoryList.categoryName}<span class="badge pull-right"></span></g:link>
                                     <ul>
                                         <g:each in="${productSubCategoryList}" var="subCategoryList">
-                                            <li><g:link action="subCategoryList" controller="endUser" params="[id1:categoryList.id,id2:subCategoryList.id]">${subCategoryList.subCategoryName}</g:link>
+                                            <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
 
                                             </li>
                                         %{--<li><a href="category.html">Shirts</a>--}%
@@ -236,7 +236,7 @@
                                     <g:form action="addToCart" controller="cart" class="text-center buttons" onsubmit="return ValidShopping();">
                                         <g:hiddenField name="id" value="${productInstance.id}"></g:hiddenField>
                                         <g:select class="form-control name4" name="size"
-                                                  from="${ProductSize.findAllByStatusShow(true)}" optionKey="id" optionValue="sizeName"
+                                                  from="${productSizeList}" optionKey="id" optionValue="sizeName"
                                                   title="select size"/>
                                         <p><button class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</button></p>
                                     </g:form>
@@ -317,20 +317,20 @@
                                                 <div class="flip-container">
                                                     <div class="flipper">
                                                         <div class="front food1">
-                                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
 
                                                             </g:link>
                                                         </div>
                                                         <div class="back food1">
-                                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
 
                                                             </g:link>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
+                                                <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible food1">
                                                     <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
 
                                                 </g:link>
@@ -486,13 +486,13 @@ return responseValue;
                                 <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front food1">
-                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                         <div class="back food1">
-                                            <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
 
                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
 
@@ -506,7 +506,7 @@ return responseValue;
 
                                 </g:link>
                                 <div class="text">
-                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName}</g:link></h3>
                                     <g:if test="${list.productDetails.isSale==true}">
                                         <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
                                             <del class="del-price">Rs.${list.productDetails.price}</del></p>

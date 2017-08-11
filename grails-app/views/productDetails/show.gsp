@@ -27,6 +27,17 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group ">
+            <label class="control-label col-sm-4">Sizes:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;"><g:each in="${productSizeList}" var="list">
+                    ${list.sizeName}<br>
+                </g:each> </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group ">
             <label class="control-label col-sm-4">Sub-category:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${productDetailsInstance.productSubCategory.subCategoryName} </div>

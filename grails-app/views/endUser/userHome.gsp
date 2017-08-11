@@ -102,14 +102,14 @@
                         <div class="flip-container">
                             <div class="flipper">
                                 <div class="front food1">
-                                    <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                    <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                         <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive ">
 
 
                                     </g:link>
                                 </div>
                                 <div class="back food1">
-    <g:link action="singleProduct" controller="endUser" id="${list.id}">
+    <g:link action="singleProduct" controller="endUser" id="${list.productId}">
         <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
 
@@ -117,13 +117,13 @@
                                 </div>
                             </div>
                         </div>
-                        <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
+                        <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible food1">
                             <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
 
                         </g:link>
                         <div class="text">
-                            <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
+                            <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName}</g:link></h3>
                             <g:if test="${list.productDetails.isSale==true}">
                                 <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
                                     <del class="del-price">Rs.${list.productDetails.price}</del></p>
@@ -212,13 +212,13 @@
                             <div class="flip-container">
                                 <div class="flipper">
                                     <div class="front food1">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                             <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                         </g:link>
                                     </div>
                                     <div class="back food1">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
 
                                             <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
@@ -226,13 +226,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
+                            <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible food1">
                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
 
                             </g:link>
                             <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
+                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName}</g:link></h3>
                                 <g:if test="${list.productDetails.isSale==true}">
                                     <p class="price">Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}
                                        <br> <del class="del-price">Rs.${list.productDetails.price}</del></p>

@@ -1,6 +1,7 @@
 
 
 class ProductDetails {
+    String productSizes
     ProductCategory productCategory
     ProductSubCategory productSubCategory
     ProductBrand productBrand
@@ -12,6 +13,5 @@ class ProductDetails {
     String detailDescription
 
     static constraints = {
-
     }
 }

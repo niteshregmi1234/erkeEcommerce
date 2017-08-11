@@ -34,11 +34,18 @@ catch (Exception e){
 
 }
 }
-    def singleProduct(Long id) {
+    def singleProduct() {
         try{
-        if (id != null) {
-            def productInstance1 = Product.get(id)
+        if (params.id != null) {
+            def productInstance1 = Product.findByProductId(params.id)
             if (productInstance1) {
+                def sizeString=productInstance1.productDetails.productSizes
+                String[] stringArraySize= sizeString.split(",")
+                List<ProductSize> productSizeList=new ArrayList<>()
+                for(int i=0;i<stringArraySize.size();i++){
+                   def sizeId=stringArraySize[i] as long
+                    productSizeList.add(ProductSize.get(sizeId))
+                }
                 def productDetailsList=ProductDetails.findAllByProductSubCategoryAndProductCategoryAndIdNotEqual(productInstance1.productDetails.productSubCategory,productInstance1.productDetails.productCategory,productInstance1.productDetails.id)
                 def moreColorsList=Product.findAllByProductDetailsAndIdNotEqual(productInstance1.productDetails,productInstance1.id)
                 List<Product> relatedProductList = new ArrayList<>()
@@ -51,7 +58,7 @@ catch (Exception e){
                 }
                 Collections.shuffle(relatedProductList)
 
-                render(view: "detail", model :[moreColorsList:moreColorsList,relatedProductList:relatedProductList,productInstance: productInstance1,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
+                render(view: "detail", model :[productSizeList:productSizeList,moreColorsList:moreColorsList,relatedProductList:relatedProductList,productInstance: productInstance1,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
             }
             else{
                 redirect(action: "notfound",controller: "errorPage")
@@ -86,8 +93,8 @@ catch (Exception e){
 
     def subCategoryList() {
         try{
-            if(ProductCategory.get(params.id1) && ProductSubCategory.get(params.id2)){
-        def productDetailsList = ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.get(params.id1), ProductSubCategory.get(params.id2))
+            if(ProductCategory.findByCategoryId(params.category) && ProductSubCategory.findBySubCategoryId(params.subCategory)){
+        def productDetailsList = ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.findByCategoryId(params.category), ProductSubCategory.findBySubCategoryId(params.subCategory))
         List<Product> productList = new ArrayList<>()
         for (ProductDetails productDetails : productDetailsList) {
             def product = Product.findByProductDetails(productDetails)
@@ -96,7 +103,7 @@ catch (Exception e){
             }
         }
         Collections.shuffle(productList)
-        render(view: "subCategoryList", model: [productList: productList, productSubCategory: ProductSubCategory.get(params.id2),productCategory: ProductCategory.get(params.id1),productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
+        render(view: "subCategoryList", model: [productList: productList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory),productCategory: ProductCategory.findByCategoryId(params.category),productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true)])
             }
         else{
             redirect(action: "notfound",controller: "errorPage")
@@ -108,11 +115,11 @@ catch (Exception e){
         }
     }
 
-    def allCategoryProducts(Long id) {
+    def allCategoryProducts() {
         try{
-        if (id != null) {
-            if(ProductCategory.get(id)){
-                def productDetailsList = ProductDetails.findAllByProductCategory(ProductCategory.get(id))
+        if (params.id != null) {
+            if(ProductCategory.findByCategoryId(params.id)){
+                def productDetailsList = ProductDetails.findAllByProductCategory(ProductCategory.findByCategoryId(params.id))
             List<Product> productList = new ArrayList<>()
             for (ProductDetails productDetails : productDetailsList) {
                 def product = Product.findAllByProductDetails(productDetails)
@@ -121,7 +128,7 @@ catch (Exception e){
                 }
             }
             Collections.shuffle(productList)
-            render(view: "categoryList", model: [productList: productList, productCategory: ProductCategory.get(params.id)])
+            render(view: "categoryList", model: [productList: productList, productCategory: ProductCategory.findByCategoryId(params.id)])
 
         }
             else{
