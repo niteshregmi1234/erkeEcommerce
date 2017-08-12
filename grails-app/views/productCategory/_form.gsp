@@ -20,15 +20,6 @@
         </div>
     </div>
     <div class="col-lg-12">
-        <div class="form-group">
-            <label class="control-label col-sm-2">Upload Shop Image:</label>
-            <div class="col-sm-2">
-                <g:field type="file" name="shoppingImageName" class="form-control-file" id="shoppingImageName"/>
-                %{--<small id="fileHelp" class="form-text text-muted"></small>--}%
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12">
         <div class="form-group ">
             <label class="control-label col-sm-2" for="menuImage1">Upload menu Image1:</label>
 
@@ -46,18 +37,6 @@
             <div class="col-sm-4">
 
                 <g:field type="file" name="menuImage2" class="form-control-file" id="menuImage2"/>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="form-group ">
-            <label class="control-label col-sm-2" for="menuImage3">Upload menu Image3:</label>
-
-            <div class="col-sm-4">
-
-                <g:field type="file" name="menuImage3" class="form-control-file" id="menuImage3"/>
-
 
             </div>
         </div>

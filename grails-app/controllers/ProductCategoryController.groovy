@@ -28,10 +28,8 @@ def productCategoryList=ProductCategory.list()
             productCategoryInstance.categoryDescription=params.categoryDescription
 
             productCategoryInstance.coverImageName=uploadCoverImage()
-            productCategoryInstance.shoppingImageName=uploadShoppingImage()
             productCategoryInstance.menuImage1=uploadMenuImage1()
             productCategoryInstance.menuImage2=uploadMenuImage2()
-            productCategoryInstance.menuImage3=uploadMenuImage3()
 
             productCategoryInstance.save(flush: true)
             redirect(action: "show" ,id:productCategoryInstance.id)
@@ -43,10 +41,8 @@ if(productCategoryInstance){
             productCategoryInstance.statusShow=params.statusShow as boolean
     productCategoryInstance.categoryDescription=params.categoryDescription
     productCategoryInstance.coverImageName=editCoverImage(productCategoryInstance.coverImageName)
-            productCategoryInstance.shoppingImageName=editShopImage(productCategoryInstance.shoppingImageName)
             productCategoryInstance.menuImage1=editMenu1Image(productCategoryInstance.menuImage1)
             productCategoryInstance.menuImage2=editMenu2Image(productCategoryInstance.menuImage2)
-            productCategoryInstance.menuImage3=editMenu3Image(productCategoryInstance.menuImage3)
 
             productCategoryInstance.save(flush: true)
 

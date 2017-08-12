@@ -55,6 +55,15 @@
     </div>
     <div class="col-lg-12">
         <div class="form-group ">
+            <label class="control-label col-sm-2">Show in Footer:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;">${productSubCategoryInstance.isFooter} </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group ">
             <label class="control-label col-sm-2">Description:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${productSubCategoryInstance.subCategoryDescription} </div>

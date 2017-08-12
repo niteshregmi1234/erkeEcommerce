@@ -30,8 +30,8 @@ class ProductSubCategoryController extends BaseController{
             productSubCategoryInstance.subCategoryName=params.subCategoryName
             productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
             productSubCategoryInstance.statusShow=params.statusShow as boolean
+            productSubCategoryInstance.isFooter=params.isFooter as boolean
             productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
-
             productSubCategoryInstance.coverImageName=uploadCoverImage()
             productSubCategoryInstance.save(flush: true)
             redirect(action: "show" ,id:productSubCategoryInstance.id)
@@ -43,6 +43,7 @@ if(productSubCategoryInstance){
             productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
 
             productSubCategoryInstance.statusShow=params.statusShow as boolean
+    productSubCategoryInstance.isFooter=params.isFooter as boolean
     productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
 
     productSubCategoryInstance.coverImageName=editCoverImage(productSubCategoryInstance.coverImageName)

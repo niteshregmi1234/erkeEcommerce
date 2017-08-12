@@ -38,17 +38,6 @@
     </div>
     <div class="col-lg-12">
         <div class="form-group ">
-            <label class="control-label col-sm-2">Shop Image:</label>
-            <div class="col-sm-6">
-                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productCategoryInstance.shoppingImageName])}" height="100" style="margin-left: -1%">
-
-
-
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="form-group ">
             <label class="control-label col-sm-2">Menu Image1:</label>
             <div class="col-sm-6">
                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productCategoryInstance.menuImage1])}" height="100" style="margin-left: -1%">
@@ -70,17 +59,6 @@
         </div>
     </div>
 
-    <div class="col-lg-12">
-        <div class="form-group ">
-            <label class="control-label col-sm-2">Menu Image3:</label>
-            <div class="col-sm-6">
-                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productCategoryInstance.menuImage3])}" height="100" style="margin-left: -1%">
-
-
-
-            </div>
-        </div>
-    </div>
 
     <div class="col-lg-12">
         <div class="form-group ">

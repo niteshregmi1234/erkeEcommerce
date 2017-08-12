@@ -109,6 +109,8 @@
             </li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Manage<span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                    <li><g:link action="show" controller="homeContent">Home Content</g:link></li>
+
                     <li><g:link action="show" controller="aboutUs">About Us</g:link></li>
 
                     <li><g:link action="show" controller="companyInformation">Company Information</g:link></li>

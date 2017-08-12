@@ -45,6 +45,19 @@
     </div>
 <div class="col-lg-12">
     <div class="form-group ">
+        <label class="control-label col-sm-2" for="statusShow">Show in Footer:</label>
+
+        <div class="col-sm-4">
+            <g:select name="isFooter" from="${['TRUE','FALSE']}"
+                      keys="${[true,false]}" value="${productSubCategoryInstance?.isFooter}" class="form-control"/>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="form-group ">
         <label class="control-label col-sm-2" for="statusShow">Description:</label>
 
         <div class="col-sm-4">

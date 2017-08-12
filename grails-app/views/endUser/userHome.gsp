@@ -46,8 +46,8 @@
                         <div class="icon"><i class="fa fa-heart"></i>
                         </div>
 
-                        <h3><a href="#">We love our customers</a></h3>
-                        <p>We are known to provide best possible service ever</p>
+                        <h3><a>${homeContent.box1Title}</a></h3>
+                        <p>${homeContent.box1Description}</p>
                     </div>
                 </div>
 
@@ -56,8 +56,8 @@
                         <div class="icon"><i class="fa fa-tags"></i>
                         </div>
 
-                        <h3><a href="#">Best prices</a></h3>
-                        <p>You can check that the height of the boxes adjust when longer text like this one is used in one of them.</p>
+                        <h3><a>${homeContent.box2Title}</a></h3>
+                        <p>${homeContent.box2Description}.</p>
                     </div>
                 </div>
 
@@ -66,8 +66,8 @@
                         <div class="icon"><i class="fa fa-thumbs-up"></i>
                         </div>
 
-                        <h3><a href="#">100% satisfaction guaranteed</a></h3>
-                        <p>Free returns on everything for 3 months.</p>
+                        <h3><a>${homeContent.box3Title}</a></h3>
+                        <p>${homeContent.box3Description}.</p>
                     </div>
                 </div>
             </div>
@@ -167,8 +167,8 @@
     <div class="container" data-animate="fadeInUpBig">
         <div class="col-md-12">
             <div class="box slideshow">
-                <h3>Get Inspired</h3>
-                <p class="lead">Get the inspiration from our world class designers</p>
+                <h3>${homeContent.coverDownImageTitle}</h3>
+                <p class="lead">${homeContent.coverDownImageDescription}</p>
                 <div id="get-inspired" class="owl-carousel owl-theme">
 <g:each in="${downCoverImageList}" var="list">
 
@@ -314,7 +314,7 @@
             <div class="col-md-12">
                 <h3 class="text-uppercase"></h3>
 
-                <p class="lead">What's new in the world of fashion?
+                <p class="lead">${homeContent.specialBrandImageDescriptionUp}
                 </p>
             </div>
         </div>
@@ -381,7 +381,7 @@
             <div class="col-md-12">
                 <h3 class="text-uppercase"></h3>
 
-                <p class="lead">What's new in the world of fashion?
+                <p class="lead">${homeContent.specialBrandImageDescriptionDown}
                 </p>
             </div>
         </div>
@@ -392,32 +392,32 @@
         <div class="col-md-12" data-animate="fadeInUp">
 
             <div id="blog-homepage" class="row">
-                <div class="col-sm-6">
-                    <div class="post">
-                        <h4><a href="post.html">Fashion now</a></h4>
-                        <p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a>
-                        </p>
-                        <hr>
-                        <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-                        ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                        <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a>
-                        </p>
-                    </div>
-                </div>
+                %{--<div class="col-sm-6">--}%
+                    %{--<div class="post">--}%
+                        %{--<h4><a href="post.html">Fashion now</a></h4>--}%
+                        %{--<p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a>--}%
+                        %{--</p>--}%
+                        %{--<hr>--}%
+                        %{--<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean--}%
+                        %{--ultricies mi vitae est. Mauris placerat eleifend leo.</p>--}%
+                        %{--<p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a>--}%
+                        %{--</p>--}%
+                    %{--</div>--}%
+                %{--</div>--}%
 
-                <div class="col-sm-6">
-                    <div class="post">
-                        <h4><a href="post.html">Who is who - example blog post</a></h4>
-                        <p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a>
-                        </p>
-                        <hr>
-                        <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-                        ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                        <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a>
-                        </p>
-                    </div>
+                %{--<div class="col-sm-6">--}%
+                    %{--<div class="post">--}%
+                        %{--<h4><a href="post.html">Who is who - example blog post</a></h4>--}%
+                        %{--<p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a>--}%
+                        %{--</p>--}%
+                        %{--<hr>--}%
+                        %{--<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean--}%
+                        %{--ultricies mi vitae est. Mauris placerat eleifend leo.</p>--}%
+                        %{--<p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a>--}%
+                        %{--</p>--}%
+                    %{--</div>--}%
 
-                </div>
+                %{--</div>--}%
 
             </div>
             <!-- /#blog-homepage -->
@@ -426,7 +426,7 @@
     <div class="container">
         <div class="col-md-12">
 
-            <div class="agileinfonewsl" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:BackgroundImage.list()[1].imageName])}')">
+            <div class="agileinfonewsl" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:BackgroundImage.list()[0].imageName])}')">
 
 
                 <!-- Popup-Box -->

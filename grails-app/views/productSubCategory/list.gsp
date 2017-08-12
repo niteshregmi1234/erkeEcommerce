@@ -28,7 +28,7 @@
 
         <th>Sub-Category Name</th>
         <th>Show Status</th>
-
+        <th>Show in Footer</th>
     </tr>
     </thead>
     <tbody>
@@ -41,6 +41,8 @@
 
             <td>${list.subCategoryName}</td>
             <td>${list.statusShow}</td>
+            <td>${list.isFooter}</td>
+
         </tr>
     </g:each>
     </tbody>

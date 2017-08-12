@@ -75,13 +75,19 @@ catch (Exception e){
 
     def userHome() {
         try{
+            if(HomeContent.list()[0] && SpecialBrand.list()[0] && SeasonManagement.list()[0]){
         def upCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "UP")
         def downCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "DOWN")
         def latestProductList = Product.findAllByIsLatest(true)
         def specialBrandInstance = SpecialBrand.list()[0]
+            def homeContent=HomeContent.list()[0]
         def productList = Product.findAllByIsFeatured(true)
         def seasonManagementInstance = SeasonManagement.list()[0]
-        [upCoverImageList: upCoverImageList, downCoverImageList: downCoverImageList, latestProductList: latestProductList, specialBrandInstance: specialBrandInstance, seasonManagementInstance: seasonManagementInstance,featuredProductList:productList]
+        [upCoverImageList: upCoverImageList, downCoverImageList: downCoverImageList, latestProductList: latestProductList, specialBrandInstance: specialBrandInstance, seasonManagementInstance: seasonManagementInstance,featuredProductList:productList,homeContent:homeContent]}
+            else{
+                redirect(action: "notfound",controller: "errorPage")
+
+            }
     }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")

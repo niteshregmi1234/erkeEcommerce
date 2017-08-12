@@ -7,8 +7,9 @@ class ProductSubCategory {
     String coverImageName
 String subCategoryDescription
     boolean statusShow
+    boolean isFooter
     static constraints = {
         subCategoryId generator:'assigned'
-
+isFooter (nullable:true)
     }
 }
