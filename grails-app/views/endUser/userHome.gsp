@@ -42,31 +42,31 @@
         <div class="container">
             <div class="same-height-row">
                 <div class="col-sm-4">
-                    <div class="box same-height clickable">
+                    <div class="box same-height">
                         <div class="icon"><i class="fa fa-heart"></i>
                         </div>
 
-                        <h3><a>${homeContent.box1Title}</a></h3>
+                        <h3>${homeContent.box1Title}</h3>
                         <p>${homeContent.box1Description}</p>
                     </div>
                 </div>
 
                 <div class="col-sm-4">
-                    <div class="box same-height clickable">
+                    <div class="box same-height">
                         <div class="icon"><i class="fa fa-tags"></i>
                         </div>
 
-                        <h3><a>${homeContent.box2Title}</a></h3>
+                        <h3>${homeContent.box2Title}</h3>
                         <p>${homeContent.box2Description}.</p>
                     </div>
                 </div>
 
                 <div class="col-sm-4">
-                    <div class="box same-height clickable">
+                    <div class="box same-height">
                         <div class="icon"><i class="fa fa-thumbs-up"></i>
                         </div>
 
-                        <h3><a>${homeContent.box3Title}</a></h3>
+                        <h3>${homeContent.box3Title}</h3>
                         <p>${homeContent.box3Description}.</p>
                     </div>
                 </div>
@@ -389,9 +389,9 @@
 
     <div class="container">
 
-        <div class="col-md-12" data-animate="fadeInUp">
+        %{--<div class="col-md-12" data-animate="fadeInUp">--}%
 
-            <div id="blog-homepage" class="row">
+            %{--<div id="blog-homepage" class="row">--}%
                 %{--<div class="col-sm-6">--}%
                     %{--<div class="post">--}%
                         %{--<h4><a href="post.html">Fashion now</a></h4>--}%
@@ -419,20 +419,22 @@
 
                 %{--</div>--}%
 
-            </div>
+            %{--</div>--}%
             <!-- /#blog-homepage -->
-        </div>
+        %{--</div>--}%
     </div>
     <div class="container">
+        <div class="row">
         <div class="col-md-12">
 
-            <div class="agileinfonewsl" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:BackgroundImage.list()[0].imageName])}')">
+            <div class="agileinfonewsl about-background" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:BackgroundImage.list()[0].imageName])}')">
 
 
                 <!-- Popup-Box -->
                 <!-- //Popup-Box -->
 
             </div>
+        </div>
         </div>
     </div>
 

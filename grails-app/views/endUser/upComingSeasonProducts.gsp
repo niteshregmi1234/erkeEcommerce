@@ -38,7 +38,7 @@
 
             <div class="box b">
                 <h1>${seasonInstance.seasonName}</h1>
-                <p>In this season we offer wide selection of the best products we have found and carefully selected worldwide. Enjoy pre-season in Yarsaa.</p>
+                <p>${SeasonManagement.list()[0].preAdvertiseDescription}</p>
             </div>
 
             %{--<div class="box info-bar">--}%

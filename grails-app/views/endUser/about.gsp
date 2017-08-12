@@ -61,7 +61,7 @@
                 <!-- /#blog-homepage -->
             </div>
             <div class="col-md-6 small-screen screen1" data-animate="fadeInUp">
-                <div class="box same-height clickable">
+                <div class="box same-height">
                     <h1>ABOUT US</h1>
                     <p>${aboutUsInstance.aboutUsDescription}</p>
                 </div>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2 small-screen">
-                    <div class="box height-same clickable small-screen">
+                    <div class="box height-same small-screen">
                         <h3>"${aboutUsInstance.quote}"</h3>
                         <h4>― ${CompanyInformation.list()[0].proprietorName}</h4>
                     </div>
@@ -298,7 +298,7 @@
                     <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProductSubCategoryImage])}" class="img-responsive img-texts">
                     <div class="w3lsshoesaits-info">
                         <h3>${aboutUsInstance.specialProductSubCategory.subCategoryName} TO DIE FOR</h3>
-                        <p>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.</p>
+                        <p>${aboutUsInstance.specialProductSubCategory.subCategoryDescription}</p>
                         <div class="wthreeshop-a a-buttonsize">
                             <g:link action="specialSubCategory" controller="endUser">SHOP ${aboutUsInstance.specialProductSubCategory.subCategoryName}</g:link>
                         </div>
@@ -310,7 +310,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 ">
-                <div class="agilenwew3lsfashions about-background" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:AboutUs.list()[0].backgroundImage])}')">
+                <div class="agilenwew3lsfashions about-background" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.backgroundImage])}')">
                 </div>
             </div>
         </div>

@@ -317,10 +317,10 @@
                                         <h5>${specifyList.specificationName}</h5>
                                         <ul>
                                         <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecifyAndStatusShow(specifyList,true)}" var="subCategoryList">
-
+<g:if test="${ProductDetails.findAllByProductCategoryAndProductSubCategory(categoryList,subCategoryList)}">
                                             <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
                                             </li>
-
+</g:if>
                                             </g:each>
                                         </ul>
                                     </div>
@@ -433,16 +433,16 @@
 
     <!-- *** FOOTER ***
  _________________________________________________________ -->
-    <div id="footer" data-animate="fadeInUp">
+    <div id="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-4 col-sm-6">
                     <h4>Pages</h4>
 
                     <ul>
                         <li><g:link action="about" controller="endUser">About us</g:link>
                         </li>
-                        <li><a href="text.html">Terms and conditions</a>
+                        %{--<li><a href="text.html">Terms and conditions</a>--}%
                         </li>
                         %{--<li><a href="faq.html">FAQ</a>--}%
                         %{--</li>--}%
@@ -466,16 +466,19 @@
                 </div>
                 <!-- /.col-md-3 -->
 
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-4 col-sm-6">
 
                     <h4>Top categories</h4>
 <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
                     <h5>${categoryList.categoryName}</h5>
 
                     <ul>
-                        <g:each in="${ProductSubCategory.findAllByIsFooter(true)}" var="subCategoryList">
-                            <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory: subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                        <g:each in="${ProductSubCategory.findAllByIsFooterAndStatusShow(true,true)}" var="subCategoryList">
+                            <g:if test="${ProductDetails.findAllByProductCategoryAndProductSubCategory(categoryList,subCategoryList)}">
+
+                                <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory: subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
                             </li>
+                                </g:if>
                         </g:each>
 
                     </ul>
@@ -487,7 +490,7 @@
                 </div>
                 <!-- /.col-md-3 -->
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-4 col-sm-6">
 
                     <h4>Where to find us</h4>
 
@@ -563,7 +566,7 @@
     <div id="copyright">
         <div class="container">
             <div class="col-md-6">
-                <p class="pull-left">© 2015 Your name goes here.</p>
+                <p class="pull-left">© 2017.</p>
 
             </div>
             <div class="col-md-6">
