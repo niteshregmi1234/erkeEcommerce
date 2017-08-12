@@ -64,6 +64,31 @@ ${list.quantity}
 
 </tr>
 </table >
+<table border="3px" width="50px">
+    <tr>
+        <th>Pre-Total</th>
+        <th>Shipping And Handling</th>
+        <th>Tax</th>
+        <th>Total</th>
+            </tr>
+
+
+        <tr>
+<th>Rs.${totalPrice}</th>
+<th>${OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100}</th>
+            <th>${(((OtherCosts.list()[0].shippingAndHandlingPercentage)*totalPrice/100)+totalPrice)*OtherCosts.list()[0].taxPercentage/100}</th>
+            <th>${(OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100)+((((OtherCosts.list()[0].shippingAndHandlingPercentage)*totalPrice/100)+totalPrice)*OtherCosts.list()[0].taxPercentage/100)+totalPrice}</th>
+
+        </tr>
+
+
+    <tr>
+
+
+
+    </tr>
+</table >
+
 <h3>Delivery Information:</h3>
 <table border="3px" width="50px"><tr><td>FirstName:${params.firstName}</td></tr><tr><td>LastName:${params.lastName}</td></tr><tr><td>Address:${params.address}</td></tr><tr><td>Contact_no:${params.phone}</td></tr><tr><td>Delivery Method:${DeliveryMethod.get(params.delivery).briefDescribe}</td></tr><tr><td>Payment Method:${PaymentMethod.get(params.payment).briefDescribe}</td></tr></table>
 

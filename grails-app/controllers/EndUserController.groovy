@@ -1,8 +1,5 @@
 class EndUserController {
-    def a(){
-def productDetails=Product.list()
-        [productDetails:productDetails]
-    }
+
     def allProducts={
         try{
         def productDetailsList=ProductDetails.list();
