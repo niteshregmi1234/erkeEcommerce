@@ -38,7 +38,7 @@
 
             <div class="box b">
                 <h1>${specialBrandInstance.brandName}</h1>
-                <p>Most sold brand in Yarsaa.</p>
+                <p>${specialBrandInstance.brandDescription}.</p>
             </div>
 
             %{--<div class="box info-bar">--}%

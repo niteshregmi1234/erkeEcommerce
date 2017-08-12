@@ -20,6 +20,8 @@ static allowedMethods = [save: 'POST']
             def productBrandInstance=new ProductBrand()
             productBrandInstance.brandName=params.brandName
             productBrandInstance.statusShow=params.statusShow as boolean
+            productBrandInstance.brandDescription=params.brandDescription
+
             productBrandInstance.save(flush: true)
             redirect(action: "show" ,id:productBrandInstance.id)
         }
@@ -28,7 +30,9 @@ static allowedMethods = [save: 'POST']
             if(productBrandInstance){
             productBrandInstance.brandName=params.brandName
             productBrandInstance.statusShow=params.statusShow as boolean
-            productBrandInstance.save(flush: true)
+                productBrandInstance.brandDescription=params.brandDescription
+
+                productBrandInstance.save(flush: true)
             redirect(action: "show" ,id:productBrandInstance.id)
         }
             else{

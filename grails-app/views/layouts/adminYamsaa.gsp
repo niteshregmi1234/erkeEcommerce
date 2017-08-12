@@ -114,8 +114,8 @@
                     <li><g:link action="show" controller="companyInformation">Company Information</g:link></li>
                     <li><g:link action="show" controller="otherCosts">Other Costs</g:link></li>
 
-                    <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[0].id}">Upcoming Season</g:link></li>
-                    <li><g:link action="show" controller="seasonsManagement" id="${SeasonManagement.list()[1].id}">Present Season</g:link></li>
+                    <li><g:link action="show" controller="seasonManagement" id="${SeasonManagement.list()[0].id}">Upcoming Season</g:link></li>
+                    <li><g:link action="show" controller="seasonManagement" id="${SeasonManagement.list()[1].id}">Present Season</g:link></li>
                     <li><g:link action="show" controller="style">Style</g:link></li>
 
                 </ul>

@@ -25,6 +25,8 @@ def productCategoryList=ProductCategory.list()
             def productCategoryInstance=new ProductCategory()
             productCategoryInstance.categoryName=params.categoryName
             productCategoryInstance.statusShow=params.statusShow as boolean
+            productCategoryInstance.categoryDescription=params.categoryDescription
+
             productCategoryInstance.coverImageName=uploadCoverImage()
             productCategoryInstance.shoppingImageName=uploadShoppingImage()
             productCategoryInstance.menuImage1=uploadMenuImage1()
@@ -39,7 +41,8 @@ def productCategoryList=ProductCategory.list()
 if(productCategoryInstance){
             productCategoryInstance.categoryName=params.categoryName
             productCategoryInstance.statusShow=params.statusShow as boolean
-            productCategoryInstance.coverImageName=editCoverImage(productCategoryInstance.coverImageName)
+    productCategoryInstance.categoryDescription=params.categoryDescription
+    productCategoryInstance.coverImageName=editCoverImage(productCategoryInstance.coverImageName)
             productCategoryInstance.shoppingImageName=editShopImage(productCategoryInstance.shoppingImageName)
             productCategoryInstance.menuImage1=editMenu1Image(productCategoryInstance.menuImage1)
             productCategoryInstance.menuImage2=editMenu2Image(productCategoryInstance.menuImage2)

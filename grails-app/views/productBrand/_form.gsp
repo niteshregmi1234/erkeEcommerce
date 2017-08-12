@@ -21,6 +21,18 @@
                          </div>
         </div>
     </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2" for="statusShow">Description:</label>
+
+            <div class="col-sm-4">
+                <g:textArea name="brandDescription" id="brandDescription" class="form-control" value="${productBrandInstance?.brandDescription}"/>
+
+            </div>
+        </div>
+    </div>
+
+
     <script>
         function preventMultipleSubmissions() {
             $('#submit_Id').prop('disabled', true);
@@ -28,7 +40,10 @@
 
         window.onbeforeunload = preventMultipleSubmissions;
         function Validate() {
+
             var brandName = document.getElementById("brandName").value;
+            var brandDescription = document.getElementById("brandDescription").value;
+
             if(brandName==''){
                 $("#brandName").css("border", "1px solid red");
                 bootbox.alert({
@@ -37,6 +52,16 @@
                 });
                 document.getElementById("brandName").focus();
                 return false;
+            }
+            else if(brandDescription==''){
+                $("#brandDescription").css("border", "1px solid red");
+                bootbox.alert({
+                    message: "description must not be blank!",
+                    size: 'small'
+                });
+                document.getElementById("brandDescription").focus();
+                return false;
+
             }
 
 

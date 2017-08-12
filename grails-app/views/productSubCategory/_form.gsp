@@ -43,6 +43,19 @@
             </div>
         </div>
     </div>
+<div class="col-lg-12">
+    <div class="form-group ">
+        <label class="control-label col-sm-2" for="statusShow">Description:</label>
+
+        <div class="col-sm-4">
+            <g:textArea name="subCategoryDescription" id="subCategoryDescription" class="form-control" value="${productSubCategoryInstance?.subCategoryDescription}"/>
+
+
+        </div>
+    </div>
+</div>
+
+
     <script>
         function preventMultipleSubmissions() {
             $('#submit_Id').prop('disabled', true);
@@ -58,6 +71,8 @@
             var subCategoryName = document.getElementById("subCategoryName").value;
 
             var coverImageName = document.getElementById("coverImageName").value;
+            var subCategoryDescription = document.getElementById("subCategoryDescription").value;
+
             if(productSubCategorySpecify==''){
                 $("#subCategoryName").css("border", "1px solid red");
                 bootbox.alert({
@@ -81,6 +96,15 @@
                     size: 'small'
                 });
                 document.getElementById("coverImageName").focus();
+                return false;
+            }
+            else if(subCategoryDescription==''){
+                $("#subCategoryDescription").css("border", "1px solid red");
+                bootbox.alert({
+                    message: "description Name must not be blank!",
+                    size: 'small'
+                });
+                document.getElementById("subCategoryDescription").focus();
                 return false;
             }
             if(coverImageName.length>0) {

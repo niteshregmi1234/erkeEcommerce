@@ -53,7 +53,7 @@
 
             <div class="box b">
                 <h1>${productCategory.categoryName}</h1>
-                <p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>
+                <p>${productCategory.categoryDescription}.</p>
             </div>
 
             %{--<div class="box info-bar">--}%

@@ -1,12 +1,14 @@
 
-class SeasonsManagementController extends BaseController{
+class SeasonManagementController extends BaseController{
 static allowedMethods = [save: 'POST']
     def save() {
         try{
         def seasonsManagementInstance=SeasonManagement.get(params.id)
         if(seasonsManagementInstance){
         seasonsManagementInstance.seasons=Seasons.get(params.season)
-        seasonsManagementInstance.save(flush: true)
+            seasonsManagementInstance.preAdvertiseDescription=params.preAdvertiseDescription
+
+            seasonsManagementInstance.save(flush: true)
         redirect(action: "show",id:seasonsManagementInstance.id)}
         else{
             redirect(action: "notfound",controller: "errorPage")

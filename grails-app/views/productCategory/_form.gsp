@@ -72,11 +72,22 @@
                           keys="${[true,false]}" value="${productCategoryInstance?.statusShow}" class="form-control"/>
 
 
-                %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%
-                %{--<input type="email" class="form-control" id="email" placeholder="Enter email">--}%
+                            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2" for="statusShow">Description:</label>
+
+            <div class="col-sm-4">
+                <g:textArea name="categoryDescription" id="categoryDescription" class="form-control" value="${productCategoryInstance?.categoryDescription}"/>
+
+
             </div>
         </div>
     </div>
+
+
 
     <script>
         function preventMultipleSubmissions() {
@@ -95,6 +106,8 @@
             var menuImage1 = document.getElementById("menuImage1").value;
             var menuImage2 = document.getElementById("menuImage2").value;
             var menuImage3 = document.getElementById("menuImage3").value;
+
+            var categoryDescription = document.getElementById("categoryDescription").value;
 
             if(coverImageName.length>0) {
                 var arrInputs = oForm.getElementsByTagName("input");
@@ -405,6 +418,15 @@
                     size: 'small'
                 });
                 document.getElementById("menuImage3").focus();
+                responseValue=false;
+
+            }
+            else if(categoryDescription==''){
+                bootbox.alert({
+                    message: "description must not be blank!",
+                    size: 'small'
+                });
+                document.getElementById("categoryDescription").focus();
                 responseValue=false;
 
             }

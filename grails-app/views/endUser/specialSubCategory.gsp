@@ -38,7 +38,7 @@
 
             <div class="box b">
                 <h1>${specialCategoryInstance.subCategoryName}</h1>
-                <p>Most sold category in Yarsaa.</p>
+                <p>${specialCategoryInstance.subCategoryDescription}.</p>
             </div>
 
             %{--<div class="box info-bar">--}%

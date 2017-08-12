@@ -218,7 +218,7 @@ if(discountPercentage.length>0){
                     message: "size must be selected",
                     size: 'small'
                 });
-                document.getElementById("productBrand").focus();
+                document.getElementById("productSizeId").focus();
                 return false;
             }
 

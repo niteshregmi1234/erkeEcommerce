@@ -193,7 +193,7 @@
             <div class="col-md-9">
                 <div class="box b">
                     <h1>${productCategory.categoryName}-${productSubCategory.subCategoryName}</h1>
-                    <p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>
+                    <p>${productSubCategory.subCategoryDescription}.</p>
                 </div>
 
                 %{--<div class="box info-bar">--}%

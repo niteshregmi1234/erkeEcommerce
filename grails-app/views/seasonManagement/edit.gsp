@@ -9,10 +9,10 @@
 <html>
 <head>
     <meta name="layout" content="adminYamsaa">
-    <title></title>
+
 </head>
 <body>
-<g:form action="save" controller="seasonsManagement" class="form-horizontal"  onsubmit="return ValidateUpdate();">
+<g:form action="save" controller="seasonManagement" class="form-horizontal" onsubmit="return ValidateUpdate();">
     <g:hiddenField name="id" value="${seasonsManagementInstance?.id}"></g:hiddenField>
 
     <div class="col-lg-12" style="margin-top: 15%;">
@@ -25,6 +25,14 @@
 
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4">Advertise About Season:</label>
+            <div class="col-sm-6">
+                <g:textArea name="preAdvertiseDescription" id="preAdvertiseDescription" class="form-control" value="${seasonsManagementInstance?.preAdvertiseDescription}"/>
+
+            </div>
+        </div>
+
     </div>
 
 
@@ -46,13 +54,13 @@
 
 
     function ValidateUpdate(){
-        var season = document.getElementById("season").value;
-        if(season==''){
+        var preAdvertiseDescription = document.getElementById("preAdvertiseDescription").value;
+        if(preAdvertiseDescription==''){
             bootbox.alert({
-                message: "must choose season",
+                message: "advertise description must not be blank",
                 size: 'small'
             });
-            document.getElementById("season").focus();
+            document.getElementById("preAdvertiseDescription").focus();
             return false;
         }
 

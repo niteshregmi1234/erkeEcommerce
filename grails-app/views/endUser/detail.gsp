@@ -285,6 +285,7 @@
                     <div class="box" id="details">
                     <div class="pannel-tab">
                     <div class="panel-group" id="accordion">
+
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -299,6 +300,27 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                        Sizes And Fits</a>
+                                    <i class="indicator glyphicon glyphicon-plus  pull-right"></i>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+<g:each in="${productSizeList}" var="list">
+
+    <li>${list.sizeName}-${list.sizeDetails}</li>
+    </g:each>
+                                </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
