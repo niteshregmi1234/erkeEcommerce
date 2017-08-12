@@ -88,8 +88,49 @@
 </head>
 
 <body>
-<!-- *** TOPBAR ***
- _________________________________________________________ -->
+<noscript>
+
+    <div id="content" style="margin:20px;">
+        <div class="container">
+
+            <div class="col-md-12">
+
+
+
+                <div class="row" id="error-page">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="box">
+
+                            <p class="text-center">
+                                <img src="img/logo.png" alt="yarsaa Logo">
+                            </p>
+
+                            <h3>JavaScript not found</h3>
+                            <h4 class="text-muted">Our page does not function properly without java-script.So,You must enable java-script to view this web-page.</h4>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.col-md-9 -->
+        </div>
+        <!-- /.container -->
+    </div>
+
+
+    <style type="text/css">
+
+    #total {
+        display: none;
+    }
+    </style>
+
+</noscript>
+
+<div id="total">
 <div id="top">
     <div class="container">
         <div class="col-md-6 offer" data-animate="fadeInDown">
@@ -588,7 +629,7 @@
 
 <!-- *** SCRIPTS TO INCLUDE ***
  _________________________________________________________ -->
-
+</div>
 </body>
 
 </html>

@@ -50,7 +50,7 @@ grails {
 
         port = 465
 
-        username = "rockingguyheman.hg1@gmail.com"
+        username = "yarsaacustomermail@gmail.com"
 
         password = "hem1234...."
 

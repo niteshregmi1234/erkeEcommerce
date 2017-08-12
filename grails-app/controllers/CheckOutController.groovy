@@ -26,7 +26,7 @@ class CheckOutController {
             totalPrice=totalPrice+((cart.product.productDetails.price*cart.quantity)-(cart.product.productDetails.discountPercentage*(cart.product.productDetails.price*cart.quantity)/100))
         }
                 sendMail {
-                    to "rockingguyheman.hg@gmail.com"
+                    to "${MailSetUp.list()[0].toEmail}"
                     subject "Shopping mail from customers"
                     html g.render(template:"/cart/mail",model: [totalPrice: totalPrice])
 

@@ -31,14 +31,12 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/jquery.dataTables.min.css')}" type="text/css"
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap-datepicker.min.css')}" type="text/css">
-    %{--<asset:stylesheet src="yamsaa/styleVideo.css"></asset:stylesheet>--}%
-    %{--<asset:javascript src="yamsaa/script.js"></asset:javascript>--}%
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap-datepicker.min.js')}" type="text/javascript"
             charset="utf-8"></script>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap-select.min.css')}" type="text/css">
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap-select.min.js')}" type="text/javascript"
             charset="utf-8"></script>
-    <title>Yamsaa</title>
+    <title>Yarsaa</title>
     <style>
     li a:focus, .active {
         background-color: rgba(15, 13, 16, 0.99);
@@ -49,7 +47,7 @@
 <body>
 <noscript>
 
-    <div class="modal-dialog">
+    <div class="modal-dialog ">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -109,6 +107,8 @@
             </li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Manage<span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                    <li><g:link action="show" controller="mailSetUp">SetUp Email</g:link></li>
+
                     <li><g:link action="show" controller="homeContent">Home Content</g:link></li>
 
                     <li><g:link action="show" controller="aboutUs">About Us</g:link></li>

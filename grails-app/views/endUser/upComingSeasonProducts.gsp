@@ -211,12 +211,6 @@
                 </g:each>
             <!-- /.col-md-4 -->
             </div>
-            <style>
-            .product img{
-                height:338px;
-                width:251px;
-            }
-            </style>
             <!-- /.products -->
             <div class="pages">
 
@@ -227,93 +221,6 @@
                     <a class="btn btn-primary btn-lg" id="showLess"><i class="fa fa-chevron-up"></i> Show less</a>
                 </p>
 
-                <script>
-                    $(document).ready(function () {
-                        var size_li = $("#myList .a").size();
-                        var x=6;
-                        var c;
-                        var b=6;
-                        var a=0;
-                        if($("#myList .a").size()<=6){
-                            $("#loadMore").hide();
-
-                        }
-                        $('#myList .a:lt('+x+')').show();
-                        $('#loadMore').click(function () {
-                            $('html, body').animate({
-                                scrollTop: $(".loadMore").offset().top
-                            }, 2000);
-                            x= (x+3 <= size_li) ? x+3 : size_li;
-                            $('#myList .a:lt('+x+')').show();
-                            a=a+1;
-                            b=b+3;
-                            c=6+(3*a);
-                            if(b>=size_li){
-                                $("#loadMore").hide();
-
-                            }
-                            if(a>0){
-                                $("#showLess").show();
-                            }
-
-                        });
-                        $('#showLess').click(function () {
-
-                            if(c==x+2){
-                                x=(x-1<0) ? 6 : x-1;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+1){
-                                x=(x-2<0) ? 6 : x-2;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else{
-                                x=(x-3<0) ? 6 : x-3;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                            }
-                            a=a-1;
-                            b=b-3;
-
-                            if(a==0){
-                                $("#showLess").hide();
-                            }
-                            if(b<size_li){
-                                $("#loadMore").show();
-
-                            }
-
-                            $('html, body').animate({
-                                scrollTop: $(".a").offset().top
-                            }, 2000);
-
-                        });
-                        $("#showLess").hide();
-
-                        $('html, body').animate({
-                            scrollTop: $(".b").offset().top
-                        }, 2000);
-                    });
-                </script>
-                <style>
-                #myList .a{ display:none;
-                }
-                /*#loadMore {*/
-                /*color:green;*/
-                /*cursor:pointer;*/
-                /*}*/
-                /*#loadMore:hover {*/
-                /*color:black;*/
-                /*}*/
-                /*#showLess {*/
-                /*color:red;*/
-                /*cursor:pointer;*/
-                /*}*/
-                /*#showLess:hover {*/
-                /*color:black;*/
-                /*}*/
-                </style>
 
                 %{--<ul class="pagination">--}%
                 %{--<li><a href="#">&laquo;</a>--}%
@@ -364,9 +271,115 @@
 
 
 
-<!-- *** SCRIPTS TO INCLUDE ***
- _________________________________________________________ -->
 
+<script>
+    $(document).ready(function () {
+        var size_li = $("#myList .a").size();
+        var x=8;
+        var c;
+        var b=8;
+        var a=0;
+        if($("#myList .a").size()<=8){
+            $("#loadMore").hide();
+
+        }
+        $('#myList .a:lt('+x+')').show();
+        $('#loadMore').click(function () {
+            $('html, body').animate({
+                scrollTop: $(".loadMore").offset().top
+            }, 2000);
+            x= (x+4 <= size_li) ? x+4 : size_li;
+            $('#myList .a:lt('+x+')').show();
+            a=a+1;
+            b=b+4;
+            c=8+(4*a);
+            if(b>=size_li){
+                $("#loadMore").hide();
+
+            }
+            if(a>0){
+                $("#showLess").show();
+            }
+
+        });
+        $('#showLess').click(function () {
+            if(c==x+3){
+                x=(x-1<0) ? 8 : x-1;
+                $('#myList .a').not(':lt('+x+')').hide();
+                c=x;
+            }
+            else if(c==x+2){
+                x=(x-2<0) ? 8 : x-2;
+                $('#myList .a').not(':lt('+x+')').hide();
+                c=x;
+            }
+            else if(c==x+1){
+                x=(x-3<0) ? 8 : x-3;
+                $('#myList .a').not(':lt('+x+')').hide();
+                c=x;
+            }
+
+            else{
+                x=(x-4<0) ? 8 : x-4;
+                $('#myList .a').not(':lt('+x+')').hide();
+            }
+            a=a-1;
+            b=b-3;
+
+            if(a==0){
+                $("#showLess").hide();
+            }
+            if(b<size_li){
+                $("#loadMore").show();
+
+            }
+
+            $('html, body').animate({
+                scrollTop: $(".a").offset().top
+            }, 2000);
+
+        });
+        $("#showLess").hide();
+
+
+    });
+</script>
+<g:if test="${productList}">
+<script>
+    $(document).ready(function () {
+
+        $('html, body').animate({
+        scrollTop: $(".b").offset().top
+    }, 2000);
+    });
+
+</script>
+</g:if>
+<style>
+#myList .a{ display:none;
+}
+/*#loadMore {*/
+/*color:green;*/
+/*cursor:pointer;*/
+/*}*/
+/*#loadMore:hover {*/
+/*color:black;*/
+/*}*/
+/*#showLess {*/
+/*color:red;*/
+/*cursor:pointer;*/
+/*}*/
+/*#showLess:hover {*/
+/*color:black;*/
+/*}*/
+</style>
+
+<style>
+.product img{
+    height:338px;
+    width:251px;
+}
+</style>
 
 
 
