@@ -1,7 +1,9 @@
 import grails.converters.JSON
 
+import java.text.DecimalFormat
 class CartController {
 static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket: 'POST',delete: 'POST',checkUser: 'POST']
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     def checkAddToCart(){
         try{
       if(session.endUser){
@@ -30,7 +32,7 @@ static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket:
     }
     def updateBasket(){
         try{
-        def totalPrice=0
+            def totalPrice=0
         def obj= JSON.parse(params.array)
         for(int i=0;i<obj[0].size();i++){
             def id=obj[0][i] as long
@@ -44,7 +46,7 @@ static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket:
         def totalPrice1=totalPrice+shippingAndHandling
         def tax=OtherCosts.list()[0].taxPercentage*totalPrice1/100
         def totalPriceTotal=totalPrice1+tax
-def totalUnits=[totalPrice,shippingAndHandling,tax,totalPriceTotal]
+def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal)]
         render totalUnits as JSON}
         catch (Exception e){
 
@@ -74,11 +76,12 @@ def totalUnits=[totalPrice,shippingAndHandling,tax,totalPriceTotal]
         cartInstance.product=productInstance
         cartInstance.quantity=1
             cartInstance.productSize=ProductSize.get(params.size)
-
             cartInstance.endUserInformation=session.endUser
         cartInstance.save(flush: true)}
         redirect(action: "cart")
-        }}
+        }
+
+        }
         catch (Exception e){
      redirect(action: "notfound",controller: "errorPage")
         }
@@ -110,8 +113,7 @@ shippingAndHandling= OtherCosts.list()[0].shippingAndHandlingPercentage*totalPri
             }
         }
         Collections.shuffle(relatedProductList)}
-
-        render(view: "checkout", model:[totalPrice:totalPrice,relatedProductList:relatedProductList,shippingAndHandling:shippingAndHandling,tax:tax,totalPriceTotal:totalPriceTotal])}
+            render(view: "checkout", model:[totalPrice:df.format(totalPrice),relatedProductList:relatedProductList,shippingAndHandling:df.format(shippingAndHandling),tax:df.format(tax),totalPriceTotal:df.format(totalPriceTotal)])}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
@@ -133,7 +135,7 @@ shippingAndHandling= OtherCosts.list()[0].shippingAndHandlingPercentage*totalPri
         def totalPrice1=totalPrice+shippingAndHandling
         def tax=OtherCosts.list()[0].taxPercentage*totalPrice1/100
         def totalPriceTotal=totalPrice1+tax
-        def totalUnits=[totalPrice,shippingAndHandling,tax,totalPriceTotal]
+        def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal)]
         render totalUnits as JSON
 
     }

@@ -44,9 +44,14 @@
 ${list.quantity}
 
             </td>
-            <td>Rs.${list.product.productDetails.price}</td>
+            <td>Rs.<g:formatNumber number="${list.product.productDetails.price}" type="number"
+                                   maxFractionDigits="2" roundingMode="HALF_DOWN" />
+
+                </td>
             <td>${list.product.productDetails.discountPercentage}%</td>
-            <td>Rs.${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}</td>
+            <td>Rs.<g:formatNumber number="${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}" type="number"
+                                   maxFractionDigits="2" roundingMode="HALF_DOWN" />
+
         </tr>
     </g:each>
 
@@ -59,7 +64,10 @@ ${list.quantity}
     <th>${""}</th>
     <th>${""}</th>
 
-    <th>Rs.${totalPrice}</th>
+    <th>Rs.<g:formatNumber number="${totalPrice}" type="number"
+                           maxFractionDigits="2" roundingMode="HALF_DOWN" />
+
+        </th>
 
 
 </tr>
@@ -74,10 +82,19 @@ ${list.quantity}
 
 
         <tr>
-<th>Rs.${totalPrice}</th>
-<th>${OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100}</th>
-            <th>${(((OtherCosts.list()[0].shippingAndHandlingPercentage)*totalPrice/100)+totalPrice)*OtherCosts.list()[0].taxPercentage/100}</th>
-            <th>${(OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100)+((((OtherCosts.list()[0].shippingAndHandlingPercentage)*totalPrice/100)+totalPrice)*OtherCosts.list()[0].taxPercentage/100)+totalPrice}</th>
+            <th>Rs.<g:formatNumber number="${totalPrice}" type="number"
+                                   maxFractionDigits="2" roundingMode="HALF_DOWN" />
+            </th>
+
+<th>Rs.<g:formatNumber number="${OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100}" type="number"
+                    maxFractionDigits="2" roundingMode="HALF_DOWN" />
+    </th>
+            <th>Rs.<g:formatNumber number="${(((OtherCosts.list()[0].shippingAndHandlingPercentage)*totalPrice/100)+totalPrice)*OtherCosts.list()[0].taxPercentage/100}" type="number"
+                                maxFractionDigits="2" roundingMode="HALF_DOWN" />
+                </th>
+            <th>Rs.<g:formatNumber number="${(OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100)+((((OtherCosts.list()[0].shippingAndHandlingPercentage)*totalPrice/100)+totalPrice)*OtherCosts.list()[0].taxPercentage/100)+totalPrice}" type="number"
+                                maxFractionDigits="2" roundingMode="HALF_DOWN" />
+                </th>
 
         </tr>
 

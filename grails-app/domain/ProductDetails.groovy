@@ -13,5 +13,6 @@ class ProductDetails {
     String detailDescription
 
     static constraints = {
+        price scale: 2
     }
 }

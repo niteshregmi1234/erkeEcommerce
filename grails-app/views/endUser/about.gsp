@@ -7,7 +7,6 @@
 <body>
 <div id="content">
     <div class="container">
-        <div class="row">
             <div class="col-md-12">
                 <div id="main-slider">
                     <div class="item coverUp">
@@ -16,7 +15,6 @@
                 </div>
                 <!-- /#main-slider -->
             </div>
-        </div>
     </div>
     <div class="container">
         <div class="row">
