@@ -33,31 +33,37 @@
             <div class="col-md-6 " data-animate="fadeInUp">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="imgwrapper">
-                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs1Image])}" width="321" height="215" class="img-responsive">
+                        <div class="imgwrapper smallAbout">
+                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs1Image])}" class="img-responsive">
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="imgwrapper">
-                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs2Image])}" width="321" height="215" class="img-responsive">
+                        <div class="imgwrapper smallAbout">
+                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs2Image])}" class="img-responsive">
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="imgwrapper">
-                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs3Image])}" width="321" height="215" class="img-responsive">
+                        <div class="imgwrapper smallAbout">
+                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs3Image])}" class="img-responsive">
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="imgwrapper">
-                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs4Image])}" width="321" height="215" class="img-responsive">
+                        <div class="imgwrapper smallAbout">
+                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs4Image])}" class="img-responsive">
                         </div>
                     </div>
                 </div>
                 <!-- /#blog-homepage -->
             </div>
+            <style>
+                .smallAbout img{
+                    height: 198px;
+                    width:262.5px;
+                }
+            </style>
             <div class="col-md-6 small-screen screen1" data-animate="fadeInUp">
                 <div class="box same-height">
                     <h1>ABOUT US</h1>
@@ -76,7 +82,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12" data-animate="fadeInUp">
-                <div class="col-sm-5 quote1">
+                <div class="col-sm-5">
                     <div class="imgwrapper quote">
                         <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.quoteLeftImage])}" class="img-responsive about-img">
                     </div>

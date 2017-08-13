@@ -105,6 +105,8 @@ ${list.quantity}
 
     </tr>
 </table >
+<h3>User Information:</h3>
+<table border="3px" width="50px"><tr><td>FirstName:${session.endUser.firstName}</td></tr><tr><td>LastName:${session.endUser.lastName}</td></tr><tr><td>City:${session.endUser.city}</td></tr><tr><td>Address:${session.endUser.address}</td></tr><tr><td>Contact_no:${session.endUser.phone}</td></tr><tr><td>E-mail:${session.endUser.email}</td></tr></table>
 
 <h3>Delivery Information:</h3>
 <table border="3px" width="50px"><tr><td>FirstName:${params.firstName}</td></tr><tr><td>LastName:${params.lastName}</td></tr><tr><td>Address:${params.address}</td></tr><tr><td>Contact_no:${params.phone}</td></tr><tr><td>Delivery Method:${DeliveryMethod.get(params.delivery).briefDescribe}</td></tr><tr><td>Payment Method:${PaymentMethod.get(params.payment).briefDescribe}</td></tr></table>

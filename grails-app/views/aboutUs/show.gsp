@@ -29,7 +29,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">aboutUsImg1:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.aboutUs1Image}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs1Image])}" height="100" style="margin-left: -1%">
 
 
             </div>
@@ -39,7 +39,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">aboutUsImg2:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.aboutUs2Image}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs2Image])}" height="100" style="margin-left: -1%">
 
 
             </div>
@@ -49,7 +49,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">aboutUsImg3:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.aboutUs3Image}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs3Image])}" height="100" style="margin-left: -1%">
 
 
             </div>
@@ -59,7 +59,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">aboutUsImg4:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.aboutUs4Image}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs4Image])}" height="100" style="margin-left: -1%">
 
 
             </div>
@@ -80,7 +80,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Left Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.quoteLeftImage}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.quoteLeftImage])}" height="100" style="margin-left: -1%">
 
             </div>
         </div>
@@ -89,7 +89,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Right Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.quoteRightImage}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.quoteRightImage])}" height="100" style="margin-left: -1%">
 
             </div>
         </div>
@@ -119,7 +119,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Video-Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.videoDescrptionImage}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.videoDescrptionImage])}" height="100" style="margin-left: -1%">
 
             </div>
         </div>
@@ -175,7 +175,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.specialProductSubCategoryImage}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProductSubCategoryImage])}" height="100" style="margin-left: -1%">
 
             </div>
         </div>
@@ -184,7 +184,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Background Image:</label>
             <div class="col-sm-6">
-                <img src="${resource(dir: "images/otherStuffs",file: "${aboutUsInstance.backgroundImage}")}" height="100" style="margin-left: -1%">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.backgroundImage])}" height="100" style="margin-left: -1%">
 
             </div>
         </div>
