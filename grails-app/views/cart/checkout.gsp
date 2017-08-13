@@ -465,7 +465,8 @@
                                 <g:each in="${Cart.findAllByEndUserInformation(session.endUser)}" var="list">
                                     <tr>
                                         <td><a>
-                                            <img src="${resource(dir: "images/allProducts/specialImage",file: "${list.product.specialImageName}")}">
+                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.product.specialImageName])}">
+
                                         </a>
                                         </td>
                                         <td>${list.product.productColor.colorName+" "+list.product.productDetails.productName+" "+list.product.productDetails.productBrand.brandName}
@@ -502,7 +503,7 @@ ${list.quantity}
                         </div>
                         <div class="pull-right">
 
-                            <button  type="submit" id="submit_Id" class="btn btn-primary" >Place an order<i class="fa fa-chevron-right"></i>
+                            <button  type="submit" id="submit_Id" class="btn btn-primary" onclick="return confirm('Are you sure want to place your order?')" >Place an order<i class="fa fa-chevron-right"></i>
                             </button>
                         </div>
                     </div>
@@ -569,6 +570,7 @@ ${list.quantity}
             window.onbeforeunload = preventMultipleSubmissions;
 
             function ValidCheckOut(){
+
     var responseValue;
     $.ajax({
         url: "${createLink(controller:'checkOut', action:'checkCart')}",
@@ -608,63 +610,97 @@ return responseValue
                     var array = [];
                     array[0] = idList;
                     array[1] = quantityList;
-                    array[2]=sizeList
-                    $.ajax({
-                        url: "${createLink(controller:'cart', action:'updateBasket')}",
-                        global: false,
-                        type: "POST",
-                        data: { "array": JSON.stringify(array) },
-                        cache: false,
-                        async: false,
-                        success: function (text) {
-                            $('#tableResponsive').load(document.URL +  ' #tableResponsive');
-                            $('.totalPrice').html("Rs."+text[0]);
-                            $('.shippingAndHandling').html("Rs."+text[1]);
-                            $('.tax').html("Rs."+text[2]);
-                            $('.totalPriceTotal').html("Rs."+text[3]);
-                            $('.hidden-sm').load(document.URL +  ' .hidden-sm');
+                    array[2]=sizeList;
+                    bootbox.confirm({
+//                        title: "Destroy planet?",
+                        message: "Are you sure want to update the basket?",
+                        buttons: {
+                            cancel: {
+                                label: '<i class="fa fa-times"></i> Cancel'
+                            },
+                            confirm: {
+                                label: '<i class="fa fa-check"></i> Confirm'
+                            }
+                        },
+                        callback: function (result) {
+                            if(result==true){
+                                $.ajax({
+                                    url: "${createLink(controller:'cart', action:'updateBasket')}",
+                                    global: false,
+                                    type: "POST",
+                                    data: { "array": JSON.stringify(array) },
+                                    cache: false,
+                                    async: false,
+                                    success: function (text) {
+                                        $('#tableResponsive').load(document.URL +  ' #tableResponsive');
+                                        $('.totalPrice').html("Rs."+text[0]);
+                                        $('.shippingAndHandling').html("Rs."+text[1]);
+                                        $('.tax').html("Rs."+text[2]);
+                                        $('.totalPriceTotal').html("Rs."+text[3]);
+                                        $('.hidden-sm').load(document.URL +  ' .hidden-sm');
 //                            $('.hidden-xs').load(document.URL +  ' .hidden-xs');
 
-                            $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
-                            $('#totalPrice1').html("Rs."+text[0]);
-                            if ($(".deleteCart").length < 2){
-                                location.reload();
+                                        $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
+                                        $('#totalPrice1').html("Rs."+text[0]);
+                                        if ($(".deleteCart").length < 2){
+                                            location.reload();
+                                        }
+
+                                    }
+
+                                });
+
                             }
-
                         }
-
                     });
 
                     evt.preventDefault();
                 })
             });
             function deleteProduct(id,evt){
-                $.ajax({
-                    url: "${createLink(controller:'cart', action:'delete')}",
-                    global: false,
-                    type: "POST",
-                    data: { "id":id },
-                    cache: false,
-                    async: false,
-                    success: function (text) {
-                        $('#tableResponsive').load(document.URL +  ' #tableResponsive');
-                        $('.totalPrice').html("Rs."+text[0]);
-                        $('.shippingAndHandling').html("Rs."+text[1]);
-                        $('.tax').html("Rs."+text[2]);
-                        $('.totalPriceTotal').html("Rs."+text[3]);
-                        $('.hidden-sm').load(document.URL +  ' .hidden-sm');
-
-                        $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
-                        $('#totalPrice1').html("Rs."+text[0]);
-                        if ($(".deleteCart").length < 2)
-                        {
-                            location.reload();
+                bootbox.confirm({
+//                    title: "Destroy planet?",
+                    message: "Are you sure want to remove this item from basket?",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        },
+                        confirm: {
+                            label: '<i class="fa fa-check"></i> Confirm'
                         }
+                    },
+                    callback: function (result) {
+                        if(result==true){
+                            $.ajax({
+                                url: "${createLink(controller:'cart', action:'delete')}",
+                                global: false,
+                                type: "POST",
+                                data: { "id":id },
+                                cache: false,
+                                async: false,
+                                success: function (text) {
+                                    $('#tableResponsive').load(document.URL +  ' #tableResponsive');
+                                    $('.totalPrice').html("Rs."+text[0]);
+                                    $('.shippingAndHandling').html("Rs."+text[1]);
+                                    $('.tax').html("Rs."+text[2]);
+                                    $('.totalPriceTotal').html("Rs."+text[3]);
+                                    $('.hidden-sm').load(document.URL +  ' .hidden-sm');
+
+                                    $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
+                                    $('#totalPrice1').html("Rs."+text[0]);
+                                    if ($(".deleteCart").length < 2)
+                                    {
+                                        location.reload();
+                                    }
 
 
+                                }
+
+                            });
+                        }
                     }
-
                 });
+
 evt.preventDefault();
             }
             function showAddress(evt){
