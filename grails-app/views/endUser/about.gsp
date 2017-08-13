@@ -161,7 +161,8 @@
                                     <p class="price">Rs.${aboutUsInstance.specialProduct1.productDetails.price}</p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}" class="btn btn-default">View detail</g:link>
-                                        <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct1.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="#" data-toggle="modal" data-target="#smallModal0"  class="btn btn-primary" onclick="addValueToField(${aboutUsInstance.specialProduct1.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                     </p>
                                 </div>
                                 <!-- /.text -->
@@ -196,7 +197,8 @@
                                     <p class="price">Rs.${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}<br><del class="del-price">Rs.${aboutUsInstance.specialProduct1.productDetails.price}</del></p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}" class="btn btn-default">View detail</g:link>
-                                        <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct1.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="#" data-toggle="modal" data-target="#smallModal0"  class="btn btn-primary" onclick="addValueToField(${aboutUsInstance.specialProduct1.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                     </p>
                                 </div>
                                 <!-- /.text -->
@@ -236,7 +238,8 @@
                                     <p class="price">Rs.${aboutUsInstance.specialProduct2.productDetails.price}</p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}" class="btn btn-default">View detail</g:link>
-                                        <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct2.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="#" data-toggle="modal" data-target="#smallModal1"  class="btn btn-primary" onclick="addValueToField(${aboutUsInstance.specialProduct2.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                     </p>
                                 </div>
                                 <!-- /.text -->
@@ -271,7 +274,8 @@
                                     <p class="price">Rs.${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct2.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}<br><del class="del-price">Rs.${aboutUsInstance.specialProduct2.productDetails.price}</del></p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}" class="btn btn-default">View detail</g:link>
-                                        <a href="#" onclick="checkAddToCart(${aboutUsInstance.specialProduct2.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="#" data-toggle="modal" data-target="#smallModal1"  class="btn btn-primary" onclick="addValueToField(${aboutUsInstance.specialProduct2.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
                                     </p>
                                 </div>
                                 <!-- /.text -->
@@ -314,6 +318,29 @@
         </div>
     </div>
 </div>
+<g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
+<g:each in="${productSizeList}" var="list" status="i">
+    <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel${i}">Select Size</h4>
+                </div>
+                <div class="modal-body">
+                    <g:select class="form-control" name="size" id="size${i}"
+                              from="${list}" optionKey="id" optionValue="sizeName"
+                              title="select size"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                    <div class="btn btn-primary" onclick="checkAddToCart(${i});"><i class="fa fa-shopping-cart"></i>Add to cart</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</g:each>
+
 <script>
     $(document).ready(function() {
         $('.popup-with-zoom-anim').magnificPopup({
@@ -331,31 +358,45 @@
 </script>
 <script src="${resource(dir: 'js', file: 'yarsaa/jquery.magnific-popup.js')}" type="text/javascript" charset="utf-8"></script>
 <script>
-    function checkAddToCart(id) {
+    function addValueToField(id){
+        document.getElementById("productId").value = id;
 
+    }
+</script>
+
+<script>
+    function checkAddToCart(i){
+        $('#smallModal'+i).modal('toggle');
+        var productId=document.getElementById("productId").value;
+        var sizeId=document.getElementById("size"+i).value;
+        var array = [];
+        array[0]=sizeId;
+        array[1]=productId;
         var responseValue;
         $.ajax({
             url: "${createLink(controller:'cart', action:'checkAddToCart')}",
             type: "POST",
-            data: {
-                id1: id
-            },
-            async: false,
-            cache: false,
+            data: { "array": JSON.stringify(array) },
+            async : false,
+            cache:false,
             success: function(result) {
-                if (result == "ok") {
+                if(result=="ok"){
                     bootbox.alert({
                         message: "successfully added to cart.",
                         size: 'small',
-                        callback: function() {
+                        callback: function(){
                             location.reload();
                         }
 
                     });
-                    responseValue = false;
+                    responseValue=false;
 
-                } else if (result == "notOk") {
+                }
+                else if(result=="notOk"){
                     $('#login-modal').modal('toggle');
+                    document.getElementById("sizeIdLogin").value = sizeId;
+                    document.getElementById("productIdLogin").value = productId;
+
                 }
             }
         });
@@ -363,5 +404,6 @@
 
     }
 </script>
+
 </body>
 </html>

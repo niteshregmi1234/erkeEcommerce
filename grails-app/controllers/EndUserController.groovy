@@ -289,7 +289,25 @@ def about(){
     try{
     def aboutUsInstance = AboutUs.list()[0]
         if(aboutUsInstance){
-    [aboutUsInstance: aboutUsInstance]}
+            List<List<ProductSize>> listList=new ArrayList<>()
+            def sizeString1=aboutUsInstance.specialProduct1.productDetails.productSizes
+            String[] stringArraySize1= sizeString1.split(",")
+            List<ProductSize> productSizeList1=new ArrayList<>()
+            for(int i=0;i<stringArraySize1.size();i++){
+                def sizeId=stringArraySize1[i] as long
+                productSizeList1.add(ProductSize.get(sizeId))
+            }
+            def sizeString2=aboutUsInstance.specialProduct2.productDetails.productSizes
+            String[] stringArraySize2= sizeString2.split(",")
+            List<ProductSize> productSizeList2=new ArrayList<>()
+            for(int i=0;i<stringArraySize2.size();i++){
+                def sizeId=stringArraySize2[i] as long
+                productSizeList2.add(ProductSize.get(sizeId))
+            }
+            listList.add(productSizeList1)
+            listList.add(productSizeList2)
+
+            [aboutUsInstance: aboutUsInstance,productSizeList:listList]}
         else{
             redirect(action: "notfound",controller: "errorPage")
 

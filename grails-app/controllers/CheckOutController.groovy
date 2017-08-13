@@ -7,10 +7,14 @@ class CheckOutController {
             if(cartList.size()==0){
                 render "cartEmpty"
             }
+            else{
+                render "ok"
+            }
         }
         else{
             render "sessionNull"
-        }}
+        }
+        }
         catch (Exception e){
 
         }

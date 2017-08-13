@@ -412,6 +412,9 @@
                 }
                 else if(result=="notOk"){
                     $('#login-modal').modal('toggle');
+                    document.getElementById("sizeIdLogin").value = sizeId;
+                    document.getElementById("productIdLogin").value = productId;
+
                 }
             }
         });

@@ -257,7 +257,7 @@
 
         <div class="col-md-9" id="checkout">
             <div class="box" style="display: none;" id="deliveryAddress">
-            <g:form action="placeOrder" controller="checkOut" method="post" onsubmit="return ValidCheckOut();">
+            <form action="/checkOut/placeOrder" method="post" id="myForm">
 
                 <h1>Checkout-Address</h1>
                     <ul class="nav nav-pills nav-justified">
@@ -503,11 +503,25 @@ ${list.quantity}
                         </div>
                         <div class="pull-right">
 
-                            <button  type="submit" id="submit_Id" class="btn btn-primary" onclick="return confirm('Are you sure want to place your order?')" >Place an order<i class="fa fa-chevron-right"></i>
-                            </button>
+                            <a href="#" id="submit_Id" class="btn btn-primary" data-toggle="modal" data-target="#confirmModel">Place an order<i class="fa fa-chevron-right"></i>
+                            </a>
+                            <div class="bootbox modal fade bootbox-confirm in" id="confirmModel" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+                                            <div class="bootbox-body">Are you sure want to place your order?</div>
+                                        </div><div class="modal-footer">
+                                        <div data-bb-handler="cancel" type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</div>
+                                        <button  type="button" class="btn btn-primary"  data-dismiss="modal" onclick="ValidCheckOut();"><i class="fa fa-check"></i> Confirm</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </g:form>
+                </form>
             </div>
 
             <!-- /.box -->
@@ -586,6 +600,10 @@ responseValue=false;
                 bootbox.alert("Sorry, your cart is empty. You must have something in your cart to send enquiry!!!.");
                 responseValue=false;
 
+            }
+            else if(text=="ok"){
+                document.getElementById('submit_Id').setAttribute("disabled","disabled");
+                document.getElementById("myForm").submit();
             }
         }
 

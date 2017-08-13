@@ -165,6 +165,9 @@
                 <div class="modal-body">
                     <form method="post" onsubmit="return loginValid();">
                         <small style="color: #a94442; display: none;" id="error" >email or password does not exist</small>
+<g:hiddenField name="sizeIdLogin" id="sizeIdLogin" value=""></g:hiddenField>
+
+<g:hiddenField name="productIdLogin" id="productIdLogin" value=""></g:hiddenField>
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="login_email" placeholder="email">
@@ -255,6 +258,9 @@
 
                         }
                         else if(result==true){
+                            var  sizeId=document.getElementById("sizeIdLogin").value;
+                            var productId=document.getElementById("productIdLogin").value ;
+if(sizeId=='' && productId==''){
                             bootbox.alert({
                                 message: "successfully logged in.",
                                 size: 'small',
@@ -265,6 +271,45 @@
                             });
                             $('#login-modal').modal('toggle');
                             responseValue=false;
+                        }
+                            else{
+
+    $('#login-modal').modal('toggle');
+    document.getElementById("sizeIdLogin").value ="";
+    document.getElementById("productIdLogin").value ="";
+
+    var array = [];
+    array[0]=sizeId;
+    array[1]=productId;
+    $.ajax({
+        url: "${createLink(controller:'cart', action:'checkAddToCart')}",
+        type: "POST",
+        data: { "array": JSON.stringify(array) },
+        async : false,
+        cache:false,
+        success: function(result) {
+            if(result=="ok"){
+                bootbox.alert({
+                    message: "successfully added to cart.",
+                    size: 'small',
+                    callback: function(){
+                        location.reload();
+                    }
+
+                });
+                responseValue=false;
+
+            }
+            else if(result=="notOk"){
+                $('#login-modal').modal('toggle');
+                document.getElementById("sizeIdLogin").value = sizeId;
+                document.getElementById("productIdLogin").value = productId;
+
+            }
+        }
+    });
+
+}
                         }
                     }
                 });
