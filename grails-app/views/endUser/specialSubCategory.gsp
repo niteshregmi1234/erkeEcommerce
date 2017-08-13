@@ -72,7 +72,7 @@
             %{--</div>--}%
 
             <div class="row products" id="myList">
-                <g:each in="${productList}" var="list">
+                <g:each in="${productList}" var="list" status="i">
                     <g:if test="${list.productDetails.isSale==false}">
                         <div class="col-md-3 col-sm-4 a">
                             <div class="product">
@@ -103,7 +103,7 @@
                                     <p class="price">Rs.${list.productDetails.price}</p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
-                                        <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary" onclick="addValueToField(${list.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 
                                     </p>
                                 </div>
@@ -151,40 +151,9 @@
                                         <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
-                                        <a href="#" onclick="checkAddToCart(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary" onclick="addValueToField(${list.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </p>
                                 </div>
-                                <script>
-                                    function checkAddToCart(id){
-                                        var responseValue;
-                                        $.ajax({
-                                            url: "${createLink(controller:'cart', action:'checkAddToCart')}",
-                                            type: "POST",
-                                            data: {id1:id},
-                                            async : false,
-                                            cache:false,
-                                            success: function(result) {
-                                                if(result=="ok"){
-                                                    bootbox.alert({
-                                                        message: "successfully added to cart.",
-                                                        size: 'small',
-                                                        callback: function(){
-                                                            location.reload();
-                                                        }
-
-                                                    });
-                                                    responseValue=false;
-
-                                                }
-                                                else if(result=="notOk"){
-                                                    $('#login-modal').modal('toggle');
-                                                }
-                                            }
-                                        });
-                                        return responseValue;
-
-                                    }
-                                </script>
                                 <!-- /.text -->
 
                                 <div class="ribbon sale">
@@ -226,6 +195,28 @@
                 <p class="loadLess">
                     <a class="btn btn-primary btn-lg" id="showLess"><i class="fa fa-chevron-up"></i> Show less</a>
                 </p>
+            <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
+            <g:each in="${productSizeList}" var="list" status="i">
+                <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel${i}">Select Size</h4>
+                            </div>
+                            <div class="modal-body">
+                                <g:select class="form-control" name="size" id="size${i}"
+                                          from="${list}" optionKey="id" optionValue="sizeName"
+                                          title="select size"/>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                                <div class="btn btn-primary" onclick="checkAddToCart(${i});"><i class="fa fa-shopping-cart"></i>Add to cart</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </g:each>
 
             <script>
                 $(document).ready(function () {
@@ -384,6 +375,50 @@
 
 
 
+<script>
+    function addValueToField(id){
+        document.getElementById("productId").value = id;
+
+    }
+</script>
+
+<script>
+    function checkAddToCart(i){
+        $('#smallModal'+i).modal('toggle');
+        var productId=document.getElementById("productId").value;
+        var sizeId=document.getElementById("size"+i).value;
+        var array = [];
+        array[0]=sizeId;
+        array[1]=productId;
+        var responseValue;
+        $.ajax({
+            url: "${createLink(controller:'cart', action:'checkAddToCart')}",
+            type: "POST",
+            data: { "array": JSON.stringify(array) },
+            async : false,
+            cache:false,
+            success: function(result) {
+                if(result=="ok"){
+                    bootbox.alert({
+                        message: "successfully added to cart.",
+                        size: 'small',
+                        callback: function(){
+                            location.reload();
+                        }
+
+                    });
+                    responseValue=false;
+
+                }
+                else if(result=="notOk"){
+                    $('#login-modal').modal('toggle');
+                }
+            }
+        });
+        return responseValue;
+
+    }
+</script>
 
 </body>
 

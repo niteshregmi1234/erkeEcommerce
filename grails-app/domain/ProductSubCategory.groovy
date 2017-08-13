@@ -10,6 +10,5 @@ String subCategoryDescription
     boolean isFooter
     static constraints = {
         subCategoryId generator:'assigned'
-isFooter (nullable:true)
     }
 }

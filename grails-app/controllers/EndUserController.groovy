@@ -1,5 +1,7 @@
 class EndUserController {
+def a(){
 
+}
     def allProducts={
         try{
         def productDetailsList=ProductDetails.list();
@@ -11,7 +13,18 @@ class EndUserController {
             }
         }
         Collections.shuffle(productList)
-        render(view: "allProducts", model: [productList: productList,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
+            List<List<ProductSize>> listList=new ArrayList<>()
+            for(Product productInstance:productList){
+                def sizeString=productInstance.productDetails.productSizes
+                String[] stringArraySize= sizeString.split(",")
+                List<ProductSize> productSizeList=new ArrayList<>()
+                for(int i=0;i<stringArraySize.size();i++){
+                    def sizeId=stringArraySize[i] as long
+                    productSizeList.add(ProductSize.get(sizeId))
+                }
+                listList.add(productSizeList)
+            }
+        render(view: "allProducts", model: [productSizeList:listList,productList: productList,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
 
     }
         catch (Exception e){
@@ -106,7 +119,18 @@ catch (Exception e){
             }
         }
         Collections.shuffle(productList)
-        render(view: "subCategoryList", model: [productList: productList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory),productCategory: ProductCategory.findByCategoryId(params.category),productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true)])
+                List<List<ProductSize>> listList=new ArrayList<>()
+                for(Product productInstance:productList){
+                    def sizeString=productInstance.productDetails.productSizes
+                    String[] stringArraySize= sizeString.split(",")
+                    List<ProductSize> productSizeList=new ArrayList<>()
+                    for(int i=0;i<stringArraySize.size();i++){
+                        def sizeId=stringArraySize[i] as long
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                    listList.add(productSizeList)
+                }
+        render(view: "subCategoryList", model: [productSizeList:listList,productList: productList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory),productCategory: ProductCategory.findByCategoryId(params.category),productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true)])
             }
         else{
             redirect(action: "notfound",controller: "errorPage")
@@ -128,10 +152,23 @@ catch (Exception e){
                 def product = Product.findAllByProductDetails(productDetails)
                 if (product) {
                     productList.add(product[0])
+
                 }
             }
             Collections.shuffle(productList)
-            render(view: "categoryList", model: [productList: productList, productCategory: ProductCategory.findByCategoryId(params.id)])
+
+                List<List<ProductSize>> listList=new ArrayList<>()
+                for(Product productInstance:productList){
+                def sizeString=productInstance.productDetails.productSizes
+                String[] stringArraySize= sizeString.split(",")
+                List<ProductSize> productSizeList=new ArrayList<>()
+                for(int i=0;i<stringArraySize.size();i++){
+                    def sizeId=stringArraySize[i] as long
+                    productSizeList.add(ProductSize.get(sizeId))
+                }
+                 listList.add(productSizeList)
+                }
+            render(view: "categoryList", model: [productList: productList, productCategory: ProductCategory.findByCategoryId(params.id),productSizeList:listList])
 
         }
             else{
@@ -160,7 +197,18 @@ catch (Exception e){
                     }
                 }
                 Collections.shuffle(productList)
-                render(view: "specialBrandProducts", model: [productList: productList, specialBrandInstance: SpecialBrand.list()[0].productBrand])
+                List<List<ProductSize>> listList=new ArrayList<>()
+                for(Product productInstance:productList){
+                    def sizeString=productInstance.productDetails.productSizes
+                    String[] stringArraySize= sizeString.split(",")
+                    List<ProductSize> productSizeList=new ArrayList<>()
+                    for(int i=0;i<stringArraySize.size();i++){
+                        def sizeId=stringArraySize[i] as long
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                    listList.add(productSizeList)
+                }
+                render(view: "specialBrandProducts", model: [productSizeList:listList,productList: productList, specialBrandInstance: SpecialBrand.list()[0].productBrand])
             }
             else{
                 redirect(action: "notfound",controller: "errorPage")
@@ -184,7 +232,18 @@ catch (Exception e){
                     }
                 }
                 Collections.shuffle(productList)
-                render(view: "specialSubCategory", model: [productList: productList, specialCategoryInstance: AboutUs.list()[0].specialProductSubCategory])
+                List<List<ProductSize>> listList=new ArrayList<>()
+                for(Product productInstance:productList){
+                    def sizeString=productInstance.productDetails.productSizes
+                    String[] stringArraySize= sizeString.split(",")
+                    List<ProductSize> productSizeList=new ArrayList<>()
+                    for(int i=0;i<stringArraySize.size();i++){
+                        def sizeId=stringArraySize[i] as long
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                    listList.add(productSizeList)
+                }
+                render(view: "specialSubCategory", model: [productSizeList:listList,productList: productList, specialCategoryInstance: AboutUs.list()[0].specialProductSubCategory])
             }
             else{
                 redirect(action: "notfound",controller: "errorPage")
@@ -201,7 +260,18 @@ catch (Exception e){
             if(SeasonManagement.list()[0].seasons){
             def productList = Product.findAllBySeasons(SeasonManagement.list()[0].seasons)
                 Collections.shuffle(productList)
-            render(view: "upComingSeasonProducts", model: [productList: productList, seasonInstance: SeasonManagement.list()[0].seasons])
+                List<List<ProductSize>> listList=new ArrayList<>()
+                for(Product productInstance:productList){
+                    def sizeString=productInstance.productDetails.productSizes
+                    String[] stringArraySize= sizeString.split(",")
+                    List<ProductSize> productSizeList=new ArrayList<>()
+                    for(int i=0;i<stringArraySize.size();i++){
+                        def sizeId=stringArraySize[i] as long
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                    listList.add(productSizeList)
+                }
+            render(view: "upComingSeasonProducts", model: [productSizeList:listList,productList: productList, seasonInstance: SeasonManagement.list()[0].seasons])
         }
             else{
                 redirect(action: "notfound",controller: "errorPage")

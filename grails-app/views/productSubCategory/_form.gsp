@@ -87,7 +87,7 @@
             var subCategoryDescription = document.getElementById("subCategoryDescription").value;
 
             if(productSubCategorySpecify==''){
-                $("#subCategoryName").css("border", "1px solid red");
+                $("#productSubCategorySpecify").css("border", "1px solid red");
                 bootbox.alert({
                     message: "specification must be choosen!",
                     size: 'small'

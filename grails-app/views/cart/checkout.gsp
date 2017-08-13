@@ -603,7 +603,7 @@ return responseValue
                     var sizeList=[];
                     for (var i = 0; i < id.length; i++) {
                         idList.push(id[i].value);
-                        quantityList.push(quantity[i].value)
+                        quantityList.push(quantity[i].value);
                         sizeList.push(size[i].value)
 
                     }

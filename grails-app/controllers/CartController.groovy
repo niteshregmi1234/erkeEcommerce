@@ -7,9 +7,11 @@ static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket:
     def checkAddToCart(){
         try{
       if(session.endUser){
-          def id=params.id1 as long
+          def obj= JSON.parse(params.array)
+          def id=obj[1] as long
+          def sizeId=obj[0] as long
           def productInstance=Product.get(id)
-          def cartInstanceCheck=Cart.findByEndUserInformationAndProduct(session.endUser,productInstance)
+          def cartInstanceCheck=Cart.findByEndUserInformationAndProductAndProductSize(session.endUser,productInstance,ProductSize.get(sizeId))
           if(cartInstanceCheck){
               cartInstanceCheck.quantity=cartInstanceCheck.quantity+1
               cartInstanceCheck.save(flush: true)
@@ -18,6 +20,7 @@ static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket:
               def cartInstance=new Cart()
               cartInstance.product=productInstance
               cartInstance.quantity=1
+              cartInstance.productSize=ProductSize.get(sizeId)
               cartInstance.endUserInformation=session.endUser
               cartInstance.save(flush: true)
           }
@@ -25,7 +28,8 @@ static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket:
       }
         else{
           render "notOk"
-      }}
+      }
+        }
         catch (Exception e){
 
         }

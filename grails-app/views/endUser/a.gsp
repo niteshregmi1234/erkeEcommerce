@@ -11,95 +11,91 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="well">
-            <form>
-                <fieldset>
-                    <div class="form-group">
-                        <label for="query">Search:</label>
-                        <input class="form-control" name="query" id="query" placeholder="Start typing something to search..." type="text">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </fieldset>
-            </form>
+    <h2>Bootstrap 3.3.7 - Modal Demo</h2>
+
+    <div class="row text-center">
+        <h3>The Basic Modal</h3>
+        <a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#basicModal">Click to open Modal</a>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <h3>The Large Modal</h3>
+        <a href="#" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#largeModal">Click to open Modal</a>
+    </div>
+    <hr>
+    <%int i=0;
+        %>
+    <div class="row text-center">
+        <h3>The Small Modal</h3>
+        <a href="#" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#smallModal${i}">Click to open Modal</a>
+    </div>
+
+</div>
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Basic Modal</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Modal Body</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Large Modal</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Modal Body</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Small Modal</h4>
+            </div>
+            <div class="modal-body">
+                <h3>Modal Body</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="p">Demo by Syed Fazle Rahman. <a href="http://www.sitepoint.com/understanding-bootstrap-modals/" target="_blank">See article</a>.</p>
 <style>
-.twitter-typeahead{
-    width:100%;
+h2 {
+    text-align: center;
 }
 
-.twitter-typeahead .tt-query,
-.twitter-typeahead .tt-hint {
-    margin-bottom: 0;
-}
-.tt-dropdown-menu {
-    min-width: 160px;
-    margin-top: 2px;
-    padding: 5px 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,.2);
-    *border-right-width: 2px;
-    *border-bottom-width: 2px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding;
-    background-clip: padding-box;
-    width:100%;
-}
-
-.tt-suggestion {
-    display: block;
-    padding: 3px 20px;
-}
-
-.tt-suggestion.tt-is-under-cursor {
-    color: #fff;
-    background-color: #0081c2;
-    background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-    background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-    background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-    background-image: linear-gradient(to bottom, #0088cc, #0077b3);
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0)
-}
-
-.tt-suggestion.tt-is-under-cursor a {
-    color: #fff;
-}
-
-.tt-suggestion p {
-    margin: 0;
+.p {
+    text-align: center;
+    padding-top: 130px;
 }
 </style>
-<script>
-    /*!
-     * typeahead.js 0.9.3
-     * https://github.com/twitter/typeahead
-     * Copyright 2013 Twitter, Inc. and other contributors; Licensed MIT
-     */
-
-
-    $('#query').typeahead({
-        local: [
-        <g:each in="${productDetails}" var="list">
-                '${list.productDetails.productName}',
-            </g:each>
-        ]
-
-    });
-
-    $('.tt-query').css('background-color','#fff');
-</script>
-
-
 </body>
 </html>

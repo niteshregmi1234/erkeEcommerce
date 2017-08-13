@@ -19,7 +19,7 @@
 <form class="form-horizontal">
     <div class="col-lg-6">
         <div class="form-group ">
-            <label class="control-label col-sm-4">Image:</label>
+            <label class="control-label col-sm-4">Season:</label>
             <div class="col-sm-6">
 
                 <div style="margin-top: 7px;">${seasonsInstance.seasonName}</div>

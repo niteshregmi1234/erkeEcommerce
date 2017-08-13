@@ -128,29 +128,6 @@ if(productSubCategoryInstance){
             return imageNameOld
         }
     }
-    def renderImage = {
-        def validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
-
-        String profileImagePath = "/home/hemanta/image/"
-        String image = params.imageName // or whatever name you saved in your db
-        File imageFile =new File(profileImagePath+image);
-
-        BufferedImage originalImage=ImageIO.read(imageFile);
-
-        ByteArrayOutputStream baos=new ByteArrayOutputStream();
-
-        ImageIO.write(originalImage, "png", baos );
-
-        byte[] imageInByte=baos.toByteArray();
-
-//        response.setHeader('Content-length', imageInByte.length.toString())
-
-        response.contentType = 'image/png' // or the appropriate image content type
-
-        response.outputStream << imageInByte
-        response.outputStream.flush()
-
-    }
     def show(Long id){
         try{
         def productSubCategoryInstance=ProductSubCategory.get(id)
