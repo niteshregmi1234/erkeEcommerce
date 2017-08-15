@@ -7,8 +7,143 @@
 
 </head>
 <body>
+<div class="container"
+     id="page_container">
+    <div id="accordion_search_bar_container">
+        <input type="search"
+               id="accordion_search_bar"
+               placeholder="Search"/>
+    </div>
+    <div class="panel-group"
+         id="accordion"
+         role="tablist"
+         aria-multiselectable="true">
+        <div class="panel panel-success"
+             id="collapseOne_container">
+            <div class="panel-heading"
+                 role="tab"
+                 id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button"
+                       data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#collapseOne"
+                       aria-expanded="true"
+                       aria-controls="collapseOne">
+                        One
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne"
+                 class="panel-collapse collapse in"
+                 role="tabpanel"
+                 aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <p>Pellentesque convallis dolor</p>
+                    <p>Enim at tincidunt magna dapibus vitae</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary"
+             id="collapseTwo_Container">
+            <div class="panel-heading"
+                 role="tab"
+                 id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed"
+                       role="button"
+                       data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#collapseTwo"
+                       aria-expanded="false"
+                       aria-controls="collapseTwo">
+                        Two
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo"
+                 class="panel-collapse collapse in"
+                 role="tabpanel"
+                 aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    <p>Vestibulum in laoreet nisi</p>
+                    <p>Sit amet placerat massa</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-danger"
+             id="collapseThree_Container">
+            <div class="panel-heading"
+                 role="tab"
+                 id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed"
+                       role="button"
+                       data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#collapseThree"
+                       aria-expanded="false"
+                       aria-controls="collapseThree">
+                        Three
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree"
+                 class="panel-collapse collapse in"
+                 role="tabpanel"
+                 aria-labelledby="headingThree">
+                <div class="panel-body">
+                    <p>Curabitur sem eros tempor sit</p>
+                    <p>Amet nunc eget, gravida mollis</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+   #page_container {
+       margin-top: 15px;
+       margin-bottom: 15px;
+   }
+
+   #accordion_search_bar_container {
+       position: relative;}
+
+#accordion_search_bar {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid;
+    border-radius: 25px;
+    outline: 0;
+}
 
 
+   .panel-title a {
+    display: block;
+}
+
+</style>
+<script>
+    (function(){
+    var searchTerm, panelContainerId;
+    // Create a new contains that is case insensitive
+    $.expr[':'].containsCaseInsensitive = function (n, i, m) {
+    return jQuery(n).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+    };
+
+    $('#accordion_search_bar').on('change keyup paste click', function () {
+    searchTerm = $(this).val();
+    $('#accordion > .panel').each(function () {
+    panelContainerId = '#' + $(this).attr('id');
+    $(panelContainerId + ':not(:containsCaseInsensitive(' + searchTerm + '))').hide();
+    $(panelContainerId + ':containsCaseInsensitive(' + searchTerm + ')').show();
+    });
+    });
+    }());
+</script>
 
 <div class="container">
 

@@ -118,36 +118,36 @@
 					</div>
 					<hr>
 					<h2>Contact form</h2>
-					<form>
+					<form action="/checkOut/sendFeedBackMessage" method="post" id="reg_form">
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="firstname">Firstname</label>
-									<input type="text" class="form-control" id="firstname">
+									<input type="text" name="first_name" class="form-control" id="firstname">
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="lastname">Lastname</label>
-									<input type="text" class="form-control" id="lastname">
+									<input type="text" name="last_name" class="form-control" id="lastname">
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="email">Email</label>
-									<input type="text" class="form-control" id="email">
+									<input type="text" name="email" class="form-control" id="email">
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="subject">Subject</label>
-									<input type="text" class="form-control" id="subject">
+									<input type="text" name="subject" class="form-control" id="subject">
 								</div>
 							</div>
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="message">Message</label>
-									<textarea id="message" class="form-control"></textarea>
+									<textarea id="message" name="message" class="form-control"></textarea>
 								</div>
 							</div>
 
@@ -222,6 +222,108 @@
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$('#reg_form').bootstrapValidator({
+					// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+
+					fields: {
+						first_name: {
+							validators: {
+								stringLength: {
+									min: 2,
+								},
+								notEmpty: {
+									message: 'Please supply your first name'
+								}
+							}
+						},
+						last_name: {
+							validators: {
+								stringLength: {
+									min: 2,
+								},
+								notEmpty: {
+									message: 'Please supply your last name'
+								}
+							}
+						},
+
+
+						email: {
+							validators: {
+								notEmpty: {
+									message: 'Please supply your email address'
+								},
+								emailAddress: {
+									message: 'Please supply a valid email address'
+
+								},
+
+							}
+						},
+						subject: {
+							validators: {
+								stringLength: {
+									min: 10,
+								},
+								notEmpty: {
+									message: 'Please supply your subject'
+								}
+							}
+						},
+						message: {
+							validators: {
+								stringLength: {
+									min: 30,
+								},
+								notEmpty: {
+									message: 'Please supply your message'
+								}
+							}
+						}
+
+
+
+					}
+				})
+
+
+				.on('success.form.bv', function(e) {
+					$('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+					$('#reg_form').data('bootstrapValidator').resetForm();
+
+					// Prevent form submission
+					e.preventDefault();
+
+					// Get the form instance
+					var $form = $(e.target);
+
+					// Get the BootstrapValidator instance
+					var bv = $form.data('bootstrapValidator');
+
+					// Use Ajax to submit form data
+				});
+	});
+
+</script>
+<g:if test="${flash.message}">
+	<script>
+		window.addEventListener("load",function(){
+			bootbox.alert({
+				message:"${flash.message}",
+				size: 'small',
+				callback: function(){
+					location.reload();
+				}
+
+			});
+
+		});
+
+	</script>
+</g:if>
 
 </body>
 

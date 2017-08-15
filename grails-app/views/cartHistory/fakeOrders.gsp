@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<h1>Successful Orders-</h1><br>
+<h1>Pending Orders-</h1><br>
 <div class="container"
      id="page_container">
     <div id="accordion_search_bar_container">
@@ -25,6 +25,7 @@
          role="tablist"
          aria-multiselectable="true">
         <g:each in="${listListCartList}" var="list" status="i">
+
             <div class="panel panel-success"
                  id="collapse${i}_container">
                 <div class="panel-heading"
@@ -46,6 +47,7 @@
                      role="tabpanel"
                      aria-labelledby="heading${i}">
                     <div class="panel-body">
+                        <g:form action="deliveredToCustomer" method="post" controller="cartHistory" >
 
                             <div class="container">
                                 <h3><u>Customer Information</u></h3>
@@ -151,8 +153,18 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2"></label>
+
+                                        <div class="col-sm-6">
+                                            <g:submitButton name="delivered" value="Delivered" id="submit_Id" class="btn btn-success" onclick="confirm('Are you sure the order is delivered?')"></g:submitButton>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
+                        </g:form>
 
                     </div>
                 </div>

@@ -1,6 +1,8 @@
 
 
 class CartHistory {
+    boolean isFakeOrder
+    String orderId
     Product product
     int quantity
     EndUserInformation endUserInformation

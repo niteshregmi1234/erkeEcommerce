@@ -19,7 +19,7 @@ static allowedMethods = [save: 'POST']
         if(!params.id){
             def productBrandInstance=new ProductBrand()
             productBrandInstance.brandName=params.brandName
-            productBrandInstance.statusShow=params.statusShow as boolean
+            productBrandInstance.statusShow=params.statusShow as byte
             productBrandInstance.brandDescription=params.brandDescription
 
             productBrandInstance.save(flush: true)
@@ -29,7 +29,7 @@ static allowedMethods = [save: 'POST']
             def productBrandInstance=ProductBrand.get(params.id)
             if(productBrandInstance){
             productBrandInstance.brandName=params.brandName
-            productBrandInstance.statusShow=params.statusShow as boolean
+            productBrandInstance.statusShow=params.statusShow as byte
                 productBrandInstance.brandDescription=params.brandDescription
 
                 productBrandInstance.save(flush: true)

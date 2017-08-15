@@ -124,8 +124,9 @@
             </li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Orders<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><g:link action="undeliveredCartItems" controller="cartHistory">Undelivered Orders</g:link></li>
-                    <li><g:link action="deliveredCartItems" controller="cartHistory">Delivered Orders</g:link></li>
+                    <li><g:link action="recentOrders" controller="cartHistory">Recent Orders</g:link></li>
+                    <li><g:link action="successFullOrders" controller="cartHistory">Successful Orders</g:link></li>
+                    <li><g:link action="pendingOrders" controller="cartHistory">Pending Orders</g:link></li>
 
 
                 </ul>

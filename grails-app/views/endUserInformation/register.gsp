@@ -192,6 +192,10 @@
 
                                     password: {
                                         validators: {
+                                            notEmpty: {
+                                                message: 'Please supply your password'
+                                            },
+
                                             identical: {
                                                 field: 'confirmPassword',
                                                 message: 'Confirm your password below - type same password please'

@@ -29,8 +29,8 @@ static allowedMethods = [save: 'POST']
             productDetails.productName=params.productName
             productDetails.productBrand=ProductBrand.get(params.productBrand)
             productDetails.price=params.price as float
-            productDetails.isSale=params.isSale
-            if(productDetails.isSale==true){
+            productDetails.isSale=params.isSale as byte
+            if(productDetails.isSale){
                 productDetails.discountPercentage=params.discountPercentage as float
             }
             else{
@@ -56,8 +56,8 @@ static allowedMethods = [save: 'POST']
             productDetails.productName=params.productName
             productDetails.productBrand=ProductBrand.get(params.productBrand)
             productDetails.price=params.price as float
-            productDetails.isSale=params.isSale
-            if(productDetails.isSale==true){
+            productDetails.isSale=params.isSale as byte
+            if(productDetails.isSale){
                 productDetails.discountPercentage=params.discountPercentage as float
             }
             else{

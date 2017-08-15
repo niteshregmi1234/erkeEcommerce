@@ -19,7 +19,7 @@ static allowedMethods = [save: 'POST']
         if(!params.id){
             def productColorInstance=new ProductColor()
             productColorInstance.colorName=params.colorName
-            productColorInstance.statusShow=params.statusShow as boolean
+            productColorInstance.statusShow=params.statusShow as byte
             productColorInstance.save(flush: true)
             redirect(action: "show" ,id:productColorInstance.id)
         }
@@ -27,7 +27,7 @@ static allowedMethods = [save: 'POST']
             def productColorInstance=ProductColor.get(params.id)
 if(productColorInstance){
             productColorInstance.colorName=params.colorName
-            productColorInstance.statusShow=params.statusShow as boolean
+            productColorInstance.statusShow=params.statusShow as byte
 
             productColorInstance.save(flush: true)
 

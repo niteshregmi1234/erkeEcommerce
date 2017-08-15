@@ -9,6 +9,6 @@ String subCategoryDescription
     boolean statusShow
     boolean isFooter
     static constraints = {
-        subCategoryId generator:'assigned'
+        subCategoryId (generator:'assigned',unique:true)
     }
 }

@@ -7,7 +7,7 @@ import java.util.regex.Pattern
 
 class ProductCategoryController extends BaseController{
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
-static allowedMethods = [save: 'POST',uploadCoverImage: 'POST',editCoverImage: 'POST',uploadMenuImage1: 'POST',editMenu1Image: 'POST',uploadMenuImage2: 'POST',editMenu2Image: 'POST',uploadMenuImage3: 'POST',editMenu3Image: 'POST',uploadShoppingImage: 'POST',editShopImage: 'POST']
+static allowedMethods = [save: 'POST',uploadCoverImage: 'POST',editCoverImage: 'POST',uploadMenuImage1: 'POST',editMenu1Image: 'POST',uploadMenuImage2: 'POST',editMenu2Image: 'POST']
     def list() {
         try{
 def productCategoryList=ProductCategory.list()
@@ -24,7 +24,7 @@ def productCategoryList=ProductCategory.list()
         if(!params.id){
             def productCategoryInstance=new ProductCategory()
             productCategoryInstance.categoryName=params.categoryName
-            productCategoryInstance.statusShow=params.statusShow as boolean
+            productCategoryInstance.statusShow=params.statusShow as byte
             productCategoryInstance.categoryDescription=params.categoryDescription
 
             productCategoryInstance.coverImageName=uploadCoverImage()
@@ -38,7 +38,7 @@ def productCategoryList=ProductCategory.list()
             def productCategoryInstance=ProductCategory.get(params.id)
 if(productCategoryInstance){
             productCategoryInstance.categoryName=params.categoryName
-            productCategoryInstance.statusShow=params.statusShow as boolean
+            productCategoryInstance.statusShow=params.statusShow as byte
     productCategoryInstance.categoryDescription=params.categoryDescription
     productCategoryInstance.coverImageName=editCoverImage(productCategoryInstance.coverImageName)
             productCategoryInstance.menuImage1=editMenu1Image(productCategoryInstance.menuImage1)
@@ -91,36 +91,6 @@ if(productCategoryInstance){
     def uploadMenuImage2(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("menuImage2")
-        def fileName=file.originalFilename
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-        }
-
-        abc:
-        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-        if (check == true) {
-            Matcher m = PATTERN.matcher(fileName);
-            if (m.matches()) {
-                String prefix = m.group(1);
-                String last = m.group(2);
-                String suffix = m.group(3);
-                if (suffix == null) suffix = "";
-                int count = last != null ? Integer.parseInt(last) : 0;
-                count++;
-                fileName = prefix + "(" + count + ")" + suffix;
-                continue abc
-            }
-        }
-        File fileDest = new File(homeDir,"yarsaa/${fileName}")
-        file.transferTo(fileDest)
-        return fileName
-
-    }
-    def uploadMenuImage3(){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("menuImage3")
         def fileName=file.originalFilename
         def homeDir = new File(System.getProperty("user.home"))
         File theDir = new File(homeDir,"yarsaa");
@@ -222,74 +192,7 @@ if(productCategoryInstance){
             return imageNameOld
         }
     }
-    def editMenu3Image(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("menuImage3")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
-            abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
-            }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            return fileName
 
-        }
-        else{
-            return imageNameOld
-        }
-    }
-
-    def uploadShoppingImage(){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("shoppingImageName")
-        def fileName=file.originalFilename
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-        }
-
-        abc:
-        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-        if (check == true) {
-            Matcher m = PATTERN.matcher(fileName);
-            if (m.matches()) {
-                String prefix = m.group(1);
-                String last = m.group(2);
-                String suffix = m.group(3);
-                if (suffix == null) suffix = "";
-                int count = last != null ? Integer.parseInt(last) : 0;
-                count++;
-                fileName = prefix + "(" + count + ")" + suffix;
-                continue abc
-            }
-        }
-        File fileDest = new File(homeDir,"yarsaa/${fileName}")
-        file.transferTo(fileDest)
-        return fileName
-
-    }
     def uploadCoverImage(){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImageName")
@@ -319,43 +222,6 @@ if(productCategoryInstance){
         file.transferTo(fileDest)
         return fileName
 
-    }
-    def editShopImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("shoppingImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
-            abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
-            }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            return fileName
-
-        }
-        else{
-            return imageNameOld
-        }
     }
 
     def editCoverImage(String imageNameOld){
@@ -430,23 +296,16 @@ if(productCategoryInstance){
             def productCategoryInstance=ProductCategory.get(params.id)
 
             if(productCategoryInstance) {
-            productCategoryInstance.delete()
+                productCategoryInstance.delete(flush: true)
                 def homeDir = new File(System.getProperty("user.home"))
                 File coverImage= new File(homeDir,"yarsaa/${productCategoryInstance.coverImageName}")
-                File shopImage=  new File(homeDir,"yarsaa/${productCategoryInstance.shoppingImageName}")
                 File menuImage1=  new File(homeDir,"yarsaa/${productCategoryInstance.menuImage1}")
                 File menuImage2=  new File(homeDir,"yarsaa/${productCategoryInstance.menuImage2}")
-                File menuImage3=  new File(homeDir,"yarsaa/${productCategoryInstance.menuImage3}")
-
                 coverImage.delete();
-                shopImage.delete();
                 menuImage1.delete()
                 menuImage2.delete()
-                menuImage3.delete()
                 flash.message="Successfully deleted."
-
-
-        }
+            }
         else{
             flash.message="Unable to delete the already deleted item."
 

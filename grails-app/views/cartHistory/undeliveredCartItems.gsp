@@ -12,141 +12,229 @@
 </head>
 
 <body>
+<h1>Recent Orders-</h1><br>
+<div class="container"
+     id="page_container">
+    <div id="accordion_search_bar_container">
+        <input type="search"
+               id="accordion_search_bar"
+               placeholder="Search" style="border: 1px solid black;"/>
+    </div>
+    <div class="panel-group"
+         id="accordion"
+         role="tablist"
+         aria-multiselectable="true">
+        <g:each in="${listListCartList}" var="list" status="i">
+
+    <div class="panel panel-success"
+             id="collapse${i}_container">
+            <div class="panel-heading"
+                 role="tab"
+                 id="heading${i}" style="background-color: #0c0c0c;">
+                <h4 class="panel-title">
+                    <a role="button"
+                       data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#collapse${i}"
+                       aria-expanded="true"
+                       aria-controls="collapse${i}" style="color: white;">
+Order Id-${list[0].orderId}
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse${i}"
+                 class="panel-collapse collapse"
+                 role="tabpanel"
+                 aria-labelledby="heading${i}">
+                <div class="panel-body">
+                    <g:form controller="cartHistory" >
+
+                        <div class="container">
+                            <h3><u>Customer Information</u></h3>
+                                                        <div class="table-responsive">
+
+                            <table class="table table-bordered" style="width: 1108px;">
+                                <tbody>
+                                <tr>
+                                    <th scope="row">Full Name</th>
+                                    <td>${list[0].endUserInformation.firstName+" "+list[0].endUserInformation.lastName}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Email Id</th>
+                                    <td>${list[0].endUserInformation.email}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">City</th>
+                                    <td>${list[0].endUserInformation.city}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Mobile Number</th>
+                                    <td>${list[0].endUserInformation.phone}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Address</th>
+                                    <td>${list[0].endUserInformation.address}</td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                            <h3><u>Delivery Information</u></h3>
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered" style="width: 1108px;">
+                                <tbody>
+                                <tr>
+                                    <th scope="row">Delivery Address</th>
+                                    <td>${list[0].deliveryAddress}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Payment Method</th>
+                                    <td>${list[0].paymentMethod.briefDescribe}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Delivery Method</th>
+                                    <td>${list[0].deliveryMethod.briefDescribe}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Mobile Number</th>
+                                    <td>${list[0].mobileNumber}</td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            </div>
+                            <h3><u>Orders List</u></h3>
+                            <div class="table-responsive">
+
+                                <table class="table table-bordered" style="width: 1108px;">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">Product</th>
+                                        <th>Size</th>
+                                        <th>Quantity</th>
+                                        <th>Unit price</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <g:each in="${list}" var="list1">
+                                        <g:hiddenField name="cartHistoryId" value="${list1.id}"></g:hiddenField>
+                                        <tr>
+                                            <td class="abc">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list1.product.specialImageName])}">
+
+
+                                            </td>
+                                            <td>${list1.product.productColor.colorName+" "+list1.product.productDetails.productName+" "+list1.product.productDetails.productBrand.brandName}
+                                            </td>
+                                            <td>${list1.productSize.sizeName}</td>
+
+                                            <td>
+                                                ${list1.quantity}
+                                            </td>
+                                            <td>Rs.${list1.product.productDetails.price}</td>
+                                            <td>${list1.product.productDetails.discountPercentage}%</td>
+                                            <td>Rs.${(list1.product.productDetails.price*list1.quantity)-(list1.product.productDetails.discountPercentage*(list1.product.productDetails.price*list1.quantity)/100)}</td>
+
+                                        </tr>
+                                    </g:each>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"></label>
+
+                                    <div class="col-sm-6">
+                                        <g:actionSubmit action="deliveredToCustomer" name="delivered" value="Delivered" class="btn btn-success a" onclick="confirm('Are you sure the order is delivered?')"></g:actionSubmit><br><br>
+                                        <g:actionSubmit action="addToPending" name="pending" value="Add to Pending" class="btn btn-danger a" onclick="confirm('Are you sure add the order to pending list?')"></g:actionSubmit>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </g:form>
+
+                </div>
+            </div>
+        </div>
+
+</g:each>
+    </div>
+</div>
+<style>
+
+#page_container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#accordion_search_bar_container {
+    position: relative;}
+
+#accordion_search_bar {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid;
+    border-radius: 25px;
+    outline: 0;
+}
+
+
+.panel-title a {
+    display: block;
+}
+
+</style>
+<script>
+    (function(){
+
+        var searchTerm, panelContainerId;
+        // Create a new contains that is case insensitive
+        $.expr[':'].containsCaseInsensitive = function (n, i, m) {
+            return jQuery(n).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+        };
+
+        $('#accordion_search_bar').on('change keyup paste click', function () {
+            searchTerm = $(this).val();
+            $('#accordion > .panel').each(function () {
+                panelContainerId = '#' + $(this).attr('id');
+                $(panelContainerId + ':not(:containsCaseInsensitive(' + searchTerm + '))').hide();
+                $(panelContainerId + ':containsCaseInsensitive(' + searchTerm + ')').show();
+            });
+        });
+    }());
+</script>
+
+
 
 <script>
-    $(function () {
-        $("#accordion").accordion();
-    });
+    function preventMultipleSubmissions() {
+        $('.a').prop('disabled', true);
+    }
+
+    window.onbeforeunload = preventMultipleSubmissions;
 </script>
-<h1>Click to View Orders</h1>
-<div id="accordion">
-    <g:each in="${listListCartList}" var="list">
-        <h3>Customer Name-${list[0].endUserInformation.firstName+" "+list[0].endUserInformation.lastName}&nbsp;&nbsp;Email-${list[0].endUserInformation.email}&nbsp;&nbsp;DateTime-${list[0].date}</h3>
-
-        <div>
-            <g:form action="deliveredToCustomer" method="post" controller="cartHistory" >
-
-            <div class="container">
-                <h3><u>Delivery Information</u></h3>
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <th scope="row">Delivery Address</th>
-                        <td>${list[0].deliveryAddress}</td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">Payment Method</th>
-                        <td>${list[0].paymentMethod.briefDescribe}</td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">Delivery Method</th>
-                        <td>${list[0].deliveryMethod.briefDescribe}</td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">Mobile Number</th>
-                        <td>${list[0].mobileNumber}</td>
-
-                    </tr>
-
-                    </tbody>
-                </table>
-                <h3><u>Orders List</u></h3>
-        <div class="table-responsive">
-
-            <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th colspan="2">Product</th>
-                        <th>Size</th>
-                        <th>Quantity</th>
-                        <th>Unit price</th>
-                        <th>Discount</th>
-                        <th>Total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <g:each in="${list}" var="list1">
-                        <g:hiddenField name="cartHistoryId" value="${list1.id}"></g:hiddenField>
-                        <tr>
-                            <td class="abc">
-                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list1.product.specialImageName])}">
-
-
-                            </td>
-                            <td>${list1.product.productColor.colorName+" "+list1.product.productDetails.productName+" "+list1.product.productDetails.productBrand.brandName}
-                            </td>
-                            <td>${list1.productSize.sizeName}</td>
-
-                            <td>
-                                ${list1.quantity}
-                            </td>
-                            <td>Rs.${list1.product.productDetails.price}</td>
-                            <td>${list1.product.productDetails.discountPercentage}%</td>
-                            <td>Rs.${(list1.product.productDetails.price*list1.quantity)-(list1.product.productDetails.discountPercentage*(list1.product.productDetails.price*list1.quantity)/100)}</td>
-
-                        </tr>
-                    </g:each>
-                    </tbody>
-                </table>
-            </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label class="control-label col-sm-2"></label>
-
-                        <div class="col-sm-6">
-                            <g:submitButton name="delivered" value="Delivered" id="submit_Id" class="btn btn-default" onclick="confirm('Are you sure the order is delivered?')"></g:submitButton>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            </g:form>
-            <script>
-                function preventMultipleSubmissions() {
-                    $('#submit_Id').prop('disabled', true);
-                }
-
-                window.onbeforeunload = preventMultipleSubmissions;
-            </script>
-            <style>
-                .abc img{
-                    height: 40px;
-                    width: 30px;
-                }
-            .height {
-                min-height: 200px;
-            }
-
-            .icon {
-                font-size: 47px;
-                color: #5CB85C;
-            }
-
-            .iconbig {
-                font-size: 77px;
-                color: #5CB85C;
-            }
-
-            .table > tbody > tr > .emptyrow {
-                border-top: none;
-            }
-
-            .table > thead > tr > .emptyrow {
-                border-bottom: none;
-            }
-
-            .table > tbody > tr > .highrow {
-                border-top: 3px solid;
-            }
-            </style>
-
-        </div>
-    </g:each>
-
-</div>
-
+<style>
+.abc img{
+    height: 40px;
+    width: 30px;
+}
+</style>
 </body>
 </html>

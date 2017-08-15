@@ -1,8 +1,8 @@
 class CartHistoryController extends BaseController{
-    static allowedMethods = [deliveredToCustomer:'POST']
-    def undeliveredCartItems(){
+    static allowedMethods = [deliveredToCustomer:'POST',addToPending: 'POST']
+    def recentOrders(){
         try{
-def undeliveredCartItems=CartHistory.findAllByIsDelivered(false)
+def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,false)
             List<List<CartHistory>> listListCartList=new ArrayList<>()
 
         def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.endUserInformation},{undeliveredCartItem -> undeliveredCartItem.date})
@@ -11,9 +11,7 @@ def undeliveredCartItems=CartHistory.findAllByIsDelivered(false)
             def cartList = abc[cartHistory.date] as List<CartHistory>
             if(!listListCartList.contains(cartList)){
                 listListCartList.add(cartList)
-                print cartList
-            print cartList[0].endUserInformation
-                print cartList[0].date
+
 
          }
         }
@@ -25,24 +23,43 @@ def undeliveredCartItems=CartHistory.findAllByIsDelivered(false)
         }
 
     }
-    def deliveredToCustomer(){
+    def addToPending(){
         try{
         def cartHistoryIdList=params.list("cartHistoryId")
         for(int i=0;i<cartHistoryIdList.size();i++){
             def cartHistoryId=cartHistoryIdList[i] as long
             def cartHistory=CartHistory.findById(cartHistoryId)
-            cartHistory.isDelivered=true
+            cartHistory.isDelivered=false
+            cartHistory.isFakeOrder=true
             cartHistory.save(flush: true)
         }
-        redirect(action: "undeliveredCartItems")
+        redirect(action: "recentOrders")
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
-    def deliveredCartItems(){
+    def deliveredToCustomer(){
         try{
-            def undeliveredCartItems=CartHistory.findAllByIsDelivered(true)
+            def cartHistoryIdList=params.list("cartHistoryId")
+            for(int i=0;i<cartHistoryIdList.size();i++){
+                def cartHistoryId=cartHistoryIdList[i] as long
+                def cartHistory=CartHistory.findById(cartHistoryId)
+                cartHistory.isDelivered=true
+                cartHistory.isFakeOrder=false
+
+                cartHistory.save(flush: true)
+            }
+            redirect(action: "recentOrders")
+        }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
+    }
+
+    def successFullOrders(){
+        try{
+            def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(true,false)
             List<List<CartHistory>> listListCartList=new ArrayList<>()
 
                 def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.endUserInformation},{undeliveredCartItem -> undeliveredCartItem.date})
@@ -51,9 +68,6 @@ def undeliveredCartItems=CartHistory.findAllByIsDelivered(false)
                     def cartList = abc[cartHistory.date] as List<CartHistory>
                     if(!listListCartList.contains(cartList)){
                         listListCartList.add(cartList)
-                        print cartList
-                        print cartList[0].endUserInformation
-                        print cartList[0].date
 
                     }
                 }
@@ -65,4 +79,27 @@ def undeliveredCartItems=CartHistory.findAllByIsDelivered(false)
         }
 
     }
+    def pendingOrders(){
+        try{
+            def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,true)
+            List<List<CartHistory>> listListCartList=new ArrayList<>()
+
+            def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.endUserInformation},{undeliveredCartItem -> undeliveredCartItem.date})
+            for(CartHistory cartHistory:undeliveredCartItems) {
+                def abc = cartItemsByEndUserAndDate[cartHistory.endUserInformation]
+                def cartList = abc[cartHistory.date] as List<CartHistory>
+                if(!listListCartList.contains(cartList)){
+                    listListCartList.add(cartList)
+
+                }
+            }
+            render(view: "fakeOrders",model:[listListCartList:listListCartList])
+
+        }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
+
+    }
+
 }

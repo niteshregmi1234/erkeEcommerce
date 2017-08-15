@@ -19,8 +19,7 @@ static  allowedMethods = [save: 'POST']
             def deliveryMethodInstance=new DeliveryMethod()
             deliveryMethodInstance.briefDescribe=params.briefDescribe
             deliveryMethodInstance.detailDescribe=params.detailDescribe
-            deliveryMethodInstance.isShowStatus=params.isShowStatus
-
+            deliveryMethodInstance.isShowStatus=params.isShowStatus as byte
             deliveryMethodInstance.save(flush: true)
             redirect(action: "show" ,id:deliveryMethodInstance.id)
         }
@@ -29,7 +28,7 @@ static  allowedMethods = [save: 'POST']
             if(deliveryMethodInstance) {
                 deliveryMethodInstance.briefDescribe = params.briefDescribe
                 deliveryMethodInstance.detailDescribe = params.detailDescribe
-                deliveryMethodInstance.isShowStatus = params.isShowStatus
+                deliveryMethodInstance.isShowStatus=params.isShowStatus as byte
                 deliveryMethodInstance.save(flush: true)
                 redirect(action: "show", id: deliveryMethodInstance.id)
             }

@@ -73,7 +73,7 @@
             <label class="control-label col-sm-4">IsSale:</label>
             <div class="col-sm-6">
                 <g:select name="isSale" from="${['TRUE','FALSE']}"
-                          keys="${[true,false]}" value="${productDetailsInstance?.isSale}" class="form-control"/>
+                          keys="${[1,0]}" value="${productDetailsInstance?.isSale?1:0}" class="form-control"/>
             </div>
         </div>
     </div>
@@ -125,7 +125,6 @@
         window.onbeforeunload = preventMultipleSubmissions;
 
         function Validate() {
-            productSizeId
             var productCategory = document.getElementById("productCategory").value;
             var productSubCategory = document.getElementById("productSubCategory").value;
             var productBrand = document.getElementById("productBrand").value;
@@ -168,7 +167,7 @@ if(discountPercentage.length>0){
         return false;
 
     }
-    else if(discountPercentage<0 ||discountPercentage>100 ){
+    else if(discountPercentage<0 ||discountPercentage>100 || discountPercentage==0 ){
         document.getElementById("discountPercentage").focus();
         bootbox.alert({
             message: "discount % must be between 0 and 100",
@@ -231,12 +230,12 @@ if(discountPercentage.length>0){
                 return false;
             }
 
-            else if(isSale=="true") {
+            else if(isSale=='1') {
 
                 if (discountPercentage == '') {
 
                     bootbox.alert({
-                        message: "discount must not be blank",
+                        message: "discount must be given for sale items",
                         size: 'small'
                     });
                     document.getElementById("discountPercentage").focus();

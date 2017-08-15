@@ -28,7 +28,7 @@
 
             <div class="col-sm-4">
                 <g:select name="isShowStatus" from="${['TRUE','FALSE']}"
-                          keys="${[true,false]}" value="${paymentMethodInstance?.isShowStatus}" class="form-control"/>
+                          keys="${[1,0]}" value="${paymentMethodInstance?.isShowStatus? 1 : 0}" class="form-control"/>
 
 
                 %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%

@@ -65,7 +65,7 @@
             <label class="control-label col-sm-4">IsFeatured:</label>
             <div class="col-sm-6">
                 <g:select name="isFeatured" from="${['TRUE','FALSE']}"
-                          keys="${[true,false]}" value="${productInstance?.isFeatured}" class="form-control"/>
+                          keys="${[1,0]}" value="${productInstance?.isFeatured?1:0}" class="form-control"/>
 
 
             </div>
@@ -76,7 +76,7 @@
             <label class="control-label col-sm-4">IsLatest:</label>
             <div class="col-sm-6">
                 <g:select name="isLatest" from="${['TRUE','FALSE']}"
-                          keys="${[true,false]}" value="${productInstance?.isLatest}" class="form-control"/>
+                          keys="${[1,0]}" value="${productInstance?.isLatest?1:0}" class="form-control"/>
 
             </div>
         </div>

@@ -29,8 +29,8 @@ class ProductSubCategoryController extends BaseController{
             def productSubCategoryInstance=new ProductSubCategory()
             productSubCategoryInstance.subCategoryName=params.subCategoryName
             productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
-            productSubCategoryInstance.statusShow=params.statusShow as boolean
-            productSubCategoryInstance.isFooter=params.isFooter as boolean
+            productSubCategoryInstance.statusShow=params.statusShow as byte
+            productSubCategoryInstance.isFooter=params.isFooter as byte
             productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
             productSubCategoryInstance.coverImageName=uploadCoverImage()
             productSubCategoryInstance.save(flush: true)
@@ -42,8 +42,8 @@ if(productSubCategoryInstance){
             productSubCategoryInstance.subCategoryName=params.subCategoryName
             productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
 
-            productSubCategoryInstance.statusShow=params.statusShow as boolean
-    productSubCategoryInstance.isFooter=params.isFooter as boolean
+            productSubCategoryInstance.statusShow=params.statusShow as byte
+    productSubCategoryInstance.isFooter=params.isFooter as byte
     productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
 
     productSubCategoryInstance.coverImageName=editCoverImage(productSubCategoryInstance.coverImageName)

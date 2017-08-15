@@ -222,7 +222,8 @@
                                 </p>
                                 <div class="price">
                                     <ul style="list-style: none;">
-                                        <li>Rs.${productInstance.productDetails.price-(productInstance.productDetails.discountPercentage*productInstance.productDetails.price/100)}</li>
+
+                                        <li>Rs.<g:formatNumber number="${productInstance.productDetails.price-(productInstance.productDetails.discountPercentage*productInstance.productDetails.price/100)}" type="number" maxFractionDigits="2" /></li>
                                         <g:if test="${productInstance.productDetails.isSale}">
                                         <li>
                                             <small><del>Rs.${productInstance.productDetails.price}</del></small>
@@ -530,7 +531,9 @@ return responseValue;
                                 <div class="text">
                                     <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName}</g:link></h3>
                                     <g:if test="${list.productDetails.isSale==true}">
-                                        <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
+                                        <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
+
                                             <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                     </g:if>
                                     <g:if test="${list.productDetails.isSale==false}">

@@ -22,7 +22,7 @@ class ProductSizeController extends BaseController{
             if (!params.id) {
                 def productSizeInstance = new ProductSize()
                 productSizeInstance.sizeName = params.sizeName
-                productSizeInstance.statusShow = params.statusShow as boolean
+                productSizeInstance.statusShow = params.statusShow as byte
                 productSizeInstance.sizeDetails = params.sizeDetails
                 productSizeInstance.save(flush: true)
                 redirect(action: "show", id: productSizeInstance.id)
@@ -30,7 +30,7 @@ class ProductSizeController extends BaseController{
                 def productSizeInstance = ProductSize.get(params.id)
                 if (productSizeInstance) {
                     productSizeInstance.sizeName = params.sizeName
-                    productSizeInstance.statusShow = params.statusShow as boolean
+                    productSizeInstance.statusShow = params.statusShow as byte
                     productSizeInstance.sizeDetails = params.sizeDetails
                     productSizeInstance.save(flush: true)
                     redirect(action: "show", id: productSizeInstance.id)

@@ -49,8 +49,8 @@ def checkPhoto(){
             def product=new Product()
                       product.productColor=ProductColor.get(params.productColor)
             product.productDetails=ProductDetails.get(params.productDetails)
-            product.isFeatured=params.isFeatured as boolean
-            product.isLatest=params.isLatest as boolean
+            product.isFeatured=params.isFeatured as byte
+            product.isLatest=params.isLatest as byte
             product.seasons=SeasonManagement.list()[1].seasons
             product.productSpecificationName=product.productDetails.productName+"-"+product.productColor.colorName
             product.frontImageName=upLoadFrontImage()
@@ -65,8 +65,8 @@ def checkPhoto(){
             if(product){
             product.productColor=ProductColor.get(params.productColor)
             product.productDetails=ProductDetails.get(params.productDetails)
-            product.isFeatured=params.isFeatured as boolean
-            product.isLatest=params.isLatest as boolean
+            product.isFeatured=params.isFeatured as byte
+            product.isLatest=params.isLatest as byte
             product.productSpecificationName=product.productDetails.productName+"-"+product.productColor.colorName
 
             product.frontImageName=editFrontImage(product.frontImageName)

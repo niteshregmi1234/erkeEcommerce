@@ -12,7 +12,7 @@ class Product {
     String productSpecificationName
     String specialImageName
     static constraints = {
-        productId generator:'assigned'
+        productId (generator:'assigned',unique:true)
     }
 
 }

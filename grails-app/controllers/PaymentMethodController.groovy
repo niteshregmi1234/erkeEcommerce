@@ -20,7 +20,7 @@ static allowedMethods = [save: 'POST']
             def paymentMethodInstance=new PaymentMethod()
             paymentMethodInstance.briefDescribe=params.briefDescribe
             paymentMethodInstance.detailDescribe=params.detailDescribe
-            paymentMethodInstance.isShowStatus=params.isShowStatus
+            paymentMethodInstance.isShowStatus=params.isShowStatus as byte
 
             paymentMethodInstance.save(flush: true)
             redirect(action: "show" ,id:paymentMethodInstance.id)
@@ -30,7 +30,8 @@ static allowedMethods = [save: 'POST']
             if(paymentMethodInstance){
             paymentMethodInstance.briefDescribe=params.briefDescribe
             paymentMethodInstance.detailDescribe=params.detailDescribe
-            paymentMethodInstance.isShowStatus=params.isShowStatus
+                paymentMethodInstance.isShowStatus=params.isShowStatus as byte
+
             paymentMethodInstance.save(flush: true)
             redirect(action: "show" ,id:paymentMethodInstance.id)}
             else{

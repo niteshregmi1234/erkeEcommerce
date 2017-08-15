@@ -177,10 +177,10 @@
         </div>
 
         <div class="col-md-9">
-            <div class="box b">
-                <h1>Shopping Department</h1>
-                <p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>
-            </div>
+            %{--<div class="box b">--}%
+                %{--<h1>Shopping Department</h1>--}%
+                %{--<p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p>--}%
+            %{--</div>--}%
 
             %{--<div class="box info-bar">--}%
             %{--<div class="row">--}%
@@ -287,7 +287,8 @@
                                 </g:link>
                                 <div class="text">
                                     <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
-                                    <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
+                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
                                         <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>

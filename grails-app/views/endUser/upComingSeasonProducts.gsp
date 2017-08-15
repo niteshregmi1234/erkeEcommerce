@@ -72,7 +72,7 @@
             %{--</div>--}%
 
             <div class="row products" id="myList">
-                <g:each in="${productList}" var="list" status="">
+                <g:each in="${productList}" var="list" status="i">
                     <g:if test="${list.productDetails.isSale==false}">
                         <div class="col-md-3 col-sm-4 a">
                             <div class="product">
@@ -147,7 +147,8 @@
                                 </g:link>
                                 <div class="text">
                                     <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
-                                    <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
+                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
                                         <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>

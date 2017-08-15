@@ -7,6 +7,6 @@ class ProductCategory {
     String menuImage1
     String menuImage2
     static constraints = {
-        categoryId generator:'assigned'
+        categoryId (generator:'assigned',unique:true)
     }
 }
