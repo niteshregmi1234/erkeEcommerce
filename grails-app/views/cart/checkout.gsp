@@ -593,11 +593,26 @@ ${list.quantity}
         async: false,
         success: function (text) {
             if(text=="sessionNull"){
-                bootbox.alert("Sorry, your session has expired or you are not logged in. Try to login again.");
+                bootbox.alert({
+                    message: "Sorry, your session has expired or you are not logged in. Try to login again.",
+                    callback: function(){
+                        location.reload();
+                    }
+
+                });
+
+
 responseValue=false;
             }
             else if(text=="cartEmpty"){
-                bootbox.alert("Sorry, your cart is empty. You must have something in your cart to send enquiry!!!.");
+                bootbox.alert({
+                    message: "Sorry, your cart is empty. You must have something in your cart to send enquiry!!!.",
+                    callback: function(){
+                        location.reload();
+                    }
+
+                });
+
                 responseValue=false;
 
             }

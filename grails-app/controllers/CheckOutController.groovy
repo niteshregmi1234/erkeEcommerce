@@ -35,8 +35,21 @@ class CheckOutController {
                     html g.render(template:"/cart/mail",model: [totalPrice: totalPrice])
 
                 }
+            def date=new Date()
                 for(Cart cart:cartList){
-                cart.delete(flush: true)}
+                    def cartHistoryInstance=new CartHistory()
+                    cartHistoryInstance.productSize=cart.productSize
+                    cartHistoryInstance.quantity=cart.quantity
+                    cartHistoryInstance.endUserInformation=cart.endUserInformation
+                    cartHistoryInstance.product=cart.product
+                    cartHistoryInstance.isDelivered=false
+                    cartHistoryInstance.date=date
+                    cartHistoryInstance.deliveryAddress=params.address
+                    cartHistoryInstance.mobileNumber=params.phone
+                    cartHistoryInstance.deliveryMethod=DeliveryMethod.get(params.delivery)
+                    cartHistoryInstance.paymentMethod=PaymentMethod.get(params.payment)
+                    cartHistoryInstance.save(flush: true)
+                    cart.delete(flush: true)}
             flash.message="your enquiry has been successfully sent.Please,visit again.Thank you!!"
             redirect(action: "cart",controller: "cart")
         }

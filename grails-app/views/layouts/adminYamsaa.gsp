@@ -122,6 +122,14 @@
 
                 </ul>
             </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Orders<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><g:link action="undeliveredCartItems" controller="cartHistory">Undelivered Orders</g:link></li>
+                    <li><g:link action="deliveredCartItems" controller="cartHistory">Delivered Orders</g:link></li>
+
+
+                </ul>
+            </li>
 
 
             <li><g:link action="logout" controller="logout">Logout</g:link></li>
@@ -149,5 +157,8 @@
     <g:layoutBody/>
 </div>
 </div>
+<div style="height: 20%; background:#000100; margin-top: 10%">
+    </div>
+
 </body>
 </html>
