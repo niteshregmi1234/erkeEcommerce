@@ -49,7 +49,7 @@
 
         <div class="col-sm-4">
             <g:select name="isFooter" from="${['TRUE','FALSE']}"
-                      keys="${[true,false]}" value="${productSubCategoryInstance?.isFooter}" class="form-control"/>
+                      keys="${[1,0]}" value="${productSubCategoryInstance?.isFooter?1:0}" class="form-control"/>
 
 
         </div>
