@@ -502,7 +502,7 @@ if(sizeId=='' && productId==''){
                     <input type="text" class="form-control" id="searchProduct" name="search" placeholder="Search">
                     <span class="input-group-btn">
 
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="btn btn-primary" id="submit_Id"><i class="fa fa-search"></i></button>
 
                     </span>
                 </div>
@@ -519,7 +519,13 @@ if(sizeId=='' && productId==''){
 <!-- *** NAVBAR END *** -->
 
     <script type="text/javascript">
-function validSearch(){
+    function preventMultipleSubmissions() {
+        $('#submit_Id').prop('disabled', true);
+    }
+
+    window.onbeforeunload = preventMultipleSubmissions;
+
+    function validSearch(){
     var searchKey=document.getElementById("searchProduct").value;
     if(searchKey==''){
         bootbox.alert({

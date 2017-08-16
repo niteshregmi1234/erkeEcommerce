@@ -101,8 +101,8 @@
 </form>
 
 <div class="col-lg-12">
-    <g:link action="edit" id="${productInstance?.id}" controller="product" class="btn btn-primary navbar-btn">Edit</g:link>
-    <g:link action="delete" id="${productInstance?.id}" controller="product" class="btn btn-primary navbar-btn">Delete</g:link>
+    <g:link action="edit" id="${productInstance?.id}" controller="product" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="delete" id="${productInstance?.id}" controller="product" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Delete</g:link>
 
 </div>
 </body>

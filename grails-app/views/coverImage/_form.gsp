@@ -19,7 +19,7 @@
 
             <div class="col-sm-4">
                 <g:select name="statusShow" from="${['TRUE','FALSE']}"
-                          keys="${[true,false]}" value="${coverImageInstance?.statusShow}" class="form-control"/>
+                          keys="${[1,0]}" value="${coverImageInstance?.statusShow?1:0}" class="form-control"/>
                 %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%
                 %{--<input type="email" class="form-control" id="email" placeholder="Enter email">--}%
             </div>

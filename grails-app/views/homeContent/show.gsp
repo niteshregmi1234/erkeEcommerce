@@ -89,7 +89,7 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group ">
-            <label class="control-label col-sm-4">special Brand Description Up:</label>
+            <label class="control-label col-sm-4">special Brand Description Down:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${homeContentInstance.specialBrandImageDescriptionDown}</div>
             </div>
@@ -101,7 +101,7 @@
     <div class="form-group ">
         <label class="control-label col-sm-4"></label>
 <div class="col-sm-6">
-    <g:link action="edit" id="${homeContentInstance?.id}" controller="homeContent" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="edit" id="${homeContentInstance?.id}" controller="homeContent" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
 
 </div>
         </div></div>

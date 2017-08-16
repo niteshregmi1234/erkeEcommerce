@@ -36,8 +36,8 @@
 
 </form>
 <div class="col-lg-12">
-    <g:link action="edit" id="${productColorInstance?.id}" controller="productColor" class="btn btn-primary navbar-btn">Edit</g:link>
-    <g:link action="delete" id="${productColorInstance?.id}" controller="productColor" class="btn btn-primary navbar-btn">Delete</g:link>
+    <g:link action="edit" id="${productColorInstance?.id}" controller="productColor" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="delete" id="${productColorInstance?.id}" controller="productColor" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Delete</g:link>
 
 </div>
 </body>

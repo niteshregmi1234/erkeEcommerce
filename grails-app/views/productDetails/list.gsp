@@ -33,6 +33,20 @@
         <th>Price</th>
     </tr>
     </thead>
+    <tfoot>
+    <tr>
+        <th>SN</th>
+        <th>View</th>
+        <th>Category</th>
+        <th>Sub-Category</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>IsSale</th>
+        <th>Discount(%)</th>
+        <th>Price</th>
+    </tr>
+
+    </tfoot>
     <tbody>
     <g:each in="${productDetailsList}" var="list" status='i'>
         <tr>
@@ -51,11 +65,41 @@
 </table>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable( {
+
+        // Setup - add a text input to each footer cell
+        $('#example tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        } );
+
+        // DataTable
+        var table = $('#example').DataTable( {
             "scrollY": 200,
             "scrollX": true
         } );
+
+        // Apply the search
+        table.columns().every( function () {
+            var that = this;
+
+            $( 'input', this.footer() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                            .search( this.value )
+                            .draw();
+                }
+            } );
+        } );
     } );
 </script>
+
+<style>
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+</style>
+
 </body>
 </html>

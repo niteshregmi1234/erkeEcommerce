@@ -21,7 +21,7 @@
         <label class="control-label col-sm-2"></label>
 
         <div class="col-sm-6">
-            <button type="submit" name="save" value="Save" class="btn btn-default">Save</button>
+            <button type="submit" name="save" value="Save" onclick="confirm('Are you sure want to confirm?')" class="btn btn-default">Save</button>
         </div>
     </div>
 </div>

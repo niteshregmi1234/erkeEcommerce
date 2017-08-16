@@ -63,8 +63,8 @@
 
 </form>
 <div class="col-lg-12">
-    <g:link action="edit" id="${seasonsInstance?.id}" controller="seasons" class="btn btn-primary navbar-btn">Edit</g:link>
-    <g:link action="delete" id="${seasonsInstance?.id}" controller="seasons" class="btn btn-primary navbar-btn">Delete</g:link>
+    <g:link action="edit" id="${seasonsInstance?.id}" controller="seasons" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="delete" id="${seasonsInstance?.id}" controller="seasons" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Delete</g:link>
 
 </div>
 </body>

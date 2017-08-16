@@ -145,7 +145,7 @@
         <label class="control-label col-sm-2"></label>
 
         <div class="col-sm-6">
-            <g:submitButton name="update" value="Update" id="submit_Id" class="btn btn-default"></g:submitButton>
+            <g:submitButton name="update" value="Update" id="submit_Id" class="btn btn-default" onclick="confirm('Are you sure want to confirm?')"></g:submitButton>
         </div>
     </div>
 </div>

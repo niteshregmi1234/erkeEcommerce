@@ -31,7 +31,7 @@
             <label class="control-label col-sm-2"></label>
             <div class="col-sm-6">
 
-                <g:link action="edit" id="${mailSetUpInstance?.id}" controller="mailSetUp" class="btn btn-primary navbar-btn">Edit</g:link>
+                <g:link action="edit" id="${mailSetUpInstance?.id}" controller="mailSetUp" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
 </div>
     </div>
 </div>
