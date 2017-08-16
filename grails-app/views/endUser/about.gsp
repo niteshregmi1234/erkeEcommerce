@@ -200,7 +200,7 @@
                                     <h3>
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}">${aboutUsInstance.specialProduct1.productColor.colorName+" "+aboutUsInstance.specialProduct1.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct1.productDetails.productName}</g:link>
                                     </h3>
-                                    <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+                                    <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
 
                                     <del class="del-price">Rs.${aboutUsInstance.specialProduct1.productDetails.price}</del></p>
                                     <p class="buttons">
@@ -241,7 +241,7 @@
                                 </g:link>
                                 <div class="text">
                                     <h3>
-                                        <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">${aboutUsInstance.specialProduct1.productDetails.productName+" "+aboutUsInstance.specialProduct1.productColor+" "+aboutUsInstance.specialProduct1.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct1.productDetails.productName}</g:link>
+                                        <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">${aboutUsInstance.specialProduct2.productDetails.productName+" "+aboutUsInstance.specialProduct2.productColor+" "+aboutUsInstance.specialProduct2.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct2.productDetails.productName}</g:link>
                                     </h3>
                                     <p class="price">Rs.${aboutUsInstance.specialProduct2.productDetails.price}</p>
                                     <p class="buttons">
@@ -279,7 +279,8 @@
                                     <h3>
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">${aboutUsInstance.specialProduct2.productColor.colorName+" "+aboutUsInstance.specialProduct2.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct2.productDetails.productName}</g:link>
                                     </h3>
-                                    <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+                                    <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct2.productDetails.discountPercentage*aboutUsInstance.specialProduct2.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+                                        <del class="del-price">Rs.${aboutUsInstance.specialProduct2.productDetails.price}</del></p>
 
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}" class="btn btn-default">View detail</g:link>

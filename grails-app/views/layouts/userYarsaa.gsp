@@ -366,10 +366,17 @@ if(sizeId=='' && productId==''){
     <div class="container">
         <div class="navbar-header">
 
-            <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
-                <img src="img/logo.png" alt="yarsaa logo" class="hidden-xs">
-                <img src="img/logo-small.png" alt="yarsaa logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
-            </a>
+            <g:link class="navbar-brand home logoImg"  action="userHome" controller="endUser" data-animate-hover="bounce">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}" class="hidden-xs">
+
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}" alt="yarsaa logo" class="visible-xs"><span class="sr-only">Home</span>
+            </g:link>
+            <style>
+                .logoImg img{
+                    width: 80px;
+                    height: 50px;
+                }
+            </style>
             <div class="navbar-buttons">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                     <span class="sr-only">Toggle navigation</span>
@@ -490,16 +497,16 @@ if(sizeId=='' && productId==''){
 
         <div class="collapse clearfix" id="search">
 
-            <form class="navbar-form" role="search">
+            <g:form controller="endUser" action="search" class="navbar-form" role="search" onsubmit="return validSearch();">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" id="searchProduct" name="search" placeholder="Search">
                     <span class="input-group-btn">
 
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
 
                     </span>
                 </div>
-            </form>
+            </g:form>
 
         </div>
         <!--/.nav-collapse -->
@@ -511,6 +518,20 @@ if(sizeId=='' && productId==''){
 
 <!-- *** NAVBAR END *** -->
 
+    <script type="text/javascript">
+function validSearch(){
+    var searchKey=document.getElementById("searchProduct").value;
+    if(searchKey==''){
+        bootbox.alert({
+            message: "Please enter search keyword",
+            size: 'small'
+        });
+        document.getElementById("searchProduct").focus();
+        return false;
+    }
+}
+
+    </script>
 
 <div id="all">
 
