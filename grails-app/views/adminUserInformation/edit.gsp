@@ -133,7 +133,7 @@
         <label class="control-label col-sm-2"></label>
 
         <div class="col-sm-6">
-            <button type="submit" name="update" id="submit_Id" onclick="confirm('Are you sure want to confirm?')" class="btn btn-default">Update</button>
+            <button type="submit" name="update" id="submit_Id" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-default">Update</button>
         </div>
     </div>
 </div>

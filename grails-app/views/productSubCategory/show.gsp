@@ -73,8 +73,8 @@
 
 </form>
 <div class="col-lg-12">
-    <g:link action="edit" id="${productSubCategoryInstance?.id}" controller="productSubCategory" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
-    <g:link action="delete" id="${productSubCategoryInstance?.id}" controller="productSubCategory" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Delete</g:link>
+    <g:link action="edit" id="${productSubCategoryInstance?.id}" controller="productSubCategory" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="delete" id="${productSubCategoryInstance?.id}" controller="productSubCategory" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Delete</g:link>
 
 </div>
 </body>

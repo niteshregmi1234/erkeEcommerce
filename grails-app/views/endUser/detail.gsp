@@ -54,6 +54,7 @@
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked category-menu">
                                 <g:each in="${productCategoryList}" var="categoryList">
+                                    <g:if test="${ProductDetails.findByProductCategory(categoryList)}">
                                     <g:if test="${categoryList.id==productInstance.productDetails.productCategory.id}">
 
                                         <li class="active">
@@ -65,9 +66,13 @@
                                     <g:link action="allCategoryProducts" id="${categoryList.categoryId}" controller="endUser">${categoryList.categoryName}<span class="badge pull-right"></span></g:link>
                                     <ul>
                                         <g:each in="${productSubCategoryList}" var="subCategoryList">
-                                            <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                                            <g:if test="${Product.findAllByProductDetails(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList))}">
+
+
+                                                <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
 
                                             </li>
+                                                </g:if>
                                         %{--<li><a href="category.html">Shirts</a>--}%
                                         </g:each>   %{--</li>--}%
                                     %{--<li><a href="category.html">Pants</a>--}%
@@ -76,6 +81,7 @@
                                     %{--</li>--}%
                                     </ul>
                                     </li>
+                                    </g:if>
                                 </g:each>
                             %{--<li class="active">--}%
                             %{--<a href="category.html">Ladies  <span class="badge pull-right">123</span></a>--}%
@@ -234,16 +240,66 @@
 
                                 <g:if test="${session.endUser}">
                                 <p class="text-center buttons">
-                                    <g:form action="addToCart" controller="cart" class="text-center buttons" onsubmit="return ValidShopping();">
+                                    <form action="/cart/addToCart" method="post" class="text-center buttons" id="myForm">
                                         <g:hiddenField name="id" value="${productInstance.id}"></g:hiddenField>
                                         <g:select class="form-control name4" name="size"
                                                   from="${productSizeList}" optionKey="id" optionValue="sizeName"
                                                   title="select size"/>
-                                        <p><button class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</button></p>
-                                    </g:form>
+                                        <p>
+                                            <a href="#" data-toggle="modal" data-target="#confirmModel" class="btn btn-primary" id="submit_Id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
+                                            %{--<button class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</button>--}%
+                                        </p>
+                                    </form>
                                     %{--<a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>--}%
                                 </p>
 </g:if>
+                                <div class="bootbox modal fade bootbox-confirm in" id="confirmModel" tabindex="-1" role="dialog"  aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+                                                <div class="bootbox-body">Are you sure want to add this item to cart?</div>
+                                            </div><div class="modal-footer">
+                                            <div data-bb-handler="cancel" type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</div>
+                                            <button  type="button" class="btn btn-primary"  data-dismiss="modal" onclick="validAddToCart();"><i class="fa fa-check"></i> Confirm</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+<script>
+        function validAddToCart(){
+            var responseValue;
+            $.ajax({
+                url: "${createLink(controller:'cart', action:'checkSession')}",
+                type: "POST",
+                cache: false,
+                async: false,
+                success: function (text) {
+                    if(text=="notOk"){
+                        bootbox.alert({
+                            message: "Sorry, your session has expired or you are not logged in. Try to login again!!!.",
+                            callback: function(){
+                                location.reload();
+                            }
+
+                        });
+
+
+                        responseValue=false;
+                    }
+                    else if(text=="ok"){
+                        document.getElementById('submit_Id').setAttribute("disabled","disabled");
+                        document.getElementById("myForm").submit();
+                        responseValue=true;
+                    }
+                }
+
+            });
+            return responseValue
+        }
+
+</script>
                                 <g:if test="${session.endUser==null}">
                                     <h5 class="text-center">You must login first to shop product</h5>
 
@@ -397,9 +453,9 @@
                             <a id="btn_shareExternalGplus" class="gplus google_plus customer share" data-animate-hover="pulse" href="" title="Google Plus Share" target="_blank"><i class="fa fa-google-plus"></i></a>
                             <a id="btn_shareLinkedIn" class="a btn btn-linkedin customer share" href="" title="linkedin Share" target="_blank" data-animate-hover="pulse"><i class="fa fa-linkedin"></i>
                             </a>
-                            <a id="btn_shareInstagram" title="instagram Share" class="btn btn-instagram a" data-animate-hover="pulse" href="">
-                                <i class="fa fa-instagram"></i>
-                            </a>
+                            %{--<a id="btn_shareInstagram" title="instagram Share" class="btn btn-instagram a" data-animate-hover="pulse" href="">--}%
+                                %{--<i class="fa fa-instagram"></i>--}%
+                            %{--</a>--}%
                         </p>
                     </div>
                     </div>
@@ -415,23 +471,6 @@
                     </script>
 
                     <script>
-    function ValidShopping(){
-        var responseValue;
-        $.ajax({
-            url: "${createLink(controller:'cart', action:'checkUser')}",
-            async : false,
-            success: function(result) {
-                if(result=="notOk"){
-                   bootbox.alert("Sorry, your session has expired or you are not logged in. Try to login again.");
-                    $('#detailInfo').load(document.URL +  ' #detailInfo');
-
-                    responseValue=false;
-
-                }
-            }
-        });
-return responseValue;
-    }
     (function($){
 
 

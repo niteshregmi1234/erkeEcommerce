@@ -20,7 +20,7 @@
         <label class="control-label col-sm-2"></label>
 
         <div class="col-sm-6">
-            <g:submitButton name="save" value="Save" onclick="confirm('Are you sure want to confirm?')" id="submit_Id" class="btn btn-default"></g:submitButton>
+            <g:submitButton name="save" value="Save" onclick="return confirm('Are you sure want to confirm?')" id="submit_Id" class="btn btn-default"></g:submitButton>
         </div>
     </div>
 </div>

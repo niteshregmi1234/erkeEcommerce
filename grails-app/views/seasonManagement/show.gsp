@@ -33,7 +33,7 @@
 
 
 <div class="col-lg-12" style="margin-left: 16%;">
-    <g:link action="edit" id="${seasonsManagementInstance?.id}" controller="seasonManagement" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="edit" id="${seasonsManagementInstance?.id}" controller="seasonManagement" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
 
 </div>
 </body>

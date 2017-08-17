@@ -36,7 +36,7 @@
 
 </form>
 <div class="col-lg-12">
-    <g:link action="edit" id="${otherCostsInstance?.id}" controller="otherCosts" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="edit" id="${otherCostsInstance?.id}" controller="otherCosts" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
 
 </div>
 </body>

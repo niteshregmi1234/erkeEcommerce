@@ -399,7 +399,9 @@ if(sizeId=='' && productId==''){
                 <li class="active menuBar"><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
                 <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
-                <li class="dropdown yamm-fw">
+                    <g:if test="${ProductDetails.findByProductCategory(categoryList)}">
+
+                        <li class="dropdown yamm-fw">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">${categoryList.categoryName}<b class="caret"></b></a href="#">
                     <ul class="dropdown-menu">
                         <li>
@@ -410,7 +412,7 @@ if(sizeId=='' && productId==''){
                                         <h5>${specifyList.specificationName}</h5>
                                         <ul>
                                         <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecifyAndStatusShow(specifyList,true)}" var="subCategoryList">
-<g:if test="${ProductDetails.findAllByProductCategoryAndProductSubCategory(categoryList,subCategoryList)}">
+<g:if test="${Product.findAllByProductDetails(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList))}">
                                             <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
                                             </li>
 </g:if>
@@ -464,6 +466,7 @@ if(sizeId=='' && productId==''){
                         </li>
                     </ul>
                 </li>
+                        </g:if>
                 </g:each>
 
                 <li class="menuBar"><g:link action="about" controller="endUser">About</g:link></li>
@@ -583,11 +586,13 @@ if(sizeId=='' && productId==''){
 
                     <h4>Top categories</h4>
 <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
-                    <h5>${categoryList.categoryName}</h5>
+    <g:if test="${ProductDetails.findByProductCategory(categoryList)}">
+
+        <h5>${categoryList.categoryName}</h5>
 
                     <ul>
                         <g:each in="${ProductSubCategory.findAllByIsFooterAndStatusShow(true,true)}" var="subCategoryList">
-                            <g:if test="${ProductDetails.findAllByProductCategoryAndProductSubCategory(categoryList,subCategoryList)}">
+                                <g:if test="${Product.findAllByProductDetails(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList))}">
 
                                 <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory: subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
                             </li>
@@ -595,6 +600,7 @@ if(sizeId=='' && productId==''){
                         </g:each>
 
                     </ul>
+        </g:if>
                 </g:each>
 
 

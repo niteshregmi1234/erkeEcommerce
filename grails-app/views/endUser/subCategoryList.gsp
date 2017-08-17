@@ -54,7 +54,9 @@
                     <div class="panel-body">
                         <ul class="nav nav-pills nav-stacked category-menu">
                             <g:each in="${productCategoryList}" var="categoryList">
-                                <g:if test="${categoryList.equals(productCategory)}">
+                                <g:if test="${ProductDetails.findByProductCategory(categoryList)}">
+
+                                    <g:if test="${categoryList.equals(productCategory)}">
                             <li class="active">
                                 </g:if>
                                 <g:if test="${categoryList!=(productCategory)}">
@@ -64,9 +66,12 @@
                                 <g:link action="allCategoryProducts" id="${categoryList.id}" controller="endUser">${categoryList.categoryName} <span class="badge pull-right"></span></g:link>
                                 <ul>
                                     <g:each in="${productSubCategoryList}" var="subCategoryList">
-                                        <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                                            <g:if test="${Product.findAllByProductDetails(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList))}">
+
+                                            <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
 
                                     </li>
+                                            </g:if>
                                     %{--<li><a href="category.html">Shirts</a>--}%
                                  </g:each>   %{--</li>--}%
                                     %{--<li><a href="category.html">Pants</a>--}%
@@ -75,6 +80,7 @@
                                     %{--</li>--}%
                                 </ul>
                             </li>
+                                    </g:if>
                             </g:each>
                             %{--<li class="active">--}%
                                 %{--<a href="category.html">Ladies  <span class="badge pull-right">123</span></a>--}%

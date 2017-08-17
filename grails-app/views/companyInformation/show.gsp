@@ -147,7 +147,7 @@
     <div class="form-group ">
         <label class="control-label col-sm-4"></label>
 <div class="col-sm-6">
-    <g:link action="edit" id="${companyInformationInstance?.id}" controller="companyInformation" onclick="confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="edit" id="${companyInformationInstance?.id}" controller="companyInformation" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
 
 </div>
         </div></div>

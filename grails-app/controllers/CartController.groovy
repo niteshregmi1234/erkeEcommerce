@@ -2,8 +2,20 @@ import grails.converters.JSON
 
 import java.text.DecimalFormat
 class CartController {
-static  allowedMethods = [checkAddToCart: 'POST', addToCart:'POST',updateBasket: 'POST',delete: 'POST',checkUser: 'POST']
+static  allowedMethods = [checkSession: 'POST', checkAddToCart: 'POST', addToCart:'POST',updateBasket: 'POST',delete: 'POST']
     private static final DecimalFormat df = new DecimalFormat("0.00");
+    def checkSession(){
+        try{
+        if(session.endUser){
+            render "ok"
+        }
+        else{
+            render "notOk"
+        }}
+        catch (Exception e){
+
+        }
+    }
     def checkAddToCart(){
         try{
       if(session.endUser){
@@ -56,15 +68,6 @@ def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(t
 
         }
 
-    }
-    def checkUser(){
-        try{
-        if(session.endUser==null){
-            render "notOk"
-        }}
-        catch (Exception e){
-
-        }
     }
     def addToCart() {
         try{
