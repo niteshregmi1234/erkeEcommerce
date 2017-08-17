@@ -45,14 +45,19 @@
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked category-menu">
                         <g:each in="${productCategoryList}" var="categoryList">
+                            <g:if test="${ProductDetails.findByProductCategory(categoryList)}">
+
                                 <li>
 
                             <g:link action="allCategoryProducts" id="${categoryList.categoryId}" controller="endUser">${categoryList.categoryName} <span class="badge pull-right"></span></g:link>
                             <ul>
                                 <g:each in="${productSubCategoryList}" var="subCategoryList">
-                                    <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                                    <g:if test="${Product.findAllByProductDetails(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList))}">
+
+                                        <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
 
                                     </li>
+                                        </g:if>
                                 %{--<li><a href="category.html">Shirts</a>--}%
                                 </g:each>   %{--</li>--}%
                             %{--<li><a href="category.html">Pants</a>--}%
@@ -61,6 +66,7 @@
                             %{--</li>--}%
                             </ul>
                             </li>
+                                </g:if>
                         </g:each>
                     %{--<li class="active">--}%
                     %{--<a href="category.html">Ladies  <span class="badge pull-right">123</span></a>--}%
@@ -238,8 +244,10 @@
 
                                 </g:link>
                                 <div class="text">
-                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName+" "+list.productColor+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
-                                    <p class="price">Rs.${list.productDetails.price}</p>
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
+                                        <del class="del-price" style="visibility: hidden;">Rs.${list.productDetails.price}</del></p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
                                         <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary" onclick="addValueToField(${list.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>

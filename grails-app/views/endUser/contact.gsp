@@ -86,7 +86,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<h3><i class="fa fa-map-marker"></i> Address</h3>
-						<p>Something mall
+						<p>
 							<br>${companyInformation.location1}
 							<br>${companyInformation.location2}
 							<br>${companyInformation.location3}

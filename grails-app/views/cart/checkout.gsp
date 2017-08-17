@@ -102,9 +102,9 @@
 
                                         <g:field  type="number" name="quantity" value="${list?.quantity}" min="1"  class="form-control quantity"/>
                                     </td>
-                                    <td>Rs.${list.product.productDetails.price}</td>
+                                    <td>Rs.<g:formatNumber number="${list.product.productDetails.price}" type="number" maxFractionDigits="2" /></td>
                                     <td>${list.product.productDetails.discountPercentage}%</td>
-                                    <td>Rs.${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}</td>
+                                    <td>Rs.<g:formatNumber number="${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}" type="number" maxFractionDigits="2" /></td>
                                     <td><a class="deleteCart" onclick="deleteProduct(${list.id},this);"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
@@ -476,9 +476,9 @@
                                         <td>
 ${list.quantity}
                                         </td>
-                                        <td>Rs.${list.product.productDetails.price}</td>
+                                        <td>Rs.<g:formatNumber number="${list.product.productDetails.price}" type="number" maxFractionDigits="2" /></td>
                                         <td>${list.product.productDetails.discountPercentage}%</td>
-                                        <td>Rs.${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}</td>
+                                        <td>Rs.<g:formatNumber number="${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}" type="number" maxFractionDigits="2" /></td>
 
                                     </tr>
 
@@ -496,7 +496,12 @@ ${list.quantity}
                         <!-- /.table-responsive -->
                     </div>
                     <!-- /.content -->
-
+<style>
+                td img{
+                    height:65px;
+                    width: 50px;
+                }
+            </style>
                     <div class="box-footer">
                         <div class="pull-left">
                             <div class="btn btn-default" onclick="backToPayment(this);"><i class="fa fa-chevron-left"></i>Back to Payment method</div>
