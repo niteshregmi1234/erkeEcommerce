@@ -21,7 +21,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Product Name:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.productDetails.productName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" id="${productInstance.productDetails.id}" controller="productDetails"> ${productInstance.productDetails.productName}</g:link></div>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Color:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productInstance.productColor.colorName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" controller="productColor" id="${productInstance.productColor.id}"> ${productInstance.productColor.colorName}</g:link></div>
             </div>
         </div>
     </div>

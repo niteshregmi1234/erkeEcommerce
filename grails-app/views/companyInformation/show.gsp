@@ -122,14 +122,6 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="form-group ">
-            <label class="control-label col-sm-4">Map View:</label>
-            <div class="col-sm-6">
-                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:companyInformationInstance.mapImageName])}" height="100" style="margin-left: -1%">
-            </div>
-        </div>
-    </div>
     <div class="col-lg-12">
         <div class="form-group ">
             <label class="control-label col-sm-2">Where we are:</label>

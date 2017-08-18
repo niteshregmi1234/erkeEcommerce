@@ -22,11 +22,22 @@
         <div class="form-group">
             <label class="control-label col-sm-4">${seasonsManagementInstance.seasonStatusName} Season:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${seasonsManagementInstance.seasons.seasonName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" id="${seasonsManagementInstance.seasons.id}" controller="seasons"> ${seasonsManagementInstance.seasons.seasonName}</g:link></div>
 
             </div>
         </div>
+
     </div>
+    <div class="col-lg-12">
+
+        <div class="form-group">
+        <label class="control-label col-sm-4">Pre-Advertisement:</label>
+        <div class="col-sm-6">
+            <div style="margin-top: 7px;">${seasonsManagementInstance.preAdvertiseDescription}</div>
+
+        </div>
+    </div>
+</div>
 
 
 </form>

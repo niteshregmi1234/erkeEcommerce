@@ -123,14 +123,6 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="form-group">
-            <label class="control-label col-sm-4">Upload map View:</label>
-            <div class="col-sm-6">
-                <g:field type="file" name="mapImageName" class="form-control-file" id="mapImageName"/>
-            </div>
-        </div>
-    </div>
     <div class="col-lg-12">
         <div class="form-group">
             <label class="control-label col-sm-2">Where we are::</label>

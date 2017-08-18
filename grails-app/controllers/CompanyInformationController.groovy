@@ -48,7 +48,6 @@ static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',
             companyInformationInstance.logoImageName=editLogoImage(companyInformationInstance.logoImageName)
         companyInformationInstance.coverImageName=editcoverImage(companyInformationInstance.coverImageName)
         companyInformationInstance.shopInsideViewImageName=editshopInsideViewImage(companyInformationInstance.shopInsideViewImageName)
-        companyInformationInstance.mapImageName=editMapImage(companyInformationInstance.mapImageName)
             companyInformationInstance.save(flush: true)
         redirect(action: "show")}
         else{
@@ -102,43 +101,6 @@ static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',
     def editshopInsideViewImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("shopInsideViewImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
-            abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
-            }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            return fileName
-
-        }
-        else{
-            return imageNameOld
-        }
-    }
-    def editMapImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("mapImageName")
         def homeDir = new File(System.getProperty("user.home"))
         File theDir = new File(homeDir,"yarsaa");
         if (! theDir.exists()){

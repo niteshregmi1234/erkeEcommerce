@@ -21,7 +21,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-2">Specification Name:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productSubCategoryInstance.productSubCategorySpecify.specificationName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" id="${productSubCategoryInstance.productSubCategorySpecify.id}" controller="productSubCategorySpecify"> ${productSubCategoryInstance.productSubCategorySpecify.specificationName}</g:link></div>
             </div>
         </div>
     </div>

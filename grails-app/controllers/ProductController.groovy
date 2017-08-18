@@ -52,7 +52,7 @@ def checkPhoto(){
             product.isFeatured=params.isFeatured as byte
             product.isLatest=params.isLatest as byte
             product.seasons=SeasonManagement.list()[1].seasons
-            product.productSpecificationName=product.productDetails.productName+"-"+product.productColor.colorName
+            product.productSpecificationName=product.productColor.colorName+" "+product.productDetails.productBrand.brandName+" "+product.productDetails.productName
             product.frontImageName=upLoadFrontImage()
             product.sideImageName=uploadSideImage()
             product.backImageName=uploadBackImage()
@@ -67,7 +67,7 @@ def checkPhoto(){
             product.productDetails=ProductDetails.get(params.productDetails)
             product.isFeatured=params.isFeatured as byte
             product.isLatest=params.isLatest as byte
-            product.productSpecificationName=product.productDetails.productName+"-"+product.productColor.colorName
+                product.productSpecificationName=product.productColor.colorName+" "+product.productDetails.productBrand.brandName+" "+product.productDetails.productName
 
             product.frontImageName=editFrontImage(product.frontImageName)
             product.sideImageName=editSideImage(product.sideImageName)

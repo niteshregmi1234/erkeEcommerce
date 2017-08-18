@@ -21,7 +21,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Category:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productDetailsInstance.productCategory.categoryName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" id="${productDetailsInstance.productCategory.id}" controller="productCategory"> ${productDetailsInstance.productCategory.categoryName}</g:link></div>
             </div>
         </div>
     </div>
@@ -40,7 +40,8 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Sub-category:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productDetailsInstance.productSubCategory.subCategoryName} </div>
+                <div style="margin-top: 7px;"><g:link action="show" id="${productDetailsInstance.productSubCategory.id}" controller="productSubCategory"> ${productDetailsInstance.productSubCategory.subCategoryName}</g:link></div>
+
             </div>
         </div>
     </div>
@@ -66,7 +67,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-4">Brand:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productDetailsInstance.productBrand.brandName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" controller="productBrand" id="${productDetailsInstance.productBrand.id}"> ${productDetailsInstance.productBrand.brandName}</g:link></div>
             </div>
         </div>
     </div>

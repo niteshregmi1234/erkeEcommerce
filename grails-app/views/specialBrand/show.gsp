@@ -22,7 +22,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">ProductBrand:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${specialBrandInstance.productBrand.brandName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" id="${specialBrandInstance.productBrand.id}" controller="productBrand"> ${specialBrandInstance.productBrand.brandName}</g:link></div>
 
             </div>
         </div>

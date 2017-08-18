@@ -139,7 +139,7 @@
             <label class="control-label col-sm-4">Special Product1:</label>
 
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${aboutUsInstance.specialProduct1.productSpecificationName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" controller="product" id="${aboutUsInstance.specialProduct1.id}"> ${aboutUsInstance.specialProduct1.productSpecificationName}</g:link></div>
 
             </div>
 
@@ -152,7 +152,7 @@
             <label class="control-label col-sm-4">Special Product2:</label>
 
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${aboutUsInstance.specialProduct2.productSpecificationName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" controller="product" id="${aboutUsInstance.specialProduct2.id}"> ${aboutUsInstance.specialProduct2.productSpecificationName}</g:link></div>
 
             </div>
 
@@ -164,7 +164,7 @@
             <label class="control-label col-sm-4">Special SubCategory:</label>
 
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${aboutUsInstance.specialProductSubCategory.subCategoryName}</div>
+                <div style="margin-top: 7px;"><g:link action="show" controller="productSubCategory" id="${aboutUsInstance.specialProductSubCategory.id}">${aboutUsInstance.specialProductSubCategory.subCategoryName}</g:link></div>
 
             </div>
 

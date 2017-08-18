@@ -26,6 +26,8 @@
         <th>SN</th>
         <th>View</th>
         <th>Name</th>
+        <th>Category</th>
+        <th>Sub-Category</th>
         <th>Color</th>
         <th>IsLatest</th>
         <th>IsFeatured</th>
@@ -36,6 +38,8 @@
         <th>SN</th>
         <th>View</th>
         <th>Name</th>
+        <th>Category</th>
+        <th>Sub-Category</th>
         <th>Color</th>
         <th>IsLatest</th>
         <th>IsFeatured</th>
@@ -48,8 +52,10 @@
             <td>${i+1}</td>
             <td> <g:link action="show" id="${list?.id}" controller="product" class="btn btn-primary btn-sm">view</g:link></td>
             <td>${list.productDetails.productName}</td>
-
             <td>${list.productColor.colorName}</td>
+            <td>${list.productDetails.productCategory}</td>
+
+            <td>${list.productDetails.productSubCategory}</td>
             <td>${list.isLatest}</td>
             <td>${list.isFeatured}</td>
         </tr>
