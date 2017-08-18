@@ -45,7 +45,7 @@
 
 
 <div class="col-lg-12" style="margin-left: 12%">
-    <g:link action="edit" id="${backgroundImageInstance?.id}" controller="backgroundImage" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="edit" controller="backgroundImage" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
 
 </div>
 </body>

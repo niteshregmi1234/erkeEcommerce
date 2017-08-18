@@ -31,22 +31,13 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
         }
     }
 
-def list(){
-    try {
-        def backgroundImageList= BackgroundImage.list()
-        [backgroundImageList:backgroundImageList]
-    }
-  catch (Exception e){
-      redirect(action: "notfound", controller: "errorPage")
-  }
-}
     def save() {
         try{
         def backgroundImageInstance=BackgroundImage.get(params.id)
         if(backgroundImageInstance){
         backgroundImageInstance.imageName=editBackgroundImage(backgroundImageInstance.imageName)
         backgroundImageInstance.save(flush: true)
-        redirect(action: "show",id:backgroundImageInstance.id)}
+        redirect(action: "show")}
         else{
             redirect(action: "notfound", controller: "errorPage")
 
@@ -93,25 +84,26 @@ def list(){
         else{
             return imageNameOld
         }    }
-       def show(Long id){
+       def show(){
            try{
-        def backgroundImageInstance=BackgroundImage.get(id)
+        def backgroundImageInstance=BackgroundImage.list()[0]
            if(backgroundImageInstance){
         [backgroundImageInstance:backgroundImageInstance]}
     else{
         redirect(action: "notfound", controller: "errorPage")
 
-    }}
+    }
+           }
            catch (Exception e){
                redirect(action: "notfound", controller: "errorPage")
 
            }
            }
 
-    def edit(Long id){
+    def edit(){
         try {
 
-        def backgroundImageInstance=BackgroundImage.get(id)
+        def backgroundImageInstance=BackgroundImage.list()[0]
         if(backgroundImageInstance){
         [backgroundImageInstance:backgroundImageInstance]}
         else{

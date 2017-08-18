@@ -59,7 +59,7 @@ class CheckOutController {
             def orderIdInstance=new OrderId()
             orderIdInstance.endUserInformation=session.endUser
             orderIdInstance.save(flush: true)
-            def orderId="yarsaa-"+orderIdInstance.id
+            def orderId="yarsaa/"+orderIdInstance.id
                 for(Cart cart:cartList){
                     def cartHistoryInstance=new CartHistory()
                     cartHistoryInstance.productSize=cart.productSize

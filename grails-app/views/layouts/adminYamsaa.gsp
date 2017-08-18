@@ -102,7 +102,7 @@
                     <li><g:link action="list" controller="product">Product</g:link></li>
                     <li><g:link action="list" controller="coverImage">Cover Image</g:link></li>
                     <li><g:link action="show" controller="specialBrand">Special Brand</g:link></li>
-                    <li><g:link action="list" controller="backgroundImage" >Other Images</g:link></li>
+                    <li><g:link action="show" controller="backgroundImage" >Home Background Image</g:link></li>
 
                 </ul>
             </li>
