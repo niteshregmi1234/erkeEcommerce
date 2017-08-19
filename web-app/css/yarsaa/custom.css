@@ -2,6 +2,12 @@
     height: 235px;
     width: 100%;
 }
+#content .product .text h3 a{
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
 .wthreeshop-a {
     margin-top: 30px;
@@ -28,8 +34,11 @@
 .box-height{
     height:400px;
 }
-.product-color{
+.product-color img{
     height:240px;
+}
+.product-color{
+    height: 240px!important;
 }
 /*.product-color img{*/
     /*height: 238px;*/
@@ -154,9 +163,9 @@
     text-align: center;
     font-style: italic;
 }
-.sildeshow1{
-    height: 370px;
-}
+/*.sildeshow1{*/
+    /*height: 317px;*/
+/*}*/
 .panel-heading a{
     color:#FFFFFF;
     outline:0 !important;
@@ -231,10 +240,33 @@
     float: left;
     margin-left: 50px;
 }
-@media screen and (max-width:320px){
-
+.smallAbout img{
+    height: 198px;
+    width:262px;
+}
+.product img{
+width: 360px;
+}
+@media screen and (max-width:280px){
+    .product-color img{
+        height:210px!important;
+    }
+    .smallAbout img{
+        height: 198px!important;
+        width:295px!important;
+    }
+    .product-color{
+        height: 210px!important;
+    }
+    .wthreeshop-a a {
+        padding: 1px 2px!important;
+        border: 1px solid #FFF !important;
+        color: #FFF;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+    }
     /*#content {*/
-        /*padding-top: 115px;*/
+    /*padding-top: 115px;*/
     /*}*/
     .box-height{
         height: 480px;
@@ -243,7 +275,7 @@
         padding: 6px 9px;
     }
     .price ul li:nth-child(1) {
-        font-size: 30px;
+        font-size: 15px!important;
     }
     .mainImage-coverDown{
         height:355px;
@@ -251,17 +283,17 @@
     }
     .lead1{
         font-size:10px !important;
-        margin-top: -10%!important;
-        margin-bottom: -10px!important;
+        margin-top: -20%!important;
+        margin-bottom: -20px!important;
     }
     .lead2{
         font-size: 8px!important;
     }
     .middle1{
-        top: 18% !important;
-        left: 4px !important;
-        height: 75px;
-        width: 100%;
+        top: 29% !important;
+        left: 74px !important;
+        height: 59px!important;
+        width: 50%!important;
     }
     .shop-button{
         margin-top:0px !important;
@@ -277,8 +309,8 @@
         height: 86px;
     }
     .agileinfonewsl{
-        width: 260px!important;
-        height:300px!important;
+        width: 255px!important;
+        height:265px!important;
     }
     .coverUp img{
         height: 120px !important;
@@ -289,9 +321,9 @@
         height: 120px !important;
         width: 260px !important;
     }
-    /*.food1 img {*/
-        /*height: 300px!important;*/
-    /*}*/
+    .food1 img {
+        height: 300px!important;
+    }
     .product-img{
         height: 390px;
     }
@@ -299,7 +331,7 @@
         padding-top: 20px;
     }
     .about-img{
-        height: 280px !important;
+        height: 360px !important;
     }
     .height-same{
         height: 450px;
@@ -347,22 +379,18 @@
         margin-top: -50px;
     }
     .mainImage-height {
-        height: 355px;
+        height: 355px!important;
         width: 100%;
     }
+
     .thumb{
         height:110px;
     }
     .img-thumb{
         height:106px;
     }
-    .food1-img{
-        height:170px !important;
-        width: 100%;
-    }
-    .product-color{
-        height: 172px;
-    }
+
+
     .sub-flipperHeight{
         height:225px;
     }
@@ -377,36 +405,228 @@
         margin-bottom: 30px;
     }
 }
-@media screen and (min-width: 321px) and (max-width:480px){
-    .sildeshow1 {
-        height: 120px;
+
+@media screen and (min-width:281px) and (max-width:320px){
+    .product-color img{
+        height:210px!important;
     }
-    .wthreeshop-a a{
-        padding: 0 !important;
-        font-size:14px;
+    .smallAbout img{
+        height: 198px!important;
+        width:295px!important;
     }
+    .product-color{
+        height: 210px!important;
+    }
+    .wthreeshop-a a {
+        padding: 1px 2px!important;
+        border: 1px solid #FFF !important;
+        color: #FFF;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+    }
+    /*#content {*/
+        /*padding-top: 115px;*/
+    /*}*/
     .box-height{
-        height: 425px;
+        height: 480px;
     }
-    .product-img{
-        height: 450px;
+    .text1{
+        padding: 6px 9px;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 15px!important;
+    }
+    .mainImage-coverDown{
+        height:355px;
+        width: 100%;
     }
     .lead1{
         font-size:10px !important;
-        margin-top: -8%!important;
-        margin-bottom: -10px!important;
+        margin-top: -20%!important;
+        margin-bottom: -20px!important;
     }
     .lead2{
         font-size: 8px!important;
     }
     .middle1{
-        top:10%!important;
-        left:10px!important;
-        width: 100%;
+        top: 29% !important;
+        left: 74px !important;
+        height: 59px!important;
+        width: 50%!important;
+    }
+    .shop-button{
+        margin-top:0px !important;
+    }
+    .sildeshow1{
+        height: auto;
+    }
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+    }
+    .imgage-nomargin{
+        height: 86px;
+    }
+    .agileinfonewsl{
+        width: 290px!important;
+        height:300px!important;
+    }
+    .coverUp img{
+        height: 120px !important;
+        width: 260px !important;
+
+    }
+    .coverDown img{
+        height: 120px !important;
+        width: 260px !important;
+    }
+    .food1 img {
+        height: 300px!important;
+    }
+    .product-img{
+        height: 390px;
+    }
+    .small-screen{
+        padding-top: 20px;
+    }
+    .about-img{
+        height: 360px !important;
+    }
+    .height-same{
+        height: 450px;
+    }
+    .product-height {
+        height: 435px;
+    }
+    .wthreeshop-a a{
+        font-size: 7px;
     }
     .wthreeshop-a{
-        margin-top: 0px;
+        margin-top: -20px;
     }
+    .w3lsshoesaits-info{
+        top: 0px;
+    }
+    .w3lsshoesaits-info h3 {
+        font-size: 16px;
+    }
+    .w3lsshoesaits-info p {
+        line-height: 25px;
+        color: #FFF;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        width: 18em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    a.a-buttonsize{
+        font-size: 10px!important;
+    }
+    .height-img{
+        height: 200px;
+    }
+    .img-texts{
+        height: 200px;
+    }
+    .about-product{
+        height: 645px;
+    }
+    .text-margin{
+        margin-top: -50px;
+    }
+    .mainImage-height {
+        height: 355px!important;
+        width: 100%;
+    }
+
+    .thumb{
+        height:110px;
+    }
+    .img-thumb{
+        height:106px;
+    }
+
+
+    .sub-flipperHeight{
+        height:225px;
+    }
+    .contact-img{
+        height: 240px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .name4{
+        width: 55%;
+        margin-bottom: 30px;
+    }
+}
+@media screen and (min-width: 321px) and (max-width:360px){
+    .img-texts{
+        height: 142px!important;
+    }
+    .height-img{
+        height: 142px!important;
+
+    }
+    .product-color img{
+        height:260px!important;
+    }
+    .product-color{
+        height:260px!important;
+
+    }
+    .smallAbout img{
+        height: 210px!important;
+        width:370px!important;
+    }
+    .wthreeshop-a {
+        margin-top: -20px;
+        padding-bottom: 10px;
+    }
+    .sildeshow1 {
+        height: 120px;
+    }
+    .wthreeshop-a a{
+        padding: 0 !important;
+        font-size:5px;
+    }
+    .mainImage-height {
+        height: 545px!important;
+        width: 100%;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 30px;
+    }
+    .text1{
+        padding: -1px 9px;
+    }
+    .middle1{
+        top: 29% !important;
+        left: 74px !important;
+        height: 59px!important;
+        width: 50%!important;
+    }
+
+    .box-height{
+        height: 460px!important;
+    }
+    .product-img{
+        height: 450px!important;
+    }
+    .lead1{
+        font-size:10px !important;
+        margin-top: -40%!important;
+        margin-bottom: -20px!important;
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+
+
     .subButton{
         margin-top: -27px!important;
         font-size: 6px!important;
@@ -432,7 +652,7 @@
         padding-top: 20px;
     }
     .about-img{
-        height: 280px !important;
+        height: 415px !important;
     }
     .height-same{
         height: 450px;
@@ -461,9 +681,7 @@
     a.a-buttonsize{
         font-size: 10px!important;
     }
-    .height-img{
-        height: 142px;
-    }
+
     .about-product {
         height: 700px;
     }
@@ -481,13 +699,455 @@
         margin-bottom: 10px;
     }
     .food1 img {
-        height: 300px;
+        height: 400px!important;
     }
     .product-height{
-        height: 430px;
+        height: 550px!important;
     }
 }
-@media screen and (min-width:481px) and (max-width: 640px){
+@media screen and (min-width: 361px) and (max-width:411px){
+    .img-texts{
+        height: 142px!important;
+    }
+    .height-img{
+        height: 142px!important;
+
+    }
+    .product-color img{
+        height:260px!important;
+    }
+    .product-color{
+        height:260px!important;
+
+    }
+    .smallAbout img{
+        height: 210px!important;
+        width:370px!important;
+    }
+    .wthreeshop-a {
+        margin-top: -20px;
+        padding-bottom: 10px;
+    }
+    .wthreeshop-a a{
+        padding: 0 !important;
+        font-size:5px;
+    }
+    .mainImage-height {
+        height: 545px!important;
+        width: 100%;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 30px;
+    }
+    .text1{
+        padding: -1px 9px;
+    }
+    .middle1{
+        top: 29% !important;
+        left: 82px !important;
+        height: 59px!important;
+        width: 50%!important;
+    }
+
+    .box-height{
+        height: 460px!important;
+    }
+    .product-img{
+        height: 450px!important;
+    }
+    .lead1{
+        font-size:10px !important;
+        margin-top: -40%!important;
+        margin-bottom: -20px!important;
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+
+
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+
+    }
+    .agileinfonewsl{
+        width: 100% !important;
+        height:300px!important;
+    }
+    .coverUp img{
+        width: 420px !important;
+        height: 165px !important;
+
+    }
+    .coverDown img{
+        height: 150px !important;
+        width: 420px !important;
+    }
+    /*.food1 img {*/
+    /*height: 300px!important;*/
+    /*}*/
+    .small-screen{
+        padding-top: 20px;
+    }
+    .about-img{
+        height: 415px !important;
+    }
+    .height-same{
+        height: 450px;
+    }
+    .button-a{
+        margin-top: -20px;
+    }
+    .w3lsshoesaits-info{
+        top: 0;
+    }
+    .w3lsshoesaits-info h3 {
+        font-size: 16px;
+    }
+    .w3lsshoesaits-info p {
+        line-height: 25px;
+        color: #FFF;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        width: 18em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    a.a-buttonsize{
+        font-size: 10px!important;
+    }
+
+    .about-product {
+        height: 700px;
+    }
+    .contact-img{
+        height: 240px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .name4{
+        width: 47% !important;
+        border-radius: 0px !important;
+        float: left;
+        margin-left: 70px;
+        margin-bottom: 10px;
+    }
+    .food1 img {
+        height: 400px!important;
+    }
+    .product-height{
+        height: 550px!important;
+    }
+}
+
+@media screen and (min-width: 412px) and (max-width:413px){
+    .img-texts{
+        height: 142px!important;
+    }
+    .height-img{
+        height: 142px!important;
+
+    }
+    .product-color img{
+        height:300px!important;
+    }
+    .product-color{
+        height:300px!important;
+
+    }
+    .smallAbout img{
+        height: 230px!important;
+        width:400px!important;
+    }
+    .wthreeshop-a {
+        margin-top: -20px;
+        padding-bottom: 10px;
+    }
+    .sildeshow1 {
+        height: 120px;
+    }
+    .wthreeshop-a a{
+        padding: 0 !important;
+        font-size:5px;
+    }
+    .mainImage-height {
+        height: 545px!important;
+        width: 100%;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 30px;
+    }
+    .text1{
+        padding: -1px 9px;
+    }
+    .middle1{
+        top: 29% !important;
+        left: 99px !important;
+        height: 75px!important;
+        width: 50%!important;
+    }
+
+    .box-height{
+        height: 460px!important;
+    }
+    .product-img{
+        height: 450px!important;
+    }
+    .lead1{
+        font-size:8px !important;
+        margin-top: -24%!important;
+        margin-bottom: -20px!important;
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+
+
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+
+    }
+    .agileinfonewsl{
+        width: 100% !important;
+        height:300px!important;
+    }
+    .coverUp img{
+        width: 420px !important;
+        height: 165px !important;
+
+    }
+    .coverDown img{
+        height: 150px !important;
+        width: 420px !important;
+    }
+    /*.food1 img {*/
+    /*height: 300px!important;*/
+    /*}*/
+    .small-screen{
+        padding-top: 20px;
+    }
+    .about-img{
+        height: 450px !important;
+    }
+    .height-same{
+        height: 450px!important;
+    }
+    .button-a{
+        margin-top: -20px;
+    }
+    .w3lsshoesaits-info{
+        top: 0;
+    }
+    .w3lsshoesaits-info h3 {
+        font-size: 16px;
+    }
+    .w3lsshoesaits-info p {
+        line-height: 25px;
+        color: #FFF;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        width: 18em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    a.a-buttonsize{
+        font-size: 10px!important;
+    }
+
+    .about-product {
+        height: 700px;
+    }
+    .contact-img{
+        height: 240px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .name4{
+        width: 47% !important;
+        border-radius: 0px !important;
+        float: left;
+        margin-left: 70px;
+        margin-bottom: 10px;
+    }
+    .food1 img {
+        height: 400px!important;
+    }
+    .product-height{
+        height: 550px!important;
+    }
+}
+
+@media screen and (min-width: 414px) and (max-width:480px){
+    .img-texts{
+        height: 142px!important;
+    }
+    .height-img{
+        height: 142px!important;
+
+    }
+    .product-color img{
+        height:260px!important;
+    }
+    .product-color{
+        height:260px!important;
+
+    }
+    .smallAbout img{
+        height: 360px!important;
+        width:450px!important;
+    }
+    .wthreeshop-a {
+        margin-top: -20px;
+        padding-bottom: 10px;
+    }
+
+    .wthreeshop-a a{
+        padding: 0 !important;
+        font-size:5px;
+    }
+    .mainImage-height {
+        height: 545px!important;
+        width: 100%;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 30px;
+    }
+    .text1{
+        padding: -1px 9px;
+    }
+    .middle1{
+        top: 38% !important;
+        left: 115px !important;
+        height: 70px!important;
+        width: 47%!important;
+    }
+
+    .box-height{
+        height: 460px!important;
+    }
+    .product-img{
+        height: 450px!important;
+    }
+    .lead1{
+        font-size:8px !important;
+        margin-top: -22%!important;
+        margin-bottom: -19px!important;
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+
+
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+
+    }
+    .agileinfonewsl{
+        width: 100% !important;
+        height:300px!important;
+    }
+    .coverUp img{
+        width: 420px !important;
+        height: 165px !important;
+
+    }
+    .coverDown img{
+        height: 290px !important;
+        width: 450px !important;
+    }
+    /*.food1 img {*/
+    /*height: 300px!important;*/
+    /*}*/
+    .small-screen{
+        padding-top: 20px;
+    }
+    .about-img{
+        height: 700px !important;
+    }
+    .height-same{
+        height: 450px;
+    }
+    .button-a{
+        margin-top: -20px;
+    }
+    .w3lsshoesaits-info{
+        top: 0;
+    }
+    .w3lsshoesaits-info h3 {
+        font-size: 16px;
+    }
+    .w3lsshoesaits-info p {
+        line-height: 25px;
+        color: #FFF;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        width: 18em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    a.a-buttonsize{
+        font-size: 10px!important;
+    }
+
+    .about-product {
+        height: 700px;
+    }
+    .contact-img{
+        height: 240px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .name4{
+        width: 47% !important;
+        border-radius: 0px !important;
+        float: left;
+        margin-left: 70px;
+        margin-bottom: 10px;
+    }
+    .about-product {
+        height: 845px!important;
+    }
+    .product img{
+        height: 600px!important;
+
+    }
+    .product-height{
+        height: 380px!important;
+    }
+    .food1 img {
+        height: 250px!important;
+    }
+
+
+    .product-color img{
+        height:350px!important;
+    }
+    .product-color{
+        height:350px!important;
+
+    }
+
+    .same-height img{
+        height: 500px!important;
+    }
+
+}
+
+@media screen and (min-width:481px) and (max-width: 520px){
     .lead1{
         font-size:10px !important;
         margin-top: 15%!important;
@@ -534,7 +1194,140 @@
     }
 
 }
-@media screen and (min-width: 641px) and (max-width: 768px) {
+@media screen and (min-width:521px) and (max-width: 568px){
+    .mainImage-height{
+        width: 508px!important;
+    }
+.img-thumb{
+    width: 145px!important;
+}
+    .smallAbout img{
+        height: 360px!important;
+        width:545px!important;
+    }
+
+    .lead1{
+        font-size:9px !important;
+        margin-top: -17%!important;
+        margin-bottom: -18px!important;
+
+    }
+    .wthreeshop-a a {
+        margin-top: -12%;
+        padding: 0px 0px!important;
+        border: 1px solid #FFF !important;
+        color: #FFF;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+    .middle1{
+        top:32%!important;
+        left:137px!important;
+        height: 107px!important;
+    }
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+
+    }
+    .agileinfonewsl{
+        width: 100%!important;
+        height:300px!important;
+    }
+    .coverUp img{
+        width: 580px !important;
+        height: 300px !important;
+
+    }
+    .coverDown img{
+        height: 300px !important;
+        width: 580px !important;
+    }
+    .product img{
+        width: 360px!important;
+        height: 700px!important;
+    }
+    .food1 img {
+        height: 300px!important;
+    }
+    .product-height{
+        height: 450px!important;
+    }
+
+
+    .height-img{
+        height: 500px!important;
+    }
+    .same-height img{
+        height: 600px!important;
+    }
+    .w3lsshoesaits-info{
+        top: 10%;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .product-color img{
+        height:400px!important;
+    }
+
+    .product-color{
+        height:400px!important;
+
+    }
+}
+@media screen and (min-width:569px) and (max-width: 640px){
+    .lead1{
+        font-size:10px !important;
+        margin-top: 15%!important;
+        margin-bottom: -10px!important;
+
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+    .middle1{
+        top:2%!important;
+        left:51px!important;
+    }
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+
+    }
+    .agileinfonewsl{
+        width: 100%!important;
+        height:300px!important;
+    }
+    .coverUp img{
+        width: 580px !important;
+        height: 230px !important;
+
+    }
+    .coverDown img{
+        height: 150px !important;
+        width: 420px !important;
+    }
+
+    .food1 img {
+        height: 300px!important;
+    }
+    .height-img{
+        height: 306px;
+    }
+    .w3lsshoesaits-info{
+        top: 10%;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+
+}
+
+@media screen and (min-width: 641px) and (max-width: 660px) {
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -569,16 +1362,328 @@
         margin-top: 30px;
     }
 }
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 661px) and (max-width: 700px) {
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 600px !important;
+    }
+    .product-img{
+        height: 490px;
+    }
+    .screen1{
+        padding-top: 20px;
+    }
+    .box-text{
+        white-space: nowrap;
+        width: 22em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .middle1{
+        left:-240px;
+        width: 100%;
+        top: 5%;
+    }
+    .sildeshow1 {
+        height: 240px;
+    }
+    .height-img{
+        height: 365px;
+    }
+    .contact-img{
+        height: 270px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+}
+@media screen and (min-width: 701px) and (max-width: 725px) {
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 600px !important;
+    }
+    .product-img{
+        height: 490px;
+    }
+    .screen1{
+        padding-top: 20px;
+    }
+    .box-text{
+        white-space: nowrap;
+        width: 22em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .middle1{
+        left:-240px;
+        width: 100%;
+        top: 5%;
+    }
+    .sildeshow1 {
+        height: 240px;
+    }
+    .height-img{
+        height: 365px;
+    }
+    .contact-img{
+        height: 270px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+}
+
+@media screen and (min-width: 726px) and (max-width: 768px) {
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 600px !important;
+    }
+    .product-img{
+        height: 490px;
+    }
+    .smallAbout img{
+        height: 250px!important;
+        width:385px!important;
+    }
+    .about-img{
+        height: 598px !important;
+    }
+    .screen1{
+        padding-top: 20px;
+    }
+    .box-text{
+        white-space: nowrap;
+        width: 22em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .middle1{
+        left:-52px!important;
+        width: 50%!important;
+        top: 15%!important;
+        height: 184px!important;
+    }
+    .height-img{
+        height: 365px;
+    }
+    .contact-img{
+        height: 270px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .coverUp img {
+        height: 405px!important;
+        width: 1108px!important;
+    }
+    .coverDown img{
+        height: 405px!important;
+        width: 1108px!important;
+    }
+    .product img{
+        width: 360px!important;
+        height: 400px!important;
+    }
+    .food1 img {
+        height: 370px!important;
+    }
+
+    .product-height{
+        height: 500px!important;
+    }
+    .same-height{
+        height: 500px!important;
+
+    }
+
+    .product-color img{
+        height:320px!important;
+    }
+
+    .product-color{
+        height:320px!important;
+
+    }
+    .about-product{
+        height: 640px!important;
+        width: 345px!important;
+    }
+    .product img{
+        width: 360px!important;
+    }
+    .height-img{
+        height: 500px!important;
+    }
+    .lead1{
+             font-size:16px !important;
+             margin-top: -8%!important;
+             margin-bottom: -12px!important;
+
+         }
+.lead2{
+    font-size: 10px!important;
+}
+}
+
+@media screen and (min-width: 769px) and (max-width: 855px) {
+    .coverUp img {
+        height: 300px!important;
+        width: 1108px!important;
+    }
+    .coverDown img{
+        height: 300px!important;
+        width: 1108px!important;
+    }
+       .smallAbout img{
+        height: 250px!important;
+        width:385px!important;
+    }
+
+    .wthreeshop-a {
+        margin-top: -20px;
+        padding-bottom: 10px;
+    }
+    .food1 img {
+        height: 270px!important;
+    }
+    .product-height{
+        height: 400px!important;
+    }
+    .lead1{
+        font-size:16px !important;
+        margin-top: 7%!important;
+        margin-bottom: -18px!important;
+
+    }
+    .product img{
+        width: 450px!important;
+    }
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 800px !important;
+    }
+
+    .middle1{
+        top:13% !important;
+        left: -65px!important;
+        height: 185px!important;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 30px;
+    }
+    .product-color img{
+        height:300px!important;
+    }
+
+    .product-color{
+        height:300px!important;
+
+    }
+
+.same-height img{
+    height: 400px!important;
+}
+
+}
+
+@media screen and (min-width: 856px) and (max-width: 961px) {
+    .smallAbout img{
+        height: 250px!important;
+        width:385px!important;
+    }
+    .same-height img{
+        height: 400px!important;
+    }
+
+    .wthreeshop-a {
+        margin-top: -20px;
+        padding-bottom: 10px;
+    }
+    .food1 img {
+        height: 240px!important;
+    }
+    .lead1{
+        font-size:16px !important;
+        margin-top: 7%!important;
+        margin-bottom: -18px!important;
+
+    }
+    .product img{
+        width: 450px!important;
+    }
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 800px !important;
+    }
+
+    .middle1{
+        top:13% !important;
+        left: -65px!important;
+        height: 185px!important;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 30px;
+    }
+    .product-color img{
+        height:300px!important;
+    }
+
+    .product-color{
+        height:300px!important;
+
+    }
+
+    .same-height img{
+        height: 350px!important;
+    }
+
+
+}
+@media screen and (min-width: 962px) and (max-width: 1024px) {
     .agileinfonewsl {
         width: 100% !important;
         height: 800px !important;
     }
     .slideshow1{
-        height: 250px;
+        height: 370px!important;
     }
     .middle1{
-        top:0 !important;
+        top:13% !important;
         left: -65px;
     }
+    .price ul li:nth-child(1) {
+        font-size: 25px;
+    }
+    .product-color img{
+        height:180px!important;
+    }
+
+    .product-color{
+        height:180px!important;
+
+    }
+
+}
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 800px !important;
+    }
+
+    .middle1{
+        top:13% !important;
+        left: -65px;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 25px;
+    }
+    .product-color img{
+        height:180px!important;
+    }
+
+    .product-color{
+        height:180px!important;
+
+    }
+
 }

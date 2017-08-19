@@ -58,12 +58,7 @@
                 </div>
                 <!-- /#blog-homepage -->
             </div>
-            <style>
-                .smallAbout img{
-                    height: 198px;
-                    width:262.5px;
-                }
-            </style>
+
             <div class="col-md-6 small-screen screen1" data-animate="fadeInUp">
                 <div class="box same-height">
                     <h1>ABOUT US</h1>
@@ -158,10 +153,10 @@
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
                                 </g:link>
                                 <div class="text">
-                                    <h3>
+                                    <h3 class="nameProduct">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}">${aboutUsInstance.specialProduct1.productColor.colorName+" "+aboutUsInstance.specialProduct1.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct1.productDetails.productName}</g:link>
                                     </h3>
                                     <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
@@ -197,10 +192,10 @@
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
                                 </g:link>
                                 <div class="text">
-                                    <h3>
+                                    <h3 class="nameProduct">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}">${aboutUsInstance.specialProduct1.productColor.colorName+" "+aboutUsInstance.specialProduct1.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct1.productDetails.productName}</g:link>
                                     </h3>
                                     <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct1.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct1.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
@@ -240,13 +235,14 @@
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
                                 </g:link>
                                 <div class="text">
-                                    <h3>
+                                    <h3 class="nameProduct">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">${aboutUsInstance.specialProduct2.productColor.colorName+" "+aboutUsInstance.specialProduct2.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct2.productDetails.productName}</g:link>
                                     </h3>
-                                    <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct2.productDetails.discountPercentage*aboutUsInstance.specialProduct2.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+                                    <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct2.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
                                         <del class="del-price" style="visibility: hidden;">Rs.${aboutUsInstance.specialProduct2.productDetails.price}</del></p>
 
                                     <p class="buttons">
@@ -255,15 +251,17 @@
 
                                     </p>
                                 </div>
+
                                 <!-- /.text -->
                             </div>
                             <!-- /.product -->
                         </div>
                     </g:if>
+                <!-- /.col-md-4 -->
                     <g:if test="${aboutUsInstance.specialProduct2.productDetails.isSale==true}">
                         <div class="col-md-6 col-sm-6 a">
                             <div class="product about-product">
-                                <div class="flip-container flip-height">
+                                <div class="flip-container">
                                     <div class="flipper">
                                         <div class="front product">
                                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">
@@ -278,13 +276,14 @@
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
                                 </g:link>
-                                <div class="text text-margin">
-                                    <h3>
+                                <div class="text">
+                                    <h3 class="nameProduct">
                                         <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">${aboutUsInstance.specialProduct2.productColor.colorName+" "+aboutUsInstance.specialProduct2.productDetails.productBrand.brandName+" "+aboutUsInstance.specialProduct2.productDetails.productName}</g:link>
                                     </h3>
-                                    <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct2.productDetails.discountPercentage*aboutUsInstance.specialProduct2.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+                                    <p class="price"> Rs.<g:formatNumber number="${aboutUsInstance.specialProduct2.productDetails.price-(aboutUsInstance.specialProduct1.productDetails.discountPercentage*aboutUsInstance.specialProduct2.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
                                         <del class="del-price">Rs.${aboutUsInstance.specialProduct2.productDetails.price}</del></p>
 
                                     <p class="buttons">
@@ -293,17 +292,17 @@
 
                                     </p>
                                 </div>
-                                <!-- /.text -->
                                 <div class="ribbon sale">
                                     <div class="theribbon">SALE</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                                <!-- /.ribbon -->
+
+                                <!-- /.text -->
                             </div>
                             <!-- /.product -->
                         </div>
                     </g:if>
-                <!-- /.col-md-4 -->
+
                 </div>
             </div>
         </div>

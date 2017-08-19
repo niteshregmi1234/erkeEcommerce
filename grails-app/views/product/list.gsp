@@ -53,10 +53,8 @@
             <td> <g:link action="show" id="${list?.id}" controller="product" class="btn btn-primary btn-sm">view</g:link></td>
             <td>${list.productDetails.productName}</td>
             <td>${list.productDetails.productCategory.categoryName}</td>
-
             <td>${list.productDetails.productSubCategory.subCategoryName}</td>
             <td>${list.productColor.colorName}</td>
-
             <td>${list.isLatest}</td>
             <td>${list.isFeatured}</td>
         </tr>
@@ -69,7 +67,7 @@
         // Setup - add a text input to each footer cell
         $('#example tfoot th').each( function () {
             var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            $(this).html( '<input type="text" placeholder='+title+' />' );
         } );
 
         // DataTable

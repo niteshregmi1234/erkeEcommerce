@@ -395,13 +395,13 @@
                                             <div class="product product-color">
                                                 <div class="flip-container">
                                                     <div class="flipper">
-                                                        <div class="front food1">
+                                                        <div class="front">
                                                             <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
 
                                                             </g:link>
                                                         </div>
-                                                        <div class="back food1">
+                                                        <div class="back">
                                                             <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
 
