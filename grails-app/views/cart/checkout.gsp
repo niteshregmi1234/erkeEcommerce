@@ -926,7 +926,7 @@ evt.preventDefault();
 
                                 </p>
 
-                                <h3 class="alert alert-success fade in">Dear,Customer. Your order has been successfully kept under process. And Your order Id is-<h2 style="text-align: center;">${flash.message1}</h2></h2></h3>
+                                <h3 class="alert alert-success fade in">Dear,Customer. Your order has been successfully kept under process. And Your order Id is</h3>-<h2 style="text-align: center;">Order Id: ${flash.message1}</h2>
                                 <h4>Dear Customer, you are requested to remember your order Id. Thank you!!</h4>
 
                 </div>
@@ -973,7 +973,7 @@ evt.preventDefault();
             }
             $('#messageModel1').modal('toggle');
         </script>
-        </script>
+
     </g:if>
 
 <!-- /.container -->

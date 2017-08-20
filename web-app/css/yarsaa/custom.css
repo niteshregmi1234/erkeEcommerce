@@ -2,6 +2,11 @@
     height: 235px;
     width: 100%;
 }
+.box{
+    text-overflow: ellipsis;
+
+
+    overflow: hidden;}
 #content .product .text h3 a{
     clear: both;
     display: inline-block;
@@ -43,9 +48,7 @@
 /*.product-color img{*/
     /*height: 238px;*/
 /*}*/
-.same-height{
-    height: 415px;
-}
+
 .height-same{
     height: 600px;
 }
@@ -2408,10 +2411,7 @@ width: 360px;
     .product-height{
         height: 500px!important;
     }
-    .same-height{
-        height: 500px!important;
 
-    }
 
     .product-color img{
         height:450px!important;

@@ -59,8 +59,8 @@
                 <!-- /#blog-homepage -->
             </div>
 
-            <div class="col-md-6 small-screen screen1" data-animate="fadeInUp">
-                <div class="box same-height">
+            <div class="col-md-6" data-animate="fadeInUp">
+                <div class="box">
                     <h1>ABOUT US</h1>
                     <p>${aboutUsInstance.aboutUsDescription}</p>
                 </div>
@@ -82,8 +82,8 @@
                         <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.quoteLeftImage])}" class="img-responsive about-img">
                     </div>
                 </div>
-                <div class="col-sm-2 small-screen">
-                    <div class="box height-same small-screen">
+                <div class="col-sm-2">
+                    <div class="box">
                         <h3>"${aboutUsInstance.quote}"</h3>
                         <h4>― ${CompanyInformation.list()[0].proprietorName}</h4>
                     </div>
@@ -106,10 +106,10 @@
         <div class="row">
             <div class="col-md-12" data-animate="fadeInUp">
                 <div class="col-sm-6">
-                    <div class="box ">
-                        <h2>SHOPPING VIDEO</h2>
+                    <div class="box">
+                        <h2>COMMERCIAL VIDEO</h2>
                         <p class="box-text">${aboutUsInstance.videoDescription}.</p>
-                        <p class="box-text">Watch our commercial videos.</p>
+                        <p class="box-text">Watch our commercial videos</p>
                         <p class="read-more"><a href="#small-dialog4" class="popup-with-zoom-anim btn btn-primary">WATCH NOW</a>
                         </p>
                     </div>
@@ -127,6 +127,7 @@
             </div>
             <!-- /#blog-homepage -->
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 &nbsp;

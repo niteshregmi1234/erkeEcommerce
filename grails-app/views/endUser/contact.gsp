@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				<div class="box boxsize-small" style="height: 393px;">
+				<div class="box">
 					<div>
 						&nbsp;
 					</div>
