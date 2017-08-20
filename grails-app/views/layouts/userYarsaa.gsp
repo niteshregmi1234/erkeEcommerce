@@ -30,8 +30,14 @@
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/owl.theme.css')}" type="text/css"
           media="all"/>
+    <g:if test="${StyleManagement.list()[0]}">
     <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"${"style."+StyleManagement.list()[0].style.name+".css"}")}" type="text/css"
           media="all"/>
+    </g:if>
+    <g:if test="${StyleManagement.list()[0]==null}">
+        <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"style.default.css")}" type="text/css"
+              media="all"/>
+    </g:if>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css')}" type="text/css"
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'js', file: 'yarsaa/typeahead.css')}" type="text/css"
@@ -102,7 +108,7 @@
                         <div class="box">
 
                             <p class="text-center">
-                                <img src="img/logo.png" alt="yarsaa Logo">
+                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
                             </p>
 
                             <h3>JavaScript not found</h3>
@@ -366,17 +372,11 @@ if(sizeId=='' && productId==''){
     <div class="container">
         <div class="navbar-header">
 
-            <g:link class="navbar-brand home logoImg"  action="userHome" controller="endUser" data-animate-hover="bounce">
+            <g:link class="navbar-brand home "  action="userHome" controller="endUser" data-animate-hover="bounce">
                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}" class="hidden-xs">
 
                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}" alt="yarsaa logo" class="visible-xs"><span class="sr-only">Home</span>
             </g:link>
-            <style>
-                .logoImg img{
-                    width: 80px;
-                    height: 50px;
-                }
-            </style>
             <div class="navbar-buttons">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                     <span class="sr-only">Toggle navigation</span>

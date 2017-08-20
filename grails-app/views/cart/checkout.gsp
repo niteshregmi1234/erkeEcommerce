@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
 
@@ -67,7 +67,7 @@
 
                 <form method="POST">
 
-                    <h1>Shopping cart</h1>
+                    <h1 class="bigName">Shopping cart</h1>
                     <p class="text-muted">You currently have ${Cart.findAllByEndUserInformation(session.endUser).size()} item(s) in your cart.</p>
                     <g:if test="${Cart.findAllByEndUserInformation(session.endUser)}">
                     <div class="table-responsive" id="tableResponsive">
@@ -127,12 +127,12 @@
 
                     <div class="box-footer">
                         <div class="pull-left">
-                            <g:link action="allProducts" controller="endUser" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</g:link>
+                            <g:link action="allProducts" controller="endUser" class="btn btn-default bigButton"><i class="fa fa-chevron-left"></i> Continue shopping</g:link>
                         </div>
                     <g:if test="${Cart.findAllByEndUserInformation(session.endUser).size()!=0}">
                         <div class="pull-right">
-                            <button type="submit" class="btn btn-default" id="updateBasket"><i class="fa fa-refresh" ></i> Update basket</button>
-                            <div class="btn btn-primary" onclick="showAddress(this);">Proceed to checkout <i class="fa fa-chevron-right"></i>
+                            <button type="submit" class="btn btn-default bigButton" id="updateBasket"><i class="fa fa-refresh" ></i> Update basket</button>
+                            <div class="btn btn-primary bigButton" onclick="showAddress(this);">Proceed to checkout <i class="fa fa-chevron-right"></i>
                             </div>
                         </div>
                     </g:if>
@@ -159,13 +159,13 @@
                             <div class="flip-container">
                                 <div class="flipper">
                                     <div class="front food1">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                             <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                         </g:link>
                                     </div>
                                     <div class="back food1">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.id}">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                             <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
 
@@ -173,21 +173,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
+                            <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible food1">
 
                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                             </g:link>
                             <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.id}">${list.productDetails.productName}</g:link></h3>
+                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName}</g:link></h3>
                                 <g:if test="${list.productDetails.isSale==true}">
-                                    <p class="price"> Rs.${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}<br>
-                                        <del class="del-price">Rs.${list.productDetails.price}</del></p>
+                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
+                                        <del class="del-price">Rs.<g:formatNumber number="${list.productDetails.price}" type="number" maxFractionDigits="2" /></del></p>
                                 </g:if>
                                 <g:if test="${list.productDetails.isSale==false}">
 
-                                    <p class="price">Rs.${list.productDetails.price}</p>
-                                </g:if>
+                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
+                                        <del class="del-price" style="visibility: hidden;">Rs.<g:formatNumber number="${list.productDetails.price}" type="number" maxFractionDigits="2" /></del></p>                                </g:if>
                             </div>
                         <!-- /.text -->
                             <g:if test="${list.productDetails.isSale==true}">
@@ -256,10 +258,11 @@
 </g:if>
 
         <div class="col-md-9" id="checkout">
-            <div class="box" style="display: none;" id="deliveryAddress">
             <form action="/checkOut/placeOrder" method="post" id="myForm">
 
-                <h1>Checkout-Address</h1>
+                <div class="box" style="display: none;" id="deliveryAddress">
+
+                <h1 class="bigName">Checkout-Address</h1>
                     <ul class="nav nav-pills nav-justified">
                         <li class="active"><a onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Address</a>
                         </li>
@@ -330,10 +333,10 @@
 
                     <div class="box-footer">
                         <div class="pull-left">
-                            <div class="btn btn-default" onclick="backToBasket(this);"><i class="fa fa-chevron-left"></i>Back to basket</div>
+                            <div class="btn btn-default bigButton" onclick="backToBasket(this);"><i class="fa fa-chevron-left"></i>Back to basket</div>
                         </div>
                         <div class="pull-right">
-                            <div class="btn btn-primary" onclick="deliveryMethod(this);">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
+                            <div class="btn btn-primary bigButton" onclick="deliveryMethod(this);">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
                             </div>
                         </div>
                     </div>
@@ -341,7 +344,7 @@
             </div>
             <div class="box" style="display: none;" id="deliveryMethod">
 
-                    <h1>Checkout - Delivery method</h1>
+                    <h1 class="bigName">Checkout - Delivery method</h1>
                     <ul class="nav nav-pills nav-justified">
                         <li><div onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Address</div>
                         </li>
@@ -378,10 +381,10 @@
 
                     <div class="box-footer">
                         <div class="pull-left">
-                            <div class="btn btn-default" onclick="backToAddress(this);"><i class="fa fa-chevron-left" ></i>Back to Addresses</div>
+                            <div class="btn btn-default bigButton" onclick="backToAddress(this);"><i class="fa fa-chevron-left" ></i>Back to Addresses</div>
                         </div>
                         <div class="pull-right">
-                            <div class="btn btn-primary" onclick="paymentMethod(this);">Continue to Payment Method<i class="fa fa-chevron-right"></i>
+                            <div class="btn btn-primary bigButton" onclick="paymentMethod(this);">Continue to Payment Method<i class="fa fa-chevron-right"></i>
                             </div>
                         </div>
                     </div>
@@ -389,7 +392,7 @@
             </div>
             <div class="box" style="display: none;" id="paymentMethod">
 
-                    <h1>Checkout - Payment method</h1>
+                    <h1 class="bigName">Checkout - Payment method</h1>
                     <ul class="nav nav-pills nav-justified">
                         <li><div onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Address</div>
                         </li>
@@ -426,17 +429,17 @@
 
                     <div class="box-footer">
                         <div class="pull-left">
-                            <div class="btn btn-default" onclick="backToDeliveryMethod(this);"><i class="fa fa-chevron-left"></i>Back to Shipping method</div>
+                            <div class="btn btn-default bigButton" onclick="backToDeliveryMethod(this);"><i class="fa fa-chevron-left"></i>Back to Shipping method</div>
                         </div>
                         <div class="pull-right">
-                            <div class="btn btn-primary" onclick="orderReview(this);">Continue to Order review<i class="fa fa-chevron-right"></i>
+                            <div class="btn btn-primary bigButton" onclick="orderReview(this);">Continue to Order review<i class="fa fa-chevron-right"></i>
                             </div>
                         </div>
                     </div>
 
             </div>
             <div class="box" style="display: none;" id="orderReview">
-                    <h1>Checkout - Order review</h1>
+                    <h1 class="bigName">Checkout - Order review</h1>
                     <ul class="nav nav-pills nav-justified">
                         <li><div onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Address</div>
                         </li>
@@ -504,12 +507,12 @@ ${list.quantity}
             </style>
                     <div class="box-footer">
                         <div class="pull-left">
-                            <div class="btn btn-default" onclick="backToPayment(this);"><i class="fa fa-chevron-left"></i>Back to Payment method</div>
+                            <div class="btn btn-default bigButton" onclick="backToPayment(this);"><i class="fa fa-chevron-left"></i>Back to Payment method</div>
                         </div>
                         <div class="pull-right">
 
-                            <a href="#" id="submit_Id" class="btn btn-primary" data-toggle="modal" data-target="#confirmModel">Place an order<i class="fa fa-chevron-right"></i>
-                            </a>
+                            <button type="button"  class="btn btn-primary bigButton" data-toggle="modal" data-target="#confirmModel" id="submit_IdOrder">Place an order<i class="fa fa-chevron-right"></i>
+                            </button>
                             <div class="bootbox modal fade bootbox-confirm in" id="confirmModel" tabindex="-1" role="dialog"  aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -526,11 +529,11 @@ ${list.quantity}
 
                         </div>
                     </div>
-                </form>
             </div>
 
             <!-- /.box -->
 
+            </form>
 
         </div>
         <div class="col-md-3" style="display: none;" id="checkoutSummary">
@@ -583,7 +586,7 @@ ${list.quantity}
 
 
             function preventMultipleSubmissions() {
-                $('#submit_Id').prop('disabled', true);
+                $('#submit_IdOrder').prop('disabled', true);
             }
 
             window.onbeforeunload = preventMultipleSubmissions;
@@ -622,8 +625,8 @@ responseValue=false;
 
             }
             else if(text=="ok"){
-                document.getElementById('submit_Id').setAttribute("disabled","disabled");
                 document.getElementById("myForm").submit();
+
             }
         }
 

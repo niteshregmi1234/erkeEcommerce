@@ -224,6 +224,9 @@
 .about-product{
     height: 857px;
 }
+.about-product img{
+    width: 560px!important;
+}
 .food1-img{
     width: 100%;
 }
@@ -247,7 +250,173 @@
 .product img{
 width: 360px;
 }
-@media screen and (max-width:280px){
+
+@media screen and (max-width:240px){
+    .bigButton {
+        width: 135px!important;
+        height: 33px!important;
+        font-size: 9px!important;
+    }
+    .bigName{
+        word-wrap: break-word!important;
+    }
+    .product-color img{
+        height:120px!important;
+    }
+    .smallAbout img{
+        height: 198px!important;
+        width:295px!important;
+    }
+    .product-color{
+        height: 120px!important;
+    }
+    .wthreeshop-a a {
+        padding: 0px 0px!important;
+        border: 1px solid #FFF !important;
+        color: #FFF;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+    }
+    /*#content {*/
+    /*padding-top: 115px;*/
+    /*}*/
+    .box-height{
+        height: 555px;
+    }
+    .text1{
+        padding: 6px 9px;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 15px!important;
+    }
+    .mainImage-coverDown{
+        height:355px;
+        width: 100%;
+    }
+    .lead1{
+        font-size:5px !important;
+        margin-top: -40%!important;
+        margin-bottom: -20px!important;
+    }
+    .lead2{
+        font-size: 3px!important;
+    }
+    .middle1{
+        top: 37% !important;
+        left: 53px !important;
+        height: 35px!important;
+        width: 50%!important;
+    }
+    .shop-button{
+        margin-top:0px !important;
+    }
+
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+    }
+    .imgage-nomargin{
+        height: 86px;
+    }
+    .agileinfonewsl{
+        width: 213px!important;
+        height:265px!important;
+    }
+    .coverUp img{
+        height: 120px !important;
+        width: 260px !important;
+
+    }
+    .coverDown img{
+        height: 120px !important;
+        width: 260px !important;
+    }
+    .food1 img {
+        height: 300px!important;
+    }
+    .product-img{
+        height: 390px;
+    }
+    .small-screen{
+        padding-top: 20px;
+    }
+    .about-img{
+        height: 360px !important;
+    }
+    .height-same{
+        height: 450px;
+    }
+    .product-height {
+        height: 435px;
+    }
+    .wthreeshop-a a{
+        font-size: 4px!important;
+    }
+    .wthreeshop-a{
+        margin-top: -31px!important;
+    }
+    .w3lsshoesaits-info{
+        top: 0px;
+        margin-left: -37px!important;
+    }
+    .w3lsshoesaits-info h3 {
+        font-size: 16px;
+    }
+    .w3lsshoesaits-info p {
+        line-height: 25px;
+        color: #FFF;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        width: 18em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    a.a-buttonsize{
+        font-size: 10px!important;
+    }
+    .height-img{
+        height: 200px;
+    }
+    .img-texts{
+        height: 200px;
+    }
+    .about-product{
+        height: 675px;
+    }
+    .text-margin{
+        margin-top: -50px;
+    }
+    .mainImage-height {
+        height: 355px!important;
+        width: 100%;
+    }
+
+    .thumb{
+        height:70px!important;
+    }
+    .img-thumb{
+        height: 70px!important;;
+    }
+
+
+    .sub-flipperHeight{
+        height:225px;
+    }
+    .contact-img{
+        height: 240px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .name4{
+        width: 55%;
+        margin-bottom: 30px;
+    }
+}
+@media screen and (min-width:241px) and (max-width: 280px){
     .product-color img{
         height:210px!important;
     }
@@ -269,7 +438,7 @@ width: 360px;
     /*padding-top: 115px;*/
     /*}*/
     .box-height{
-        height: 480px;
+        height: 555px;
     }
     .text1{
         padding: 6px 9px;
@@ -406,7 +575,171 @@ width: 360px;
     }
 }
 
-@media screen and (min-width:281px) and (max-width:320px){
+@media screen and (min-width:281px) and (max-width:300px){
+    .bigButton {
+        width: 187px!important;
+        height: 32px!important;
+        font-size: 13px!important;
+    }
+    .product-color img{
+        height:210px!important;
+    }
+    .smallAbout img{
+        height: 198px!important;
+        width:295px!important;
+    }
+    .product-color{
+        height: 210px!important;
+    }
+    .wthreeshop-a a {
+        padding: 1px 2px!important;
+        border: 1px solid #FFF !important;
+        color: #FFF;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+    }
+    /*#content {*/
+    /*padding-top: 115px;*/
+    /*}*/
+    .box-height{
+        height: 555px;
+    }
+    .text1{
+        padding: 6px 9px;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 15px!important;
+    }
+    .mainImage-coverDown{
+        height:355px;
+        width: 100%;
+    }
+    .lead1{
+        font-size:10px !important;
+        margin-top: -20%!important;
+        margin-bottom: -20px!important;
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+    .middle1{
+        top: 29% !important;
+        left: 74px !important;
+        height: 59px!important;
+        width: 50%!important;
+    }
+    .shop-button{
+        margin-top:0px !important;
+    }
+    .sildeshow1{
+        height: auto;
+    }
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+    }
+    .imgage-nomargin{
+        height: 86px;
+    }
+    .agileinfonewsl{
+        width: 263px!important;
+        height:300px!important;
+    }
+    .coverUp img{
+        height: 120px !important;
+        width: 260px !important;
+
+    }
+    .coverDown img{
+        height: 120px !important;
+        width: 260px !important;
+    }
+    .food1 img {
+        height: 300px!important;
+    }
+    .product-img{
+        height: 390px;
+    }
+    .small-screen{
+        padding-top: 20px;
+    }
+    .about-img{
+        height: 360px !important;
+    }
+    .height-same{
+        height: 450px;
+    }
+    .product-height {
+        height: 435px;
+    }
+    .wthreeshop-a a{
+        font-size: 7px;
+    }
+    .wthreeshop-a{
+        margin-top: -20px;
+    }
+    .w3lsshoesaits-info{
+        top: 0px;
+    }
+    .w3lsshoesaits-info h3 {
+        font-size: 16px;
+    }
+    .w3lsshoesaits-info p {
+        line-height: 25px;
+        color: #FFF;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        width: 18em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    a.a-buttonsize{
+        font-size: 10px!important;
+    }
+    .height-img{
+        height: 200px;
+    }
+    .img-texts{
+        height: 200px;
+    }
+    .about-product{
+        height: 645px;
+    }
+    .text-margin{
+        margin-top: -50px;
+    }
+    .mainImage-height {
+        height: 350px!important;
+        width: 100%;
+    }
+
+    .thumb{
+        height:110px;
+    }
+    .img-thumb{
+        height:106px;
+    }
+
+
+    .sub-flipperHeight{
+        height:225px;
+    }
+    .contact-img{
+        height: 240px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .name4{
+        width: 55%;
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (min-width:301px) and (max-width:320px){
     .product-color img{
         height:210px!important;
     }
@@ -1018,6 +1351,9 @@ width: 360px;
         height: 545px!important;
         width: 100%;
     }
+    .img-thumb{
+     width: 125px!important;
+    }
     .price ul li:nth-child(1) {
         font-size: 30px;
     }
@@ -1224,7 +1560,7 @@ width: 360px;
         font-size: 8px!important;
     }
     .middle1{
-        top:32%!important;
+        top:26%!important;
         left:137px!important;
         height: 107px!important;
     }
@@ -1246,10 +1582,14 @@ width: 360px;
         height: 300px !important;
         width: 580px !important;
     }
+    .about-product{
+        height: 945px!important;
+    }
     .product img{
         width: 360px!important;
         height: 700px!important;
     }
+
     .food1 img {
         height: 300px!important;
     }
@@ -1279,7 +1619,7 @@ width: 360px;
 
     }
 }
-@media screen and (min-width:569px) and (max-width: 640px){
+@media screen and (min-width:569px) and (max-width: 599px){
     .lead1{
         font-size:10px !important;
         margin-top: 15%!important;
@@ -1326,8 +1666,236 @@ width: 360px;
     }
 
 }
+@media screen and (min-width:600px) and (max-width: 620px){
 
-@media screen and (min-width: 641px) and (max-width: 660px) {
+    .mainImage-height{
+        width: 540px!important;
+        height: 755px!important;
+    }
+    .thumb{
+        height:220px!important;
+    }
+    .img-thumb{
+        width: 180px!important;
+        height:220px!important;
+
+    }
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 600px !important;
+    }
+    .product-img{
+        height: 490px;
+    }
+    .smallAbout img{
+        height: 330px!important;
+        width:570px!important;
+    }
+    .about-img{
+        height: 650px !important;
+        width: 540px!important;
+    }
+    .screen1{
+        padding-top: 20px;
+    }
+    .box-text{
+        white-space: nowrap;
+        width: 22em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .middle1{
+        left:140px!important;
+        width: 50%!important;
+        top: 20%!important;
+        height: 132px!important;
+    }
+    .height-img{
+        height: 365px;
+    }
+    .contact-img{
+        height: 270px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .coverUp img {
+        height: 250px!important;
+        width: 1108px!important;
+    }
+    .coverDown img{
+        height: 250px!important;
+        width: 1108px!important;
+    }
+    .product img{
+        width: 360px!important;
+        height: 520px!important;
+    }
+    .food1 img {
+        height: 310px!important;
+    }
+
+    .product-height{
+        height: 440px!important;
+    }
+    .same-height img {
+        height: 500px!important;
+
+    }
+
+    .product-color img{
+        height:450px!important;
+    }
+
+    .product-color{
+        height:450px!important;
+
+    }
+    .about-product{
+        height: 755px!important;
+        width: 568px!important;
+    }
+    .product img{
+        width: 360px!important;
+    }
+    .height-img{
+        height: 500px!important;
+    }
+    .lead1{
+        font-size:10px !important;
+        margin-top: -15%!important;
+        margin-bottom: -12px!important;
+
+    }
+    .lead2{
+        font-size: 10px!important;
+    }
+    .wthreeshop-a a {
+        margin-top: -12%;
+        padding: 3px 6px!important;
+        border: 1px solid #FFF !important;
+        color: #FFF;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+    }
+
+}
+@media screen and (min-width:621px) and (max-width: 640px){
+    .mainImage-height{
+        width: 580px!important;
+        height: 755px!important;
+    }
+    .thumb{
+        height:220px!important;
+    }
+    .img-thumb{
+        width: 180px!important;
+        height:220px!important;
+
+    }
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 600px !important;
+    }
+    .product-img{
+        height: 490px;
+    }
+    .smallAbout img{
+        height: 330px!important;
+        width:615px!important;
+    }
+    .about-img{
+        height: 700px !important;
+        width: 590px!important;
+    }
+    .screen1{
+        padding-top: 20px;
+    }
+    .box-text{
+        white-space: nowrap;
+        width: 22em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .middle1{
+        left:140px!important;
+        width: 50%!important;
+        top: 20%!important;
+        height: 132px!important;
+    }
+    .height-img{
+        height: 365px;
+    }
+    .contact-img{
+        height: 270px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .coverUp img {
+        height: 250px!important;
+        width: 1108px!important;
+    }
+    .coverDown img{
+        height: 250px!important;
+        width: 1108px!important;
+    }
+    .product img{
+        width: 360px!important;
+        height: 520px!important;
+    }
+    .food1 img {
+        height: 310px!important;
+    }
+
+    .product-height{
+        height: 440px!important;
+    }
+    .same-height img {
+        height: 655px!important;
+
+    }
+
+    .product-color img{
+        height:530px!important;
+    }
+
+    .product-color{
+        height:530px!important;
+
+    }
+    .about-product{
+        height: 765px!important;
+        width: 610px!important;
+    }
+    .product img{
+        width: 360px!important;
+    }
+    .height-img{
+        height: 500px!important;
+    }
+    .lead1{
+        font-size:10px !important;
+        margin-top: -15%!important;
+        margin-bottom: -12px!important;
+
+    }
+    .lead2{
+        font-size: 10px!important;
+    }
+    .wthreeshop-a a {
+        margin-top: -12%;
+        padding: 3px 6px!important;
+        border: 1px solid #FFF !important;
+        color: #FFF;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+    }
+
+}
+
+
+@media screen and (min-width: 641px) and (max-width: 666px) {
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -1362,48 +1930,133 @@ width: 360px;
         margin-top: 30px;
     }
 }
-@media screen and (min-width: 661px) and (max-width: 700px) {
-    .agileinfonewsl {
-        width: 100% !important;
-        height: 600px !important;
+@media screen and (min-width: 667px) and (max-width: 700px) {
+    .about-img{
+        height: 900px!important;
+        width: 610px!important;
     }
-    .product-img{
-        height: 490px;
+
+    .mainImage-height{
+        width: 607px!important;
+        height: 815px!important;
     }
-    .screen1{
-        padding-top: 20px;
+    .thumb{
+        height:220px!important;
     }
-    .box-text{
-        white-space: nowrap;
-        width: 22em;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .img-thumb{
+        width: 180px!important;
+        height:220px!important;
+
+    }
+    .smallAbout img{
+        height: 410px!important;
+        width:645px!important;
+    }
+
+    .lead1{
+        font-size:13px !important;
+        margin-top: -12%!important;
+        margin-bottom: -19px!important;
+
+    }
+    .wthreeshop-a a {
+        margin-top: -10%;
+        padding: 3px 6px!important;
+        border: 1px solid #FFF !important;
+        color: #FFF;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+    }
+    .lead2{
+        font-size: 8px!important;
     }
     .middle1{
-        left:-240px;
-        width: 100%;
-        top: 5%;
+        top:29%!important;
+        left:160px!important;
+        height: 107px!important;
     }
-    .sildeshow1 {
-        height: 240px;
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+
     }
+    .agileinfonewsl{
+        width: 100%!important;
+        height:300px!important;
+    }
+    .coverUp img{
+        width: 580px !important;
+        height: 300px !important;
+
+    }
+    .coverDown img{
+        height: 300px !important;
+        width: 580px !important;
+    }
+    .about-product{
+        height: 945px!important;
+    }
+    .product img{
+        width: 360px!important;
+        height: 700px!important;
+    }
+
+    .food1 img {
+        height: 316px!important;
+    }
+    .product-height{
+        height: 450px!important;
+    }
+
+
     .height-img{
-        height: 365px;
+        height: 500px!important;
     }
-    .contact-img{
-        height: 270px;
+    .same-height img{
+        height: 650px!important;
+    }
+    .w3lsshoesaits-info{
+        top: 10%;
     }
     .boxsize-small{
         margin-top: 30px;
+    }
+    .product-color img{
+        height:470px!important;
+    }
+
+    .product-color{
+        height:470px!important;
+
     }
 }
 @media screen and (min-width: 701px) and (max-width: 725px) {
+    .mainImage-height{
+        width: 660px!important;
+        height: 755px!important;
+    }
+    .thumb{
+        height:220px!important;
+    }
+    .img-thumb{
+        width: 200px!important;
+        height:220px!important;
+
+    }
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
     }
     .product-img{
         height: 490px;
+    }
+    .smallAbout img{
+        height: 800px!important;
+        width:675px!important;
+    }
+    .about-img{
+        height: 700px !important;
+        width: 590px!important;
     }
     .screen1{
         padding-top: 20px;
@@ -1415,12 +2068,10 @@ width: 360px;
         text-overflow: ellipsis;
     }
     .middle1{
-        left:-240px;
-        width: 100%;
-        top: 5%;
-    }
-    .sildeshow1 {
-        height: 240px;
+        left:174px!important;
+        width: 50%!important;
+        top: 23%!important;
+        height: 132px!important;
     }
     .height-img{
         height: 365px;
@@ -1431,9 +2082,275 @@ width: 360px;
     .boxsize-small{
         margin-top: 30px;
     }
+    .coverUp img {
+        height: 250px!important;
+        width: 1108px!important;
+    }
+    .coverDown img{
+        height: 250px!important;
+        width: 1108px!important;
+    }
+    .product img{
+        width: 360px!important;
+        height: 700px!important;
+    }
+    .food1 img {
+        height: 325px!important;
+    }
+
+    .product-height{
+        height: 460px!important;
+    }
+    .same-height img {
+        height: 655px!important;
+
+    }
+
+    .product-color img{
+        height:600px!important;
+    }
+
+    .product-color{
+        height:600px!important;
+
+    }
+    .about-product{
+        height: 765px!important;
+        width: 675px!important;
+    }
+    .product img{
+        width: 360px!important;
+    }
+    .height-img{
+        height: 500px!important;
+    }
+    .lead1{
+        font-size:14px !important;
+        margin-top: -10%!important;
+        margin-bottom: -12px!important;
+
+    }
+    .lead2{
+        font-size: 10px!important;
+    }
+    .wthreeshop-a a {
+        margin-top: -12%;
+        padding: 3px 6px!important;
+        border: 1px solid #FFF !important;
+        color: #FFF;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+    }
+
 }
 
-@media screen and (min-width: 726px) and (max-width: 768px) {
+@media screen and (min-width: 726px) and (max-width: 735px) {
+    .mainImage-height{
+        width: 671px!important;
+        height: 815px!important;
+    }
+    .thumb{
+        height:220px!important;
+    }
+    .img-thumb{
+        width: 200px!important;
+        height:220px!important;
+
+    }
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 600px !important;
+    }
+    .product-img{
+        height: 490px;
+    }
+    .smallAbout img{
+        height: 400px!important;
+        width:705px!important;
+    }
+    .about-img{
+        height: 780px !important;
+        width: 675px!important;
+    }
+    .screen1{
+        padding-top: 20px;
+    }
+    .box-text{
+        white-space: nowrap;
+        width: 22em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .middle1{
+        left:174px!important;
+        width: 50%!important;
+        top: 15%!important;
+        height: 175px!important;
+    }
+    .height-img{
+        height: 365px;
+    }
+    .contact-img{
+        height: 270px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .coverUp img {
+        height: 405px!important;
+        width: 1108px!important;
+    }
+    .coverDown img{
+        height: 405px!important;
+        width: 1108px!important;
+    }
+    .product img{
+        width: 360px!important;
+        height: 800px!important;
+    }
+    .food1 img {
+        height: 370px!important;
+    }
+
+    .product-height{
+        height: 500px!important;
+    }
+    .same-height img{
+        height: 750px!important;
+
+    }
+
+    .product-color img{
+        height:550px!important;
+    }
+
+    .product-color{
+        height:550px!important;
+
+    }
+    .about-product{
+        height: 1040px!important;
+        width: 675px!important;
+    }
+    .product img{
+        width: 360px!important;
+    }
+    .height-img{
+        height: 500px!important;
+    }
+    .lead1{
+             font-size:16px !important;
+             margin-top: -8%!important;
+             margin-bottom: -12px!important;
+
+         }
+.lead2{
+    font-size: 10px!important;
+}
+}
+@media screen and (min-width: 736px) and (max-width: 749px) {
+    .mainImage-height{
+        width: 675px!important;
+        height: 815px!important;
+    }
+    .thumb{
+        height:220px!important;
+    }
+    .img-thumb{
+        width: 205px!important;
+        height:220px!important;
+
+    }
+    .agileinfonewsl {
+        width: 100% !important;
+        height: 600px !important;
+    }
+    .product-img{
+        height: 490px;
+    }
+    .smallAbout img{
+        height: 440px!important;
+        width:710px!important;
+    }
+    .about-img{
+        height: 750px !important;
+        width: 675px!important;
+    }
+    .screen1{
+        padding-top: 20px;
+    }
+    .box-text{
+        white-space: nowrap;
+        width: 22em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .middle1{
+        left:177px!important;
+        width: 50%!important;
+        top: 15%!important;
+        height: 172px!important;
+    }
+    .height-img{
+        height: 365px;
+    }
+    .contact-img{
+        height: 270px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .coverUp img {
+        height: 405px!important;
+        width: 1108px!important;
+    }
+    .coverDown img{
+        height: 405px!important;
+        width: 1108px!important;
+    }
+    .product img{
+        width: 360px!important;
+        height: 700px!important;
+    }
+    .food1 img {
+        height: 370px!important;
+    }
+
+    .product-height{
+        height: 500px!important;
+    }
+    .same-height img{
+        height: 650px!important;
+
+    }
+
+    .product-color img{
+        height:540px!important;
+    }
+
+    .product-color{
+        height:540px!important;
+
+    }
+    .about-product{
+        height: 941px!important;
+        width: 675px!important;
+    }
+
+    .height-img{
+        height: 500px!important;
+    }
+    .lead1{
+        font-size:16px !important;
+        margin-top: -8%!important;
+        margin-bottom: -12px!important;
+
+    }
+    .lead2{
+        font-size: 10px!important;
+    }
+}
+@media screen and (min-width: 750px) and (max-width: 768px) {
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -1497,11 +2414,11 @@ width: 360px;
     }
 
     .product-color img{
-        height:320px!important;
+        height:450px!important;
     }
 
     .product-color{
-        height:320px!important;
+        height:450px!important;
 
     }
     .about-product{
@@ -1515,15 +2432,16 @@ width: 360px;
         height: 500px!important;
     }
     .lead1{
-             font-size:16px !important;
-             margin-top: -8%!important;
-             margin-bottom: -12px!important;
+        font-size:16px !important;
+        margin-top: -8%!important;
+        margin-bottom: -12px!important;
 
-         }
-.lead2{
-    font-size: 10px!important;
+    }
+    .lead2{
+        font-size: 10px!important;
+    }
 }
-}
+
 
 @media screen and (min-width: 769px) and (max-width: 855px) {
     .coverUp img {

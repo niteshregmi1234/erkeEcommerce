@@ -223,36 +223,41 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="box box-height" id="detailInfo">
-                                <h1 class="text-center">${productInstance.productColor.colorName+" "+productInstance.productDetails.productName+" "+productInstance.productDetails.productBrand.brandName}</h1>
+                                <h1 class="text-center bigName">${productInstance.productColor.colorName+" "+productInstance.productDetails.productName+" "+productInstance.productDetails.productBrand.brandName}</h1>
                                 <p class="goToDescription"><a href="#details" class="scroll-to">${productInstance.productDetails.briefDescription}-Scroll to know more about this product </a>
                                 </p>
-                                <div class="price">
-                                    <ul style="list-style: none;">
 
-                                        <li>Rs.<g:formatNumber number="${productInstance.productDetails.price-(productInstance.productDetails.discountPercentage*productInstance.productDetails.price/100)}" type="number" maxFractionDigits="2" /></li>
+                                <p class="price">
+
+                                        Rs.<g:formatNumber number="${productInstance.productDetails.price-(productInstance.productDetails.discountPercentage*productInstance.productDetails.price/100)}" type="number" maxFractionDigits="2"/>
                                         <g:if test="${productInstance.productDetails.isSale}">
-                                        <li>
-                                            <small><del>Rs.${productInstance.productDetails.price}</del></small>
-                                        </li>
+<br>
+                                              <del class="del-price" style="font-size: 15px;">Rs.${productInstance.productDetails.price}</del>
+
                                         </g:if>
-                                    </ul>
-                                </div>
+                                </p>
+
 
                                 <g:if test="${session.endUser}">
-                                <p class="text-center buttons">
                                     <form action="/cart/addToCart" method="post" class="text-center buttons" id="myForm">
-                                        <g:hiddenField name="id" value="${productInstance.id}"></g:hiddenField>
-                                        <g:select class="form-control name4" name="size"
-                                                  from="${productSizeList}" optionKey="id" optionValue="sizeName"
-                                                  title="select size"/>
-                                        <p>
-                                            <a href="#" data-toggle="modal" data-target="#confirmModel" class="btn btn-primary" id="submit_Id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                                              <g:hiddenField name="id" value="${productInstance.id}"></g:hiddenField>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <g:select class="form-control" name="size"
+                                                  from="${productSizeList}" optionKey="id" id="size" optionValue="sizeName"
+                                                          noSelection="${['null':'Select Size']}"
+                                                />
+                                                </div>
+                                        </div>
+                                        <p class="text-center buttons">
+
+                                            <button type="button" data-toggle="modal" data-target="#confirmModel" class="btn btn-primary" id="submit_IdOrder"><i class="fa fa-shopping-cart"></i>Add to cart</button>
 
                                             %{--<button class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</button>--}%
                                         </p>
                                     </form>
                                     %{--<a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>--}%
-                                </p>
+
 </g:if>
                                 <div class="bootbox modal fade bootbox-confirm in" id="confirmModel" tabindex="-1" role="dialog"  aria-hidden="true">
                                     <div class="modal-dialog">
@@ -268,8 +273,22 @@
                                     </div>
                                 </div>
 <script>
+    function preventMultipleSubmissions() {
+        $('#submit_IdOrder').prop('disabled', true);
+    }
+
+    window.onbeforeunload = preventMultipleSubmissions;
         function validAddToCart(){
             var responseValue;
+            var size=document.getElementById("size").value;
+            if(size=='null'){
+              bootbox.alert({
+                  size:"small",
+                  message:"size of product not selected"
+              } );
+                responseValue=false;
+            }
+            else{
             $.ajax({
                 url: "${createLink(controller:'cart', action:'checkSession')}",
                 type: "POST",
@@ -289,15 +308,15 @@
                         responseValue=false;
                     }
                     else if(text=="ok"){
-                        document.getElementById('submit_Id').setAttribute("disabled","disabled");
+
                         document.getElementById("myForm").submit();
-                        responseValue=true;
+
                     }
                 }
 
             });
             return responseValue
-        }
+        }}
 
 </script>
                                 <g:if test="${session.endUser==null}">
@@ -543,61 +562,62 @@
                         </div>
 <g:each in="${relatedProductList}" var="list" status="i">
     <g:if test="${i<3}">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front food1">
-                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
+        <div class="col-md-3 col-sm-6">
+            <div class="product same-height">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front food1">
+                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
+                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
-                                            </g:link>
-                                        </div>
-                                        <div class="back food1">
-                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
-
-                                            </g:link>
-                                        </div>
-                                    </div>
-                                </div>
-                                <g:link action="singleProduct" controller="endUser" id="${list.id}" class="invisible food1">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
-
-
-                                </g:link>
-                                <div class="text">
-                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName}</g:link></h3>
-                                    <g:if test="${list.productDetails.isSale==true}">
-                                        <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-
-
-                                            <del class="del-price">Rs.${list.productDetails.price}</del></p>
-                                    </g:if>
-                                    <g:if test="${list.productDetails.isSale==false}">
-
-                                        <p class="price">Rs.${list.productDetails.price}</p>
-                                    </g:if>
-                                </div>
-                            <!-- /.text -->
-                                <g:if test="${list.productDetails.isSale==true}">
-                                    <div class="ribbon sale">
-                                        <div class="theribbon">SALE</div>
-                                        <div class="ribbon-background"></div>
-                                    </div>
-                                </g:if>
-                                <g:if test="${list.isLatest==true}">
-                                    <div class="ribbon new">
-                                        <div class="theribbon">NEW</div>
-                                        <div class="ribbon-background"></div>
-                                    </div>
-                                </g:if>
-
-
-                            </div>
-                            <!-- /.product -->
+                            </g:link>
                         </div>
+                        <div class="back food1">
+                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
+                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+
+                            </g:link>
+                        </div>
+                    </div>
+                </div>
+                <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible food1">
+
+                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+                </g:link>
+                <div class="text">
+                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName}</g:link></h3>
+                    <g:if test="${list.productDetails.isSale==true}">
+                        <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
+                            <del class="del-price">Rs.<g:formatNumber number="${list.productDetails.price}" type="number" maxFractionDigits="2" /></del></p>
+                    </g:if>
+                    <g:if test="${list.productDetails.isSale==false}">
+
+                        <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
+                            <del class="del-price" style="visibility: hidden;">Rs.<g:formatNumber number="${list.productDetails.price}" type="number" maxFractionDigits="2" /></del></p>                                </g:if>
+                </div>
+            <!-- /.text -->
+                <g:if test="${list.productDetails.isSale==true}">
+                    <div class="ribbon sale">
+                        <div class="theribbon">SALE</div>
+                        <div class="ribbon-background"></div>
+                    </div>
+                </g:if>
+                <g:if test="${list.isLatest==true}">
+                    <div class="ribbon new">
+                        <div class="theribbon">NEW</div>
+                        <div class="ribbon-background"></div>
+                    </div>
+                </g:if>
+
+
+            </div>
+            <!-- /.product -->
+        </div>
+
     </g:if>
 </g:each>
 

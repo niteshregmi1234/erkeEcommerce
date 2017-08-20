@@ -148,7 +148,7 @@ catch (Exception e){
 
     def userHome() {
         try{
-            if(HomeContent.list()[0] && SpecialBrand.list()[0] && SeasonManagement.list()[0]){
+            if(HomeContent.list()[0] && SpecialBrand.list()[0] && SeasonManagement.list()[0] && CompanyInformation.list()[0]){
         def upCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "UP")
         def downCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "DOWN")
         def latestProductList = Product.findAllByIsLatest(true)
