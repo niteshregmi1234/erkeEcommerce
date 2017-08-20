@@ -44,29 +44,29 @@
 
                             <div class="form-group">
                             <label>First Name</label>
-                            <input name="first_name" type="text" class="form-control">
+                            <input name="first_name" placeholder="first Name" type="text" class="form-control">
                         </div>
                         <div class="form-group">
                             <label >Last Name</label>
-                            <input name="last_name" type="text" class="form-control" >
+                            <input name="last_name" placeholder="last name" type="text" class="form-control" >
                         </div>
                         <div class="form-group">
-                            <label>Phone/mobile</label>
-                            <input name="phone" type="text" class="form-control">
+                            <label>mobile</label>
+                            <input name="phone" placeholder="mobile No" type="text" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Address</label>
-                            <input name="address" type="text" class="form-control">
+                            <input name="address" placeholder="address" type="text" class="form-control">
                         </div>
                         <div class="form-group" id="c">
                             <label>City</label>
-                            <input name="city" type="text" class="form-control">
+                            <input name="city" placeholder="city" type="text" class="form-control">
                         </div>
 </fieldset><fieldset>
                         <legend> Account Information </legend>
                         <div class="form-group" >
                             <label>Email</label>
-                            <input name="email" type="text" class="form-control" id="a" >
+                            <input name="email" placeholder="email@gmail.com" type="text" class="form-control" id="a" >
 
 
                             <small style="color: #a94442;"><g:if test="${flash.message}">${flash.message}

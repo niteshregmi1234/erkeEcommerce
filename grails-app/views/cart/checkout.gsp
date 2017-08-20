@@ -280,7 +280,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="firstName">Firstname</label>
-                                <input type="text" name="firstName" class="form-control" id="firstName">
+                                <input type="text" name="firstName" placeholder="firstName" class="form-control" id="firstName">
                                 <small style="color: #a94442; display: none;" id="firstNameBlank">
                                     Please supply your firstName</small>
 
@@ -291,7 +291,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="lastName">Lastname</label>
-                                    <input type="text" name="lastName" class="form-control" id="lastName">
+                                    <input type="text" name="lastName" placeholder="lastName" class="form-control" id="lastName">
                                     <small style="color: #a94442; display: none;" id="lastNameBlank">
                                         Please supply your lastName</small>
 
@@ -302,7 +302,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="address">Delivery Address</label>
-                                    <input type="text" name="address" class="form-control" id="address">
+                                    <input type="text" name="address" placeholder="address" class="form-control" id="address">
                                     <small style="color: #a94442; display: none;" id="addressBlank">
                                         Please supply your delivery address</small>
 
@@ -312,8 +312,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="phone">Mobile/phone</label>
-                                    <input type="text" name="phone" class="form-control" id="phone">
+                                    <label for="phone">Mobile</label>
+                                    <input type="text" name="phone" placeholder="mobile No" class="form-control" id="phone">
                                     <small style="color: #a94442; display: none;" id="phoneBlank">
                                         Please supply your phone number</small>
                                     <small style="color: #a94442; display: none;" id="phoneInvalid">
