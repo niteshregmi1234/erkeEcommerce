@@ -108,7 +108,8 @@
                         <div class="box">
 
                             <p class="text-center">
-                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
+                                <img src="${resource(dir: "images/companyInformation",file: "${CompanyInformation.list()[0].logoImageName}")}" alt="yarsaa-logo" />
+
                             </p>
 
                             <h3>JavaScript not found</h3>

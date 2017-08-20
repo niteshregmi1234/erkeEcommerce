@@ -125,11 +125,16 @@
                                             <th>Quantity</th>
                                             <th>Unit price</th>
                                             <th>Discount</th>
-                                            <th>Total</th>
+                                            <th colspan="2">Total</th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <%
+                                            def totalPrice=0
+                                        %>
                                         <g:each in="${list}" var="list1">
+
                                             <g:hiddenField name="cartHistoryId" value="${list1.id}"></g:hiddenField>
                                             <tr>
                                                 <td class="abc">
@@ -144,15 +149,66 @@
                                                 <td>
                                                     ${list1.quantity}
                                                 </td>
-                                                <td>Rs.${list1.product.productDetails.price}</td>
+                                                <td>Rs.<g:formatNumber number="${list1.product.productDetails.price}" type="number"
+                                                                       maxFractionDigits="2" roundingMode="HALF_DOWN" />
+
+                                                </td>
                                                 <td>${list1.product.productDetails.discountPercentage}%</td>
-                                                <td>Rs.${(list1.product.productDetails.price*list1.quantity)-(list1.product.productDetails.discountPercentage*(list1.product.productDetails.price*list1.quantity)/100)}</td>
+                                                <td>Rs.<g:formatNumber number="${(list1.product.productDetails.price*list1.quantity)-(list1.product.productDetails.discountPercentage*(list1.product.productDetails.price*list1.quantity)/100)}" type="number"
+                                                                       maxFractionDigits="2" roundingMode="HALF_DOWN" /></td>
 
                                             </tr>
+                                            <%
+                                                totalPrice=totalPrice+(list1.product.productDetails.price*list1.quantity)-(list1.product.productDetails.discountPercentage*(list1.product.productDetails.price*list1.quantity)/100)
+                                            %>
                                         </g:each>
-                                        </tbody>
+
+                                        <tr>
+
+                                            <th>Sub-Total</th>
+                                            <th>${""}</th>
+                                            <th>${""}</th>
+                                            <th>${""}</th>
+                                            <th>${""}</th>
+                                            <th>${""}</th>
+                                            <th>Rs.<g:formatNumber number="${totalPrice}" type="number"
+                                                                   maxFractionDigits="2" roundingMode="HALF_DOWN" />
+
+                                            </th>
+
+
+                                        </tr>
+                                        <thead>
+                                        <tr>
+                                            <th colspan="2"></th>
+                                            <th colspan="2">Shipping and Handling</th>
+                                            <th colspan="2">Tax</th>
+                                            <th colspan="2">Total</th>
+
+                                        </tr>
+
+                                        </thead>
+                                        <tr>
+                                            <td colspan="2">Rs.<g:formatNumber number="${totalPrice}" type="number"
+                                                                               maxFractionDigits="2" roundingMode="HALF_DOWN" />
+                                            </td>
+
+                                            <td colspan="2">Rs.<g:formatNumber number="${OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100}" type="number"
+                                                                               maxFractionDigits="2" roundingMode="HALF_DOWN" />
+                                            </td>
+                                            <td colspan="2">Rs.<g:formatNumber number="${(((OtherCosts.list()[0].shippingAndHandlingPercentage)*totalPrice/100)+totalPrice)*OtherCosts.list()[0].taxPercentage/100}" type="number"
+                                                                               maxFractionDigits="2" roundingMode="HALF_DOWN" />
+                                            </td>
+                                            <th colspan="2">Rs.<g:formatNumber number="${(OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100)+((((OtherCosts.list()[0].shippingAndHandlingPercentage)*totalPrice/100)+totalPrice)*OtherCosts.list()[0].taxPercentage/100)+totalPrice}" type="number"
+                                                                               maxFractionDigits="2" roundingMode="HALF_DOWN" />
+                                            </th>
+
+                                        </tr>
+
+                                    </tbody>
                                     </table>
                                 </div>
+
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="control-label col-sm-2"></label>

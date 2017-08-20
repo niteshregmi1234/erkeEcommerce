@@ -143,10 +143,11 @@ static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',
         File theDir = new File(homeDir,"yarsaa");
         if (! theDir.exists()){
             theDir.mkdir();
-            print"yes"
         }
         if(file.size>0){
             File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
+            File fileOld1= new File("web-app/images/companyInformation",imageNameOld)
+            fileOld1.delete();
             fileOld.delete();
             String fileName = file.originalFilename
             abc:
@@ -166,6 +167,8 @@ static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',
             }
             File fileDest = new File(homeDir,"yarsaa/${fileName}")
             file.transferTo(fileDest)
+            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/companyInformation/${fileName}")
+            file.transferTo(new File(realFilePath))
             return fileName
 
         }
