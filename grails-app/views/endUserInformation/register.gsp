@@ -66,7 +66,7 @@
                         <legend> Account Information </legend>
                         <div class="form-group" >
                             <label>Email</label>
-                            <input name="email" placeholder="email@gmail.com" type="text" class="form-control" id="a" >
+                            <input name="email" placeholder="email@hostname.com" type="text" class="form-control" id="a" >
 
 
                             <small style="color: #a94442;"><g:if test="${flash.message}">${flash.message}
@@ -249,7 +249,7 @@
 
                         <div class="form-group">
                             <label for="login_email1">Email</label>
-                            <input type="text" name="login_email" class="form-control" id="login_email1">
+                            <input type="text" name="login_email" placeholder="email@hostname.com" class="form-control" id="login_email1">
                             <small style="color: #a94442; display: none;" id="login_emailBlank1">
                             Please supply your email</small>
                             <small style="color: #a94442; display: none;" id="login_emailInvalid1">
@@ -258,7 +258,7 @@
                         </div>
                         <div class="form-group">
                             <label for="login_password1">Password</label>
-                            <input type="password" name="login_password" class="form-control" id="login_password1">
+                            <input type="password" name="login_password" class="form-control" placeholder="password" id="login_password1">
                             <small style="color: #a94442; display: none;" id="login_passwordBlank1">
                                 Please supply your password</small>
 

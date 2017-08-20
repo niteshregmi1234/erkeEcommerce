@@ -46,7 +46,7 @@
 
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                        <input class="form-control" placeholder="email@hostname.com" name="email" type="email" autofocus>
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
