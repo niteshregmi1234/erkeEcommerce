@@ -76,7 +76,7 @@ class CheckOutController {
                     cartHistoryInstance.isFakeOrder=false
                     cartHistoryInstance.save(flush: true)
                     cart.delete(flush: true)}
-            flash.message="your enquiry has been successfully sent.Please,visit again.Thank you!!"
+            flash.message1="yarsaa/"+orderIdInstance.id
             redirect(action: "cart",controller: "cart")
         }
     catch(Exception e){

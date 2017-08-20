@@ -915,23 +915,68 @@ evt.preventDefault();
         <!-- /.col-md-3 -->
 
     </div>
-    <g:if test="${flash.message}">
+    <div class="bootbox modal fade bootbox-confirm in" id="messageModel" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
+
+                                <p class="text-center">
+                                    <img src="${resource(dir: "images/companyInformation",file: "${CompanyInformation.list()[0].logoImageName}")}" alt="yarsaa-logo" />
+
+                                </p>
+
+                                <h3 class="alert alert-success fade in">Dear,Customer. Your order has been successfully kept under process. And Your order Id is-<h2 style="text-align: center;">${flash.message1}</h2></h2></h3>
+                                <h4>Dear Customer, you are requested to remember your order Id. Thank you!!</h4>
+
+                </div>
+                <div class="modal-footer">
+                <div data-bb-handler="cancel" type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadPage();">Okey</div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="bootbox modal fade bootbox-confirm in" id="messageModel1" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
+
+                    <p class="text-center">
+                        <img src="${resource(dir: "images/companyInformation",file: "${CompanyInformation.list()[0].logoImageName}")}" alt="yarsaa-logo" />
+
+                    </p>
+
+                    <h3 class="alert alert-danger fade in">${flash.message}.</h3>
+
+                </div>
+                <div class="modal-footer">
+                    <div data-bb-handler="cancel" type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadPage();">Okey</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <g:if test="${flash.message1}">
         <script>
-            window.addEventListener("load",function(){
-                bootbox.alert({
-                    message:"${flash.message}",
-                    size: 'small',
-                    callback: function(){
-                        location.reload();
-                    }
-
-                });
-
-            });
-
+            function reloadPage(){
+                location.reload();
+            }
+            $('#messageModel').modal('toggle');
         </script>
     </g:if>
-    <!-- /.container -->
+    <g:if test="${flash.message}">
+
+            <script>
+            function reloadPage(){
+                location.reload();
+            }
+            $('#messageModel1').modal('toggle');
+        </script>
+        </script>
+    </g:if>
+
+<!-- /.container -->
 </div>
 <!-- /#content -->
 

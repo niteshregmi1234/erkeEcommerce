@@ -27,7 +27,22 @@
                                     <h2 class="logo-title"> Login</h2>
                                 </div>
                                 <form method="POST" action="/login/login" role="form" class="form-fix" id="login">
-                                    <small style="color: #a94442;" >${flash.message}</small>
+<g:if test="${flash.messageSuccess}">
+                                        <div class="alert alert-success fade in">
+
+                                            <strong>!</strong>${flash.messageSuccess}
+
+                                        </div>
+</g:if>
+<g:if test="${flash.messageError}">
+
+                                        <div class="alert alert-danger fade in">
+
+
+                                            <strong>Warning!</strong>${flash.messageError}
+
+                                        </div>
+    </g:if>
 
                                     <div class="form-group">
                                         <label>Username</label>

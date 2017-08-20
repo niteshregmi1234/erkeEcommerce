@@ -50,6 +50,8 @@
                         <g:form action="deliveredToCustomer" method="post" controller="cartHistory" >
 
                             <div class="container">
+                                <h4><u>Time-${list[0].date}</u></h4>
+
                                 <h3><u>Customer Information</u></h3>
                                 <div class="table-responsive">
 

@@ -20,7 +20,7 @@ class LoginController {
             redirect(action: "adminHome",controller: "adminHome")
         }
         else{
-            flash.message="email or password does not exist"
+            flash.messageError="email or password does not exist"
             redirect(action: "adminLoginForm")
         }
 

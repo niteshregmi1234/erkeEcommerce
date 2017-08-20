@@ -6,7 +6,7 @@ class LogoutController {
         try{
         if(session.adminUser){
         session.adminUser=null
-        flash.message="successfully logged out"
+        flash.messageSuccess="successfully logged out"
         redirect(action: "adminLoginForm",controller: "login")
     }
     }
