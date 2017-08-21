@@ -216,7 +216,7 @@
                                         <label class="control-label col-sm-2"></label>
 
                                         <div class="col-sm-6">
-                                            <g:submitButton name="delivered" value="Delivered" id="submit_Id" class="btn btn-success" onclick="confirm('Are you sure the order is delivered?')"></g:submitButton>
+                                            <g:submitButton name="delivered" value="Delivered" id="submit_Id" class="btn btn-success" onclick="return confirm('Are you sure the order is delivered?')"></g:submitButton>
                                         </div>
                                     </div>
                                 </div>
