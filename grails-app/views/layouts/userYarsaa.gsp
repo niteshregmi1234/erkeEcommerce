@@ -143,8 +143,8 @@
         <div class="col-md-6 offer" data-animate="fadeInDown">
             <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 10% off on orders over Rs.10000!</a>
         </div>
-        <div class="col-md-6" data-animate="fadeInDown">
-            <ul class="menu">
+        <div class="col-md-6" data-animate="fadeInDown" >
+            <ul class="menu" id="logoutClass">
                 <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
                 </li>
                 <g:if test="${session.endUser}">
@@ -300,7 +300,11 @@ if(sizeId=='' && productId==''){
                     message: "successfully added to cart.",
                     size: 'small',
                     callback: function(){
-                        location.reload();
+                        $('#cartShow').load(document.URL +  ' #cartShow');
+
+                        $('#logoutClass').load(document.URL +  ' #logoutClass');
+
+
                     }
 
                 });
@@ -483,7 +487,7 @@ if(sizeId=='' && productId==''){
         </script>
         <!--/.nav-collapse -->
 
-        <div class="navbar-buttons">
+        <div class="navbar-buttons" id="cartShow">
 
             <div class="navbar-collapse collapse right" id="basket-overview">
                 <g:link action="cart" controller="cart" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">${Cart.findAllByEndUserInformation(session.endUser).size()} items in cart</span></g:link>

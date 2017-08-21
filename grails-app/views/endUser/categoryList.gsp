@@ -390,7 +390,8 @@
                         message: "successfully added to cart.",
                         size: 'small',
                         callback: function(){
-                            location.reload();
+                            $('#cartShow').load(document.URL +  ' #cartShow');
+
                         }
 
                     });

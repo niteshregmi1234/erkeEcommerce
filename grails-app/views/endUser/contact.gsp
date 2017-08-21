@@ -59,7 +59,7 @@
 		<div data-animate="fadeInUp">
 			<div class="col-md-6">
 				<div class="imgwrapper">
-					<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:companyInformation.shopInsideViewImageName])}" class="img-responsive contact-img">
+					<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:companyInformation.shopInsideViewImageName])}" class="img-responsive">
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -123,31 +123,31 @@
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="firstname">Firstname</label>
-									<input type="text" name="first_name" class="form-control" id="firstname">
+									<input type="text" name="first_name" placeholder="firstName" class="form-control" id="firstname">
 								</div>
 							</div>
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="lastname">Lastname</label>
-									<input type="text" name="last_name" class="form-control" id="lastname">
+									<input type="text" name="last_name" placeholder="lastName" class="form-control" id="lastname">
 								</div>
 							</div>
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="email">Email</label>
-									<input type="text" name="email" class="form-control" id="email">
+									<input type="text" name="email" placeholder="email@hostname.com" class="form-control" id="email">
 								</div>
 							</div>
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="subject">Subject</label>
-									<input type="text" name="subject" class="form-control" id="subject">
+									<input type="text" name="subject" class="form-control" placeholder="atleast 10 letters" id="subject">
 								</div>
 							</div>
 							<div class="col-sm-12">
 								<div class="form-group">
 									<label for="message">Message</label>
-									<textarea id="message" name="message" class="form-control"></textarea>
+									<textarea id="message" name="message" placeholder="atleast 30 letters" class="form-control"></textarea>
 								</div>
 							</div>
 
