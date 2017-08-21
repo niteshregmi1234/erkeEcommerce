@@ -37,14 +37,15 @@
                         <div class="box">
 
                             <p class="text-center">
-                                <img src="img/logo.png" alt="yarsaa Logo">
+                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}" class="hidden-xs">
+
                             </p>
 
                             <h3>We are sorry - this action cannot be proceed - Reasons may be one of the following..</h3>
                             <h4 class="text-muted">Page not found</h4>
                             <h4 class="text-muted">Data does not exist</h4>
                             <h4 class="text-muted">Url mismatch</h4>
-                            <h4 class="text-muted">Server timeout</h4>
+                            <h4 class="text-muted">Session timeout</h4>
 
                             <p class="text-center">To continue please use the <strong>Search form</strong> or <strong>Menu</strong> above.</p>
 
