@@ -45,6 +45,8 @@ static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',
         companyInformationInstance.proprietorName=params.proprietorName
         companyInformationInstance.phoneNumber=params.phoneNumber
         companyInformationInstance.descriptionWhereWeAre=params.descriptionWhereWeAre
+            companyInformationInstance.offer=params.offer
+
             companyInformationInstance.logoImageName=editLogoImage(companyInformationInstance.logoImageName)
         companyInformationInstance.coverImageName=editcoverImage(companyInformationInstance.coverImageName)
         companyInformationInstance.shopInsideViewImageName=editshopInsideViewImage(companyInformationInstance.shopInsideViewImageName)
