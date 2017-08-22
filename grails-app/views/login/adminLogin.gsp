@@ -15,7 +15,8 @@
     </g:if>
     <script src="${resource(dir: 'js', file: 'yamsaa/jquery.min.js')}" type="text/javascript"
             charset="utf-8"></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+    <script src="${resource(dir: 'js', file: 'yamsaa/bootstrapvalidator.js')}" type="text/javascript"
+            charset="utf-8"></script>
 
 </head>
 

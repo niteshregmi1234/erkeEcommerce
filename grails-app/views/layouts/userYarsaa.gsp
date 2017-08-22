@@ -53,7 +53,9 @@
 <script src="${resource(dir: 'js', file: 'yarsaa/jquery.elevateZoom-3.0.8.min.js')}" type="text/javascript"
         charset="utf-8"></script>
 
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+    <script src="${resource(dir: 'js', file: 'yamsaa/bootstrapvalidator.js')}" type="text/javascript"
+            charset="utf-8"></script>
+
     <script src="${resource(dir: 'js', file: 'yarsaa/bootstrap.min.js')}" type="text/javascript"
             charset="utf-8"></script>
 <script src="${resource(dir: 'js', file: 'yarsaa/typeahead.js')}" type="text/javascript"
