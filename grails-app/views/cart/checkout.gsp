@@ -100,7 +100,7 @@
 
                                     <td>
 
-                                        <g:field  type="number" name="quantity" value="${list?.quantity}" min="1"  class="form-control quantity"/>
+                                        <g:field  type="number" name="quantity" value="${list?.quantity}" class="form-control quantity" onchange="handleChange(this);"/>
                                     </td>
                                     <td>Rs.<g:formatNumber number="${list.product.productDetails.price}" type="number" maxFractionDigits="2" /></td>
                                     <td>${list.product.productDetails.discountPercentage}%</td>
@@ -119,6 +119,11 @@
                         </table>
 
                     </div>
+                        <script>
+                            function handleChange(input) {
+                                if (input.value < 1) input.value =1 ;
+                            }
+                        </script>
                     </g:if>
                     <g:if test="${!Cart.findAllByEndUserInformation(session.endUser)}">
                         <h3>Your cart is empty.Yo can shop by clicking the button below. Thank you.</h3>

@@ -54,7 +54,13 @@ static  allowedMethods = [checkSession: 'POST', checkAddToCart: 'POST', addToCar
             def id=obj[0][i] as long
             def sizeId=obj[2][i] as long
             def cartInstance=Cart.findByEndUserInformationAndProductAndProductSize(session.endUser,Product.get(id),ProductSize.get(sizeId))
-    cartInstance.quantity=obj[1][i] as int
+          def quantity=obj[1][i] as int
+            if(quantity<1){
+                cartInstance.quantity=cartInstance.quantity
+            }
+            else{
+    cartInstance.quantity=quantity
+            }
             cartInstance.save(flush: true)
             totalPrice=totalPrice+((cartInstance.product.productDetails.price*cartInstance.quantity)-(cartInstance.product.productDetails.discountPercentage*(cartInstance.product.productDetails.price*cartInstance.quantity)/100))
         }
