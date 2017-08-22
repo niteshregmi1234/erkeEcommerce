@@ -68,6 +68,7 @@ def checkPhoto(){
             product.isFeatured=params.isFeatured as byte
             product.isLatest=params.isLatest as byte
                 product.productSpecificationName=product.productColor.colorName+" "+product.productDetails.productBrand.brandName+" "+product.productDetails.productName
+                product.seasons=SeasonManagement.list()[1].seasons
 
             product.frontImageName=editFrontImage(product.frontImageName)
             product.sideImageName=editSideImage(product.sideImageName)
