@@ -235,7 +235,7 @@
                 <div class="row products" id="myList">
                 <g:each in="${productList}" var="list" status="i">
                     <g:if test="${list.productDetails.isSale==false}">
-                        <div class="col-md-3 col-sm-4 a">
+                        <div class="col-md-4 col-sm-4 a">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
@@ -282,7 +282,7 @@
                     </g:if>
                     <g:if test="${list.productDetails.isSale==true}">
 
-                        <div class="col-md-3 col-sm-4 a">
+                        <div class="col-md-4 col-sm-4 a">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">

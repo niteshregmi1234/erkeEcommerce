@@ -177,7 +177,12 @@
                     </div>
                 </g:if>
             </g:each>
-
+            <style>
+            .product img{
+                height:338px;
+                width:251px;
+            }
+            </style>
         <!-- /.col-md-4 -->
             </div>
             <!-- /.products -->
