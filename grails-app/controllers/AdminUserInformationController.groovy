@@ -105,7 +105,7 @@ class AdminUserInformationController extends BaseController{
     }
     def delete(){
         try{
-
+if(AdminUserInformation.list().size()>1){
             def adminUserInstance=AdminUserInformation.get(params.id)
             if(adminUserInstance) {
 
@@ -121,6 +121,12 @@ class AdminUserInformationController extends BaseController{
 
 
             }}
+            else{
+    flash.message="Sorry! cannot delete the last admin information."
+    redirect(action: "list")
+
+}
+        }
         catch (DataIntegrityViolationException e){
             flash.message="Sorry! cannot delete this data."
             redirect(action: "list")

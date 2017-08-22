@@ -47,8 +47,9 @@
 </form>
 <div class="col-lg-12">
     <g:link action="edit" id="${adminUserInstance?.id}" controller="adminUserInformation"  onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:if test="${AdminUserInformation.list().size()>1}">
     <g:link action="delete" id="${adminUserInstance?.id}" controller="adminUserInformation" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Delete</g:link>
-
+    </g:if>
 </div>
 </body>
 </html>
