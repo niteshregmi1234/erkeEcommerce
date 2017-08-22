@@ -6,7 +6,7 @@
 
             <div class="col-sm-6">
                 <g:select class="selectpicker" id="productDetails" name="productDetails" value="${productInstance?.productDetails?.id}"
-                          from="${ProductDetails.list()}" optionKey="id" optionValue="productName" data-show-subtext="true"
+                          from="${ProductDetails.list()}" optionKey="id" optionValue="productNameWithBrand" data-show-subtext="true"
                           data-live-search="true" title="choose name "/>
             </div>
         </div>

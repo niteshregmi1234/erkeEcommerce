@@ -51,7 +51,7 @@
         <tr>
             <td>${i+1}</td>
             <td> <g:link action="show" id="${list?.id}" controller="product" class="btn btn-primary btn-sm">view</g:link></td>
-            <td>${list.productDetails.productName}</td>
+            <td>${list.productDetails.productNameWithBrand}</td>
             <td>${list.productDetails.productCategory.categoryName}</td>
             <td>${list.productDetails.productSubCategory.subCategoryName}</td>
             <td>${list.productColor.colorName}</td>

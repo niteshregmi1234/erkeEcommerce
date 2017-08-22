@@ -12,9 +12,10 @@ class ProductDetails {
         float price
     String briefDescription
     String detailDescription
-
+String productNameWithBrand
     static constraints = {
         detailId (generator:'assigned',unique:true,nullable: true)
+        productNameWithBrand(nullable: true)
 
         price scale: 2
     }

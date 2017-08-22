@@ -153,30 +153,6 @@
 
                 }
             }
-if(discountPercentage.length>0){
-    var discountPercentage = document.getElementById("discountPercentage").value;
-
-    var valid = (discountPercentage.match(/^-?\d*(\.\d+)?$/));
-
-    if(!valid){
-        document.getElementById("discountPercentage").focus();
-        bootbox.alert({
-            message: "invalid discount",
-            size: 'small'
-        });
-        return false;
-
-    }
-    else if(discountPercentage<0 ||discountPercentage>100 || discountPercentage==0 ){
-        document.getElementById("discountPercentage").focus();
-        bootbox.alert({
-            message: "discount % must be between 0 and 100",
-            size: 'small'
-        });
-        return false;
-
-    }
-}
             if(productCategory==''){
                 bootbox.alert({
                     message: "Category must be selected",
@@ -241,26 +217,52 @@ if(discountPercentage.length>0){
                     document.getElementById("discountPercentage").focus();
                     return false;
                 }
-                else if(briefDescription==''){
-                    bootbox.alert({
-                        message: "brief Description must not be blank",
-                        size: 'small'
-                    });
-                    document.getElementById("briefDescription").focus();
-                    return false;
+               else if(discountPercentage.length>0){
+                    var discountPercentage = document.getElementById("discountPercentage").value;
+
+                    var valid = (discountPercentage.match(/^-?\d*(\.\d+)?$/));
+
+                    if(!valid){
+                        document.getElementById("discountPercentage").focus();
+                        bootbox.alert({
+                            message: "invalid discount",
+                            size: 'small'
+                        });
+                        return false;
+
+                    }
+                    else if(discountPercentage<0 || discountPercentage>=100 || discountPercentage==0){
+                        document.getElementById("discountPercentage").focus();
+                        bootbox.alert({
+                            message: "discount % must be between 0 and 100",
+                            size: 'small'
+                        });
+                        return false;
+
+                    }
                 }
 
-                else if(detailDescription==''){
-                    bootbox.alert({
-                        message: "detail description must not be blank",
-                        size: 'small'
-                    });
-                    document.getElementById("detailDescription").focus();
-                    return false;
-                }
 
 
             }
+            if(briefDescription==''){
+                bootbox.alert({
+                    message: "brief Description must not be blank",
+                    size: 'small'
+                });
+                document.getElementById("briefDescription").focus();
+                return false;
+            }
+
+            else if(detailDescription==''){
+                bootbox.alert({
+                    message: "detail description must not be blank",
+                    size: 'small'
+                });
+                document.getElementById("detailDescription").focus();
+                return false;
+            }
+
 
 
 

@@ -38,8 +38,8 @@ static allowedMethods = [save: 'POST']
             }
                        productDetails.briefDescription=params.briefDescription
             productDetails.detailDescription=params.detailDescription
+            productDetails.productNameWithBrand=productDetails.productBrand.brandName+" "+productDetails.productName
             productDetails.save(flush: true)
-
             redirect(action: "show" ,id:productDetails.id)
         }
         else{
@@ -65,7 +65,8 @@ static allowedMethods = [save: 'POST']
             }
                         productDetails.briefDescription=params.briefDescription
             productDetails.detailDescription=params.detailDescription
-            productDetails.save(flush: true)
+                productDetails.productNameWithBrand=productDetails.productBrand.brandName+" "+productDetails.productName
+                productDetails.save(flush: true)
 
                 redirect(action: "show" ,id:productDetails.id)
         }
