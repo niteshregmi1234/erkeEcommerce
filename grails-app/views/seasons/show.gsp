@@ -28,7 +28,7 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group ">
-            <label class="control-label col-sm-4">Show Status:</label>
+            <label class="control-label col-sm-4">Greetings:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${seasonsInstance.greetings}</div>
             </div>
