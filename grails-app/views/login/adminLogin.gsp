@@ -23,7 +23,8 @@
                         <div class="login-panel panel panel-default">
                             <div class="panel-body">
                                 <div class="logo-segment">
-                                    %{--<img src="css/images/logo.png" class="img-responsive logo-login">--}%
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}" class="img-responsive logo-login">
+
                                     <h2 class="logo-title"> Login</h2>
                                 </div>
                                 <form method="POST" action="/login/login" role="form" class="form-fix" id="login">
