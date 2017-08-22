@@ -233,126 +233,113 @@
                 %{--</div>--}%
 
                 <div class="row products" id="myList">
-                    <g:each in="${productList}" var="list" status="i">
-<g:if test="${list.productDetails.isSale==false}">
-                    <div class="col-md-4 col-sm-6 a">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front product">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                <g:each in="${productList}" var="list" status="i">
+                    <g:if test="${list.productDetails.isSale==false}">
+                        <div class="col-md-3 col-sm-4 a">
+                            <div class="product">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front product">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
 
-                                        </g:link>
-                                    </div>
-                                    <div class="back product">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                            </g:link>
+                                        </div>
+                                        <div class="back product">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.backImageName])}" class="img-responsive">
 
-                                        </g:link>
+                                            </g:link>
+                                        </div>
                                     </div>
                                 </div>
+                                <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
+
+                                </g:link>
+                                <div class="text">
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+                                        <del class="del-price" style="visibility:hidden;">Rs.${list.productDetails.price}</del></p>
+                                    <p class="buttons">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
+                                        <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
+                                    </p>
+                                </div>
+                                <g:if test="${list.isLatest==true}">
+                                    <div class="ribbon new">
+                                        <div class="theribbon">NEW</div>
+                                        <div class="ribbon-background"></div>
+                                    </div>
+                                </g:if>
+
+                            <!-- /.text -->
                             </div>
-                            <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
-                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                            <!-- /.product -->
+                        </div>
 
-                            </g:link>
-                            <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
-                                <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-                                    <del class="del-price" style="visibility:hidden;">Rs.${list.productDetails.price}</del></p>
-                                <p class="buttons">
-                                    <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
-                                    <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary" onclick="addValueToField(${list.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    </g:if>
+                    <g:if test="${list.productDetails.isSale==true}">
 
+                        <div class="col-md-3 col-sm-4 a">
+                            <div class="product">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front product">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
 
-                                </p>
-                            </div>
-                            <g:if test="${list.isLatest==true}">
-                                <div class="ribbon new">
-                                    <div class="theribbon">NEW</div>
+                                            </g:link>
+                                        </div>
+                                        <div class="back product">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
+
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.backImageName])}" class="img-responsive">
+
+                                            </g:link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
+
+                                </g:link>
+                                <div class="text">
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+                                        <del class="del-price">Rs.${list.productDetails.price}</del></p>
+                                    <p class="buttons">
+                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
+                                        <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary" onclick="addValueToField(${list.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    </p>
+                                </div>
+                                <!-- /.text -->
+
+                                <div class="ribbon sale">
+                                    <div class="theribbon">SALE</div>
                                     <div class="ribbon-background"></div>
                                 </div>
-                            </g:if>
-
-                        <!-- /.text -->
-                        </div>
-                        <!-- /.product -->
-                    </div>
-
-</g:if>
-                        <g:if test="${list.productDetails.isSale==true}">
-
-                            <div class="col-md-4 col-sm-6 a">
-                                <div class="product">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front product">
-                                                <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
-
-                                                </g:link>
-                                            </div>
-                                            <div class="back product">
-                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-
-                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
-
-                                                </g:link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
-                                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
-
-                                    </g:link>
-
-                                    <div class="text">
-                                        <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
-                                        <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-
-                                            <del class="del-price">Rs.${list.productDetails.price}</del></p>
-                                        <p class="buttons">
-                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
-                                            <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary" onclick="addValueToField(${list.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-
-
-
-                                        </p>
-                                    </div>
-
-                                    <!-- /.text -->
-
-                            <div class="ribbon sale">
-                                <div class="theribbon">SALE</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                                    <g:if test="${list.isLatest==true}">
-                                        <div class="ribbon new">
-                                            <div class="theribbon">NEW</div>
-                                            <div class="ribbon-background"></div>
-                                        </div>
-                                    </g:if>
-
                                 <!-- /.ribbon -->
 
-                            %{--<div class="ribbon new">--}%
+                                %{--<div class="ribbon new">--}%
                                 %{--<div class="theribbon">NEW</div>--}%
                                 %{--<div class="ribbon-background"></div>--}%
-                            %{--</div>--}%
-                            %{--<!-- /.ribbon -->--}%
+                                %{--</div>--}%
+                                %{--<!-- /.ribbon -->--}%
 
-                            %{--<div class="ribbon gift">--}%
+                                %{--<div class="ribbon gift">--}%
                                 %{--<div class="theribbon">GIFT</div>--}%
                                 %{--<div class="ribbon-background"></div>--}%
-                            %{--</div>--}%
-                            %{--<!-- /.ribbon -->--}%
+                                %{--</div>--}%
+                                %{--<!-- /.ribbon -->--}%
+                            </div>
+                            <!-- /.product -->
                         </div>
-                        <!-- /.product -->
-                    </div>
-                            </g:if>
-                    </g:each>
-                    <!-- /.col-md-4 -->
+                    </g:if>
+                </g:each>
+
+            <!-- /.col-md-4 -->
                 </div>
                 <style>
                     .product img{

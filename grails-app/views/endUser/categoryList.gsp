@@ -95,20 +95,20 @@
                                     <div class="flipper">
                                         <div class="front product">
                                             <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                         <div class="back product">
                                             <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.backImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
 
                                 </g:link>
                                 <div class="text">
@@ -142,21 +142,21 @@
                                     <div class="flipper">
                                         <div class="front product">
                                             <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                         <div class="back product">
                                             <g:link action="singleProduct" controller="endUser" id="${list.productId}">
 
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.backImageName])}" class="img-responsive">
 
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
 
                                 </g:link>
                                 <div class="text">
