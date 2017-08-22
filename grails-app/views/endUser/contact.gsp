@@ -194,9 +194,8 @@
 <!-- *** SCRIPTS TO INCLUDE ***
  _________________________________________________________ -->
 
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeEMyutLZoUynPVyDpSbSy2SSNa98NPqs&callback=initMap"
-		type="text/javascript"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3-VdiQWco8261vT8eXl6gxnT9rm8AhpI&callback=initMap">
+</script>
 
 <script>
 
