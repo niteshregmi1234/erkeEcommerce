@@ -38,7 +38,7 @@ static allowedMethods = [save: 'POST']
             }
                        productDetails.briefDescription=params.briefDescription
             productDetails.detailDescription=params.detailDescription
-            productDetails.productNameWithBrand=productDetails.productBrand.brandName+" "+productDetails.productName
+            productDetails.productNameWithBrand=productDetails.productCategory.categoryName+"-"+productDetails.productBrand.brandName+" "+productDetails.productName
             productDetails.save(flush: true)
             redirect(action: "show" ,id:productDetails.id)
         }
@@ -65,7 +65,7 @@ static allowedMethods = [save: 'POST']
             }
                         productDetails.briefDescription=params.briefDescription
             productDetails.detailDescription=params.detailDescription
-                productDetails.productNameWithBrand=productDetails.productBrand.brandName+" "+productDetails.productName
+                productDetails.productNameWithBrand=productDetails.productCategory.categoryName+"-"+productDetails.productBrand.brandName+" "+productDetails.productName
                 productDetails.save(flush: true)
 
                 redirect(action: "show" ,id:productDetails.id)

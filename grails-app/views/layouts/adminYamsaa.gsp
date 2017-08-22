@@ -32,9 +32,7 @@
             charset="utf-8"></script>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/jquery.dataTables.min.css')}" type="text/css"
           media="all"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap-datepicker.min.css')}" type="text/css">
-    <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap-datepicker.min.js')}" type="text/javascript"
-            charset="utf-8"></script>
+
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap-select.min.css')}" type="text/css">
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap-select.min.js')}" type="text/javascript"
             charset="utf-8"></script>

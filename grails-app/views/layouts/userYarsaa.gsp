@@ -40,29 +40,19 @@
     </g:if>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css')}" type="text/css"
           media="all"/>
-    <link rel="stylesheet" href="${resource(dir: 'js', file: 'yarsaa/typeahead.css')}" type="text/css"
-      media="all"/>
-    <link rel="stylesheet" href="${resource(dir: 'js', file: 'yarsaa/typeahead.scss')}" type="text/css"
-      media="all"/>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/respond.min.js')}" type="text/javascript"
             charset="utf-8"></script>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
             charset="utf-8"></script>
-<script src="${resource(dir: 'js', file: 'yarsaa/jquery.elevateZoom-3.0.8.min.js')}" type="text/javascript"
-        charset="utf-8"></script>
 
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrapvalidator.js')}" type="text/javascript"
             charset="utf-8"></script>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/bootstrap.min.js')}" type="text/javascript"
             charset="utf-8"></script>
-<script src="${resource(dir: 'js', file: 'yarsaa/typeahead.js')}" type="text/javascript"
-        charset="utf-8"></script>
 
-%{--<script src="${resource(dir: 'js', file: 'yarsaa/jquery.typeahead.js')}" type="text/javascript"--}%
-        %{--charset="utf-8"></script>--}%
 
 <script src="${resource(dir: 'js', file: 'yamsaa/bootbox.min.js')}" type="text/javascript"
             charset="utf-8"></script>
@@ -80,7 +70,7 @@
     <script src="${resource(dir: 'js', file: 'yarsaa/front.js')}" type="text/javascript"
             charset="utf-8"></script>
 
-    <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/favicon.png')}">
+    %{--<link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/favicon.png')}">--}%
 
 <script>
     $(window).bind('scroll', function () {

@@ -143,18 +143,18 @@
                                     <div class="flipper">
                                         <div class="front product">
                                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.frontImageName])}" class="img-responsive product-img">
                                             </g:link>
                                         </div>
                                         <div class="back product">
                                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.backImageName])}" class="img-responsive product-img">
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.frontImageName])}" class="img-responsive product-img">
                                 </g:link>
                                 <div class="text">
                                     <h3 class="nameProduct">
@@ -182,18 +182,18 @@
                                     <div class="flipper">
                                         <div class="front product">
                                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.frontImageName])}" class="img-responsive product-img">
                                             </g:link>
                                         </div>
                                         <div class="back product">
                                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.backImageName])}" class="img-responsive product-img">
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct1.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.specialImageName])}" class="img-responsive product-img">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct1.frontImageName])}" class="img-responsive product-img">
                                 </g:link>
                                 <div class="text">
                                     <h3 class="nameProduct">
@@ -225,18 +225,18 @@
                                     <div class="flipper">
                                         <div class="front product">
                                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.frontImageName])}" class="img-responsive product-img">
                                             </g:link>
                                         </div>
                                         <div class="back product">
                                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.backImageName])}" class="img-responsive product-img">
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.frontImageName])}" class="img-responsive product-img">
                                 </g:link>
                                 <div class="text">
                                     <h3 class="nameProduct">
@@ -266,18 +266,18 @@
                                     <div class="flipper">
                                         <div class="front product">
                                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.frontImageName])}" class="img-responsive product-img">
                                             </g:link>
                                         </div>
                                         <div class="back product">
                                             <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.backImageName])}" class="img-responsive product-img">
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" id="${aboutUsInstance.specialProduct2.productId}" class="invisible product">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.specialImageName])}" class="img-responsive product-img">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProduct2.frontImageName])}" class="img-responsive product-img">
                                 </g:link>
                                 <div class="text">
                                     <h3 class="nameProduct">
