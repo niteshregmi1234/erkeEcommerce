@@ -5,8 +5,14 @@
     <title>Admin Login</title>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/admin.css')}" type="text/css" media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.css')}" type="text/css" media="all"/>
+    <g:if test="${StyleManagement.list()[0]}">
     <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"${"style."+StyleManagement.list()[0].style.name+".css"}")}" type="text/css"
           media="all"/>
+    </g:if>
+    <g:if test="${!StyleManagement.list()[0]}">
+        <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"style.default.css")}" type="text/css"
+              media="all"/>
+    </g:if>
     <script src="${resource(dir: 'js', file: 'yamsaa/jquery.min.js')}" type="text/javascript"
             charset="utf-8"></script>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
