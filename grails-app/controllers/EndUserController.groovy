@@ -1,17 +1,63 @@
 class EndUserController {
     static allowedMethods = [search: "POST"]
-def a(){
 
-}
     def search(){
         try{
-    def criteria = ProductDetails.createCriteria()
-    def productDetailsList = criteria.list {
+    def productDetailscriteria = ProductDetails.createCriteria()
+    def productDetailsList = productDetailscriteria.list {
         or {
 
             like("productName", "%" + params.search + "%")
         }
     }
+            def categoryCriteria = ProductCategory.createCriteria()
+            def categoryList = categoryCriteria.list {
+                or {
+
+                    like("categoryName", "%" + params.search + "%")
+                }
+            }
+            for(ProductCategory productCategory:categoryList){
+              def productDetailsList1=ProductDetails.findAllByProductCategory(productCategory)
+                for(ProductDetails productDetails:productDetailsList1){
+                    if(!productDetailsList.contains(productDetails)){
+                    productDetailsList.add(productDetails)}
+
+                }
+            }
+            def subCategoryCriteria = ProductSubCategory.createCriteria()
+            def subCategoryList = subCategoryCriteria.list {
+                or {
+
+                    like("subCategoryName", "%" + params.search + "%")
+                }
+            }
+            for(ProductSubCategory productSubCategory:subCategoryList){
+                def productDetailsList1=ProductDetails.findAllByProductSubCategory(productSubCategory)
+                for(ProductDetails productDetails:productDetailsList1){
+                    if(!productDetailsList.contains(productDetails)){
+
+                        productDetailsList.add(productDetails)}
+
+                }
+            }
+            def brandCriteria = ProductBrand.createCriteria()
+            def brandList = brandCriteria.list {
+                or {
+
+                    like("brandName", "%" + params.search + "%")
+                }
+            }
+            for(ProductBrand productBrand:brandList){
+                def productDetailsList1=ProductDetails.findAllByProductBrand(productBrand)
+                for(ProductDetails productDetails:productDetailsList1){
+                    if(!productDetailsList.contains(productDetails)){
+
+                        productDetailsList.add(productDetails)}
+
+
+                }
+            }
         if(productDetailsList){
         List<String> stringListIdList=new ArrayList<>()
         for(ProductDetails productDetails:productDetailsList){
@@ -32,17 +78,20 @@ def a(){
         try {
             List<Product> productList = new ArrayList<>()
             List<List<ProductSize>> listList = new ArrayList<>()
-            def productDetailsIds = params.result
+            def productDetailsIds = params.list("result")
             if (productDetailsIds) {
                 List<ProductDetails> productDetailsList = new ArrayList<>()
                 for (int i = 0; i < productDetailsIds.size(); i++) {
-                    productDetailsList.add(ProductDetails.findByDetailId(productDetailsIds[i]))
+                    def id=productDetailsIds[i] as String
+                    productDetailsList.add(ProductDetails.findByDetailId(id))
                 }
           for (ProductDetails productDetails : productDetailsList) {
               def product = Product.findByProductDetails(productDetails)
               if (product) {
                   productList.add(product)
+
               }
+
           }
           Collections.shuffle(productList)
                 for(Product productInstance: productList){
@@ -54,8 +103,12 @@ def a(){
                   productSizeList.add(ProductSize.get(sizeId))
               }
               listList.add(productSizeList)
-          }}
-          render(view: "search", model: [productSizeList: listList, productList: productList, productCategoryList:ProductCategory.list(), productSubCategoryList:ProductSubCategory.findAllByStatusShow(true), productBrandList:ProductBrand.findAllByStatusShow(true), productColourList:ProductColor.findAllByStatusShow(true)])
+
+                }
+
+            }
+
+            render(view: "search", model: [productSizeList: listList, productList: productList, productCategoryList:ProductCategory.list(), productSubCategoryList:ProductSubCategory.findAllByStatusShow(true), productBrandList:ProductBrand.findAllByStatusShow(true), productColourList:ProductColor.findAllByStatusShow(true)])
 
 
 
