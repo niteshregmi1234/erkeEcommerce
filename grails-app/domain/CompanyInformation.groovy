@@ -14,7 +14,9 @@ String companyName
     String coverImageName
     String shopInsideViewImageName
     String descriptionWhereWeAre
+    String offer
     static constraints = {
+        offer(nullable: true)
 
     }
 }
