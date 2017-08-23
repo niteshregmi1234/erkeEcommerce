@@ -133,7 +133,7 @@
 <div id="top">
     <div class="container">
         <div class="col-md-6 offer" data-animate="fadeInDown">
-            <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">Get flat 10% off on orders over Rs.10000!</a>
+            <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">${CompanyInformation.list()[0].offer}</a>
         </div>
         <div class="col-md-6" data-animate="fadeInDown" >
             <ul class="menu" id="logoutClass">

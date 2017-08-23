@@ -125,9 +125,17 @@
     </div>
     <div class="col-lg-12">
         <div class="form-group">
-            <label class="control-label col-sm-2">Where we are::</label>
+            <label class="control-label col-sm-2">Where we are:</label>
             <div class="col-sm-6">
                 <g:textArea name="descriptionWhereWeAre" id="descriptionWhereWeAre" class="form-control" value="${companyInformationInstance?.descriptionWhereWeAre}"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Offer</label>
+            <div class="col-sm-6">
+                <g:textArea name="offer" id="offer" class="form-control" value="${companyInformationInstance?.offer}"/>
             </div>
         </div>
     </div>
@@ -159,6 +167,7 @@
         var location2 = document.getElementById("location2").value;
         var location3 = document.getElementById("location3").value;
         var location4 = document.getElementById("location4").value;
+        var offer = document.getElementById("offer").value;
 
         var emailAddress = document.getElementById("emailAddress").value;
         var mobileNumber = document.getElementById("mobileNumber").value;
@@ -256,6 +265,7 @@
             document.getElementById("phoneNumber").focus();
             return false;
         }
+
         if(logoImageName.length>0) {
             var arrInputs = oForm.getElementsByTagName("input");
             var oInput = arrInputs[10];

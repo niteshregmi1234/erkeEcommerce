@@ -133,6 +133,17 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Offer:</label>
+            <div class="col-sm-6">
+
+                <div style="margin-top: 7px;">${companyInformationInstance.offer}</div>
+
+
+            </div>
+        </div>
+    </div>
 
 </form>
 <div class="col-lg-6">
