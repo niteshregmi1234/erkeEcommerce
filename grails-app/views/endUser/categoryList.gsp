@@ -117,7 +117,7 @@
                                         <del class="del-price" style="visibility:hidden;">Rs.${list.productDetails.price}</del></p>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
-                                        <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary" onclick="addValueToField(${list.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 
                                     </p>
                                 </div>
