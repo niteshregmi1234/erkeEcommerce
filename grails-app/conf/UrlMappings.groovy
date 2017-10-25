@@ -18,7 +18,7 @@ class UrlMappings {
         "/subCategory/$category/$subCategory"(action: "subCategoryList",controller: "endUser")
         "/category"(action: "allCategoryProducts",controller: "endUser")
         "/specialBrand"(action: "specialBrandProducts",controller: "endUser")
-        "/specialSubCategory"(action: "specialSubProducts",controller: "endUser")
+        "/specialSubCategory"(action: "specialSubCategory",controller: "endUser")
         "/season"(action: "upcomingSeasonProducts",controller: "endUser")
         "/about"(action: "about",controller: "endUser")
         "/addCart"(action: "addToCart",controller: "cart")
@@ -28,7 +28,7 @@ class UrlMappings {
         "/sendQuery"(action: "placeOrder",controller: "checkOut")
         "/login-YarsaaAnojAndBikash"(action: "adminLoginForm",controller: "login")
         "/"(action: "userHome",controller: "endUser")
-        "500"(view:'/error')
+        "500"(controller:"errorPage",action:"notfound")
         "404"(controller:"errorPage",action:"notfound")
         "405"(controller: "errorPage",action: "notfound")
 	}

@@ -26,7 +26,7 @@
          <label class="control-label col-sm-2" for="statusShow">Size Details:</label>
 
          <div class="col-sm-4">
-             <g:textArea name="sizeDetails" id="sizeDetails" class="form-control" value="${productDetailsInstance?.sizeDetails}"/>
+             <g:textArea name="sizeDetails" id="sizeDetails" class="form-control" value="${productSizeInstance?.sizeDetails}"/>
 
 
          </div>

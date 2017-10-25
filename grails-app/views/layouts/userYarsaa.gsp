@@ -4,18 +4,18 @@
 <meta charset="utf-8">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Obaju e-commerce template">
-    <meta name="author" content="Ondrej Svestka | ondrejsvestka.cz">
     <meta name="keywords" content="">
-    <meta name="google-site-verification" content="yFlo6Uspjm1tOF27VK5uKuiAs9_i9sCkqM1A049MKu4" />
+    <meta name="google-site-verification" content="ukYH3gaQ4LcRA-6yCKNwKZGIv2FKj6l8WubNurI13mc"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
+    <meta name="author" content="Anoj And Bikash">
+
     <title>
         Yarsaa
     </title>
 
-    <meta name="keywords" content="">
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
 
     <!-- styles -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/font-awesome.css')}" type="text/css"
@@ -70,7 +70,6 @@
     <script src="${resource(dir: 'js', file: 'yarsaa/front.js')}" type="text/javascript"
             charset="utf-8"></script>
 
-    %{--<link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/favicon.png')}">--}%
 
 <script>
     $(window).bind('scroll', function () {
@@ -82,6 +81,12 @@
     });
 
 </script>
+    <script type="text/javascript"> //<![CDATA[
+    var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+    document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+    //]]>
+    </script>
+    <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/yarsaalogosmall.png')}">
 
 </head>
 
@@ -100,7 +105,6 @@
                         <div class="box">
 
                             <p class="text-center">
-                                <img src="${resource(dir: "images/companyInformation",file: "${CompanyInformation.list()[0].logoImageName}")}" alt="yarsaa-logo" />
 
                             </p>
 
@@ -402,7 +406,7 @@ if(sizeId=='' && productId==''){
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">${categoryList.categoryName}<b class="caret"></b></a href="#">
                     <ul class="dropdown-menu">
                         <li>
-                            <div class="yamm-content">
+                            <div class="yamm-content" style="height:400px;overflow-y: scroll;">
                                 <div class="row">
                                     <g:each in="${ProductSubCategorySpecify.list()}" var="specifyList">
                                     <div class="col-sm-3">
@@ -686,7 +690,7 @@ if(sizeId=='' && productId==''){
 
             </div>
             <div class="col-md-6">
-                <p class="pull-right">Template by Bonish Thapa</a>
+                <p class="pull-right">Designed and Developed by Bonish Thapa and Hemanta Ghimire</a>
                     <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
                 </p>
             </div>

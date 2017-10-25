@@ -36,6 +36,12 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap-select.min.css')}" type="text/css">
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap-select.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+    <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/yarsaalogosmall.png')}">
+    <script type="text/javascript"> //<![CDATA[
+    var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+    document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+    //]]>
+    </script>
     <title>Yarsaa</title>
     <style>
     li a:focus, .active {
@@ -75,13 +81,13 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand">Yamsaa</a>
+            <a class="navbar-brand">Yarsaa</a>
         </div>
         <ul class="nav navbar-nav">
             <li><g:link action="adminHome" controller="adminHome">Home</g:link></li>
             <li><g:link action="list" controller="adminUserInformation">Admins</g:link></li>
 
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Set Up<span class="caret"></span></a>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Set Up<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="list" controller="productCategory">Product Category</g:link></li>
                     <li><g:link action="list" controller="productSubCategorySpecify">Specify Product SubCategory</g:link></li>
@@ -95,7 +101,7 @@
 
                 </ul>
             </li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Items<span class="caret"></span></a>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Items<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="list" controller="productDetails">Product Details</g:link></li>
                     <li><g:link action="list" controller="product">Product</g:link></li>
@@ -105,7 +111,7 @@
 
                 </ul>
             </li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Manage<span class="caret"></span></a>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Manage<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="show" controller="mailSetUp">SetUp Email</g:link></li>
 
@@ -122,7 +128,7 @@
 
                 </ul>
             </li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Orders<span class="caret"></span></a>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Orders<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="recentOrders" controller="cartHistory">Recent Orders</g:link></li>
                     <li><g:link action="successFullOrders" controller="cartHistory">Successful Orders</g:link></li>

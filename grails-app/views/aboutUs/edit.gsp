@@ -108,7 +108,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Describe video:</label>
             <div class="col-sm-6">
-                <g:textArea name="videoDescription" id="videoDescription" class="form-control" value="${aboutUsInstance?.quote}"/>
+                <g:textArea name="videoDescription" id="videoDescription" class="form-control" value="${aboutUsInstance?.videoDescription}"/>
             </div>
         </div>
     </div>

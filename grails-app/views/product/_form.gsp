@@ -236,7 +236,7 @@ if(backImageName.length>0){
                 });
             }
 
-            else if(productDetails==''){
+            if(productDetails==''){
                 bootbox.alert({
                     message: "product Name must be selected",
                     size: 'small'
@@ -245,7 +245,7 @@ if(backImageName.length>0){
                 return false;
             }
 
-            else if(productColor==''){
+            if(productColor==''){
                 bootbox.alert({
                     message: "Color must be selected",
                     size: 'small'
@@ -282,14 +282,6 @@ if(backImageName.length>0){
                 return false;
             }
 
-            else if(productDetails==''){
-                bootbox.alert({
-                    message: "product name must be selected",
-                    size: 'small'
-                });
-                document.getElementById("productDetails").focus();
-                return false;
-            }
 
 
 

@@ -927,7 +927,8 @@ evt.preventDefault();
                     <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
 
                                 <p class="text-center">
-                                    <img src="${resource(dir: "images/companyInformation",file: "${CompanyInformation.list()[0].logoImageName}")}" alt="yarsaa-logo" />
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
+
 
                                 </p>
 
@@ -948,7 +949,8 @@ evt.preventDefault();
                     <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
 
                     <p class="text-center">
-                        <img src="${resource(dir: "images/companyInformation",file: "${CompanyInformation.list()[0].logoImageName}")}" alt="yarsaa-logo" />
+                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
+
 
                     </p>
 

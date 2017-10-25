@@ -46,23 +46,58 @@ static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',
         companyInformationInstance.phoneNumber=params.phoneNumber
         companyInformationInstance.descriptionWhereWeAre=params.descriptionWhereWeAre
             companyInformationInstance.offer=params.offer
-
             companyInformationInstance.logoImageName=editLogoImage(companyInformationInstance.logoImageName)
         companyInformationInstance.coverImageName=editcoverImage(companyInformationInstance.coverImageName)
         companyInformationInstance.shopInsideViewImageName=editshopInsideViewImage(companyInformationInstance.shopInsideViewImageName)
             companyInformationInstance.save(flush: true)
         redirect(action: "show")}
         else{
-            print "a"
             redirect(action: "notfound",controller: "errorPage")
         }}
         catch (Exception e){
-            print "b"
+            print e
             redirect(action: "notfound",controller: "errorPage")
 
         }
 
     }
+    def editLogoImage(String imageNameOld){
+        def mp = (MultipartHttpServletRequest) request
+        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("logoImageName")
+        def homeDir = new File(System.getProperty("user.home"))
+        File theDir = new File(homeDir,"yarsaa");
+        if (! theDir.exists()){
+            theDir.mkdir();
+        }
+        if(file.size>0){
+            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
+            fileOld.delete();
+            String fileName = file.originalFilename
+            abc:
+            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
+            if (check == true) {
+                Matcher m = PATTERN.matcher(fileName);
+                if (m.matches()) {
+                    String prefix = m.group(1);
+                    String last = m.group(2);
+                    String suffix = m.group(3);
+                    if (suffix == null) suffix = "";
+                    int count = last != null ? Integer.parseInt(last) : 0;
+                    count++;
+                    fileName = prefix + "(" + count + ")" + suffix;
+                    continue abc
+                }
+            }
+            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            file.transferTo(fileDest)
+                        return fileName
+
+        }
+        else{
+            return imageNameOld
+        }
+    }
+
     def editcoverImage(String imageNameOld){
         def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImageName")
@@ -70,7 +105,6 @@ static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',
         File theDir = new File(homeDir,"yarsaa");
         if (! theDir.exists()){
             theDir.mkdir();
-            print"yes"
         }
         if(file.size>0){
             File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
@@ -138,46 +172,6 @@ static  allowedMethods = [save:'POST',checkPhoto: 'POST',editcoverImage: 'POST',
         }
     }
 
-    def editLogoImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("logoImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            File fileOld1= new File("web-app/images/companyInformation",imageNameOld)
-            fileOld1.delete();
-            fileOld.delete();
-            String fileName = file.originalFilename
-            abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
-            }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            def realFilePath = grailsApplication.mainContext.servletContext.getRealPath("/images/companyInformation/${fileName}")
-            file.transferTo(new File(realFilePath))
-            return fileName
-
-        }
-        else{
-            return imageNameOld
-        }
-    }
     def show(){
         try{
         def companyInformationInstance=CompanyInformation.list()[0]

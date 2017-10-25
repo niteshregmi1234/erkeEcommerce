@@ -37,9 +37,10 @@
     <tbody>
     <g:each in="${productSubCategorySpecifyList}" var="list" status='i'>
         <tr>
+            <td>${i+1}</td>
+
             <td> <g:link action="show" id="${list?.id}" controller="productSubCategorySpecify" class="btn btn-primary btn-sm">view</g:link></td>
 
-            <td>${i+1}</td>
             <td>${list.specificationName}</td>
         </tr>
     </g:each>

@@ -19,7 +19,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost/yamsaaE"
+            url = "jdbc:mysql://localhost/productionDatabase"
             username="root"
             password=" "
         }
@@ -33,7 +33,7 @@ environments {
     production {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost/yamsaaE"
+            url = "jdbc:mysql://localhost/productionDatabase"
             username="root"
             password=" "
             properties {

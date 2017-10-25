@@ -30,7 +30,7 @@
         <div class="form-group ">
             <label class="control-label col-sm-2">Last Name:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${adminUserInstance.firstName} </div>
+                <div style="margin-top: 7px;">${adminUserInstance.lastName} </div>
             </div>
         </div>
     </div>

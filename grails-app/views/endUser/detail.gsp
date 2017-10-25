@@ -3,7 +3,8 @@
 
 <head>
 <meta name="layout" content="userYarsaa">
-<title>
+
+    <title>
 
 
 </title>
@@ -416,20 +417,20 @@
                                                     <div class="flipper">
                                                         <div class="front">
                                                             <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
+                                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive food1-img">
 
                                                             </g:link>
                                                         </div>
                                                         <div class="back">
                                                             <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive food1-img">
+                                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive food1-img">
 
                                                             </g:link>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible food1">
-                                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.specialImageName])}" class="img-responsive">
+                                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
 
                                                 </g:link>
 
