@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
     <meta name="author" content="Anoj And Bikash">
+    <g:if test="${productInstance}">
+        <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.frontImageName}"/>
+
+    </g:if>
 
     <title>
         Yarsaa
@@ -71,16 +75,6 @@
             charset="utf-8"></script>
 
 
-<script>
-    $(window).bind('scroll', function () {
-        if ($(window).scrollTop() > 50) {
-            $('.menu2').addClass('fixed');
-        } else {
-            $('.menu2').removeClass('fixed');
-        }
-    });
-
-</script>
     <script type="text/javascript"> //<![CDATA[
     var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
     document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
@@ -134,27 +128,27 @@
 </noscript>
 
 <div id="total">
-<div id="top">
-    <div class="container">
-        <div class="col-md-6 offer" data-animate="fadeInDown">
-            <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">${CompanyInformation.list()[0].offer}</a>
-        </div>
-        <div class="col-md-6" data-animate="fadeInDown" >
-            <ul class="menu" id="logoutClass">
-                <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-                </li>
-                <g:if test="${session.endUser}">
-                <li><a href="#" onclick="logoutUser();">Logout</a>
-                </li>
-                </g:if>
-                <li><g:link action="register" controller="endUserInformation">Register</g:link>
-                </li>
-                <li><g:link action="contact" controller="endUser">Contact</g:link>
-                </li>
 
-            </ul>
-        </div>
-    </div>
+    %{--<div class="container">--}%
+        %{--<div class="col-md-6 offer" data-animate="fadeInDown">--}%
+            %{--<a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">${CompanyInformation.list()[0].offer}</a>--}%
+        %{--</div>--}%
+        %{--<div class="col-md-6" data-animate="fadeInDown" >--}%
+            %{--<ul class="menu" id="logoutClass">--}%
+                %{--<li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>--}%
+                %{--</li>--}%
+                %{--<g:if test="${session.endUser}">--}%
+                %{--<li><a href="#" onclick="logoutUser();">Logout</a>--}%
+                %{--</li>--}%
+                %{--</g:if>--}%
+                %{--<li><g:link action="register" controller="endUserInformation">Register</g:link>--}%
+                %{--</li>--}%
+                %{--<li><g:link action="contact" controller="endUser">Contact</g:link>--}%
+                %{--</li>--}%
+
+            %{--</ul>--}%
+        %{--</div>--}%
+    %{--</div>--}%
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
         <div class="modal-dialog modal-sm">
 
@@ -362,14 +356,14 @@ if(sizeId=='' && productId==''){
     </script>
 
 
-</div>
+
 
 <!-- *** TOP BAR END *** -->
 
 <!-- *** NAVBAR ***
  _________________________________________________________ -->
 
-<div class="navbar navbar-default yamm menu2" role="navigation" id="navbar">
+<div class="navbar navbar-default yamm" role="navigation" id="navbar">
     <div class="container">
         <div class="navbar-header">
 
@@ -422,24 +416,24 @@ if(sizeId=='' && productId==''){
                                     </div>
 
                                     </g:each>
-                                    <div class="col-sm-3">
-                                        <div class="banner">
-                                            <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.categoryId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:categoryList.menuImage1])}" class="img-responsive">
+                                    %{--<div class="col-sm-3">--}%
+                                        %{--<div class="banner">--}%
+                                            %{--<g:link action="allCategoryProducts" controller="endUser" id="${categoryList.categoryId}">--}%
+                                                %{--<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:categoryList.menuImage1])}" class="img-responsive">--}%
 
 
-                                            </g:link>
-                                        </div>
+                                            %{--</g:link>--}%
+                                        %{--</div>--}%
 
-                                        <div class="banner">
-                                            <g:link action="allCategoryProducts" controller="endUser" id="${categoryList.categoryId}">
-                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:categoryList.menuImage2])}" class="img-responsive">
+                                        %{--<div class="banner">--}%
+                                            %{--<g:link action="allCategoryProducts" controller="endUser" id="${categoryList.categoryId}">--}%
+                                                %{--<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:categoryList.menuImage2])}" class="img-responsive">--}%
 
-                                            </g:link>
-                                        </div>
+                                            %{--</g:link>--}%
+                                        %{--</div>--}%
 
 
-                                    </div>
+                                    %{--</div>--}%
 
                                     %{--<div class="col-sm-3">--}%
                                         %{--<h5>Featured</h5>--}%
@@ -481,7 +475,71 @@ if(sizeId=='' && productId==''){
                 $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
             });
         </script>
+        <style>
+        .dropbtn {
+
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 100px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1;
+            color:#4fbfa8;
+            text-decoration: none;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+
+        }
+        </style>
         <!--/.nav-collapse -->
+        <div class="navbar-buttons">
+
+
+            <!--/.nav-collapse -->
+
+            <div class="navbar-collapse collapse right dropdown">
+                <button type="button" class="btn navbar-btn btn-primary dropbtn">
+                 My Account
+                </button>
+        <div class="dropdown-content" id="logoutClass">
+                <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+
+                <g:if test="${session.endUser}"><a href="#" onclick="logoutUser();">Logout</a>
+
+                </g:if>
+                <g:link action="register" controller="endUserInformation">Register</g:link>
+
+
+
+
+        </div>
+            </div>
+
+        </div>
 
         <div class="navbar-buttons" id="cartShow">
 

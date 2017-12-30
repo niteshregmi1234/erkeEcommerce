@@ -37,46 +37,46 @@
     width: 1108px;
 }
     </style>
-    <div id="advantages">
+    %{--<div id="advantages">--}%
 
-        <div class="container">
-            <div class="same-height-row">
-                <div class="col-sm-4">
-                    <div class="box same-height">
-                        <div class="icon"><i class="fa fa-heart"></i>
-                        </div>
+        %{--<div class="container">--}%
+            %{--<div class="same-height-row">--}%
+                %{--<div class="col-sm-4">--}%
+                    %{--<div class="box same-height">--}%
+                        %{--<div class="icon"><i class="fa fa-heart"></i>--}%
+                        %{--</div>--}%
 
-                        <h3>${homeContent.box1Title}</h3>
-                        <p>${homeContent.box1Description}</p>
-                    </div>
-                </div>
+                        %{--<h3>${homeContent.box1Title}</h3>--}%
+                        %{--<p>${homeContent.box1Description}</p>--}%
+                    %{--</div>--}%
+                %{--</div>--}%
 
-                <div class="col-sm-4">
-                    <div class="box same-height">
-                        <div class="icon"><i class="fa fa-tags"></i>
-                        </div>
+                %{--<div class="col-sm-4">--}%
+                    %{--<div class="box same-height">--}%
+                        %{--<div class="icon"><i class="fa fa-tags"></i>--}%
+                        %{--</div>--}%
 
-                        <h3>${homeContent.box2Title}</h3>
-                        <p>${homeContent.box2Description}.</p>
-                    </div>
-                </div>
+                        %{--<h3>${homeContent.box2Title}</h3>--}%
+                        %{--<p>${homeContent.box2Description}.</p>--}%
+                    %{--</div>--}%
+                %{--</div>--}%
 
-                <div class="col-sm-4">
-                    <div class="box same-height">
-                        <div class="icon"><i class="fa fa-thumbs-up"></i>
-                        </div>
+                %{--<div class="col-sm-4">--}%
+                    %{--<div class="box same-height">--}%
+                        %{--<div class="icon"><i class="fa fa-thumbs-up"></i>--}%
+                        %{--</div>--}%
 
-                        <h3>${homeContent.box3Title}</h3>
-                        <p>${homeContent.box3Description}.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- /.row -->
+                        %{--<h3>${homeContent.box3Title}</h3>--}%
+                        %{--<p>${homeContent.box3Description}.</p>--}%
+                    %{--</div>--}%
+                %{--</div>--}%
+            %{--</div>--}%
+            %{--<!-- /.row -->--}%
 
-        </div>
-        <!-- /.container -->
+        %{--</div>--}%
+        %{--<!-- /.container -->--}%
 
-    </div>
+    %{--</div>--}%
     <!-- /#advantages -->
 
     <!-- *** ADVANTAGES END *** -->
@@ -164,24 +164,24 @@
 
     <!-- *** GET INSPIRED ***
  _________________________________________________________ -->
-    <div class="container" data-animate="fadeInUpBig">
-        <div class="col-md-12">
-            <div class="box slideshow">
-                <h3>${homeContent.coverDownImageTitle}</h3>
-                <p class="lead">${homeContent.coverDownImageDescription}</p>
-                <div id="get-inspired" class="owl-carousel owl-theme">
-<g:each in="${downCoverImageList}" var="list">
+    %{--<div class="container" data-animate="fadeInUpBig">--}%
+        %{--<div class="col-md-12">--}%
+            %{--<div class="box slideshow">--}%
+                %{--<h3>${homeContent.coverDownImageTitle}</h3>--}%
+                %{--<p class="lead">${homeContent.coverDownImageDescription}</p>--}%
+                %{--<div id="get-inspired" class="owl-carousel owl-theme">--}%
+%{--<g:each in="${downCoverImageList}" var="list">--}%
 
-    <div class="item coverDown">
-        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive">
+    %{--<div class="item coverDown">--}%
+        %{--<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive">--}%
 
-                    </div>
-    </g:each>
+                    %{--</div>--}%
+    %{--</g:each>--}%
 
-                </div>
-            </div>
-        </div>
-    </div>
+                %{--</div>--}%
+            %{--</div>--}%
+        %{--</div>--}%
+    %{--</div>--}%
     <style>
     .coverDown img{
         height: 500px;

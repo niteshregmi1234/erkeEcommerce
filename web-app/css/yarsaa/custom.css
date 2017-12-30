@@ -1,3 +1,4 @@
+
 .food1 img {
     height: 235px;
     width: 100%;
@@ -144,16 +145,11 @@
 .all{
     padding: 70px;
 }
-.menu2 {
-    /*height:2em;*/
-    /*position:absolute;*/
-    width:100%;
-    z-index: 6;
-}
-.fixed {
-    position:fixed;
-    top:0;
-}
+
+/*.fixed {*/
+    /*position:fixed;*/
+    /*!*top:0;*!*/
+/*}*/
 .product:hover{
     box-shadow: 0 0 5px #888888;
 }
