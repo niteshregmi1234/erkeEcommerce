@@ -206,13 +206,13 @@
                                             <img id="myImg" src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="img-responsive mainImage-height">
 
                                         </div>
-                            <div id="myModal" class="modal">
+                            <div id="myModal1" class="modal1">
 
                                 <!-- The Close Button -->
-                                <span class="close" id="closes">&times;</span>
+                                <span class="close1" id="closes">&times;</span>
 
                                 <!-- Modal Content (The Image) -->
-                                <img class="modal-content" id="img01">
+                                <img class="modal-content1" id="img01">
 
                                 <!-- Modal Caption (Image Text) -->
                                 %{--<div id="caption"></div>--}%
@@ -227,7 +227,7 @@
                             #myImg:hover {opacity: 0.7;}
 
                             /* The Modal (background) */
-                            .modal {
+                            .modal1 {
                                 display: none; /* Hidden by default */
                                 position: fixed; /* Stay in place */
                                 z-index: 1; /* Sit on top */
@@ -242,7 +242,7 @@
                             }
 
                             /* Modal Content (Image) */
-                            .modal-content {
+                            .modal-content1 {
                                 margin: auto;
                                 display: block;
                                 width: 80%;
@@ -262,10 +262,10 @@
                             /*}*/
 
                             /* Add Animation - Zoom in the Modal */
-                            .modal-content, #caption {
-                                animation-name: zoom;
-                                animation-duration: 0.6s;
-                            }
+                            /*.modal-content, #caption {*/
+                                /*animation-name: zoom;*/
+                                /*animation-duration: 0.6s;*/
+                            /*}*/
 
                             @keyframes zoom {
                                 from {transform:scale(0)}
@@ -273,7 +273,7 @@
                             }
 
                             /* The Close Button */
-                            .close {
+                            .close1 {
                                 position: absolute;
                                 top: 15px;
                                 right: 35px;
@@ -283,8 +283,8 @@
                                 transition: 0.3s;
                             }
 
-                            .close:hover,
-                            .close:focus {
+                            .close1:hover,
+                            .close1:focus {
                                 color: #bbb;
                                 text-decoration: none;
                                 cursor: pointer;
@@ -298,7 +298,7 @@
                             }
                             </style>
                             <script>
-                                var modal = document.getElementById('myModal');
+                                var modal = document.getElementById('myModal1');
 
                                 // Get the image and insert it inside the modal - use its "alt" text as a caption
                                 var img = document.getElementById('myImg');

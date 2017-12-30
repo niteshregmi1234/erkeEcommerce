@@ -149,6 +149,7 @@
             %{--</ul>--}%
         %{--</div>--}%
     %{--</div>--}%
+<div id="top">
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
         <div class="modal-dialog modal-sm">
 
@@ -193,6 +194,7 @@
             </div>
         </div>
     </div>
+</div>
     <script type="text/javascript">
         var modal = document.getElementById('login-modal');
 
