@@ -96,11 +96,21 @@
             </div>
         </div>
     </div>
+    <%
+        def string=productDetailsInstance.detailDescription
+        String[] lines = string.split("\r\n|\r|\n");
+        %>
     <div class="col-lg-12">
         <div class="form-group ">
             <label class="control-label col-sm-2">Detail Description:</label>
             <div class="col-sm-6">
-                <div style="margin-top: 7px;">${productDetailsInstance.detailDescription}</div>
+                <div style="margin-top: 7px;">
+                    <%
+                        for (String line : lines) {
+                        %>
+                    ${line}
+                    <br> <% } %>
+                </div>
             </div>
         </div>
     </div>

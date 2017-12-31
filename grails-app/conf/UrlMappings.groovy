@@ -12,7 +12,10 @@ class UrlMappings {
             "/error"(action: "notfound",controller: "errorPage")
 
             "/result"(action: "result",controller: "endUser")
-            "/allProducts"(action: "allProducts",controller: "endUser")
+        "/topBrand"(action: "topBrand",controller: "endUser")
+            "/offerBrand"(action: "offerBrand",controller: "endUser")
+
+        "/allProducts"(action: "allProducts",controller: "endUser")
         "/contact"(action: "contact",controller: "endUser")
         "/product"(action: "singleProduct",controller: "endUser")
         "/subCategory/$category/$subCategory"(action: "subCategoryList",controller: "endUser")

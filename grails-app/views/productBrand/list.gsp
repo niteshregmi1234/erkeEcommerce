@@ -26,6 +26,7 @@
         <th>View</th>
 
         <th>Brand Name</th>
+        <th>Is Top</th>
 <th>Show Status</th>
     </tr>
     </thead>
@@ -33,8 +34,9 @@
     <tr>
         <th>SN</th>
         <th>View</th>
-
         <th>Brand Name</th>
+        <th>Is Top</th>
+
         <th>Show Status</th>
     </tr>
     </tfoot>
@@ -45,6 +47,7 @@
             <td> <g:link action="show" id="${list?.id}" controller="productBrand" class="btn btn-primary btn-sm">view</g:link></td>
 
             <td>${list.brandName}</td>
+            <td>${list.isTop}</td>
 <td>${list.statusShow}</td>
         </tr>
     </g:each>

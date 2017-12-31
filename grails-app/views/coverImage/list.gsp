@@ -24,8 +24,8 @@
     <tr>
         <th>SN</th>
         <th>View</th>
-
         <th>Image Name</th>
+        <th>Offer Brand</th>
         <th>Show Status</th>
         <th>where to Slide?</th>
     </tr>
@@ -34,8 +34,8 @@
     <tr>
         <th>SN</th>
         <th>View</th>
-
         <th>Image Name</th>
+        <th>Offer Brand</th>
         <th>Show Status</th>
         <th>where to Slide?</th>
     </tr>
@@ -46,6 +46,8 @@
             <td>${i+1}</td>
             <td> <g:link action="show" id="${list?.id}" controller="coverImage" class="btn btn-primary btn-sm">view</g:link></td>
             <td>${list.imageName}</td>
+            <td>${list.productBrand.brandName}</td>
+
             <td>${list.statusShow}</td>
             <td>${list.slidePlace}</td>
         </tr>

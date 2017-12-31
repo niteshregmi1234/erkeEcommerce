@@ -209,7 +209,7 @@ catch (Exception e){
             def homeContent=HomeContent.list()[0]
         def productList = Product.findAllByIsFeatured(true)
         def seasonManagementInstance = SeasonManagement.list()[0]
-        [upCoverImageList: upCoverImageList, downCoverImageList: downCoverImageList, latestProductList: latestProductList, specialBrandInstance: specialBrandInstance, seasonManagementInstance: seasonManagementInstance,featuredProductList:productList,homeContent:homeContent]}
+        [brandList:ProductBrand.findAllByIsTop(true),upCoverImageList: upCoverImageList, downCoverImageList: downCoverImageList, latestProductList: latestProductList, specialBrandInstance: specialBrandInstance, seasonManagementInstance: seasonManagementInstance,featuredProductList:productList,homeContent:homeContent]}
             else{
                 redirect(action: "notfound",controller: "errorPage")
 
@@ -300,7 +300,91 @@ catch (Exception e){
 
         }
     }
+def topBrand(){
+    try{
+        if (params.id != null) {
+            if(ProductBrand.findById(params.id) && ProductBrand.findById(params.id).isTop){
+                def productDetailsList = ProductDetails.findAllByProductBrand(ProductBrand.findById(params.id))
+                List<Product> productList = new ArrayList<>()
+                for (ProductDetails productDetails : productDetailsList) {
+                    def product = Product.findAllByProductDetails(productDetails)
+                    if (product) {
+                        productList.add(product[0])
 
+                    }
+                }
+                Collections.shuffle(productList)
+
+                List<List<ProductSize>> listList=new ArrayList<>()
+                for(Product productInstance:productList){
+                    def sizeString=productInstance.productDetails.productSizes
+                    String[] stringArraySize= sizeString.split(",")
+                    List<ProductSize> productSizeList=new ArrayList<>()
+                    for(int i=0;i<stringArraySize.size();i++){
+                        def sizeId=stringArraySize[i] as long
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                    listList.add(productSizeList)
+                }
+                render(view: "brandProducts", model: [productList: productList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
+
+            }
+            else{
+                redirect(action: "notfound",controller: "errorPage")
+
+            }
+        } else {
+            redirect(action: "notfound",controller: "errorPage")
+
+        }}
+    catch (Exception e){
+        redirect(action: "notfound",controller: "errorPage")
+
+    }
+    }
+    def offerBrand(){
+        try{
+            if (params.id != null) {
+                if(ProductBrand.findById(params.id) && CoverImage.findByProductBrand(ProductBrand.findById(params.id))){
+                    def productDetailsList = ProductDetails.findAllByProductBrand(ProductBrand.findById(params.id))
+                    List<Product> productList = new ArrayList<>()
+                    for (ProductDetails productDetails : productDetailsList) {
+                        def product = Product.findAllByProductDetails(productDetails)
+                        if (product) {
+                            productList.add(product[0])
+
+                        }
+                    }
+                    Collections.shuffle(productList)
+
+                    List<List<ProductSize>> listList=new ArrayList<>()
+                    for(Product productInstance:productList){
+                        def sizeString=productInstance.productDetails.productSizes
+                        String[] stringArraySize= sizeString.split(",")
+                        List<ProductSize> productSizeList=new ArrayList<>()
+                        for(int i=0;i<stringArraySize.size();i++){
+                            def sizeId=stringArraySize[i] as long
+                            productSizeList.add(ProductSize.get(sizeId))
+                        }
+                        listList.add(productSizeList)
+                    }
+                    render(view: "brandProducts", model: [productList: productList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
+
+                }
+                else{
+                    redirect(action: "notfound",controller: "errorPage")
+
+                }
+            } else {
+                redirect(action: "notfound",controller: "errorPage")
+
+            }}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+
+    }
     def specialBrandProducts() {
         try{
             if(SpecialBrand.list()[0].productBrand) {

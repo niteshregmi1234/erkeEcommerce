@@ -38,7 +38,7 @@
                         </li>
                         <li>${productInstance.productDetails.productSubCategory.subCategoryName}
                         </li>
-                        <li>${productInstance.productColor.colorName+" "+productInstance.productDetails.productName+" "+productInstance.productDetails.productBrand.brandName}</li>
+                        <li>${productInstance.productDetails.productName+" "+productInstance.productDetails.productBrand.brandName}</li>
                     </ul>
 
                 </div>
@@ -335,8 +335,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="box box-height" id="detailInfo">
-                                <h1 class="text-center bigName">${productInstance.productColor.colorName+" "+productInstance.productDetails.productName+" "+productInstance.productDetails.productBrand.brandName}</h1>
-                                <p class="goToDescription"><a href="#details" class="scroll-to">${productInstance.productDetails.briefDescription}-Scroll to know more about this product </a>
+                                <h1 class="text-center bigName">${productInstance.productDetails.productName+" "+productInstance.productDetails.productBrand.brandName}</h1>
+                                <p class="goToDescription"><a href="#details" class="scroll-to">${productInstance.productDetails.briefDescription}</a>
                                 </p>
 
                                 <p class="price">
@@ -482,9 +482,17 @@
                                         <i class="indicator glyphicon glyphicon-minus  pull-right"></i>
                                         </h4>
                             </div>
+                            <%
+                                def string=productInstance.productDetails.detailDescription
+                                String[] lines = string.split("\r\n|\r|\n");
+                            %>
                             <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    ${productInstance.productDetails.detailDescription}
+                                    <%
+                                        for (String line : lines) {
+                                    %>
+                                    ${line}
+                                    <br> <% } %>
                                 </div>
                             </div>
                         </div>

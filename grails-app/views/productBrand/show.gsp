@@ -27,6 +27,24 @@
     </div>
     <div class="col-lg-12">
         <div class="form-group ">
+            <label class="control-label col-sm-2">Logo Image:</label>
+            <div class="col-sm-6">
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productBrandInstance.logoName])}" height="100" style="margin-left: -1%">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Is Top:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;">${productBrandInstance.isTop}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group ">
             <label class="control-label col-sm-2">Show Status:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${productBrandInstance.statusShow}</div>

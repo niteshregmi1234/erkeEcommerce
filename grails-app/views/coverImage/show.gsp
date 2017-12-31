@@ -29,6 +29,16 @@
         </div>
     <div class="col-lg-12">
         <div class="form-group ">
+            <label class="control-label col-sm-2">Offer Brand:</label>
+            <div class="col-sm-6">
+
+<div style="margin-top: 7px;"><g:link action="show" id="${coverImageInstance.productBrand.id}" controller="productBrand">${coverImageInstance.productBrand.brandName}</g:link></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group ">
             <label class="control-label col-sm-2">Show Status:</label>
             <div class="col-sm-6">
                 <div style="margin-top: 7px;">${coverImageInstance.statusShow}</div>

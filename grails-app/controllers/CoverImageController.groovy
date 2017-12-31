@@ -48,6 +48,7 @@ def checkPhoto(){
         if(!params.id){
             def coverImageInstance=new CoverImage()
             coverImageInstance.imageName=uploadCoverImage()
+            coverImageInstance.productBrand=ProductBrand.findById(params.productBrand)
             coverImageInstance.statusShow=params.statusShow as byte
             coverImageInstance.slidePlace=params.slidePlace
             coverImageInstance.save(flush: true)
@@ -57,7 +58,8 @@ def checkPhoto(){
             def coverImageInstance=CoverImage.get(params.id)
             if(coverImageInstance){
             coverImageInstance.imageName=editCoverImage(coverImageInstance.imageName)
-            coverImageInstance.statusShow=params.statusShow as byte
+                coverImageInstance.productBrand=ProductBrand.findById(params.productBrand)
+                coverImageInstance.statusShow=params.statusShow as byte
             coverImageInstance.slidePlace=params.slidePlace
             coverImageInstance.save(flush: true)
             redirect(action: "show" ,id:coverImageInstance.id)}

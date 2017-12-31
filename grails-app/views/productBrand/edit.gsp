@@ -12,7 +12,7 @@
     <title></title>
 </head>
 <body>
-<g:form action="save" controller="productBrand" class="form-horizontal" onsubmit="return Validate();">
+<g:form action="save" controller="productBrand" class="form-horizontal" enctype="multipart/form-data" onsubmit="return ValidateUpdate(this);">
     <g:hiddenField name="id" value="${productBrandInstance?.id}"></g:hiddenField>
 
 <g:render template="form"></g:render>
@@ -26,5 +26,98 @@
     </div>
 </div>
 </g:form>
+<script>
+    var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
+
+    function preventMultipleSubmissions() {
+        $('#submit_Id').prop('disabled', true);
+    }
+
+    window.onbeforeunload = preventMultipleSubmissions;
+    function ValidateUpdate(oForm) {
+        var responseValue;
+
+        var brandName = document.getElementById("brandName").value;
+        var brandDescription = document.getElementById("brandDescription").value;
+        var logoName = document.getElementById("logoName").value;
+
+        if(logoName.length>0) {
+            var arrInputs = oForm.getElementsByTagName("input");
+            var oInput = arrInputs[1];
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFileExtensions.length; j++) {
+                        var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                            blnValid = true;
+                            break;
+                        }
+                    }
+
+                    if (!blnValid) {
+                        bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                        responseValue=false;
+                    }
+                    else{
+                        var jForm = new FormData();
+
+                        jForm.append("Image", $('#logoName').get(0).files[0]);
+                        $.ajax({
+                            url: "${createLink(controller:'product', action:'checkPhoto')}",
+                            type: "POST",
+                            data: jForm,
+                            mimeType: "multipart/form-data",
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            async: false,
+                            success: function (result) {
+                                if(result=="Photo bad format"){
+                                    bootbox.alert({
+                                        message: "Image bad format",
+                                        size: 'small'
+                                    });
+                                    responseValue=false;
+
+                                }
+
+
+                            }
+                        });
+                    }
+
+                }
+
+            }
+        }
+
+        if(brandName==''){
+            $("#brandName").css("border", "1px solid red");
+            bootbox.alert({
+                message: "brandName must not be blank!",
+                size: 'small'
+            });
+            document.getElementById("brandName").focus();
+            return false;
+        }
+
+        else if(brandDescription==''){
+            $("#brandDescription").css("border", "1px solid red");
+            bootbox.alert({
+                message: "description must not be blank!",
+                size: 'small'
+            });
+            document.getElementById("brandDescription").focus();
+            return false;
+
+        }
+
+        return responseValue;
+    }
+
+</script>
+
 </body>
 </html>

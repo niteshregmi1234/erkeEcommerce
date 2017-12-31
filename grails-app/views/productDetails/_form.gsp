@@ -139,7 +139,6 @@
             var briefDescription = document.getElementById("briefDescription").value;
 
             if(price.length>0){
-                var price = document.getElementById("price").value;
 
                 var valid = (price.match(/^-?\d*(\.\d+)?$/));
 
@@ -218,11 +217,10 @@
                     return false;
                 }
                else if(discountPercentage.length>0){
-                    var discountPercentage = document.getElementById("discountPercentage").value;
 
-                    var valid = (discountPercentage.match(/^-?\d*(\.\d+)?$/));
+                    var valid1 = (discountPercentage.match(/^-?\d*(\.\d+)?$/));
 
-                    if(!valid){
+                    if(!valid1){
                         document.getElementById("discountPercentage").focus();
                         bootbox.alert({
                             message: "invalid discount",

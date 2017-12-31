@@ -20,7 +20,7 @@
             <div id="main-slider">
 <g:each in="${upCoverImageList}" var="list">
                 <div class="item coverUp">
-                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive">
+                   <g:link action="offerBrand" controller="endUser" id="${list.productBrand.id}"> <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive"></g:link>
 
                 </div>
                </g:each>
@@ -28,7 +28,37 @@
             <!-- /#main-slider -->
         </div>
     </div>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="box">
 
+            <div class="social">
+            <h2 style="color: #4fbfa8; margin-left: 8px;">Top Brands</h2>
+<g:each in="${brandList}" var="list">
+    <g:if test="${Product.findByProductDetails(ProductDetails.findByProductBrand(list))}">
+                <div class="col-sm-2" style="margin-bottom: 10px;">
+        <g:link action="topBrand" controller="endUser" id="${list.id}">
+
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive">
+</g:link>
+                </div>
+    </g:if>
+</g:each>
+
+                %{--<p>--}%
+                %{--<a id="btn_shareFacebook" class="facebook customer share" title="Facebook share" data-animate-hover="pulse" target="_blank"><i class="fa fa-facebook"></i></a>--}%
+                %{--<a id="btn_shareTWI" class="twitter customer share" href="" title="Twitter share" data-animate-hover="pulse" target="_blank"><i class="fa fa-twitter"></i></a>--}%
+                %{--<a id="btn_shareExternalGplus" class="gplus google_plus customer share" data-animate-hover="pulse" href="" title="Google Plus Share" target="_blank"><i class="fa fa-google-plus"></i></a>--}%
+                %{--<a id="btn_shareLinkedIn" class="a btn btn-linkedin customer share" href="" title="linkedin Share" target="_blank" data-animate-hover="pulse"><i class="fa fa-linkedin"></i>--}%
+                %{--</a>--}%
+                %{--<a id="btn_shareInstagram" title="instagram Share" class="btn btn-instagram a" data-animate-hover="pulse" href="">--}%
+                %{--<i class="fa fa-instagram"></i>--}%
+                %{--</a>--}%
+            %{--</p>--}%
+        </div>
+            </div>
+    </div>
+</div>
     <!-- *** ADVANTAGES HOMEPAGE ***
  _________________________________________________________ -->
     <style>
@@ -270,36 +300,36 @@
         <!-- /.container -->
 
     </div>
-    <div class="container" data-animate="fadeInUpBig">
+    %{--<div class="container" data-animate="fadeInUpBig">--}%
 
-        <div class="col-md-12">
+        %{--<div class="col-md-12">--}%
 
-            <div class="box slideshow sildeshow1">
+            %{--<div class="box slideshow sildeshow1">--}%
 
-                <div id="thumbnail text-center nomargin">
-                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:seasonManagementInstance.seasons.imageName])}" class="img-responsive image-nomargin">
+                %{--<div id="thumbnail text-center nomargin">--}%
+                    %{--<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:seasonManagementInstance.seasons.imageName])}" class="img-responsive image-nomargin">--}%
 
-                    <div class="middle1 col-sm-offset-4 col-sm-5">
-                        <div class="text1">
-                            <h3> <p class="text-center lead1">${seasonManagementInstance.seasons.greetings}</p></h3>
-
-
-                            <p class="text-center lead lead2">${seasonManagementInstance.seasons.descriptionOfSeason}</p>
-                            <div class="wthreeshop-a button-a">
-                                <g:link action="upcomingSeasonProducts">${seasonManagementInstance.seasons.askingForShopping}</g:link>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                    %{--<div class="middle1 col-sm-offset-4 col-sm-5">--}%
+                        %{--<div class="text1">--}%
+                            %{--<h3> <p class="text-center lead1">${seasonManagementInstance.seasons.greetings}</p></h3>--}%
 
 
+                            %{--<p class="text-center lead lead2">${seasonManagementInstance.seasons.descriptionOfSeason}</p>--}%
+                            %{--<div class="wthreeshop-a button-a">--}%
+                                %{--<g:link action="upcomingSeasonProducts">${seasonManagementInstance.seasons.askingForShopping}</g:link>--}%
+                            %{--</div>--}%
+                        %{--</div>--}%
+                    %{--</div>--}%
 
-            </div>
+                %{--</div>--}%
 
-        </div>
 
-    </div>
+
+            %{--</div>--}%
+
+        %{--</div>--}%
+
+    %{--</div>--}%
 
     <style>
     .caption1{

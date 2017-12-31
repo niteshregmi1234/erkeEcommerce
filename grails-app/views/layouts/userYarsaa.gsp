@@ -405,6 +405,7 @@ if(sizeId=='' && productId==''){
                             <div class="yamm-content" style="height:400px;overflow-y: scroll;">
                                 <div class="row">
                                     <g:each in="${ProductSubCategorySpecify.list()}" var="specifyList">
+                                        <g:if test="${Product.findByProductDetails(ProductDetails.findByProductSubCategoryAndProductCategory(ProductSubCategory.findByProductSubCategorySpecify(specifyList),categoryList))}">
                                     <div class="col-sm-3">
                                         <h5>${specifyList.specificationName}</h5>
                                         <ul>
@@ -416,7 +417,7 @@ if(sizeId=='' && productId==''){
                                             </g:each>
                                         </ul>
                                     </div>
-
+</g:if>
                                     </g:each>
                                     %{--<div class="col-sm-3">--}%
                                         %{--<div class="banner">--}%
