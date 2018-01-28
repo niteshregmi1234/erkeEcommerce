@@ -29,7 +29,8 @@
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
-                <li>Brand</li>
+                <li><g:link action="allBrands" controller="endUser">Brand</g:link></li>
+
 
                 <li>${specialBrandInstance.brandName}</li>
             </ul>
@@ -97,7 +98,7 @@
 
                             </g:link>
                             <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
                                 <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
                                     <del class="del-price" style="visibility:hidden;">Rs.${list.productDetails.price}</del></p>
                                 <p class="buttons">
@@ -145,7 +146,7 @@
 
                             </g:link>
                             <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
                                 <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
                                     <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                 <p class="buttons">

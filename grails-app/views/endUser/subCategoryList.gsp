@@ -38,13 +38,19 @@
                 <ul class="breadcrumb">
                     <li><g:link action="userHome" controller="endUser">Home</g:link>
                     </li>
-                    <li>${productCategory.categoryName}</li>
+                    <li><g:link action="allCategoryProducts" id="${productCategory.categoryId}" controller="endUser">
+                        ${productCategory.categoryName}</g:link>
+                    </li>
+<li><g:link action="specifiedProducts" params="[category:productCategory.categoryId,subCategorySpecify:productSubCategory.productSubCategorySpecify.id]" controller="endUser">${productSubCategory.productSubCategorySpecify.specificationName}</g:link>
+</li>
+                    <li>${productSubCategory.subCategoryName}</li>
                 </ul>
             </div>
 
             <div class="col-md-3">
                 <!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
+
                 <div class="panel panel-default sidebar-menu">
 
                     <div class="panel-heading">
@@ -53,35 +59,92 @@
 
                     <div class="panel-body">
                         <ul class="nav nav-pills nav-stacked category-menu">
-                            <g:each in="${productCategoryList}" var="categoryList">
-                                <g:if test="${ProductDetails.findByProductCategory(categoryList)}">
 
-                                    <g:if test="${categoryList.equals(productCategory)}">
                             <li class="active">
-                                </g:if>
-                                <g:if test="${categoryList!=(productCategory)}">
-                                    <li>
 
-                            </g:if>
-                                <g:link action="allCategoryProducts" id="${categoryList.id}" controller="endUser">${categoryList.categoryName} <span class="badge pull-right"></span></g:link>
-                                <ul>
-                                    <g:each in="${productSubCategoryList}" var="subCategoryList">
-                                            <g:if test="${Product.findAllByProductDetails(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList))}">
+                            
+                                <g:link action="allCategoryProducts" id="${productCategory.categoryId}" controller="endUser">${productCategory.categoryName} <span class="badge pull-right"></span></g:link>
+                                    <g:each in="${ProductSubCategorySpecify.list()}" var="specifyList" status="i">
+                                        <style>
+                                        .dropbtnA {
 
-                                            <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                                            cursor: pointer;
+                                            width:223px;
+                                        }
 
-                                    </li>
-                                            </g:if>
-                                    %{--<li><a href="category.html">Shirts</a>--}%
-                                 </g:each>   %{--</li>--}%
-                                    %{--<li><a href="category.html">Pants</a>--}%
-                                    %{--</li>--}%
-                                    %{--<li><a href="category.html">Accessories</a>--}%
-                                    %{--</li>--}%
-                                </ul>
+                                        .dropdownA {
+                                            position: relative;
+                                            display: inline-block;
+                                        }
+
+                                        .dropdown-contentA {
+                                            display: none;
+                                            position: absolute;
+                                            background-color: #f9f9f9;
+                                            min-width: 223px;
+                                            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                                            z-index: 1;
+                                        }
+
+                                        .dropdown-contentA a {
+                                            color: black;
+                                            padding: 12px 16px;
+                                            text-decoration: none;
+                                            display: block;
+                                        }
+
+                                        .dropdown-contentA a:hover {background-color: #f1f1f1;
+                                            color:#4fbfa8;
+                                            text-decoration: none;
+                                        }
+
+                                        .dropdownA:hover .dropdown-contentA {
+                                            display: block;
+                                        }
+
+                                        .dropdownA:hover .dropbtnA {
+
+                                        }
+                                        </style>
+
+                                        <div class="dropdownA">
+<ul>
+    <%
+        def subCategoryList1=ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)
+        def productList=new ArrayList<>()
+        for(ProductSubCategory productSubCategory: subCategoryList1){
+            def product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategoryAndProductCategory(productSubCategory,productCategory),false)
+            if(product){
+                productList.add(product)
+            }
+        }
+    %>
+    <g:if test="${productList}">
+                                            <li><g:link action="specifiedProducts" params="[category:productCategory.categoryId,subCategorySpecify:specifyList.id]" controller="endUser" class="dropbtnA"> ${specifyList.specificationName}</g:link></li>
+</g:if>
+                                            </ul>
+                                        <ul class="dropdown-contentA">
+                                            <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)}" var="subCategoryList">
+                                                <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(productCategory,subCategoryList),false)}">
+
+                                                    <li><g:link action="subCategoryList" controller="endUser" params="[category:productCategory.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+
+                                                    </li>
+
+                                                </g:if>
+                                                </g:each>
+                                            %{--<li><a href="category.html">Shirts</a>--}%
+                                        %{--<li><a href="category.html">Pants</a>--}%
+                                        %{--</li>--}%
+                                        %{--<li><a href="category.html">Accessories</a>--}%
+                                        %{--</li>--}%
+                                        </ul>
+
+                        </div>
                             </li>
-                                    </g:if>
                             </g:each>
+
+
                             %{--<li class="active">--}%
                                 %{--<a href="category.html">Ladies  <span class="badge pull-right">123</span></a>--}%
                                 %{--<ul>--}%
@@ -258,7 +321,7 @@
 
                                 </g:link>
                                 <div class="text">
-                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
                                     <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
                                         <del class="del-price" style="visibility:hidden;">Rs.${list.productDetails.price}</del></p>
                                     <p class="buttons">
@@ -306,7 +369,7 @@
 
                                 </g:link>
                                 <div class="text">
-                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
                                     <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
                                         <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                     <p class="buttons">

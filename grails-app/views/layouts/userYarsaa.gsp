@@ -9,17 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
     <meta name="author" content="Anoj And Bikash">
-    <g:if test="${productInstance}">
-        <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.frontImageName}"/>
+    %{--<g:if test="${productInstance}">--}%
+        %{--<meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.frontImageName}"/>--}%
 
-    </g:if>
+    %{--</g:if>--}%
 
     <title>
         Yarsaa
     </title>
 
 
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
+    %{--<link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>--}%
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
 
     <!-- styles -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/font-awesome.css')}" type="text/css"
@@ -75,11 +76,11 @@
             charset="utf-8"></script>
 
 
-    <script type="text/javascript"> //<![CDATA[
-    var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
-    document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
-    //]]>
-    </script>
+    %{--<script type="text/javascript"> //<![CDATA[--}%
+    %{--var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");--}%
+    %{--document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));--}%
+    %{--//]]>--}%
+    %{--</script>--}%
     <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/yarsaalogosmall.png')}">
 
 </head>
@@ -396,7 +397,7 @@ if(sizeId=='' && productId==''){
                 <li class="active menuBar"><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
                 <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
-                    <g:if test="${ProductDetails.findByProductCategory(categoryList)}">
+                    <g:if test="${Product.findByProductDetails(ProductDetails.findByProductCategory(categoryList))}">
 
                         <li class="dropdown yamm-fw">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">${categoryList.categoryName}<b class="caret"></b></a href="#">
@@ -405,12 +406,22 @@ if(sizeId=='' && productId==''){
                             <div class="yamm-content" style="height:400px;overflow-y: scroll;">
                                 <div class="row">
                                     <g:each in="${ProductSubCategorySpecify.list()}" var="specifyList">
-                                        <g:if test="${Product.findByProductDetails(ProductDetails.findByProductSubCategoryAndProductCategory(ProductSubCategory.findByProductSubCategorySpecify(specifyList),categoryList))}">
+                                        <%
+                                            def subCategoryList1=ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)
+                                        def productList=new ArrayList<>()
+                                        for(ProductSubCategory productSubCategory: subCategoryList1){
+                                            def product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategoryAndProductCategory(productSubCategory,categoryList),false)
+                                        if(product){
+                                            productList.add(product)
+                                        }
+                                        }
+                                            %>
+                                        <g:if test="${productList}">
                                     <div class="col-sm-3">
-                                        <h5>${specifyList.specificationName}</h5>
+                                        <g:link action="specifiedProducts" params="[category:categoryList.categoryId,subCategorySpecify:specifyList.id]" controller="endUser"> <h5>${specifyList.specificationName}</h5></g:link>
                                         <ul>
                                         <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecifyAndStatusShow(specifyList,true)}" var="subCategoryList">
-<g:if test="${Product.findAllByProductDetails(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList))}">
+<g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList),false)}">
                                             <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
                                             </li>
 </g:if>
@@ -529,9 +540,12 @@ if(sizeId=='' && productId==''){
                  My Account
                 </button>
         <div class="dropdown-content" id="logoutClass">
-                <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-
+<g:if test="${session.endUser==null}">
+    <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+</g:if>
                 <g:if test="${session.endUser}"><a href="#" onclick="logoutUser();">Logout</a>
+
+                    <g:link action="myProfile" controller="endUserInformation">My Profile</g:link>
 
                 </g:if>
                 <g:link action="register" controller="endUserInformation">Register</g:link>
@@ -751,7 +765,7 @@ if(sizeId=='' && productId==''){
 
             </div>
             <div class="col-md-6">
-                <p class="pull-right">Designed and Developed by Bonish Thapa and Hemanta Ghimire</a>
+                <p class="pull-right">ALL RIGHTS RESERVED BY ONLINE YARSAA</a>
                     <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
                 </p>
             </div>

@@ -140,7 +140,7 @@
                                             },
                                             phone: {
                                                 country: 'NEPAL',
-                                                message: 'Please supply a vaild mobile/phone number'
+                                                message: 'Please supply a vaild mobile number'
                                             }
                                         }
                                     },
@@ -150,7 +150,7 @@
                                                 min: 8,
                                             },
                                             notEmpty: {
-                                                message: 'Please supply your street address'
+                                                message: 'Please supply your address'
                                             }
                                         }
                                     },
@@ -240,8 +240,7 @@
                     <h1>Login</h1>
 
                     <p class="lead">Already our customer?</p>
-                    <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
-                    mi vitae est. Mauris placerat eleifend leo.</p>
+                    <p class="text-muted">You can login from the form below if you have already created your account to shop products available here.</p>
 
                     <hr>
                     <form action="/endUserInformation/login" class="form-horizontal" method="post" onsubmit="return loginValid1();">

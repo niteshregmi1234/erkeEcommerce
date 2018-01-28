@@ -120,7 +120,7 @@ shippingAndHandling= OtherCosts.list()[0].shippingAndHandlingPercentage*totalPri
 
 
         for (ProductDetails productDetails : productDetailsList) {
-            def product = Product.findAllByProductDetailsAndSeasons(productDetails, SeasonManagement.list()[1].seasons)
+            def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)
             if (product) {
                 relatedProductList.add(product[0])
             }

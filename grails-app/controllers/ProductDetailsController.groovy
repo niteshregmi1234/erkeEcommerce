@@ -1,4 +1,4 @@
-
+import org.apache.commons.lang.ArrayUtils
 import org.springframework.dao.DataIntegrityViolationException
 class ProductDetailsController extends BaseController{
 static allowedMethods = [save: 'POST']
@@ -16,9 +16,9 @@ static allowedMethods = [save: 'POST']
     def save(){
         try{
         if(!params.id){
-
             def productDetails=new ProductDetails()
-            def productSizeId=params.productSizeId
+            def productSizeId1=params.productSizeId
+            def productSizeId=new ArrayList<>(Arrays.asList(productSizeId1))
             String productSizes=""
             for(int i=0;i<productSizeId.size();i++){
                 productSizes=productSizes + productSizeId[i]+","
@@ -45,10 +45,12 @@ static allowedMethods = [save: 'POST']
         else{
             def productDetails=ProductDetails.get(params.id)
             if(productDetails){
-                def productSizeId=params.productSizeId
+                def productSizeId1=params.productSizeId
+                def productSizeId=new ArrayList<>(Arrays.asList(productSizeId1))
                 String productSizes=""
                 for(int i=0;i<productSizeId.size();i++){
-                    productSizes=productSizes + productSizeId[i]+","
+                    print productSizeId[i]
+                    productSizes=productSizes+productSizeId[i]+","
                 }
                 productDetails.productSizes=productSizes
                 productDetails.productCategory=ProductCategory.get(params.productCategory)
@@ -63,11 +65,10 @@ static allowedMethods = [save: 'POST']
             else{
                 productDetails.discountPercentage=0
             }
-                        productDetails.briefDescription=params.briefDescription
-            productDetails.detailDescription=params.detailDescription
+                productDetails.briefDescription=params.briefDescription
+                productDetails.detailDescription=params.detailDescription
                 productDetails.productNameWithBrand=productDetails.productCategory.categoryName+"-"+productDetails.productBrand.brandName+" "+productDetails.productName
                 productDetails.save(flush: true)
-
                 redirect(action: "show" ,id:productDetails.id)
         }
             else {
@@ -93,7 +94,8 @@ static allowedMethods = [save: 'POST']
             List<ProductSize> productSizeList=new ArrayList<>()
             for(int i=0;i<stringArraySize.size();i++){
                 def sizeId=stringArraySize[i] as long
-                productSizeList.add(ProductSize.get(sizeId))
+                if(ProductSize.get(sizeId)){
+                productSizeList.add(ProductSize.get(sizeId))}
             }
             [productDetailsInstance:productDetailsInstance,productSizeList:productSizeList]
         }

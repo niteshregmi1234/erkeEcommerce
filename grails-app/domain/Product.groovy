@@ -11,7 +11,9 @@ class Product {
     boolean isFeatured
     String productSpecificationName
     String specialImageName
+    boolean delFlag
     static constraints = {
+        delFlag nullable: true
         productId (generator:'assigned',unique:true)
     }
 

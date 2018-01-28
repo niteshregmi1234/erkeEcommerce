@@ -36,6 +36,7 @@
         <div class="col-md-3">
             <!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
+
             <div class="panel panel-default sidebar-menu">
 
                 <div class="panel-heading">
@@ -47,27 +48,92 @@
                         <g:each in="${productCategoryList}" var="categoryList">
                             <g:if test="${ProductDetails.findByProductCategory(categoryList)}">
 
-                                <li>
 
-                            <g:link action="allCategoryProducts" id="${categoryList.categoryId}" controller="endUser">${categoryList.categoryName} <span class="badge pull-right"></span></g:link>
-                            <ul>
-                                <g:each in="${productSubCategoryList}" var="subCategoryList">
-                                    <g:if test="${Product.findAllByProductDetails(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList))}">
+                                    <li class="active">
 
-                                        <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                                <g:link action="allCategoryProducts" id="${categoryList.categoryId}" controller="endUser">${categoryList.categoryName} <span class="badge pull-right"></span></g:link>
+                                <g:each in="${ProductSubCategorySpecify.list()}" var="specifyList" status="i">
+                                    <style>
+                                    .dropbtnA {
 
+                                        cursor: pointer;
+                                        width:223px;
+                                    }
+
+                                    .dropdownA {
+                                        position: relative;
+                                        display: inline-block;
+                                    }
+
+                                    .dropdown-contentA {
+                                        display: none;
+                                        position: absolute;
+                                        background-color: #f9f9f9;
+                                        min-width: 223px;
+                                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                                        z-index: 1;
+                                    }
+
+                                    .dropdown-contentA a {
+                                        color: black;
+                                        padding: 12px 16px;
+                                        text-decoration: none;
+                                        display: block;
+                                    }
+
+                                    .dropdown-contentA a:hover {background-color: #f1f1f1;
+                                        color:#4fbfa8;
+                                        text-decoration: none;
+                                    }
+
+                                    .dropdownA:hover .dropdown-contentA {
+                                        display: block;
+                                    }
+
+                                    .dropdownA:hover .dropbtnA {
+
+                                    }
+                                    </style>
+                                    <%
+                                        def subCategoryList1=ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)
+                                        def productList=new ArrayList<>()
+                                        for(ProductSubCategory productSubCategory: subCategoryList1){
+                                            def product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategoryAndProductCategory(productSubCategory,categoryList),false)
+                                            if(product){
+                                                productList.add(product)
+                                            }
+                                        }
+                                    %>
+                                    <div class="dropdownA">
+                                        <ul>
+                                            <g:if test="${productList}">
+
+                                                <li><g:link action="specifiedProducts" params="[category:categoryList.categoryId,subCategorySpecify:specifyList.id]" controller="endUser" class="dropbtnA"> ${specifyList.specificationName}</g:link></li>
+                                            </g:if>
+                                        </ul>
+                                        <ul class="dropdown-contentA">
+                                            <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)}" var="subCategoryList">
+                                                <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList),false)}">
+
+                                                    <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+
+                                                    </li>
+
+                                                </g:if>
+                                            </g:each>
+                                        %{--<li><a href="category.html">Shirts</a>--}%
+                                        %{--<li><a href="category.html">Pants</a>--}%
+                                        %{--</li>--}%
+                                        %{--<li><a href="category.html">Accessories</a>--}%
+                                        %{--</li>--}%
+                                        </ul>
+
+                                    </div>
                                     </li>
-                                        </g:if>
-                                %{--<li><a href="category.html">Shirts</a>--}%
-                                </g:each>   %{--</li>--}%
-                            %{--<li><a href="category.html">Pants</a>--}%
-                            %{--</li>--}%
-                            %{--<li><a href="category.html">Accessories</a>--}%
-                            %{--</li>--}%
-                            </ul>
-                            </li>
-                                </g:if>
+                                </g:each>
+                            </g:if>
                         </g:each>
+
                     %{--<li class="active">--}%
                     %{--<a href="category.html">Ladies  <span class="badge pull-right">123</span></a>--}%
                     %{--<ul>--}%
@@ -102,75 +168,75 @@
 
             %{--<div class="panel panel-default sidebar-menu">--}%
 
-                %{--<div class="panel-heading">--}%
-                    %{--<h3 class="panel-title">Brands </h3>--}%
-                %{--</div>--}%
+            %{--<div class="panel-heading">--}%
+            %{--<h3 class="panel-title">Brands </h3>--}%
+            %{--</div>--}%
 
-                %{--<div class="panel-body">--}%
+            %{--<div class="panel-body">--}%
 
-                    %{--<g:form action="abc" controller="endUser">--}%
-                        %{--<div class="form-group">--}%
-                            %{--<g:each in="${productBrandList}" var="brandList">--}%
-                                %{--<div class="checkbox">--}%
-                                    %{--<label>--}%
-                                        %{--<g:checkBox name="brand" value="${brandList.id}"  />${brandList.brandName}--}%
-                                    %{--</label>--}%
-                                %{--</div>--}%
-                            %{--</g:each>--}%
-                        %{--</div>--}%
+            %{--<g:form action="abc" controller="endUser">--}%
+            %{--<div class="form-group">--}%
+            %{--<g:each in="${productBrandList}" var="brandList">--}%
+            %{--<div class="checkbox">--}%
+            %{--<label>--}%
+            %{--<g:checkBox name="brand" value="${brandList.id}"  />${brandList.brandName}--}%
+            %{--</label>--}%
+            %{--</div>--}%
+            %{--</g:each>--}%
+            %{--</div>--}%
 
-                        %{--<button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>--}%
+            %{--<button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>--}%
 
-                    %{--</g:form>--}%
+            %{--</g:form>--}%
 
-                %{--</div>--}%
+            %{--</div>--}%
             %{--</div>--}%
 
             %{--<div class="panel panel-default sidebar-menu">--}%
 
-                %{--<div class="panel-heading">--}%
-                    %{--<h3 class="panel-title">Colours</h3>--}%
-                %{--</div>--}%
+            %{--<div class="panel-heading">--}%
+            %{--<h3 class="panel-title">Colours</h3>--}%
+            %{--</div>--}%
 
-                %{--<div class="panel-body">--}%
+            %{--<div class="panel-body">--}%
 
-                    %{--<form>--}%
-                        %{--<div class="form-group">--}%
-                            %{--<g:each in="${productColourList}" var="colourList">--}%
-                                %{--<div class="checkbox">--}%
-                                    %{--<label>--}%
-                                        %{--<g:checkBox name="colour" value="${colourList.id}"/>${colourList.colorName}--}%
+            %{--<form>--}%
+            %{--<div class="form-group">--}%
+            %{--<g:each in="${productColourList}" var="colourList">--}%
+            %{--<div class="checkbox">--}%
+            %{--<label>--}%
+            %{--<g:checkBox name="colour" value="${colourList.id}"/>${colourList.colorName}--}%
 
-                                    %{--</label>--}%
-                                %{--</div>--}%
-                            %{--</g:each>--}%
-                        %{--<div class="checkbox">--}%
-                        %{--<label>--}%
-                        %{--<input type="checkbox"> <span class="colour blue"></span> Blue (10)--}%
-                        %{--</label>--}%
-                        %{--</div>--}%
-                        %{--<div class="checkbox">--}%
-                        %{--<label>--}%
-                        %{--<input type="checkbox"> <span class="colour green"></span> Green (20)--}%
-                        %{--</label>--}%
-                        %{--</div>--}%
-                        %{--<div class="checkbox">--}%
-                        %{--<label>--}%
-                        %{--<input type="checkbox"> <span class="colour yellow"></span> Yellow (13)--}%
-                        %{--</label>--}%
-                        %{--</div>--}%
-                        %{--<div class="checkbox">--}%
-                        %{--<label>--}%
-                        %{--<input type="checkbox"> <span class="colour red"></span> Red (10)--}%
-                        %{--</label>--}%
-                        %{--</div>--}%
-                        %{--</div>--}%
+            %{--</label>--}%
+            %{--</div>--}%
+            %{--</g:each>--}%
+            %{--<div class="checkbox">--}%
+            %{--<label>--}%
+            %{--<input type="checkbox"> <span class="colour blue"></span> Blue (10)--}%
+            %{--</label>--}%
+            %{--</div>--}%
+            %{--<div class="checkbox">--}%
+            %{--<label>--}%
+            %{--<input type="checkbox"> <span class="colour green"></span> Green (20)--}%
+            %{--</label>--}%
+            %{--</div>--}%
+            %{--<div class="checkbox">--}%
+            %{--<label>--}%
+            %{--<input type="checkbox"> <span class="colour yellow"></span> Yellow (13)--}%
+            %{--</label>--}%
+            %{--</div>--}%
+            %{--<div class="checkbox">--}%
+            %{--<label>--}%
+            %{--<input type="checkbox"> <span class="colour red"></span> Red (10)--}%
+            %{--</label>--}%
+            %{--</div>--}%
+            %{--</div>--}%
 
-                        %{--<button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>--}%
+            %{--<button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>--}%
 
-                    %{--</form>--}%
+            %{--</form>--}%
 
-                %{--</div>--}%
+            %{--</div>--}%
             %{--</div>--}%
 
             <!-- *** MENUS AND FILTERS END *** -->
@@ -181,6 +247,7 @@
             %{--</a>--}%
             %{--</div>--}%
         </div>
+
 
         <div class="col-md-9">
             %{--<div class="box b">--}%
@@ -244,7 +311,7 @@
 
                             </g:link>
                             <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
                                 <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
                                     <del class="del-price" style="visibility:hidden;">Rs.${list.productDetails.price}</del></p>
                                 <p class="buttons">
@@ -292,7 +359,7 @@
 
                             </g:link>
                             <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productColor.colorName+" "+list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
+                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
                                 <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
                                     <del class="del-price">Rs.${list.productDetails.price}</del></p>
                                 <p class="buttons">

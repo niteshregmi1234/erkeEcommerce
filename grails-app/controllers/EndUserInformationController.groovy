@@ -1,9 +1,76 @@
 import grails.converters.JSON
 
 class EndUserInformationController {
-    static allowedMethods = [save: 'POST',login: 'POST',checkEmail: 'POST',checkLogin: 'POST']
+    static allowedMethods = [save: 'POST',login: 'POST',checkEmail: 'POST',checkLogin: 'POST',checkPassword: 'POST',editEndUserPassword:'POST' ,editEndUserPersonalDetails: 'POST']
     def endUserInformationService
+def editEndUserPersonalDetails(){
+    try{
+        def status=false
+        def obj= JSON.parse(params.array)
+        if(session.endUser){
+            session.endUser.firstName =obj[0]
+            session.endUser.lastName =obj[1]
+            session.endUser.phone =obj[2]
+            session.endUser.address =obj[3]
+            session.endUser.city =obj[4]
+            status=true
+            render status
+        }
+        else{
+            render status
+        }
+    }
+    catch (Exception e){
 
+        render "serverError"
+    }
+}
+    def checkPassword(){
+        try{
+        def status=false
+        if (session.endUser) {
+            status = endUserInformationService.decryptPassword(params.oldPassword, session.endUser.password)
+            render status
+        }
+            else{
+
+        }
+        }
+        catch (Exception e){
+
+        }
+    }
+
+def editEndUserPassword(){
+    try{
+        def status=false
+    if(session.endUser){
+    session.endUser.password = endUserInformationService.encryptedPassword(params.newPassword)
+        status=true
+        render status
+    }
+        else{
+        render status
+    }
+    }
+    catch (Exception e){
+
+render "serverError"
+    }
+}
+def myProfile(){
+    try{
+if(session.endUser){
+  render(view: "myProfile")
+}
+    else{
+    redirect(action: "userHome",controller:"endUser" )
+}
+    }
+    catch (Exception e){
+
+    }
+}
     def register() {
 
     }
@@ -84,7 +151,8 @@ redirect(action: "allProducts",controller: "endUser")
 
         }
           render status
-}catch (Exception e){
+}
+        catch (Exception e){
 
         }
     }

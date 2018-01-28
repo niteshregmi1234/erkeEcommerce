@@ -34,7 +34,7 @@ def checkPhoto(){
 }
     def list() {
         try{
-        def productList=Product.list()
+        def productList=Product.findAllByDelFlag(false)
         render(view: "list",model: [productList:productList])}
         catch (Exception e){
             redirect(action: "notfound",controller:"errorPage")
@@ -409,39 +409,61 @@ def checkPhoto(){
     }
     def delete(){
         try{
-        def productInstance=Product.get(params.id)
+                    def productInstance=Product.get(params.id)
+            if(productInstance) {
+                if (!productInstance.delFlag) {
+                    productInstance.delFlag = true
+                    productInstance.save(flush: true)
+                                flash.message="Successfully deleted."
 
+                } else {
+                    flash.message = "Unable to delete the already deleted item."
+                }
+            }
+            else{
+                flash.message = "Unable to delete unexisted item."
 
-        if(productInstance) {
-            productInstance.delete(flush: true)
-            def homeDir = new File(System.getProperty("user.home"))
-            File frontImage= new File(homeDir,"yarsaa/${productInstance.frontImageName}")
-                File backImage= new File(homeDir,"yarsaa/${productInstance.backImageName}")
-                File sideImage= new File(homeDir,"yarsaa/${productInstance.sideImageName}")
-            File specialImage= new File(homeDir,"yarsaa/${productInstance.specialImageName}")
-
-            frontImage.delete();
-                backImage.delete();
-                sideImage.delete();
-            specialImage.delete()
-            flash.message="Successfully deleted."
-        }
-        else{
-            flash.message="Unable to delete the already deleted item."
-
+            }
+                        redirect(action: "list")
 
         }
-        redirect(action: "list")
-
-    }
-        catch (DataIntegrityViolationException e) {
-            flash.message = "Sorry! cannot delete this data."
-            redirect(action: "list")
-        }
-        catch (Exception e) {
+        catch (Exception e){
             redirect(action: "notfound", controller: "errorPage")
-
         }
+//        try{
+//        def productInstance=Product.get(params.id)
+//
+//
+//        if(productInstance) {
+//            productInstance.delete(flush: true)
+//            def homeDir = new File(System.getProperty("user.home"))
+//            File frontImage= new File(homeDir,"yarsaa/${productInstance.frontImageName}")
+//                File backImage= new File(homeDir,"yarsaa/${productInstance.backImageName}")
+//                File sideImage= new File(homeDir,"yarsaa/${productInstance.sideImageName}")
+//            File specialImage= new File(homeDir,"yarsaa/${productInstance.specialImageName}")
+//
+//            frontImage.delete();
+//                backImage.delete();
+//                sideImage.delete();
+//            specialImage.delete()
+//            flash.message="Successfully deleted."
+//        }
+//        else{
+//            flash.message="Unable to delete the already deleted item."
+//
+//
+//        }
+//        redirect(action: "list")
+//
+//    }
+//        catch (DataIntegrityViolationException e) {
+//            flash.message = "Sorry! cannot delete this data."
+//            redirect(action: "list")
+//        }
+//        catch (Exception e) {
+//            redirect(action: "notfound", controller: "errorPage")
+//
+//        }
     }
 }
 

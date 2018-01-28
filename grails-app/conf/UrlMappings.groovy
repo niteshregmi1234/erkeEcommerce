@@ -13,12 +13,16 @@ class UrlMappings {
 
             "/result"(action: "result",controller: "endUser")
         "/topBrand"(action: "topBrand",controller: "endUser")
-            "/offerBrand"(action: "offerBrand",controller: "endUser")
+        "/allBrands"(action: "allBrands",controller: "endUser")
+
+        "/offerBrand"(action: "offerBrand",controller: "endUser")
 
         "/allProducts"(action: "allProducts",controller: "endUser")
         "/contact"(action: "contact",controller: "endUser")
         "/product"(action: "singleProduct",controller: "endUser")
         "/subCategory/$category/$subCategory"(action: "subCategoryList",controller: "endUser")
+        "/specifiedProducts/$category/$subCategorySpecify"(action: "specifiedProducts",controller: "endUser")
+
         "/category"(action: "allCategoryProducts",controller: "endUser")
         "/specialBrand"(action: "specialBrandProducts",controller: "endUser")
         "/specialSubCategory"(action: "specialSubCategory",controller: "endUser")
