@@ -4,9 +4,17 @@ class ProductSizeController extends BaseController{
     static allowedMethods = [save: 'POST']
 
     def list() {
+
         try {
-            def productSizeList = ProductSize.list()
-            render(view: "list", model: [productSizeList: productSizeList])
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productSizeList = ProductSize.list()
+                render(view: "list", model: [productSizeList: productSizeList])
+            }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
         }
         catch (Exception e) {
             redirect(action: "notfound", controller: "errorPage")
@@ -14,12 +22,20 @@ class ProductSizeController extends BaseController{
     }
 
     def create() {
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+        render(view: "create")
+        }
+        else {
+            redirect(action: "adminLoginForm",controller: "login")
 
+        }
     }
 
     def save() {
         try {
-            if (!params.id) {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                if (!params.id) {
                 def productSizeInstance = new ProductSize()
                 productSizeInstance.sizeName = params.sizeName
                 productSizeInstance.statusShow = params.statusShow as byte
@@ -38,6 +54,10 @@ class ProductSizeController extends BaseController{
                     redirect(action: "notfound", controller: "errorPage")
 
                 }
+            }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
             }
         }
         catch (Exception e) {
@@ -47,11 +67,17 @@ class ProductSizeController extends BaseController{
 
     def show(Long id) {
         try {
-            def productSizeInstance = ProductSize.get(id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productSizeInstance = ProductSize.get(id)
             if (productSizeInstance) {
                 [productSizeInstance: productSizeInstance]
             } else {
                 redirect(action: "list")
+            }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
             }
         }
         catch (Exception e) {
@@ -62,12 +88,19 @@ class ProductSizeController extends BaseController{
 
     def edit() {
         try {
-            def productSizeInstance = ProductSize.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productSizeInstance = ProductSize.get(params.id)
 
             if (productSizeInstance) {
                 [productSizeInstance: productSizeInstance]
             } else {
                 redirect(action: "list")
+            }
+        }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
             }
         }
         catch (Exception e) {
@@ -78,21 +111,27 @@ class ProductSizeController extends BaseController{
 
     def delete() {
         try {
-            def productSizeInstance = ProductSize.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productSizeInstance = ProductSize.get(params.id)
 
 
-            if (productSizeInstance) {
+                if (productSizeInstance) {
 
-                productSizeInstance.delete(flush: true)
-                flash.message = "Successfully deleted."
-
-
-            } else {
-                flash.message = "Unable to delete the already deleted item."
+                    productSizeInstance.delete(flush: true)
+                    flash.message = "Successfully deleted."
 
 
+                } else {
+                    flash.message = "Unable to delete the already deleted item."
+
+
+                }
+                redirect(action: "list")
             }
-            redirect(action: "list")
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
+            }
         }
         catch (DataIntegrityViolationException e) {
             flash.message = "Sorry! cannot delete this data."

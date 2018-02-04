@@ -11,7 +11,9 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){
         try{
-        def Image = request.getFile('Image')
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def Image = request.getFile('Image')
 
         def checkFile
         Image trueImage = ImageIO.read(Image.getInputStream());
@@ -26,6 +28,11 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
             checkFile="perfect"
             render checkFile
         }}
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
 
         }
@@ -33,7 +40,9 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
 
     def save() {
         try{
-        def backgroundImageInstance=BackgroundImage.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def backgroundImageInstance=BackgroundImage.get(params.id)
         if(backgroundImageInstance){
         backgroundImageInstance.imageName=editBackgroundImage(backgroundImageInstance.imageName)
         backgroundImageInstance.save(flush: true)
@@ -42,6 +51,11 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
             redirect(action: "notfound", controller: "errorPage")
 
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound", controller: "errorPage")
 
@@ -49,7 +63,9 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
 
     }
     def editBackgroundImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+            def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
         def homeDir = new File(System.getProperty("user.home"))
         File theDir = new File(homeDir,"yarsaa");
@@ -81,18 +97,24 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
             return fileName
 
         }
-        else{
+        else {
             return imageNameOld
-        }    }
+        }        }    }
        def show(){
            try{
-        def backgroundImageInstance=BackgroundImage.list()[0]
+               if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                   def backgroundImageInstance=BackgroundImage.list()[0]
            if(backgroundImageInstance){
         [backgroundImageInstance:backgroundImageInstance]}
     else{
         redirect(action: "notfound", controller: "errorPage")
 
     }
+           }
+               else{
+                   redirect(action: "adminLoginForm",controller: "login")
+               }
            }
            catch (Exception e){
                redirect(action: "notfound", controller: "errorPage")
@@ -102,6 +124,7 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
 
     def edit(){
         try {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
         def backgroundImageInstance=BackgroundImage.list()[0]
         if(backgroundImageInstance){
@@ -109,7 +132,10 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
         else{
             redirect(action: "notfound", controller: "errorPage")
 
-        }
+        }}
+            else{
+             redirect(action: "adminLoginForm",controller: "login")
+            }
         }
         catch (Exception e){
             redirect(action: "notfound", controller: "errorPage")

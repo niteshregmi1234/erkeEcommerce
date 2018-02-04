@@ -4,19 +4,33 @@ class ProductColorController extends BaseController{
 static allowedMethods = [save: 'POST']
     def list() {
         try{
-        def productColorList=ProductColor.list()
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+                def productColorList=ProductColor.list()
         render(view: "list",model: [productColorList:productColorList])
     }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+        render(view:"create")
+        }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
 
+        }
     }
     def save(){
         try{
-        if(!params.id){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                if(!params.id){
             def productColorInstance=new ProductColor()
             productColorInstance.colorName=params.colorName
             productColorInstance.statusShow=params.statusShow as byte
@@ -37,26 +51,40 @@ if(productColorInstance){
 
 }
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+            }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def show(Long id){
         try{
-        def productColorInstance=ProductColor.get(id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productColorInstance=ProductColor.get(id)
 
         if(productColorInstance){
             [productColorInstance:productColorInstance]}
         else{
             redirect(action: "list")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def edit(){
         try{
-        def productColorInstance=ProductColor.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productColorInstance=ProductColor.get(params.id)
 
         if(productColorInstance){
             [productColorInstance:productColorInstance]
@@ -64,13 +92,20 @@ if(productColorInstance){
         else{
             redirect(action: "list")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+            }
     catch (Exception e){
         redirect(action: "notfound",controller: "errorPage")
     }
     }
     def delete() {
         try{
-        def productColorInstance = ProductColor.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productColorInstance = ProductColor.get(params.id)
 
 
         if (productColorInstance) {
@@ -84,6 +119,10 @@ if(productColorInstance){
         }
         redirect(action: "list")
     }
+            else{
+             redirect(action: "adminLoginForm",controller: "login")
+            }
+        }
     catch (DataIntegrityViolationException e) {
         flash.message = "Sorry! cannot delete this data."
         redirect(action: "list")

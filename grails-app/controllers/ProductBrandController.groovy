@@ -1,7 +1,6 @@
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
-
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -11,19 +10,34 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
 
     def list() {
         try{
-        def productBrandList=ProductBrand.list()
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productBrandList=ProductBrand.list()
         render(view: "list",model: [productBrandList:productBrandList])
     }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+        render(view: "create")
+        }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
 
+        }
     }
     def save(){
         try{
-        if(!params.id){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                if(!params.id){
             def productBrandInstance=new ProductBrand()
             productBrandInstance.brandName=params.brandName
             productBrandInstance.logoName=uploadLogoImage()
@@ -50,57 +64,30 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
                 redirect(action: "notfound",controller: "errorPage")
 
             }
-        }
+        }}
+            else {
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def uploadLogoImage(){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("logoName")
-        def fileName=file.originalFilename
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-        }
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
-        abc:
-        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-        if (check == true) {
-            Matcher m = PATTERN.matcher(fileName);
-            if (m.matches()) {
-                String prefix = m.group(1);
-                String last = m.group(2);
-                String suffix = m.group(3);
-                if (suffix == null) suffix = "";
-                int count = last != null ? Integer.parseInt(last) : 0;
-                count++;
-                fileName = prefix + "(" + count + ")" + suffix;
-                continue abc
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("logoName")
+            def fileName = file.originalFilename
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
             }
-        }
-        File fileDest = new File(homeDir,"yarsaa/${fileName}")
-        file.transferTo(fileDest)
-        return fileName
 
-    }
-    def editLogoImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("logoName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
             abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -114,23 +101,64 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
                     continue abc
                 }
             }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            File fileDest = new File(homeDir, "yarsaa/${fileName}")
             file.transferTo(fileDest)
             return fileName
 
-        }
-        else{
-            return imageNameOld
-        }
-    }
+        }    }
+    def editLogoImage(String imageNameOld){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("logoName")
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+                print "yes"
+            }
+            if (file.size > 0) {
+                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                fileOld.delete();
+                String fileName = file.originalFilename
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
+                    }
+                }
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
+
+            } else {
+                return imageNameOld
+            }
+        }    }
     def show(Long id){
         try{
-        def productBrandInstance=ProductBrand.get(id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productBrandInstance=ProductBrand.get(id)
         if(productBrandInstance){
             [productBrandInstance:productBrandInstance]}
         else{
             redirect(action: "list")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+            }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -138,7 +166,9 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
     }
     def edit(){
         try{
-        def productBrandInstance=ProductBrand.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productBrandInstance=ProductBrand.get(params.id)
 
         if(productBrandInstance){
             [productBrandInstance:productBrandInstance]
@@ -146,6 +176,11 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
         else{
             redirect(action: "list")
         }}
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -153,22 +188,27 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
     }
     def delete(){
         try{
-        def productBrandInstance=ProductBrand.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productBrandInstance = ProductBrand.get(params.id)
 
 
-        if(productBrandInstance) {
-                productBrandInstance.delete(flush: true)
-                flash.message="Successfully deleted."
+                if (productBrandInstance) {
+                    productBrandInstance.delete(flush: true)
+                    flash.message = "Successfully deleted."
 
+                } else {
+                    flash.message = "Unable to delete the already deleted item."
+
+
+                }
+                redirect(action: "list")
+
+            }
+            else{
+ redirect(action: "adminLoginForm",controller: "login")
+            }
         }
-        else{
-            flash.message="Unable to delete the already deleted item."
-
-
-        }
-        redirect(action: "list")
-
-    }
         catch (DataIntegrityViolationException e) {
             flash.message = "Sorry! cannot delete this data."
             redirect(action: "list")

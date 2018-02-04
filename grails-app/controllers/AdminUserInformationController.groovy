@@ -2,10 +2,10 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class AdminUserInformationController extends BaseController{
     static  allowedMethods = [save: 'POST',checkEmail: 'POST' ]
-
     def endUserInformationService
     def checkEmail() {
         try{
+            if(session.adminUser.role=="CEO" || session.adminUser.role=="MD"){
             def isAvailable = false
             def adminUserInstance = AdminUserInformation.findByEmail(params.email)
             if (!adminUserInstance) {
@@ -18,6 +18,10 @@ class AdminUserInformationController extends BaseController{
                         "valid": isAvailable,
                 ]
             }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+            }
+            }
         catch (Exception e){
 
         }
@@ -26,47 +30,77 @@ class AdminUserInformationController extends BaseController{
 
     def list() {
         try{
-            def adminUserList=AdminUserInformation.list()
-            render(view: "list",model: [adminUserList:adminUserList])}
+            if(session.adminUser.role=="CEO" || session.adminUser.role=="MD") {
+
+                def adminUserList = AdminUserInformation.list()
+                render(view: "list", model: [adminUserList: adminUserList])
+            }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
+        if(session.adminUser.role=="CEO" || session.adminUser.role=="MD") {
+        render(view: "create")
+        }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
+
+        }
 
     }
     def save(){
         try{
-            if(!params.id){
-                def adminUserInstance=new AdminUserInformation()
-                adminUserInstance.firstName=params.firstName
-                adminUserInstance.lastName=params.lastName
-                adminUserInstance.email=params.email
-                adminUserInstance.password = endUserInformationService.encryptedPassword(params.password)
-                if (adminUserInstance.validate()) {
+            if(session.adminUser.role=="CEO" || session.adminUser.role=="MD") {
 
-                    adminUserInstance.save(flush: true)
-                redirect(action: "show" ,id:adminUserInstance.id)}
-                else{
-                    flash.message = "Please don't enter already used email "
-                    redirect(action: "create")
+                if (!params.id) {
+                    def adminUserInstance = new AdminUserInformation()
+                    adminUserInstance.firstName = params.firstName
+                    adminUserInstance.lastName = params.lastName
+                    adminUserInstance.email = params.email
+                    adminUserInstance.password = endUserInformationService.encryptedPassword(params.password)
+                    adminUserInstance.role = params.role
+                    if (adminUserInstance.validate()) {
+
+                        adminUserInstance.save(flush: true)
+                        redirect(action: "show", id: adminUserInstance.id)
+                    } else {
+                        flash.message = "Please don't enter already used email "
+                        redirect(action: "create")
+                    }
+                } else {
+                    def adminUserInstance = AdminUserInformation.get(params.id)
+                    if (AdminUserInformation) {
+
+                        if (params.password != '') {
+                            adminUserInstance.firstName = params.firstName
+                            adminUserInstance.lastName = params.lastName
+                            adminUserInstance.password = endUserInformationService.encryptedPassword(params.password)
+                            adminUserInstance.role = params.role
+                            adminUserInstance.save(flush: true)
+
+                        } else {
+                            adminUserInstance.firstName = params.firstName
+                            adminUserInstance.lastName = params.lastName
+                            adminUserInstance.role = params.role
+                            adminUserInstance.save(flush: true)
+                        }
+                        redirect(action: "show", id: adminUserInstance.id)
+                    } else {
+                        redirect(action: "notfound", controller: "errorPage")
+                    }
                 }
             }
-            else{
-                def adminUserInstance=AdminUserInformation.get(params.id)
-                if(AdminUserInformation) {
-                    print params.password
-                    if(params.password!=''){
-                    adminUserInstance.password = endUserInformationService.encryptedPassword(params.password)
-                        adminUserInstance.save(flush: true)
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
 
-                    }
-                    redirect(action: "show", id: adminUserInstance.id)
-                }
-
-                else {
-                    redirect(action: "notfound",controller: "errorPage")
-                }}}
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
@@ -75,14 +109,20 @@ class AdminUserInformationController extends BaseController{
 
     def show(Long id){
         try {
+            if(session.adminUser.role=="CEO" || session.adminUser.role=="MD") {
 
             def adminUserInstance=AdminUserInformation.get(id)
 
             if(adminUserInstance){
                 [adminUserInstance:adminUserInstance]}
-            else{
+            else {
                 redirect(action: "list")
-            }        }
+            }
+            }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -90,7 +130,9 @@ class AdminUserInformationController extends BaseController{
     }
     def edit(){
         try{
-            def adminUserInstance=AdminUserInformation.get(params.id)
+            if(session.adminUser.role=="CEO" || session.adminUser.role=="MD") {
+
+                def adminUserInstance=AdminUserInformation.get(params.id)
 
             if(adminUserInstance){
                 [adminUserInstance:adminUserInstance]
@@ -98,6 +140,11 @@ class AdminUserInformationController extends BaseController{
             else{
                 redirect(action: "list")
             }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+            }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -105,6 +152,8 @@ class AdminUserInformationController extends BaseController{
     }
     def delete(){
         try{
+            if(session.adminUser.role=="CEO" || session.adminUser.role=="MD") {
+
 if(AdminUserInformation.list().size()>1){
             def adminUserInstance=AdminUserInformation.get(params.id)
             if(adminUserInstance) {
@@ -125,7 +174,11 @@ if(AdminUserInformation.list().size()>1){
     flash.message="Sorry! cannot delete the last admin information."
     redirect(action: "list")
 
-}
+}}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
         }
         catch (DataIntegrityViolationException e){
             flash.message="Sorry! cannot delete this data."

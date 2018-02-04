@@ -3,19 +3,33 @@ import org.springframework.dao.DataIntegrityViolationException
 class ProductSubCategorySpecifyController extends BaseController{
 static allowedMethods = [save: 'POST']
     def list() {
-        try{
-        def productSubCategorySpecifyList=ProductSubCategorySpecify.list()
-        render(view: "list",model: [productSubCategorySpecifyList:productSubCategorySpecifyList])}
+        try {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def productSubCategorySpecifyList = ProductSubCategorySpecify.list()
+                render(view: "list", model: [productSubCategorySpecifyList: productSubCategorySpecifyList])
+            }
+            else{
+              redirect(action: "adminLoginForm",controller: "login")
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+        render(view: "create")
+        }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
 
+        }
     }
     def save(){
         try{
-        if(!params.id){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+                if(!params.id){
             def productSubCategorySpecifyInstance=new ProductSubCategorySpecify()
             productSubCategorySpecifyInstance.specificationName=params.specificationName
 
@@ -36,7 +50,13 @@ static allowedMethods = [save: 'POST']
             else {
                 redirect(action: "notfound",controller: "errorPage")
             }
-        }}
+        }            }
+            else {
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -45,13 +65,20 @@ static allowedMethods = [save: 'POST']
 
     def show(Long id){
         try{
-        def productSubCategorySpecifyInstance=ProductSubCategorySpecify.get(id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def productSubCategorySpecifyInstance=ProductSubCategorySpecify.get(id)
 
         if(productSubCategorySpecifyInstance){
             [productSubCategorySpecifyInstance:productSubCategorySpecifyInstance]}
         else{
             redirect(action: "list")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -59,14 +86,21 @@ static allowedMethods = [save: 'POST']
     }
     def edit(){
         try{
-        def productSubCategorySpecifyInstance=ProductSubCategorySpecify.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
-        if(productSubCategorySpecifyInstance){
-            [productSubCategorySpecifyInstance:productSubCategorySpecifyInstance]
-        }
+                def productSubCategorySpecifyInstance = ProductSubCategorySpecify.get(params.id)
+
+                if (productSubCategorySpecifyInstance) {
+                    [productSubCategorySpecifyInstance: productSubCategorySpecifyInstance]
+                } else {
+                    redirect(action: "list")
+                }
+            }
         else{
-            redirect(action: "list")
-        }}
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -74,8 +108,9 @@ static allowedMethods = [save: 'POST']
     }
     def delete(){
         try{
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
-            def productSubCategorySpecifyInstance=ProductSubCategorySpecify.get(params.id)
+                def productSubCategorySpecifyInstance=ProductSubCategorySpecify.get(params.id)
 
 
         if(productSubCategorySpecifyInstance) {
@@ -91,6 +126,11 @@ static allowedMethods = [save: 'POST']
         redirect(action: "list")
 
     }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (DataIntegrityViolationException e){
             flash.message="Sorry! cannot delete this data."
             redirect(action: "list")

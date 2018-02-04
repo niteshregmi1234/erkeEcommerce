@@ -1,36 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-
-   <meta name="layout" content="userYarsaa">
-
+    <meta name="layout" content="userYarsaa">
 </head>
-
 <body>
+
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
 
 %{--<div id="all">--}%
 
     <div id="content">
-    <div class="container">
-        <div class="col-md-12">
-            <div id="main-slider">
-                    <div class="item coverUp">
-                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productSubCategory.coverImageName])}" class="img-responsive">
+    %{--<div class="container">--}%
+        %{--<div class="col-md-12">--}%
+            %{--<div id="main-slider">--}%
+                    %{--<div class="item coverUp">--}%
+                        %{--<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productSubCategory.coverImageName])}" class="img-responsive">--}%
 
-                    </div>
-            </div>
-            <!-- /#main-slider -->
-        </div>
-    </div>
-    <style>
-    .coverUp img{
-        height:520px;
-        width: 1108px;
-    }
-    </style>
+                    %{--</div>--}%
+            %{--</div>--}%
+            %{--<!-- /#main-slider -->--}%
+        %{--</div>--}%
+    %{--</div>--}%
+    %{--<style>--}%
+    %{--.coverUp img{--}%
+        %{--height:520px;--}%
+        %{--width: 1108px;--}%
+    %{--}--}%
+    %{--</style>--}%
 
     <div class="container">
 
@@ -177,50 +174,126 @@
                     </div>
                 </div>
 
-                %{--<div class="panel panel-default sidebar-menu">--}%
+                <div class="panel panel-default sidebar-menu">
 
-                    %{--<div class="panel-heading">--}%
-                        %{--<h3 class="panel-title">Brands </h3>--}%
-                    %{--</div>--}%
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Brands </h3>
+                    </div>
 
-                    %{--<div class="panel-body">--}%
+                    <div class="panel-body">
 
-                        %{--<g:form action="abc" controller="endUser">--}%
-                            %{--<div class="form-group">--}%
-                                %{--<g:each in="${productBrandList}" var="brandList">--}%
-                                %{--<div class="checkbox">--}%
-                                    %{--<label>--}%
-                                        %{--<g:checkBox name="brand" value="${brandList.id}"  />${brandList.brandName}--}%
-                                    %{--</label>--}%
-                                %{--</div>--}%
-                                    %{--</g:each>--}%
-                                                           %{--</div>--}%
+                        <form>
+                            <div class="form-group">
+                                <g:each in="${ProductBrand.list()}" var="brandList" status="i">
+                                <div class="checkbox">
+                                    <label>
+                                        <g:checkBox name="brand" id="brand${i}" value="${brandList.id}"/>${brandList.brandName}
+                                    </label>
+                                </div>
+                                    <script>
+                                        document.getElementById("brand${i}").checked = false;
+                                        $("input[name=brand]").val();
+                                    </script>
 
-                            %{--<button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>--}%
+                                </g:each>
+                                                           </div>
 
-                        %{--</g:form>--}%
+                            <button class="btn btn-default btn-sm btn-primary" id="filterBrand"><i class="fa fa-pencil"></i> Apply</button>
 
-                    %{--</div>--}%
-                %{--</div>--}%
+                        </form>
 
-                %{--<div class="panel panel-default sidebar-menu">--}%
+                    </div>
+                </div>
+                <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/jquery-ui.css')}" type="text/css"
+                      media="all"/>
 
-                    %{--<div class="panel-heading">--}%
-                        %{--<h3 class="panel-title">Colours</h3>--}%
-                    %{--</div>--}%
+                <script src="${resource(dir: 'js', file: 'yamsaa/jquery-ui.js')}" type="text/javascript"
+                        charset="utf-8"></script>
+                <div class="panel panel-default sidebar-menu">
 
-                    %{--<div class="panel-body">--}%
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Price(Rs.)</h3>
+                    </div>
+                    <div class="panel-body">
 
+
+                        <div id="slider-range">
+
+                    </div>
+<div style="margin-top: 10px;">
+    <form>
+
+        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="amount_min" onkeypress="return isNumberKeyMin(event)"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="amount_max" onkeypress="return isNumberKeyMax(event)"/>
+
+
+                            </div>
+                        </div>
+        <button class="btn btn-default btn-sm btn-primary" id="filterPrice"><i class="fa fa-pencil"></i> Apply</button>
+
+
+    </form>
+
+</div>
+
+                        <script>
+                            function isNumberKeyMin(evt)
+                            {
+                                var charCode = (evt.which) ? evt.which : event.keyCode
+                                if (charCode > 31 && (charCode < 48 || charCode > 57)){
+                                    return false;}
+                                else{
+if($("#amount_min").val()>=500){
+        return false;
+}
+                                }
+                                return true;
+
+                            }
+                            function isNumberKeyMax(evt)
+                            {
+                                var charCode = (evt.which) ? evt.which : event.keyCode
+                                if (charCode > 31 && (charCode < 48 || charCode > 57)){
+                                    return false;}
+                                else{
+                                    if($("#amount_max").val()>=500){
+                                        return false;
+                                    }
+                                }
+                                return true;
+
+                            }
+                            $(function() {
+                                $("#slider-range").slider({
+                                    range: true,
+                                    min: ${prices[1]},
+                                    max: ${prices[0]},
+                                    values: [${prices[1]}, ${prices[0]}],
+                                    slide: function(event, ui) {
+                                        $("#amount_min").val(ui.values[0]);
+                                        $("#amount_max").val(ui.values[1]);
+                                    }
+                                });
+                                $("#amount_min").val($("#slider-range").slider("values", 0));
+                                $("#amount_max").val($("#slider-range").slider("values", 1));
+                                $("#amount_min").change(function() {
+                                    $("#slider-range").slider("values", 0,$(this).val());
+                                });
+                                $("#amount_max").change(function() {
+                                    $("#slider-range").slider("values", 1,$(this).val());
+                                })
+                            });
+
+                        </script>
                         %{--<form>--}%
                             %{--<div class="form-group">--}%
-                                %{--<g:each in="${productColourList}" var="colourList">--}%
-                                %{--<div class="checkbox">--}%
-                                    %{--<label>--}%
-                                        %{--<g:checkBox name="colour" value="${colourList.id}"/>${colourList.colorName}--}%
 
-                                    %{--</label>--}%
-                                %{--</div>--}%
-                                %{--</g:each>--}%
                                 %{--<div class="checkbox">--}%
                                     %{--<label>--}%
                                         %{--<input type="checkbox"> <span class="colour blue"></span> Blue (10)--}%
@@ -247,8 +320,8 @@
 
                         %{--</form>--}%
 
-                    %{--</div>--}%
-                %{--</div>--}%
+                    </div>
+                </div>
 
                 <!-- *** MENUS AND FILTERS END *** -->
 
@@ -260,6 +333,16 @@
             </div>
 
             <div class="col-md-9">
+                <div id="loader" style="display: none;">
+                    <img src="/images/AjaxLoader.gif"/>
+                </div>
+                <style>
+                    #loader{
+                position: relative;
+                        margin-top: 350px;
+                margin-left: 310px;
+                z-index: 1;}
+                </style>
                 <div class="box b">
                     <h1>${productCategory.categoryName}-${productSubCategory.subCategoryName}</h1>
                     <p>${productSubCategory.subCategoryDescription}.</p>
@@ -296,9 +379,14 @@
                 %{--</div>--}%
 
                 <div class="row products" id="myList">
+
                 <g:each in="${productList}" var="list" status="i">
                     <g:if test="${list.productDetails.isSale==false}">
-                        <div class="col-md-4 col-sm-4 a">
+                        <div class="col-md-4 col-sm-4 a brand${list.productDetails.productBrand.id}${list.id}" id="price${list.productDetails.price}${list.id}">
+                            <input type="hidden" name="price" value="${list.productDetails.price}">
+                            <input type="hidden" name="productId" value="${list.id}">
+                            <input type="hidden" name="brandId" id="id${list.id}" value="${list.productDetails.productBrand.id}">
+
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
@@ -344,8 +432,10 @@
 
                     </g:if>
                     <g:if test="${list.productDetails.isSale==true}">
-
-                        <div class="col-md-4 col-sm-4 a">
+                        <div class="col-md-4 col-sm-4 a brand${list.productDetails.productBrand.id}${list.id}" id="price${list.productDetails.price}${list.id}">
+      <input type="hidden" name="productId" value="${list.id}">
+                            <input type="hidden" name="brandId" id="id${list.id}" value="${list.productDetails.productBrand.id}">
+                            <input type="hidden" name="price" value="${list.productDetails.price}">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
@@ -357,9 +447,7 @@
                                         </div>
                                         <div class="back product">
                                             <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-
                                                 <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.backImageName])}" class="img-responsive">
-
                                             </g:link>
                                         </div>
                                     </div>
@@ -419,6 +507,7 @@
                 <p class="loadLess">
                     <a class="btn btn-primary btn-lg" id="showLess"><i class="fa fa-chevron-up"></i> Show less</a>
                 </p>
+
                 <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
                 <g:each in="${productSizeList}" var="list" status="i">
                     <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
@@ -512,7 +601,8 @@
                     });
                 </script>
                 <style>
-                #myList .a{ display:none;
+                #myList .a{
+                    display:none;
                 }
                 /*#loadMore {*/
                 /*color:green;*/
@@ -586,11 +676,12 @@
 <script>
     function addValueToField(id){
         document.getElementById("productId").value = id;
-
     }
 </script>
 
 <script>
+
+
     function checkAddToCart(i){
         $('#smallModal'+i).modal('toggle');
         var productId=document.getElementById("productId").value;
@@ -630,7 +721,10 @@
         return responseValue;
 
     }
+
 </script>
+<script src="${resource(dir: 'js', file: 'yarsaa/custom.js')}" type="text/javascript"
+        charset="utf-8"></script>
 
 </body>
 

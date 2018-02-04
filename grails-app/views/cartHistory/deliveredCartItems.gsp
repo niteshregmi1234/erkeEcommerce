@@ -46,6 +46,7 @@
                      role="tabpanel"
                      aria-labelledby="heading${i}">
                     <div class="panel-body">
+            <g:form controller="cartHistory" action="deleteSuccessfulOrders" >
 
                             <div class="container">
                                 <h4><u>Time-${list[0].date}</u></h4>
@@ -207,9 +208,21 @@
                                     </tbody>
                                     </table>
                                 </div>
+                <g:if test="${session.adminUser.role=="CEO" || session.adminUser.role=="MD"}">
 
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2"></label>
 
+                                        <div class="col-sm-6">
+                                            <g:submitButton name="delete" value="delete" id="submit_Id" class="btn btn-danger" onclick="return confirm('Are you sure to delete this successfull order?')"></g:submitButton>
+
+                                        </div>
+                                    </div>
+                                </div>
+</g:if>
                             </div>
+            </g:form>
 
                     </div>
                 </div>

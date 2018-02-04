@@ -13,6 +13,8 @@ class CartHistory {
     boolean isDelivered
     DeliveryMethod deliveryMethod
     PaymentMethod paymentMethod
+    boolean successfulOrderDelFlag
     static constraints = {
+        successfulOrderDelFlag nullable: true
     }
 }

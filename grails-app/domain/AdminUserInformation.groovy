@@ -4,7 +4,9 @@ class AdminUserInformation {
     String password
     String firstName
     String lastName
+    String role
     static constraints = {
         email unique: true
+        role nullable: true
     }
 }

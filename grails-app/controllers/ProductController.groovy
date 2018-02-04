@@ -13,7 +13,9 @@ class ProductController extends BaseController {
 
 def checkPhoto(){
     try{
-    def Image = request.getFile('Image')
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+            def Image = request.getFile('Image')
 
     def checkFile
     Image trueImage = ImageIO.read(Image.getInputStream());
@@ -28,128 +30,121 @@ def checkPhoto(){
         checkFile="perfect"
         render checkFile
     }}
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
+
+        }
+    }
     catch (Exception e){
 
     }
 }
     def list() {
         try{
-        def productList=Product.findAllByDelFlag(false)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def productList=Product.findAllByDelFlag(false)
         render(view: "list",model: [productList:productList])}
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller:"errorPage")
         }
     }
     def create(){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        render(view: "create")
+        }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
 
+        }
     }
     def save(){
         try{
-        if(!params.id){
-            def product=new Product()
-                      product.productColor=ProductColor.get(params.productColor)
-            product.productDetails=ProductDetails.get(params.productDetails)
-            product.isFeatured=params.isFeatured as byte
-            product.isLatest=params.isLatest as byte
-            product.seasons=SeasonManagement.list()[1].seasons
-            product.productSpecificationName=product.productDetails.productCategory.categoryName+"-"+product.productColor.colorName+" "+product.productDetails.productBrand.brandName+" "+product.productDetails.productName
-            product.frontImageName=upLoadFrontImage()
-            product.sideImageName=uploadSideImage()
-            product.backImageName=uploadBackImage()
-            product.specialImageName=uploadSpecialImage()
-            product.save(flush: true)
-            redirect(action: "show" ,id:product.id)
-        }
-        else{
-            def product=Product.get(params.id)
-            if(product){
-            product.productColor=ProductColor.get(params.productColor)
-            product.productDetails=ProductDetails.get(params.productDetails)
-            product.isFeatured=params.isFeatured as byte
-            product.isLatest=params.isLatest as byte
-                product.productSpecificationName=product.productDetails.productCategory.categoryName+"-"+product.productColor.colorName+" "+product.productDetails.productBrand.brandName+" "+product.productDetails.productName
-                product.seasons=SeasonManagement.list()[1].seasons
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            product.frontImageName=editFrontImage(product.frontImageName)
-            product.sideImageName=editSideImage(product.sideImageName)
-            product.backImageName=editBackImage(product.backImageName)
-            product.specialImageName=editSpecialImage( product.specialImageName)
+                if (!params.id) {
+                    def product = new Product()
+                    product.productColor = ProductColor.get(params.productColor)
+                    product.productDetails = ProductDetails.get(params.productDetails)
+                    product.isFeatured = params.isFeatured as byte
+                    product.isLatest = params.isLatest as byte
+                    product.seasons = SeasonManagement.list()[1].seasons
+                    product.productSpecificationName = product.productDetails.productCategory.categoryName + "-" + product.productColor.colorName + " " + product.productDetails.productBrand.brandName + " " + product.productDetails.productName
+                    product.frontImageName = upLoadFrontImage()
+                    product.sideImageName = uploadSideImage()
+                    product.backImageName = uploadBackImage()
+                    product.specialImageName = uploadSpecialImage()
+                    product.delFlag = false
+                    product.save(flush: true)
+                    redirect(action: "show", id: product.id)
+                } else {
+                    def product = Product.get(params.id)
+                    if (product) {
+                        product.productColor = ProductColor.get(params.productColor)
+                        product.productDetails = ProductDetails.get(params.productDetails)
+                        product.isFeatured = params.isFeatured as byte
+                        product.isLatest = params.isLatest as byte
+                        product.productSpecificationName = product.productDetails.productCategory.categoryName + "-" + product.productColor.colorName + " " + product.productDetails.productBrand.brandName + " " + product.productDetails.productName
+                        product.seasons = SeasonManagement.list()[1].seasons
+                        product.frontImageName = editFrontImage(product.frontImageName)
+                        product.sideImageName = editSideImage(product.sideImageName)
+                        product.backImageName = editBackImage(product.backImageName)
+                        product.specialImageName = editSpecialImage(product.specialImageName)
 
-            product.save(flush: true)
-            redirect(action: "show" ,id:product.id)}
-            else{
-         redirect(action: "notfound",controller: "errorPage")
+                        product.save(flush: true)
+                        redirect(action: "show", id: product.id)
+                    } else {
+                        redirect(action: "notfound", controller: "errorPage")
+                    }
+                }
             }
-        }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
-    def bloodHound(){
-        def criteria = ProductDetails.createCriteria();
-        def productDetails = criteria.list {
-            or {
-
-                like("productName", "%" + params.keyCode + "%")
-                like("briefDescription", "%" + params.keyCode + "%")
-
-            }
-        }
-        print productDetails
-        def productNameList=[]
-        for(int i=0;i<productDetails.size();i++){
-            productNameList.add(productDetails[i].productName)
-        }
-        print productNameList
-
-    }
+//    def bloodHound(){
+//        def criteria = ProductDetails.createCriteria();
+//        def productDetails = criteria.list {
+//            or {
+//
+//                like("productName", "%" + params.keyCode + "%")
+//                like("briefDescription", "%" + params.keyCode + "%")
+//
+//            }
+//        }
+//        print productDetails
+//        def productNameList=[]
+//        for(int i=0;i<productDetails.size();i++){
+//            productNameList.add(productDetails[i].productName)
+//        }
+//        print productNameList
+//
+//    }
 
     def uploadSpecialImage(){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialImageName")
-        def fileName=file.originalFilename
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-        }
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        abc:
-        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-        if (check == true) {
-            Matcher m = PATTERN.matcher(fileName);
-            if (m.matches()) {
-                String prefix = m.group(1);
-                String last = m.group(2);
-                String suffix = m.group(3);
-                if (suffix == null) suffix = "";
-                int count = last != null ? Integer.parseInt(last) : 0;
-                count++;
-                fileName = prefix + "(" + count + ")" + suffix;
-                continue abc
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialImageName")
+            def fileName = file.originalFilename
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
             }
-        }
-        File fileDest = new File(homeDir,"yarsaa/${fileName}")
-        file.transferTo(fileDest)
-        return fileName
 
-    }
-    def editSpecialImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
             abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -163,106 +158,179 @@ def checkPhoto(){
                     continue abc
                 }
             }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            File fileDest = new File(homeDir, "yarsaa/${fileName}")
             file.transferTo(fileDest)
             return fileName
 
-        }
-        else{
-            return imageNameOld
-        }
-    }
+        }    }
+    def editSpecialImage(String imageNameOld){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialImageName")
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+                print "yes"
+            }
+            if (file.size > 0) {
+                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                fileOld.delete();
+                String fileName = file.originalFilename
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
+                    }
+                }
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
+
+            } else {
+                return imageNameOld
+            }
+        }    }
 
     def editFrontImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("frontImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
-            abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("frontImageName")
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+                print "yes"
             }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            return fileName
+            if (file.size > 0) {
+                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                fileOld.delete();
+                String fileName = file.originalFilename
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
+                    }
+                }
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
 
-        }
-        else{
-            return imageNameOld
-        }
+            } else {
+                return imageNameOld
+            }
 
-    }
+        }    }
     def editBackImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
-            abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
-            }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            return fileName
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        }
-        else{
-            return imageNameOld
-        }
-    }
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backImageName")
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+                print "yes"
+            }
+            if (file.size > 0) {
+                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                fileOld.delete();
+                String fileName = file.originalFilename
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
+                    }
+                }
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
+
+            } else {
+                return imageNameOld
+            }
+        }    }
     def editSideImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("sideImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("sideImageName")
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+                print "yes"
+            }
+            if (file.size > 0) {
+                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                fileOld.delete();
+                String fileName = file.originalFilename
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
+                    }
+                }
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
+
+            } else {
+                return imageNameOld
+            }
+        }    }
+    def upLoadFrontImage(){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("frontImageName")
+            def fileName = file.originalFilename
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+            }
+
             abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -276,115 +344,88 @@ def checkPhoto(){
                     continue abc
                 }
             }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            File fileDest = new File(homeDir, "yarsaa/${fileName}")
             file.transferTo(fileDest)
             return fileName
 
-        }
-        else{
-            return imageNameOld
-        }
-    }
-    def upLoadFrontImage(){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("frontImageName")
-        def fileName=file.originalFilename
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-        }
-
-        abc:
-        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-        if (check == true) {
-            Matcher m = PATTERN.matcher(fileName);
-            if (m.matches()) {
-                String prefix = m.group(1);
-                String last = m.group(2);
-                String suffix = m.group(3);
-                if (suffix == null) suffix = "";
-                int count = last != null ? Integer.parseInt(last) : 0;
-                count++;
-                fileName = prefix + "(" + count + ")" + suffix;
-                continue abc
-            }
-        }
-        File fileDest = new File(homeDir,"yarsaa/${fileName}")
-        file.transferTo(fileDest)
-        return fileName
-
-    }
+        }    }
     def uploadSideImage(){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("sideImageName")
-        def fileName=file.originalFilename
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-        }
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        abc:
-        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-        if (check == true) {
-            Matcher m = PATTERN.matcher(fileName);
-            if (m.matches()) {
-                String prefix = m.group(1);
-                String last = m.group(2);
-                String suffix = m.group(3);
-                if (suffix == null) suffix = "";
-                int count = last != null ? Integer.parseInt(last) : 0;
-                count++;
-                fileName = prefix + "(" + count + ")" + suffix;
-                continue abc
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("sideImageName")
+            def fileName = file.originalFilename
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
             }
-        }
-        File fileDest = new File(homeDir,"yarsaa/${fileName}")
-        file.transferTo(fileDest)
-        return fileName
-    }
+
+            abc:
+            boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+            if (check == true) {
+                Matcher m = PATTERN.matcher(fileName);
+                if (m.matches()) {
+                    String prefix = m.group(1);
+                    String last = m.group(2);
+                    String suffix = m.group(3);
+                    if (suffix == null) suffix = "";
+                    int count = last != null ? Integer.parseInt(last) : 0;
+                    count++;
+                    fileName = prefix + "(" + count + ")" + suffix;
+                    continue abc
+                }
+            }
+            File fileDest = new File(homeDir, "yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+        }    }
     def uploadBackImage(){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backImageName")
-        def fileName=file.originalFilename
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-        }
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        abc:
-        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-        if (check == true) {
-            Matcher m = PATTERN.matcher(fileName);
-            if (m.matches()) {
-                String prefix = m.group(1);
-                String last = m.group(2);
-                String suffix = m.group(3);
-                if (suffix == null) suffix = "";
-                int count = last != null ? Integer.parseInt(last) : 0;
-                count++;
-                fileName = prefix + "(" + count + ")" + suffix;
-                continue abc
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backImageName")
+            def fileName = file.originalFilename
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
             }
-        }
-        File fileDest = new File(homeDir,"yarsaa/${fileName}")
-        file.transferTo(fileDest)
-        return fileName
 
-    }
+            abc:
+            boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+            if (check == true) {
+                Matcher m = PATTERN.matcher(fileName);
+                if (m.matches()) {
+                    String prefix = m.group(1);
+                    String last = m.group(2);
+                    String suffix = m.group(3);
+                    if (suffix == null) suffix = "";
+                    int count = last != null ? Integer.parseInt(last) : 0;
+                    count++;
+                    fileName = prefix + "(" + count + ")" + suffix;
+                    continue abc
+                }
+            }
+            File fileDest = new File(homeDir, "yarsaa/${fileName}")
+            file.transferTo(fileDest)
+            return fileName
+
+        }    }
     def show(Long id){
         try {
-
-
-        def productInstance=Product.get(id)
-
-        if(productInstance){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                def productInstance=Product.get(id)
+            if(productInstance){
             [productInstance:productInstance]}
         else{
             redirect(action: "list")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+            }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -393,15 +434,21 @@ def checkPhoto(){
     def edit(){
         try {
 
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
         def productInstance=Product.get(params.id)
 
         if(productInstance){
             [productInstance:productInstance]
         }
-        else{
+        else {
             redirect(action: "list")
-        }}
+        }        }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -409,7 +456,9 @@ def checkPhoto(){
     }
     def delete(){
         try{
-                    def productInstance=Product.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def productInstance=Product.get(params.id)
             if(productInstance) {
                 if (!productInstance.delFlag) {
                     productInstance.delFlag = true
@@ -424,7 +473,10 @@ def checkPhoto(){
                 flash.message = "Unable to delete unexisted item."
 
             }
-                        redirect(action: "list")
+                        redirect(action: "list")}
+            else{
+         redirect(action: "adminLoginForm",controller: "login")
+            }
 
         }
         catch (Exception e){

@@ -11,7 +11,9 @@ static allowedMethods = [checkPhoto: "POST",save: "POST",editBrandMainImage: "PO
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){
         try{
-        def Image = request.getFile('Image')
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def Image = request.getFile('Image')
 
         def checkFile
         Image trueImage = ImageIO.read(Image.getInputStream());
@@ -22,10 +24,15 @@ static allowedMethods = [checkPhoto: "POST",save: "POST",editBrandMainImage: "PO
             render checkFile
         }
 
-        else{
-            checkFile="perfect"
+        else {
+            checkFile = "perfect"
             render checkFile
-        }}
+        }        }
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
 
         }
@@ -34,7 +41,9 @@ static allowedMethods = [checkPhoto: "POST",save: "POST",editBrandMainImage: "PO
 
     def save() {
         try{
-        def specialBrandInstance=SpecialBrand.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def specialBrandInstance=SpecialBrand.get(params.id)
         if(specialBrandInstance){
         specialBrandInstance.productBrand=ProductBrand.get(params.productBrand)
         specialBrandInstance.brandMainImageName=editBrandMainImage(specialBrandInstance.brandMainImageName)
@@ -48,8 +57,13 @@ static allowedMethods = [checkPhoto: "POST",save: "POST",editBrandMainImage: "PO
         specialBrandInstance.save(flush: true)
         redirect(action: "show")}
         else {
-            redirect(action: "notfound",controller: "errorPage")
-        }}
+            redirect(action: "notfound", controller: "errorPage")
+        }        }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -57,126 +71,136 @@ static allowedMethods = [checkPhoto: "POST",save: "POST",editBrandMainImage: "PO
 
     }
     def editBrandSub1Image(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("brandSub1ImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
-            abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
-            }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            return fileName
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        }
-        else{
-            return imageNameOld
-        }
-    }
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("brandSub1ImageName")
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+                print "yes"
+            }
+            if (file.size > 0) {
+                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                fileOld.delete();
+                String fileName = file.originalFilename
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
+                    }
+                }
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
+
+            } else {
+                return imageNameOld
+            }
+        }    }
     def editBrandMainImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("brandMainImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
-            abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
-            }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            return fileName
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        }
-        else{
-            return imageNameOld
-        }
-    }
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("brandMainImageName")
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+                print "yes"
+            }
+            if (file.size > 0) {
+                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                fileOld.delete();
+                String fileName = file.originalFilename
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
+                    }
+                }
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
+
+            } else {
+                return imageNameOld
+            }
+        }    }
 
     def editBrandSub2Image(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("brandSub2ImageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
-            abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
-                }
-            }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            return fileName
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        }
-        else{
-            return imageNameOld
-        }
-    }
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("brandSub2ImageName")
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+                print "yes"
+            }
+            if (file.size > 0) {
+                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                fileOld.delete();
+                String fileName = file.originalFilename
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
+                    }
+                }
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
+
+            } else {
+                return imageNameOld
+            }
+        }    }
     def show(){
         try{
-        def specialBrandInstance=SpecialBrand.list()[0]
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def specialBrandInstance=SpecialBrand.list()[0]
         if(specialBrandInstance) {
             [specialBrandInstance: specialBrandInstance]
         }
         else {
             redirect(action: "notfound",controller: "errorPage")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -185,6 +209,8 @@ static allowedMethods = [checkPhoto: "POST",save: "POST",editBrandMainImage: "PO
 
     def edit(){
 try{
+    if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
         def specialBrandInstance=SpecialBrand.get(params.id)
         if(specialBrandInstance) {
 
@@ -194,6 +220,10 @@ try{
             redirect(action: "notfound",controller: "errorPage")
 
         }}
+    else{
+        redirect(action: "adminLoginForm",controller: "login")
+    }
+}
     catch (Exception e){
         redirect(action: "notfound",controller: "errorPage")
 

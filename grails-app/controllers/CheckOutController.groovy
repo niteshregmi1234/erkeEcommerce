@@ -41,8 +41,6 @@ class CheckOutController {
 
     }
     def placeOrder(){
-
-
         try{
             def cartList=Cart.findAllByEndUserInformation(session.endUser)
         def totalPrice=0
@@ -74,17 +72,16 @@ class CheckOutController {
                     cartHistoryInstance.paymentMethod=PaymentMethod.get(params.payment)
                     cartHistoryInstance.orderId=orderId
                     cartHistoryInstance.isFakeOrder=false
+                    cartHistoryInstance.successfulOrderDelFlag=false
                     cartHistoryInstance.save(flush: true)
-                    cart.delete(flush: true)}
-            flash.message1="yarsaa/"+orderIdInstance.id
-            redirect(action: "cart",controller: "cart")
+                    cart.delete(flush: true)
+                }
+                    flash.message1="yarsaa/"+orderIdInstance.id
+                    redirect(action: "cart",controller: "cart")
         }
     catch(Exception e){
-
         flash.message="your enquiry has been not been sent due to some problems.Please try again later"
         redirect(action: "cart",controller: "cart")
-
     }
-
-}
+    }
 }

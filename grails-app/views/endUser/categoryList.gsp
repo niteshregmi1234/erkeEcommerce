@@ -22,23 +22,23 @@
 
 
     <div id="content">
-    <div class="container">
-        <div class="col-md-12">
-            <div id="main-slider">
-                <div class="item coverUp">
-                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productCategory.coverImageName])}" class="img-responsive">
+    %{--<div class="container">--}%
+        %{--<div class="col-md-12">--}%
+            %{--<div id="main-slider">--}%
+                %{--<div class="item coverUp">--}%
+                    %{--<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productCategory.coverImageName])}" class="img-responsive">--}%
 
-                </div>
-            </div>
-            <!-- /#main-slider -->
-        </div>
-    </div>
-    <style>
-    .coverUp img{
-        height:520px;
-        width: 1108px;
-    }
-    </style>
+                %{--</div>--}%
+            %{--</div>--}%
+            %{--<!-- /#main-slider -->--}%
+        %{--</div>--}%
+    %{--</div>--}%
+    %{--<style>--}%
+    %{--.coverUp img{--}%
+        %{--height:520px;--}%
+        %{--width: 1108px;--}%
+    %{--}--}%
+    %{--</style>--}%
 
     <div class="container">
 

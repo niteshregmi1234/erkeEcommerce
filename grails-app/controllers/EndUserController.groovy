@@ -1,12 +1,17 @@
 class EndUserController {
     static allowedMethods = [search: "POST"]
-
+def brand(){
+    def brandId=params.list("brand")
+    print brandId
+}
     def search(){
         try{
     def productDetailscriteria = ProductDetails.createCriteria()
     def productDetailsList = productDetailscriteria.list {
         or {
-
+            like("briefDescription", "%" + params.search + "%")
+            like("detailDescription", "%" + params.search + "%")
+            like("productNameWithBrand", "%" + params.search + "%")
             like("productName", "%" + params.search + "%")
         }
     }
@@ -179,7 +184,7 @@ catch (Exception e){
                         productSizeList.add(ProductSize.get(sizeId))
                     }                }
                 def productDetailsList=ProductDetails.findAllByProductSubCategoryAndProductCategoryAndIdNotEqual(productInstance1.productDetails.productSubCategory,productInstance1.productDetails.productCategory,productInstance1.productDetails.id)
-                def moreColorsList=Product.findAllByProductDetailsAndIdNotEqual(productInstance1.productDetails,productInstance1.id)
+                def moreColorsList=Product.findAllByProductDetailsAndIdNotEqualAndDelFlag(productInstance1.productDetails,productInstance1.id,false)
                 List<Product> relatedProductList = new ArrayList<>()
 
                 for (ProductDetails productDetails : productDetailsList) {
@@ -241,6 +246,23 @@ catch (Exception e){
                 productList.add(product)
             }
         }
+
+                        def maxPrice=0;
+                        for (int counter = 1; counter < productList.size(); counter++)
+                        {
+                            if (productList.productDetails.price[counter] > maxPrice)
+                            {
+                                maxPrice = productList.productDetails.price[counter];
+                            }
+                        }
+                        def minPrice = productList.productDetails.price[0];
+                        for (int i = 1; i < productList.size(); i++) {
+                            if (productList.productDetails.price[i] < minPrice) {
+                                minPrice = productList.productDetails.price[i];
+                            }
+                        }
+                        def prices=[maxPrice,minPrice]
+
         Collections.shuffle(productList)
                 List<List<ProductSize>> listList=new ArrayList<>()
                 for(Product productInstance:productList){
@@ -255,7 +277,7 @@ catch (Exception e){
                         }                    }
                     listList.add(productSizeList)
                 }
-        render(view: "subCategoryList", model: [productSizeList:listList,productList: productList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory),productCategory: ProductCategory.findByCategoryId(params.category),productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true)])
+        render(view: "subCategoryList", model: [prices:prices,productSizeList:listList,productList: productList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory),productCategory: ProductCategory.findByCategoryId(params.category),productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true)])
             }
         else{
             redirect(action: "notfound",controller: "errorPage")

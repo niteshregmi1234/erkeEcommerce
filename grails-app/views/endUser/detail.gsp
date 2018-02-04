@@ -396,7 +396,7 @@
 </g:if>
                         </div>
                         <div class="col-sm-6">
-                            <div class="box box-height" id="detailInfo">
+                            <div class="box box-height" id="detailInfo" style="height:400px;overflow-y: scroll;">
                                 <h1 class="text-center bigName">${productInstance.productDetails.productBrand.brandName}</h1>
                                 <h1 class="text-center bigName">${productInstance.productDetails.briefDescription}</h1>
                                 <p class="goToDescription"><a href="#details" class="scroll-to">${productInstance.productDetails.productName}</a>

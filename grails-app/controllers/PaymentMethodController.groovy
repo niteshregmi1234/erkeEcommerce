@@ -3,20 +3,36 @@ import org.springframework.dao.DataIntegrityViolationException
 class PaymentMethodController extends BaseController{
 static allowedMethods = [save: 'POST']
     def list() {
-        try{
-        def paymentMethodList=PaymentMethod.list()
-        render(view: "list",model: [paymentMethodList:paymentMethodList])}
+        try {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def paymentMethodList = PaymentMethod.list()
+                render(view: "list", model: [paymentMethodList: paymentMethodList])
+            }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e) {
             redirect(action: "notfound", controller: "errorPage")
 
         }
     }
     def create(){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+        render(view: "create")
+        }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
 
+        }
     }
     def save(){
         try{
-        if(!params.id){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                if(!params.id){
             def paymentMethodInstance=new PaymentMethod()
             paymentMethodInstance.briefDescribe=params.briefDescribe
             paymentMethodInstance.detailDescribe=params.detailDescribe
@@ -38,7 +54,11 @@ static allowedMethods = [save: 'POST']
                 redirect(action: "notfound", controller: "errorPage")
 
             }
-        }
+        }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
         }
         catch (Exception e) {
             redirect(action: "notfound", controller: "errorPage")
@@ -49,13 +69,20 @@ static allowedMethods = [save: 'POST']
 
     def show(Long id){
         try{
-        def paymentMethodInstance=PaymentMethod.get(id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def paymentMethodInstance=PaymentMethod.get(id)
 
         if(paymentMethodInstance){
             [paymentMethodInstance:paymentMethodInstance]}
         else{
             redirect(action: "list")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e) {
             redirect(action: "notfound", controller: "errorPage")
 
@@ -64,7 +91,9 @@ static allowedMethods = [save: 'POST']
     }
     def edit(){
         try{
-        def paymentMethodInstance=PaymentMethod.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def paymentMethodInstance=PaymentMethod.get(params.id)
 
         if(paymentMethodInstance){
             [paymentMethodInstance:paymentMethodInstance]
@@ -72,6 +101,11 @@ static allowedMethods = [save: 'POST']
         else{
             redirect(action: "list")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e) {
             redirect(action: "notfound", controller: "errorPage")
 
@@ -80,7 +114,9 @@ static allowedMethods = [save: 'POST']
     }
     def delete(){
         try{
-        def paymentMethodInstance=PaymentMethod.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+
+                def paymentMethodInstance=PaymentMethod.get(params.id)
 
 
 
@@ -95,6 +131,10 @@ static allowedMethods = [save: 'POST']
 
         }
         redirect(action: "list")}
+            else{
+redirect(action: "adminLoginForm",controller: "login")
+            }
+        }
         catch (DataIntegrityViolationException e) {
             flash.message = "Sorry! cannot delete this data."
             redirect(action: "list")

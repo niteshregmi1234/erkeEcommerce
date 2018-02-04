@@ -4,7 +4,9 @@ class MailSetUpController {
 static allowedMethods = [save: 'POST']
     def save() {
         try{
-            def mailSetUpInstance=MailSetUp.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def mailSetUpInstance=MailSetUp.get(params.id)
             if(mailSetUpInstance){
                                 mailSetUpInstance.toEmail=params.toEmail
 
@@ -14,6 +16,11 @@ static allowedMethods = [save: 'POST']
                 print "a"
                 redirect(action: "notfound",controller: "errorPage")
             }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -22,13 +29,19 @@ static allowedMethods = [save: 'POST']
     }
     def show(){
         try{
-            def mailSetUpInstance=MailSetUp.list()[0]
-            if(mailSetUpInstance){
-                render(view: "show",model:[mailSetUpInstance:mailSetUpInstance] )
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
+                def mailSetUpInstance = MailSetUp.list()[0]
+                if (mailSetUpInstance) {
+                    render(view: "show", model: [mailSetUpInstance: mailSetUpInstance])
+
+                } else {
+                    redirect(action: "notfound", controller: "errorPage")
+                }
             }
-            else{
-                redirect(action: "notfound",controller: "errorPage")
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
+
             }
         }
         catch (Exception e){
@@ -39,16 +52,20 @@ static allowedMethods = [save: 'POST']
 
     def edit(){
         try {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            def mailSetUpInstance=MailSetUp.get(params.id)
+                def mailSetUpInstance = MailSetUp.get(params.id)
 
-            if(mailSetUpInstance){
-                [mailSetUpInstance:mailSetUpInstance]}
-            else{
-                redirect(action: "notfound",controller: "errorPage")
+                if (mailSetUpInstance) {
+                    [mailSetUpInstance: mailSetUpInstance]
+                } else {
+                    redirect(action: "notfound", controller: "errorPage")
 
 
-
+                }
+            }
+        else{
+             redirect(action: "adminLoginForm",controller: "login")
             }
         }
         catch (Exception e){

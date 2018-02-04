@@ -85,9 +85,12 @@
         </div>
         <ul class="nav navbar-nav">
             <li><g:link action="adminHome" controller="adminHome">Home</g:link></li>
-            <li><g:link action="list" controller="adminUserInformation">Admins</g:link></li>
+            <g:if test="${session.adminUser.role=="CEO" || session.adminUser.role=="MD"}">
+            <li><g:link action="list" controller="adminUserInformation">Staffs</g:link></li>
+            </g:if>
+<g:if test="${session.adminUser.role=="CEO" || session.adminUser.role=="MD" || session.adminUser.role=="Content Manager"}">
 
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Set Up<span class="caret"></span></a>
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Set Up<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="list" controller="productCategory">Product Category</g:link></li>
                     <li><g:link action="list" controller="productSubCategorySpecify">Specify Product SubCategory</g:link></li>
@@ -95,7 +98,7 @@
                     <li><g:link action="list" controller="productColor">Product Color</g:link></li>
                     <li><g:link action="list" controller="productSize">Product Size</g:link></li>
                     <li><g:link action="list" controller="productBrand">Product Brand</g:link></li>
-                    <li><g:link action="list" controller="seasons">Season</g:link></li>
+                    %{--<li><g:link action="list" controller="seasons">Season</g:link></li>--}%
                     <li><g:link action="list" controller="paymentMethod">Payment</g:link></li>
                     <li><g:link action="list" controller="deliveryMethod">Delivery</g:link></li>
 
@@ -122,12 +125,13 @@
                     <li><g:link action="show" controller="companyInformation">Company Information</g:link></li>
                     <li><g:link action="show" controller="otherCosts">Other Costs</g:link></li>
 
-                    <li><g:link action="show" controller="seasonManagement" id="${SeasonManagement.list()[0].id}">Upcoming Season</g:link></li>
-                    <li><g:link action="show" controller="seasonManagement" id="${SeasonManagement.list()[1].id}">Present Season</g:link></li>
+                    %{--<li><g:link action="show" controller="seasonManagement" id="${SeasonManagement.list()[0].id}">Upcoming Season</g:link></li>--}%
+                    %{--<li><g:link action="show" controller="seasonManagement" id="${SeasonManagement.list()[1].id}">Present Season</g:link></li>--}%
                     <li><g:link action="show" controller="style">Style</g:link></li>
 
                 </ul>
             </li>
+    </g:if>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Orders<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="recentOrders" controller="cartHistory">Recent Orders</g:link></li>

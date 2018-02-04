@@ -15,28 +15,6 @@
 <form action="/adminUserInformation/save" method="post" class="form-horizontal" id="reg_form">
     <g:hiddenField name="id" value="${adminUserInstance?.id}"></g:hiddenField>
 
-
-    <div class="col-lg-12">
-        <div class="form-group ">
-            <label class="control-label col-sm-2">First Name:</label>
-
-            <div class="col-sm-4">
-                <div style="margin-top: 7px;">${adminUserInstance.firstName}</div>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="form-group ">
-            <label class="control-label col-sm-2">Last Name:</label>
-
-            <div class="col-sm-4">
-                <div style="margin-top: 7px;">${adminUserInstance.lastName}</div>
-
-            </div>
-        </div>
-    </div>
-
     <div class="col-lg-12">
         <div class="form-group ">
             <label class="control-label col-sm-2">Email:</label>
@@ -47,9 +25,33 @@
 
 
 
-            </div>e
+            </div>
         </div>
     </div>
+
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2" for="firstName">First Name:</label>
+
+            <div class="col-sm-4">
+                <input type="text" name="firstName" id="firstName" value="${adminUserInstance?.firstName}" class="form-control"/>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2" for="lastName">Last Name:</label>
+
+            <div class="col-sm-4">
+                <input type="text" name="lastName" id="lastName" value="${adminUserInstance?.lastName}" class="form-control"/>
+
+
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-12">
         <div class="form-group">
             <label class="control-label col-sm-2" for="userPw">New Password</label>
@@ -70,15 +72,30 @@
 
                 <input class="form-control {$borderColor}" id="userPw2"  type="password" placeholder="Confirm password"
                        name="confirmPassword" data-match="#confirmPassword" data-minLength="5"
-                       data-match-error="some error 2"
-                       />
+                       data-match-error="some error 2"/>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="role">Select Role</label>
+            <div class="col-sm-4 role_100">
+                <select class="selectpicker" name="role" id="role">
+                    <option value="CEO">CEO</option>
+                    <option value="MD">MD</option>
+                    <option value="Content Manager">Content Manager</option>
+                    <option value="Delivery Person">Delivery Person</option>
+                </select>
+
             </div>
         </div>
 
     </div>
 
-    <script type="text/javascript">
 
+    <script type="text/javascript">
+        $("div.role_100 select").val("${adminUserInstance.role}");
         $(document).ready(function() {
             $('#reg_form').bootstrapValidator({
                         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later

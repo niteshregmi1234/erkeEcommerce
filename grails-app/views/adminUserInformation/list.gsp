@@ -19,7 +19,6 @@
 <h6 style="color: #761c19;">${flash.message}</h6>
 <caption><h3>List</h3></caption>
 <table id="example" class="display nowrap" cellspacing="0" width="100%">
-
     <thead>
     <tr>
         <th>SN</th>
@@ -27,7 +26,7 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
-
+        <th>Role</th>
     </tr>
     <tfoot>
 <tr>
@@ -35,8 +34,7 @@
     <th>View</th>
     <th>First Name</th>
     <th>Last Name</th>
-    <th>Email</th>
-
+    <th>Role</th>
 </tr>
 </tfoot>
     </thead>
@@ -45,10 +43,10 @@
         <tr>
             <td>${i+1}</td>
             <td> <g:link action="show" id="${list?.id}" controller="adminUserInformation" class="btn btn-primary btn-sm">view</g:link></td>
-
             <td>${list.firstName}</td>
             <td>${list.lastName}</td>
             <td>${list.email}</td>
+            <td>${list.role}</td>
         </tr>
     </g:each>
     </tbody>

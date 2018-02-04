@@ -59,10 +59,9 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
 
     def successFullOrders(){
         try{
-            def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(true,false)
+            def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrderAndSuccessfulOrderDelFlag(true,false,false)
             List<List<CartHistory>> listListCartList=new ArrayList<>()
-
-                def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.endUserInformation},{undeliveredCartItem -> undeliveredCartItem.date})
+             def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.endUserInformation},{undeliveredCartItem -> undeliveredCartItem.date})
                 for(CartHistory cartHistory:undeliveredCartItems) {
                     def abc = cartItemsByEndUserAndDate[cartHistory.endUserInformation]
                     def cartList = abc[cartHistory.date] as List<CartHistory>
@@ -77,7 +76,6 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
-
     }
     def pendingOrders(){
         try{
@@ -90,16 +88,33 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
                 def cartList = abc[cartHistory.date] as List<CartHistory>
                 if(!listListCartList.contains(cartList)){
                     listListCartList.add(cartList)
-
                 }
             }
             render(view: "fakeOrders",model:[listListCartList:listListCartList])
-
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
-
+    }
+    def deleteSuccessfulOrders(){
+        try{
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD") {
+                def cartHistoryIdList=params.list("cartHistoryId")
+            for(int i=0;i<cartHistoryIdList.size();i++){
+                def cartHistoryId=cartHistoryIdList[i] as long
+                def cartHistory=CartHistory.findById(cartHistoryId)
+                cartHistory.successfulOrderDelFlag=true
+                cartHistory.save(flush: true)
+            }
+            redirect(action: "successFullOrders")
+        }
+            else {
+                redirect(action: "adminLoginForm",controller: "login")
+            }
+        }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+        }
     }
 
 }

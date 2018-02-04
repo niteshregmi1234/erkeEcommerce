@@ -11,7 +11,9 @@ class CoverImageController extends BaseController{
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 def checkPhoto(){
     try{
-    def Image = request.getFile('Image')
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+            def Image = request.getFile('Image')
 
     def checkFile
     Image trueImage = ImageIO.read(Image.getInputStream());
@@ -26,26 +28,44 @@ def checkPhoto(){
         checkFile="perfect"
         render checkFile
     }}
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
+
+        }
+    }
     catch (Exception  e){
 
     }
 }
     def list() {
         try {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-
-        def coverImageList=CoverImage.list()
+                def coverImageList=CoverImage.list()
         render(view: "list",model: [coverImageList:coverImageList])}
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        render(view: "create")
+        }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
 
+        }
     }
     def save(){
         try{
-        if(!params.id){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                if(!params.id){
             def coverImageInstance=new CoverImage()
             coverImageInstance.imageName=uploadCoverImage()
             coverImageInstance.productBrand=ProductBrand.findById(params.productBrand)
@@ -68,56 +88,30 @@ def checkPhoto(){
 
             }
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
         }
     }
     def uploadCoverImage(){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
-        def fileName=file.originalFilename
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-        }
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        abc:
-        boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
-        if (check == true) {
-            Matcher m = PATTERN.matcher(fileName);
-            if (m.matches()) {
-                String prefix = m.group(1);
-                String last = m.group(2);
-                String suffix = m.group(3);
-                if (suffix == null) suffix = "";
-                int count = last != null ? Integer.parseInt(last) : 0;
-                count++;
-                fileName = prefix + "(" + count + ")" + suffix;
-                continue abc
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
+            def fileName = file.originalFilename
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
             }
-        }
-        File fileDest = new File(homeDir,"yarsaa/${fileName}")
-        file.transferTo(fileDest)
-        return fileName
 
-    }
-    def editCoverImage(String imageNameOld){
-        def mp = (MultipartHttpServletRequest) request
-        CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
-        def homeDir = new File(System.getProperty("user.home"))
-        File theDir = new File(homeDir,"yarsaa");
-        if (! theDir.exists()){
-            theDir.mkdir();
-            print"yes"
-        }
-        if(file.size>0){
-            File fileOld= new File(homeDir,"yarsaa/${imageNameOld}")
-            fileOld.delete();
-            String fileName = file.originalFilename
             abc:
-            boolean check = new File(homeDir, "yarsaa/"+fileName).exists()
+            boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
             if (check == true) {
                 Matcher m = PATTERN.matcher(fileName);
                 if (m.matches()) {
@@ -131,36 +125,84 @@ def checkPhoto(){
                     continue abc
                 }
             }
-            File fileDest = new File(homeDir,"yarsaa/${fileName}")
+            File fileDest = new File(homeDir, "yarsaa/${fileName}")
             file.transferTo(fileDest)
             return fileName
 
-        }
-        else{
-            return imageNameOld
-        }
-    }
+        }    }
+    def editCoverImage(String imageNameOld){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+            def mp = (MultipartHttpServletRequest) request
+            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
+            def homeDir = new File(System.getProperty("user.home"))
+            File theDir = new File(homeDir, "yarsaa");
+            if (!theDir.exists()) {
+                theDir.mkdir();
+                print "yes"
+            }
+            if (file.size > 0) {
+                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                fileOld.delete();
+                String fileName = file.originalFilename
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
+                    }
+                }
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
+
+            } else {
+                return imageNameOld
+            }
+        }    }
     def show(Long id){
         try{
-        def coverImageInstance=CoverImage.get(id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def coverImageInstance=CoverImage.get(id)
         if(coverImageInstance){
             [coverImageInstance:coverImageInstance]}
         else{
             redirect(action: "list")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+            }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def edit(){
         try{
-        def coverImageInstance=CoverImage.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def coverImageInstance=CoverImage.get(params.id)
         if(coverImageInstance){
             [coverImageInstance:coverImageInstance]
         }
         else{
             redirect(action: "list")
         }}
+            else {
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -168,7 +210,9 @@ def checkPhoto(){
     }
     def delete(){
         try{
-        def coverImageInstance=CoverImage.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def coverImageInstance=CoverImage.get(params.id)
         if(coverImageInstance) {
             coverImageInstance.delete(flush: true)
 
@@ -183,7 +227,10 @@ def checkPhoto(){
 
 
         }
-        redirect(action: "list")
+        redirect(action: "list")}
+            else{
+redirect(action: "adminLoginForm",controller: "login")
+            }
         }
         catch (DataIntegrityViolationException e){
             flash.message="Sorry! cannot delete this data."

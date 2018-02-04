@@ -4,7 +4,7 @@
             <label class="control-label col-sm-2" for="firstName">First Name:</label>
 
             <div class="col-sm-4">
-                <input type="text" name="firstName" id="firstName" value="${adminUserInstance?.firstName}" class="form-control"/>
+                <input type="text" name="firstName" id="firstName"  class="form-control"/>
                 %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%
                 %{--<input type="email" class="form-control" id="email" placeholder="Enter email">--}%
             </div>
@@ -15,7 +15,7 @@
             <label class="control-label col-sm-2" for="lastName">Last Name:</label>
 
             <div class="col-sm-4">
-                <input type="text" name="lastName" id="lastName" value="${adminUserInstance?.lastName}" class="form-control"/>
+                <input type="text" name="lastName" id="lastName" class="form-control"/>
                 %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%
                 %{--<input type="email" class="form-control" id="email" placeholder="Enter email">--}%
             </div>
@@ -27,7 +27,7 @@
             <label class="control-label col-sm-2" for="email">Email:</label>
 
             <div class="col-sm-4">
-                <input type="text" name="email" id="email" value="${adminUserInstance?.email}" class="form-control"/>
+                <input type="text" name="email" id="email"  class="form-control"/>
 
                 <small style="color: #a94442;"><g:if test="${flash.message}">${flash.message}
                     <script>
@@ -50,7 +50,7 @@
             <label class="control-label col-sm-2" for="userPw">Password</label>
             <div class="col-sm-4">
 
-                <input class="form-control" id="userPw" type="password" value="${adminUserInstance?.password}" placeholder="password"
+                <input class="form-control" id="userPw" type="password" placeholder="password"
                        name="password" data-minLength="5"
                        data-error="some error"
                        required/>
@@ -63,10 +63,25 @@
             <label class="control-label col-sm-2" for="userPw2">Confirm Password</label>
             <div class="col-sm-4">
 
-                <input class="form-control {$borderColor}" id="userPw2" value="${adminUserInstance?.password}" type="password" placeholder="Confirm password"
+                <input class="form-control {$borderColor}" id="userPw2" type="password" placeholder="Confirm password"
                        name="confirmPassword" data-match="#confirmPassword" data-minLength="5"
                        data-match-error="some error 2"
                        required/>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="role">Select Role</label>
+            <div class="col-sm-4">
+                <select class="selectpicker" id="role" name="role">
+                    <option value="CEO">CEO</option>
+                    <option value="MD">MD</option>
+                    <option value="Content Manager">Content Manager</option>
+                    <option value="Delivery Person">Delivery Person</option>
+                </select>
+
             </div>
         </div>
 

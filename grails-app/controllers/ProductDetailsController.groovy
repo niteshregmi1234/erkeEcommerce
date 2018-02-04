@@ -4,18 +4,33 @@ class ProductDetailsController extends BaseController{
 static allowedMethods = [save: 'POST']
     def list() {
         try{
-        def productDetailsList=ProductDetails.list()
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def productDetailsList=ProductDetails.list()
         render(view: "list",model: [productDetailsList:productDetailsList])}
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+render(view: "create")
+        }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
 
+        }
     }
     def save(){
         try{
-        if(!params.id){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                if(!params.id){
             def productDetails=new ProductDetails()
             def productSizeId1=params.productSizeId
             def productSizeId=new ArrayList<>(Arrays.asList(productSizeId1))
@@ -77,6 +92,11 @@ static allowedMethods = [save: 'POST']
             }
         }
         }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -86,7 +106,9 @@ static allowedMethods = [save: 'POST']
 
     def show(Long id){
         try{
-        def productDetailsInstance=ProductDetails.get(id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def productDetailsInstance=ProductDetails.get(id)
 
         if(productDetailsInstance){
             def sizeString=productDetailsInstance.productSizes
@@ -102,6 +124,11 @@ static allowedMethods = [save: 'POST']
         else{
             redirect(action: "list")
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -109,18 +136,24 @@ static allowedMethods = [save: 'POST']
     }
     def edit(){
         try{
-        def productDetailsInstance=ProductDetails.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        if(productDetailsInstance){
-def sizeString=productDetailsInstance.productSizes
-            String[] stringArray = sizeString.split(",");
+                def productDetailsInstance = ProductDetails.get(params.id)
 
-            [productDetailsInstance:productDetailsInstance,stringArray:stringArray]
+                if (productDetailsInstance) {
+                    def sizeString = productDetailsInstance.productSizes
+                    String[] stringArray = sizeString.split(",");
+
+                    [productDetailsInstance: productDetailsInstance, stringArray: stringArray]
+                } else {
+                    redirect(action: "list")
+                }
+            }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
         }
-        else{
-            redirect(action: "list")
-        }
-    }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -128,21 +161,27 @@ def sizeString=productDetailsInstance.productSizes
     }
     def delete(){
         try {
-            def productDetailsInstance = ProductDetails.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def productDetailsInstance = ProductDetails.get(params.id)
 
 
-            if (productDetailsInstance) {
+                if (productDetailsInstance) {
 
-                productDetailsInstance.delete(flush: true)
-                flash.message = "Successfully deleted."
-
-
-            } else {
-                flash.message = "Unable to delete the already deleted item."
+                    productDetailsInstance.delete(flush: true)
+                    flash.message = "Successfully deleted."
 
 
+                } else {
+                    flash.message = "Unable to delete the already deleted item."
+
+
+                }
+                redirect(action: "list")
             }
-            redirect(action: "list")
+            else{
+ redirect(action: "adminLoginForm",controller: "login")
+            }
         }
         catch (DataIntegrityViolationException e) {
             flash.message = "Sorry! cannot delete this data."

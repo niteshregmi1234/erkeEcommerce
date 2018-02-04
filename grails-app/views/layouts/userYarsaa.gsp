@@ -86,6 +86,19 @@
 </head>
 
 <body>
+<div class="se-pre-con"></div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+<script>
+//paste this code under the head tag or in a separate js file.
+// Wait for window load
+$(window).load(function() {
+// Animate loader off screen
+$(".se-pre-con").fadeOut("slow");
+});
+</script>
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/loader.css')}" type="text/css"
+      media="all"/>
 <noscript>
 
     <div id="content" style="margin:20px;">
@@ -496,6 +509,7 @@ if(sizeId=='' && productId==''){
         }
 
         .dropdown {
+
             position: relative;
             display: inline-block;
         }
@@ -506,7 +520,7 @@ if(sizeId=='' && productId==''){
             background-color: #f9f9f9;
             min-width: 100px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            z-index: 3;
         }
 
         .dropdown-content a {
@@ -579,11 +593,13 @@ if(sizeId=='' && productId==''){
             <g:form controller="endUser" action="search" class="navbar-form" role="search" onsubmit="return validSearch();">
                 <div class="input-group">
                     <input type="text" class="form-control" id="searchProduct" name="search" placeholder="Search">
+
                     <span class="input-group-btn">
 
                         <button type="submit" class="btn btn-primary" id="submit_Id"><i class="fa fa-search"></i></button>
 
                     </span>
+
                 </div>
             </g:form>
 
@@ -607,11 +623,11 @@ if(sizeId=='' && productId==''){
     function validSearch(){
     var searchKey=document.getElementById("searchProduct").value;
     if(searchKey==''){
-        bootbox.alert({
+                bootbox.alert({
             message: "Please enter search keyword",
             size: 'small'
         });
-        document.getElementById("searchProduct").focus();
+        $('#searchProduct').focus();
         return false;
     }
 }
@@ -662,13 +678,13 @@ if(sizeId=='' && productId==''){
 
                     <h4>Top categories</h4>
 <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
-    <g:if test="${ProductDetails.findByProductCategory(categoryList)}">
+    <g:if test="${Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductCategory(categoryList),false)}">
 
         <h5>${categoryList.categoryName}</h5>
 
                     <ul>
                         <g:each in="${ProductSubCategory.findAllByIsFooterAndStatusShow(true,true)}" var="subCategoryList">
-                                <g:if test="${Product.findAllByProductDetails(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList))}">
+                                <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList),false)}">
 
                                 <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory: subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
                             </li>

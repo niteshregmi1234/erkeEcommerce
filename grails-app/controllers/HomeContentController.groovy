@@ -6,7 +6,8 @@ class HomeContentController extends BaseController{
 static allowedMethods = [save: 'POST']
     def save() {
         try{
-            def homeContentInstance=HomeContent.get(params.id)
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                def homeContentInstance=HomeContent.get(params.id)
             if(homeContentInstance){
                 homeContentInstance.box1Title=params.box1Title
                 homeContentInstance.box2Title=params.box2Title
@@ -24,6 +25,11 @@ static allowedMethods = [save: 'POST']
                 print "a"
                 redirect(action: "notfound",controller: "errorPage")
             }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
         catch (Exception e){
             print "b"
             redirect(action: "notfound",controller: "errorPage")
@@ -34,13 +40,19 @@ static allowedMethods = [save: 'POST']
 
     def show(){
         try{
-            def homeContentInstance=HomeContent.list()[0]
-            if(homeContentInstance){
-                render(view: "show",model:[homeContentInstance:homeContentInstance] )
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
+                def homeContentInstance = HomeContent.list()[0]
+                if (homeContentInstance) {
+                    render(view: "show", model: [homeContentInstance: homeContentInstance])
+
+                } else {
+                    redirect(action: "notfound", controller: "errorPage")
+                }
             }
-            else{
-                redirect(action: "notfound",controller: "errorPage")
+        else{
+                redirect(action: "adminLoginForm",controller: "login")
+
             }
         }
         catch (Exception e){
@@ -51,16 +63,20 @@ static allowedMethods = [save: 'POST']
 
     def edit(){
         try {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            def homeContentInstance=HomeContent.get(params.id)
+                def homeContentInstance = HomeContent.get(params.id)
 
-            if(homeContentInstance){
-                [homeContentInstance:homeContentInstance]}
-            else{
-                redirect(action: "notfound",controller: "errorPage")
+                if (homeContentInstance) {
+                    [homeContentInstance: homeContentInstance]
+                } else {
+                    redirect(action: "notfound", controller: "errorPage")
 
 
-
+                }
+            }
+        else{
+             redirect(action: "adminLoginForm",controller: "login")
             }
         }
         catch (Exception e){
