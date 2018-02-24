@@ -12,7 +12,8 @@
     <title></title>
 </head>
 
-<body><g:form action="save" controller="productDetails" class="form-horizontal"  onsubmit="return Validate();">
+<body>
+<g:form action="save" controller="productDetails" class="form-horizontal"  onsubmit="return Validate();">
 
     <g:render template="form"></g:render>
 <div class="col-lg-12">

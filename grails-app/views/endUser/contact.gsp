@@ -56,7 +56,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<div data-animate="fadeInUp">
+		<div>
 			<div class="col-md-6">
 				<div class="imgwrapper">
 					<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:companyInformation.shopInsideViewImageName])}" class="img-responsive">
@@ -77,7 +77,7 @@
 		<div class="col-md-12">
 			&nbsp;
 		</div>
-		<div class="col-md-12" data-animate="fadeInUp">
+		<div class="col-md-12">
 			<div class="box" id="contact">
 				<h1>Contact</h1>
 				<p class="lead">Are you curious about something? Do you have some kind of problem with our products?</p>

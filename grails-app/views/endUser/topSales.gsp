@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,13 +47,8 @@
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
-                <li>Special SubCategory</li>
-
-                <li>${specialCategoryInstance.subCategoryName}</li>
+                <li>Top Sales</li>
             </ul>
-
-
-
 
         </div>
         <div class="col-md-3">
@@ -74,7 +68,6 @@
                                         <option>Sort by</option>
                                         <option value="low">Low Price</option>
                                         <option value="high">High Price</option>
-                                        <option value="sales">Top Sales</option>
                                     </select>
                                 </div>
                             </div>
@@ -107,19 +100,6 @@
                         $('#myList').html(sorted);
 
                     }
-                    else if(sortCriteria=='sales'){
-                        sorted = $('.grid-products').sort(function (a, b) {
-                            return (ascending ==
-                            (convertToNum($(a).find('.pricesT').html()) >
-                            convertToNum($(b).find('.pricesT').html()))) ? 1 : -1;
-                        });
-
-                        $('#myList').html(sorted);
-
-                    }
-                }
-                var convertToNum = function(value){
-                    return parseInt(value.replace('Rs',''));
                 }
                 var convertToNumber = function(value){
                     return parseFloat(value.replace('Rs',''));
@@ -158,6 +138,35 @@
                     </div>
                 </div>
 
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sub Categories </h3>
+                    </div>
+
+                    <div class="panel-body filter-attributes">
+
+                        <form>
+                            <div class="form-group">
+                                <g:each in="${productSubCategoryList}" var="subCategoryList" status="i">
+                                    <div class="checkbox">
+                                        <label>
+                                            <g:checkBox name="subCategory" id="subCategory${i}" value="${subCategoryList.id}"/>${subCategoryList.subCategoryName}
+                                        </label>
+                                    </div>
+                                    <script>
+                                        document.getElementById("subCategory${i}").checked = false;
+                                        $("input[name=subCategory]").val();
+                                    </script>
+
+                                </g:each>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
 
                 <div class="panel panel-default sidebar-menu">
 
@@ -287,9 +296,13 @@
                                 var minPrice=parseFloat(document.getElementById("amount_min").value);
                                 var maxPrice=parseFloat(document.getElementById("amount_max").value);
                                 var brandList=[];
+                                var subCategoryList=[];
                                 var categoryList=[];
                                 var discountList=[];
                                 var idList=[];
+                                $('input[name="subCategory"]:checked').each(function() {
+                                    subCategoryList.push($(this).val());
+                                });
                                 $('input[name="category"]:checked').each(function() {
                                     categoryList.push($(this).val());
                                 });
@@ -314,39 +327,74 @@
                                     else{
                                         var categoryId=$( "#category"+idList[i] ).val();
                                         var brandId=$( "#brand"+idList[i] ).val();
+                                        var subCategoryId=$( "#subCategory"+idList[i] ).val();
                                         var discount=$( "#discount"+idList[i] ).val();
-                                        if(brandList!='' && discountList!='' &&categoryList!=''){
-                                            if(categoryList.includes(categoryId) && brandList.includes(brandId) && discountList.includes(discount)){
+                                        if(brandList!='' && subCategoryList!='' && discountList!='' &&categoryList!=''){
+                                            if(categoryList.includes(categoryId) && brandList.includes(brandId) && subCategoryList.includes(subCategoryId) && discountList.includes(discount)){
+                                                document.getElementById("product"+idList[i]).style.display="block";
+                                            }
+                                        }
+                                        else if(brandList!='' && subCategoryList!='' && categoryList!=''){
+                                            if(brandList.includes(brandId) && categoryList.includes(categoryId) && subCategoryList.includes(subCategoryId)){
+                                                document.getElementById("product"+idList[i]).style.display="block";
+                                            }
+                                        }
+                                        else if(brandList!='' && discountList!='' && categoryList!=''){
+                                            if(brandList.includes(brandId) && categoryList.includes(categoryId) && discountList.includes(discount)){
+                                                document.getElementById("product"+idList[i]).style.display="block";
+                                            }
+                                        }
+                                        else if(brandList!='' && subCategoryList!='' && discountList!=''){
+                                            if(brandList.includes(brandId) && subCategoryList.includes(subCategoryId) && discountList.includes(discount)){
+                                                document.getElementById("product"+idList[i]).style.display="block";
+                                            }
+                                        }
+                                        else if(subCategoryList!='' && discountList!='' && categoryList!=''){
+                                            if(subCategoryList.includes(subCategoryId) && categoryList.includes(categoryId) && discountList.includes(discount)){
                                                 document.getElementById("product"+idList[i]).style.display="block";
                                             }
                                         }
                                         else if(brandList!='' && categoryList!=''){
                                             if(brandList.includes(brandId) && categoryList.includes(categoryId)){
                                                 document.getElementById("product"+idList[i]).style.display="block";
-                                            }
-                                        }
 
+                                            }}
+                                        else if(brandList!='' && subCategoryList!=''){
+                                            if(brandList.includes(brandId) && subCategoryList.includes(subCategoryId)){
+                                                document.getElementById("product"+idList[i]).style.display="block";
+
+                                            }}
                                         else if(brandList!='' && discountList!=''){
                                             if(brandList.includes(brandId) && discountList.includes(discount)){
                                                 document.getElementById("product"+idList[i]).style.display="block";
+
                                             }
                                         }
-                                        else if(discountList!='' && categoryList!=''){
+                                        else if(subCategoryList!='' && discountList!=''){
+                                            if(subCategoryList.includes(subCategoryId) && discountList.includes(discount)){
+                                                document.getElementById("product"+idList[i]).style.display="block";
+
+                                            }
+                                        }
+                                        else if(subCategoryList!='' && categoryList!=''){
+                                            if(subCategoryList.includes(subCategoryId) && categoryList.includes(categoryId)){
+                                                document.getElementById("product"+idList[i]).style.display="block";
+
+                                            }
+                                        }
+                                        else if(categoryList!='' && discountList!=''){
                                             if(categoryList.includes(categoryId) && discountList.includes(discount)){
                                                 document.getElementById("product"+idList[i]).style.display="block";
+
                                             }
                                         }
 
-                                        else if(brandList!='' && discountList!=''){
-                                            if(brandList.includes(brandId) && discountList.includes(discount)){
+                                        else if(subCategoryList!=''){
+                                            if(subCategoryList.includes(subCategoryId)) {
                                                 document.getElementById("product"+idList[i]).style.display="block";
 
                                             }
                                         }
-
-
-
-
                                         else if(discountList!=''){
                                             if(discountList.includes(discount)) {
                                                 document.getElementById("product"+idList[i]).style.display="block";
@@ -374,6 +422,7 @@
                                 }
 
                                 brandList=[];
+                                subCategoryList=[];
                                 discountList=[];
                                 idList=[];
                                 categoryList=[]
@@ -418,10 +467,6 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="box b">
-                <h1>${specialCategoryInstance.subCategoryName}</h1>
-                <p>${specialCategoryInstance.subCategoryDescription}.</p>
-            </div>
 
             %{--<div class="box info-bar">--}%
             %{--<div class="row">--}%
@@ -456,7 +501,7 @@
             <div class="row products" id="myList">
                 <g:each in="${productList}" var="list" status="i">
                     <g:if test="${list.productDetails.isSale==false}">
-                        <div class="grid-products" id="product${list.id}" data-category="${list.productDetails.productCategory.id}" data-discount="${list.productDetails.discountPercentage}"  data-productBrand="${list.productDetails.productBrand.id}">
+                        <div class="grid-products" id="product${list.id}" data-category="${list.productDetails.productCategory.id}" data-discount="${list.productDetails.discountPercentage}" data-subCategory="${list.productDetails.productSubCategory.id}" data-productBrand="${list.productDetails.productBrand.id}">
                             <input type="hidden" name="price" id="price${list.id}" value="${list.productDetails.price}">
                             <input type="hidden" name="productId" value="${list.id}">
                             <input type="hidden" name="categoryId" id="category${list.id}" value="${list.productDetails.productCategory.id}">
@@ -516,7 +561,7 @@
                         </div>
                     </g:if>
                     <g:if test="${list.productDetails.isSale==true}">
-                        <div class="grid-products" id="product${list.id}" data-category="${list.productDetails.productCategory.id}" data-price="${list.productDetails.price}" data-discount="${list.productDetails.discountPercentage}"  data-productBrand="${list.productDetails.productBrand.id}">
+                        <div class="grid-products" id="product${list.id}" data-category="${list.productDetails.productCategory.id}" data-price="${list.productDetails.price}" data-discount="${list.productDetails.discountPercentage}" data-subCategory="${list.productDetails.productSubCategory.id}" data-productBrand="${list.productDetails.productBrand.id}">
                             <input type="hidden" name="price" id="price${list.id}" value="${list.productDetails.price}">
                             <input type="hidden" name="productId" value="${list.id}">
                             <input type="hidden" name="brandId" id="brand${list.id}" value="${list.productDetails.productBrand.id}">
@@ -750,8 +795,6 @@
                 });
             </script>
 
-
-
             <g:if test="${productList}">
                     <script>
                         $(document).ready(function () {
@@ -892,3 +935,4 @@
 </body>
 
 </html>
+

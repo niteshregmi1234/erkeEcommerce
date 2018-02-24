@@ -7,4 +7,7 @@ Product product
     ProductSize productSize
     static constraints = {
     }
+    static mapping = {
+        sort id: "desc"
+    }
 }

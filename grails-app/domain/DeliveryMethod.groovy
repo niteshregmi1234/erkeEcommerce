@@ -7,4 +7,8 @@ class DeliveryMethod {
     static constraints = {
 
     }
+    static mapping = {
+        sort id: "desc"
+    }
+
 }

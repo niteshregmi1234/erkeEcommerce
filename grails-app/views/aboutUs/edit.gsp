@@ -113,28 +113,28 @@
         </div>
     </div>
 
-    <div class="col-lg-6">
-        <div class="form-group">
-            <label class="control-label col-sm-4">Choose specialProduct1:</label>
-            <div class="col-sm-6">
-                <g:select class="selectpicker" id="specialProduct1" name="specialProduct1" value="${aboutUsInstance?.specialProduct1?.id}"
-                          from="${Product.findAllByDelFlag(false)}" optionKey="id" optionValue="productSpecificationName" data-show-subtext="true"
-                          data-live-search="true" title="choose product"/>
+    %{--<div class="col-lg-6">--}%
+        %{--<div class="form-group">--}%
+            %{--<label class="control-label col-sm-4">Choose specialProduct1:</label>--}%
+            %{--<div class="col-sm-6">--}%
+                %{--<g:select class="selectpicker" id="specialProduct1" name="specialProduct1" value="${aboutUsInstance?.specialProduct1?.id}"--}%
+                          %{--from="${Product.findAllByDelFlag(false)}" optionKey="id" optionValue="productSpecificationName" data-show-subtext="true"--}%
+                          %{--data-live-search="true" title="choose product"/>--}%
 
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="form-group">
-            <label class="control-label col-sm-4">Choose specialProduct2:</label>
-            <div class="col-sm-6">
-                <g:select class="selectpicker" id="specialProduct2" name="specialProduct2" value="${aboutUsInstance?.specialProduct2?.id}"
-                          from="${Product.findAllByDelFlag(false)}" optionKey="id" optionValue="productSpecificationName" data-show-subtext="true"
-                          data-live-search="true" title="choose product"/>
+            %{--</div>--}%
+        %{--</div>--}%
+    %{--</div>--}%
+    %{--<div class="col-lg-6">--}%
+        %{--<div class="form-group">--}%
+            %{--<label class="control-label col-sm-4">Choose specialProduct2:</label>--}%
+            %{--<div class="col-sm-6">--}%
+                %{--<g:select class="selectpicker" id="specialProduct2" name="specialProduct2" value="${aboutUsInstance?.specialProduct2?.id}"--}%
+                          %{--from="${Product.findAllByDelFlag(false)}" optionKey="id" optionValue="productSpecificationName" data-show-subtext="true"--}%
+                          %{--data-live-search="true" title="choose product"/>--}%
 
-            </div>
-        </div>
-    </div>
+            %{--</div>--}%
+        %{--</div>--}%
+    %{--</div>--}%
     <div class="col-lg-6">
         <div class="form-group">
             <label class="control-label col-sm-4">Choose specialSubCategory:</label>

@@ -1,4 +1,3 @@
-import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
@@ -8,9 +7,165 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductController extends BaseController {
-    static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSpecialImage: 'POST',editSpecialImage: 'POST',upLoadFrontImage: 'POST',editFrontImage: 'POST',uploadSideImage: 'POST',editSideImage: 'POST',uploadBackImage: 'POST',editBackImage: 'POST']
+    static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSpecialImage: 'POST',editSpecialImage: 'POST',upLoadFrontImage: 'POST',editFrontImage: 'POST',uploadSideImage: 'POST',editSideImage: 'POST',uploadBackImage: 'POST',editBackImage: 'POST',changeDiscount: 'POST',changeIsLatest: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
+    def productService
+    def changeIsLatest(){
+        try{
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
+                def productList=Product.findAllByDelFlag(false)
+        for(Product product:productList) {
+            product.isLatest = params.isLatest as byte
+            product.save(flush: true)
+        }
+            }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+            }
+            }
+        catch (Exception e){
+
+        }
+    }
+    def latestShortcut(){
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            render(view: "setUpIsLatest")
+        }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
+
+        }
+    }
+    def changeDiscount(){
+    try{
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            def brandIds=params.brand
+    def categoryIds=params.category
+    def specificationIds=params.specification
+    def subCategoryIds=params.subCategory
+    if(brandIds){
+    brandIds=new ArrayList<>(Arrays.asList(brandIds))
+    }
+    if(categoryIds){
+
+    categoryIds=new ArrayList<>(Arrays.asList(categoryIds))
+    }
+        if(specificationIds){
+
+    specificationIds=new ArrayList<>(Arrays.asList(specificationIds))
+        }
+            if(subCategoryIds){
+
+    subCategoryIds=new ArrayList<>(Arrays.asList(subCategoryIds))
+            }
+            def discountPercentage=params.discountPercentage as float
+            if(brandIds && categoryIds && specificationIds && subCategoryIds ){
+        productService.changeDiscountIfAll(brandIds,categoryIds,specificationIds,subCategoryIds,discountPercentage)
+
+    }
+    else if(brandIds && specificationIds && subCategoryIds){
+        productService.changeDiscountIfBrandAndSpecificationAndSubCategory(brandIds,specificationIds,subCategoryIds,discountPercentage)
+    }
+    else if(categoryIds && specificationIds && subCategoryIds){
+       productService.changeDiscountIfCategoryAndSpecificationAndSubCategory(specificationIds, categoryIds,subCategoryIds,discountPercentage)
+    }
+    else if(brandIds && categoryIds && subCategoryIds){
+                productService.changeDiscountIfBrandAndCategoryAndSubCategory(brandIds,categoryIds,subCategoryIds,discountPercentage)
+
+    }
+    else if(brandIds && categoryIds && specificationIds){
+                productService.changeDiscountIfBrandAndSpecificationAndCategory(brandIds,categoryIds ,specificationIds,discountPercentage)
+            }
+    else if(brandIds && categoryIds){
+                productService.changeDiscountIfBrandAndCategory(brandIds,categoryIds,discountPercentage)
+         }
+    else if(brandIds && specificationIds){
+                productService.changeDiscountIfBrandAndSpecification(brandIds,specificationIds,discountPercentage)
+    }
+    else if(brandIds && subCategoryIds){
+                productService.changeDiscountIfBrandAndSubCategory(brandIds,subCategoryIds,discountPercentage)
+    }
+    else if(categoryIds && specificationIds){
+                productService.changeDiscountIfSpecificationAndCategory(categoryIds,specificationIds,discountPercentage)
+    }
+    else if(subCategoryIds && specificationIds){
+                productService.changeDiscountIfSpecificationAndSubCategory(subCategoryIds,specificationIds,discountPercentage)
+
+    }
+    else if(subCategoryIds && categoryIds){
+                productService.changeDiscountIfCategoryAndSubCategory(subCategoryIds,categoryIds,discountPercentage)
+    }
+    else if(brandIds){
+                productService.changeDiscountIfBrand(brandIds,discountPercentage)
+    }
+    else if(categoryIds){
+                productService.changeDiscountIfCategory(categoryIds,discountPercentage)
+
+
+    }
+    else if(specificationIds){
+                productService.changeDiscountIfSpecification(specificationIds,discountPercentage)
+
+    }
+    else if(subCategoryIds){
+                productService.changeDiscountIfSubCategory(subCategoryIds,discountPercentage)
+    }
+redirect(action: "list",controller: "productDetails")}
+    else{
+            redirect(action: "adminLoginForm",controller: "login")
+        }
+    }
+    catch (Exception e){
+
+    }
+}
+    def discountShortcut(){
+    try{
+        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+List<ProductBrand> productBrandList=new ArrayList<>()
+            def brandList=ProductBrand.findAllByStatusShow(true)
+            for(ProductBrand productBrand:brandList){
+               def Product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductBrand(productBrand),false)
+                if(Product){
+                    productBrandList.add(productBrand)
+                }
+            }
+            List<ProductCategory> productCategoryArrayList=new ArrayList<>()
+            def categoryList=ProductCategory.findAllByStatusShow(true)
+            for(ProductCategory productCategory:categoryList){
+                def Product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductCategory(productCategory),false)
+                if(Product){
+                    productCategoryArrayList.add(productCategory)
+                }
+            }
+            List<ProductSubCategorySpecify> productSubCategorySpecifyArrayList=new ArrayList<>()
+            def specifyListSubCategory=ProductSubCategorySpecify.list()
+            for(ProductSubCategorySpecify productSubCategorySpecify:specifyListSubCategory){
+                def Product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategory(ProductSubCategory.findByProductSubCategorySpecify(productSubCategorySpecify)),false)
+                if(Product){
+                    productSubCategorySpecifyArrayList.add(productSubCategorySpecify)
+                }
+            }
+            List<ProductSubCategory> productSubCategoryArrayList=new ArrayList<>()
+            def subCategoryList=ProductSubCategory.findAllByStatusShow(true)
+            for(ProductSubCategory productSubCategory:subCategoryList){
+                def Product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategory(productSubCategory),false)
+                if(Product){
+                    productSubCategoryArrayList.add(productSubCategory)
+                }
+            }
+            render(view: "setUpDiscount",model: [productBrandList:productBrandList,productCategoryArrayList:productCategoryArrayList,productSubCategorySpecifyArrayList:productSubCategorySpecifyArrayList,productSubCategoryArrayList:productSubCategoryArrayList])
+            }
+        else{
+            redirect(action: "adminLoginForm",controller: "login")
+
+        }
+    }
+    catch (Exception e){
+        redirect(action: "notfound",controller:"errorPage")
+    }
+}
 def checkPhoto(){
     try{
         if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
@@ -80,6 +235,7 @@ def checkPhoto(){
                     product.backImageName = uploadBackImage()
                     product.specialImageName = uploadSpecialImage()
                     product.delFlag = false
+                    product.soldNumbers=0
                     product.save(flush: true)
                     redirect(action: "show", id: product.id)
                 } else {
@@ -95,7 +251,6 @@ def checkPhoto(){
                         product.sideImageName = editSideImage(product.sideImageName)
                         product.backImageName = editBackImage(product.backImageName)
                         product.specialImageName = editSpecialImage(product.specialImageName)
-
                         product.save(flush: true)
                         redirect(action: "show", id: product.id)
                     } else {

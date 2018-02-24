@@ -15,6 +15,9 @@
 
     <script src="${resource(dir: 'js', file: 'yamsaa/jquery.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
+
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrapvalidator.js')}" type="text/javascript"
             charset="utf-8"></script>
 
@@ -22,6 +25,7 @@
             charset="utf-8"></script>
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap-multiselect.js')}" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap-multiselect.css')}" type="text/css">
 
@@ -51,6 +55,19 @@
 
 </head>
 <body>
+<div class="se-pre-con"></div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+<script>
+    //paste this code under the head tag or in a separate js file.
+    // Wait for window load
+    $(window).load(function() {
+// Animate loader off screen
+        $(".se-pre-con").fadeOut("slow");
+    });
+</script>
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/loader.css')}" type="text/css"
+      media="all"/>
 <noscript>
 
     <div class="modal-dialog ">
@@ -111,6 +128,8 @@
                     <li><g:link action="list" controller="coverImage">Cover Image</g:link></li>
                     <li><g:link action="show" controller="specialBrand">Special Brand</g:link></li>
                     <li><g:link action="show" controller="backgroundImage" >Home Background Image</g:link></li>
+                    <li><g:link action="discountShortcut" controller="product" >Discount Shortcut</g:link></li>
+                    <li><g:link action="latestShortcut" controller="product" >Change Latest Product?</g:link></li>
 
                 </ul>
             </li>

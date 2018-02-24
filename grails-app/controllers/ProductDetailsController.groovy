@@ -29,7 +29,6 @@ render(view: "create")
     def save(){
         try{
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
                 if(!params.id){
             def productDetails=new ProductDetails()
             def productSizeId1=params.productSizeId

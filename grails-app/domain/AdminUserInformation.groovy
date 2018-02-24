@@ -9,4 +9,8 @@ class AdminUserInformation {
         email unique: true
         role nullable: true
     }
+    static mapping = {
+        sort id: "desc"
+    }
+
 }

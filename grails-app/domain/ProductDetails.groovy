@@ -18,4 +18,8 @@ String productNameWithBrand
         productNameWithBrand(nullable: true)
         price scale: 2
     }
+    static mapping = {
+        sort id: "desc"
+    }
+
 }

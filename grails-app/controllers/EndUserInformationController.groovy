@@ -1,5 +1,4 @@
 import grails.converters.JSON
-
 class EndUserInformationController {
     static allowedMethods = [save: 'POST',login: 'POST',checkEmail: 'POST',checkLogin: 'POST',checkPassword: 'POST',editEndUserPassword:'POST' ,editEndUserPersonalDetails: 'POST']
     def endUserInformationService
@@ -33,7 +32,7 @@ def editEndUserPersonalDetails(){
             render status
         }
             else{
-
+render status
         }
         }
         catch (Exception e){
@@ -156,5 +155,4 @@ redirect(action: "allProducts",controller: "endUser")
 
         }
     }
-
 }

@@ -17,4 +17,8 @@ class CartHistory {
     static constraints = {
         successfulOrderDelFlag nullable: true
     }
+    static mapping = {
+        sort id: "desc"
+    }
+
 }

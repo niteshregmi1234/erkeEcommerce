@@ -134,31 +134,31 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="form-group">
-            <label class="control-label col-sm-4">Special Product1:</label>
+    %{--<div class="col-lg-6">--}%
+        %{--<div class="form-group">--}%
+            %{--<label class="control-label col-sm-4">Special Product1:</label>--}%
 
-            <div class="col-sm-6">
-                <div style="margin-top: 7px;"><g:link action="show" controller="product" id="${aboutUsInstance.specialProduct1.id}"> ${aboutUsInstance.specialProduct1.productSpecificationName}</g:link></div>
+            %{--<div class="col-sm-6">--}%
+                %{--<div style="margin-top: 7px;"><g:link action="show" controller="product" id="${aboutUsInstance.specialProduct1.id}"> ${aboutUsInstance.specialProduct1.productSpecificationName}</g:link></div>--}%
 
-            </div>
-
-
-        </div>
-    </div>
-
-    <div class="col-lg-6">
-        <div class="form-group">
-            <label class="control-label col-sm-4">Special Product2:</label>
-
-            <div class="col-sm-6">
-                <div style="margin-top: 7px;"><g:link action="show" controller="product" id="${aboutUsInstance.specialProduct2.id}"> ${aboutUsInstance.specialProduct2.productSpecificationName}</g:link></div>
-
-            </div>
+            %{--</div>--}%
 
 
-        </div>
-    </div>
+        %{--</div>--}%
+    %{--</div>--}%
+
+    %{--<div class="col-lg-6">--}%
+        %{--<div class="form-group">--}%
+            %{--<label class="control-label col-sm-4">Special Product2:</label>--}%
+
+            %{--<div class="col-sm-6">--}%
+                %{--<div style="margin-top: 7px;"><g:link action="show" controller="product" id="${aboutUsInstance.specialProduct2.id}"> ${aboutUsInstance.specialProduct2.productSpecificationName}</g:link></div>--}%
+
+            %{--</div>--}%
+
+
+        %{--</div>--}%
+    %{--</div>--}%
     <div class="col-lg-6">
         <div class="form-group">
             <label class="control-label col-sm-4">Special SubCategory:</label>

@@ -51,6 +51,8 @@
 
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/product_filter_level2.js')}" type="text/javascript"
+            charset="utf-8"></script>
 
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrapvalidator.js')}" type="text/javascript"
             charset="utf-8"></script>
@@ -86,6 +88,8 @@
 </head>
 
 <body>
+
+
 <div class="se-pre-con"></div>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
@@ -105,9 +109,6 @@ $(".se-pre-con").fadeOut("slow");
         <div class="container">
 
             <div class="col-md-12">
-
-
-
                 <div class="row" id="error-page">
                     <div class="col-sm-6 col-sm-offset-3">
                         <div class="box">

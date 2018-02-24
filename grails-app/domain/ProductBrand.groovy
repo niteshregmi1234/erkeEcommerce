@@ -11,4 +11,8 @@ class ProductBrand {
         isTop nullable: true
         logoName nullable: true
     }
+    static mapping = {
+        sort id: "desc"
+    }
+
 }

@@ -11,4 +11,8 @@ String subCategoryDescription
     static constraints = {
         subCategoryId (generator:'assigned',unique:true)
     }
+    static mapping = {
+        sort id: "desc"
+    }
+
 }

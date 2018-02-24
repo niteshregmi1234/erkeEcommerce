@@ -8,4 +8,8 @@ class CoverImage {
     static constraints = {
         productBrand nullable: true
     }
+    static mapping = {
+        sort id: "desc"
+    }
+
 }

@@ -12,7 +12,8 @@
     <title></title>
 </head>
 
-<body><g:form action="save" controller="product" class="form-horizontal" enctype="multipart/form-data" onsubmit="return Validate(this);">
+<body>
+<g:form action="save" controller="product" class="form-horizontal" enctype="multipart/form-data" onsubmit="return Validate(this);">
 
     <g:render template="form"></g:render>
 <div class="col-lg-12">

@@ -14,6 +14,8 @@ class UrlMappings {
             "/result"(action: "result",controller: "endUser")
         "/topBrand"(action: "topBrand",controller: "endUser")
         "/allBrands"(action: "allBrands",controller: "endUser")
+            "/topSales"(action: "topSales",controller: "endUser")
+            "/latestProducts"(action: "latestProducts",controller: "endUser")
 
         "/offerBrand"(action: "offerBrand",controller: "endUser")
 
@@ -35,7 +37,7 @@ class UrlMappings {
         "/sendQuery"(action: "placeOrder",controller: "checkOut")
         "/login-YarsaaAnojAndBikash"(action: "adminLoginForm",controller: "login")
         "/"(action: "userHome",controller: "endUser")
-        "500"(controller:"errorPage",action:"notfound")
+//        "500"(controller:"errorPage",action:"notfound")
         "404"(controller:"errorPage",action:"notfound")
         "405"(controller: "errorPage",action: "notfound")
 	}

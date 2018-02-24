@@ -47,8 +47,10 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
                 def cartHistory=CartHistory.findById(cartHistoryId)
                 cartHistory.isDelivered=true
                 cartHistory.isFakeOrder=false
-
                 cartHistory.save(flush: true)
+                def productInstance=cartHistory.product
+                productInstance.soldNumbers=cartHistory.product.soldNumbers+cartHistory.quantity
+                productInstance.save(flush: true)
             }
             redirect(action: "recentOrders")
         }

@@ -34,14 +34,21 @@
 
             <div class="social">
             <h2 style="color: #4fbfa8; margin-left: 8px;">Top Brands</h2>
+                <%int i=0;
+                    %>
 <g:each in="${brandList}" var="list">
-    <g:if test="${Product.findByProductDetails(ProductDetails.findByProductBrand(list))}">
-                <div class="col-sm-2" style="margin-bottom: 10px;">
+    <g:if test="${Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductBrand(list),false)}">
+
+        <g:if test="${i<5}">
+                <div class="col-md-2 col-sm-4 col-xs-4" style="margin-bottom: 10px;">
         <g:link action="topBrand" controller="endUser" id="${list.id}">
 
             <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive">
 </g:link>
                 </div>
+            <% i=i+1
+            %>
+        </g:if>
     </g:if>
 </g:each>
 
@@ -113,7 +120,8 @@
 
     <!-- *** HOT PRODUCT SLIDESHOW ***
  _________________________________________________________ -->
-    <div id="hot" data-animate="fadeInUpBig">
+    <g:if test="${latestProductList}">
+    <div id="hot">
 
         <div class="box">
             <div class="container">
@@ -126,34 +134,30 @@
         <div class="container">
             <div class="product-slider">
 <g:each in="${latestProductList}" var="list">
-
-                <div class="item">
+    <div class="item">
                     <div class="product product-height">
                         <div class="flip-container">
                             <div class="flipper">
                                 <div class="front food1">
                                     <g:link action="singleProduct" controller="endUser" id="${list.productId}">
                                         <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive ">
-
-
                                     </g:link>
                                 </div>
                                 <div class="back food1">
     <g:link action="singleProduct" controller="endUser" id="${list.productId}">
         <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
-
-
-                                    </g:link>
+    </g:link>
                                 </div>
                             </div>
                         </div>
                         <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible food1">
                             <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
-
-
                         </g:link>
                         <div class="text">
-                            <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName}</g:link></h3>
+                            <div class="tooltips">
+                            <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
+                            <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
+                           </div>
                             <g:if test="${list.productDetails.isSale==true}">
                                 <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
                                     <del class="del-price">Rs.${list.productDetails.price}</del></p>
@@ -184,11 +188,17 @@
 
            </g:each>
             </div>
+            <div class="pages">
+            <p class="loadMore">
+                <g:link action="latestProducts" controller="endUser" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i>See more</g:link>
+            </p>
+            </div>
             <!-- /.product-slider -->
         </div>
         <!-- /.container -->
 
     </div>
+    </g:if>
     <!-- /#hot -->
     <!-- *** HOT END *** -->
 
@@ -223,12 +233,14 @@
 
     <!-- *** BLOG HOMEPAGE ***
  _________________________________________________________ -->
-    <div id="hot" data-animate="fadeInUpBig">
+<g:if test="${featuredProductList}">
+
+    <div id="hot">
 
         <div class="box">
             <div class="container">
                 <div class="col-md-12">
-                    <h2>Featured Items</h2>
+                    <h2>Top Sales</h2>
                 </div>
             </div>
         </div>
@@ -262,7 +274,10 @@
 
                             </g:link>
                             <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productName}</g:link></h3>
+                                <div class="tooltips">
+                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
+                                    <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
+                                </div>
                                 <g:if test="${list.productDetails.isSale==true}">
                                     <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
 
@@ -299,7 +314,20 @@
         </div>
         <!-- /.container -->
 
+    <div class="pages">
+        <p class="loadMore">
+            <g:link controller="endUser" action="topSales" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i>See more</g:link>
+        </p>
     </div>
+    </div>
+</g:if>
+    %{--<style>--}%
+    %{--.div1 {--}%
+        %{--overflow: hidden;--}%
+        %{--white-space: nowrap;--}%
+
+    %{--}--}%
+
     %{--<div class="container" data-animate="fadeInUpBig">--}%
 
         %{--<div class="col-md-12">--}%
@@ -331,94 +359,7 @@
 
     %{--</div>--}%
 
-    <style>
-    .caption1{
-        position:absolute;
-        top:30%;
-        left:-30px;
-        background: rgba(255,255,255,0.44);
-    }
 
-    </style>
-    <div class="box text-center" data-animate="fadeInUp">
-        <div class="container">
-            <div class="col-md-12">
-                <h3 class="text-uppercase"></h3>
-
-                <p class="lead">${homeContent.specialBrandImageDescriptionUp}
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-
-        <div class="col-md-12" data-animate="fadeInUp">
-
-            <div id="blog-homepage" class="row">
-                <div class="col-sm-6">
-                    <div class="imgwrapper ">
-                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:specialBrandInstance?.brandMainImageName])}" class="img-responsive">
-
-                        <div class="middle">
-                            <div class="text1">
-                                <h3>${specialBrandInstance.productBrand.brandName}</h3>
-                                <p>${specialBrandInstance.descriptionMainImage}</p>
-
-                                <div class="wthreeshop-a shop-button"><g:link action="specialBrandProducts" controller="endUser">SHOP ${specialBrandInstance.productBrand.brandName} COLLECTION</g:link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="imgwrapper">
-                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:specialBrandInstance?.brandSub1ImageName])}" class="img-responsive">
-
-                        <div class="middle">
-                            <div class="text1">
-                                <h3>${specialBrandInstance.titleForSub1Image}</h3>
-                                <p>${specialBrandInstance.descriptionSub1Image}</p>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="imgwrapper">
-                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:specialBrandInstance?.brandSub2ImageName])}" class="img-responsive">
-
-                        <div class="middle">
-                            <div class="text1">
-                                <h3>${specialBrandInstance.titleForSub2Image}</h3>
-                                <p>${specialBrandInstance.descriptionSub2Image}</p>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-            </div>
-            <!-- /#blog-homepage -->
-        </div>
-    </div>
-    <br/>
-    <!-- /.container -->
-
-    <!-- *** BLOG HOMEPAGE END *** -->
-    <div class="box text-center" data-animate="fadeInUp">
-        <div class="container">
-            <div class="col-md-12">
-                <h3 class="text-uppercase"></h3>
-
-                <p class="lead">${homeContent.specialBrandImageDescriptionDown}
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
 
         %{--<div class="col-md-12" data-animate="fadeInUp">--}%
 
@@ -453,7 +394,6 @@
             %{--</div>--}%
             <!-- /#blog-homepage -->
         %{--</div>--}%
-    </div>
     <div class="container">
         <div class="row">
         <div class="col-md-12">

@@ -6,4 +6,8 @@ String colorName
 
     static constraints = {
     }
+    static mapping = {
+        sort id: "desc"
+    }
+
 }

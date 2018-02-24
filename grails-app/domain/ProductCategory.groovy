@@ -10,4 +10,9 @@ class ProductCategory {
 
         categoryId (generator:'assigned',unique:true)
     }
+    static mapping = {
+        sort id: "desc"
+    }
+
 }
+
