@@ -27,6 +27,7 @@
             </div>
             <!-- /#main-slider -->
         </div>
+
     </div>
     <div class="container">
         <div class="col-md-12">
@@ -39,13 +40,14 @@
 <g:each in="${brandList}" var="list">
     <g:if test="${Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductBrand(list),false)}">
 
-        <g:if test="${i<5}">
+        <g:if test="${i<6}">
                 <div class="col-md-2 col-sm-4 col-xs-4" style="margin-bottom: 10px;">
         <g:link action="topBrand" controller="endUser" id="${list.id}">
 
             <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive">
 </g:link>
                 </div>
+
             <% i=i+1
             %>
         </g:if>
@@ -63,9 +65,16 @@
                 %{--</a>--}%
             %{--</p>--}%
         </div>
+                <h4><p class="loadMore moreBrand" >
+                    <g:link action="allBrands" controller="endUser">See more..</g:link>
+                </p>
+                </h4>
             </div>
+
     </div>
+
 </div>
+
     <!-- *** ADVANTAGES HOMEPAGE ***
  _________________________________________________________ -->
     <style>
@@ -187,17 +196,22 @@
                 </div>
 
            </g:each>
+
             </div>
-            <div class="pages">
-            <p class="loadMore">
-                <g:link action="latestProducts" controller="endUser" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i>See more</g:link>
-            </p>
-            </div>
+
             <!-- /.product-slider -->
         </div>
+
+
         <!-- /.container -->
 
     </div>
+        <div class="col-md-12">
+        <h4><p class="loadMore more" >
+            <g:link action="latestProducts" controller="endUser">See more..</g:link>
+        </p>
+        </h4>
+        </div>
     </g:if>
     <!-- /#hot -->
     <!-- *** HOT END *** -->
@@ -314,87 +328,17 @@
         </div>
         <!-- /.container -->
 
-    <div class="pages">
-        <p class="loadMore">
-            <g:link controller="endUser" action="topSales" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i>See more</g:link>
-        </p>
+
     </div>
+    </div>
+    <div class="col-md-12">
+        <h4><p class="loadMore more" >
+            <g:link action="topSales" controller="endUser">See more..</g:link>
+        </p>
+        </h4>
     </div>
 </g:if>
-    %{--<style>--}%
-    %{--.div1 {--}%
-        %{--overflow: hidden;--}%
-        %{--white-space: nowrap;--}%
-
-    %{--}--}%
-
-    %{--<div class="container" data-animate="fadeInUpBig">--}%
-
-        %{--<div class="col-md-12">--}%
-
-            %{--<div class="box slideshow sildeshow1">--}%
-
-                %{--<div id="thumbnail text-center nomargin">--}%
-                    %{--<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:seasonManagementInstance.seasons.imageName])}" class="img-responsive image-nomargin">--}%
-
-                    %{--<div class="middle1 col-sm-offset-4 col-sm-5">--}%
-                        %{--<div class="text1">--}%
-                            %{--<h3> <p class="text-center lead1">${seasonManagementInstance.seasons.greetings}</p></h3>--}%
-
-
-                            %{--<p class="text-center lead lead2">${seasonManagementInstance.seasons.descriptionOfSeason}</p>--}%
-                            %{--<div class="wthreeshop-a button-a">--}%
-                                %{--<g:link action="upcomingSeasonProducts">${seasonManagementInstance.seasons.askingForShopping}</g:link>--}%
-                            %{--</div>--}%
-                        %{--</div>--}%
-                    %{--</div>--}%
-
-                %{--</div>--}%
-
-
-
-            %{--</div>--}%
-
-        %{--</div>--}%
-
-    %{--</div>--}%
-
-
-
-        %{--<div class="col-md-12" data-animate="fadeInUp">--}%
-
-            %{--<div id="blog-homepage" class="row">--}%
-                %{--<div class="col-sm-6">--}%
-                    %{--<div class="post">--}%
-                        %{--<h4><a href="post.html">Fashion now</a></h4>--}%
-                        %{--<p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a>--}%
-                        %{--</p>--}%
-                        %{--<hr>--}%
-                        %{--<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean--}%
-                        %{--ultricies mi vitae est. Mauris placerat eleifend leo.</p>--}%
-                        %{--<p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a>--}%
-                        %{--</p>--}%
-                    %{--</div>--}%
-                %{--</div>--}%
-
-                %{--<div class="col-sm-6">--}%
-                    %{--<div class="post">--}%
-                        %{--<h4><a href="post.html">Who is who - example blog post</a></h4>--}%
-                        %{--<p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a>--}%
-                        %{--</p>--}%
-                        %{--<hr>--}%
-                        %{--<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean--}%
-                        %{--ultricies mi vitae est. Mauris placerat eleifend leo.</p>--}%
-                        %{--<p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a>--}%
-                        %{--</p>--}%
-                    %{--</div>--}%
-
-                %{--</div>--}%
-
-            %{--</div>--}%
-            <!-- /#blog-homepage -->
-        %{--</div>--}%
-    <div class="container">
+<div class="container">
         <div class="row">
         <div class="col-md-12">
 

@@ -423,7 +423,7 @@
                                         </g:link>
                                         <div class="text">
                                             <div class="tooltips">
-                                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
+                                                <h3 class="textHeight"><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
                                                 <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
                                             </div>
                                             <span class="pricesT" style="display: none;">Rs${list.soldNumbers}</span>
@@ -482,7 +482,7 @@
                                         </g:link>
                                         <div class="text">
                                             <div class="tooltips">
-                                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
+                                                <h3 class="textHeight"><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
                                                 <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
                                             </div>
                                             <span class="pricesT" style="display: none;">Rs${list.soldNumbers}</span>
@@ -531,13 +531,11 @@
                 <!-- /.products -->
                 <div class="pages">
 
-                    <p class="loadMore">
-                        <a class="btn btn-primary btn-lg" id="loadMore"><i class="fa fa-chevron-down"></i> Load more</a>
-                    </p>
-                    <p class="loadLess">
-                        <a class="btn btn-primary btn-lg" id="showLess"><i class="fa fa-chevron-up"></i> Show less</a>
-                    </p>
-                    <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
+                <ul class="pagination">
+                    <li><g:paginate next=" &raquo;" prev="&laquo;;" action="subCategoryList" params="[category:productCategory.categoryId,subCategory:productSubCategory.subCategoryId]" controller="endUser" total="${countPaginate}"/></li>
+                </ul>
+
+                <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
                     <g:each in="${productSizeList}" var="list" status="i">
                         <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
                             <div class="modal-dialog modal-sm">
@@ -560,129 +558,6 @@
                         </div>
                     </g:each>
 
-                <script>
-                    $(document).ready(function () {
-                        var size_li = $("#myList .a").size();
-                        var x=15;
-                        var c;
-                        var b=15;
-                        var a=0;
-                        if($("#myList .a").size()<=15){
-                            $("#loadMore").hide();
-
-                        }
-                        $('#myList .a:lt('+x+')').show();
-                        $('#loadMore').click(function () {
-                            $('html, body').animate({
-                                scrollTop: $(".loadMore").offset().top
-                            }, 2000);
-                            x= (x+15 <= size_li) ? x+15 : size_li;
-                            $('#myList .a:lt('+x+')').show();
-                            a=a+1;
-                            b=b+15;
-                            c=15+(15*a);
-                            if(b>=size_li){
-                                $("#loadMore").hide();
-
-                            }
-                            if(a>0){
-                                $("#showLess").show();
-                            }
-
-                        });
-                        $('#showLess').click(function () {
-                            if(c==x+14){
-                                x=(x-1<0) ? 15 : x-1;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+13){
-                                x=(x-2<0) ? 15 : x-2;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+12){
-                                x=(x-3<0) ? 15 : x-3;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+11){
-                                x=(x-4<0) ? 15 : x-4;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+10){
-                                x=(x-5<0) ? 15 : x-5;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+9){
-                                x=(x-6<0) ? 15 : x-6;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+8){
-                                x=(x-7<0) ? 15 : x-7;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+7){
-                                x=(x-8<0) ? 15 : x-8;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+6){
-                                x=(x-9<0) ? 15 : x-9;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+5){
-                                x=(x-10<0) ? 15 : x-10;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+4){
-                                x=(x-11<0) ? 15 : x-11;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+3){
-                                x=(x-12<0) ? 15 : x-12;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+2){
-                                x=(x-13<0) ? 15 : x-13;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-                            else if(c==x+1){
-                                x=(x-14<0) ? 15 : x-14;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                                c=x;
-                            }
-
-                            else{
-                                x=(x-15<0) ? 15 : x-15;
-                                $('#myList .a').not(':lt('+x+')').hide();
-                            }
-                            a=a-1;
-                            b=b-15;
-
-                            if(a==0){
-                                $("#showLess").hide();
-                            }
-                            if(b<size_li){
-                                $("#loadMore").show();
-
-                            }
-
-                        });
-                        $("#showLess").hide();
-
-
-                    });
-                </script>
                     <g:if test="${productList}">
                         <script>
                             $(document).ready(function () {
@@ -694,24 +569,6 @@
 
                         </script>
                     </g:if>
-                    <style>
-                    #myList .a{ display:none;
-                    }
-                    /*#loadMore {*/
-                    /*color:green;*/
-                    /*cursor:pointer;*/
-                    /*}*/
-                    /*#loadMore:hover {*/
-                    /*color:black;*/
-                    /*}*/
-                    /*#showLess {*/
-                    /*color:red;*/
-                    /*cursor:pointer;*/
-                    /*}*/
-                    /*#showLess:hover {*/
-                    /*color:black;*/
-                    /*}*/
-                    </style>
 
                     %{--<ul class="pagination">--}%
                     %{--<li><a href="#">&laquo;</a>--}%
@@ -740,7 +597,7 @@
     <!-- /.container -->
 </div>
 <!-- /#content -->
-</div>
+
 
 <script>
 

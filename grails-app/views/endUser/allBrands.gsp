@@ -37,7 +37,7 @@
                     <h2 style="color: #4fbfa8; margin-left: 8px;">Top Brands</h2>
                     <g:each in="${brandsList}" var="list">
                         <g:if test="${Product.findByProductDetails(ProductDetails.findByProductBrand(list))}">
-                            <div class="col-sm-2" style="margin-bottom: 10px;">
+                            <div class="col-sm-2 col-sm-4 col-xs-4 "style="margin-bottom: 10px;">
                                 <g:link action="topBrand" controller="endUser" id="${list.id}">
 
                                     <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive">

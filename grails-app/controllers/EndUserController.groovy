@@ -2,40 +2,43 @@ class EndUserController {
     def productService
     static allowedMethods = [search: "POST"]
 def topSales(){
-    def productTopSalesList = Product.findAllBySoldNumbersGreaterThanAndDelFlag(0,false, [max:10,sort: "soldNumbers", order: "desc"])
+    def subList=[]
+    List<Product> productListSub=new ArrayList<>()
+    def prices=[]
+    def productTopSalesList = Product.findAllBySoldNumbersGreaterThanAndDelFlag(0,false ,[sort: "soldNumbers", order: "desc"])
     List<List<ProductSize>> listList=new ArrayList<>()
     List<ProductCategory> productCategoryList=new ArrayList<>()
     List<Float> discountList=new ArrayList<>()
     List<ProductBrand> productBrandList=new ArrayList<>()
     List<ProductSubCategory> productSubCategoryList=new ArrayList<>()
-    for(Product product:productTopSalesList) {
-        if (!productBrandList.contains(product.productDetails.productBrand)) {
-            productBrandList.add(product.productDetails.productBrand)
+       subList = productService.getSubList(productTopSalesList, params)
+    for(int j=0;j<subList.size();j++){
+        def productInstance=subList.get(j)
+        productListSub.add(productInstance)
+        if(!productBrandList.contains(productInstance.productDetails.productBrand)){
+            productBrandList.add(productInstance.productDetails.productBrand)}
+        if(!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)){
+            productSubCategoryList.add(productInstance.productDetails.productSubCategory)
         }
-        if (!productSubCategoryList.contains(product.productDetails.productSubCategory)) {
-            productSubCategoryList.add(product.productDetails.productSubCategory)
+        if(!productCategoryList.contains(productInstance.productDetails.productCategory)){
+            productCategoryList.add(productInstance.productDetails.productCategory)
         }
-        if (!discountList.contains(product.productDetails.discountPercentage) && product.productDetails.discountPercentage != 0) {
-            discountList.add(product.productDetails.discountPercentage)
+        if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
+            discountList.add(productInstance.productDetails.discountPercentage)
         }
-        if (!productCategoryList.contains(product.productDetails.productCategory)) {
-            productCategoryList.add(product.productDetails.productCategory)
-        }
+        def sizeString=productInstance.productDetails.productSizes
+        String[] stringArraySize= sizeString.split(",")
+        List<ProductSize> productSizeList=new ArrayList<>()
+        for(int i=0;i<stringArraySize.size();i++){
+            def sizeId=stringArraySize[i] as long
+            if(ProductSize.get(sizeId)) {
 
-        def sizeString = product.productDetails.productSizes
-        String[] stringArraySize = sizeString.split(",")
-        List<ProductSize> productSizeList = new ArrayList<>()
-        for (int i = 0; i < stringArraySize.size(); i++) {
-            def sizeId = stringArraySize[i] as long
-            if (ProductSize.get(sizeId)) {
                 productSizeList.add(ProductSize.get(sizeId))
-            }
-        }
+            }                }
         listList.add(productSizeList)
     }
-    def prices=productService.pricesArray(productTopSalesList)
-
-    [productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList:productTopSalesList]
+    prices=productService.pricesArray(productListSub)
+    [countPaginate:productTopSalesList.size() ,productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList:subList]
 }
     def brand(){
     def brandId=params.list("brand")
@@ -119,12 +122,14 @@ def topSales(){
     def result() {
         try {
             def prices=[0,0]
+            def subList=[]
+            List<List<ProductSize>> listList=new ArrayList<>()
+            List<Product> productListSub=new ArrayList<>()
             List<Product> productList = new ArrayList<>()
             List<ProductCategory> productCategoryList=new ArrayList<>()
             List<Float> discountList=new ArrayList<>()
             List<ProductBrand> productBrandList=new ArrayList<>()
             List<ProductSubCategory> productSubCategoryList=new ArrayList<>()
-            List<List<ProductSize>> listList = new ArrayList<>()
             def productDetailsIds = params.list("result")
             if (productDetailsIds) {
                 List<ProductDetails> productDetailsList = new ArrayList<>()
@@ -136,44 +141,42 @@ def topSales(){
               def product = Product.findByProductDetailsAndDelFlag(productDetails,false)
               if (product) {
                   productList.add(product)
-                  if(!productBrandList.contains(product.productDetails.productBrand)){
-                      productBrandList.add(product.productDetails.productBrand)
-                  }
-                  if(!productSubCategoryList.contains(product.productDetails.productSubCategory)){
-                      productSubCategoryList.add(product.productDetails.productSubCategory)
-                  }
-                  if(!discountList.contains(product.productDetails.discountPercentage) && product.productDetails.discountPercentage!=0 ) {
-                      discountList.add(product.productDetails.discountPercentage)
-                  }
-                  if(!productCategoryList.contains(product.productDetails.productCategory)){
-                      productCategoryList.add(product.productDetails.productCategory)}
-
               }
 
           }
-                prices=productService.pricesArray(productList)
+                subList = productService.getSubList(productList, params)
+                for(int j=0;j<subList.size();j++){
+                    def productInstance=subList.get(j)
+                    productListSub.add(productInstance)
+                    if(!productBrandList.contains(productInstance.productDetails.productBrand)){
+                        productBrandList.add(productInstance.productDetails.productBrand)}
+                    if(!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)){
+                        productSubCategoryList.add(productInstance.productDetails.productSubCategory)
+                    }
+                    if(!productCategoryList.contains(productInstance.productDetails.productCategory)){
+                        productCategoryList.add(productInstance.productDetails.productCategory)
+                    }
+                    if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
+                        discountList.add(productInstance.productDetails.discountPercentage)
+                    }
+                    def sizeString=productInstance.productDetails.productSizes
+                    String[] stringArraySize= sizeString.split(",")
+                    List<ProductSize> productSizeList=new ArrayList<>()
+                    for(int i=0;i<stringArraySize.size();i++){
+                        def sizeId=stringArraySize[i] as long
+                        if(ProductSize.get(sizeId)) {
 
-                for(Product productInstance: productList){
-              def sizeString=productInstance.productDetails.productSizes
-              String[] stringArraySize= sizeString.split(",")
-              List <ProductSize> productSizeList=new ArrayList<>()
-                    for(int i=0; i< stringArraySize.size(); i++){
-                  def sizeId=stringArraySize[i] as long
-                        if(ProductSize.get(sizeId)){
-
-                            productSizeList.add(ProductSize.get(sizeId))}
-              }
-              listList.add(productSizeList)
-
+                            productSizeList.add(ProductSize.get(sizeId))
+                        }                }
+                    listList.add(productSizeList)
                 }
+                prices=productService.pricesArray(productListSub)
 
             }
 
-            render(view: "search", model: [productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,productBrandList: productBrandList,productSizeList: listList, productList: productList,prices: prices])
+            render(view: "search", model: [countPaginate:productList.size(),productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,productBrandList: productBrandList,productSizeList: listList, productList: subList,prices: prices,result:productDetailsIds])
 
-
-
-    }
+        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
@@ -181,7 +184,10 @@ def topSales(){
 
     def allProducts={
         try{
-        def productDetailsList=ProductDetails.list();
+            List<Product> productListSub=new ArrayList<>()
+            def subList=[]
+            def prices=[0,0]
+            def productDetailsList=ProductDetails.list();
             List<ProductCategory> productCategoryList=new ArrayList<>()
             List<Float> discountList=new ArrayList<>()
             List<ProductBrand> productBrandList=new ArrayList<>()
@@ -191,34 +197,38 @@ def topSales(){
             def product = Product.findByProductDetailsAndDelFlag(productDetails,false)
             if (product) {
                 productList.add(product)
-                if(!productBrandList.contains(product.productDetails.productBrand)){
-                    productBrandList.add(product.productDetails.productBrand)
-                }
-                if(!productSubCategoryList.contains(product.productDetails.productSubCategory)){
-                    productSubCategoryList.add(product.productDetails.productSubCategory)
-                }
-                if(!discountList.contains(product.productDetails.discountPercentage) && product.productDetails.discountPercentage!=0 ) {
-                    discountList.add(product.productDetails.discountPercentage)
-                }
-                if(!productCategoryList.contains(product.productDetails.productCategory)){
-                    productCategoryList.add(product.productDetails.productCategory)}
-
             }
         }
-            def prices=productService.pricesArray(productList)
+            prices=productService.pricesArray(productList)
             List<List<ProductSize>> listList=new ArrayList<>()
-            for(Product productInstance:productList){
+            subList = productService.getSubList(productList, params)
+            for(int j=0;j<subList.size();j++){
+                def productInstance=subList.get(j)
+                productListSub.add(productInstance)
+                if(!productBrandList.contains(productInstance.productDetails.productBrand)){
+                    productBrandList.add(productInstance.productDetails.productBrand)}
+                if(!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)){
+                    productSubCategoryList.add(productInstance.productDetails.productSubCategory)
+                }
+                if(!productCategoryList.contains(productInstance.productDetails.productCategory)){
+                    productCategoryList.add(productInstance.productDetails.productCategory)
+                }
+                if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
+                    discountList.add(productInstance.productDetails.discountPercentage)
+                }
                 def sizeString=productInstance.productDetails.productSizes
                 String[] stringArraySize= sizeString.split(",")
                 List<ProductSize> productSizeList=new ArrayList<>()
                 for(int i=0;i<stringArraySize.size();i++){
                     def sizeId=stringArraySize[i] as long
                     if(ProductSize.get(sizeId)) {
+
                         productSizeList.add(ProductSize.get(sizeId))
-                    }               }
+                    }                }
                 listList.add(productSizeList)
             }
-        render(view: "allProducts", model: [productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList: productList,productCategoryList:ProductCategory.list()])
+            prices=productService.pricesArray(productListSub)
+            render(view: "allProducts", model: [countPaginate:productList.size(),productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList: subList])
 
     }
         catch (Exception e){
@@ -228,6 +238,7 @@ def topSales(){
     def specialSubCategory(){
         try{
             if(AboutUs.list()[0].specialProductSubCategory) {
+                def subList=[]
                 List<ProductCategory> productCategoryList=new ArrayList<>()
                 List<Float> discountList=new ArrayList<>()
                 List<ProductBrand> productBrandList=new ArrayList<>()
@@ -237,20 +248,23 @@ def topSales(){
                     def product = Product.findByProductDetailsAndDelFlag(productDetails,false)
                     if (product) {
                         productList.add(product)
-                        if(!productBrandList.contains(product.productDetails.productBrand)){
-                            productBrandList.add(product.productDetails.productBrand)
-                        }
-                        if(!discountList.contains(product.productDetails.discountPercentage) && product.productDetails.discountPercentage!=0 ) {
-                            discountList.add(product.productDetails.discountPercentage)
-                        }
-                        if(!productCategoryList.contains(product.productDetails.productCategory)){
-                            productCategoryList.add(product.productDetails.productCategory)}
 
                     }
                 }
-                def prices=productService.pricesArray(productList)
+                List<Product>  productListSub=new ArrayList<>()
                 List<List<ProductSize>> listList=new ArrayList<>()
-                for(Product productInstance:productList){
+                subList = productService.getSubList(productList, params)
+                for(int j=0;j<subList.size();j++){
+                    def productInstance=subList.get(j)
+                    productListSub.add(productInstance)
+                    if(!productBrandList.contains(productInstance.productDetails.productBrand)){
+                        productBrandList.add(productInstance.productDetails.productBrand)}
+                    if(!productCategoryList.contains(productInstance.productDetails.productCategory)){
+                        productCategoryList.add(productInstance.productDetails.productCategory)
+                    }
+                    if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
+                        discountList.add(productInstance.productDetails.discountPercentage)
+                    }
                     def sizeString=productInstance.productDetails.productSizes
                     String[] stringArraySize= sizeString.split(",")
                     List<ProductSize> productSizeList=new ArrayList<>()
@@ -259,10 +273,11 @@ def topSales(){
                         if(ProductSize.get(sizeId)) {
 
                             productSizeList.add(ProductSize.get(sizeId))
-                        }                    }
+                        }                }
                     listList.add(productSizeList)
                 }
-                render(view: "specialSubCategory", model: [productCategoryList:productCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList: productList, specialCategoryInstance: AboutUs.list()[0].specialProductSubCategory])
+                def prices=productService.pricesArray(productListSub)
+                render(view: "specialSubCategory", model: [countPaginate:productList.size(),productCategoryList:productCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList: subList, specialCategoryInstance: AboutUs.list()[0].specialProductSubCategory])
             }
             else{
                 redirect(action: "notfound",controller: "errorPage")
@@ -328,12 +343,14 @@ catch (Exception e){
         }
     }
     def latestProducts(){
+        def prices=[0,0]
+        params.max=15
         List<List<ProductSize>> listList=new ArrayList<>()
         List<ProductCategory> productCategoryList=new ArrayList<>()
         List<Float> discountList=new ArrayList<>()
         List<ProductBrand> productBrandList=new ArrayList<>()
         List<ProductSubCategory> productSubCategoryList=new ArrayList<>()
-        def latestProductList = Product.findAllByIsLatestAndDelFlag(true,false)
+        def latestProductList = Product.findAllByIsLatestAndDelFlag(true,false,params)
         for(Product product:latestProductList) {
             if (!productBrandList.contains(product.productDetails.productBrand)) {
                 productBrandList.add(product.productDetails.productBrand)
@@ -359,9 +376,9 @@ catch (Exception e){
             }
             listList.add(productSizeList)
         }
-            def prices=productService.pricesArray(latestProductList)
+            prices=productService.pricesArray(latestProductList)
 
-[productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList:latestProductList]
+[countPaginate:Product.findAllByIsLatestAndDelFlag(true,false).size(),productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList:latestProductList]
     }
     def userHome() {
         try{
@@ -387,6 +404,7 @@ catch (Exception e){
 
     def subCategoryList() {
         try{
+
             if(ProductDetails.findByProductCategoryAndProductSubCategory(ProductCategory.findByCategoryId(params.category), ProductSubCategory.findBySubCategoryId(params.subCategory)))
                     {
                         List<Float> discountList=new ArrayList<>()
@@ -397,29 +415,37 @@ catch (Exception e){
             def product = Product.findByProductDetailsAndDelFlag(productDetails,false)
             if (product) {
                 productList.add(product)
-                if(!productBrandList.contains(product.productDetails.productBrand)){
-                productBrandList.add(product.productDetails.productBrand)}
-                if(!discountList.contains(product.productDetails.discountPercentage) && product.productDetails.discountPercentage!=0 ) {
-                    discountList.add(product.productDetails.discountPercentage)
-                }
+
             }
         }
 
-   def prices=productService.pricesArray(productList)
-                List<List<ProductSize>> listList=new ArrayList<>()
-                for(Product productInstance:productList){
-                    def sizeString=productInstance.productDetails.productSizes
-                    String[] stringArraySize= sizeString.split(",")
-                    List<ProductSize> productSizeList=new ArrayList<>()
-                    for(int i=0;i<stringArraySize.size();i++){
-                        def sizeId=stringArraySize[i] as long
-                        if(ProductSize.get(sizeId)) {
+                        def subList=[]
+                        List<Product>  productListSub=new ArrayList<>()
+                        List<List<ProductSize>> listList=new ArrayList<>()
+                        subList = productService.getSubList(productList, params)
+                        for(int j=0;j<subList.size();j++){
+                            def productInstance=subList.get(j)
+                            productListSub.add(productInstance)
+                            if(!productBrandList.contains(productInstance.productDetails.productBrand)){
+                                productBrandList.add(productInstance.productDetails.productBrand)
+                            }
+                            if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
+                                discountList.add(productInstance.productDetails.discountPercentage)
+                            }
+                            def sizeString=productInstance.productDetails.productSizes
+                            String[] stringArraySize= sizeString.split(",")
+                            List<ProductSize> productSizeList=new ArrayList<>()
+                            for(int i=0;i<stringArraySize.size();i++){
+                                def sizeId=stringArraySize[i] as long
+                                if(ProductSize.get(sizeId)) {
 
-                            productSizeList.add(ProductSize.get(sizeId))
-                        }                    }
-                    listList.add(productSizeList)
-                }
-        render(view: "subCategoryList", model: [discountList:discountList,productBrandList:productBrandList,prices:prices,productSizeList:listList,productList: productList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory),productCategory: ProductCategory.findByCategoryId(params.category),productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true)])
+                                    productSizeList.add(ProductSize.get(sizeId))
+                                }                }
+                            listList.add(productSizeList)
+                        }
+                        def prices=productService.pricesArray(productListSub)
+
+                        render(view: "subCategoryList", model: [countPaginate:productList.size(),discountList:discountList,productBrandList:productBrandList,prices:prices,productSizeList:listList,productList: subList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory),productCategory: ProductCategory.findByCategoryId(params.category)])
             }
         else{
             redirect(action: "notfound",controller: "errorPage")
@@ -437,6 +463,7 @@ def test(){
         try{
         if (params.id != null) {
             if(ProductCategory.findByCategoryId(params.id)){
+                List<List<ProductSize>> listList=new ArrayList<>()
                 List<Float> discountList=new ArrayList<>()
                 List<ProductBrand> productBrandList=new ArrayList<>()
                 List<ProductSubCategory> productSubCategoryList=new ArrayList<>()
@@ -446,32 +473,35 @@ def test(){
                 def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)
                 if (product) {
                     productList.add(product[0])
-                    if(!productBrandList.contains(product[0].productDetails.productBrand)){
-                        productBrandList.add(product[0].productDetails.productBrand)}
-                    if(!productSubCategoryList.contains(product[0].productDetails.productSubCategory)){
-                        productSubCategoryList.add(product[0].productDetails.productSubCategory)
-                    }
-                    if(!discountList.contains(product[0].productDetails.discountPercentage) && product[0].productDetails.discountPercentage!=0 ) {
-                        discountList.add(product[0].productDetails.discountPercentage)
-                    }
 
                 }
             }
-                def prices=productService.pricesArray(productList)
-                List<List<ProductSize>> listList=new ArrayList<>()
-                for(Product productInstance:productList){
-                def sizeString=productInstance.productDetails.productSizes
-                String[] stringArraySize= sizeString.split(",")
-                List<ProductSize> productSizeList=new ArrayList<>()
-                for(int i=0;i<stringArraySize.size();i++){
-                    def sizeId=stringArraySize[i] as long
-                    if(ProductSize.get(sizeId)) {
+                List<Product> productListSub=new ArrayList<>()
+                def subList = productService.getSubList(productList, params)
+                for(int j=0;j<subList.size();j++){
+                    def productInstance=subList.get(j)
+                    productListSub.add(productInstance)
+                    if(!productBrandList.contains(productInstance.productDetails.productBrand)){
+                        productBrandList.add(productInstance.productDetails.productBrand)}
+                    if(!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)){
+                        productSubCategoryList.add(productInstance.productDetails.productSubCategory)
+                    }
+                    if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
+                        discountList.add(productInstance.productDetails.discountPercentage)
+                    }
+                    def sizeString=productInstance.productDetails.productSizes
+                    String[] stringArraySize= sizeString.split(",")
+                    List<ProductSize> productSizeList=new ArrayList<>()
+                    for(int i=0;i<stringArraySize.size();i++){
+                        def sizeId=stringArraySize[i] as long
+                        if(ProductSize.get(sizeId)) {
 
-                        productSizeList.add(ProductSize.get(sizeId))
-                    }                }
-                 listList.add(productSizeList)
+                            productSizeList.add(ProductSize.get(sizeId))
+                        }                }
+                    listList.add(productSizeList)
                 }
-            render(view: "categoryList", model: [discountList:discountList,prices: prices,productBrandList: productBrandList, productList: productList, productCategory: ProductCategory.findByCategoryId(params.id),productSizeList:listList,productSubCategoryList:productSubCategoryList])
+                def prices=productService.pricesArray(productListSub)
+                render(view: "categoryList", model: [countPaginate: productList.size(), discountList:discountList,prices: prices,productBrandList: productBrandList, productList: subList, productCategory: ProductCategory.findByCategoryId(params.id),productSizeList:listList,productSubCategoryList:productSubCategoryList])
 
         }
             else{
@@ -491,6 +521,7 @@ def topBrand(){
     try{
         if (params.id != null) {
             if(ProductBrand.findById(params.id) && ProductBrand.findById(params.id).isTop){
+                def subList=[]
                 List<ProductCategory> productCategoryList=new ArrayList<>()
                 List<Float> discountList=new ArrayList<>()
                 List<ProductSubCategory> productSubCategoryList=new ArrayList<>()
@@ -500,20 +531,24 @@ def topBrand(){
                     def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)
                     if (product) {
                         productList.add(product[0])
-                        if(!productSubCategoryList.contains(product[0].productDetails.productSubCategory)){
-                            productSubCategoryList.add(product[0].productDetails.productSubCategory)
-                        }
-                        if(!discountList.contains(product[0].productDetails.discountPercentage) && product[0].productDetails.discountPercentage!=0 ) {
-                            discountList.add(product[0].productDetails.discountPercentage)
-                        }
-                        if(!productCategoryList.contains(product[0].productDetails.productCategory)){
-                            productCategoryList.add(product[0].productDetails.productCategory)}
 
                     }
                 }
-                def prices=productService.pricesArray(productList)
+                List<Product>  productListSub=new ArrayList<>()
                 List<List<ProductSize>> listList=new ArrayList<>()
-                for(Product productInstance:productList){
+                subList = productService.getSubList(productList, params)
+                for(int j=0;j<subList.size();j++){
+                    def productInstance=subList.get(j)
+                    productListSub.add(productInstance)
+                    if(!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)){
+                        productSubCategoryList.add(productInstance.productDetails.productSubCategory)
+                    }
+                    if(!productCategoryList.contains(productInstance.productDetails.productCategory)){
+                        productCategoryList.add(productInstance.productDetails.productCategory)
+                    }
+                    if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
+                        discountList.add(productInstance.productDetails.discountPercentage)
+                    }
                     def sizeString=productInstance.productDetails.productSizes
                     String[] stringArraySize= sizeString.split(",")
                     List<ProductSize> productSizeList=new ArrayList<>()
@@ -522,10 +557,12 @@ def topBrand(){
                         if(ProductSize.get(sizeId)) {
 
                             productSizeList.add(ProductSize.get(sizeId))
-                        }                    }
+                        }                }
                     listList.add(productSizeList)
                 }
-                render(view: "brandProducts", model: [productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productList: productList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
+                def prices=productService.pricesArray(productListSub)
+
+                render(view: "brandProducts", model: [countPaginate:productList.size(),productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productList: subList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
 
             }
             else{
@@ -545,13 +582,13 @@ def topBrand(){
         def brandsList=new ArrayList<>()
         def topBrandsList=ProductBrand.findAllByIsTop(true)
         for(ProductBrand topBrand:topBrandsList){
-            if(Product.findByProductDetails(ProductDetails.findByProductBrand(topBrand))){
+            if(Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductBrand(topBrand),false)){
                 brandsList.add(topBrand)
             }
         }
         def nonTopBrandsList=ProductBrand.findAllByIsTop(false)
         for(ProductBrand nonTopBrand:nonTopBrandsList){
-            if(Product.findByProductDetails(ProductDetails.findByProductBrand(nonTopBrand))){
+            if(Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductBrand(nonTopBrand),false)){
                 brandsList.add(nonTopBrand)
             }
         }
@@ -562,6 +599,7 @@ def topBrand(){
         try{
             if (params.id != null) {
                 if(ProductBrand.findById(params.id) && CoverImage.findByProductBrand(ProductBrand.findById(params.id))){
+                    def subList=[]
                     List<ProductCategory> productCategoryList=new ArrayList<>()
                     List<Float> discountList=new ArrayList<>()
                     List<ProductSubCategory> productSubCategoryList=new ArrayList<>()
@@ -571,20 +609,24 @@ def topBrand(){
                         def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)
                         if (product) {
                             productList.add(product[0])
-                                                       if(!productSubCategoryList.contains(product[0].productDetails.productSubCategory)){
-                                productSubCategoryList.add(product[0].productDetails.productSubCategory)
-                            }
-                            if(!discountList.contains(product[0].productDetails.discountPercentage) && product[0].productDetails.discountPercentage!=0 ) {
-                                discountList.add(product[0].productDetails.discountPercentage)
-                            }
-                            if(!productCategoryList.contains(product[0].productDetails.productCategory)){
-                                productCategoryList.add(product[0].productDetails.productCategory)}
 
                         }
                     }
-                    def prices=productService.pricesArray(productList)
+                    List<Product>  productListSub=new ArrayList<>()
                     List<List<ProductSize>> listList=new ArrayList<>()
-                    for(Product productInstance:productList){
+                    subList = productService.getSubList(productList, params)
+                    for(int j=0;j<subList.size();j++){
+                        def productInstance=subList.get(j)
+                        productListSub.add(productInstance)
+                                     if(!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)){
+                            productSubCategoryList.add(productInstance.productDetails.productSubCategory)
+                        }
+                        if(!productCategoryList.contains(productInstance.productDetails.productCategory)){
+                            productCategoryList.add(productInstance.productDetails.productCategory)
+                        }
+                        if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
+                            discountList.add(productInstance.productDetails.discountPercentage)
+                        }
                         def sizeString=productInstance.productDetails.productSizes
                         String[] stringArraySize= sizeString.split(",")
                         List<ProductSize> productSizeList=new ArrayList<>()
@@ -593,10 +635,12 @@ def topBrand(){
                             if(ProductSize.get(sizeId)) {
 
                                 productSizeList.add(ProductSize.get(sizeId))
-                            }                        }
+                            }                }
                         listList.add(productSizeList)
                     }
-                    render(view: "brandProducts", model: [productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productList: productList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
+                    def prices=productService.pricesArray(productListSub)
+
+                    render(view: "brandProducts", model: [countPaginate:productList.size(),productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productList: subList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
 
                 }
                 else{
@@ -650,9 +694,22 @@ def topBrand(){
                             }
                         }
                     }
-                    def prices=productService.pricesArray(productList)
+                    def subList=[]
+                    List<Product>  productListSub=new ArrayList<>()
                     List<List<ProductSize>> listList=new ArrayList<>()
-                    for(Product productInstance:productList){
+                    subList = productService.getSubList(productList, params)
+                    for(int j=0;j<subList.size();j++){
+                        def productInstance=subList.get(j)
+                        productListSub.add(productInstance)
+                        if(!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)){
+                            productSubCategoryList.add(productInstance.productDetails.productSubCategory)
+                        }
+                        if(!productBrandList.contains(productInstance.productDetails.productBrand)){
+                            productBrandList.add(productInstance.productDetails.productBrand)
+                        }
+                        if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
+                            discountList.add(productInstance.productDetails.discountPercentage)
+                        }
                         def sizeString=productInstance.productDetails.productSizes
                         String[] stringArraySize= sizeString.split(",")
                         List<ProductSize> productSizeList=new ArrayList<>()
@@ -661,10 +718,13 @@ def topBrand(){
                             if(ProductSize.get(sizeId)) {
 
                                 productSizeList.add(ProductSize.get(sizeId))
-                            }                        }
+                            }                }
                         listList.add(productSizeList)
                     }
-                    render(view: "specifiedProducts", model: [productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productList: productList, productSpecifyInstance: ProductSubCategorySpecify.findById(params.subCategorySpecify),productCategory:ProductCategory.findByCategoryId(params.category), productSizeList:listList])
+                    def prices=productService.pricesArray(productListSub)
+
+
+                    render(view: "specifiedProducts", model: [countPaginate:productList.size(),productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productList: subList, productSpecifyInstance: ProductSubCategorySpecify.findById(params.subCategorySpecify),productCategory:ProductCategory.findByCategoryId(params.category), productSizeList:listList])
 
                 }
                 else{

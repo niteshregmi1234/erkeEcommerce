@@ -1,3 +1,20 @@
+.more{
+    margin-top: -80px;
+    margin-right: 80px;
+    text-align:right;
+    font-style: italic;
+}
+.textHeight{
+    margin-top: -20px;
+
+}
+.moreBrand{
+    margin-top: 178px;
+    margin-right: -16px;
+    text-align:right;
+    font-style: italic;
+    margin-bottom: -40px;
+}
 .tooltips {
     position: relative;
 }
