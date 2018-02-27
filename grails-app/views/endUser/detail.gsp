@@ -395,12 +395,7 @@
                             <!-- /.ribbon -->
 </g:if>
                         </div>
-                        <script>
-                            var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-                            alert(width);
-
-                        </script>
-                        <div class="col-sm-6">
+                                               <div class="col-sm-6">
                             <div class="box box-height" id="detailInfo" style="height:400px;overflow-y: scroll;">
                                 <h1 class="text-center bigName">${productInstance.productDetails.productBrand.brandName}</h1>
                                 <h1 class="text-center bigName1">${productInstance.productDetails.briefDescription}</h1>
