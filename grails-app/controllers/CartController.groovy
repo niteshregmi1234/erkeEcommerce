@@ -96,7 +96,6 @@ def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(t
 
         }
         catch (Exception e){
-     redirect(action: "notfound",controller: "errorPage")
         }
     }
     def cart()
@@ -128,7 +127,6 @@ shippingAndHandling= OtherCosts.list()[0].shippingAndHandlingPercentage*totalPri
         Collections.shuffle(relatedProductList)}
             render(view: "checkout", model:[totalPrice:df.format(totalPrice),relatedProductList:relatedProductList,shippingAndHandling:df.format(shippingAndHandling),tax:df.format(tax),totalPriceTotal:df.format(totalPriceTotal)])}
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
 
 }

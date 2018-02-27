@@ -6,7 +6,7 @@
     <meta name="googlebot" content="index,follow,snippet,archive">
     <meta name="keywords" content="">
     <meta name="google-site-verification" content="ukYH3gaQ4LcRA-6yCKNwKZGIv2FKj6l8WubNurI13mc"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
     <meta name="author" content="Anoj And Bikash">
     %{--<g:if test="${productInstance}">--}%
@@ -43,7 +43,7 @@
         <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"style.default.css")}" type="text/css"
               media="all"/>
     </g:if>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.2')}" type="text/css"
           media="all"/>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/respond.min.js')}" type="text/javascript"

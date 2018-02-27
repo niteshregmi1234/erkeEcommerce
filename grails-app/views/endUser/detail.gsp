@@ -395,10 +395,15 @@
                             <!-- /.ribbon -->
 </g:if>
                         </div>
+                        <script>
+                            var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+                            alert(width);
+
+                        </script>
                         <div class="col-sm-6">
                             <div class="box box-height" id="detailInfo" style="height:400px;overflow-y: scroll;">
                                 <h1 class="text-center bigName">${productInstance.productDetails.productBrand.brandName}</h1>
-                                <h1 class="text-center bigName">${productInstance.productDetails.briefDescription}</h1>
+                                <h1 class="text-center bigName1">${productInstance.productDetails.briefDescription}</h1>
                                 <p class="goToDescription"><a href="#details" class="scroll-to">${productInstance.productDetails.productName}</a>
                                 </p>
 
@@ -407,7 +412,7 @@
                                         Rs.<g:formatNumber number="${productInstance.productDetails.price-(productInstance.productDetails.discountPercentage*productInstance.productDetails.price/100)}" type="number" maxFractionDigits="2"/>
                                         <g:if test="${productInstance.productDetails.isSale}">
 <br>
-                                              <del class="del-price" style="font-size: 15px;">Rs.${productInstance.productDetails.price}</del>
+                                              <del class="del-price" style="font-size: 15px;">Rs.${productInstance.productDetails.price}</del>(-${productInstance.productDetails.discountPercentage}%)
 
                                         </g:if>
                                 </p>

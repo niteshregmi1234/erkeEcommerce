@@ -107,7 +107,6 @@ if(session.endUser){
             redirect(action: "register")
         }}
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
     }
 

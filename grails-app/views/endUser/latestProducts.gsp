@@ -658,7 +658,7 @@
 
 
                 <ul class="pagination">
-                    <li><g:paginate  next="&laquo;" prev="&raquo;" total="${countPaginate}"/></li>
+                    <li><g:paginate  next="&raquo;" prev="&laquo;" total="${countPaginate}"/></li>
                     %{--<li><g:paginate next="Forward" prev="Back"--}%
                                 %{--maxsteps="0" controller="endUser"--}%
                                 %{--action="latestProducts"  />--}%

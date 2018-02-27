@@ -1,6 +1,6 @@
 .more{
-    margin-top: -80px;
-    margin-right: 80px;
+    margin-top: -65px;
+    margin-right: 90px;
     text-align:right;
     font-style: italic;
 }
@@ -325,6 +325,22 @@
 .product img{
 width: 360px;
 }
+#detailInfo::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+#detailInfo::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+#detailInfo::-webkit-scrollbar-thumb
+{
+    background-color: #41b39c;
+}
 
 @media screen and (max-width:240px){
     .bigButton {
@@ -491,6 +507,7 @@ width: 360px;
         margin-bottom: 30px;
     }
 }
+
 @media screen and (min-width:241px) and (max-width: 280px){
     .product-color img{
         height:210px!important;
@@ -815,6 +832,12 @@ width: 360px;
 }
 
 @media screen and (min-width:301px) and (max-width:320px){
+    .more{
+        margin-top: -65px!important;
+        margin-right: 35px!important;
+    }
+    .moreBrand{
+        margin-top: 70px!important;}
     .product-color img{
         height:210px!important;
     }
@@ -835,9 +858,30 @@ width: 360px;
     /*#content {*/
         /*padding-top: 115px;*/
     /*}*/
-    .box-height{
-        height: 480px;
+    .text-center{
+        margin-top: -5px!important;
     }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+
     .text1{
         padding: 6px 9px;
     }
@@ -973,6 +1017,33 @@ width: 360px;
     }
 }
 @media screen and (min-width: 321px) and (max-width:360px){
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+    font-size: 18px!important;
+    margin-top: -13px!important;
+
+}
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .more {
+        margin-top: -70px!important;
+        margin-right: 24px!important;
+    }
+    .moreBrand{
+        margin-top: 80px!important;
+    }
     .img-texts{
         height: 142px!important;
     }
@@ -1020,8 +1091,9 @@ width: 360px;
     }
 
     .box-height{
-        height: 460px!important;
+        height: 180px!important;
     }
+
     .product-img{
         height: 450px!important;
     }
@@ -1112,8 +1184,39 @@ width: 360px;
     .product-height{
         height: 550px!important;
     }
+
 }
 @media screen and (min-width: 361px) and (max-width:411px){
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+
+    .more {
+        margin-top: -70px!important;
+        margin-right: 20px!important;
+    }
+    .moreBrand{
+        margin-top: 90px!important;}
     .img-texts{
         height: 142px!important;
     }
@@ -1157,10 +1260,7 @@ width: 360px;
         width: 50%!important;
     }
 
-    .box-height{
-        height: 460px!important;
-    }
-    .product-img{
+      .product-img{
         height: 450px!important;
     }
     .lead1{
@@ -1253,6 +1353,36 @@ width: 360px;
 }
 
 @media screen and (min-width: 412px) and (max-width:413px){
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+
+    .more{
+        margin-top: -70px!important;
+        margin-right: 35px!important;
+    }
+    .moreBrand{
+        margin-top: 100px!important;}
     .img-texts{
         height: 142px!important;
     }
@@ -1299,9 +1429,7 @@ width: 360px;
         width: 50%!important;
     }
 
-    .box-height{
-        height: 460px!important;
-    }
+
     .product-img{
         height: 450px!important;
     }
@@ -1394,7 +1522,37 @@ width: 360px;
     }
 }
 
-@media screen and (min-width: 414px) and (max-width:480px){
+@media screen and (min-width: 414px) and (max-width:440px){
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+
+    .more{
+        margin-top: -70px!important;
+        margin-right: 45px!important;
+    }
+    .moreBrand{
+        margin-top: 100px!important;}
     .img-texts{
         height: 142px!important;
     }
@@ -1442,9 +1600,196 @@ width: 360px;
         width: 47%!important;
     }
 
-    .box-height{
-        height: 460px!important;
+
+    .product-img{
+        height: 450px!important;
     }
+    .lead1{
+        font-size:8px !important;
+        margin-top: -22%!important;
+        margin-bottom: -19px!important;
+    }
+    .lead2{
+        font-size: 8px!important;
+    }
+
+
+    .subButton{
+        margin-top: -27px!important;
+        font-size: 6px!important;
+
+    }
+    .agileinfonewsl{
+        width: 100% !important;
+        height:300px!important;
+    }
+    .coverUp img{
+        width: 420px !important;
+        height: 165px !important;
+
+    }
+    .coverDown img{
+        height: 290px !important;
+        width: 450px !important;
+    }
+    /*.food1 img {*/
+    /*height: 300px!important;*/
+    /*}*/
+    .small-screen{
+        padding-top: 20px;
+    }
+    .about-img{
+        height: 700px !important;
+    }
+    .height-same{
+        height: 450px;
+    }
+    .button-a{
+        margin-top: -20px;
+    }
+    .w3lsshoesaits-info{
+        top: 0;
+    }
+    .w3lsshoesaits-info h3 {
+        font-size: 16px;
+    }
+    .w3lsshoesaits-info p {
+        line-height: 25px;
+        color: #FFF;
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        width: 18em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    a.a-buttonsize{
+        font-size: 10px!important;
+    }
+
+    .about-product {
+        height: 700px;
+    }
+    .contact-img{
+        height: 240px;
+    }
+    .boxsize-small{
+        margin-top: 30px;
+    }
+    .name4{
+        width: 47% !important;
+        border-radius: 0px !important;
+        float: left;
+        margin-left: 70px;
+        margin-bottom: 10px;
+    }
+    .about-product {
+        height: 845px!important;
+    }
+    .product img{
+        height: 600px!important;
+
+    }
+    .product-height{
+        height: 380px!important;
+    }
+    .food1 img {
+        height: 250px!important;
+    }
+
+
+    .product-color img{
+        height:350px!important;
+    }
+    .product-color{
+        height:350px!important;
+
+    }
+
+    .same-height img{
+        height: 500px!important;
+    }
+
+}
+@media screen and (min-width: 441px) and (max-width:480px){
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+    .more{
+                margin-right: 30px!important;
+    }
+    .moreBrand{
+        margin-top: 122px!important;}
+    .img-texts{
+        height: 142px!important;
+    }
+    .height-img{
+        height: 142px!important;
+
+    }
+    .product-color img{
+        height:260px!important;
+    }
+    .product-color{
+        height:260px!important;
+
+    }
+    .smallAbout img{
+        height: 360px!important;
+        width:450px!important;
+    }
+    .wthreeshop-a {
+        margin-top: -20px;
+        padding-bottom: 10px;
+    }
+
+    .wthreeshop-a a{
+        padding: 0 !important;
+        font-size:5px;
+    }
+    .mainImage-height {
+        height: 545px!important;
+        width: 100%;
+    }
+    .img-thumb{
+        width: 125px!important;
+    }
+    .price ul li:nth-child(1) {
+        font-size: 30px;
+    }
+    .text1{
+        padding: -1px 9px;
+    }
+    .middle1{
+        top: 38% !important;
+        left: 115px !important;
+        height: 70px!important;
+        width: 47%!important;
+    }
+
+
     .product-img{
         height: 450px!important;
     }
@@ -1606,6 +1951,37 @@ width: 360px;
 
 }
 @media screen and (min-width:521px) and (max-width: 568px){
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+
+    .more{
+        margin-top: -85px!important;
+        margin-right: 35px!important;
+    }
+    .moreBrand{
+        margin-top: 140px!important;
+    }
     .mainImage-height{
         width: 508px!important;
     }
@@ -1742,7 +2118,35 @@ width: 360px;
 
 }
 @media screen and (min-width:600px) and (max-width: 620px){
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
 
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+    .more {
+
+        margin-right: 20px;
+    }
+    .moreBrand{
+        margin-top: 165px!important;}
     .mainImage-height{
         width: 540px!important;
         height: 755px!important;
@@ -1856,6 +2260,33 @@ width: 360px;
 
 }
 @media screen and (min-width:621px) and (max-width: 640px){
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+
+    .more {
+        margin-right: 30px!important;
+    }
     .mainImage-height{
         width: 580px!important;
         height: 755px!important;
@@ -1971,6 +2402,7 @@ width: 360px;
 
 
 @media screen and (min-width: 641px) and (max-width: 666px) {
+
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -2006,6 +2438,10 @@ width: 360px;
     }
 }
 @media screen and (min-width: 667px) and (max-width: 700px) {
+    .more{
+
+        margin-right: 30px!important;
+    }
     .about-img{
         height: 900px!important;
         width: 610px!important;
@@ -2104,6 +2540,30 @@ width: 360px;
         height:470px!important;
 
     }
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+
 }
 @media screen and (min-width: 701px) and (max-width: 725px) {
     .mainImage-height{
@@ -2220,6 +2680,34 @@ width: 360px;
 }
 
 @media screen and (min-width: 726px) and (max-width: 735px) {
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+
+    .more{
+        margin-top: -87px!important;
+        margin-right: 35px!important;
+    }
     .mainImage-height{
         width: 671px!important;
         height: 815px!important;
@@ -2324,6 +2812,10 @@ width: 360px;
 }
 }
 @media screen and (min-width: 736px) and (max-width: 749px) {
+    .more{
+
+        margin-right: 35px!important;
+    }
     .mainImage-height{
         width: 675px!important;
         height: 815px!important;
@@ -2424,8 +2916,35 @@ width: 360px;
     .lead2{
         font-size: 10px!important;
     }
+    .text-center{
+        margin-top: -5px!important;
+    }
+    .goToDescription{
+        margin-top: -20px!important;
+    }
+    .price{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+    }
+    .bigName{
+        font-size: 18px!important;
+        margin-top: -13px!important;
+
+    }
+    .bigName1{
+        font-size: 20px!important;
+        margin-top: -20px!important;
+
+    }
+    .box-height{
+        height: 200px!important;
+    }
+
 }
 @media screen and (min-width: 750px) and (max-width: 768px) {
+    .more{
+         margin-right: 30px!important;
+    }
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -2516,6 +3035,12 @@ width: 360px;
 
 
 @media screen and (min-width: 769px) and (max-width: 855px) {
+    .more{
+
+        margin-right: 60px!important;
+    }
+    .moreBrand{
+        margin-top: 190px!important;}
     .coverUp img {
         height: 300px!important;
         width: 1108px!important;
@@ -2577,6 +3102,10 @@ width: 360px;
 }
 
 @media screen and (min-width: 856px) and (max-width: 961px) {
+    .more{
+
+        margin-right: 125px!important;
+    }
     .smallAbout img{
         height: 250px!important;
         width:385px!important;
@@ -2630,6 +3159,12 @@ width: 360px;
 
 }
 @media screen and (min-width: 962px) and (max-width: 1024px) {
+    .more{
+        margin-right: 55px!important;
+    }
+    .moreBrand{
+        margin-top: 142px!important;
+    }
     .agileinfonewsl {
         width: 100% !important;
         height: 800px !important;

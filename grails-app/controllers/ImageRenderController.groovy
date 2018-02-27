@@ -64,11 +64,8 @@ if(params.imageName!=null) {
     response.outputStream << imageInByte
     response.outputStream.flush()
 }
-        else{
-    redirect(action: "notfound",controller: "errorPage")
-}}
+ }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
 
         }
     }

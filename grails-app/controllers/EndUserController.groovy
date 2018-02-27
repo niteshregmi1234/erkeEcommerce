@@ -2,43 +2,50 @@ class EndUserController {
     def productService
     static allowedMethods = [search: "POST"]
 def topSales(){
-    def subList=[]
-    List<Product> productListSub=new ArrayList<>()
-    def prices=[]
-    def productTopSalesList = Product.findAllBySoldNumbersGreaterThanAndDelFlag(0,false ,[sort: "soldNumbers", order: "desc"])
-    List<List<ProductSize>> listList=new ArrayList<>()
-    List<ProductCategory> productCategoryList=new ArrayList<>()
-    List<Float> discountList=new ArrayList<>()
-    List<ProductBrand> productBrandList=new ArrayList<>()
-    List<ProductSubCategory> productSubCategoryList=new ArrayList<>()
-       subList = productService.getSubList(productTopSalesList, params)
-    for(int j=0;j<subList.size();j++){
-        def productInstance=subList.get(j)
-        productListSub.add(productInstance)
-        if(!productBrandList.contains(productInstance.productDetails.productBrand)){
-            productBrandList.add(productInstance.productDetails.productBrand)}
-        if(!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)){
-            productSubCategoryList.add(productInstance.productDetails.productSubCategory)
-        }
-        if(!productCategoryList.contains(productInstance.productDetails.productCategory)){
-            productCategoryList.add(productInstance.productDetails.productCategory)
-        }
-        if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
-            discountList.add(productInstance.productDetails.discountPercentage)
-        }
-        def sizeString=productInstance.productDetails.productSizes
-        String[] stringArraySize= sizeString.split(",")
-        List<ProductSize> productSizeList=new ArrayList<>()
-        for(int i=0;i<stringArraySize.size();i++){
-            def sizeId=stringArraySize[i] as long
-            if(ProductSize.get(sizeId)) {
+    try {
+        def subList = []
+        List<Product> productListSub = new ArrayList<>()
+        def prices = []
+        def productTopSalesList = Product.findAllBySoldNumbersGreaterThanAndDelFlag(0, false, [sort: "soldNumbers", order: "desc"])
+        List<List<ProductSize>> listList = new ArrayList<>()
+        List<ProductCategory> productCategoryList = new ArrayList<>()
+        List<Float> discountList = new ArrayList<>()
+        List<ProductBrand> productBrandList = new ArrayList<>()
+        List<ProductSubCategory> productSubCategoryList = new ArrayList<>()
+        subList = productService.getSubList(productTopSalesList, params)
+        for (int j = 0; j < subList.size(); j++) {
+            def productInstance = subList.get(j)
+            productListSub.add(productInstance)
+            if (!productBrandList.contains(productInstance.productDetails.productBrand)) {
+                productBrandList.add(productInstance.productDetails.productBrand)
+            }
+            if (!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)) {
+                productSubCategoryList.add(productInstance.productDetails.productSubCategory)
+            }
+            if (!productCategoryList.contains(productInstance.productDetails.productCategory)) {
+                productCategoryList.add(productInstance.productDetails.productCategory)
+            }
+            if (!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage != 0) {
+                discountList.add(productInstance.productDetails.discountPercentage)
+            }
+            def sizeString = productInstance.productDetails.productSizes
+            String[] stringArraySize = sizeString.split(",")
+            List<ProductSize> productSizeList = new ArrayList<>()
+            for (int i = 0; i < stringArraySize.size(); i++) {
+                def sizeId = stringArraySize[i] as long
+                if (ProductSize.get(sizeId)) {
 
-                productSizeList.add(ProductSize.get(sizeId))
-            }                }
-        listList.add(productSizeList)
+                    productSizeList.add(ProductSize.get(sizeId))
+                }
+            }
+            listList.add(productSizeList)
+        }
+        prices = productService.pricesArray(productListSub)
+        [countPaginate: productTopSalesList.size(), productCategoryList: productCategoryList, productSubCategoryList: productSubCategoryList, discountList: discountList, prices: prices, productBrandList: productBrandList, productSizeList: listList, productList: subList]
     }
-    prices=productService.pricesArray(productListSub)
-    [countPaginate:productTopSalesList.size() ,productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList:subList]
+    catch(Exception e){
+
+    }
 }
     def brand(){
     def brandId=params.list("brand")
@@ -115,7 +122,6 @@ def topSales(){
         }
         }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
 
     }
@@ -178,7 +184,6 @@ def topSales(){
 
         }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
         }
 
@@ -232,7 +237,6 @@ def topSales(){
 
     }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
     }
     def specialSubCategory(){
@@ -279,12 +283,8 @@ def topSales(){
                 def prices=productService.pricesArray(productListSub)
                 render(view: "specialSubCategory", model: [countPaginate:productList.size(),productCategoryList:productCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList: subList, specialCategoryInstance: AboutUs.list()[0].specialProductSubCategory])
             }
-            else{
-                redirect(action: "notfound",controller: "errorPage")
-
-            }}
+      }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
 
         }
     }
@@ -293,12 +293,8 @@ def topSales(){
     try {
 if(CompanyInformation.list()[0]){
 [companyInformation:CompanyInformation.list()[0]]  }
-    else{
-    redirect(action: "notfound",controller: "errorPage")
-
-}}
+   }
 catch (Exception e){
-    redirect(action: "notfound",controller: "errorPage")
 
 }
 }
@@ -330,15 +326,10 @@ catch (Exception e){
 
                 render(view: "detail", model :[productSizeList:productSizeList,moreColorsList:moreColorsList,relatedProductList:relatedProductList,productInstance: productInstance1,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
             }
-            else{
-                redirect(action: "notfound",controller: "errorPage")
-            }
-        } else {
-            redirect(action: "notfound",controller: "errorPage")
 
-        }}
+        }
+        }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
 
         }
     }
@@ -383,6 +374,8 @@ catch (Exception e){
     def userHome() {
         try{
             if(HomeContent.list()[0] && SpecialBrand.list()[0] && SeasonManagement.list()[0] && CompanyInformation.list()[0]){
+                response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
+                response.setHeader("Pragma", "no-cache");
                 def upCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "UP")
         def downCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "DOWN")
         def latestProductList = Product.findAllByIsLatestAndDelFlag(true,false,[max:10])
@@ -391,13 +384,8 @@ catch (Exception e){
         def productTopSalesList = Product.findAllBySoldNumbersGreaterThanAndDelFlag(0,false, [max:10,sort: "soldNumbers", order: "desc"])
         def seasonManagementInstance = SeasonManagement.list()[0]
         [brandList:ProductBrand.findAllByIsTop(true),upCoverImageList: upCoverImageList, downCoverImageList: downCoverImageList, latestProductList: latestProductList, specialBrandInstance: specialBrandInstance, seasonManagementInstance: seasonManagementInstance,featuredProductList:productTopSalesList,homeContent:homeContent]}
-            else{
-                redirect(action: "notfound",controller: "errorPage")
-
-            }
     }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
 
         }
     }
@@ -447,12 +435,8 @@ catch (Exception e){
 
                         render(view: "subCategoryList", model: [countPaginate:productList.size(),discountList:discountList,productBrandList:productBrandList,prices:prices,productSizeList:listList,productList: subList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory),productCategory: ProductCategory.findByCategoryId(params.category)])
             }
-        else{
-            redirect(action: "notfound",controller: "errorPage")
-        }
         }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
 
         }
     }
@@ -504,16 +488,9 @@ def test(){
                 render(view: "categoryList", model: [countPaginate: productList.size(), discountList:discountList,prices: prices,productBrandList: productBrandList, productList: subList, productCategory: ProductCategory.findByCategoryId(params.id),productSizeList:listList,productSubCategoryList:productSubCategoryList])
 
         }
-            else{
-                redirect(action: "notfound",controller: "errorPage")
-
-            }
-        } else {
-            redirect(action: "notfound",controller: "errorPage")
 
         }}
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
 
         }
     }
@@ -565,16 +542,9 @@ def topBrand(){
                 render(view: "brandProducts", model: [countPaginate:productList.size(),productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productList: subList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
 
             }
-            else{
-                redirect(action: "notfound",controller: "errorPage")
-
-            }
-        } else {
-            redirect(action: "notfound",controller: "errorPage")
 
         }}
     catch (Exception e){
-        redirect(action: "notfound",controller: "errorPage")
 
     }
     }
@@ -643,16 +613,9 @@ def topBrand(){
                     render(view: "brandProducts", model: [countPaginate:productList.size(),productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productList: subList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
 
                 }
-                else{
-                    redirect(action: "notfound",controller: "errorPage")
 
-                }
-            } else {
-                redirect(action: "notfound",controller: "errorPage")
-
-            }}
+            } }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
 
         }
 
@@ -727,13 +690,9 @@ def topBrand(){
                     render(view: "specifiedProducts", model: [countPaginate:productList.size(),productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productList: subList, productSpecifyInstance: ProductSubCategorySpecify.findById(params.subCategorySpecify),productCategory:ProductCategory.findByCategoryId(params.category), productSizeList:listList])
 
                 }
-                else{
-                    redirect(action: "notfound",controller: "errorPage")
 
-                }
             }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
 
         }
     }
@@ -768,13 +727,9 @@ def about(){
             listList.add(productSizeList2)
 
             [aboutUsInstance: aboutUsInstance,productSizeList:listList]}
-        else{
-            redirect(action: "notfound",controller: "errorPage")
 
-        }
     }
     catch (Exception e){
-        redirect(action: "notfound",controller: "errorPage")
 
     }
 }

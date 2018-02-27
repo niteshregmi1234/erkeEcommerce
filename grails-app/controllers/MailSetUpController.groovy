@@ -15,7 +15,8 @@ static allowedMethods = [save: 'POST']
             else{
                 print "a"
                 redirect(action: "notfound",controller: "errorPage")
-            }}
+            }
+            }
             else{
                 redirect(action: "adminLoginForm",controller: "login")
 

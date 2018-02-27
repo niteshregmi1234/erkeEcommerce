@@ -12,7 +12,6 @@ String subCategoryDescription
         subCategoryId (generator:'assigned',unique:true)
     }
     static mapping = {
-        sort id: "desc"
     }
 
 }

@@ -12,12 +12,12 @@ class ProductService {
             params.max = params.max.toInteger()
             params.offset = params.offset.toInteger()
         } catch (Exception exceptionInstance) {
-            params.max = 3
+            params.max = 15
             params.offset = 0
         }
         //Verify pagination params... if not you add them
         if (params.max <= 0) {
-            params.max = 3
+            params.max = 15
         }
         //Get total size of the list
         def objectInstanceTotal = objectList.size()

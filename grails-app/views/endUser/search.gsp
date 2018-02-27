@@ -659,7 +659,7 @@
             <div class="pages">
 
             <ul class="pagination">
-                <li><g:paginate next="&laquo;" prev="&raquo;" controller="endUser" action="result" params="[result:result]" total="${countPaginate}"/></li>
+                <li><g:paginate next="&raquo;" prev="&laquo;" controller="endUser" action="result" params="[result:result]" total="${countPaginate}"/></li>
                 </ul>
                </div>
                 <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>

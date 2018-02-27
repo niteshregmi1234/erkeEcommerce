@@ -19,7 +19,6 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
 
 }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
 
     }
@@ -36,7 +35,6 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
         redirect(action: "recentOrders")
         }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
     }
     def deliveredToCustomer(){
@@ -55,7 +53,6 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
             redirect(action: "recentOrders")
         }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
     }
 
@@ -76,7 +73,6 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
 
         }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
     }
     def pendingOrders(){
@@ -95,7 +91,6 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
             render(view: "fakeOrders",model:[listListCartList:listListCartList])
         }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
     }
     def deleteSuccessfulOrders(){
@@ -115,7 +110,6 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
             }
         }
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
         }
     }
 
