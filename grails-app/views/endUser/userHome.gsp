@@ -330,7 +330,7 @@
 
 
     </div>
-    </div>
+
     <div class="col-md-12">
         <h4><p class="loadMore more" >
             <g:link action="topSales" controller="endUser">See more..</g:link>
@@ -338,7 +338,98 @@
         </h4>
     </div>
 </g:if>
-<div class="container">
+    <g:each in="${listListProduct}" var="listProducts">
+        <div id="hot">
+
+            <div class="box">
+                <div class="container">
+                    <div class="col-md-12">
+                        <h2>${listProducts[0].productDetails.productSubCategory.subCategoryName}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="product-slider">
+                    <g:each in="${listProducts}" var="list">
+
+                        <div class="item">
+                            <div class="product product-height">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front food1">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+                                            </g:link>
+                                        </div>
+                                        <div class="back food1">
+                                            <g:link action="singleProduct" controller="endUser" id="${list.productId}">
+
+                                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+                                            </g:link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible food1">
+                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+
+
+                                </g:link>
+                                <div class="text">
+                                    <div class="tooltips">
+                                        <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
+                                        <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
+                                    </div>
+                                    <g:if test="${list.productDetails.isSale==true}">
+                                        <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
+                                            <del class="del-price">Rs.${list.productDetails.price}</del></p>
+                                    </g:if>
+                                    <g:if test="${list.productDetails.isSale==false}">
+
+                                        <p class="price">Rs.${list.productDetails.price}</p>
+                                    </g:if>
+                                </div>
+                            <!-- /.text -->
+                                <g:if test="${list.productDetails.isSale==true}">
+                                    <div class="ribbon sale">
+                                        <div class="theribbon">SALE</div>
+                                        <div class="ribbon-background"></div>
+                                    </div>
+                                </g:if>
+                                <g:if test="${list.isLatest==true}">
+                                    <div class="ribbon new">
+                                        <div class="theribbon">NEW</div>
+                                        <div class="ribbon-background"></div>
+                                    </div>
+                                </g:if>
+
+                            <!-- /.ribbon -->
+                            </div>
+                            <!-- /.product -->
+                        </div>
+
+                    </g:each>
+                </div>
+
+                <!-- /.product-slider -->
+            </div>
+            <!-- /.container -->
+
+
+        </div>
+
+        <div class="col-md-12">
+            <h4><p class="loadMore more" >
+                <g:link action="topSales" controller="endUser">See more..</g:link>
+            </p>
+            </h4>
+        </div>
+    </g:each>
+
+    <div class="container">
         <div class="row">
         <div class="col-md-12">
 

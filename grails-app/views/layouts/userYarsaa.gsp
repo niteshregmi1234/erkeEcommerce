@@ -51,8 +51,13 @@
 
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
             charset="utf-8"></script>
-    <script src="${resource(dir: 'js', file: 'yarsaa/product_filter_level2.js')}" type="text/javascript"
-            charset="utf-8"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
+
+    %{--<script src="${resource(dir: 'js', file: 'yarsaa/pagination.js')}" type="text/javascript"--}%
+            %{--charset="utf-8"></script>--}%
 
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrapvalidator.js')}" type="text/javascript"
             charset="utf-8"></script>
@@ -436,7 +441,7 @@ if(sizeId=='' && productId==''){
                                         <ul>
                                         <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecifyAndStatusShow(specifyList,true)}" var="subCategoryList">
 <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList),false)}">
-                                            <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                                            <li><g:link controller="endUser" action="subCategoryList"  params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
                                             </li>
 </g:if>
                                             </g:each>

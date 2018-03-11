@@ -1,9 +1,6 @@
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
-
-import javax.imageio.ImageIO
-import java.awt.image.BufferedImage
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -47,7 +44,8 @@ class ProductSubCategoryController extends BaseController{
             productSubCategoryInstance.statusShow=params.statusShow as byte
             productSubCategoryInstance.isFooter=params.isFooter as byte
             productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
-            productSubCategoryInstance.coverImageName=uploadCoverImage()
+                    productSubCategoryInstance.showInHomePage=params.showInHomePage as byte
+                    productSubCategoryInstance.coverImageName=uploadCoverImage()
             productSubCategoryInstance.save(flush: true)
             redirect(action: "show" ,id:productSubCategoryInstance.id)
         }
@@ -56,16 +54,13 @@ class ProductSubCategoryController extends BaseController{
 if(productSubCategoryInstance){
             productSubCategoryInstance.subCategoryName=params.subCategoryName
             productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
-
-            productSubCategoryInstance.statusShow=params.statusShow as byte
+    productSubCategoryInstance.statusShow=params.statusShow as byte
     productSubCategoryInstance.isFooter=params.isFooter as byte
     productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
-
+    productSubCategoryInstance.showInHomePage=params.showInHomePage as byte
     productSubCategoryInstance.coverImageName=editCoverImage(productSubCategoryInstance.coverImageName)
-
-            productSubCategoryInstance.save(flush: true)
-
-            redirect(action: "show" ,id:productSubCategoryInstance.id)}
+    productSubCategoryInstance.save(flush: true)
+    redirect(action: "show" ,id:productSubCategoryInstance.id)}
             else {
     redirect(action: "notfound",controller: "errorPage")
 
@@ -196,10 +191,7 @@ if(productSubCategoryInstance){
     def delete(){
         try{
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-
                 def productSubCategoryInstance = ProductSubCategory.get(params.id)
-
-
                 if (productSubCategoryInstance) {
                     productSubCategoryInstance.delete(flush: true)
                     def imageName = productSubCategoryInstance.coverImageName

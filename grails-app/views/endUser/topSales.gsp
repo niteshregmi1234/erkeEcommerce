@@ -51,6 +51,12 @@
             </ul>
 
         </div>
+    <div id="search-results">
+        <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/jquery-ui.css')}" type="text/css"
+              media="all"/>
+
+        <script src="${resource(dir: 'js', file: 'yamsaa/jquery-ui.js')}" type="text/javascript"
+                charset="utf-8"></script>
         <div class="col-md-3">
 
             <!-- *** MENUS AND FILTERS ***
@@ -65,47 +71,24 @@
                             <div class="col-md-7">
                                 <div class="products-sort-by">
                                     <select name="sort-by" id="sortCriteria" onchange="prices();" class="form-control">
-                                        <option>Sort by</option>
-                                        <option value="low">Low Price</option>
-                                        <option value="high">High Price</option>
+                                        <option id="sortBy">Sort by</option>
+                                        <option value="low" id="LP">Low Price</option>
+                                        <option value="high" id="HP">High Price</option>
+                                        <option value="sales" id="TS">Top Sales</option>
                                     </select>
+                                    <div class="sort" id="lowToHigh" data-sort="priceProduct" style="display: none;">
+                                        Sort
+                                    </div>
+                                    <div class="sort" id="topSales" data-sort="soldNumbers" style="display: none;">
+                                        SoldNumbers
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <script>
-                var ascending = false;
-
-                function prices() {
-                    var sortCriteria=document.getElementById("sortCriteria").value;
-                    if(sortCriteria=='low'){
-                        var sorted = $('.grid-products').sort(function (a, b) {
-                            return (ascending ==
-                            (convertToNumber($(a).find('.pricesF').html()) <
-                            convertToNumber($(b).find('.pricesF').html()))) ? 1 : -1;
-                        });
-
-                        $('#myList').html(sorted);
-
-                    }
-                    else if(sortCriteria=='high'){
-                        sorted = $('.grid-products').sort(function (a, b) {
-                            return (ascending ==
-                            (convertToNumber($(a).find('.pricesF').html()) >
-                            convertToNumber($(b).find('.pricesF').html()))) ? 1 : -1;
-                        });
-
-                        $('#myList').html(sorted);
-
-                    }
-                }
-                var convertToNumber = function(value){
-                    return parseFloat(value.replace('Rs',''));
-                }
-
-            </script>
 
             <div id='filters' class='sections'>
                 <div class="panel panel-default sidebar-menu">
@@ -117,19 +100,8 @@
                     <div class="panel-body filter-attributes">
 
                         <form>
-                            <div class="form-group">
-                                <g:each in="${productCategoryList}" var="categoryList" status="i">
-                                    <div class="checkbox">
-                                        <label>
-                                            <g:checkBox name="category" id="category${i}" value="${categoryList.id}"/>${categoryList.categoryName}
-                                        </label>
-                                    </div>
-                                    <script>
-                                        document.getElementById("category${i}").checked = false;
-                                        $("input[name=category]").val();
-                                    </script>
+                            <div class=" categoryCheckBox form-group">
 
-                                </g:each>
                             </div>
 
 
@@ -147,19 +119,8 @@
                     <div class="panel-body filter-attributes">
 
                         <form>
-                            <div class="form-group">
-                                <g:each in="${productSubCategoryList}" var="subCategoryList" status="i">
-                                    <div class="checkbox">
-                                        <label>
-                                            <g:checkBox name="subCategory" id="subCategory${i}" value="${subCategoryList.id}"/>${subCategoryList.subCategoryName}
-                                        </label>
-                                    </div>
-                                    <script>
-                                        document.getElementById("subCategory${i}").checked = false;
-                                        $("input[name=subCategory]").val();
-                                    </script>
+                            <div class="subCategoryCheckBox form-group">
 
-                                </g:each>
                             </div>
 
 
@@ -177,19 +138,8 @@
                     <div class="panel-body filter-attributes">
 
                         <form>
-                            <div class="form-group">
-                                <g:each in="${productBrandList}" var="brandList" status="i">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="productBrand" id="${brandList.id}" value="${brandList.id}">${brandList.brandName}</input>
-                                        </label>
-                                    </div>
-                                    <script>
-                                        document.getElementById("${brandList.id}").checked = false;
-                                        $("input[name=productBrand]").val();
-                                    </script>
+                            <div class="brandCheckBox form-group">
 
-                                </g:each>
                             </div>
 
 
@@ -197,11 +147,7 @@
 
                     </div>
                 </div>
-                <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/jquery-ui.css')}" type="text/css"
-                      media="all"/>
 
-                <script src="${resource(dir: 'js', file: 'yamsaa/jquery-ui.js')}" type="text/javascript"
-                        charset="utf-8"></script>
                 <div class="panel panel-default sidebar-menu">
 
                     <div class="panel-heading">
@@ -212,18 +158,10 @@
 
                         <form>
                             <div class="form-group">
-                                <g:each in="${discountList}" var="discount" status="i">
-                                    <div class="checkbox">
-                                        <label>
-                                            <g:checkBox name="discount" id="discount${i}" value="${discount}"/>${discount}
-                                        </label>
-                                    </div>
-                                    <script>
-                                        document.getElementById("discount${i}").checked = false;
-                                        $("input[name=discount]").val();
-                                    </script>
+                                <div class="discountCheckBox checkbox">
 
-                                </g:each>
+                                </div>
+
                             </div>
 
 
@@ -292,165 +230,6 @@
                                 return true;
 
                             }
-                            function filterPrice(){
-                                var minPrice=parseFloat(document.getElementById("amount_min").value);
-                                var maxPrice=parseFloat(document.getElementById("amount_max").value);
-                                var brandList=[];
-                                var subCategoryList=[];
-                                var categoryList=[];
-                                var discountList=[];
-                                var idList=[];
-                                $('input[name="subCategory"]:checked').each(function() {
-                                    subCategoryList.push($(this).val());
-                                });
-                                $('input[name="category"]:checked').each(function() {
-                                    categoryList.push($(this).val());
-                                });
-                                $('input[name="productBrand"]:checked').each(function() {
-                                    brandList.push($(this).val());
-                                });
-                                $('input[name="discount"]:checked').each(function() {
-                                    discountList.push($(this).val());
-                                });
-                                $("input[name='productId']").each(function() {
-                                    idList.push($(this).val());
-                                });
-                                for(var i=0;i<idList.length;i++) {
-                                    var price=$( "#price"+idList[i] ).val();
-                                    if(price<minPrice){
-                                        document.getElementById("product"+idList[i]).style.display="none";
-                                    }
-                                    else if(price>maxPrice){
-                                        document.getElementById("product"+idList[i]).style.display="none";
-
-                                    }
-                                    else{
-                                        var categoryId=$( "#category"+idList[i] ).val();
-                                        var brandId=$( "#brand"+idList[i] ).val();
-                                        var subCategoryId=$( "#subCategory"+idList[i] ).val();
-                                        var discount=$( "#discount"+idList[i] ).val();
-                                        if(brandList!='' && subCategoryList!='' && discountList!='' &&categoryList!=''){
-                                            if(categoryList.includes(categoryId) && brandList.includes(brandId) && subCategoryList.includes(subCategoryId) && discountList.includes(discount)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-                                            }
-                                        }
-                                        else if(brandList!='' && subCategoryList!='' && categoryList!=''){
-                                            if(brandList.includes(brandId) && categoryList.includes(categoryId) && subCategoryList.includes(subCategoryId)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-                                            }
-                                        }
-                                        else if(brandList!='' && discountList!='' && categoryList!=''){
-                                            if(brandList.includes(brandId) && categoryList.includes(categoryId) && discountList.includes(discount)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-                                            }
-                                        }
-                                        else if(brandList!='' && subCategoryList!='' && discountList!=''){
-                                            if(brandList.includes(brandId) && subCategoryList.includes(subCategoryId) && discountList.includes(discount)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-                                            }
-                                        }
-                                        else if(subCategoryList!='' && discountList!='' && categoryList!=''){
-                                            if(subCategoryList.includes(subCategoryId) && categoryList.includes(categoryId) && discountList.includes(discount)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-                                            }
-                                        }
-                                        else if(brandList!='' && categoryList!=''){
-                                            if(brandList.includes(brandId) && categoryList.includes(categoryId)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-
-                                            }}
-                                        else if(brandList!='' && subCategoryList!=''){
-                                            if(brandList.includes(brandId) && subCategoryList.includes(subCategoryId)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-
-                                            }}
-                                        else if(brandList!='' && discountList!=''){
-                                            if(brandList.includes(brandId) && discountList.includes(discount)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-
-                                            }
-                                        }
-                                        else if(subCategoryList!='' && discountList!=''){
-                                            if(subCategoryList.includes(subCategoryId) && discountList.includes(discount)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-
-                                            }
-                                        }
-                                        else if(subCategoryList!='' && categoryList!=''){
-                                            if(subCategoryList.includes(subCategoryId) && categoryList.includes(categoryId)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-
-                                            }
-                                        }
-                                        else if(categoryList!='' && discountList!=''){
-                                            if(categoryList.includes(categoryId) && discountList.includes(discount)){
-                                                document.getElementById("product"+idList[i]).style.display="block";
-
-                                            }
-                                        }
-
-                                        else if(subCategoryList!=''){
-                                            if(subCategoryList.includes(subCategoryId)) {
-                                                document.getElementById("product"+idList[i]).style.display="block";
-
-                                            }
-                                        }
-                                        else if(discountList!=''){
-                                            if(discountList.includes(discount)) {
-                                                document.getElementById("product"+idList[i]).style.display="block";
-                                            }
-                                        }
-                                        else if(brandList!=''){
-                                            if(brandList.includes(brandId)) {
-                                                document.getElementById("product"+idList[i]).style.display="block";
-
-                                            }
-                                        }
-                                        else if(categoryList!=''){
-                                            if(categoryList.includes(categoryId)) {
-                                                document.getElementById("product"+idList[i]).style.display="block";
-
-                                            }
-                                        }
-
-                                        else{
-                                            document.getElementById("product"+idList[i]).style.display="block";
-
-                                        }
-
-                                    }
-                                }
-
-                                brandList=[];
-                                subCategoryList=[];
-                                discountList=[];
-                                idList=[];
-                                categoryList=[]
-                            }
-                            $(function() {
-                                $("#slider-range").slider({
-                                    range: true,
-                                    min: ${prices[1]},
-                                    max: ${prices[0]},
-                                    values: [${prices[1]}, ${prices[0]}],
-                                    change: function(event, ui) {
-                                        $("#amount_min").val(ui.values[0]);
-                                        $("#amount_max").val(ui.values[1]);
-                                        filterPrice();
-                                    }
-
-                                });
-                                $("#amount_min").val($("#slider-range").slider("values", 0));
-                                $("#amount_max").val($("#slider-range").slider("values", 1));
-                                $("#amount_min").change(function() {
-                                    $("#slider-range").slider("values", 0,$(this).val());
-                                    filterPrice();
-                                });
-                                $("#amount_max").change(function() {
-                                    $("#slider-range").slider("values", 1,$(this).val());
-                                    filterPrice();
-                                })
-                            });
 
                         </script>
 
@@ -467,48 +246,19 @@
             </div>
         </div>
         <div class="col-md-9">
-
-            %{--<div class="box info-bar">--}%
-            %{--<div class="row">--}%
-            %{--<div class="col-sm-12 col-md-4 products-showing">--}%
-            %{--Showing <strong>12</strong> of <strong>${productList.size()}</strong> products--}%
-            %{--</div>--}%
-
-            %{--<div class="col-sm-12 col-md-8  products-number-sort">--}%
-            %{--<div class="row">--}%
-            %{--<form class="form-inline">--}%
-            %{--<div class="col-md-6 col-sm-6">--}%
-            %{--<div class="products-number">--}%
-            %{--<strong>Show</strong>  <a href="#" class="btn btn-default btn-sm btn-primary">12</a>  <a href="#" class="btn btn-default btn-sm">24</a>  <a href="#" class="btn btn-default btn-sm">All</a> products--}%
-            %{--</div>--}%
-            %{--</div>--}%
-            %{--<div class="col-md-6 col-sm-6">--}%
-            %{--<div class="products-sort-by">--}%
-            %{--<strong>Sort by</strong>--}%
-            %{--<select name="sort-by" class="form-control">--}%
-            %{--<option>Price</option>--}%
-            %{--<option>Name</option>--}%
-            %{--<option>Sales first</option>--}%
-            %{--</select>--}%
-            %{--</div>--}%
-            %{--</div>--}%
-            %{--</form>--}%
-            %{--</div>--}%
-            %{--</div>--}%
-            %{--</div>--}%
-            %{--</div>--}%
-
-            <div class="row products" id="myList">
+            <div class="list row products" id="myList">
                 <g:each in="${productList}" var="list" status="i">
                     <g:if test="${list.productDetails.isSale==false}">
-                        <div class="grid-products" id="product${list.id}" data-category="${list.productDetails.productCategory.id}" data-discount="${list.productDetails.discountPercentage}" data-subCategory="${list.productDetails.productSubCategory.id}" data-productBrand="${list.productDetails.productBrand.id}">
-                            <input type="hidden" name="price" id="price${list.id}" value="${list.productDetails.price}">
-                            <input type="hidden" name="productId" value="${list.id}">
-                            <input type="hidden" name="categoryId" id="category${list.id}" value="${list.productDetails.productCategory.id}">
 
-                            <input type="hidden" name="brandId" id="brand${list.id}" value="${list.productDetails.productBrand.id}">
-                            <input type="hidden" name="subCategoryId" id="subCategory${list.id}" value="${list.productDetails.productSubCategory.id}">
-                            <input type="hidden" name="discount" id="discount${list.id}" value="${list.productDetails.discountPercentage}">
+                    %{--<div class="category">Niagra Falls</div>--}%
+
+                        <div class="grid-products">
+                            <div class="category hidden">${list.productDetails.productCategory.categoryName}</div>
+                            <div class="subCategory hidden">${list.productDetails.productSubCategory.subCategoryName}</div>
+                            <div class="brand hidden">${list.productDetails.productBrand.brandName}</div>
+                            <div class="discount hidden">${list.productDetails.discountPercentage}</div>
+                            <div class="priceProduct hidden">${list.productDetails.price}</div>
+                            <div class="soldNumbers hidden">${list.soldNumbers}</div>
                             <div class="col-md-4 col-sm-4 a ">
                                 <div class="product">
                                     <div class="flip-container">
@@ -561,13 +311,13 @@
                         </div>
                     </g:if>
                     <g:if test="${list.productDetails.isSale==true}">
-                        <div class="grid-products" id="product${list.id}" data-category="${list.productDetails.productCategory.id}" data-price="${list.productDetails.price}" data-discount="${list.productDetails.discountPercentage}" data-subCategory="${list.productDetails.productSubCategory.id}" data-productBrand="${list.productDetails.productBrand.id}">
-                            <input type="hidden" name="price" id="price${list.id}" value="${list.productDetails.price}">
-                            <input type="hidden" name="productId" value="${list.id}">
-                            <input type="hidden" name="brandId" id="brand${list.id}" value="${list.productDetails.productBrand.id}">
-                            <input type="hidden" name="subCategoryId" id="subCategory${list.id}" value="${list.productDetails.productSubCategory.id}">
-                            <input type="hidden" name="discount" id="discount${list.id}" value="${list.productDetails.discountPercentage}">
-                            <input type="hidden" name="categoryId" id="category${list.id}" value="${list.productDetails.productCategory.id}">
+                        <div class="grid-products">
+                            <div class="category hidden">${list.productDetails.productCategory.categoryName}</div>
+                            <div class="subCategory hidden">${list.productDetails.productSubCategory.subCategoryName}</div>
+                            <div class="brand hidden">${list.productDetails.productBrand.brandName}</div>
+                            <div class="discount hidden">${list.productDetails.discountPercentage}</div>
+                            <div class="priceProduct hidden">${list.productDetails.price}</div>
+                            <div class="soldNumbers hidden">${list.soldNumbers}</div>
                             <div class="col-md-4 col-sm-4 a">
                                 <div class="product">
                                     <div class="flip-container">
@@ -612,19 +362,7 @@
                                         <div class="theribbon">SALE</div>
                                         <div class="ribbon-background"></div>
                                     </div>
-                                    <!-- /.ribbon -->
 
-                                    %{--<div class="ribbon new">--}%
-                                    %{--<div class="theribbon">NEW</div>--}%
-                                    %{--<div class="ribbon-background"></div>--}%
-                                    %{--</div>--}%
-                                    %{--<!-- /.ribbon -->--}%
-
-                                    %{--<div class="ribbon gift">--}%
-                                    %{--<div class="theribbon">GIFT</div>--}%
-                                    %{--<div class="ribbon-background"></div>--}%
-                                    %{--</div>--}%
-                                    %{--<!-- /.ribbon -->--}%
                                 </div>
                                 <!-- /.product -->
                             </div>
@@ -633,143 +371,295 @@
                 </g:each>
             <!-- /.col-md-4 -->
             </div>
-            <style>
-            .product img{
-                height:338px;
-                width:251px;
-            }
-            </style>
             <!-- /.products -->
             <div class="pages">
 
-            <ul class="pagination">
-                <li><g:paginate next=" &raquo;" prev="&laquo;;"  total="${countPaginate}"/></li>
-            </ul>
-                <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
-                <g:each in="${productSizeList}" var="list" status="i">
-                    <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="myModalLabel${i}">Select Size</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <g:select class="form-control" name="size" id="size${i}"
-                                              from="${list}" optionKey="id" optionValue="sizeName"
-                                              title="select size"/>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                                    <div class="btn btn-primary" onclick="checkAddToCart(${i});"><i class="fa fa-shopping-cart"></i>Add to cart</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </g:each>
+                <ul class="prev" id="prev">
+                    <li><a class="prev">&laquo;</a>
+                    </li>
+                </ul>
+                <ul class="pagination"></ul>
 
+                <ul class="pagination next">
 
-            <g:if test="${productList}">
-                    <script>
-                        $(document).ready(function () {
-
-                            $('html, body').animate({
-                                scrollTop: $(".b").offset().top
-                            }, 2000);
-                        });
-
-                    </script>
-                </g:if>
+                    <li><a class="next">&raquo;</a>
+                    </li>
+                </ul>
 
             </div>
 
 
-        </div>
 
-        <!-- /.col-md-9 -->
+
+        </div>
+        <script>
+            $(function() {
+                $("#slider-range").slider({
+                    range: true,
+                    min: ${prices[1]},
+                    max: ${prices[0]},
+                    values: [${prices[1]}, ${prices[0]}],
+                    slide: function(event, ui) {
+                        $("#amount_min").val(ui.values[0]);
+                        $("#amount_max").val(ui.values[1]);
+                        updateList();
+
+                    }
+
+                });
+                $("#amount_min").val($("#slider-range").slider("values", 0));
+                $("#amount_max").val($("#slider-range").slider("values", 1));
+                $("#amount_min").change(function() {
+                    $("#slider-range").slider("values", 0,$(this).val());
+                    updateList();
+                });
+                $("#amount_max").change(function() {
+                    $("#slider-range").slider("values", 1,$(this).val());
+                    updateList();
+                })
+            });
+
+        </script>
+        <script>
+
+
+            var options = {
+                valueNames: ['category', 'subCategory', 'brand','discount','priceProduct','soldNumbers'],
+                page: 15,
+                plugins: [
+                    ListPagination({})
+                ]
+            };
+
+            var userList = new List('search-results', options);
+            var updateList = function () {
+                var minPrice=parseFloat(document.getElementById("amount_min").value);
+                var maxPrice=parseFloat(document.getElementById("amount_max").value);
+                var category = new Array();
+                var subCategory = new Array();
+                var brand = new Array();
+                var discount = new Array();
+
+                $("input:checkbox[name=category]:checked").each(function () {
+                    category.push($(this).val());
+                });
+                $("input:checkbox[name=subCategory]:checked").each(function () {
+                    subCategory.push($(this).val());
+                });$("input:checkbox[name=brand]:checked").each(function () {
+                    brand.push($(this).val());
+                });$("input:checkbox[name=discount]:checked").each(function () {
+                    discount.push($(this).val());
+                });
+
+                var values_category = category.length > 0 ? category : null;
+                var values_subCategory = subCategory.length > 0 ? subCategory : null;
+                var values_brand = brand.length > 0 ? brand : null;
+                var values_discount = discount.length > 0 ? discount : null;
+                var priceProduct=0;
+
+                userList.filter(function (item) {
+
+
+                            return (_(values_category).contains(item.values().category) || !values_category)
+                                    && (_(values_subCategory).contains(item.values().subCategory) || !values_subCategory)
+                                    && (_(values_brand).contains(item.values().brand) || !values_brand)
+                                    && (_(values_discount).contains(item.values().discount) || !values_discount)
+                                    && (_(parseFloat(item.values().priceProduct)) <= maxPrice || !maxPrice)
+                                    && (_(parseFloat(item.values().priceProduct)) >= minPrice || !minPrice)
+                                    && (_(parseFloat(item.values().priceProduct)) > priceProduct);
+
+                        }
+                );
+
+            }
+
+
+            var all_category = [];
+            var all_subCategory = [];
+            var all_brand = [];
+            var all_discount = [];
+
+            updateList();
+
+            _(userList.items).each(function (item) {
+
+
+                all_category.push(item.values().category);
+                all_subCategory.push(item.values().subCategory);
+                all_brand.push(item.values().brand);
+                all_discount.push(item.values().discount)
+
+            });
+
+
+            _(all_category).uniq().each(function (item) {
+                $(".categoryCheckBox").append('<div class="checkbox"> <label><input type="checkbox" name="category" value="' + item + '">' + item + '</label> </div>')
+            });
+            _(all_subCategory).uniq().each(function (item) {
+                $(".subCategoryCheckBox").append('<div class="checkbox"><label><input type="checkbox" name="subCategory" value="' + item + '">' + item + '</label></div>')
+            });
+            _(all_brand).uniq().each(function (item) {
+                $(".brandCheckBox").append('<div class="checkbox"><label><input type="checkbox" name="brand" value="' + item + '">' + item + '</label></div>')
+            });
+            _(all_discount).uniq().each(function (item) {
+                if(item!='0.0') {
+                    $(".discountCheckBox").append('<div class="checkbox"><label><input type="checkbox" name="discount" value="' + item + '">' + item + '</label></div>')
+                }
+            });
+
+            $(document).off("change", "input:checkbox[name=category]");
+            $(document).on("change", "input:checkbox[name=category]", updateList);
+            $(document).off("change", "input:checkbox[name=subCategory]");
+            $(document).on("change", "input:checkbox[name=subCategory]", updateList);
+            $(document).off("change", "input:checkbox[name=brand]");
+            $(document).on("change", "input:checkbox[name=brand]", updateList);
+            $(document).off("change", "input:checkbox[name=discount]");
+            $(document).on("change", "input:checkbox[name=discount]", updateList);
+
+            var i=0;
+            function prices() {
+                var sortCriteria = document.getElementById("sortCriteria").value;
+                if (sortCriteria == 'low') {
+                    i=1;
+                    document.getElementById("sortBy").style.display = 'none';
+                    document.getElementById("LP").style.display = 'none';
+                    document.getElementById("HP").style.display = 'block';
+                    document.getElementById("lowToHigh").click();
+                }
+                else if (sortCriteria == 'high') {
+                    document.getElementById("sortBy").style.display = 'none';
+                    document.getElementById("HP").style.display = 'none';
+                    document.getElementById("LP").style.display = 'block';
+                    document.getElementById("lowToHigh").click();
+                    if(i==0){
+                        document.getElementById("lowToHigh").click();}
+                }
+                else if (sortCriteria == 'sales') {
+                    i=0;
+                    document.getElementById("sortBy").style.display = 'none';
+                    document.getElementById("HP").style.display = 'block';
+                    document.getElementById("LP").style.display = 'block';
+                    document.getElementById("topSales").click();
+                    document.getElementById("topSales").click();
+                }
+            }
+            $('#prev').addClass('pagination');
+            $(".next").unbind().click(function() {
+                $( ".pagination li.active" ).next().click();
+                return  false;
+            });
+            $('.prev').on('click', function() {
+
+                $( ".pagination li.active" ).prev().click();
+                return  false;
+
+            });
+
+        </script>
+
+        <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
+        <g:each in="${productSizeList}" var="list" status="i">
+            <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel${i}">Select Size</h4>
+                        </div>
+                        <div class="modal-body">
+                            <g:select class="form-control" name="size" id="size${i}"
+                                      from="${list}" optionKey="id" optionValue="sizeName"
+                                      title="select size"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                            <div class="btn btn-primary" onclick="checkAddToCart(${i});"><i class="fa fa-shopping-cart"></i>Add to cart</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </g:each>
+
+
+        <g:if test="${productList}">
+            <script>
+                $(document).ready(function () {
+
+                    $('html, body').animate({
+                        scrollTop: $(".b").offset().top
+                    }, 2000);
+                });
+
+            </script>
+        </g:if>
+
+
+        <script>
+
+            function addValueToField(id){
+                document.getElementById("productId").value = id;
+
+            }
+            function checkAddToCart(i){
+                $('#smallModal'+i).modal('toggle');
+                var productId=document.getElementById("productId").value;
+                var sizeId=document.getElementById("size"+i).value;
+                var array = [];
+                array[0]=sizeId;
+                array[1]=productId;
+                var responseValue;
+                $.ajax({
+                    url: "${createLink(controller:'cart', action:'checkAddToCart')}",
+                    type: "POST",
+                    data: { "array": JSON.stringify(array) },
+                    async : false,
+                    cache:false,
+                    success: function(result) {
+                        if(result=="ok"){
+                            bootbox.alert({
+                                message: "successfully added to cart.",
+                                size: 'small',
+                                callback: function(){
+                                    $('#cartShow').load(document.URL +  ' #cartShow');
+
+                                }
+
+                            });
+                            responseValue=false;
+
+                        }
+                        else if(result=="notOk"){
+                            $('#login-modal').modal('toggle');
+                            document.getElementById("sizeIdLogin").value = sizeId;
+                            document.getElementById("productIdLogin").value = productId;
+
+                        }
+                    }
+                });
+                return responseValue;
+
+            }
+        </script>
+
+
+
+
+
+        <style>
+        .product img{
+            height:338px;
+            width:251px;
+        }
+        </style>
+
+    </div>
+
+    <!-- /.col-md-9 -->
 
     </div>
     <!-- /.container -->
 </div>
 <!-- /#content -->
-
-
-<script>
-
-    function addValueToField(id){
-        document.getElementById("productId").value = id;
-
-    }
-</script>
-
-<script>
-    function checkAddToCart(i){
-        $('#smallModal'+i).modal('toggle');
-        var productId=document.getElementById("productId").value;
-        var sizeId=document.getElementById("size"+i).value;
-        var array = [];
-        array[0]=sizeId;
-        array[1]=productId;
-        var responseValue;
-        $.ajax({
-            url: "${createLink(controller:'cart', action:'checkAddToCart')}",
-            type: "POST",
-            data: { "array": JSON.stringify(array) },
-            async : false,
-            cache:false,
-            success: function(result) {
-                if(result=="ok"){
-                    bootbox.alert({
-                        message: "successfully added to cart.",
-                        size: 'small',
-                        callback: function(){
-                            $('#cartShow').load(document.URL +  ' #cartShow');
-
-                        }
-
-                    });
-                    responseValue=false;
-
-                }
-                else if(result=="notOk"){
-                    $('#login-modal').modal('toggle');
-                    document.getElementById("sizeIdLogin").value = sizeId;
-                    document.getElementById("productIdLogin").value = productId;
-
-                }
-            }
-        });
-        return responseValue;
-
-    }
-</script>
-
-<!-- *** FOOTER ***
- _________________________________________________________ -->
-<!-- /#footer -->
-
-<!-- *** FOOTER END *** -->
-
-
-
-
-<!-- *** COPYRIGHT ***
- _________________________________________________________ -->
-<!-- *** COPYRIGHT END *** -->
-
-
-
-<!-- /#all -->
-
-
-
-
-<!-- *** SCRIPTS TO INCLUDE ***
- _________________________________________________________ -->
-
-
-
-
 
 
 </body>

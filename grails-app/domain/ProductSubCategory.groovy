@@ -8,8 +8,10 @@ class ProductSubCategory {
 String subCategoryDescription
     boolean statusShow
     boolean isFooter
+    boolean showInHomePage
     static constraints = {
         subCategoryId (generator:'assigned',unique:true)
+        showInHomePage nullable: true
     }
     static mapping = {
     }

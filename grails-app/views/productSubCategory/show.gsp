@@ -61,6 +61,14 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Show in Home Page:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;">${productSubCategoryInstance.showInHomePage} </div>
+            </div>
+        </div>
+    </div>
 
     <div class="col-lg-12">
         <div class="form-group ">
@@ -75,7 +83,6 @@
 <div class="col-lg-12">
     <g:link action="edit" id="${productSubCategoryInstance?.id}" controller="productSubCategory" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
     <g:link action="delete" id="${productSubCategoryInstance?.id}" controller="productSubCategory" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Delete</g:link>
-
 </div>
 </body>
 </html>

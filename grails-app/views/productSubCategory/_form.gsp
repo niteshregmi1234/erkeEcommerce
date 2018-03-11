@@ -55,6 +55,18 @@
         </div>
     </div>
 </div>
+<div class="col-lg-12">
+    <div class="form-group ">
+        <label class="control-label col-sm-2" for="statusShow">Show in Home Page:</label>
+
+        <div class="col-sm-4">
+            <g:select name="showInHomePage" from="${['TRUE','FALSE']}"
+                      keys="${[1,0]}" value="${productSubCategoryInstance?.showInHomePage?1:0}" class="form-control"/>
+
+
+        </div>
+    </div>
+</div>
 
 <div class="col-lg-12">
     <div class="form-group ">
