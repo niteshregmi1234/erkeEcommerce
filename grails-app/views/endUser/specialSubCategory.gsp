@@ -48,7 +48,7 @@
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
-                <li>Special SubCategory</li>
+                <li>SubCategory</li>
 
                 <li>${specialCategoryInstance.subCategoryName}</li>
             </ul>

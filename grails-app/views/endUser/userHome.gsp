@@ -423,7 +423,7 @@
 
         <div class="col-md-12">
             <h4><p class="loadMore more" >
-                <g:link action="topSales" controller="endUser">See more..</g:link>
+                <g:link action="subCategory" controller="endUser" id="${listProducts[0].productDetails.productSubCategory.subCategoryName}">See more..</g:link>
             </p>
             </h4>
         </div>

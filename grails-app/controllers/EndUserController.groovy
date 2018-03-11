@@ -2,6 +2,37 @@
 class EndUserController {
     def productService
     static allowedMethods = [search: "POST"]
+    def subCategory(){
+        try{
+        if(params.id){
+        def productDetailsList=ProductDetails.findAllByProductSubCategory(ProductSubCategory.findBySubCategoryName(params.id))
+        List<Product> productList=new ArrayList<>()
+            List<List<ProductSize>> listList=new ArrayList<>()
+            for(ProductDetails productDetails:productDetailsList){
+            def product=Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
+            if(product){
+                productList.add(product)
+                def sizeString=product.productDetails.productSizes
+                String[] stringArraySize= sizeString.split(",")
+                List<ProductSize> productSizeList=new ArrayList<>()
+                for(int i=0;i<stringArraySize.size();i++){
+                    def sizeId=stringArraySize[i] as long
+                    if(ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }                }
+                listList.add(productSizeList)
+            }
+        }
+            def prices=productService.pricesArray(productList)
+            render(view: "specialSubCategory", model: [prices: prices,productSizeList:listList,productList: productList, specialCategoryInstance:ProductSubCategory.findBySubCategoryName(params.id)])
+
+        }
+        }
+        catch (Exception e){
+
+        }
+    }
     def topSales(){
     try {
         def prices = [0,0]

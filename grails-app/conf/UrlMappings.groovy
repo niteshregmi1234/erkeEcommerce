@@ -28,6 +28,8 @@ class UrlMappings {
         "/category"(action: "allCategoryProducts",controller: "endUser")
         "/specialBrand"(action: "specialBrandProducts",controller: "endUser")
         "/specialSubCategory"(action: "specialSubCategory",controller: "endUser")
+        "/$id"(action: "subCategory",controller: "endUser")
+
         "/season"(action: "upcomingSeasonProducts",controller: "endUser")
         "/about"(action: "about",controller: "endUser")
         "/addCart"(action: "addToCart",controller: "cart")
