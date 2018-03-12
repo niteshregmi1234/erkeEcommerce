@@ -177,31 +177,16 @@ class EndUserController {
         catch (Exception e){
         }
         }
-    def allProducts={
+    def allProducts(){
         try{
             def prices=[0,0]
-            def productDetailsList=ProductDetails.list();
-            List<ProductCategory> productCategoryList=new ArrayList<>()
-            List<Float> discountList=new ArrayList<>()
-            List<ProductBrand> productBrandList=new ArrayList<>()
-            List<ProductSubCategory> productSubCategoryList=new ArrayList<>()
+                        def productDetailsList=ProductDetails.list();
             List<List<ProductSize>> listList=new ArrayList<>()
             List<Product> productList = new ArrayList<>()
         for (ProductDetails productDetails : productDetailsList) {
-            def productInstance = Product.findByProductDetailsAndDelFlag(productDetails,false)
+            def productInstance = Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
             if (productInstance) {
                 productList.add(productInstance)
-                if(!productBrandList.contains(productInstance.productDetails.productBrand)){
-                    productBrandList.add(productInstance.productDetails.productBrand)}
-                if(!productSubCategoryList.contains(productInstance.productDetails.productSubCategory)){
-                    productSubCategoryList.add(productInstance.productDetails.productSubCategory)
-                }
-                if(!productCategoryList.contains(productInstance.productDetails.productCategory)){
-                    productCategoryList.add(productInstance.productDetails.productCategory)
-                }
-                if(!discountList.contains(productInstance.productDetails.discountPercentage) && productInstance.productDetails.discountPercentage!=0 ) {
-                    discountList.add(productInstance.productDetails.discountPercentage)
-                }
                 def sizeString=productInstance.productDetails.productSizes
                 String[] stringArraySize= sizeString.split(",")
                 List<ProductSize> productSizeList=new ArrayList<>()
@@ -215,7 +200,7 @@ class EndUserController {
             }
                    }
             prices=productService.pricesArray(productList)
-            render(view: "allProducts", model: [productCategoryList:productCategoryList,productSubCategoryList:productSubCategoryList,discountList:discountList,prices: prices,productBrandList: productBrandList,productSizeList:listList,productList: productList])
+            render(view: "allProducts", model: [prices: prices,productSizeList:listList,productList: productList])
 
     }
         catch (Exception e){

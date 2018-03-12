@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
     <meta name="author" content="Anoj And Bikash">
+
     %{--<g:if test="${productInstance}">--}%
         %{--<meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.frontImageName}"/>--}%
 
@@ -51,13 +52,14 @@
 
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/loadash.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/list.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/list.pagination.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
 
-    %{--<script src="${resource(dir: 'js', file: 'yarsaa/pagination.js')}" type="text/javascript"--}%
-            %{--charset="utf-8"></script>--}%
 
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrapvalidator.js')}" type="text/javascript"
             charset="utf-8"></script>
@@ -93,21 +95,6 @@
 </head>
 
 <body>
-
-
-<div class="se-pre-con"></div>
-
-<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
-<script>
-//paste this code under the head tag or in a separate js file.
-// Wait for window load
-$(window).load(function() {
-// Animate loader off screen
-$(".se-pre-con").fadeOut("slow");
-});
-</script>
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/loader.css')}" type="text/css"
-      media="all"/>
 <noscript>
 
     <div id="content" style="margin:20px;">
@@ -149,26 +136,7 @@ $(".se-pre-con").fadeOut("slow");
 
 <div id="total">
 
-    %{--<div class="container">--}%
-        %{--<div class="col-md-6 offer" data-animate="fadeInDown">--}%
-            %{--<a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the day</a>  <a href="#">${CompanyInformation.list()[0].offer}</a>--}%
-        %{--</div>--}%
-        %{--<div class="col-md-6" data-animate="fadeInDown" >--}%
-            %{--<ul class="menu" id="logoutClass">--}%
-                %{--<li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>--}%
-                %{--</li>--}%
-                %{--<g:if test="${session.endUser}">--}%
-                %{--<li><a href="#" onclick="logoutUser();">Logout</a>--}%
-                %{--</li>--}%
-                %{--</g:if>--}%
-                %{--<li><g:link action="register" controller="endUserInformation">Register</g:link>--}%
-                %{--</li>--}%
-                %{--<li><g:link action="contact" controller="endUser">Contact</g:link>--}%
-                %{--</li>--}%
 
-            %{--</ul>--}%
-        %{--</div>--}%
-    %{--</div>--}%
 <div id="top">
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
         <div class="modal-dialog modal-sm">

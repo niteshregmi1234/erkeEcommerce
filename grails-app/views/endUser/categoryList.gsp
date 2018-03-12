@@ -426,11 +426,15 @@
         <script>
 
 
+            var paginationTopOptions = {
+                left: 5,
+                right: 1
+            };
             var options = {
                 valueNames: ['category', 'subCategory', 'brand','discount','priceProduct','soldNumbers'],
                 page: 15,
                 plugins: [
-                    ListPagination({})
+                    ListPagination(paginationTopOptions)
                 ]
             };
 

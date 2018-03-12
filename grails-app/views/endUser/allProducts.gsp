@@ -421,12 +421,15 @@
         </script>
         <script>
 
-
+            var paginationTopOptions = {
+                left: 5,
+                right: 1
+            };
             var options = {
                 valueNames: ['category', 'subCategory', 'brand','discount','priceProduct','soldNumbers'],
                 page: 15,
                 plugins: [
-                    ListPagination({})
+                    ListPagination(paginationTopOptions)
                 ]
             };
 
@@ -434,10 +437,10 @@
             var updateList = function () {
                 var minPrice=parseFloat(document.getElementById("amount_min").value);
                 var maxPrice=parseFloat(document.getElementById("amount_max").value);
-                var category = new Array();
-                var subCategory = new Array();
-                var brand = new Array();
-                var discount = new Array();
+                var category =[];
+                var subCategory =[];
+                var brand = [];
+                var discount =[];
 
                 $("input:checkbox[name=category]:checked").each(function () {
                     category.push($(this).val());
