@@ -39,7 +39,7 @@ class UrlMappings {
         "/sendQuery"(action: "placeOrder",controller: "checkOut")
         "/login-YarsaaAnojAndBikash"(action: "adminLoginForm",controller: "login")
         "/"(action: "userHome",controller: "endUser")
-//        "500"(controller:"errorPage",action:"notfound")
+        "500"(controller:"errorPage",action:"notfound")
         "404"(controller:"errorPage",action:"notfound")
         "405"(controller: "errorPage",action: "notfound")
 	}

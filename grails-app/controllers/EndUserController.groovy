@@ -6,6 +6,7 @@ class EndUserController {
         try{
         if(params.id){
         def productDetailsList=ProductDetails.findAllByProductSubCategory(ProductSubCategory.findBySubCategoryName(params.id))
+    if(productDetailsList){
         List<Product> productList=new ArrayList<>()
             List<List<ProductSize>> listList=new ArrayList<>()
             for(ProductDetails productDetails:productDetailsList){
@@ -27,7 +28,7 @@ class EndUserController {
             def prices=productService.pricesArray(productList)
             render(view: "specialSubCategory", model: [prices: prices,productSizeList:listList,productList: productList, specialCategoryInstance:ProductSubCategory.findBySubCategoryName(params.id)])
 
-        }
+        }}
         }
         catch (Exception e){
 
@@ -326,6 +327,9 @@ catch (Exception e){
                     List<Product> productList=new ArrayList<>()
                     for(ProductDetails productDetails:productDetailsList){
                         def product=Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
+                        if(productList.size()==10){
+                            break;
+                        }
                         if(product){
                             productList.add(product)
                         }
@@ -348,10 +352,9 @@ catch (Exception e){
     }
     def subCategoryList() {
         try{
-
-            if(ProductDetails.findByProductCategoryAndProductSubCategory(ProductCategory.findByCategoryId(params.category), ProductSubCategory.findBySubCategoryId(params.subCategory)))
+def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.findByCategoryId(params.category), ProductSubCategory.findBySubCategoryId(params.subCategory))
+            if(productDetailsList)
                     {
-                        def productDetailsList = ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.findByCategoryId(params.category), ProductSubCategory.findBySubCategoryId(params.subCategory))
                         List<List<ProductSize>> listList=new ArrayList<>()
                         List<Product> productList = new ArrayList<>()
         for (ProductDetails productDetails : productDetailsList) {
@@ -374,8 +377,9 @@ catch (Exception e){
 
                         def prices=productService.pricesArray(productList)
 
-                        render(view: "subCategoryList", model: [prices:prices,productSizeList:listList,productList: productList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory),productCategory: ProductCategory.findByCategoryId(params.category)])
+                        render(view: "subCategoryProducts", model: [prices:prices, productSizeList:listList, productList: productList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory), productCategory: ProductCategory.findByCategoryId(params.category)])
             }
+
         }
         catch (Exception e){
 

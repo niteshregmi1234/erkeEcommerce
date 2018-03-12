@@ -221,7 +221,6 @@ def checkPhoto(){
     def save(){
         try{
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
                 if (!params.id) {
                     def product = new Product()
                     product.productColor = ProductColor.get(params.productColor)
