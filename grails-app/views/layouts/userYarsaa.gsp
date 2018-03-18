@@ -83,6 +83,7 @@
             charset="utf-8"></script>
     <script src="${resource(dir: 'js', file: 'yarsaa/front.js')}" type="text/javascript"
             charset="utf-8"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js"></script>
 
 
     %{--<script type="text/javascript"> //<![CDATA[--}%
@@ -104,7 +105,6 @@
                 <div class="row" id="error-page">
                     <div class="col-sm-6 col-sm-offset-3">
                         <div class="box">
-
                             <p class="text-center">
 
                             </p>
@@ -610,7 +610,9 @@ if(sizeId=='' && productId==''){
 
 <div id="all">
 
-    <g:layoutBody></g:layoutBody>
+    <g:layoutBody>
+
+    </g:layoutBody>
     <!-- /#content -->
 
     <!-- *** FOOTER ***
@@ -625,7 +627,6 @@ if(sizeId=='' && productId==''){
                         <li><g:link action="about" controller="endUser">About us</g:link>
                         </li>
                         %{--<li><a href="text.html">Terms and conditions</a>--}%
-                        </li>
                         %{--<li><a href="faq.html">FAQ</a>--}%
                         %{--</li>--}%
                         <li><g:link action="contact" controller="endUser">Contact us</g:link>

@@ -249,6 +249,39 @@
             </div>
         </div>
         <div class="col-md-9">
+            <div class="pages">
+
+                <ul id="prevPage">
+                    <li><a id="prev" style="display: none;">&laquo;</a>
+                    </li>
+                </ul>
+
+                <ul class="pagination paginationTop" id="pagesCount"></ul>
+
+                <ul class="pagination" id="nextPage">
+
+                    <li><a id="next" style="display: none;">&raquo;</a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="row" id="error-page" style="display: none;">
+                <div class="box">
+
+                    <p class="text-center">
+                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}" class="hidden-xs">
+
+                    </p>
+
+                    <h4 class="text-muted text-center">O products found for your filter enquiry.</h4>
+
+                    <p class="text-center">To continue please use the <strong>filter</strong> in left side or </p><strong>Search form</strong> or <strong>Menu</strong> above.</p>
+
+                    <p class="buttons text-center"><g:link action="userHome" controller="endUser" class="btn btn-primary"><i class="fa fa-home"></i> Go to Homepage</g:link>
+                    </p>
+                </div>
+            </div>
+
             <div class="list row products" id="myList">
                 <g:each in="${productList}" var="list" status="i">
                     <g:if test="${list.productDetails.isSale==false}">
@@ -266,27 +299,27 @@
                                 <div class="product">
                                     <div class="flip-container">
                                         <div class="flipper">
-                                            <div class="front product">
+                                            <div class="front">
                                                 <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
+                                                    <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive lazy">
 
                                                 </g:link>
                                             </div>
-                                            <div class="back product">
+                                            <div class="back">
                                                 <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.backImageName])}" class="img-responsive">
+                                                    <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive lazy">
 
                                                 </g:link>
                                             </div>
                                         </div>
                                     </div>
-                                    <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
-                                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
+                                    <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible">
+                                        <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive lazy">
 
                                     </g:link>
                                     <div class="text">
                                         <div class="tooltips">
-                                            <h3 class="textHeight"><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
+                                            <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
                                             <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
                                         </div>
                                         <span class="pricesT" style="display: none;">Rs${list.soldNumbers}</span>
@@ -325,28 +358,28 @@
                                 <div class="product">
                                     <div class="flip-container">
                                         <div class="flipper">
-                                            <div class="front product">
+                                            <div class="front">
                                                 <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
+                                                    <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive lazy">
 
                                                 </g:link>
                                             </div>
-                                            <div class="back product">
+                                            <div class="back">
                                                 <g:link action="singleProduct" controller="endUser" id="${list.productId}">
 
-                                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.backImageName])}" class="img-responsive">
+                                                    <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive lazy" >
 
                                                 </g:link>
                                             </div>
                                         </div>
                                     </div>
-                                    <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
-                                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
+                                    <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible">
+                                        <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive lazy">
 
                                     </g:link>
                                     <div class="text">
                                         <div class="tooltips">
-                                            <h3 class="textHeight"><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
+                                            <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
                                             <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
                                         </div>
                                         <span class="pricesT" style="display: none;">Rs${list.soldNumbers}</span>
@@ -374,27 +407,50 @@
                 </g:each>
             <!-- /.col-md-4 -->
             </div>
-            <!-- /.products -->
+
+            <script>
+                $(function() {
+                    $('.lazy').Lazy();
+                });
+                window.addEventListener('load', function(){
+                    document.getElementById("next").style.display='block';
+                    document.getElementById("filterColumn").style.visibility='visible';
+
+                }, false);
+
+            </script>
+
             <div class="pages">
 
-                <ul class="prev" id="prev">
-                    <li><a class="prev">&laquo;</a>
+                <ul id="prevPages">
+                    <li><a id="prevs" style="display: none;">&laquo;</a>
                     </li>
                 </ul>
-                <ul class="pagination"></ul>
 
-                <ul class="pagination next">
+                <ul class="pagination paginationBottom" id="pagesCounts"></ul>
 
-                    <li><a class="next">&raquo;</a>
+                <ul class="pagination" id="nextPages">
+
+                    <li><a id="nexts">&raquo;</a>
                     </li>
                 </ul>
 
             </div>
+            <p class="text-center" id="goToTop"><a href="#myList" class="scroll-to">Go to top</a></p>
 
 
 
 
         </div>
+        <g:if test="${productList.size()<=15}">
+            <script>
+                document.getElementById("pagesCount").style.display='none';
+                document.getElementById("next").style.display='none';
+                document.getElementById("pagesCounts").style.display='none';
+                document.getElementById("nexts").style.display='none';
+
+            </script>
+        </g:if>
         <script>
             $(function() {
                 $("#slider-range").slider({
@@ -425,28 +481,36 @@
         </script>
         <script>
 
-
             var paginationTopOptions = {
-                left: 5,
+                name:"paginationTop",
+                paginationClass:"paginationTop",
+                left: 2,
                 right: 1
             };
+            var paginationBottomOptions = {
+                name:"paginationBottom",
+                paginationClass:"paginationBottom",
+                left: 2,
+                right: 1
+            };
+
             var options = {
                 valueNames: ['category', 'subCategory', 'brand','discount','priceProduct','soldNumbers'],
                 page: 15,
                 plugins: [
-                    ListPagination(paginationTopOptions)
+                    ListPagination(paginationTopOptions), ListPagination(paginationBottomOptions)
                 ]
             };
 
-
             var userList = new List('search-results', options);
             var updateList = function () {
+
                 var minPrice=parseFloat(document.getElementById("amount_min").value);
                 var maxPrice=parseFloat(document.getElementById("amount_max").value);
-                var category = new Array();
-                var subCategory = new Array();
-                var brand = new Array();
-                var discount = new Array();
+                var category =[];
+                var subCategory =[];
+                var brand = [];
+                var discount =[];
 
                 $("input:checkbox[name=category]:checked").each(function () {
                     category.push($(this).val());
@@ -465,9 +529,7 @@
                 var values_discount = discount.length > 0 ? discount : null;
                 var priceProduct=0;
 
-                userList.filter(function (item) {
-
-
+                var itemList=userList.filter(function (item) {
                             return (_(values_category).contains(item.values().category) || !values_category)
                                     && (_(values_subCategory).contains(item.values().subCategory) || !values_subCategory)
                                     && (_(values_brand).contains(item.values().brand) || !values_brand)
@@ -478,6 +540,57 @@
 
                         }
                 );
+                var allimages= document.getElementsByTagName('img');
+                var element = $(".pagination li.active");
+                var element1 = element.prev('li');
+                var element2 = element.next('li');
+                document.getElementById("goToTop").style.display='block';
+                if (element1.length) {
+                    document.getElementById("prev").style.display = 'block';
+                    document.getElementById("prevs").style.display = 'block';
+
+                }
+                else {
+                    document.getElementById("prev").style.display = 'none';
+                    document.getElementById("prevs").style.display = 'none';
+
+                }
+                if (element2.length) {
+                    document.getElementById("next").style.display = 'block';
+                    document.getElementById("nexts").style.display = 'block';
+
+                }
+                else {
+                    document.getElementById("next").style.display = 'none';
+                    document.getElementById("nexts").style.display = 'none';
+                }
+
+                for (var i=0; i<allimages.length; i++) {
+                    if (allimages[i].getAttribute('data-src')) {
+                        allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+                    }
+                }
+                if(itemList.length==0) {
+                    document.getElementById("error-page").style.display='block';
+                    document.getElementById("goToTop").style.display='none';
+                }
+                else{
+                    document.getElementById("error-page").style.display='none';
+                    document.getElementById("goToTop").style.display='block';
+                }
+                var pagesCountDiv=document.getElementsByClassName("pages");
+                var number=$( ".paginationBottom li").length;
+                if(number==1){
+                    for(var m=0;m<pagesCountDiv.length;m++){
+                        pagesCountDiv[m].style.display='none';
+                    }
+
+                }
+                else{
+                    for(m=0;m<pagesCountDiv.length;m++){
+                        pagesCountDiv[m].style.display='block';
+                    }
+                }
 
             }
 
@@ -551,20 +664,120 @@
                     document.getElementById("topSales").click();
                 }
             }
-            $('#prev').addClass('pagination');
-            $(".next").unbind().click(function() {
-                $( ".pagination li.active" ).next().click();
-                return  false;
+            $('#prevPage').addClass('pagination');
+            $('#prevPages').addClass('pagination');
+
+            $("#next").on('click', function() {
+                var element=$( ".pagination li.active" ).next('li');
+                if(element.length){
+                    $( element.click());
+                    var allimages= document.getElementsByTagName('img');
+                    lazyDisplayImage(allimages);
+                    document.getElementById("prev").style.display='block';
+                    var element1=$( ".pagination li.active" ).next('li');
+                    if(element1.length){
+                        document.getElementById("next").style.display='block';
+                    }
+                    else{
+                        document.getElementById("next").style.display='none';
+
+                    }
+                    return  false;
+                }
             });
-            $('.prev').on('click', function() {
+            $('#prev').on('click', function() {
+                var element=$( ".pagination li.active" ).prev('li');
+                if(element.length){
+                    $( element.click());
+                    var allimages= document.getElementsByTagName('img');
+                    lazyDisplayImage(allimages);
+                    document.getElementById("next").style.display='block';
+                    var element1=$( ".pagination li.active" ).prev('li');
+                    if(element1.length){
+                        document.getElementById("prev").style.display='block';
+                    }
+                    else{
+                        document.getElementById("prev").style.display='none';
 
-                $( ".pagination li.active" ).prev().click();
-                return  false;
+                    }
+                    return  false;
+                }
+            });
+            $("#nexts").on('click', function() {
+                var element=$( ".pagination li.active" ).next('li');
+                if(element.length){
+                    $( element.click());
+                    var allimages= document.getElementsByTagName('img');
+                    lazyDisplayImage(allimages);
+                    document.getElementById("prevs").style.display='block';
+                    var element1=$( ".pagination li.active" ).next('li');
+                    if(element1.length){
+                        document.getElementById("nexts").style.display='block';
+                    }
+                    else{
+                        document.getElementById("nexts").style.display='none';
 
+                    }
+                    return  false;
+                }
+            });
+            $('#prevs').on('click', function() {
+                var element=$( ".pagination li.active" ).prev('li');
+                if(element.length){
+                    $( element.click());
+                    var allimages= document.getElementsByTagName('img');
+                    lazyDisplayImage(allimages);
+                    document.getElementById("nexts").style.display='block';
+                    var element1=$( ".pagination li.active" ).prev('li');
+                    if(element1.length){
+                        document.getElementById("prevs").style.display='block';
+                    }
+                    else{
+                        document.getElementById("prevs").style.display='none';
+
+                    }
+                    return  false;
+                }
             });
 
         </script>
+        <script>
+            $("body").click(function(event){
+                var allimages= document.getElementsByTagName('img');
+                lazyDisplayImage(allimages);
+            });
+            function lazyDisplayImage(allimages){
+                var element=$( ".pagination li.active" );
+                var element1=element.prev('li');
+                var element2=element.next('li');
+                if(element1.length){
+                    document.getElementById("prevs").style.display='block';
+                    document.getElementById("prev").style.display='block';
 
+                }
+                else{
+                    document.getElementById("prevs").style.display='none';
+                    document.getElementById("prev").style.display='none';
+
+                }
+                if(element2.length){
+                    document.getElementById("nexts").style.display='block';
+                    document.getElementById("next").style.display='block';
+
+                }
+                else{
+                    document.getElementById("nexts").style.display='none';
+                    document.getElementById("next").style.display='none';
+
+                }
+
+                for (var i=0; i<allimages.length; i++) {
+                    if (allimages[i].getAttribute('data-src')) {
+                        allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+                    }
+                }
+            }
+        </script>
         <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
         <g:each in="${productSizeList}" var="list" status="i">
             <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
@@ -594,7 +807,7 @@
                 $(document).ready(function () {
 
                     $('html, body').animate({
-                        scrollTop: $(".b").offset().top
+                        scrollTop: $("#myList").offset().top
                     }, 2000);
                 });
 
