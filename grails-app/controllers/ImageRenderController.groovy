@@ -11,7 +11,7 @@ import java.util.regex.Pattern
 
 class ImageRenderController {
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
-    def renderImage = {
+    def renderImage() {
         try {
 
 

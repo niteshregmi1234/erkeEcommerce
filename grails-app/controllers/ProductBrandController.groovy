@@ -5,6 +5,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductBrandController extends BaseController{
+    def productService
 static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 
@@ -42,11 +43,10 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
             productBrandInstance.brandName=params.brandName
             productBrandInstance.logoName=uploadLogoImage()
             productBrandInstance.isTop=params.isTop as byte
-
-            productBrandInstance.statusShow=params.statusShow as byte
+                    productBrandInstance.statusShow=params.statusShow as byte
             productBrandInstance.brandDescription=params.brandDescription
-
-            productBrandInstance.save(flush: true)
+                    productBrandInstance.urlName=productService.convertToOriginalUrl(productBrandInstance.brandName)
+                    productBrandInstance.save(flush: true)
             redirect(action: "show" ,id:productBrandInstance.id)
         }
         else{
@@ -57,6 +57,7 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
                 productBrandInstance.isTop=params.isTop as byte
                 productBrandInstance.statusShow=params.statusShow as byte
                 productBrandInstance.brandDescription=params.brandDescription
+                productBrandInstance.urlName=productService.convertToOriginalUrl(productBrandInstance.brandName)
                 productBrandInstance.save(flush: true)
             redirect(action: "show" ,id:productBrandInstance.id)
         }

@@ -2,8 +2,10 @@
 
 class ErrorPageController {
 
-    def notfound(){
-
+    def notFoundUrl(){
+redirect(action: "userHome",controller: "endUser")
     }
+def notfound(){
 
+}
 }

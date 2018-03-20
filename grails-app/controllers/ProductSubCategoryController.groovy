@@ -5,6 +5,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductSubCategoryController extends BaseController{
+def productService
     static allowedMethods = [save: "POST",uploadCoverImage:"POST",editCoverImage: "POST",renderImage: "POST"]
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 
@@ -45,6 +46,7 @@ class ProductSubCategoryController extends BaseController{
             productSubCategoryInstance.isFooter=params.isFooter as byte
             productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
                     productSubCategoryInstance.showInHomePage=params.showInHomePage as byte
+                    productSubCategoryInstance.urlName=productService.convertToOriginalUrl(productSubCategoryInstance.subCategoryName)
                     productSubCategoryInstance.coverImageName=uploadCoverImage()
             productSubCategoryInstance.save(flush: true)
             redirect(action: "show" ,id:productSubCategoryInstance.id)
@@ -58,6 +60,7 @@ if(productSubCategoryInstance){
     productSubCategoryInstance.isFooter=params.isFooter as byte
     productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
     productSubCategoryInstance.showInHomePage=params.showInHomePage as byte
+    productSubCategoryInstance.urlName=productService.convertToOriginalUrl(productSubCategoryInstance.subCategoryName)
     productSubCategoryInstance.coverImageName=editCoverImage(productSubCategoryInstance.coverImageName)
     productSubCategoryInstance.save(flush: true)
     redirect(action: "show" ,id:productSubCategoryInstance.id)}

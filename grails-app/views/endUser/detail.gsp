@@ -35,10 +35,10 @@
                         <li><g:link action="userHome" controller="endUser">Home</g:link>
                         </li>
 
-                        <li><g:link action="allCategoryProducts" id="${productInstance.productDetails.productCategory.categoryId}" controller="endUser">
+                        <li><g:link action="allCategoryProducts" params="[category:productInstance.productDetails.productCategory.urlName]" controller="endUser">
                     ${productInstance.productDetails.productCategory.categoryName}</g:link>
                         </li>
-                        <li><g:link action="subCategoryList" controller="endUser" params="[category:productInstance.productDetails.productCategory.categoryId,subCategory:productInstance.productDetails.productSubCategory.subCategoryId]">
+                        <li><g:link action="subCategoryList" controller="endUser" params="[category:productInstance.productDetails.productCategory.urlName,subCategorySpecify: productInstance.productDetails.productSubCategory.productSubCategorySpecify.urlName,subCategory:productInstance.productDetails.productSubCategory.urlName]">
                         ${productInstance.productDetails.productSubCategory.subCategoryName}</g:link>
                         </li>
 
@@ -62,7 +62,7 @@
                             <li class="active">
 
 
-                                <g:link action="allCategoryProducts" id="${productInstance.productDetails.productCategory.categoryId}" controller="endUser">${productInstance.productDetails.productCategory.categoryName} <span class="badge pull-right"></span></g:link>
+                                <g:link action="allCategoryProducts" params="[category:productInstance.productDetails.productCategory.urlName]" controller="endUser">${productInstance.productDetails.productCategory.categoryName} <span class="badge pull-right"></span></g:link>
                                 <g:each in="${ProductSubCategorySpecify.list()}" var="specifyList" status="i">
 
                                     <div class="dropdownA">
@@ -78,14 +78,14 @@
                                                 }
                                             %>
                                             <g:if test="${productList}">
-                                                <li><g:link action="specifiedProducts" params="[category:productInstance.productDetails.productCategory.categoryId,subCategorySpecify:specifyList.id]" controller="endUser" class="dropbtnA"> ${specifyList.specificationName}</g:link></li>
+                                                <li><g:link action="specifiedProducts" params="[category:productInstance.productDetails.productCategory.urlName,subCategorySpecify:specifyList.urlName]" controller="endUser" class="dropbtnA"> ${specifyList.specificationName}</g:link></li>
                                             </g:if>
                                         </ul>
                                         <ul class="dropdown-contentA">
                                             <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)}" var="subCategoryList">
                                                 <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(productInstance.productDetails.productCategory,subCategoryList),false)}">
 
-                                                    <li><g:link action="subCategoryList" controller="endUser" params="[category:productInstance.productDetails.productCategory.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                                                    <li><g:link action="subCategoryList" controller="endUser" params="[category:productInstance.productDetails.productCategory.urlName,subCategorySpecify:subCategoryList.productSubCategorySpecify.urlName,subCategory:subCategoryList.urlName]">${subCategoryList.subCategoryName}</g:link>
 
                                                     </li>
 

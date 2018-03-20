@@ -317,7 +317,7 @@
                         <h3>${aboutUsInstance.specialProductSubCategory.subCategoryName} TO DIE FOR</h3>
                         <p>${aboutUsInstance.specialProductSubCategory.subCategoryDescription}</p>
                         <div class="wthreeshop-a a-buttonsize">
-                            <g:link action="specialSubCategory" controller="endUser">SHOP ${aboutUsInstance.specialProductSubCategory.subCategoryName}</g:link>
+                            <g:link action="subCategory" controller="endUser" params="[subCategory:aboutUsInstance.specialProductSubCategory.urlName]">SHOP ${aboutUsInstance.specialProductSubCategory.subCategoryName}</g:link>
                         </div>
                     </div>
                 </div>
@@ -333,28 +333,6 @@
         </div>
     </div>
 </div>
-<g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
-<g:each in="${productSizeList}" var="list" status="i">
-    <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel${i}">Select Size</h4>
-                </div>
-                <div class="modal-body">
-                    <g:select class="form-control" name="size" id="size${i}"
-                              from="${list}" optionKey="id" optionValue="sizeName"
-                              title="select size"/>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                    <div class="btn btn-primary" onclick="checkAddToCart(${i});"><i class="fa fa-shopping-cart"></i>Add to cart</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</g:each>
 
 <script>
     $(document).ready(function() {

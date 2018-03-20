@@ -228,7 +228,7 @@ def checkPhoto(){
                     product.isFeatured = params.isFeatured as byte
                     product.isLatest = params.isLatest as byte
                     product.seasons = SeasonManagement.list()[1].seasons
-                    product.productSpecificationName = product.productDetails.productCategory.categoryName + "-" + product.productColor.colorName + " " + product.productDetails.productBrand.brandName + " " + product.productDetails.productName
+                    product.productSpecificationName = productService.convertToOriginalUrl(product.productDetails.productBrand.urlName + "-" + product.productColor.colorName+ "-" + product.productDetails.briefDescription)
                     product.frontImageName = upLoadFrontImage()
                     product.sideImageName = uploadSideImage()
                     product.backImageName = uploadBackImage()
@@ -236,6 +236,8 @@ def checkPhoto(){
                     product.delFlag = false
                     product.soldNumbers=0
                     product.save(flush: true)
+                    product.productSpecificationName = product.productSpecificationName+ "-" + product.id
+product.save(flush: true)
                     redirect(action: "show", id: product.id)
                 } else {
                     def product = Product.get(params.id)
@@ -246,6 +248,7 @@ def checkPhoto(){
                         product.isLatest = params.isLatest as byte
                         product.productSpecificationName = product.productDetails.productCategory.categoryName + "-" + product.productColor.colorName + " " + product.productDetails.productBrand.brandName + " " + product.productDetails.productName
                         product.seasons = SeasonManagement.list()[1].seasons
+                        product.productSpecificationName = productService.convertToOriginalUrl(product.productDetails.productBrand.urlName + "-" + product.productColor.colorName+ "-" + product.productDetails.briefDescription + "-" + product.id)
                         product.frontImageName = editFrontImage(product.frontImageName)
                         product.sideImageName = editSideImage(product.sideImageName)
                         product.backImageName = editBackImage(product.backImageName)

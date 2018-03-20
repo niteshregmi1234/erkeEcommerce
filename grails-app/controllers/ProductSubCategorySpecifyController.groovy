@@ -1,7 +1,8 @@
 import org.springframework.dao.DataIntegrityViolationException
 
 class ProductSubCategorySpecifyController extends BaseController{
-static allowedMethods = [save: 'POST']
+def productService
+    static allowedMethods = [save: 'POST']
     def list() {
         try {
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
@@ -32,20 +33,17 @@ static allowedMethods = [save: 'POST']
                 if(!params.id){
             def productSubCategorySpecifyInstance=new ProductSubCategorySpecify()
             productSubCategorySpecifyInstance.specificationName=params.specificationName
-
-
-            productSubCategorySpecifyInstance.save(flush: true)
+                    productSubCategorySpecifyInstance.urlName=productService.convertToOriginalUrl(productSubCategorySpecifyInstance.specificationName)
+                    productSubCategorySpecifyInstance.save(flush: true)
             redirect(action: "show" ,id:productSubCategorySpecifyInstance.id)
         }
         else{
             def productSubCategorySpecifyInstance=ProductSubCategorySpecify.get(params.id)
             if(productSubCategorySpecifyInstance){
             productSubCategorySpecifyInstance.specificationName=params.specificationName
-
-
-            productSubCategorySpecifyInstance.save(flush: true)
-
-            redirect(action: "show" ,id:productSubCategorySpecifyInstance.id)
+                productSubCategorySpecifyInstance.urlName=productService.convertToOriginalUrl(productSubCategorySpecifyInstance.specificationName)
+                productSubCategorySpecifyInstance.save(flush: true)
+                redirect(action: "show" ,id:productSubCategorySpecifyInstance.id)
         }
             else {
                 redirect(action: "notfound",controller: "errorPage")

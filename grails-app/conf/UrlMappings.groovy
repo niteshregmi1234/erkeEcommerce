@@ -7,29 +7,22 @@ class UrlMappings {
 
             }
         }
-
-            "/search/$result"(action: "search",controller: "endUser")
+        "/"(action: "userHome",controller: "endUser")
+         "/search/$result"(action: "search",controller: "endUser")
             "/error"(action: "notfound",controller: "errorPage")
-
-            "/result"(action: "result",controller: "endUser")
-        "/topBrand"(action: "topBrand",controller: "endUser")
+        "/result"(action: "result",controller: "endUser")
+        "/$brandNames/ "(action: "topBrand",controller: "endUser")
         "/allBrands"(action: "allBrands",controller: "endUser")
             "/topSales"(action: "topSales",controller: "endUser")
-            "/latestProducts"(action: "latestProducts",controller: "endUser")
-
-        "/offerBrand"(action: "offerBrand",controller: "endUser")
-
-        "/shoppingDepartment"(action: "allProducts",controller: "endUser")
+            "/latest"(action: "latestProducts",controller: "endUser")
+        "/store"(action: "allProducts",controller: "endUser")
         "/contact"(action: "contact",controller: "endUser")
-        "/product"(action: "singleProduct",controller: "endUser")
-        "/subCategory/$category/$subCategory"(action: "subCategoryList",controller: "endUser")
-        "/specifiedProducts/$category/$subCategorySpecify"(action: "specifiedProducts",controller: "endUser")
-
-        "/category"(action: "allCategoryProducts",controller: "endUser")
+        "/detail-$specificationName"(action: "singleProduct",controller: "endUser")
+        "/$category/$subCategorySpecify/$subCategory/ "(action: "subCategoryList",controller: "endUser")
+        "/$category/$subCategorySpecify/ "(action: "specifiedProducts",controller: "endUser")
+        "/$category/"(action: "allCategoryProducts",controller: "endUser")
         "/specialBrand"(action: "specialBrandProducts",controller: "endUser")
-        "/specialSubCategory"(action: "specialSubCategory",controller: "endUser")
-        "/$id"(action: "subCategory",controller: "endUser")
-
+        "/all-$subCategory/ "(action: "subCategory",controller: "endUser")
         "/season"(action: "upcomingSeasonProducts",controller: "endUser")
         "/about"(action: "about",controller: "endUser")
         "/addCart"(action: "addToCart",controller: "cart")
@@ -38,9 +31,8 @@ class UrlMappings {
         "/register"(action: "register",controller: "endUserInformation")
         "/sendQuery"(action: "placeOrder",controller: "checkOut")
         "/login-YarsaaAnojAndBikash"(action: "adminLoginForm",controller: "login")
-        "/"(action: "userHome",controller: "endUser")
         "500"(controller:"errorPage",action:"notfound")
-        "404"(controller:"errorPage",action:"notfound")
+        "404"(controller:"errorPage",action:"notFoundUrl")
         "405"(controller: "errorPage",action: "notfound")
 	}
 }

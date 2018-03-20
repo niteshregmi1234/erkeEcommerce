@@ -6,9 +6,11 @@ class ProductCategory {
     boolean statusShow
     String menuImage1
     String menuImage2
+    String urlName
     static constraints = {
-
         categoryId (generator:'assigned',unique:true)
+        urlName (nullable: true)
+
     }
     static mapping = {
 

@@ -405,11 +405,11 @@ if(sizeId=='' && productId==''){
                                             %>
                                         <g:if test="${productList}">
                                     <div class="col-sm-3">
-                                        <g:link action="specifiedProducts" params="[category:categoryList.categoryId,subCategorySpecify:specifyList.id]" controller="endUser"> <h5>${specifyList.specificationName}</h5></g:link>
+                                        <g:link action="specifiedProducts" params="[category:categoryList.urlName,subCategorySpecify:specifyList.urlName]" controller="endUser"> <h5>${specifyList.specificationName}</h5></g:link>
                                         <ul>
                                         <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecifyAndStatusShow(specifyList,true)}" var="subCategoryList">
 <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList),false)}">
-                                            <li><g:link controller="endUser" action="subCategoryList"  params="[category:categoryList.categoryId,subCategory:subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                                            <li><g:link controller="endUser" action="subCategoryList"  params="[category:categoryList.urlName,subCategorySpecify: subCategoryList.productSubCategorySpecify.urlName, subCategory:subCategoryList.urlName]">${subCategoryList.subCategoryName}</g:link>
                                             </li>
 </g:if>
                                             </g:each>
@@ -661,7 +661,7 @@ if(sizeId=='' && productId==''){
                         <g:each in="${ProductSubCategory.findAllByIsFooterAndStatusShow(true,true)}" var="subCategoryList">
                                 <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList),false)}">
 
-                                <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.categoryId,subCategory: subCategoryList.subCategoryId]">${subCategoryList.subCategoryName}</g:link>
+                                <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.urlName,subCategorySpecify: subCategoryList.productSubCategorySpecify.urlName,subCategory: subCategoryList.urlName]">${subCategoryList.subCategoryName}</g:link>
                             </li>
                                 </g:if>
                         </g:each>
@@ -756,7 +756,7 @@ if(sizeId=='' && productId==''){
 
             </div>
             <div class="col-md-6">
-                <p class="pull-right">ALL RIGHTS RESERVED BY ONLINE YARSAA</a>
+                <p class="pull-right">ALL RIGHTS RESERVED BY ONLINE YARSAA
                     <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
                 </p>
             </div>

@@ -4,8 +4,8 @@ class EndUserController {
     static allowedMethods = [search: "POST"]
     def subCategory(){
         try{
-        if(params.id){
-        def productDetailsList=ProductDetails.findAllByProductSubCategory(ProductSubCategory.findBySubCategoryName(params.id))
+        if(params.subCategory){
+        def productDetailsList=ProductDetails.findAllByProductSubCategory(ProductSubCategory.findByUrlName(params.subCategory))
     if(productDetailsList){
         List<Product> productList=new ArrayList<>()
             List<List<ProductSize>> listList=new ArrayList<>()
@@ -26,7 +26,7 @@ class EndUserController {
             }
         }
             def prices=productService.pricesArray(productList)
-            render(view: "specialSubCategory", model: [prices: prices,productSizeList:listList,productList: productList, specialCategoryInstance:ProductSubCategory.findBySubCategoryName(params.id)])
+            render(view: "specialSubCategory", model: [prices: prices,productSizeList:listList,productList: productList, specialCategoryInstance:ProductSubCategory.findByUrlName(params.subCategory)])
 
         }}
         }
@@ -206,36 +206,6 @@ class EndUserController {
         catch (Exception e){
         }
     }
-    def specialSubCategory(){
-        try{
-            if(AboutUs.list()[0].specialProductSubCategory) {
-                def productDetailsList = ProductDetails.findAllByProductSubCategory(AboutUs.list()[0].specialProductSubCategory)
-                List<Product> productList = new ArrayList<>()
-                List<List<ProductSize>> listList=new ArrayList<>()
-                for (ProductDetails productDetails : productDetailsList) {
-                    def product = Product.findByProductDetailsAndDelFlag(productDetails,false)
-                    if (product) {
-                        productList.add(product)
-                        def sizeString=product.productDetails.productSizes
-                        String[] stringArraySize= sizeString.split(",")
-                        List<ProductSize> productSizeList=new ArrayList<>()
-                        for(int i=0;i<stringArraySize.size();i++){
-                            def sizeId=stringArraySize[i] as long
-                            if(ProductSize.get(sizeId)) {
-
-                                productSizeList.add(ProductSize.get(sizeId))
-                            }                }
-                        listList.add(productSizeList)
-                    }
-                }
-                def prices=productService.pricesArray(productList)
-                render(view: "specialSubCategory", model: [prices: prices,productSizeList:listList,productList: productList, specialCategoryInstance: AboutUs.list()[0].specialProductSubCategory])
-            }
-      }
-        catch (Exception e){
-
-        }
-    }
     def contact(){
     try {
 if(CompanyInformation.list()[0]){
@@ -247,8 +217,8 @@ catch (Exception e){
 }
     def singleProduct() {
         try{
-        if (params.id != null) {
-            def productInstance1 = Product.findByProductIdAndDelFlag(params.id,false)
+        if (params.specificationName != null) {
+            def productInstance1 = Product.findByProductSpecificationNameAndDelFlag(params.specificationName,false)
             if (productInstance1) {
                 def sizeString=productInstance1.productDetails.productSizes
                 String[] stringArraySize= sizeString.split(",")
@@ -337,7 +307,7 @@ catch (Exception e){
     }
     def subCategoryList() {
         try{
-def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.findByCategoryId(params.category), ProductSubCategory.findBySubCategoryId(params.subCategory))
+def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.findByUrlName(params.category), ProductSubCategory.findByUrlName(params.subCategory))
             if(productDetailsList)
                     {
                         List<List<ProductSize>> listList=new ArrayList<>()
@@ -362,7 +332,7 @@ def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCateg
 
                         def prices=productService.pricesArray(productList)
 
-                        render(view: "subCategoryProducts", model: [prices:prices, productSizeList:listList, productList: productList, productSubCategory: ProductSubCategory.findBySubCategoryId(params.subCategory), productCategory: ProductCategory.findByCategoryId(params.category)])
+                        render(view: "subCategoryProducts", model: [prices:prices, productSizeList:listList, productList: productList, productSubCategory: ProductSubCategory.findByUrlName(params.subCategory), productCategory: ProductCategory.findByUrlName(params.category)])
             }
 
         }
@@ -374,10 +344,10 @@ def test(){
 }
     def allCategoryProducts() {
         try{
-        if (params.id != null) {
-            if(ProductCategory.findByCategoryId(params.id)){
+        if (params.category) {
+            if(ProductCategory.findByUrlName(params.category)){
                 List<List<ProductSize>> listList=new ArrayList<>()
-                def productDetailsList = ProductDetails.findAllByProductCategory(ProductCategory.findByCategoryId(params.id))
+                def productDetailsList = ProductDetails.findAllByProductCategory(ProductCategory.findByUrlName(params.category))
             List<Product> productList = new ArrayList<>()
             for (ProductDetails productDetails : productDetailsList) {
                 def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
@@ -396,7 +366,7 @@ def test(){
                 }
             }
                 def prices=productService.pricesArray(productList)
-                render(view: "categoryList", model: [prices: prices, productList: productList, productCategory: ProductCategory.findByCategoryId(params.id),productSizeList:listList])
+                render(view: "categoryList", model: [prices: prices, productList: productList, productCategory: ProductCategory.findByUrlName(params.category),productSizeList:listList])
 
         }
 
@@ -407,9 +377,9 @@ def test(){
     }
 def topBrand(){
     try{
-        if (params.id != null) {
-            if(ProductBrand.findById(params.id) && ProductBrand.findById(params.id).isTop){
-                def productDetailsList = ProductDetails.findAllByProductBrand(ProductBrand.findById(params.id))
+        if (params.brandNames != null) {
+            if(ProductBrand.findByUrlName(params.brandNames)){
+                def productDetailsList = ProductDetails.findAllByProductBrand(ProductBrand.findByUrlName(params.brandNames))
                 List<List<ProductSize>> listList=new ArrayList<>()
                 List<Product> productList = new ArrayList<>()
                 for (ProductDetails productDetails : productDetailsList) {
@@ -429,11 +399,12 @@ def topBrand(){
                     }
                 }
                 def prices=productService.pricesArray(productList)
-                render(view: "brandProducts", model: [prices: prices,productList: productList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
+                render(view: "brandProducts", model: [prices: prices,productList: productList, productBrandInstance: ProductBrand.findByUrlName(params.brandNames), productSizeList:listList])
 
             }
 
-        }}
+        }
+    }
     catch (Exception e){
 
     }
@@ -455,58 +426,22 @@ def topBrand(){
         render(view:"allBrands",model: [brandsList:brandsList])
 
     }
-    def offerBrand(){
-        try{
-            if (params.id != null) {
-                if(ProductBrand.findById(params.id) && CoverImage.findByProductBrand(ProductBrand.findById(params.id))){
-                    def productDetailsList = ProductDetails.findAllByProductBrand(ProductBrand.findById(params.id))
-                    List<List<ProductSize>> listList=new ArrayList<>()
-                    List<Product> productList = new ArrayList<>()
-                    for (ProductDetails productDetails : productDetailsList) {
-                        def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
-                        if (product) {
-                            productList.add(product)
-                            def sizeString=product.productDetails.productSizes
-                            String[] stringArraySize= sizeString.split(",")
-                            List<ProductSize> productSizeList=new ArrayList<>()
-                            for(int i=0;i<stringArraySize.size();i++){
-                                def sizeId=stringArraySize[i] as long
-                                if(ProductSize.get(sizeId)) {
-
-                                    productSizeList.add(ProductSize.get(sizeId))
-                                }                }
-                            listList.add(productSizeList)
-
-                        }
-                    }
-                    def prices=productService.pricesArray(productList)
-
-                    render(view: "brandProducts", model: [prices: prices,productList: productList, productBrandInstance: ProductBrand.findById(params.id), productSizeList:listList])
-
-                }
-
-            } }
-        catch (Exception e){
-
-        }
-
-    }
     def specifiedProducts(){
         try{
             List<List<ProductSize>> listList=new ArrayList<>()
-            def subCategoryList1=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(params.subCategorySpecify))
+            def subCategoryList1=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findByUrlName(params.subCategorySpecify))
             def productList1=new ArrayList<>()
             for(ProductSubCategory productSubCategory: subCategoryList1){
-                def product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategoryAndProductCategory(productSubCategory,ProductCategory.findByCategoryId(params.category)),false)
+                def product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategoryAndProductCategory(productSubCategory,ProductCategory.findByUrlName(params.category)),false)
                 if(product){
                     productList1.add(product)
                 }
             }
                 if(productList1){
-                    def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(params.subCategorySpecify))
+                    def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findByUrlName(params.subCategorySpecify))
                     List<ProductDetails> productDetailsList=new ArrayList<>()
                     for(ProductSubCategory productSubCategory:subCategoryList){
-                    def productDetailsListSubCategoryWise = ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.findByCategoryId(params.category),productSubCategory)
+                    def productDetailsListSubCategoryWise = ProductDetails.findAllByProductCategoryAndProductSubCategory(ProductCategory.findByUrlName(params.category),productSubCategory)
                         for(ProductDetails productDetails1:productDetailsListSubCategoryWise){
                             productDetailsList.add(productDetails1)
                         }
@@ -529,7 +464,7 @@ def topBrand(){
                         }
                     }
                     def prices=productService.pricesArray(productList)
-                    render(view: "specifiedProducts", model: [prices: prices, productSpecifyInstance: ProductSubCategorySpecify.findById(params.subCategorySpecify),productCategory:ProductCategory.findByCategoryId(params.category), productSizeList:listList,productList:productList])
+                    render(view: "specifiedProducts", model: [prices: prices, productSpecifyInstance: ProductSubCategorySpecify.findByUrlName(params.subCategorySpecify),productCategory:ProductCategory.findByUrlName(params.category), productSizeList:listList,productList:productList])
 
                 }
 

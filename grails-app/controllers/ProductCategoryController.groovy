@@ -6,6 +6,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductCategoryController extends BaseController{
+    def productService
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 static allowedMethods = [save: 'POST',uploadCoverImage: 'POST',editCoverImage: 'POST',uploadMenuImage1: 'POST',editMenu1Image: 'POST',uploadMenuImage2: 'POST',editMenu2Image: 'POST']
     def list() {
@@ -32,21 +33,23 @@ render(view: "create")
 
         }
     }
+    def urlName(){
+def urlName=productService.convertToOriginalUrl("other-  -front-buttoned-skirt-for-women-92047")
+        print urlName
+    }
     def save(){
         try{
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-
                 if(!params.id){
             def productCategoryInstance=new ProductCategory()
             productCategoryInstance.categoryName=params.categoryName
             productCategoryInstance.statusShow=params.statusShow as byte
             productCategoryInstance.categoryDescription=params.categoryDescription
-
-            productCategoryInstance.coverImageName=uploadCoverImage()
+                    productCategoryInstance.urlName=productService.convertToOriginalUrl(productCategoryInstance.categoryName)
+                    productCategoryInstance.coverImageName=uploadCoverImage()
             productCategoryInstance.menuImage1=uploadMenuImage1()
             productCategoryInstance.menuImage2=uploadMenuImage2()
-
-            productCategoryInstance.save(flush: true)
+                    productCategoryInstance.save(flush: true)
             redirect(action: "show" ,id:productCategoryInstance.id)
         }
         else{
@@ -55,6 +58,8 @@ if(productCategoryInstance){
             productCategoryInstance.categoryName=params.categoryName
             productCategoryInstance.statusShow=params.statusShow as byte
     productCategoryInstance.categoryDescription=params.categoryDescription
+    def urlOriginal=productService.convertToOriginalUrl(productCategoryInstance.categoryName)
+    productCategoryInstance.urlName=urlOriginal
     productCategoryInstance.coverImageName=editCoverImage(productCategoryInstance.coverImageName)
             productCategoryInstance.menuImage1=editMenu1Image(productCategoryInstance.menuImage1)
             productCategoryInstance.menuImage2=editMenu2Image(productCategoryInstance.menuImage2)
