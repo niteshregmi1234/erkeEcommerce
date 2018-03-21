@@ -2,6 +2,31 @@
 class EndUserController {
     def productService
     static allowedMethods = [search: "POST"]
+    def nepaliProducts(){
+        def productDetailsList=ProductDetails.findAllByProductBrandInList(ProductBrand.findAllByUrlNameInList(["goldstar","black-horse"]))
+        List<Product> productList=new ArrayList<>()
+        List<List<ProductSize>> listList=new ArrayList<>()
+        for(ProductDetails productDetails:productDetailsList){
+            def product=Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
+            if(product){
+                productList.add(product)
+                def sizeString=product.productDetails.productSizes
+                String[] stringArraySize= sizeString.split(",")
+                List<ProductSize> productSizeList=new ArrayList<>()
+                for(int i=0;i<stringArraySize.size();i++){
+                    def sizeId=stringArraySize[i] as long
+                    if(ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }                }
+                listList.add(productSizeList)
+            }
+        }
+        Collections.shuffle(productList)
+        def prices=productService.pricesArray(productList)
+        render(view: "nepaliBrands", model: [prices: prices,productSizeList:listList,productList: productList])
+
+    }
     def subCategory(){
         try{
         if(params.subCategory){
@@ -25,10 +50,12 @@ class EndUserController {
                 listList.add(productSizeList)
             }
         }
-            def prices=productService.pricesArray(productList)
+        Collections.shuffle(productList)
+        def prices=productService.pricesArray(productList)
             render(view: "specialSubCategory", model: [prices: prices,productSizeList:listList,productList: productList, specialCategoryInstance:ProductSubCategory.findByUrlName(params.subCategory)])
 
-        }}
+        }
+        }
         }
         catch (Exception e){
 
@@ -54,6 +81,8 @@ class EndUserController {
             listList.add(productSizeList)
         }
         prices = productService.pricesArray(productTopSalesList)
+        Collections.shuffle(productList)
+
         [ prices: prices, productSizeList: listList, productList: productTopSalesList]
     }
     catch(Exception e){
@@ -126,9 +155,9 @@ class EndUserController {
         if(productDetailsList){
         List<String> stringListIdList=new ArrayList<>()
         for(ProductDetails productDetails:productDetailsList){
-            stringListIdList.add(productDetails.detailId)
+            stringListIdList.add(productDetails.briefDescription)
         }
-            redirect(action: "result",params: [result:stringListIdList])
+            redirect(action: "result",params: [q:stringListIdList])
         }
         else{
            redirect(action: "result")
@@ -143,12 +172,12 @@ class EndUserController {
             def prices=[0,0]
             List<List<ProductSize>> listList=new ArrayList<>()
             List<Product> productList = new ArrayList<>()
-            def productDetailsIds = params.list("result")
+            def productDetailsIds = params.list("q")
             if (productDetailsIds) {
                 List<ProductDetails> productDetailsList = new ArrayList<>()
                 for (int i = 0; i < productDetailsIds.size(); i++) {
                     def id=productDetailsIds[i] as String
-                    productDetailsList.add(ProductDetails.findByDetailId(id))
+                    productDetailsList.add(ProductDetails.findByBriefDescription(id))
                 }
           for (ProductDetails productDetails : productDetailsList) {
               def product = Product.findByProductDetailsAndDelFlag(productDetails,false)
@@ -168,6 +197,7 @@ class EndUserController {
 
           }
                 prices=productService.pricesArray(productList)
+                Collections.shuffle(productList)
 
             }
 
@@ -200,6 +230,8 @@ class EndUserController {
             }
                    }
             prices=productService.pricesArray(productList)
+            Collections.shuffle(productList)
+
             render(view: "allProducts", model: [prices: prices,productSizeList:listList,productList: productList])
 
     }
@@ -240,7 +272,6 @@ catch (Exception e){
                     }
                 }
                 Collections.shuffle(relatedProductList)
-
                 render(view: "detail", model :[productSizeList:productSizeList,moreColorsList:moreColorsList,relatedProductList:relatedProductList,productInstance: productInstance1,productCategoryList:ProductCategory.list(),productSubCategoryList:ProductSubCategory.findAllByStatusShow(true),productBrandList:ProductBrand.findAllByStatusShow(true),productColourList:ProductColor.findAllByStatusShow(true)])
             }
 
@@ -274,7 +305,7 @@ catch (Exception e){
     }
     def userHome() {
         try{
-            if(HomeContent.list()[0] && SpecialBrand.list()[0] && SeasonManagement.list()[0] && CompanyInformation.list()[0]){
+            if(CompanyInformation.list()[0]){
                 List<List<Product>> listListProduct=new ArrayList<>()
                 def subCategoryList=ProductSubCategory.findAllByShowInHomePage(true)
                 for(ProductSubCategory productSubCategory:subCategoryList){
@@ -293,13 +324,9 @@ catch (Exception e){
                     listListProduct.add(productList)}
                 }
                 def upCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "UP")
-        def downCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "DOWN")
         def latestProductList = Product.findAllByIsLatestAndDelFlag(true,false,[max:10])
-        def specialBrandInstance = SpecialBrand.list()[0]
-            def homeContent=HomeContent.list()[0]
         def productTopSalesList = Product.findAllBySoldNumbersGreaterThanAndDelFlag(0,false, [max:10,sort: "soldNumbers", order: "desc"])
-        def seasonManagementInstance = SeasonManagement.list()[0]
-        [brandList:ProductBrand.findAllByIsTop(true),upCoverImageList: upCoverImageList, downCoverImageList: downCoverImageList, latestProductList: latestProductList, specialBrandInstance: specialBrandInstance, seasonManagementInstance: seasonManagementInstance,featuredProductList:productTopSalesList,homeContent:homeContent,listListProduct:listListProduct]}
+        [brandList:ProductBrand.findAllByIsTop(true),upCoverImageList: upCoverImageList, latestProductList: latestProductList,featuredProductList:productTopSalesList,listListProduct:listListProduct]}
     }
         catch (Exception e){
 
@@ -331,6 +358,7 @@ def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCateg
         }
 
                         def prices=productService.pricesArray(productList)
+                        Collections.shuffle(productList)
 
                         render(view: "subCategoryProducts", model: [prices:prices, productSizeList:listList, productList: productList, productSubCategory: ProductSubCategory.findByUrlName(params.subCategory), productCategory: ProductCategory.findByUrlName(params.category)])
             }
@@ -366,6 +394,8 @@ def test(){
                 }
             }
                 def prices=productService.pricesArray(productList)
+                Collections.shuffle(productList)
+
                 render(view: "categoryList", model: [prices: prices, productList: productList, productCategory: ProductCategory.findByUrlName(params.category),productSizeList:listList])
 
         }
@@ -399,6 +429,8 @@ def topBrand(){
                     }
                 }
                 def prices=productService.pricesArray(productList)
+                Collections.shuffle(productList)
+
                 render(view: "brandProducts", model: [prices: prices,productList: productList, productBrandInstance: ProductBrand.findByUrlName(params.brandNames), productSizeList:listList])
 
             }
@@ -464,6 +496,8 @@ def topBrand(){
                         }
                     }
                     def prices=productService.pricesArray(productList)
+                    Collections.shuffle(productList)
+
                     render(view: "specifiedProducts", model: [prices: prices, productSpecifyInstance: ProductSubCategorySpecify.findByUrlName(params.subCategorySpecify),productCategory:ProductCategory.findByUrlName(params.category), productSizeList:listList,productList:productList])
 
                 }
@@ -477,29 +511,7 @@ def topBrand(){
     try{
     def aboutUsInstance = AboutUs.list()[0]
         if(aboutUsInstance){
-            List<List<ProductSize>> listList=new ArrayList<>()
-            def sizeString1=aboutUsInstance.specialProduct1.productDetails.productSizes
-            String[] stringArraySize1= sizeString1.split(",")
-            List<ProductSize> productSizeList1=new ArrayList<>()
-            for(int i=0;i<stringArraySize1.size();i++){
-                def sizeId=stringArraySize1[i] as long
-                if(ProductSize.get(sizeId)) {
-
-                    productSizeList1.add(ProductSize.get(sizeId))
-                }            }
-            def sizeString2=aboutUsInstance.specialProduct2.productDetails.productSizes
-            String[] stringArraySize2= sizeString2.split(",")
-            List<ProductSize> productSizeList2=new ArrayList<>()
-            for(int i=0;i<stringArraySize2.size();i++){
-                def sizeId=stringArraySize2[i] as long
-                if(ProductSize.get(sizeId)) {
-
-                    productSizeList2.add(ProductSize.get(sizeId))
-                }            }
-            listList.add(productSizeList1)
-            listList.add(productSizeList2)
-
-            [aboutUsInstance: aboutUsInstance,productSizeList:listList]}
+            [aboutUsInstance: aboutUsInstance]}
 
     }
     catch (Exception e){

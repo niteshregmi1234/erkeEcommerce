@@ -57,7 +57,7 @@
 
         <script src="${resource(dir: 'js', file: 'yamsaa/jquery-ui.js')}" type="text/javascript"
                 charset="utf-8"></script>
-        <div class="col-md-3">
+        <div class="col-md-3" id="filterColumn" style="visibility:hidden;">
 
             <!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
@@ -406,9 +406,7 @@
             </div>
 
             <script>
-                $(function() {
-                    $('.lazy').Lazy();
-                });
+
                 window.addEventListener('load', function(){
                     document.getElementById("next").style.display='block';
                     document.getElementById("filterColumn").style.visibility='visible';

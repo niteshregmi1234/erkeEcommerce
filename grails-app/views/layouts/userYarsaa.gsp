@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript">
+        var timerStart = Date.now();
+    </script>
 <meta charset="utf-8">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
@@ -83,8 +86,8 @@
             charset="utf-8"></script>
     <script src="${resource(dir: 'js', file: 'yarsaa/front.js')}" type="text/javascript"
             charset="utf-8"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.4/jquery.lazy.min.js"></script>
-
+    <script src="${resource(dir: 'js', file: 'yarsaa/lazyLoad.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
 
     %{--<script type="text/javascript"> //<![CDATA[--}%
     %{--var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");--}%
@@ -613,6 +616,12 @@ if(sizeId=='' && productId==''){
     <g:layoutBody>
 
     </g:layoutBody>
+    <script>
+        $(function() {
+            $('.lazy').lazy();
+        });
+    </script>
+
     <!-- /#content -->
 
     <!-- *** FOOTER ***
@@ -749,10 +758,11 @@ if(sizeId=='' && productId==''){
 
     <!-- *** COPYRIGHT ***
  _________________________________________________________ -->
+
     <div id="copyright">
         <div class="container">
             <div class="col-md-6">
-                <p class="pull-left">© 2017.</p>
+                <p class="pull-left">© <g:formatDate format="yyyy" date="${new Date()}"/>.</p>
 
             </div>
             <div class="col-md-6">

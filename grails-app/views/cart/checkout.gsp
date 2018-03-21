@@ -29,7 +29,7 @@
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
-                <li>Shopping cart</li>
+                <li>Basket</li>
 
             </ul>
         </div>
@@ -164,28 +164,28 @@
                             <div class="flip-container">
                                 <div class="flipper">
                                     <div class="front food1">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                        <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
+                                            <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                                         </g:link>
                                     </div>
                                     <div class="back food1">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                        <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
+                                            <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
 
                                         </g:link>
                                     </div>
                                 </div>
                             </div>
-                            <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible food1">
+                            <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible food1">
 
-                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive">
+                                <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                             </g:link>
                             <div class="text">
                                 <div class="tooltips">
-                                    <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
+                                    <h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
                                     <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
                                 </div>
                                 <g:if test="${list.productDetails.isSale==true}">
