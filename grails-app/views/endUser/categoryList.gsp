@@ -46,7 +46,7 @@
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
-                <li>${productCategory.categoryName}</li>
+                <li>${totalArray[3].categoryName}</li>
             </ul>
             </div>
     <div id="search-results">
@@ -208,7 +208,7 @@
                                 if (charCode > 31 && (charCode < 48 || charCode > 57)){
                                     return false;}
                                 else{
-                                    if($("#amount_min").val()>=${prices[0]}){
+                                    if($("#amount_min").val()>=${totalArray[1][0]}){
                                         return false;
                                     }
                                 }
@@ -221,7 +221,7 @@
                                 if (charCode > 31 && (charCode < 48 || charCode > 57)){
                                     return false;}
                                 else{
-                                    if($("#amount_max").val()>=${prices[0]}){
+                                    if($("#amount_max").val()>=${totalArray[1][0]}){
                                         return false;
                                     }
                                 }
@@ -245,8 +245,8 @@
         </div>
         <div class="col-md-9">
             <div class="box b">
-                <h1>${productCategory.categoryName}</h1>
-                <p>${productCategory.categoryDescription}.</p>
+                <h1>${totalArray[3].categoryName}</h1>
+                <p>${totalArray[3].categoryDescription}.</p>
             </div>
 
             <div class="pages">
@@ -283,7 +283,7 @@
             </div>
 
             <div class="list row products" id="myList">
-                <g:each in="${productList}" var="list" status="i">
+                <g:each in="${totalArray[0]}" var="list" status="i">
                     <g:if test="${list.productDetails.isSale==false}">
 
                     %{--<div class="category">Niagra Falls</div>--}%
@@ -411,7 +411,6 @@
             <script>
 
                 window.addEventListener('load', function(){
-                    document.getElementById("next").style.display='block';
                     document.getElementById("filterColumn").style.visibility='visible';
 
                 }, false);
@@ -440,7 +439,7 @@
 
 
         </div>
-        <g:if test="${productList.size()<=15}">
+        <g:if test="${totalArray[0].size()<=15}">
             <script>
                 document.getElementById("pagesCount").style.display='none';
                 document.getElementById("next").style.display='none';
@@ -453,9 +452,9 @@
             $(function() {
                 $("#slider-range").slider({
                     range: true,
-                    min: ${prices[1]},
-                    max: ${prices[0]},
-                    values: [${prices[1]}, ${prices[0]}],
+                    min: ${totalArray[1][1]},
+                    max: ${totalArray[1][0]},
+                    values: [${totalArray[1][1]}, ${totalArray[1][0]}],
                     slide: function(event, ui) {
                         $("#amount_min").val(ui.values[0]);
                         $("#amount_max").val(ui.values[1]);
@@ -777,7 +776,7 @@
             }
         </script>
         <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
-        <g:each in="${productSizeList}" var="list" status="i">
+        <g:each in="${totalArray[2]}" var="list" status="i">
             <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
@@ -800,7 +799,7 @@
         </g:each>
 
 
-        <g:if test="${productList}">
+        <g:if test="${totalArray[0]}">
             <script>
                 $(document).ready(function () {
 

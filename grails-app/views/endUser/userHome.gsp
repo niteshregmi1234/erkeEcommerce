@@ -18,7 +18,7 @@
     <div class="container">
         <div class="col-md-12">
             <div id="main-slider">
-<g:each in="${upCoverImageList}" var="list">
+<g:each in="${totalArray[0]}" var="list">
                 <div class="item coverUp">
                    <g:link action="topBrand" controller="endUser" params="[brandNames:list.productBrand.urlName]"> <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive lazy"></g:link>
 
@@ -35,12 +35,9 @@
 
             <div class="social">
             <h2 style="color: #4fbfa8; margin-left: 8px;">Top Brands</h2>
-                <%int i=0;
-                    %>
-<g:each in="${brandList}" var="list">
+<g:each in="${totalArray[1]}" var="list">
     <g:if test="${Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductBrand(list),false)}">
 
-        <g:if test="${i<6}">
                 <div class="col-md-2 col-sm-4 col-xs-4" style="margin-bottom: 10px;">
         <g:link action="topBrand" controller="endUser" params="[brandNames:list.urlName]">
 
@@ -48,9 +45,7 @@
 </g:link>
                 </div>
 
-            <% i=i+1
-            %>
-        </g:if>
+
     </g:if>
 </g:each>
 
@@ -129,7 +124,7 @@
 
     <!-- *** HOT PRODUCT SLIDESHOW ***
  _________________________________________________________ -->
-    <g:if test="${latestProductList}">
+    <g:if test="${totalArray[2]}">
     <div id="hot">
 
         <div class="box">
@@ -142,7 +137,7 @@
 
         <div class="container">
             <div class="product-slider">
-<g:each in="${latestProductList}" var="list">
+<g:each in="${totalArray[2]}" var="list">
     <div class="item">
                     <div class="product product-height">
                         <div class="flip-container">
@@ -247,7 +242,7 @@
 
     <!-- *** BLOG HOMEPAGE ***
  _________________________________________________________ -->
-<g:if test="${featuredProductList}">
+<g:if test="${totalArray[3]}">
 
     <div id="hot">
 
@@ -261,7 +256,7 @@
 
         <div class="container">
             <div class="product-slider">
-                <g:each in="${featuredProductList}" var="list">
+                <g:each in="${totalArray[3]}" var="list">
 
                     <div class="item">
                         <div class="product product-height">
@@ -364,7 +359,7 @@
             <!-- /#blog-homepage -->
         </div>
 <br>
-    <g:each in="${listListProduct}" var="listProducts">
+    <g:each in="${totalArray[4]}" var="listProducts">
         <div id="hot">
 
             <div class="box">

@@ -8,9 +8,8 @@ class UrlMappings {
             }
         }
         "/"(action: "userHome",controller: "endUser")
-         "/search/$result"(action: "search",controller: "endUser")
             "/error"(action: "notfound",controller: "errorPage")
-        "/query"(action: "result",controller: "endUser")
+        "/search"(action: "result",controller: "endUser")
         "/$brandNames/ "(action: "topBrand",controller: "endUser")
         "/black-horse-goldstar"(action: "nepaliProducts",controller: "endUser")
             "/all-brands"(action: "allBrands",controller: "endUser")

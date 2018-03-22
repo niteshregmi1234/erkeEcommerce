@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +21,6 @@
 <!-- /#navbar -->
 
 <!-- *** NAVBAR END *** -->
-<g:if test="${productList}">
 
 <div id="content">
     %{--<div class="container">--}%
@@ -49,7 +47,7 @@
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
-                <li>Searched Products</li>
+                <li>Top Sales</li>
             </ul>
 
         </div>
@@ -212,7 +210,7 @@
                                 if (charCode > 31 && (charCode < 48 || charCode > 57)){
                                     return false;}
                                 else{
-                                    if($("#amount_min").val()>=${prices[0]}){
+                                    if($("#amount_min").val()>=${totalArray[1][0]}){
                                         return false;
                                     }
                                 }
@@ -225,7 +223,7 @@
                                 if (charCode > 31 && (charCode < 48 || charCode > 57)){
                                     return false;}
                                 else{
-                                    if($("#amount_max").val()>=${prices[0]}){
+                                    if($("#amount_max").val()>=${totalArray[1][0]}){
                                         return false;
                                     }
                                 }
@@ -282,7 +280,7 @@
             </div>
 
             <div class="list row products" id="myList">
-                <g:each in="${productList}" var="list" status="i">
+                <g:each in="${totalArray[0]}" var="list" status="i">
                     <g:if test="${list.productDetails.isSale==false}">
 
                     %{--<div class="category">Niagra Falls</div>--}%
@@ -408,9 +406,7 @@
             </div>
 
             <script>
-
                 window.addEventListener('load', function(){
-                    document.getElementById("next").style.display='block';
                     document.getElementById("filterColumn").style.visibility='visible';
 
                 }, false);
@@ -439,7 +435,7 @@
 
 
         </div>
-        <g:if test="${productList.size()<=15}">
+        <g:if test="${totalArray[0].size()<=15}">
             <script>
                 document.getElementById("pagesCount").style.display='none';
                 document.getElementById("next").style.display='none';
@@ -452,9 +448,9 @@
             $(function() {
                 $("#slider-range").slider({
                     range: true,
-                    min: ${prices[1]},
-                    max: ${prices[0]},
-                    values: [${prices[1]}, ${prices[0]}],
+                    min: ${totalArray[1][1]},
+                    max: ${totalArray[1][0]},
+                    values: [${totalArray[1][1]}, ${totalArray[1][0]}],
                     slide: function(event, ui) {
                         $("#amount_min").val(ui.values[0]);
                         $("#amount_max").val(ui.values[1]);
@@ -776,7 +772,7 @@
             }
         </script>
         <g:hiddenField name="productId" id="productId" value=""></g:hiddenField>
-        <g:each in="${productSizeList}" var="list" status="i">
+        <g:each in="${totalArray[2]}" var="list" status="i">
             <div class="modal fade" id="smallModal${i}" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
@@ -799,7 +795,7 @@
         </g:each>
 
 
-        <g:if test="${productList}">
+        <g:if test="${totalArray[0]}">
             <script>
                 $(document).ready(function () {
 
@@ -878,30 +874,9 @@
     <!-- /.container -->
 </div>
 <!-- /#content -->
-</g:if>
-<g:if test="${productList.size()==0}">
-    <div class="row" id="error-page">
-        <div class="col-sm-6 col-sm-offset-3">
-            <div class="box">
-
-                <p class="text-center">
-                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}" class="hidden-xs">
-
-                </p>
-
-                <h4 class="text-muted text-center">Your enquiry is not found.</h4>
-
-                <p class="text-center">To continue please use the <strong>Search form</strong> or <strong>Menu</strong> above.</p>
-
-                <p class="buttons text-center"><g:link action="userHome" controller="endUser" class="btn btn-primary"><i class="fa fa-home"></i> Go to Homepage</g:link>
-                </p>
-            </div>
-        </div>
-    </div>
-
-</g:if>
 
 
 </body>
 
 </html>
+

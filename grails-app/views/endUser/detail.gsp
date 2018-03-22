@@ -35,14 +35,14 @@
                         <li><g:link action="userHome" controller="endUser">Home</g:link>
                         </li>
 
-                        <li><g:link action="allCategoryProducts" params="[category:productInstance.productDetails.productCategory.urlName]" controller="endUser">
-                    ${productInstance.productDetails.productCategory.categoryName}</g:link>
+                        <li><g:link action="allCategoryProducts" params="[category:totalArray[0].productDetails.productCategory.urlName]" controller="endUser">
+                    ${totalArray[0].productDetails.productCategory.categoryName}</g:link>
                         </li>
-                        <li><g:link action="subCategoryList" controller="endUser" params="[category:productInstance.productDetails.productCategory.urlName,subCategorySpecify: productInstance.productDetails.productSubCategory.productSubCategorySpecify.urlName,subCategory:productInstance.productDetails.productSubCategory.urlName]">
-                        ${productInstance.productDetails.productSubCategory.subCategoryName}</g:link>
+                        <li><g:link action="subCategoryList" controller="endUser" params="[category:totalArray[0].productDetails.productCategory.urlName,subCategorySpecify: totalArray[0].productDetails.productSubCategory.productSubCategorySpecify.urlName,subCategory:totalArray[0].productDetails.productSubCategory.urlName]">
+                        ${totalArray[0].productDetails.productSubCategory.subCategoryName}</g:link>
                         </li>
 
-                        <li>${productInstance.productDetails.productName+" "+productInstance.productDetails.productBrand.brandName}</li>
+                        <li>${totalArray[0].productDetails.productName+" "+totalArray[0].productDetails.productBrand.brandName}</li>
                     </ul>
 
                 </div>
@@ -62,7 +62,7 @@
                             <li class="active">
 
 
-                                <g:link action="allCategoryProducts" params="[category:productInstance.productDetails.productCategory.urlName]" controller="endUser">${productInstance.productDetails.productCategory.categoryName} <span class="badge pull-right"></span></g:link>
+                                <g:link action="allCategoryProducts" params="[category:totalArray[0].productDetails.productCategory.urlName]" controller="endUser">${totalArray[0].productDetails.productCategory.categoryName} <span class="badge pull-right"></span></g:link>
                                 <g:each in="${ProductSubCategorySpecify.list()}" var="specifyList" status="i">
 
                                     <div class="dropdownA">
@@ -71,21 +71,21 @@
                                                 def subCategoryList1=ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)
                                                 def productList=new ArrayList<>()
                                                 for(ProductSubCategory productSubCategory: subCategoryList1){
-                                                    def product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategoryAndProductCategory(productSubCategory,productInstance.productDetails.productCategory),false)
+                                                    def product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategoryAndProductCategory(productSubCategory,totalArray[0].productDetails.productCategory),false)
                                                     if(product){
                                                         productList.add(product)
                                                     }
                                                 }
                                             %>
                                             <g:if test="${productList}">
-                                                <li><g:link action="specifiedProducts" params="[category:productInstance.productDetails.productCategory.urlName,subCategorySpecify:specifyList.urlName]" controller="endUser" class="dropbtnA"> ${specifyList.specificationName}</g:link></li>
+                                                <li><g:link action="specifiedProducts" params="[category:totalArray[0].productDetails.productCategory.urlName,subCategorySpecify:specifyList.urlName]" controller="endUser" class="dropbtnA"> ${specifyList.specificationName}</g:link></li>
                                             </g:if>
                                         </ul>
                                         <ul class="dropdown-contentA">
                                             <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)}" var="subCategoryList">
-                                                <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(productInstance.productDetails.productCategory,subCategoryList),false)}">
+                                                <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(totalArray[0].productDetails.productCategory,subCategoryList),false)}">
 
-                                                    <li><g:link action="subCategoryList" controller="endUser" params="[category:productInstance.productDetails.productCategory.urlName,subCategorySpecify:subCategoryList.productSubCategorySpecify.urlName,subCategory:subCategoryList.urlName]">${subCategoryList.subCategoryName}</g:link>
+                                                    <li><g:link action="subCategoryList" controller="endUser" params="[category:totalArray[0].productDetails.productCategory.urlName,subCategorySpecify:subCategoryList.productSubCategorySpecify.urlName,subCategory:subCategoryList.urlName]">${subCategoryList.subCategoryName}</g:link>
 
                                                     </li>
 
@@ -265,7 +265,7 @@
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                                         <div id="mainImage" class="mainImage-coverDown mainImage-height">
-                                            <img id="myImg" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="img-responsive mainImage-height lazy">
+                                            <img id="myImg" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="img-responsive mainImage-height lazy">
 
                                         </div>
                             <div id="myModal1" class="modal1">
@@ -380,13 +380,13 @@
                                     modal.style.display = "none";
                                 }
                             </script>
-<g:if test="${productInstance.productDetails.isSale}">
+<g:if test="${totalArray[0].productDetails.isSale}">
                                                        <div class="ribbon sale">
                                 <div class="theribbon">SALE</div>
                                 <div class="ribbon-background"></div>
                             </div>
 </g:if>
-<g:if test="${productInstance.isLatest}">
+<g:if test="${totalArray[0].isLatest}">
                             <!-- /.ribbon -->
                             <div class="ribbon new">
                                 <div class="theribbon">NEW</div>
@@ -397,17 +397,17 @@
                         </div>
                                                <div class="col-sm-6">
                             <div class="box box-height" id="detailInfo" style="height:400px;overflow-y: scroll;">
-                                <h1 class="text-center bigName">${productInstance.productDetails.productBrand.brandName}</h1>
-                                <h1 class="text-center bigName1">${productInstance.productDetails.briefDescription}</h1>
-                                <p class="goToDescription"><a href="#details" class="scroll-to">${productInstance.productDetails.productName}</a>
+                                <h1 class="text-center bigName">${totalArray[0].productDetails.productBrand.brandName}</h1>
+                                <h1 class="text-center bigName1">${totalArray[0].productDetails.briefDescription}</h1>
+                                <p class="goToDescription"><a href="#details" class="scroll-to">${totalArray[0].productDetails.productName}</a>
                                 </p>
 
                                 <p class="price">
 
-                                        Rs.<g:formatNumber number="${productInstance.productDetails.price-(productInstance.productDetails.discountPercentage*productInstance.productDetails.price/100)}" type="number" maxFractionDigits="2"/>
-                                        <g:if test="${productInstance.productDetails.isSale}">
+                                        Rs.<g:formatNumber number="${totalArray[0].productDetails.price-(totalArray[0].productDetails.discountPercentage*totalArray[0].productDetails.price/100)}" type="number" maxFractionDigits="2"/>
+                                        <g:if test="${totalArray[0].productDetails.isSale}">
 <br>
-                                              <del class="del-price" style="font-size: 15px;">Rs.${productInstance.productDetails.price}</del>(-${productInstance.productDetails.discountPercentage}%)
+                                              <del class="del-price" style="font-size: 15px;">Rs.${totalArray[0].productDetails.price}</del>(-${totalArray[0].productDetails.discountPercentage}%)
 
                                         </g:if>
                                 </p>
@@ -415,11 +415,11 @@
 
                                 <g:if test="${session.endUser}">
                                     <form action="/cart/addToCart" method="post" class="text-center buttons" id="myForm">
-                                                                              <g:hiddenField name="id" value="${productInstance.id}"></g:hiddenField>
+                                                                              <g:hiddenField name="id" value="${totalArray[0].id}"></g:hiddenField>
                                         <div class="col-sm-6 col-md-6">
                                             <div class="form-group">
                                                 <g:select class="form-control" name="size"
-                                                  from="${productSizeList}" optionKey="id" id="size" optionValue="sizeName"
+                                                  from="${totalArray[1]}" optionKey="id" id="size" optionValue="sizeName"
                                                           noSelection="${['null':'Select Size']}"
                                                 />
                                                 </div>
@@ -508,22 +508,22 @@
 
                             <div class="row"  id="thumbs">
                                 <div class="col-xs-4">
-                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="thumb" >
-                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.frontImageName])}" class="img-responsive img-thumb lazy">
+                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="thumb" >
+                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="img-responsive img-thumb lazy">
 
 
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.sideImageName])}" class="thumb" >
+                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].sideImageName])}" class="thumb" >
 
-                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.sideImageName])}" class="img-responsive img-thumb lazy">
+                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].sideImageName])}" class="img-responsive img-thumb lazy">
 
                                     </a>
                                 </div>
                                 <div class="col-xs-4">
-                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.backImageName])}" class="thumb" >
-                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:productInstance.backImageName])}" class="img-responsive img-thumb lazy">
+                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].backImageName])}" class="thumb" >
+                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].backImageName])}" class="img-responsive img-thumb lazy">
 
 </a>
                                 </div>
@@ -546,7 +546,7 @@
                                         </h4>
                             </div>
                             <%
-                                def string=productInstance.productDetails.detailDescription
+                                def string=totalArray[0].productDetails.detailDescription
                                 String[] lines = string.split("\r\n|\r|\n");
                             %>
                             <div id="collapseOne" class="panel-collapse collapse in">
@@ -570,7 +570,7 @@
                             <div id="collapseThree" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
-<g:each in="${productSizeList}" var="list">
+<g:each in="${totalArray[1]}" var="list">
 
     <li>${list.sizeName}-${list.sizeDetails}</li>
     </g:each>
@@ -579,19 +579,19 @@
                                 </div>
                             </div>
                         </div>
-<g:if test="${moreColorsList}">
+<g:if test="${totalArray[2]}">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                        More Colors (${moreColorsList.size()})</a>
+                                        More Colors (${totalArray[2].size()})</a>
                                         <i class="indicator glyphicon glyphicon-plus  pull-right"></i>
                             </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <div class="accordion-image">
-                                        <g:each in="${moreColorsList}" var="list">
+                                        <g:each in="${totalArray[2]}" var="list">
                                     <div class="ac-img">
                                         <div class="col-md-3 col-sm-6">
                                             <div class="product product-color">
@@ -754,7 +754,7 @@
                                 <h3>You may also like these products</h3>
                             </div>
                         </div>
-<g:each in="${relatedProductList}" var="list" status="i">
+<g:each in="${totalArray[3]}" var="list" status="i">
     <g:if test="${i<3}">
         <div class="col-md-3 col-sm-6">
             <div class="product same-height">

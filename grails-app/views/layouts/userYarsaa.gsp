@@ -569,7 +569,7 @@ if(sizeId=='' && productId==''){
 
             <g:form controller="endUser" action="search" class="navbar-form" role="search" onsubmit="return validSearch();">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="searchProduct" name="search" placeholder="Search">
+                    <input type="text" class="form-control" id="searchProduct" name="search" placeholder="Search by product,category,brand wise..." value="${params?.q}">
 
                     <span class="input-group-btn">
 
