@@ -75,22 +75,25 @@ class ProductService {
                 def product = Product.findByProductDetailsAndDelFlag(productDetails, false)
                 if (product) {
                     productList.add(product)
-                    def sizeString = product.productDetails.productSizes
-                    String[] stringArraySize = sizeString.split(",")
-                    List<ProductSize> productSizeList = new ArrayList<>()
-                    for (int i = 0; i < stringArraySize.size(); i++) {
-                        def sizeId = stringArraySize[i] as long
-                        if (ProductSize.get(sizeId)) {
 
-                            productSizeList.add(ProductSize.get(sizeId))
-                        }
-                    }
-                    listList.add(productSizeList)
                 }
 
             }
-            def prices = pricesArray(productList)
             Collections.shuffle(productList)
+            def prices = pricesArray(productList)
+            for(Product productInstance:productList){
+                def sizeString = productInstance.productDetails.productSizes
+                String[] stringArraySize = sizeString.split(",")
+                List<ProductSize> productSizeList = new ArrayList<>()
+                for (int i = 0; i < stringArraySize.size(); i++) {
+                    def sizeId = stringArraySize[i] as long
+                    if (ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                }
+                listList.add(productSizeList)
+            }
             def totalArray=[productList,prices,listList]
             return totalArray
         }
@@ -135,21 +138,26 @@ return totalArray}
             def product=Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
             if(product){
                 productList.add(product)
-                def sizeString=product.productDetails.productSizes
-                String[] stringArraySize= sizeString.split(",")
-                List<ProductSize> productSizeList=new ArrayList<>()
-                for(int i=0;i<stringArraySize.size();i++){
-                    def sizeId=stringArraySize[i] as long
-                    if(ProductSize.get(sizeId)) {
 
-                        productSizeList.add(ProductSize.get(sizeId))
-                    }                }
-                listList.add(productSizeList)
             }
         }
         Collections.shuffle(productList)
         def prices=pricesArray(productList)
-        def totalArray = [productList, prices, listList]
+            for(Product productInstance:productList){
+                def sizeString = productInstance.productDetails.productSizes
+                String[] stringArraySize = sizeString.split(",")
+                List<ProductSize> productSizeList = new ArrayList<>()
+                for (int i = 0; i < stringArraySize.size(); i++) {
+                    def sizeId = stringArraySize[i] as long
+                    if (ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                }
+                listList.add(productSizeList)
+            }
+
+            def totalArray = [productList, prices, listList]
         return totalArray
         }
         catch(Exception e){
@@ -166,21 +174,25 @@ return totalArray}
                 def product = Product.findAllByProductDetailsAndDelFlag(productDetails, false)[0]
                 if (product) {
                     productList.add(product)
-                    def sizeString = product.productDetails.productSizes
-                    String[] stringArraySize = sizeString.split(",")
-                    List<ProductSize> productSizeList = new ArrayList<>()
-                    for (int i = 0; i < stringArraySize.size(); i++) {
-                        def sizeId = stringArraySize[i] as long
-                        if (ProductSize.get(sizeId)) {
 
-                            productSizeList.add(ProductSize.get(sizeId))
-                        }
-                    }
-                    listList.add(productSizeList)
                 }
             }
             def prices = pricesArray(productList)
             Collections.shuffle(productList)
+            for(Product productInstance:productList){
+                def sizeString = productInstance.productDetails.productSizes
+                String[] stringArraySize = sizeString.split(",")
+                List<ProductSize> productSizeList = new ArrayList<>()
+                for (int i = 0; i < stringArraySize.size(); i++) {
+                    def sizeId = stringArraySize[i] as long
+                    if (ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                }
+                listList.add(productSizeList)
+            }
+
             def totalArray = [productList, prices, listList, productSubCategory]
             return totalArray
         }
@@ -253,21 +265,25 @@ return totalArray}
             def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
             if (product) {
                 productList.add(product)
-                def sizeString=product.productDetails.productSizes
-                String[] stringArraySize= sizeString.split(",")
-                List<ProductSize> productSizeList=new ArrayList<>()
-                for(int i=0;i<stringArraySize.size();i++){
-                    def sizeId=stringArraySize[i] as long
-                    if(ProductSize.get(sizeId)) {
-
-                        productSizeList.add(ProductSize.get(sizeId))
-                    }                }
-                listList.add(productSizeList)
             }
         }
         def prices=pricesArray(productList)
         Collections.shuffle(productList)
-        def totalArray=[productList,prices,listList,productBrand]
+            for(Product productInstance:productList){
+                def sizeString = productInstance.productDetails.productSizes
+                String[] stringArraySize = sizeString.split(",")
+                List<ProductSize> productSizeList = new ArrayList<>()
+                for (int i = 0; i < stringArraySize.size(); i++) {
+                    def sizeId = stringArraySize[i] as long
+                    if (ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                }
+                listList.add(productSizeList)
+            }
+
+            def totalArray=[productList,prices,listList,productBrand]
 return totalArray
     }
         catch(Exception e){
@@ -306,23 +322,27 @@ return totalArray
             def product = Product.findByProductDetailsAndDelFlag(productDetails,false)
             if (product) {
                 productList.add(product)
-                def sizeString=product.productDetails.productSizes
-                String[] stringArraySize= sizeString.split(",")
-                List<ProductSize> productSizeList=new ArrayList<>()
-                for(int i=0;i<stringArraySize.size();i++){
-                    def sizeId=stringArraySize[i] as long
-                    if(ProductSize.get(sizeId)) {
-
-                        productSizeList.add(ProductSize.get(sizeId))
-                    }                }
-                listList.add(productSizeList)
 
             }
         }
 
         def prices=pricesArray(productList)
         Collections.shuffle(productList)
-        def totalArray=[productList,prices,listList,productCategory,productSubCategory]
+            for(Product productInstance:productList){
+                def sizeString = productInstance.productDetails.productSizes
+                String[] stringArraySize = sizeString.split(",")
+                List<ProductSize> productSizeList = new ArrayList<>()
+                for (int i = 0; i < stringArraySize.size(); i++) {
+                    def sizeId = stringArraySize[i] as long
+                    if (ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                }
+                listList.add(productSizeList)
+            }
+
+            def totalArray=[productList,prices,listList,productCategory,productSubCategory]
         return totalArray}
         catch (Exception e){
 
@@ -346,7 +366,12 @@ return totalArray
             def product = Product.findAllByProductDetailsAndDelFlag(productDetails, false)[0]
             if (product) {
                 productList.add(product)
-                def sizeString = product.productDetails.productSizes
+            }
+        }
+        def prices = pricesArray(productList)
+        Collections.shuffle(productList)
+            for(Product productInstance:productList){
+                def sizeString = productInstance.productDetails.productSizes
                 String[] stringArraySize = sizeString.split(",")
                 List<ProductSize> productSizeList = new ArrayList<>()
                 for (int i = 0; i < stringArraySize.size(); i++) {
@@ -358,10 +383,8 @@ return totalArray
                 }
                 listList.add(productSizeList)
             }
-        }
-        def prices = pricesArray(productList)
-        Collections.shuffle(productList)
-        def totalArray = [productList, prices, listList, productCategory, productSubCategorySpecify]
+
+            def totalArray = [productList, prices, listList, productCategory, productSubCategorySpecify]
         return totalArray
     }
         catch(Exception e){
@@ -388,6 +411,7 @@ def topSales(){
     try {
         def productTopSalesList = Product.findAllBySoldNumbersGreaterThanAndDelFlag(0, false, [sort: "soldNumbers", order: "desc"])
         List<List<ProductSize>> listList = new ArrayList<>()
+        Collections.shuffle(productTopSalesList)
         for (int j = 0; j < productTopSalesList.size(); j++) {
             def productInstance = productTopSalesList.get(j)
             def sizeString = productInstance.productDetails.productSizes
@@ -403,8 +427,7 @@ def topSales(){
             listList.add(productSizeList)
         }
         def prices = pricesArray(productTopSalesList)
-        Collections.shuffle(productTopSalesList)
-    def totalArray=[productTopSalesList,prices,listList]
+        def totalArray=[productTopSalesList,prices,listList]
         return totalArray
     }
     catch(Exception e){
@@ -421,21 +444,26 @@ def topSales(){
                 def productInstance = Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
                 if (productInstance) {
                     productList.add(productInstance)
-                    def sizeString=productInstance.productDetails.productSizes
-                    String[] stringArraySize= sizeString.split(",")
-                    List<ProductSize> productSizeList=new ArrayList<>()
-                    for(int i=0;i<stringArraySize.size();i++){
-                        def sizeId=stringArraySize[i] as long
-                        if(ProductSize.get(sizeId)) {
-                            productSizeList.add(ProductSize.get(sizeId))
-                        }                }
-                    listList.add(productSizeList)
 
                 }
             }
             def prices=pricesArray(productList)
             Collections.shuffle(productList)
-def totalArray=[productList,prices,listList]
+            for(Product productInstance:productList){
+                def sizeString = productInstance.productDetails.productSizes
+                String[] stringArraySize = sizeString.split(",")
+                List<ProductSize> productSizeList = new ArrayList<>()
+                for (int i = 0; i < stringArraySize.size(); i++) {
+                    def sizeId = stringArraySize[i] as long
+                    if (ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                }
+                listList.add(productSizeList)
+            }
+
+            def totalArray=[productList,prices,listList]
 return totalArray
         }
         catch (Exception e){
@@ -451,21 +479,24 @@ return totalArray
                 def product = Product.findAllByProductDetailsAndDelFlag(productDetails, false)[0]
                 if (product) {
                     productList.add(product)
-                    def sizeString = product.productDetails.productSizes
-                    String[] stringArraySize = sizeString.split(",")
-                    List<ProductSize> productSizeList = new ArrayList<>()
-                    for (int i = 0; i < stringArraySize.size(); i++) {
-                        def sizeId = stringArraySize[i] as long
-                        if (ProductSize.get(sizeId)) {
-
-                            productSizeList.add(ProductSize.get(sizeId))
-                        }
-                    }
-                    listList.add(productSizeList)
                 }
             }
             def prices = pricesArray(productList)
             Collections.shuffle(productList)
+            for(Product productInstance:productList){
+                def sizeString = productInstance.productDetails.productSizes
+                String[] stringArraySize = sizeString.split(",")
+                List<ProductSize> productSizeList = new ArrayList<>()
+                for (int i = 0; i < stringArraySize.size(); i++) {
+                    def sizeId = stringArraySize[i] as long
+                    if (ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                }
+                listList.add(productSizeList)
+            }
+
         def totalArray=[productList,prices,listList,productCategory]
             return totalArray
         }
