@@ -1,5 +1,4 @@
-
-
+import grails.converters.JSON
 import grails.transaction.Transactional
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
@@ -9,7 +8,163 @@ import java.security.spec.InvalidKeySpecException
 
 @Transactional
 class EndUserInformationService {
+    def getOrderId(List<Cart> cartList,EndUserInformation endUserInformation,Map params){
+       try{
+        def date=new Date()
+        def orderIdInstance=new OrderId()
+        orderIdInstance.endUserInformation=endUserInformation
+        orderIdInstance.save(flush: true)
+        def orderId="yarsaa/"+orderIdInstance.id
+        for(Cart cart:cartList){
+            def cartHistoryInstance=new CartHistory()
+            cartHistoryInstance.productSize=cart.productSize
+            cartHistoryInstance.quantity=cart.quantity
+            cartHistoryInstance.endUserInformation=cart.endUserInformation
+            cartHistoryInstance.product=cart.product
+            cartHistoryInstance.isDelivered=false
+            cartHistoryInstance.date=date
+            cartHistoryInstance.deliveryAddress=params.address
+            cartHistoryInstance.mobileNumber=params.phone
+            cartHistoryInstance.deliveryMethod=DeliveryMethod.get(params.delivery)
+            cartHistoryInstance.paymentMethod=PaymentMethod.get(params.payment)
+            cartHistoryInstance.orderId=orderId
+            cartHistoryInstance.isFakeOrder=false
+            cartHistoryInstance.successfulOrderDelFlag=false
+            cartHistoryInstance.save(flush: true)
+            cart.delete(flush: true)
+        }
+        return orderIdInstance.id
+    }
+       catch (Exception e){
 
+       }
+    }
+    def cartList(EndUserInformation endUserInformation){
+        try{
+        def cartList=Cart.findAllByEndUserInformation(endUserInformation)
+        return cartList
+    }
+        catch (Exception e){
+
+        }
+    }
+    def getTotalPriceOfCartList(List<Cart> cartList){
+        try{
+        def totalPrice=0
+        for(Cart cart:cartList){
+            totalPrice=totalPrice+((cart.product.productDetails.price*cart.quantity)-(cart.product.productDetails.discountPercentage*(cart.product.productDetails.price*cart.quantity)/100))
+        }
+            return totalPrice
+        }
+        catch (Exception e){
+
+        }
+    }
+    def checkLogin(Map params){
+        try{
+        def obj= JSON.parse(params.array)
+
+        def endUserInformationInstance = EndUserInformation.findByEmail(obj[0])
+        def status=false
+        if (endUserInformationInstance) {
+            status = decryptPassword(obj[1], endUserInformationInstance.password)
+        }
+        def totalArray=[endUserInformationInstance,status]
+return totalArray}
+        catch (Exception e){
+
+        }
+    }
+    def checkEmail(Map params){
+        try {
+            def isAvailable = false
+            def endUserInstance = EndUserInformation.findByEmail(params.email)
+            if (!endUserInstance) {
+                isAvailable = true
+
+            }
+            return isAvailable
+        }
+        catch (Exception e){
+
+        }
+    }
+    def saveEndUser(Map params){
+        try{
+            def endUserInformationInstance = new EndUserInformation()
+            endUserInformationInstance.firstName = params.first_name
+            endUserInformationInstance.lastName = params.last_name
+            endUserInformationInstance.phone = params.phone
+            endUserInformationInstance.address = params.address
+            endUserInformationInstance.city = params.city
+            endUserInformationInstance.email = params.email
+            endUserInformationInstance.password = encryptedPassword(params.password)
+            if (endUserInformationInstance.validate()) {
+                endUserInformationInstance.save(flush: true)
+                def message1="you are successfully registered"
+                return message1
+            } else {
+                def message = "Please don't enter already used email "
+                return message
+            }
+        }
+        catch (Exception e){
+        }
+    }
+    def editEndUserPassword(Map params,EndUserInformation endUserInformation){
+        try{
+            def status=false
+            if(endUserInformation){
+                endUserInformation.password = encryptedPassword(params.newPassword)
+                status=true
+                return status
+            }
+            else{
+                return status
+            }
+        }
+        catch (Exception e){
+
+            return  "serverError"
+        }
+    }
+def editEndUserPersonalDetails(Map params,EndUserInformation endUserInformation){
+    try{
+        def status=false
+        def obj= JSON.parse(params.array)
+        if(endUserInformation){
+            endUserInformation.firstName =obj[0]
+            endUserInformation.lastName =obj[1]
+            endUserInformation.phone =obj[2]
+            endUserInformation.address =obj[3]
+            endUserInformation.city =obj[4]
+            status=true
+            return status
+        }
+        else{
+            return status
+        }
+    }
+    catch (Exception e){
+
+        return "serverError"
+    }
+}
+    def checkPassword(Map params,EndUserInformation endUserInformation){
+        try{
+            def status=false
+            if (endUserInformation) {
+                status = decryptPassword(params.oldPassword, endUserInformation.password)
+                return status
+            }
+            else{
+                return status
+            }
+        }
+        catch (Exception e){
+
+        }
+    }
     def encryptedPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String originalPassword = password;
         String generatedSecuredPasswordHash = generateStorngPasswordHash(originalPassword);

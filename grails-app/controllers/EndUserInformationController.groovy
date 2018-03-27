@@ -4,36 +4,16 @@ class EndUserInformationController {
     def endUserInformationService
 def editEndUserPersonalDetails(){
     try{
-        def status=false
-        def obj= JSON.parse(params.array)
-        if(session.endUser){
-            session.endUser.firstName =obj[0]
-            session.endUser.lastName =obj[1]
-            session.endUser.phone =obj[2]
-            session.endUser.address =obj[3]
-            session.endUser.city =obj[4]
-            status=true
-            render status
-        }
-        else{
-            render status
-        }
-    }
+  def status=endUserInformationService.editEndUserPersonalDetails(params,session.endUser)
+    render status}
     catch (Exception e){
 
-        render "serverError"
     }
 }
     def checkPassword(){
-        try{
-        def status=false
-        if (session.endUser) {
-            status = endUserInformationService.decryptPassword(params.oldPassword, session.endUser.password)
+        try {
+            def status = endUserInformationService.checkPassword(params, session.endUser)
             render status
-        }
-            else{
-render status
-        }
         }
         catch (Exception e){
 
@@ -42,19 +22,10 @@ render status
 
 def editEndUserPassword(){
     try{
-        def status=false
-    if(session.endUser){
-    session.endUser.password = endUserInformationService.encryptedPassword(params.newPassword)
-        status=true
-        render status
-    }
-        else{
-        render status
-    }
-    }
+  def status=endUserInformationService.editEndUserPassword(params,session.endUser)
+    render status}
     catch (Exception e){
 
-render "serverError"
     }
 }
 def myProfile(){
@@ -90,46 +61,34 @@ if(session.endUser){
 
     def save() {
         try{
-        def endUserInformationInstance = new EndUserInformation()
-        endUserInformationInstance.firstName = params.first_name
-        endUserInformationInstance.lastName = params.last_name
-        endUserInformationInstance.phone = params.phone
-        endUserInformationInstance.address = params.address
-        endUserInformationInstance.city = params.city
-        endUserInformationInstance.email = params.email
-        endUserInformationInstance.password = endUserInformationService.encryptedPassword(params.password)
-        if (endUserInformationInstance.validate()) {
-            endUserInformationInstance.save(flush: true)
-            flash.message1="you are successfully registered"
+        def message=endUserInformationService.saveEndUser(params)
+        if(message=="you are successfully registered"){
+            flash.message1=message
             redirect(action: "register")
-        } else {
-            flash.message = "Please don't enter already used email "
+        }
+        else if(message=="Please don't enter already used email "){
+            flash.message=message
             redirect(action: "register")
         }}
         catch (Exception e){
+
         }
     }
 
     def login() {
         flash.message="successfully logged in."
 redirect(action: "allProducts",controller: "endUser")
-
     }
 
     def checkEmail() {
         try{
-        def isAvailable = false
-        def endUserInstance = EndUserInformation.findByEmail(params.email)
-        if (!endUserInstance) {
-            isAvailable = true
-
-        }
-
-        render(contentType: 'text/json') {
+            def isAvailable=endUserInformationService.checkEmail(params)
+                render(contentType: 'text/json') {
             [
                     "valid": isAvailable,
             ]
-        }}
+        }
+        }
         catch (Exception e){
 
         }
@@ -137,18 +96,12 @@ redirect(action: "allProducts",controller: "endUser")
 
     def checkLogin() {
         try{
-        def obj= JSON.parse(params.array)
-
-        def endUserInformationInstance = EndUserInformation.findByEmail(obj[0])
-       def status=false
-        if (endUserInformationInstance) {
-            status = endUserInformationService.decryptPassword(obj[1], endUserInformationInstance.password)
-        }
-        if(status==true){
-            session.endUser = endUserInformationInstance
+        def totalArray=endUserInformationService.checkLogin(params)
+        if(totalArray[1]==true){
+            session.endUser = totalArray[0] as EndUserInformation
 
         }
-          render status
+          render totalArray[1]
 }
         catch (Exception e){
 

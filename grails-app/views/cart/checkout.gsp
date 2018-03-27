@@ -68,7 +68,9 @@
                 <form method="POST">
 
                     <h1 class="bigName">Shopping cart</h1>
-                    <p class="text-muted">You currently have ${Cart.findAllByEndUserInformation(session.endUser).size()} item(s) in your cart.</p>
+                    <p class="text-muted" id="itemsInCart">You currently have ${Cart.findAllByEndUserInformation(session.endUser).size()} item(s) in your cart.</p>
+                    <p class="text-muted updateCart" id="updateItem" style="display: none;">Cart has been updated successfully.</p>
+                    <p class="text-muted updateCart" id="deleteItem" style="display: none;">Item has been successfully removed from cart.</p>
                     <g:if test="${Cart.findAllByEndUserInformation(session.endUser)}">
                     <div class="table-responsive" id="tableResponsive">
                         <table class="table">
@@ -113,7 +115,7 @@
                             <tfoot>
                             <tr>
                                 <th colspan="6">Total</th>
-                                <th colspan="2" class="totalPrice">Rs.${totalPrice}</th>
+                                <th colspan="2" class="totalPrice">Rs.${totalArray[0]}</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -156,7 +158,7 @@
                         <h3>You may also like these products</h3>
                     </div>
                 </div>
-                <g:each in="${relatedProductList}" var="list" status="i">
+                <g:each in="${totalArray[1]}" var="list" status="i">
                     <g:if test="${i<3}">
 
                         <div class="col-md-3 col-sm-6">
@@ -239,19 +241,19 @@
                         <tbody>
                         <tr>
                             <td>Order subtotal</td>
-                            <th class="totalPrice">Rs.${totalPrice}</th>
+                            <th class="totalPrice">Rs.${totalArray[0]}</th>
                         </tr>
                         <tr>
                             <td>Shipping and handling</td>
-                            <th class="shippingAndHandling">Rs.${shippingAndHandling}</th>
+                            <th class="shippingAndHandling">Rs.${totalArray[2]}</th>
                         </tr>
                         <tr>
                             <td>Tax</td>
-                            <th class="tax">Rs.${tax}</th>
+                            <th class="tax">Rs.${totalArray[3]}</th>
                         </tr>
                         <tr class="total">
                             <td>Total</td>
-                            <th class="totalPriceTotal">Rs.${totalPriceTotal}</th>
+                            <th class="totalPriceTotal">Rs.${totalArray[4]}</th>
                         </tr>
                         </tbody>
                     </table>
@@ -498,7 +500,7 @@ ${list.quantity}
                                 <tfoot>
                                 <tr>
                                     <th colspan="6">Total</th>
-                                    <th id="totalPrice1">Rs.${totalPrice}</th>
+                                    <th id="totalPrice1">Rs.${totalArray[0]}</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -557,19 +559,19 @@ ${list.quantity}
                         <tbody>
                         <tr>
                             <td>Order subtotal</td>
-                            <th class="totalPrice">Rs.${totalPrice}</th>
+                            <th class="totalPrice">Rs.${totalArray[0]}</th>
                         </tr>
                         <tr>
                             <td>Shipping and handling</td>
-                            <th class="shippingAndHandling">Rs.${shippingAndHandling}</th>
+                            <th class="shippingAndHandling">Rs.${totalArray[2]}</th>
                         </tr>
                         <tr>
                             <td>Tax</td>
-                            <th class="tax">Rs.${tax}</th>
+                            <th class="tax">Rs.${totalArray[3]}</th>
                         </tr>
                         <tr class="total">
                             <td>Total</td>
-                            <th class="totalPriceTotal">Rs.${totalPriceTotal}</th>
+                            <th class="totalPriceTotal">Rs.${totalArray[4]}</th>
                         </tr>
                         </tbody>
                     </table>
@@ -687,9 +689,10 @@ return responseValue
                                         $('.tax').html("Rs."+text[2]);
                                         $('.totalPriceTotal').html("Rs."+text[3]);
                                         $('.hidden-sm').load(document.URL +  ' .hidden-sm');
-//                            $('.hidden-xs').load(document.URL +  ' .hidden-xs');
-
                                         $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
+                                        $('#itemsInCart').load(document.URL +  ' #itemsInCart');
+                                        $('#deleteItem').hide();
+                                        $('#updateItem').show();
                                         $('#totalPrice1').html("Rs."+text[0]);
                                         if ($(".deleteCart").length < 2){
                                             location.reload();
@@ -734,7 +737,9 @@ return responseValue
                                     $('.tax').html("Rs."+text[2]);
                                     $('.totalPriceTotal').html("Rs."+text[3]);
                                     $('.hidden-sm').load(document.URL +  ' .hidden-sm');
-
+                                    $('#itemsInCart').load(document.URL +  ' #itemsInCart');
+                                    $('#deleteItem').show();
+                                    $('#updateItem').hide();
                                     $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
                                     $('#totalPrice1').html("Rs."+text[0]);
                                     if ($(".deleteCart").length < 2)

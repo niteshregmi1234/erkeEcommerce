@@ -1,5 +1,3 @@
-
-
 class MailSetUpController {
 static allowedMethods = [save: 'POST']
     def save() {

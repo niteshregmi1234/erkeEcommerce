@@ -1,5 +1,6 @@
 class CheckOutController {
     static allowedMethods = [placeOrder: 'POST',checkCart: 'POST',sendFeedBackMessage: 'POST']
+def endUserInformationService
     def sendFeedBackMessage(){
         try{
         sendMail {
@@ -23,7 +24,7 @@ class CheckOutController {
     def checkCart(){
         try{
         if(session.endUser!=null){
-        def cartList=Cart.findAllByEndUserInformation(session.endUser)
+            def cartList=endUserInformationService.cartList(session.endUser)
             if(cartList.size()==0){
                 render "cartEmpty"
             }
@@ -42,41 +43,16 @@ class CheckOutController {
     }
     def placeOrder(){
         try{
-            def cartList=Cart.findAllByEndUserInformation(session.endUser)
-        def totalPrice=0
-        for(Cart cart:cartList){
-            totalPrice=totalPrice+((cart.product.productDetails.price*cart.quantity)-(cart.product.productDetails.discountPercentage*(cart.product.productDetails.price*cart.quantity)/100))
-        }
+            def cartList=endUserInformationService.cartList(session.endUser)
+        def totalPrice=endUserInformationService.getTotalPriceOfCartList(cartList)
                 sendMail {
                     to "${MailSetUp.list()[0].toEmail}"
                     subject "Shopping mail from customers"
                     html g.render(template:"/cart/mail",model: [totalPrice: totalPrice])
 
                 }
-            def date=new Date()
-            def orderIdInstance=new OrderId()
-            orderIdInstance.endUserInformation=session.endUser
-            orderIdInstance.save(flush: true)
-            def orderId="yarsaa/"+orderIdInstance.id
-                for(Cart cart:cartList){
-                    def cartHistoryInstance=new CartHistory()
-                    cartHistoryInstance.productSize=cart.productSize
-                    cartHistoryInstance.quantity=cart.quantity
-                    cartHistoryInstance.endUserInformation=cart.endUserInformation
-                    cartHistoryInstance.product=cart.product
-                    cartHistoryInstance.isDelivered=false
-                    cartHistoryInstance.date=date
-                    cartHistoryInstance.deliveryAddress=params.address
-                    cartHistoryInstance.mobileNumber=params.phone
-                    cartHistoryInstance.deliveryMethod=DeliveryMethod.get(params.delivery)
-                    cartHistoryInstance.paymentMethod=PaymentMethod.get(params.payment)
-                    cartHistoryInstance.orderId=orderId
-                    cartHistoryInstance.isFakeOrder=false
-                    cartHistoryInstance.successfulOrderDelFlag=false
-                    cartHistoryInstance.save(flush: true)
-                    cart.delete(flush: true)
-                }
-                    flash.message1="yarsaa/"+orderIdInstance.id
+           def orderId=endUserInformationService.getOrderId(cartList,session.endUser,params)
+                    flash.message1="yarsaa/"+orderId
                     redirect(action: "cart",controller: "cart")
         }
     catch(Exception e){
