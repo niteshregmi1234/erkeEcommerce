@@ -11,8 +11,8 @@
     <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
     <meta name="author" content="Anoj And Bikash">
 
-    <g:if test="${productInstance}">
-        <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.frontImageName}"/>
+    <g:if test="${totalArray[0]}">
+        <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${totalArray[0].frontImageName}"/>
 
     </g:if>
 
