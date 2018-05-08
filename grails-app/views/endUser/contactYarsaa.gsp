@@ -24,7 +24,7 @@
 	<div class="container">
 		<div class="col-md-12">
 			<div id="main-slider">
-				<div class="item coverUp">
+				<div class="item">
 					<img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:companyInformation.coverImageName])}" class="img-responsive lazy">
 
 				</div>
@@ -32,13 +32,6 @@
 			<!-- /#main-slider -->
 		</div>
 	</div>
-	<style>
-	.coverUp img{
-		height:520px;
-		width: 1108px;
-	}
-
-	</style>
 
 	<div class="container">
 		<div class="col-md-12">

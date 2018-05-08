@@ -9,7 +9,7 @@
     <div class="container">
             <div class="col-md-12">
                 <div id="main-slider">
-                    <div class="item coverUp">
+                    <div class="item">
                         <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.coverImage])}" class="img-responsive lazy">
                     </div>
                 </div>
@@ -33,12 +33,12 @@
             <div class="col-md-6 ">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="imgwrapper smallAbout">
+                        <div class="imgwrapper">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs1Image])}" class="img-responsive lazy">
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="imgwrapper smallAbout">
+                        <div class="imgwrapper">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs2Image])}" class="img-responsive lazy">
                         </div>
                     </div>
@@ -46,12 +46,12 @@
                 <br>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="imgwrapper smallAbout">
+                        <div class="imgwrapper">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs3Image])}" class="img-responsive lazy">
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="imgwrapper smallAbout">
+                        <div class="imgwrapper">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs4Image])}" class="img-responsive lazy">
                         </div>
                     </div>
@@ -78,8 +78,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-sm-5">
-                    <div class="imgwrapper quote">
-                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.quoteLeftImage])}" class="img-responsive about-img lazy">
+                    <div class="imgwrapper">
+                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.quoteLeftImage])}" class="img-responsive lazy">
                     </div>
                 </div>
                 <div class="col-sm-2">
@@ -89,8 +89,8 @@
                     </div>
                 </div>
                 <div class="col-sm-5">
-                    <div class="imgwrapper quote">
-                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.quoteRightImage])}" class="img-responsive about-img lazy">
+                    <div class="imgwrapper">
+                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.quoteRightImage])}" class="img-responsive lazy">
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="imgwrapper">
-                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.videoDescrptionImage])}" class="img-responsive lazy" width="645" height="431">
+                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.videoDescrptionImage])}" class="img-responsive lazy">
                     </div>
                 </div>
             </div>
@@ -138,8 +138,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="imgwrapper height-img">
-                    <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProductSubCategoryImage])}" class="img-responsive img-texts lazy">
+                <div class="imgwrapper">
+                    <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProductSubCategoryImage])}" class="img-responsive lazy">
                     <div class="w3lsshoesaits-info">
                         <h3>${aboutUsInstance.specialProductSubCategory.subCategoryName} TO DIE FOR</h3>
                         <p>${aboutUsInstance.specialProductSubCategory.subCategoryDescription}</p>

@@ -95,7 +95,8 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
     }
     def deleteSuccessfulOrders(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD") {
                 def cartHistoryIdList=params.list("cartHistoryId")
             for(int i=0;i<cartHistoryIdList.size();i++){
                 def cartHistoryId=cartHistoryIdList[i] as long
@@ -108,7 +109,7 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
             else {
                 redirect(action: "adminLoginForm",controller: "login")
             }
-        }
+        }}
         catch (Exception e){
         }
     }

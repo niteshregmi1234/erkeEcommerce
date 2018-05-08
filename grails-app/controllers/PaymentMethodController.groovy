@@ -4,7 +4,8 @@ class PaymentMethodController extends BaseController{
 static allowedMethods = [save: 'POST']
     def list() {
         try {
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def paymentMethodList = PaymentMethod.list()
                 render(view: "list", model: [paymentMethodList: paymentMethodList])
@@ -13,24 +14,27 @@ static allowedMethods = [save: 'POST']
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e) {
             redirect(action: "notfound", controller: "errorPage")
 
         }
     }
     def create(){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+        if(session.adminUser){
+
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
         render(view: "create")
         }
-        else{
-            redirect(action: "adminLoginForm",controller: "login")
+        else {
+                redirect(action: "adminLoginForm", controller: "login")
 
-        }
+            }        }
     }
     def save(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
                 if(!params.id){
             def paymentMethodInstance=new PaymentMethod()
@@ -58,7 +62,7 @@ static allowedMethods = [save: 'POST']
             else{
                 redirect(action: "adminLoginForm",controller: "login")
 
-            }
+            }}
         }
         catch (Exception e) {
             redirect(action: "notfound", controller: "errorPage")
@@ -69,20 +73,22 @@ static allowedMethods = [save: 'POST']
 
     def show(Long id){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser) {
 
-                def paymentMethodInstance=PaymentMethod.get(id)
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        if(paymentMethodInstance){
-            [paymentMethodInstance:paymentMethodInstance]}
-        else{
-            redirect(action: "list")
-        }}
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
+                    def paymentMethodInstance = PaymentMethod.get(id)
 
-            }
-        }
+                    if (paymentMethodInstance) {
+                        [paymentMethodInstance: paymentMethodInstance]
+                    } else {
+                        redirect(action: "list")
+                    }
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+
+                }
+            }        }
         catch (Exception e) {
             redirect(action: "notfound", controller: "errorPage")
 
@@ -91,21 +97,22 @@ static allowedMethods = [save: 'POST']
     }
     def edit(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser) {
 
-                def paymentMethodInstance=PaymentMethod.get(params.id)
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        if(paymentMethodInstance){
-            [paymentMethodInstance:paymentMethodInstance]
-        }
-        else{
-            redirect(action: "list")
-        }}
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
+                    def paymentMethodInstance = PaymentMethod.get(params.id)
 
-            }
-        }
+                    if (paymentMethodInstance) {
+                        [paymentMethodInstance: paymentMethodInstance]
+                    } else {
+                        redirect(action: "list")
+                    }
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+
+                }
+            }        }
         catch (Exception e) {
             redirect(action: "notfound", controller: "errorPage")
 
@@ -114,7 +121,8 @@ static allowedMethods = [save: 'POST']
     }
     def delete(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
                 def paymentMethodInstance=PaymentMethod.get(params.id)
 
@@ -134,7 +142,7 @@ static allowedMethods = [save: 'POST']
             else{
 redirect(action: "adminLoginForm",controller: "login")
             }
-        }
+        }}
         catch (DataIntegrityViolationException e) {
             flash.message = "Sorry! cannot delete this data."
             redirect(action: "list")

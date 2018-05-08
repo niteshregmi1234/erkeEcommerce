@@ -11,15 +11,14 @@
     <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
     <meta name="author" content="Anoj And Bikash">
 
-    <g:if test="${totalArray[0]}">
-        <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${totalArray[0].frontImageName}"/>
+    <g:if test="${productInstance}">
+        <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.frontImageName}"/>
 
     </g:if>
 
     <title>
         Yarsaa
     </title>
-
 
     <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
     %{--<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>--}%
@@ -45,7 +44,7 @@
         <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"style.default.css")}" type="text/css"
               media="all"/>
     </g:if>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.2')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.3')}" type="text/css"
           media="all"/>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/respond.min.js')}" type="text/javascript"
@@ -87,10 +86,6 @@
     <script src="${resource(dir: 'js', file: 'yarsaa/lazyLoad.min.js')}" type="text/javascript"
             charset="utf-8"></script>
 
-    <script type="text/javascript">
-    var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
-    document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
     <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/yarsaalogosmall.png')}">
 
 </head>
@@ -110,7 +105,6 @@
                             </p>
 
                             <h3>JavaScript not found</h3>
-                            <h4 class="text-muted">Our page does not function properly without java-script.So,You must enable java-script to view this web-page.</h4>
 
 
                         </div>

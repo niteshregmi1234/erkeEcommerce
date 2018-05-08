@@ -859,12 +859,6 @@ return  false;
 
 
 
-        <style>
-        .product img{
-            height:338px;
-            width:251px;
-        }
-        </style>
 
     </div>
 

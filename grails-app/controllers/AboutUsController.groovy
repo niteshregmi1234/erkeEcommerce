@@ -12,6 +12,7 @@ class AboutUsController extends BaseController {
 
     def checkPhoto() {
         try{
+            if(session.adminUser){
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def Image = request.getFile('Image')
@@ -31,7 +32,7 @@ class AboutUsController extends BaseController {
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
 
         }
@@ -40,6 +41,7 @@ class AboutUsController extends BaseController {
 
     def save() {
         try{
+            if(session.adminUser){
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def aboutUsInstance = AboutUs.get(params.id)
@@ -72,7 +74,7 @@ class AboutUsController extends BaseController {
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch(Exception e){
             redirect(action: "notfound", controller: "errorPage")
 
@@ -81,45 +83,48 @@ class AboutUsController extends BaseController {
     }
 
     def updateCoverImage(String imageNameOld) {
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if (session.adminUser) {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            def mp = (MultipartHttpServletRequest) request
-            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImage")
-            def homeDir = new File(System.getProperty("user.home"))
-            File theDir = new File(homeDir, "yarsaa");
-            if (!theDir.exists()) {
-                theDir.mkdir();
-                print "yes"
-            }
-            if (file.size > 0) {
-                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                fileOld.delete();
-                String fileName = file.originalFilename
-                abc:
-                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                if (check == true) {
-                    Matcher m = PATTERN.matcher(fileName);
-                    if (m.matches()) {
-                        String prefix = m.group(1);
-                        String last = m.group(2);
-                        String suffix = m.group(3);
-                        if (suffix == null) suffix = "";
-                        int count = last != null ? Integer.parseInt(last) : 0;
-                        count++;
-                        fileName = prefix + "(" + count + ")" + suffix;
-                        continue abc
-                    }
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("coverImage")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
                 }
-                File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                file.transferTo(fileDest)
-                return fileName
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
 
-            } else {
-                return imageNameOld
+                } else {
+                    return imageNameOld
+                }
             }
-        }    }
-
+        }
+    }
     def updateAboutUs1Image(String imageNameOld) {
+        if(session.adminUser){
         if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
             def mp = (MultipartHttpServletRequest) request
@@ -156,48 +161,52 @@ class AboutUsController extends BaseController {
             } else {
                 return imageNameOld
             }
-        }    }
+        }
+    }}
 
     def updateAboutUs2Image(String imageNameOld) {
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if (session.adminUser) {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            def mp = (MultipartHttpServletRequest) request
-            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs2Image")
-            def homeDir = new File(System.getProperty("user.home"))
-            File theDir = new File(homeDir, "yarsaa");
-            if (!theDir.exists()) {
-                theDir.mkdir();
-                print "yes"
-            }
-            if (file.size > 0) {
-                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                fileOld.delete();
-                String fileName = file.originalFilename
-                abc:
-                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                if (check == true) {
-                    Matcher m = PATTERN.matcher(fileName);
-                    if (m.matches()) {
-                        String prefix = m.group(1);
-                        String last = m.group(2);
-                        String suffix = m.group(3);
-                        if (suffix == null) suffix = "";
-                        int count = last != null ? Integer.parseInt(last) : 0;
-                        count++;
-                        fileName = prefix + "(" + count + ")" + suffix;
-                        continue abc
-                    }
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs2Image")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
                 }
-                File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                file.transferTo(fileDest)
-                return fileName
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
 
-            } else {
-                return imageNameOld
+                } else {
+                    return imageNameOld
+                }
             }
-        }    }
-
+        }
+    }
     def updateAboutUs3Image(String imageNameOld) {
+        if(session.adminUser){
         if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
             def mp = (MultipartHttpServletRequest) request
@@ -234,126 +243,133 @@ class AboutUsController extends BaseController {
             } else {
                 return imageNameOld
             }
-        }    }
+        }    }}
 
     def updateAboutUs4Image(String imageNameOld) {
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if (session.adminUser) {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            def mp = (MultipartHttpServletRequest) request
-            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs4Image")
-            def homeDir = new File(System.getProperty("user.home"))
-            File theDir = new File(homeDir, "yarsaa");
-            if (!theDir.exists()) {
-                theDir.mkdir();
-                print "yes"
-            }
-            if (file.size > 0) {
-                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                fileOld.delete();
-                String fileName = file.originalFilename
-                abc:
-                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                if (check == true) {
-                    Matcher m = PATTERN.matcher(fileName);
-                    if (m.matches()) {
-                        String prefix = m.group(1);
-                        String last = m.group(2);
-                        String suffix = m.group(3);
-                        if (suffix == null) suffix = "";
-                        int count = last != null ? Integer.parseInt(last) : 0;
-                        count++;
-                        fileName = prefix + "(" + count + ")" + suffix;
-                        continue abc
-                    }
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("aboutUs4Image")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
                 }
-                File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                file.transferTo(fileDest)
-                return fileName
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
 
-            } else {
-                return imageNameOld
+                } else {
+                    return imageNameOld
+                }
             }
-        }    }
-
+        }
+    }
     def updateQuoteLeftImage(String imageNameOld) {
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if (session.adminUser) {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            def mp = (MultipartHttpServletRequest) request
-            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("quoteLeftImage")
-            def homeDir = new File(System.getProperty("user.home"))
-            File theDir = new File(homeDir, "yarsaa");
-            if (!theDir.exists()) {
-                theDir.mkdir();
-                print "yes"
-            }
-            if (file.size > 0) {
-                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                fileOld.delete();
-                String fileName = file.originalFilename
-                abc:
-                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                if (check == true) {
-                    Matcher m = PATTERN.matcher(fileName);
-                    if (m.matches()) {
-                        String prefix = m.group(1);
-                        String last = m.group(2);
-                        String suffix = m.group(3);
-                        if (suffix == null) suffix = "";
-                        int count = last != null ? Integer.parseInt(last) : 0;
-                        count++;
-                        fileName = prefix + "(" + count + ")" + suffix;
-                        continue abc
-                    }
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("quoteLeftImage")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
                 }
-                File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                file.transferTo(fileDest)
-                return fileName
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
 
-            } else {
-                return imageNameOld
+                } else {
+                    return imageNameOld
+                }
             }
-        }    }
-
+        }
+    }
     def updateQuoteRightImage(String imageNameOld) {
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if (session.adminUser) {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            def mp = (MultipartHttpServletRequest) request
-            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("quoteRightImage")
-            def homeDir = new File(System.getProperty("user.home"))
-            File theDir = new File(homeDir, "yarsaa");
-            if (!theDir.exists()) {
-                theDir.mkdir();
-                print "yes"
-            }
-            if (file.size > 0) {
-                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                fileOld.delete();
-                String fileName = file.originalFilename
-                abc:
-                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                if (check == true) {
-                    Matcher m = PATTERN.matcher(fileName);
-                    if (m.matches()) {
-                        String prefix = m.group(1);
-                        String last = m.group(2);
-                        String suffix = m.group(3);
-                        if (suffix == null) suffix = "";
-                        int count = last != null ? Integer.parseInt(last) : 0;
-                        count++;
-                        fileName = prefix + "(" + count + ")" + suffix;
-                        continue abc
-                    }
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("quoteRightImage")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
                 }
-                File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                file.transferTo(fileDest)
-                return fileName
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
 
-            } else {
-                return imageNameOld
+                } else {
+                    return imageNameOld
+                }
             }
-        }    }
-
+        }
+    }
     def updateVideoDescriptionImage(String imageNameOld) {
+     if(session.adminUser){
         if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
             def mp = (MultipartHttpServletRequest) request
@@ -390,102 +406,107 @@ class AboutUsController extends BaseController {
             } else {
                 return imageNameOld
             }
-        }    }
+        }    }}
 
     def updateSpecialProductSubCategoryImage(String imageNameOld) {
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-            def mp = (MultipartHttpServletRequest) request
-            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialProductSubCategoryImage")
-            def homeDir = new File(System.getProperty("user.home"))
-            File theDir = new File(homeDir, "yarsaa");
-            if (!theDir.exists()) {
-                theDir.mkdir();
-                print "yes"
-            }
-            if (file.size > 0) {
-                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                fileOld.delete();
-                String fileName = file.originalFilename
-                abc:
-                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                if (check == true) {
-                    Matcher m = PATTERN.matcher(fileName);
-                    if (m.matches()) {
-                        String prefix = m.group(1);
-                        String last = m.group(2);
-                        String suffix = m.group(3);
-                        if (suffix == null) suffix = "";
-                        int count = last != null ? Integer.parseInt(last) : 0;
-                        count++;
-                        fileName = prefix + "(" + count + ")" + suffix;
-                        continue abc
-                    }
-                }
-                File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                file.transferTo(fileDest)
-                return fileName
-
-            } else {
-                return imageNameOld
-            }
-        }    }
-
-    def updateBackgroundImage(String imageNameOld) {
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-            def mp = (MultipartHttpServletRequest) request
-            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backgroundImage")
-            def homeDir = new File(System.getProperty("user.home"))
-            File theDir = new File(homeDir, "yarsaa");
-            if (!theDir.exists()) {
-                theDir.mkdir();
-                print "yes"
-            }
-            if (file.size > 0) {
-                File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                fileOld.delete();
-                String fileName = file.originalFilename
-                abc:
-                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                if (check == true) {
-                    Matcher m = PATTERN.matcher(fileName);
-                    if (m.matches()) {
-                        String prefix = m.group(1);
-                        String last = m.group(2);
-                        String suffix = m.group(3);
-                        if (suffix == null) suffix = "";
-                        int count = last != null ? Integer.parseInt(last) : 0;
-                        count++;
-                        fileName = prefix + "(" + count + ")" + suffix;
-                        continue abc
-                    }
-                }
-                File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                file.transferTo(fileDest)
-                return fileName
-
-            } else {
-                return imageNameOld
-            }
-        }    }
-
-    def show() {
-        try{
+        if (session.adminUser) {
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-                def aboutUsInstance = AboutUs.list()[0]
-        if (aboutUsInstance) {
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialProductSubCategoryImage")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
+                }
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
 
-            render(view: "show", model: [aboutUsInstance: aboutUsInstance])
-        } else {
-            redirect(action: "notfound", controller: "errorPage")
-        }}
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
-
+                } else {
+                    return imageNameOld
+                }
             }
         }
+    }
+    def updateBackgroundImage(String imageNameOld) {
+        if (session.adminUser) {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backgroundImage")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
+                }
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
+
+                } else {
+                    return imageNameOld
+                }
+            }
+        }
+    }
+    def show() {
+        try{
+            if(session.adminUser) {
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                    def aboutUsInstance = AboutUs.list()[0]
+                    if (aboutUsInstance) {
+
+                        render(view: "show", model: [aboutUsInstance: aboutUsInstance])
+                    } else {
+                        redirect(action: "notfound", controller: "errorPage")
+                    }
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+
+                }
+            }        }
         catch (Exception e){
             redirect(action: "notfound", controller: "errorPage")
 
@@ -494,20 +515,21 @@ class AboutUsController extends BaseController {
 
     def edit() {
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser) {
 
-                def aboutUsInstance = AboutUs.get(params.id)
-        if (aboutUsInstance) {
-            [aboutUsInstance: aboutUsInstance]
-        } else {
-            redirect(action: "notfound", controller: "errorPage")
-        }
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-    }
-            else{
-         redirect(action: "adminLoginForm",controller: "login")
-            }
-        }
+                    def aboutUsInstance = AboutUs.get(params.id)
+                    if (aboutUsInstance) {
+                        [aboutUsInstance: aboutUsInstance]
+                    } else {
+                        redirect(action: "notfound", controller: "errorPage")
+                    }
+
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+                }
+            }        }
         catch (Exception e){
             redirect(action: "notfound", controller: "errorPage")
 

@@ -1,3 +1,19 @@
+
+/*p span*/
+/*{*/
+    /*display: block;*/
+/*}*/
+/*#some-element {*/
+    /*!*display: none;*!*/
+    /*font-size: 10px;*/
+
+    /*text-transform: uppercase;*/
+/*}*/
+
+/*#some-div:hover #some-element,*/
+/*#some-div:focus #some-element{*/
+    /*display: block;*/
+/*}*/
 .updateCart{
     color:#4fbfa8;
 }
@@ -36,7 +52,6 @@
     left: 50%;
     margin-left: -60px;
 }
-
 .tooltips .tooltiptext::after {
     content: "";
     position: absolute;
@@ -52,10 +67,6 @@
     visibility: visible;
 }
 
-.food1 img {
-    height: 235px;
-    width: 100%;
-}
 .box{
     text-overflow: ellipsis;
     overflow: hidden;}
@@ -153,9 +164,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.mainImage-height{
-    height: 597px;
-}
+
 .price ul li:nth-child(1) {
     font-size: 50px;
     font-family: 'Montserrat', sans-serif;
@@ -179,12 +188,7 @@
     -ms-transform: translate(-50%, -50%);
     /*background: rgba(0, 0, 0, 0.75);*/
 }
-.thumb{
-    height: 167px;
-}
-.img-thumb{
-    height: 163px;
-}
+
 .middle1 {
     position: absolute;
     top: 20%;
@@ -295,19 +299,14 @@
     text-align: center;
     color: #FFF;
 }
-.coverUp img {
-    height: 520px;
-    width: 1108px;
-}
+
 .about-product{
     height: 857px;
 }
 .about-product img{
     width: 560px!important;
 }
-.food1-img{
-    width: 100%;
-}
+
 .contact-img{
     width: 100%;
     height: 390px;
@@ -325,9 +324,7 @@
     height: 198px;
     width:262px;
 }
-.product img{
-width: 360px;
-}
+
 #detailInfo::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -416,18 +413,8 @@ width: 360px;
         width: 213px!important;
         height:265px!important;
     }
-    .coverUp img{
-        height: 120px !important;
-        width: 260px !important;
 
-    }
-    .coverDown img{
-        height: 120px !important;
-        width: 260px !important;
-    }
-    .food1 img {
-        height: 300px!important;
-    }
+
     .product-img{
         height: 390px;
     }
@@ -483,19 +470,6 @@ width: 360px;
     .text-margin{
         margin-top: -50px;
     }
-    .mainImage-height {
-        height: 355px!important;
-        width: 100%;
-    }
-
-    .thumb{
-        height:70px!important;
-    }
-    .img-thumb{
-        height: 70px!important;;
-    }
-
-
     .sub-flipperHeight{
         height:225px;
     }
@@ -576,18 +550,7 @@ width: 360px;
         width: 255px!important;
         height:265px!important;
     }
-    .coverUp img{
-        height: 120px !important;
-        width: 260px !important;
 
-    }
-    .coverDown img{
-        height: 120px !important;
-        width: 260px !important;
-    }
-    .food1 img {
-        height: 300px!important;
-    }
     .product-img{
         height: 390px;
     }
@@ -641,17 +604,6 @@ width: 360px;
     }
     .text-margin{
         margin-top: -50px;
-    }
-    .mainImage-height {
-        height: 355px!important;
-        width: 100%;
-    }
-
-    .thumb{
-        height:110px;
-    }
-    .img-thumb{
-        height:106px;
     }
 
 
@@ -740,18 +692,7 @@ width: 360px;
         width: 263px!important;
         height:300px!important;
     }
-    .coverUp img{
-        height: 120px !important;
-        width: 260px !important;
 
-    }
-    .coverDown img{
-        height: 120px !important;
-        width: 260px !important;
-    }
-    .food1 img {
-        height: 300px!important;
-    }
     .product-img{
         height: 390px;
     }
@@ -806,17 +747,6 @@ width: 360px;
     .text-margin{
         margin-top: -50px;
     }
-    .mainImage-height {
-        height: 350px!important;
-        width: 100%;
-    }
-
-    .thumb{
-        height:110px;
-    }
-    .img-thumb{
-        height:106px;
-    }
 
 
     .sub-flipperHeight{
@@ -858,9 +788,6 @@ width: 360px;
         font-family: 'Montserrat', sans-serif;
         display: inline-block;
     }
-    /*#content {*/
-        /*padding-top: 115px;*/
-    /*}*/
     .text-center{
         margin-top: -5px!important;
     }
@@ -926,18 +853,6 @@ width: 360px;
         width: 290px!important;
         height:300px!important;
     }
-    .coverUp img{
-        height: 120px !important;
-        width: 260px !important;
-
-    }
-    .coverDown img{
-        height: 120px !important;
-        width: 260px !important;
-    }
-    .food1 img {
-        height: 300px!important;
-    }
     .product-img{
         height: 390px;
     }
@@ -992,19 +907,6 @@ width: 360px;
     .text-margin{
         margin-top: -50px;
     }
-    .mainImage-height {
-        height: 355px!important;
-        width: 100%;
-    }
-
-    .thumb{
-        height:110px;
-    }
-    .img-thumb{
-        height:106px;
-    }
-
-
     .sub-flipperHeight{
         height:225px;
     }
@@ -1076,10 +978,6 @@ margin-top: -20px!important;
         padding: 0 !important;
         font-size:5px;
     }
-    .mainImage-height {
-        height: 545px!important;
-        width: 100%;
-    }
     .price ul li:nth-child(1) {
         font-size: 30px;
     }
@@ -1119,18 +1017,6 @@ margin-top: -20px!important;
         width: 100% !important;
         height:300px!important;
     }
-    .coverUp img{
-        width: 420px !important;
-        height: 165px !important;
-
-    }
-    .coverDown img{
-        height: 150px !important;
-        width: 420px !important;
-    }
-    /*.food1 img {*/
-        /*height: 300px!important;*/
-    /*}*/
     .small-screen{
         padding-top: 20px;
     }
@@ -1181,9 +1067,6 @@ margin-top: -20px!important;
         margin-left: 70px;
         margin-bottom: 10px;
     }
-    .food1 img {
-        height: 400px!important;
-    }
     .product-height{
         height: 550px!important;
     }
@@ -1198,7 +1081,7 @@ margin-top: -20px!important;
     }
     .price{
         font-size: 20px!important;
-        margin-top: -20px!important;
+        margin-top: -10px!important;
     }
     .bigName{
         font-size: 18px!important;
@@ -1246,10 +1129,6 @@ margin-top: -20px!important;
         padding: 0 !important;
         font-size:5px;
     }
-    .mainImage-height {
-        height: 545px!important;
-        width: 100%;
-    }
     .price ul li:nth-child(1) {
         font-size: 30px;
     }
@@ -1285,18 +1164,6 @@ margin-top: -20px!important;
         width: 100% !important;
         height:300px!important;
     }
-    .coverUp img{
-        width: 420px !important;
-        height: 165px !important;
-
-    }
-    .coverDown img{
-        height: 150px !important;
-        width: 420px !important;
-    }
-    /*.food1 img {*/
-    /*height: 300px!important;*/
-    /*}*/
     .small-screen{
         padding-top: 20px;
     }
@@ -1347,9 +1214,7 @@ margin-top: -20px!important;
         margin-left: 70px;
         margin-bottom: 10px;
     }
-    .food1 img {
-        height: 400px!important;
-    }
+
     .product-height{
         height: 550px!important;
     }
@@ -1415,10 +1280,6 @@ margin-top: -20px!important;
         padding: 0 !important;
         font-size:5px;
     }
-    .mainImage-height {
-        height: 545px!important;
-        width: 100%;
-    }
     .price ul li:nth-child(1) {
         font-size: 30px;
     }
@@ -1455,18 +1316,7 @@ margin-top: -20px!important;
         width: 100% !important;
         height:300px!important;
     }
-    .coverUp img{
-        width: 420px !important;
-        height: 165px !important;
 
-    }
-    .coverDown img{
-        height: 150px !important;
-        width: 420px !important;
-    }
-    /*.food1 img {*/
-    /*height: 300px!important;*/
-    /*}*/
     .small-screen{
         padding-top: 20px;
     }
@@ -1516,9 +1366,6 @@ margin-top: -20px!important;
         float: left;
         margin-left: 70px;
         margin-bottom: 10px;
-    }
-    .food1 img {
-        height: 400px!important;
     }
     .product-height{
         height: 550px!important;
@@ -1583,13 +1430,6 @@ margin-top: -20px!important;
         padding: 0 !important;
         font-size:5px;
     }
-    .mainImage-height {
-        height: 545px!important;
-        width: 100%;
-    }
-    .img-thumb{
-     width: 125px!important;
-    }
     .price ul li:nth-child(1) {
         font-size: 30px;
     }
@@ -1626,18 +1466,7 @@ margin-top: -20px!important;
         width: 100% !important;
         height:300px!important;
     }
-    .coverUp img{
-        width: 420px !important;
-        height: 165px !important;
 
-    }
-    .coverDown img{
-        height: 290px !important;
-        width: 450px !important;
-    }
-    /*.food1 img {*/
-    /*height: 300px!important;*/
-    /*}*/
     .small-screen{
         padding-top: 20px;
     }
@@ -1691,16 +1520,11 @@ margin-top: -20px!important;
     .about-product {
         height: 845px!important;
     }
-    .product img{
-        height: 600px!important;
 
-    }
     .product-height{
         height: 380px!important;
     }
-    .food1 img {
-        height: 250px!important;
-    }
+
 
 
     .product-color img{
@@ -1711,9 +1535,6 @@ margin-top: -20px!important;
 
     }
 
-    .same-height img{
-        height: 500px!important;
-    }
 
 }
 @media screen and (min-width: 441px) and (max-width:480px){
@@ -1772,13 +1593,6 @@ margin-top: -20px!important;
         padding: 0 !important;
         font-size:5px;
     }
-    .mainImage-height {
-        height: 545px!important;
-        width: 100%;
-    }
-    .img-thumb{
-        width: 125px!important;
-    }
     .price ul li:nth-child(1) {
         font-size: 30px;
     }
@@ -1815,18 +1629,6 @@ margin-top: -20px!important;
         width: 100% !important;
         height:300px!important;
     }
-    .coverUp img{
-        width: 420px !important;
-        height: 165px !important;
-
-    }
-    .coverDown img{
-        height: 290px !important;
-        width: 450px !important;
-    }
-    /*.food1 img {*/
-    /*height: 300px!important;*/
-    /*}*/
     .small-screen{
         padding-top: 20px;
     }
@@ -1880,15 +1682,9 @@ margin-top: -20px!important;
     .about-product {
         height: 845px!important;
     }
-    .product img{
-        height: 600px!important;
 
-    }
     .product-height{
         height: 380px!important;
-    }
-    .food1 img {
-        height: 250px!important;
     }
 
 
@@ -1900,9 +1696,6 @@ margin-top: -20px!important;
 
     }
 
-    .same-height img{
-        height: 500px!important;
-    }
 
 }
 
@@ -1929,19 +1722,9 @@ margin-top: -20px!important;
         width: 100%!important;
         height:300px!important;
     }
-    .coverUp img{
-        width: 580px !important;
-        height: 230px !important;
 
-    }
-    .coverDown img{
-        height: 150px !important;
-        width: 420px !important;
-    }
 
-    .food1 img {
-        height: 300px!important;
-    }
+
     .height-img{
         height: 306px;
     }
@@ -1985,12 +1768,6 @@ margin-top: -20px!important;
     .moreBrand{
         margin-top: 140px!important;
     }
-    .mainImage-height{
-        width: 508px!important;
-    }
-.img-thumb{
-    width: 145px!important;
-}
     .smallAbout img{
         height: 360px!important;
         width:545px!important;
@@ -2027,15 +1804,7 @@ margin-top: -20px!important;
         width: 100%!important;
         height:300px!important;
     }
-    .coverUp img{
-        width: 580px !important;
-        height: 300px !important;
 
-    }
-    .coverDown img{
-        height: 300px !important;
-        width: 580px !important;
-    }
     .about-product{
         height: 945px!important;
     }
@@ -2044,20 +1813,14 @@ margin-top: -20px!important;
         height: 700px!important;
     }
 
-    .food1 img {
-        height: 300px!important;
-    }
     .product-height{
         height: 450px!important;
     }
 
-
     .height-img{
         height: 500px!important;
     }
-    .same-height img{
-        height: 600px!important;
-    }
+
     .w3lsshoesaits-info{
         top: 10%;
     }
@@ -2096,20 +1859,7 @@ margin-top: -20px!important;
         width: 100%!important;
         height:300px!important;
     }
-    .coverUp img{
-        width: 580px !important;
-        height: 230px !important;
-
-    }
-    .coverDown img{
-        height: 150px !important;
-        width: 420px !important;
-    }
-
-    .food1 img {
-        height: 300px!important;
-    }
-    .height-img{
+        .height-img{
         height: 306px;
     }
     .w3lsshoesaits-info{
@@ -2121,6 +1871,9 @@ margin-top: -20px!important;
 
 }
 @media screen and (min-width:600px) and (max-width: 620px){
+ #mainImage img{
+     width: 100%;
+ }
     .text-center{
         margin-top: -5px!important;
     }
@@ -2150,18 +1903,6 @@ margin-top: -20px!important;
     }
     .moreBrand{
         margin-top: 165px!important;}
-    .mainImage-height{
-        width: 540px!important;
-        height: 755px!important;
-    }
-    .thumb{
-        height:220px!important;
-    }
-    .img-thumb{
-        width: 180px!important;
-        height:220px!important;
-
-    }
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -2201,45 +1942,17 @@ margin-top: -20px!important;
     .boxsize-small{
         margin-top: 30px;
     }
-    .coverUp img {
-        height: 250px!important;
-        width: 1108px!important;
-    }
-    .coverDown img{
-        height: 250px!important;
-        width: 1108px!important;
-    }
-    .product img{
-        width: 360px!important;
-        height: 520px!important;
-    }
-    .food1 img {
-        height: 310px!important;
-    }
 
     .product-height{
         height: 440px!important;
     }
-    .same-height img {
-        height: 500px!important;
 
-    }
 
-    .product-color img{
-        height:450px!important;
-    }
-
-    .product-color{
-        height:450px!important;
-
-    }
     .about-product{
         height: 755px!important;
         width: 568px!important;
     }
-    .product img{
-        width: 360px!important;
-    }
+
     .height-img{
         height: 500px!important;
     }
@@ -2290,18 +2003,6 @@ margin-top: -20px!important;
     .more {
         margin-right: 30px!important;
     }
-    .mainImage-height{
-        width: 580px!important;
-        height: 755px!important;
-    }
-    .thumb{
-        height:220px!important;
-    }
-    .img-thumb{
-        width: 180px!important;
-        height:220px!important;
-
-    }
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -2341,28 +2042,9 @@ margin-top: -20px!important;
     .boxsize-small{
         margin-top: 30px;
     }
-    .coverUp img {
-        height: 250px!important;
-        width: 1108px!important;
-    }
-    .coverDown img{
-        height: 250px!important;
-        width: 1108px!important;
-    }
-    .product img{
-        width: 360px!important;
-        height: 520px!important;
-    }
-    .food1 img {
-        height: 310px!important;
-    }
 
     .product-height{
         height: 440px!important;
-    }
-    .same-height img {
-        height: 655px!important;
-
     }
 
     .product-color img{
@@ -2377,9 +2059,7 @@ margin-top: -20px!important;
         height: 765px!important;
         width: 610px!important;
     }
-    .product img{
-        width: 360px!important;
-    }
+
     .height-img{
         height: 500px!important;
     }
@@ -2450,18 +2130,6 @@ margin-top: -20px!important;
         width: 610px!important;
     }
 
-    .mainImage-height{
-        width: 607px!important;
-        height: 815px!important;
-    }
-    .thumb{
-        height:220px!important;
-    }
-    .img-thumb{
-        width: 180px!important;
-        height:220px!important;
-
-    }
     .smallAbout img{
         height: 410px!important;
         width:645px!important;
@@ -2498,26 +2166,11 @@ margin-top: -20px!important;
         width: 100%!important;
         height:300px!important;
     }
-    .coverUp img{
-        width: 580px !important;
-        height: 300px !important;
 
-    }
-    .coverDown img{
-        height: 300px !important;
-        width: 580px !important;
-    }
     .about-product{
         height: 945px!important;
     }
-    .product img{
-        width: 360px!important;
-        height: 700px!important;
-    }
 
-    .food1 img {
-        height: 316px!important;
-    }
     .product-height{
         height: 450px!important;
     }
@@ -2526,9 +2179,7 @@ margin-top: -20px!important;
     .height-img{
         height: 500px!important;
     }
-    .same-height img{
-        height: 650px!important;
-    }
+
     .w3lsshoesaits-info{
         top: 10%;
     }
@@ -2569,18 +2220,6 @@ margin-top: -20px!important;
 
 }
 @media screen and (min-width: 701px) and (max-width: 725px) {
-    .mainImage-height{
-        width: 660px!important;
-        height: 755px!important;
-    }
-    .thumb{
-        height:220px!important;
-    }
-    .img-thumb{
-        width: 200px!important;
-        height:220px!important;
-
-    }
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -2620,28 +2259,9 @@ margin-top: -20px!important;
     .boxsize-small{
         margin-top: 30px;
     }
-    .coverUp img {
-        height: 250px!important;
-        width: 1108px!important;
-    }
-    .coverDown img{
-        height: 250px!important;
-        width: 1108px!important;
-    }
-    .product img{
-        width: 360px!important;
-        height: 700px!important;
-    }
-    .food1 img {
-        height: 325px!important;
-    }
 
     .product-height{
         height: 460px!important;
-    }
-    .same-height img {
-        height: 655px!important;
-
     }
 
     .product-color img{
@@ -2656,9 +2276,7 @@ margin-top: -20px!important;
         height: 765px!important;
         width: 675px!important;
     }
-    .product img{
-        width: 360px!important;
-    }
+
     .height-img{
         height: 500px!important;
     }
@@ -2711,18 +2329,6 @@ margin-top: -20px!important;
         margin-top: -87px!important;
         margin-right: 35px!important;
     }
-    .mainImage-height{
-        width: 671px!important;
-        height: 815px!important;
-    }
-    .thumb{
-        height:220px!important;
-    }
-    .img-thumb{
-        width: 200px!important;
-        height:220px!important;
-
-    }
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -2762,28 +2368,9 @@ margin-top: -20px!important;
     .boxsize-small{
         margin-top: 30px;
     }
-    .coverUp img {
-        height: 405px!important;
-        width: 1108px!important;
-    }
-    .coverDown img{
-        height: 405px!important;
-        width: 1108px!important;
-    }
-    .product img{
-        width: 360px!important;
-        height: 800px!important;
-    }
-    .food1 img {
-        height: 370px!important;
-    }
 
     .product-height{
         height: 500px!important;
-    }
-    .same-height img{
-        height: 750px!important;
-
     }
 
     .product-color img{
@@ -2798,9 +2385,7 @@ margin-top: -20px!important;
         height: 1040px!important;
         width: 675px!important;
     }
-    .product img{
-        width: 360px!important;
-    }
+
     .height-img{
         height: 500px!important;
     }
@@ -2819,18 +2404,8 @@ margin-top: -20px!important;
 
         margin-right: 35px!important;
     }
-    .mainImage-height{
-        width: 675px!important;
-        height: 815px!important;
-    }
-    .thumb{
-        height:220px!important;
-    }
-    .img-thumb{
-        width: 205px!important;
-        height:220px!important;
 
-    }
+
     .agileinfonewsl {
         width: 100% !important;
         height: 600px !important;
@@ -2870,28 +2445,8 @@ margin-top: -20px!important;
     .boxsize-small{
         margin-top: 30px;
     }
-    .coverUp img {
-        height: 405px!important;
-        width: 1108px!important;
-    }
-    .coverDown img{
-        height: 405px!important;
-        width: 1108px!important;
-    }
-    .product img{
-        width: 360px!important;
-        height: 700px!important;
-    }
-    .food1 img {
-        height: 370px!important;
-    }
-
     .product-height{
         height: 500px!important;
-    }
-    .same-height img{
-        height: 650px!important;
-
     }
 
     .product-color img{
@@ -2986,42 +2541,17 @@ margin-top: -20px!important;
     .boxsize-small{
         margin-top: 30px;
     }
-    .coverUp img {
-        height: 405px!important;
-        width: 1108px!important;
-    }
-    .coverDown img{
-        height: 405px!important;
-        width: 1108px!important;
-    }
-    .product img{
-        width: 360px!important;
-        height: 400px!important;
-    }
-    .food1 img {
-        height: 370px!important;
-    }
 
     .product-height{
         height: 500px!important;
     }
 
 
-    .product-color img{
-        height:450px!important;
-    }
-
-    .product-color{
-        height:450px!important;
-
-    }
     .about-product{
         height: 640px!important;
         width: 345px!important;
     }
-    .product img{
-        width: 360px!important;
-    }
+
     .height-img{
         height: 500px!important;
     }
@@ -3044,14 +2574,7 @@ margin-top: -20px!important;
     }
     .moreBrand{
         margin-top: 190px!important;}
-    .coverUp img {
-        height: 300px!important;
-        width: 1108px!important;
-    }
-    .coverDown img{
-        height: 300px!important;
-        width: 1108px!important;
-    }
+
        .smallAbout img{
         height: 250px!important;
         width:385px!important;
@@ -3061,9 +2584,7 @@ margin-top: -20px!important;
         margin-top: -20px;
         padding-bottom: 10px;
     }
-    .food1 img {
-        height: 270px!important;
-    }
+
     .product-height{
         height: 400px!important;
     }
@@ -3073,9 +2594,7 @@ margin-top: -20px!important;
         margin-bottom: -18px!important;
 
     }
-    .product img{
-        width: 450px!important;
-    }
+
     .agileinfonewsl {
         width: 100% !important;
         height: 800px !important;
@@ -3089,18 +2608,6 @@ margin-top: -20px!important;
     .price ul li:nth-child(1) {
         font-size: 30px;
     }
-    .product-color img{
-        height:300px!important;
-    }
-
-    .product-color{
-        height:300px!important;
-
-    }
-
-.same-height img{
-    height: 400px!important;
-}
 
 }
 
@@ -3113,26 +2620,18 @@ margin-top: -20px!important;
         height: 250px!important;
         width:385px!important;
     }
-    .same-height img{
-        height: 400px!important;
-    }
-
     .wthreeshop-a {
         margin-top: -20px;
         padding-bottom: 10px;
     }
-    .food1 img {
-        height: 240px!important;
-    }
+
     .lead1{
         font-size:16px !important;
         margin-top: 7%!important;
         margin-bottom: -18px!important;
 
     }
-    .product img{
-        width: 450px!important;
-    }
+
     .agileinfonewsl {
         width: 100% !important;
         height: 800px !important;
@@ -3146,51 +2645,34 @@ margin-top: -20px!important;
     .price ul li:nth-child(1) {
         font-size: 30px;
     }
-    .product-color img{
-        height:300px!important;
-    }
-
-    .product-color{
-        height:300px!important;
-
-    }
-
-    .same-height img{
-        height: 350px!important;
-    }
-
 
 }
 @media screen and (min-width: 962px) and (max-width: 1024px) {
-    .more{
-        margin-right: 55px!important;
+    .more {
+        margin-right: 55px !important;
     }
-    .moreBrand{
-        margin-top: 142px!important;
+
+    .moreBrand {
+        margin-top: 142px !important;
     }
+
     .agileinfonewsl {
         width: 100% !important;
         height: 800px !important;
     }
-    .slideshow1{
-        height: 370px!important;
+
+    .slideshow1 {
+        height: 370px !important;
     }
-    .middle1{
-        top:13% !important;
+
+    .middle1 {
+        top: 13% !important;
         left: -65px;
     }
+
     .price ul li:nth-child(1) {
         font-size: 25px;
     }
-    .product-color img{
-        height:180px!important;
-    }
-
-    .product-color{
-        height:180px!important;
-
-    }
-
 }
 @media screen and (min-width: 1025px) and (max-width: 1200px) {
     .agileinfonewsl {
@@ -3198,20 +2680,12 @@ margin-top: -20px!important;
         height: 800px !important;
     }
 
-    .middle1{
-        top:13% !important;
+    .middle1 {
+        top: 13% !important;
         left: -65px;
     }
+
     .price ul li:nth-child(1) {
         font-size: 25px;
     }
-    .product-color img{
-        height:180px!important;
-    }
-
-    .product-color{
-        height:180px!important;
-
-    }
-
 }

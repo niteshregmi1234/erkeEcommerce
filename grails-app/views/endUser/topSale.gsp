@@ -855,17 +855,6 @@
             }
         </script>
 
-
-
-
-
-        <style>
-        .product img{
-            height:338px;
-            width:251px;
-        }
-        </style>
-
     </div>
 
     <!-- /.col-md-9 -->

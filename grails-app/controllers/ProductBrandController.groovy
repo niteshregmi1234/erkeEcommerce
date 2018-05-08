@@ -11,34 +11,36 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
 
     def list() {
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser) {
 
-                def productBrandList=ProductBrand.list()
-        render(view: "list",model: [productBrandList:productBrandList])
-    }
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            }
-        }
+                    def productBrandList = ProductBrand.list()
+                    render(view: "list", model: [productBrandList: productBrandList])
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+
+                }
+            }        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+        if(session.adminUser){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
         render(view: "create")
         }
         else{
             redirect(action: "adminLoginForm",controller: "login")
 
-        }
+        }}
     }
     def save(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-
-                if(!params.id){
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+                    if(!params.id){
             def productBrandInstance=new ProductBrand()
             productBrandInstance.brandName=params.brandName
             productBrandInstance.logoName=uploadLogoImage()
@@ -69,16 +71,16 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
             else {
                 redirect(action: "adminLoginForm",controller: "login")
 
-            }
+            }}
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def uploadLogoImage(){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-
-            def mp = (MultipartHttpServletRequest) request
+        if(session.adminUser){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+                def mp = (MultipartHttpServletRequest) request
             CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("logoName")
             def fileName = file.originalFilename
             def homeDir = new File(System.getProperty("user.home"))
@@ -106,11 +108,11 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
             file.transferTo(fileDest)
             return fileName
 
-        }    }
+        }  }  }
     def editLogoImage(String imageNameOld){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-
-            def mp = (MultipartHttpServletRequest) request
+        if(session.adminUser){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+                def mp = (MultipartHttpServletRequest) request
             CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("logoName")
             def homeDir = new File(System.getProperty("user.home"))
             File theDir = new File(homeDir, "yarsaa");
@@ -144,12 +146,12 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
             } else {
                 return imageNameOld
             }
-        }    }
+        }    }}
     def show(Long id){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-
-                def productBrandInstance=ProductBrand.get(id)
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+                    def productBrandInstance=ProductBrand.get(id)
         if(productBrandInstance){
             [productBrandInstance:productBrandInstance]}
         else{
@@ -159,7 +161,7 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-            }
+            }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -167,7 +169,9 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
     }
     def edit(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser){
+
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
                 def productBrandInstance=ProductBrand.get(params.id)
 
@@ -177,10 +181,10 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
         else{
             redirect(action: "list")
         }}
-        else{
-                redirect(action: "adminLoginForm",controller: "login")
+        else {
+                    redirect(action: "adminLoginForm", controller: "login")
 
-            }
+                }            }
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
@@ -189,27 +193,28 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
     }
     def delete(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser) {
 
-                def productBrandInstance = ProductBrand.get(params.id)
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                    def productBrandInstance = ProductBrand.get(params.id)
 
 
-                if (productBrandInstance) {
-                    productBrandInstance.delete(flush: true)
-                    flash.message = "Successfully deleted."
+                    if (productBrandInstance) {
+                        productBrandInstance.delete(flush: true)
+                        flash.message = "Successfully deleted."
+
+                    } else {
+                        flash.message = "Unable to delete the already deleted item."
+
+
+                    }
+                    redirect(action: "list")
 
                 } else {
-                    flash.message = "Unable to delete the already deleted item."
-
-
+                    redirect(action: "adminLoginForm", controller: "login")
                 }
-                redirect(action: "list")
-
-            }
-            else{
- redirect(action: "adminLoginForm",controller: "login")
-            }
-        }
+            }        }
         catch (DataIntegrityViolationException e) {
             flash.message = "Sorry! cannot delete this data."
             redirect(action: "list")

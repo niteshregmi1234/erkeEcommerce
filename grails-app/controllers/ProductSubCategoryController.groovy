@@ -11,75 +11,80 @@ def productService
 
     def list() {
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser){
+
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
                 def productSubCategoryList=ProductSubCategory.list()
         render(view: "list",model: [productSubCategoryList:productSubCategoryList])
     }
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
+            else {
+                    redirect(action: "adminLoginForm", controller: "login")
 
-            }
+                }            }
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-        render(view: "create")
-        }
-        else{
-            redirect(action: "adminLoginForm",controller: "login")
+        if(session.adminUser) {
 
-        }
-    }
-    def save(){
-        try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-
-                if(!params.id){
-            def productSubCategoryInstance=new ProductSubCategory()
-            productSubCategoryInstance.subCategoryName=params.subCategoryName
-            productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
-            productSubCategoryInstance.statusShow=params.statusShow as byte
-            productSubCategoryInstance.isFooter=params.isFooter as byte
-            productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
-                    productSubCategoryInstance.showInHomePage=params.showInHomePage as byte
-                    productSubCategoryInstance.urlName=productService.convertToOriginalUrl(productSubCategoryInstance.subCategoryName)
-                    productSubCategoryInstance.coverImageName=uploadCoverImage()
-            productSubCategoryInstance.save(flush: true)
-            redirect(action: "show" ,id:productSubCategoryInstance.id)
-        }
-        else{
-            def productSubCategoryInstance=ProductSubCategory.get(params.id)
-if(productSubCategoryInstance){
-            productSubCategoryInstance.subCategoryName=params.subCategoryName
-            productSubCategoryInstance.productSubCategorySpecify=ProductSubCategorySpecify.get(params.productSubCategorySpecify)
-    productSubCategoryInstance.statusShow=params.statusShow as byte
-    productSubCategoryInstance.isFooter=params.isFooter as byte
-    productSubCategoryInstance.subCategoryDescription=params.subCategoryDescription
-    productSubCategoryInstance.showInHomePage=params.showInHomePage as byte
-    productSubCategoryInstance.urlName=productService.convertToOriginalUrl(productSubCategoryInstance.subCategoryName)
-    productSubCategoryInstance.coverImageName=editCoverImage(productSubCategoryInstance.coverImageName)
-    productSubCategoryInstance.save(flush: true)
-    redirect(action: "show" ,id:productSubCategoryInstance.id)}
-            else {
-    redirect(action: "notfound",controller: "errorPage")
-
-}
-        }}
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                render(view: "create")
+            } else {
+                redirect(action: "adminLoginForm", controller: "login")
 
             }
-        }
+        }    }
+    def save(){
+        try{
+            if(session.adminUser) {
+
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                    if (!params.id) {
+                        def productSubCategoryInstance = new ProductSubCategory()
+                        productSubCategoryInstance.subCategoryName = params.subCategoryName
+                        productSubCategoryInstance.productSubCategorySpecify = ProductSubCategorySpecify.get(params.productSubCategorySpecify)
+                        productSubCategoryInstance.statusShow = params.statusShow as byte
+                        productSubCategoryInstance.isFooter = params.isFooter as byte
+                        productSubCategoryInstance.subCategoryDescription = params.subCategoryDescription
+                        productSubCategoryInstance.showInHomePage = params.showInHomePage as byte
+                        productSubCategoryInstance.urlName = productService.convertToOriginalUrl(productSubCategoryInstance.subCategoryName)
+                        productSubCategoryInstance.coverImageName = uploadCoverImage()
+                        productSubCategoryInstance.save(flush: true)
+                        redirect(action: "show", id: productSubCategoryInstance.id)
+                    } else {
+                        def productSubCategoryInstance = ProductSubCategory.get(params.id)
+                        if (productSubCategoryInstance) {
+                            productSubCategoryInstance.subCategoryName = params.subCategoryName
+                            productSubCategoryInstance.productSubCategorySpecify = ProductSubCategorySpecify.get(params.productSubCategorySpecify)
+                            productSubCategoryInstance.statusShow = params.statusShow as byte
+                            productSubCategoryInstance.isFooter = params.isFooter as byte
+                            productSubCategoryInstance.subCategoryDescription = params.subCategoryDescription
+                            productSubCategoryInstance.showInHomePage = params.showInHomePage as byte
+                            productSubCategoryInstance.urlName = productService.convertToOriginalUrl(productSubCategoryInstance.subCategoryName)
+                            productSubCategoryInstance.coverImageName = editCoverImage(productSubCategoryInstance.coverImageName)
+                            productSubCategoryInstance.save(flush: true)
+                            redirect(action: "show", id: productSubCategoryInstance.id)
+                        } else {
+                            redirect(action: "notfound", controller: "errorPage")
+
+                        }
+                    }
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+
+                }
+            }        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
         }
     }
     def uploadCoverImage(){
+
         if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
             def mp = (MultipartHttpServletRequest) request
@@ -151,71 +156,75 @@ if(productSubCategoryInstance){
         }    }
     def show(Long id){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser) {
 
-                def productSubCategoryInstance=ProductSubCategory.get(id)
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        if(productSubCategoryInstance){
-            [productSubCategoryInstance:productSubCategoryInstance]}
-        else{
-            redirect(action: "list")
-        }}
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
+                    def productSubCategoryInstance = ProductSubCategory.get(id)
 
-            }
-        }
+                    if (productSubCategoryInstance) {
+                        [productSubCategoryInstance: productSubCategoryInstance]
+                    } else {
+                        redirect(action: "list")
+                    }
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+
+                }
+            }        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def edit(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser) {
 
-                def productSubCategoryInstance=ProductSubCategory.get(params.id)
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-        if(productSubCategoryInstance){
-            [productSubCategoryInstance:productSubCategoryInstance]
-        }
-        else{
-            redirect(action: "list")
-        }}
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
+                    def productSubCategoryInstance = ProductSubCategory.get(params.id)
 
-            }
-            }
-        catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
+                    if (productSubCategoryInstance) {
+                        [productSubCategoryInstance: productSubCategoryInstance]
+                    } else {
+                        redirect(action: "list")
+                    }
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
 
-        }
+                }
+            }}
+        catch (Exception e) {
+                redirect(action: "notfound", controller: "errorPage")
+
+                    }
     }
     def delete(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-                def productSubCategoryInstance = ProductSubCategory.get(params.id)
-                if (productSubCategoryInstance) {
-                    productSubCategoryInstance.delete(flush: true)
-                    def imageName = productSubCategoryInstance.coverImageName
-                    def homeDir = new File(System.getProperty("user.home"))
-                    File file = new File(homeDir, "yarsaa/${imageName}")
-                    file.delete();
-                    flash.message = "Successfully deleted."
+            if(session.adminUser) {
 
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def productSubCategoryInstance = ProductSubCategory.get(params.id)
+                    if (productSubCategoryInstance) {
+                        productSubCategoryInstance.delete(flush: true)
+                        def imageName = productSubCategoryInstance.coverImageName
+                        def homeDir = new File(System.getProperty("user.home"))
+                        File file = new File(homeDir, "yarsaa/${imageName}")
+                        file.delete();
+                        flash.message = "Successfully deleted."
+
+
+                    } else {
+                        flash.message = "Unable to delete the already deleted item."
+
+
+                    }
+                    redirect(action: "list")
 
                 } else {
-                    flash.message = "Unable to delete the already deleted item."
-
-
+                    redirect(action: "adminLoginForm", controller: "login")
                 }
-                redirect(action: "list")
-
-            }
-        else{
-                redirect(action: "adminLoginForm",controller: "login")
-            }
-        }
+            }        }
         catch (DataIntegrityViolationException e){
             flash.message="Sorry! cannot delete this data."
             redirect(action: "list")

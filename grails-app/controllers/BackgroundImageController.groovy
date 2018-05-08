@@ -11,6 +11,7 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def checkPhoto(){
         try{
+            if(session.adminUser){
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def Image = request.getFile('Image')
@@ -32,7 +33,7 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
 
         }
@@ -40,7 +41,8 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
 
     def save() {
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def backgroundImageInstance=BackgroundImage.get(params.id)
         if(backgroundImageInstance){
@@ -55,7 +57,7 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound", controller: "errorPage")
 
@@ -63,7 +65,8 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
 
     }
     def editBackgroundImage(String imageNameOld){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if(session.adminUser){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
             def mp = (MultipartHttpServletRequest) request
         CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
@@ -99,23 +102,24 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
         }
         else {
             return imageNameOld
-        }        }    }
+        }   }     }    }
        def show(){
            try{
-               if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+               if(session.adminUser) {
 
-                   def backgroundImageInstance=BackgroundImage.list()[0]
-           if(backgroundImageInstance){
-        [backgroundImageInstance:backgroundImageInstance]}
-    else{
-        redirect(action: "notfound", controller: "errorPage")
+                   if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-    }
-           }
-               else{
-                   redirect(action: "adminLoginForm",controller: "login")
-               }
-           }
+                       def backgroundImageInstance = BackgroundImage.list()[0]
+                       if (backgroundImageInstance) {
+                           [backgroundImageInstance: backgroundImageInstance]
+                       } else {
+                           redirect(action: "notfound", controller: "errorPage")
+
+                       }
+                   } else {
+                       redirect(action: "adminLoginForm", controller: "login")
+                   }
+               }           }
            catch (Exception e){
                redirect(action: "notfound", controller: "errorPage")
 
@@ -124,7 +128,8 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
 
     def edit(){
         try {
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
         def backgroundImageInstance=BackgroundImage.list()[0]
         if(backgroundImageInstance){
@@ -135,7 +140,7 @@ static allowedMethods = [checkPhoto: 'POST',save: 'POST',editBackgroundImage: 'P
         }}
             else{
              redirect(action: "adminLoginForm",controller: "login")
-            }
+            }}
         }
         catch (Exception e){
             redirect(action: "notfound", controller: "errorPage")

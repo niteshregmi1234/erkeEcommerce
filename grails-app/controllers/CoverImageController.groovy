@@ -11,7 +11,8 @@ class CoverImageController extends BaseController{
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
 def checkPhoto(){
     try{
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if(session.adminUser){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
             def Image = request.getFile('Image')
 
@@ -32,30 +33,31 @@ def checkPhoto(){
             redirect(action: "adminLoginForm",controller: "login")
 
         }
-    }
+    }}
     catch (Exception  e){
 
     }
 }
     def list() {
         try {
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def coverImageList=CoverImage.list()
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def coverImageList=CoverImage.list()
         render(view: "list",model: [coverImageList:coverImageList])}
         else{
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if(session.adminUser){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
         render(view: "create")
-        }
+        }}
         else{
             redirect(action: "adminLoginForm",controller: "login")
 
@@ -63,7 +65,8 @@ def checkPhoto(){
     }
     def save(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 if(!params.id){
             def coverImageInstance=new CoverImage()
@@ -92,14 +95,15 @@ def checkPhoto(){
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
         }
     }
     def uploadCoverImage(){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if(session.adminUser){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
             def mp = (MultipartHttpServletRequest) request
             CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
@@ -129,11 +133,11 @@ def checkPhoto(){
             file.transferTo(fileDest)
             return fileName
 
-        }    }
+        }   } }
     def editCoverImage(String imageNameOld){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-            def mp = (MultipartHttpServletRequest) request
+        if(session.adminUser){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                def mp = (MultipartHttpServletRequest) request
             CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("imageName")
             def homeDir = new File(System.getProperty("user.home"))
             File theDir = new File(homeDir, "yarsaa");
@@ -167,12 +171,12 @@ def checkPhoto(){
             } else {
                 return imageNameOld
             }
-        }    }
+        }    }}
     def show(Long id){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def coverImageInstance=CoverImage.get(id)
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def coverImageInstance=CoverImage.get(id)
         if(coverImageInstance){
             [coverImageInstance:coverImageInstance]}
         else{
@@ -182,16 +186,16 @@ def checkPhoto(){
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-            }
+            }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def edit(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def coverImageInstance=CoverImage.get(params.id)
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def coverImageInstance=CoverImage.get(params.id)
         if(coverImageInstance){
             [coverImageInstance:coverImageInstance]
         }
@@ -202,7 +206,7 @@ def checkPhoto(){
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -210,7 +214,8 @@ def checkPhoto(){
     }
     def delete(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def coverImageInstance=CoverImage.get(params.id)
         if(coverImageInstance) {
@@ -231,7 +236,7 @@ def checkPhoto(){
             else{
 redirect(action: "adminLoginForm",controller: "login")
             }
-        }
+        }}
         catch (DataIntegrityViolationException e){
             flash.message="Sorry! cannot delete this data."
             redirect(action: "list")

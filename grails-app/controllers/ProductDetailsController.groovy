@@ -4,31 +4,36 @@ class ProductDetailsController extends BaseController{
 static allowedMethods = [save: 'POST']
     def list() {
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser) {
 
-                def productDetailsList=ProductDetails.list()
-        render(view: "list",model: [productDetailsList:productDetailsList])}
-        else{
-                redirect(action: "adminLoginForm",controller: "login")
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            }
-        }
+                    def productDetailsList = ProductDetails.list()
+                    render(view: "list", model: [productDetailsList: productDetailsList])
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+
+                }
+            }        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if(session.adminUser){
+
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 render(view: "create")
         }
-        else{
-            redirect(action: "adminLoginForm",controller: "login")
+        else {
+                redirect(action: "adminLoginForm", controller: "login")
 
-        }
+            }        }
     }
     def save(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
                 if(!params.id){
             def productDetails=new ProductDetails()
             def productSizeId1=params.productSizeId
@@ -95,7 +100,7 @@ render(view: "create")
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -105,9 +110,9 @@ render(view: "create")
 
     def show(Long id){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def productDetailsInstance=ProductDetails.get(id)
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def productDetailsInstance=ProductDetails.get(id)
 
         if(productDetailsInstance){
             def sizeString=productDetailsInstance.productSizes
@@ -127,7 +132,7 @@ render(view: "create")
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -135,7 +140,8 @@ render(view: "create")
     }
     def edit(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def productDetailsInstance = ProductDetails.get(params.id)
 
@@ -152,7 +158,7 @@ render(view: "create")
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -160,28 +166,29 @@ render(view: "create")
     }
     def delete(){
         try {
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser) {
 
-                def productDetailsInstance = ProductDetails.get(params.id)
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-
-                if (productDetailsInstance) {
-
-                    productDetailsInstance.delete(flush: true)
-                    flash.message = "Successfully deleted."
+                    def productDetailsInstance = ProductDetails.get(params.id)
 
 
+                    if (productDetailsInstance) {
+
+                        productDetailsInstance.delete(flush: true)
+                        flash.message = "Successfully deleted."
+
+
+                    } else {
+                        flash.message = "Unable to delete the already deleted item."
+
+
+                    }
+                    redirect(action: "list")
                 } else {
-                    flash.message = "Unable to delete the already deleted item."
-
-
+                    redirect(action: "adminLoginForm", controller: "login")
                 }
-                redirect(action: "list")
-            }
-            else{
- redirect(action: "adminLoginForm",controller: "login")
-            }
-        }
+            }        }
         catch (DataIntegrityViolationException e) {
             flash.message = "Sorry! cannot delete this data."
             redirect(action: "list")

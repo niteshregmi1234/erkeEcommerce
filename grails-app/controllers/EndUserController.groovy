@@ -92,7 +92,7 @@ class EndUserController {
             if (params.specificationName) {
                 def totalArray = productService.singleProduct(params.specificationName)
                 if (totalArray[0]) {
-                    render(view: "detail", model: [totalArray: totalArray])
+                    render(view: "detail", model: [totalArray: totalArray,productInstance:Product.findByProductSpecificationName(params.specificationName)])
                 }
             }
         }

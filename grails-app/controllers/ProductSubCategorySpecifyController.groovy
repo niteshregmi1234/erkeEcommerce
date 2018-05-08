@@ -5,56 +5,59 @@ def productService
     static allowedMethods = [save: 'POST']
     def list() {
         try {
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser) {
 
-                def productSubCategorySpecifyList = ProductSubCategorySpecify.list()
-                render(view: "list", model: [productSubCategorySpecifyList: productSubCategorySpecifyList])
-            }
-            else{
-              redirect(action: "adminLoginForm",controller: "login")
-            }
-        }
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                    def productSubCategorySpecifyList = ProductSubCategorySpecify.list()
+                    render(view: "list", model: [productSubCategorySpecifyList: productSubCategorySpecifyList])
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+                }
+            }        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+        if(session.adminUser){
+
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
         render(view: "create")
         }
-        else{
-            redirect(action: "adminLoginForm",controller: "login")
+        else {
+                redirect(action: "adminLoginForm", controller: "login")
 
-        }
+            }        }
     }
     def save(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
-                if(!params.id){
-            def productSubCategorySpecifyInstance=new ProductSubCategorySpecify()
-            productSubCategorySpecifyInstance.specificationName=params.specificationName
-                    productSubCategorySpecifyInstance.urlName=productService.convertToOriginalUrl(productSubCategorySpecifyInstance.specificationName)
-                    productSubCategorySpecifyInstance.save(flush: true)
-            redirect(action: "show" ,id:productSubCategorySpecifyInstance.id)
-        }
-        else{
-            def productSubCategorySpecifyInstance=ProductSubCategorySpecify.get(params.id)
-            if(productSubCategorySpecifyInstance){
-            productSubCategorySpecifyInstance.specificationName=params.specificationName
-                productSubCategorySpecifyInstance.urlName=productService.convertToOriginalUrl(productSubCategorySpecifyInstance.specificationName)
-                productSubCategorySpecifyInstance.save(flush: true)
-                redirect(action: "show" ,id:productSubCategorySpecifyInstance.id)
-        }
-            else {
-                redirect(action: "notfound",controller: "errorPage")
-            }
-        }            }
-            else {
-                redirect(action: "adminLoginForm",controller: "login")
+            if(session.adminUser) {
 
-            }
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    if (!params.id) {
+                        def productSubCategorySpecifyInstance = new ProductSubCategorySpecify()
+                        productSubCategorySpecifyInstance.specificationName = params.specificationName
+                        productSubCategorySpecifyInstance.urlName = productService.convertToOriginalUrl(productSubCategorySpecifyInstance.specificationName)
+                        productSubCategorySpecifyInstance.save(flush: true)
+                        redirect(action: "show", id: productSubCategorySpecifyInstance.id)
+                    } else {
+                        def productSubCategorySpecifyInstance = ProductSubCategorySpecify.get(params.id)
+                        if (productSubCategorySpecifyInstance) {
+                            productSubCategorySpecifyInstance.specificationName = params.specificationName
+                            productSubCategorySpecifyInstance.urlName = productService.convertToOriginalUrl(productSubCategorySpecifyInstance.specificationName)
+                            productSubCategorySpecifyInstance.save(flush: true)
+                            redirect(action: "show", id: productSubCategorySpecifyInstance.id)
+                        } else {
+                            redirect(action: "notfound", controller: "errorPage")
+                        }
+                    }
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
 
-        }
+                }
+
+            }        }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -63,7 +66,9 @@ def productService
 
     def show(Long id){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser){
+
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
                 def productSubCategorySpecifyInstance=ProductSubCategorySpecify.get(id)
 
@@ -72,10 +77,10 @@ def productService
         else{
             redirect(action: "list")
         }}
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
+            else {
+                    redirect(action: "adminLoginForm", controller: "login")
 
-            }
+                }            }
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
@@ -84,7 +89,8 @@ def productService
     }
     def edit(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
                 def productSubCategorySpecifyInstance = ProductSubCategorySpecify.get(params.id)
 
@@ -98,7 +104,7 @@ def productService
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -106,7 +112,8 @@ def productService
     }
     def delete(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
 
                 def productSubCategorySpecifyInstance=ProductSubCategorySpecify.get(params.id)
 
@@ -128,7 +135,7 @@ def productService
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (DataIntegrityViolationException e){
             flash.message="Sorry! cannot delete this data."
             redirect(action: "list")

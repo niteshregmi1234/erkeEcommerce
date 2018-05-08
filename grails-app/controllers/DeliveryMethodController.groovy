@@ -3,19 +3,34 @@ import org.springframework.dao.DataIntegrityViolationException
 class DeliveryMethodController extends BaseController{
 static  allowedMethods = [save: 'POST']
     def list() {
-        try{
-        def deliveryMethodList=DeliveryMethod.list()
-        render(view: "list",model: [deliveryMethodList:deliveryMethodList])}
-        catch (Exception e){
+        try {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD") {
+                def deliveryMethodList = DeliveryMethod.list()
+                render(view: "list", model: [deliveryMethodList: deliveryMethodList])
+            }
+else{
+                redirect(action: "adminLoginForm",controller: "login")
+            }
+        }}        catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
     }
     def create(){
+        if(session.adminUser){
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD") {
+render(view: "create")
+    }
+        else{
+            redirect(action: "notfound",controller: "errorPage")
 
+        }}
     }
     def save(){
         try{
-        if(!params.id){
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD") {
+                if(!params.id){
             def deliveryMethodInstance=new DeliveryMethod()
             deliveryMethodInstance.briefDescribe=params.briefDescribe
             deliveryMethodInstance.detailDescribe=params.detailDescribe
@@ -35,6 +50,10 @@ static  allowedMethods = [save: 'POST']
         else {
            redirect(action: "notfound",controller: "errorPage")
         }}}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+            }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
         }
@@ -43,14 +62,19 @@ static  allowedMethods = [save: 'POST']
 
     def show(Long id){
         try {
-
-        def deliveryMethodInstance=DeliveryMethod.get(id)
-
-        if(deliveryMethodInstance){
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD") {
+                def deliveryMethodInstance=DeliveryMethod.get(id)
+                if(deliveryMethodInstance){
             [deliveryMethodInstance:deliveryMethodInstance]}
         else{
             redirect(action: "list")
-        }        }
+        }       }
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }}
 catch (Exception e){
     redirect(action: "notfound",controller: "errorPage")
 
@@ -58,13 +82,18 @@ catch (Exception e){
     }
     def edit(){
         try{
-        def deliveryMethodInstance=DeliveryMethod.get(params.id)
-
-        if(deliveryMethodInstance){
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD") {
+                def deliveryMethodInstance=DeliveryMethod.get(params.id)
+            if(deliveryMethodInstance){
             [deliveryMethodInstance:deliveryMethodInstance]
         }
         else{
             redirect(action: "list")
+        }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+            }
         }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
@@ -73,11 +102,12 @@ catch (Exception e){
     }
     def delete(){
         try{
-
-            def deliveryMethodInstance=DeliveryMethod.get(params.id)
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD") {
+                def deliveryMethodInstance=DeliveryMethod.get(params.id)
         if(deliveryMethodInstance) {
 
-                deliveryMethodInstance.delete(flush: true)
+            deliveryMethodInstance.delete(flush: true)
                 flash.message="Successfully deleted."
             redirect(action: "list")
 
@@ -89,6 +119,12 @@ catch (Exception e){
 
 
         }}
+            else{
+                redirect(action: "adminLoginForm",controller: "login")
+
+            }
+        }
+        }
         catch (DataIntegrityViolationException e){
             flash.message="Sorry! cannot delete this data."
             redirect(action: "list")

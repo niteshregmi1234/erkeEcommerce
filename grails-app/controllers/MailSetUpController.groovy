@@ -1,10 +1,10 @@
-class MailSetUpController {
+class MailSetUpController extends BaseController{
 static allowedMethods = [save: 'POST']
     def save() {
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def mailSetUpInstance=MailSetUp.get(params.id)
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def mailSetUpInstance=MailSetUp.get(params.id)
             if(mailSetUpInstance){
                                 mailSetUpInstance.toEmail=params.toEmail
 
@@ -19,7 +19,7 @@ static allowedMethods = [save: 'POST']
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -28,9 +28,9 @@ static allowedMethods = [save: 'POST']
     }
     def show(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def mailSetUpInstance = MailSetUp.list()[0]
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def mailSetUpInstance = MailSetUp.list()[0]
                 if (mailSetUpInstance) {
                     render(view: "show", model: [mailSetUpInstance: mailSetUpInstance])
 
@@ -42,7 +42,7 @@ static allowedMethods = [save: 'POST']
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -51,11 +51,10 @@ static allowedMethods = [save: 'POST']
 
     def edit(){
         try {
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def mailSetUpInstance = MailSetUp.get(params.id)
-
-                if (mailSetUpInstance) {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def mailSetUpInstance = MailSetUp.get(params.id)
+                    if (mailSetUpInstance) {
                     [mailSetUpInstance: mailSetUpInstance]
                 } else {
                     redirect(action: "notfound", controller: "errorPage")
@@ -66,7 +65,7 @@ static allowedMethods = [save: 'POST']
         else{
              redirect(action: "adminLoginForm",controller: "login")
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 

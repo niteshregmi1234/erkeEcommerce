@@ -6,7 +6,8 @@ static  allowedMethods = [save: 'POST']
 
     def save(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def otherCostsInstance=OtherCosts.get(params.otherCostId)
         if(otherCostsInstance){
@@ -21,7 +22,7 @@ static  allowedMethods = [save: 'POST']
                 redirect(action: "adminLoginForm",controller: "login")
 
             }
-        }
+        }}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
@@ -31,11 +32,10 @@ static  allowedMethods = [save: 'POST']
 
     def show(){
         try {
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def otherCostsInstance = OtherCosts.list()[0]
-
-                if (otherCostsInstance) {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def otherCostsInstance = OtherCosts.list()[0]
+                    if (otherCostsInstance) {
                     [otherCostsInstance: otherCostsInstance]
                 } else {
                     redirect(action: "notfound", controller: "errorPage")
@@ -44,7 +44,7 @@ static  allowedMethods = [save: 'POST']
             else{
                 redirect(action: "adminLoginForm",controller: "login")
 
-            }
+            }}
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
@@ -54,11 +54,10 @@ static  allowedMethods = [save: 'POST']
     }
     def edit(){
         try{
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def otherCostsInstance = OtherCosts.get(params.id)
-
-                if (otherCostsInstance) {
+            if(session.adminUser){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def otherCostsInstance = OtherCosts.get(params.id)
+                    if (otherCostsInstance) {
                     [otherCostsInstance: otherCostsInstance]
                 } else {
                     redirect(action: "notfound", controller: "errorPage")
@@ -69,7 +68,7 @@ static  allowedMethods = [save: 'POST']
         else{
                 redirect(action: "adminLoginForm",controller: "login")
 
-            }
+            }}
         }
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")

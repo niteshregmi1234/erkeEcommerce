@@ -19,7 +19,7 @@
         <div class="col-md-12">
             <div id="main-slider">
 <g:each in="${totalArray[0]}" var="list">
-                <div class="item coverUp">
+                <div class="item">
                    <g:link action="topBrand" controller="endUser" params="[brandNames:list.productBrand.urlName]"> <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive lazy"></g:link>
 
                 </div>
@@ -72,12 +72,7 @@
 
     <!-- *** ADVANTAGES HOMEPAGE ***
  _________________________________________________________ -->
-    <style>
-.coverUp img{
-    height:520px;
-    width: 1108px;
-}
-    </style>
+
     %{--<div id="advantages">--}%
 
         %{--<div class="container">--}%
@@ -139,15 +134,15 @@
             <div class="product-slider">
 <g:each in="${totalArray[2]}" var="list">
     <div class="item">
-                    <div class="product product-height">
+                    <div class="product" id="some-div">
                         <div class="flip-container">
                             <div class="flipper">
-                                <div class="front food1">
+                                <div class="front">
                                     <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
                                         <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
                                     </g:link>
                                 </div>
-                                <div class="back food1">
+                                <div class="back">
     <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
         <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
     </g:link>
@@ -157,21 +152,36 @@
                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible food1">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
                         </g:link>
+                        %{--<div class="text" id="some-element">--}%
+                            %{--<h6><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h6>--}%
+
+                            %{--<g:if test="${list.productDetails.isSale==true}">--}%
+                                %{--<p class="price"><span> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /></span>--}%
+                                    %{--<span> <del class="del-price"> Rs.${list.productDetails.price}</del></span></p>--}%
+                            %{--</g:if>--}%
+                            %{--<g:if test="${list.productDetails.isSale==false}">--}%
+
+                                %{--<p class="price">Rs.${list.productDetails.price}</p>--}%
+                            %{--</g:if>--}%
+                        %{--</div>--}%
+
                         <div class="text">
                             <div class="tooltips">
-                            <h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
-                            <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
-                           </div>
+                                <h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
+                                <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
+                            </div>
                             <g:if test="${list.productDetails.isSale==true}">
                                 <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
+
                                     <del class="del-price">Rs.${list.productDetails.price}</del></p>
                             </g:if>
                             <g:if test="${list.productDetails.isSale==false}">
 
-        <p class="price">Rs.${list.productDetails.price}</p>
-        </g:if>
+                                <p class="price">Rs.${list.productDetails.price}</p>
+                            </g:if>
                         </div>
-                        <!-- /.text -->
+
+                    <!-- /.text -->
                         <g:if test="${list.productDetails.isSale==true}">
                         <div class="ribbon sale">
                             <div class="theribbon">SALE</div>
@@ -187,7 +197,8 @@
 
                     <!-- /.ribbon -->
                     </div>
-                    <!-- /.product -->
+
+        <!-- /.product -->
                 </div>
 
            </g:each>
@@ -196,6 +207,7 @@
 
             <!-- /.product-slider -->
         </div>
+
 
 
         <!-- /.container -->
@@ -231,13 +243,7 @@
             %{--</div>--}%
         %{--</div>--}%
     %{--</div>--}%
-    <style>
-    .coverDown img{
-        height: 500px;
-        width: 1120px;
 
-    }
-    </style>
     <!-- *** GET INSPIRED END *** -->
 
     <!-- *** BLOG HOMEPAGE ***
@@ -262,13 +268,13 @@
                         <div class="product product-height">
                             <div class="flip-container">
                                 <div class="flipper">
-                                    <div class="front food1">
+                                    <div class="front">
                                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
                                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                                         </g:link>
                                     </div>
-                                    <div class="back food1">
+                                    <div class="back">
                                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
 
                                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
@@ -378,13 +384,13 @@
                             <div class="product product-height">
                                 <div class="flip-container">
                                     <div class="flipper">
-                                        <div class="front food1">
+                                        <div class="front">
                                             <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
                                                 <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                                             </g:link>
                                         </div>
-                                        <div class="back food1">
+                                        <div class="back">
                                             <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
 
                                                 <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">

@@ -165,24 +165,24 @@
                         <div class="product same-height">
                             <div class="flip-container">
                                 <div class="flipper">
-                                    <div class="front food1">
+                                    <div class="front">
                                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                                            <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                                         </g:link>
                                     </div>
-                                    <div class="back food1">
+                                    <div class="back">
                                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                                            <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
 
                                         </g:link>
                                     </div>
                                 </div>
                             </div>
-                            <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible food1">
+                            <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible">
 
-                                <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                             </g:link>
                             <div class="text">
