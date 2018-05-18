@@ -1,7 +1,9 @@
 class EndUserController {
     def productService
     static allowedMethods = [search: "POST"]
+def test1(){
 
+}
     def nepaliProducts() {
         try {
             def totalArray = productService.nepaliProducts()

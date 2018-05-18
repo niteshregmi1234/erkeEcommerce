@@ -14,7 +14,7 @@
 
 <body>
 <nav class="navbar">
-    <g:link action="create" controller="Product" class="btn btn-primary navbar-btn">New</g:link>
+    <g:link action="create" controller="yarsaaProducts" class="btn btn-primary navbar-btn">New</g:link>
 </nav>
 <h6 style="color: #761c19;">${flash.message}</h6>
 <caption><h3>List</h3></caption>
@@ -53,7 +53,7 @@
         <tr>
             <td>${i+1}</td>
             <td>${list.id}</td>
-            <td> <g:link action="show" id="${list?.id}" controller="Product" class="btn btn-primary btn-sm">view</g:link></td>
+            <td> <g:link action="show" id="${list?.id}" controller="yarsaaProducts" class="btn btn-primary btn-sm">view</g:link></td>
             <td>${list.productDetails.productNameWithBrand}</td>
             <td>${list.productDetails.productCategory.categoryName}</td>
             <td>${list.productDetails.productSubCategory.subCategoryName}</td>

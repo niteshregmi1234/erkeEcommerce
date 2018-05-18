@@ -10,9 +10,9 @@
 <head>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/jquery-ui.css')}" type="text/css"
           media="all"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap.min.css')}" type="text/css"
-          media="all"/>
-
+    %{--<link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap.min.css')}" type="text/css"--}%
+          %{--media="all"/>--}%
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="${resource(dir: 'js', file: 'yamsaa/jquery.min.js')}" type="text/javascript"
             charset="utf-8"></script>
     <script src="${resource(dir: 'js', file: 'yarsaa/jquery-1.11.0.min.js')}" type="text/javascript"
@@ -23,9 +23,10 @@
 
     <script src="${resource(dir: 'js', file: 'yamsaa/jquery-ui.js')}" type="text/javascript"
             charset="utf-8"></script>
-    <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap.min.js')}" type="text/javascript"
-            charset="utf-8"></script>
-
+    %{--<script src="${resource(dir: 'js', file: 'yamsaa/bootstrap.min.js')}" type="text/javascript"--}%
+            %{--charset="utf-8"></script>--}%
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    %{--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>--}%
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrap-multiselect.js')}" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yamsaa/bootstrap-multiselect.css')}" type="text/css">
 
@@ -130,6 +131,7 @@
                     <li><g:link action="show" controller="backgroundImage" >Home Background Image</g:link></li>
                     <li><g:link action="discountShortcut" controller="product" >Discount Shortcut</g:link></li>
                     <li><g:link action="latestShortcut" controller="product" >Change Latest Product?</g:link></li>
+                    <li><g:link action="list" controller="yarsaaProducts" >Yarsaa Product</g:link></li>
 
                 </ul>
             </li>
@@ -187,8 +189,6 @@
     <g:layoutBody/>
 </div>
 </div>
-<div style="height: 20%; background:#000100; margin-top: 10%">
-    </div>
 
 </body>
 </html>

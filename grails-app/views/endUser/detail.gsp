@@ -47,60 +47,60 @@
 
                 </div>
 
-                <div class="col-md-3">
-                    <!-- *** MENUS AND FILTERS ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
+                %{--<div class="col-md-3">--}%
+                    %{--<!-- *** MENUS AND FILTERS ***--}%
+ %{--_________________________________________________________ -->--}%
+                    %{--<div class="panel panel-default sidebar-menu">--}%
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Categories</h3>
-                        </div>
+                        %{--<div class="panel-heading">--}%
+                            %{--<h3 class="panel-title">Categories</h3>--}%
+                        %{--</div>--}%
 
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked category-menu">
+                        %{--<div class="panel-body">--}%
+                            %{--<ul class="nav nav-pills nav-stacked category-menu">--}%
 
-                            <li class="active">
+                            %{--<li class="active">--}%
 
 
-                                <g:link action="allCategoryProducts" params="[category:totalArray[0].productDetails.productCategory.urlName]" controller="endUser">${totalArray[0].productDetails.productCategory.categoryName} <span class="badge pull-right"></span></g:link>
-                                <g:each in="${ProductSubCategorySpecify.list()}" var="specifyList" status="i">
+                                %{--<g:link action="allCategoryProducts" params="[category:totalArray[0].productDetails.productCategory.urlName]" controller="endUser">${totalArray[0].productDetails.productCategory.categoryName} <span class="badge pull-right"></span></g:link>--}%
+                                %{--<g:each in="${ProductSubCategorySpecify.list()}" var="specifyList" status="i">--}%
 
-                                    <div class="dropdownA">
-                                        <ul>
-                                            <%
-                                                def subCategoryList1=ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)
-                                                def productList=new ArrayList<>()
-                                                for(ProductSubCategory productSubCategory: subCategoryList1){
-                                                    def product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategoryAndProductCategory(productSubCategory,totalArray[0].productDetails.productCategory),false)
-                                                    if(product){
-                                                        productList.add(product)
-                                                    }
-                                                }
-                                            %>
-                                            <g:if test="${productList}">
-                                                <li><g:link action="specifiedProducts" params="[category:totalArray[0].productDetails.productCategory.urlName,subCategorySpecify:specifyList.urlName]" controller="endUser" class="dropbtnA"> ${specifyList.specificationName}</g:link></li>
-                                            </g:if>
-                                        </ul>
-                                        <ul class="dropdown-contentA">
-                                            <g:each in="${ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)}" var="subCategoryList">
-                                                <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(totalArray[0].productDetails.productCategory,subCategoryList),false)}">
+                                    %{--<div class="dropdownA">--}%
+                                        %{--<ul>--}%
+                                            %{--<%--}%
+                                                %{--def subCategoryList1=ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)--}%
+                                                %{--def productList=new ArrayList<>()--}%
+                                                %{--for(ProductSubCategory productSubCategory: subCategoryList1){--}%
+                                                    %{--def product=Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategoryAndProductCategory(productSubCategory,totalArray[0].productDetails.productCategory),false)--}%
+                                                    %{--if(product){--}%
+                                                        %{--productList.add(product)--}%
+                                                    %{--}--}%
+                                                %{--}--}%
+                                            %{--%>--}%
+                                            %{--<g:if test="${productList}">--}%
+                                                %{--<li><g:link action="specifiedProducts" params="[category:totalArray[0].productDetails.productCategory.urlName,subCategorySpecify:specifyList.urlName]" controller="endUser" class="dropbtnA"> ${specifyList.specificationName}</g:link></li>--}%
+                                            %{--</g:if>--}%
+                                        %{--</ul>--}%
+                                        %{--<ul class="dropdown-contentA">--}%
+                                            %{--<g:each in="${ProductSubCategory.findAllByProductSubCategorySpecify(specifyList)}" var="subCategoryList">--}%
+                                                %{--<g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(totalArray[0].productDetails.productCategory,subCategoryList),false)}">--}%
 
-                                                    <li><g:link action="subCategoryList" controller="endUser" params="[category:totalArray[0].productDetails.productCategory.urlName,subCategorySpecify:subCategoryList.productSubCategorySpecify.urlName,subCategory:subCategoryList.urlName]">${subCategoryList.subCategoryName}</g:link>
+                                                    %{--<li><g:link action="subCategoryList" controller="endUser" params="[category:totalArray[0].productDetails.productCategory.urlName,subCategorySpecify:subCategoryList.productSubCategorySpecify.urlName,subCategory:subCategoryList.urlName]">${subCategoryList.subCategoryName}</g:link>--}%
 
-                                                    </li>
+                                                    %{--</li>--}%
 
-                                                </g:if>
-                                            </g:each>
+                                                %{--</g:if>--}%
+                                            %{--</g:each>--}%
                                         %{--<li><a href="category.html">Shirts</a>--}%
                                         %{--<li><a href="category.html">Pants</a>--}%
                                         %{--</li>--}%
                                         %{--<li><a href="category.html">Accessories</a>--}%
                                         %{--</li>--}%
-                                        </ul>
+                                        %{--</ul>--}%
 
-                                    </div>
-                                    </li>
-                                </g:each>
+                                    %{--</div>--}%
+                                    %{--</li>--}%
+                                %{--</g:each>--}%
 
 
                             %{--<li class="active">--}%
@@ -130,52 +130,52 @@
                             %{--</ul>--}%
                             %{--</li>--}%
 
-                            </ul>
+                            %{--</ul>--}%
 
-                        </div>
-                    </div>
+                        %{--</div>--}%
+                    %{--</div>--}%
 
-                    <style>
-                    .dropbtnA {
+                    %{--<style>--}%
+                    %{--.dropbtnA {--}%
 
-                        cursor: pointer;
-                        width:223px;
-                    }
+                        %{--cursor: pointer;--}%
+                        %{--width:223px;--}%
+                    %{--}--}%
 
-                    .dropdownA {
-                        position: relative;
-                        display: inline-block;
-                    }
+                    %{--.dropdownA {--}%
+                        %{--position: relative;--}%
+                        %{--display: inline-block;--}%
+                    %{--}--}%
 
-                    .dropdown-contentA {
-                        display: none;
-                        position: absolute;
-                        background-color: #f9f9f9;
-                        min-width: 223px;
-                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                        z-index: 1;
-                    }
+                    %{--.dropdown-contentA {--}%
+                        %{--display: none;--}%
+                        %{--position: absolute;--}%
+                        %{--background-color: #f9f9f9;--}%
+                        %{--min-width: 223px;--}%
+                        %{--box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);--}%
+                        %{--z-index: 1;--}%
+                    %{--}--}%
 
-                    .dropdown-contentA a {
-                        color: black;
-                        padding: 12px 16px;
-                        text-decoration: none;
-                        display: block;
-                    }
+                    %{--.dropdown-contentA a {--}%
+                        %{--color: black;--}%
+                        %{--padding: 12px 16px;--}%
+                        %{--text-decoration: none;--}%
+                        %{--display: block;--}%
+                    %{--}--}%
 
-                    .dropdown-contentA a:hover {background-color: #f1f1f1;
-                        color:#4fbfa8;
-                        text-decoration: none;
-                    }
+                    %{--.dropdown-contentA a:hover {background-color: #f1f1f1;--}%
+                        %{--color:#4fbfa8;--}%
+                        %{--text-decoration: none;--}%
+                    %{--}--}%
 
-                    .dropdownA:hover .dropdown-contentA {
-                        display: block;
-                    }
+                    %{--.dropdownA:hover .dropdown-contentA {--}%
+                        %{--display: block;--}%
+                    %{--}--}%
 
-                    .dropdownA:hover .dropbtnA {
+                    %{--.dropdownA:hover .dropbtnA {--}%
 
-                    }
-                    </style>
+                    %{--}--}%
+                    %{--</style>--}%
 
                     %{--<div class="panel panel-default sidebar-menu">--}%
 
@@ -250,18 +250,37 @@
                     %{--</div>--}%
                     %{--</div>--}%
 
-                    <!-- *** MENUS AND FILTERS END *** -->
+                    %{--<!-- *** MENUS AND FILTERS END *** -->--}%
 
                     %{--<div class="banner">--}%
                     %{--<a href="#">--}%
                     %{--<img src="img/banner.jpg" alt="sales 2014" class="img-responsive">--}%
                     %{--</a>--}%
                     %{--</div>--}%
+                %{--</div>--}%
+
+<div class="col-md-1">
+                <div class="row" id="thumbs">
+<g:each in="${totalArray[4]}" var="list" status="i">
+
+    <div class="col-md-12 col-xs-2">
+                        %{--<a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="thumb" >--}%
+                        %{--<img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="img-responsive lazy">--}%
+
+
+                        %{--</a>--}%
+                        <a href="#" class="thumb" id="thumb${i}" data-image="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.mediumImageName])}" data-zoom-image="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.zoomImageName])}">
+
+                            <img src="${resource(dir: 'images', file: 'product-thumb-spinner.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.thumbnailImageName])}" class="img-responsive lazy" >
+                        </a>
+                        &nbsp;
+
+                    </div>
+</g:each>
                 </div>
 
-
-
-                <div class="col-md-9">
+            </div>
+                <div class="col-md-11">
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                             %{--<div id="mainImage" class="mainImage-coverDown mainImage-height">--}%
@@ -269,121 +288,13 @@
 
                             %{--</div>--}%
                             <div id="mainImage">
-                                            <img id="myImg" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="img-responsive lazy">
+                                            %{--<img id="myImg" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="img-responsive lazy">--}%
+                           <g:if test="${totalArray[4]}">
+                            <img id="zoom" src="${resource(dir: 'images', file: 'product-medium-spinner.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[4][0].mediumImageName])}" data-zoom-image="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[4][0].zoomImageName])}" class="img-responsive lazy">
+                           </g:if>
+                        </div>
 
-                                        </div>
-                            <div id="myModal1" class="modal1">
 
-                                <!-- The Close Button -->
-                                <span class="close1" id="closes">&times;</span>
-
-                                <!-- Modal Content (The Image) -->
-                                <img class="modal-content1" id="img01">
-
-                                <!-- Modal Caption (Image Text) -->
-                                %{--<div id="caption"></div>--}%
-                            </div>
-                            <style>
-                            #myImg {
-                                border-radius: 5px;
-                                cursor: pointer;
-                                transition: 0.3s;
-                            }
-
-                            #myImg:hover {opacity: 0.7;}
-
-                            /* The Modal (background) */
-                            .modal1 {
-                                display: none; /* Hidden by default */
-                                position: fixed; /* Stay in place */
-                                z-index: 1; /* Sit on top */
-                                padding-top: 100px; /* Location of the box */
-                                left: 0;
-                                top: 0;
-                                width: 100%; /* Full width */
-                                height: 100%; /* Full height */
-                                overflow: auto; /* Enable scroll if needed */
-                                background-color: rgb(0,0,0); /* Fallback color */
-                                background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-                            }
-
-                            /* Modal Content (Image) */
-                            .modal-content1 {
-                                margin: auto;
-                                display: block;
-                                width: 80%;
-                                max-width: 700px;
-                            }
-
-                            /* Caption of Modal Image (Image Text) - Same Width as the Image */
-                            /*#caption {*/
-                                /*margin: auto;*/
-                                /*display: block;*/
-                                /*width: 80%;*/
-                                /*max-width: 700px;*/
-                                /*text-align: center;*/
-                                /*color: #ccc;*/
-                                /*padding: 10px 0;*/
-                                /*height: 150px;*/
-                            /*}*/
-
-                            /* Add Animation - Zoom in the Modal */
-                            /*.modal-content, #caption {*/
-                                /*animation-name: zoom;*/
-                                /*animation-duration: 0.6s;*/
-                            /*}*/
-
-                            @keyframes zoom {
-                                from {transform:scale(0)}
-                                to {transform:scale(1)}
-                            }
-
-                            /* The Close Button */
-                            .close1 {
-                                position: absolute;
-                                top: 15px;
-                                right: 35px;
-                                color: #f1f1f1;
-                                font-size: 40px;
-                                font-weight: bold;
-                                transition: 0.3s;
-                            }
-
-                            .close1:hover,
-                            .close1:focus {
-                                color: #bbb;
-                                text-decoration: none;
-                                cursor: pointer;
-                            }
-
-                            /* 100% Image Width on Smaller Screens */
-                            @media only screen and (max-width: 700px){
-                                .modal-content {
-                                    width: 100%;
-                                }
-                            }
-                            </style>
-                            <script>
-                                var modal = document.getElementById('myModal1');
-
-                                // Get the image and insert it inside the modal - use its "alt" text as a caption
-                                var img = document.getElementById('myImg');
-                                var modalImg = document.getElementById("img01");
-                                var span = document.getElementById("closes");
-
-                                //                    var captionText = document.getElementById("caption");
-                                img.onclick = function(){
-                                    modal.style.display = "block";
-                                    modalImg.src = this.src;
-                                };
-
-                                // Get the <span> element that closes the modal
-
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function() {
-                                    modal.style.display = "none";
-                                }
-                            </script>
 <g:if test="${totalArray[0].productDetails.isSale}">
                                                        <div class="ribbon sale">
                                 <div class="theribbon">SALE</div>
@@ -398,9 +309,16 @@
                             </div>
                             <!-- /.ribbon -->
 </g:if>
+
+
+
                         </div>
-                                               <div class="col-sm-6">
-                            <div class="box box-height" id="detailInfo" style="height:400px;overflow-y: scroll;">
+                        <script src="${resource(dir: 'js', file: 'yarsaa/fancyGallery.js')}" type="text/javascript"
+                                charset="utf-8"></script>
+
+
+                        <div class="col-sm-6">
+                            <div class="box box-height" id="detailInfo" style="height:495px;overflow-y: scroll;">
                                 <h1 class="text-center bigName">${totalArray[0].productDetails.productBrand.brandName}</h1>
                                 <h1 class="text-center bigName1">${totalArray[0].productDetails.briefDescription}</h1>
                                 <p class="goToDescription"><a href="#details" class="scroll-to">${totalArray[0].productDetails.productName}</a>
@@ -510,28 +428,6 @@
 
                             </div>
 
-                            <div class="row"  id="thumbs">
-                                <div class="col-xs-4">
-                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="thumb" >
-                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="img-responsive lazy">
-
-
-                                    </a>
-                                </div>
-                                <div class="col-xs-4">
-                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].sideImageName])}" class="thumb" >
-
-                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].sideImageName])}" class="img-responsive lazy">
-
-                                    </a>
-                                </div>
-                                <div class="col-xs-4">
-                                    <a href="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].backImageName])}" class="thumb" >
-                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].backImageName])}" class="img-responsive lazy">
-
-</a>
-                                </div>
-                            </div>
                         </div>
 
                     </div>

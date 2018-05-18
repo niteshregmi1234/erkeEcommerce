@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<g:form action="save" controller="Product" class="form-horizontal" enctype="multipart/form-data" onsubmit="return Validate(this);">
+<g:form action="save" controller="yarsaaProducts" class="form-horizontal" enctype="multipart/form-data" onsubmit="return Validate(this);">
 
     <div class="col-lg-6">
         <div class="form-group ">

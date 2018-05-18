@@ -20,7 +20,7 @@
             <div id="main-slider">
 <g:each in="${totalArray[0]}" var="list">
                 <div class="item">
-                   <g:link action="topBrand" controller="endUser" params="[brandNames:list.productBrand.urlName]"> <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive lazy"></g:link>
+                   <g:link action="topBrand" controller="endUser" params="[brandNames:list.productBrand.urlName]"> <img src="${resource(dir: 'images', file: 'cover.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive lazy"></g:link>
 
                 </div>
                </g:each>
@@ -41,7 +41,7 @@
                 <div class="col-md-2 col-sm-4 col-xs-4" style="margin-bottom: 10px;">
         <g:link action="topBrand" controller="endUser" params="[brandNames:list.urlName]">
 
-            <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive lazy">
+            <img src="${resource(dir: 'images', file: 'product-special-spinner.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive lazy">
 </g:link>
                 </div>
 
@@ -134,7 +134,7 @@
             <div class="product-slider">
 <g:each in="${totalArray[2]}" var="list">
     <div class="item">
-                    <div class="product" id="some-div">
+                    <div class="product">
                         <div class="flip-container">
                             <div class="flipper">
                                 <div class="front">
@@ -152,19 +152,6 @@
                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible food1">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
                         </g:link>
-                        %{--<div class="text" id="some-element">--}%
-                            %{--<h6><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h6>--}%
-
-                            %{--<g:if test="${list.productDetails.isSale==true}">--}%
-                                %{--<p class="price"><span> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /></span>--}%
-                                    %{--<span> <del class="del-price"> Rs.${list.productDetails.price}</del></span></p>--}%
-                            %{--</g:if>--}%
-                            %{--<g:if test="${list.productDetails.isSale==false}">--}%
-
-                                %{--<p class="price">Rs.${list.productDetails.price}</p>--}%
-                            %{--</g:if>--}%
-                        %{--</div>--}%
-
                         <div class="text">
                             <div class="tooltips">
                                 <h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
@@ -180,6 +167,22 @@
                                 <p class="price">Rs.${list.productDetails.price}</p>
                             </g:if>
                         </div>
+                        %{--<div class="text">--}%
+                            %{--<div class="tooltips">--}%
+                                %{--<h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>--}%
+                                %{--<span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>--}%
+                            %{--</div>--}%
+                            %{--<g:if test="${list.productDetails.isSale==true}">--}%
+                                %{--<p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>--}%
+
+                                    %{--<del class="del-price">Rs.${list.productDetails.price}</del></p>--}%
+                            %{--</g:if>--}%
+                            %{--<g:if test="${list.productDetails.isSale==false}">--}%
+
+                                %{--<p class="price">Rs.${list.productDetails.price}</p>--}%
+                            %{--</g:if>--}%
+                        %{--</div>--}%
+
 
                     <!-- /.text -->
                         <g:if test="${list.productDetails.isSale==true}">
@@ -344,19 +347,19 @@
 <div class="row">
                 <div class="col-md-6 ">
 
-                    <g:link action="nepaliProducts" controller="endUser">    <img data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
+                    <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'ad-01-spinner.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
 
                 </div>
                 <div class="col-md-6 ">
                     <g:link controller="endUser" action="specifiedProducts"  params="[category:'electronics',subCategorySpecify: 'laptop-computer']">
 
-                        <img data-src="${resource(dir: 'images', file: 'hp3.jpg')}" class="img-responsive lazy" >
+                        <img src="${resource(dir: 'images', file: 'ad-02-spinner.gif.gif')}" data-src="${resource(dir: 'images', file: 'hp3.jpg')}" class="img-responsive lazy" >
                     </g:link>
                 </div>
                     <div class="col-md-6 ">
                                                 <g:link action="allCategoryProducts" params="[category:'women']" controller="endUser">
 
-    <img data-src="${resource(dir: 'images', file: 'Ph4.jpg')}" class="img-responsive lazy" >
+    <img src="${resource(dir: 'images', file: 'ad-02-spinner.gif.gif')}" data-src="${resource(dir: 'images', file: 'Ph4.jpg')}" class="img-responsive lazy" >
                                                 </g:link>
                     </div>
 </div>

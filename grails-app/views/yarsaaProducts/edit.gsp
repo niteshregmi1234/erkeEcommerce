@@ -15,7 +15,7 @@
 
 <body>
 
-<g:form action="save" controller="Product" class="form-horizontal" enctype="multipart/form-data" onsubmit="return ValidateUpdate(this);">
+<g:form action="save" controller="yarsaaProducts" class="form-horizontal" enctype="multipart/form-data" onsubmit="return ValidateUpdate(this);">
 <g:hiddenField name="id" value="${productInstance?.id}"></g:hiddenField>
 <div class="col-lg-6">
     <div class="form-group ">

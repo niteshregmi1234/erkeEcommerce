@@ -1,15 +1,17 @@
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
-
 import javax.imageio.ImageIO
 import java.awt.Image
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductController extends BaseController {
-    static allowedMethods = [checkPhoto: 'POST',save: 'POST',uploadSpecialImage: 'POST',editSpecialImage: 'POST',upLoadFrontImage: 'POST',editFrontImage: 'POST',uploadSideImage: 'POST',editSideImage: 'POST',uploadBackImage: 'POST',editBackImage: 'POST',changeDiscount: 'POST',changeIsLatest: 'POST']
+    static allowedMethods = [saveViewOfImages:'POST',checkPhoto: 'POST',save: 'POST',uploadSpecialImage: 'POST',editSpecialImage: 'POST',uploadThumbnailImage: 'POST',uploadMediumImage: 'POST',uploadZoomImage: 'POST',changeDiscount: 'POST',changeIsLatest: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def productService
+    def create(){
+
+    }
     def changeIsLatest(){
         try{
             if(session.adminUser) {
@@ -20,6 +22,7 @@ class ProductController extends BaseController {
                     for (Product product : productList) {
                         product.isLatest = params.isLatest as byte
                         product.save(flush: true)
+                        render(view: "setUpIsLatest")
                     }
                 } else {
                     redirect(action: "adminLoginForm", controller: "login")
@@ -186,7 +189,7 @@ def checkPhoto(){
 
     }
 }
-    def list() {
+    def list(){
         try{
             if(session.adminUser) {
 
@@ -203,95 +206,139 @@ def checkPhoto(){
             redirect(action: "notfound",controller:"errorPage")
         }
     }
-    def create(){
-        if(session.adminUser){
+    def save() {
+        try{
+            if(session.adminUser) {
 
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-        render(view: "create")
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        if(!params.id) {
+            def product = new Product()
+            product.productColor = ProductColor.get(params.productColor)
+            product.productDetails = ProductDetails.get(params.productDetails)
+            product.isFeatured = params.isFeatured as byte
+            product.isLatest = params.isLatest as byte
+            product.productSpecificationName = productService.convertToOriginalUrl(product.productDetails.productBrand.urlName + "-" + product.productColor.colorName + "-" + product.productDetails.briefDescription)
+            product.frontImageName="frontImageName"
+            product.backImageName="backImageName"
+            product.sideImageName="sideImageName"
+            product.specialImageName = uploadSpecialImage()
+            product.delFlag = false
+            product.soldNumbers = 0
+            product.save(flush: true)
+            product.productSpecificationName = product.productSpecificationName + "-" + product.id
+            product.save(flush: true)
+
+            redirect(action: "show", id: product.id)
+            def numberOfImageSets = params.numberOfImageSets as int
+            for (int i = 0; i < numberOfImageSets; i++) {
+                def productView = new ProductView()
+                productView.thumbnailImageName = uploadThumbnailImage(i)
+                productView.mediumImageName = uploadMediumImage(i)
+                productView.zoomImageName = uploadZoomImage(i)
+                productView.product = product
+                product.delFlag = false
+                productView.save()
+            }
         }
         else {
-                redirect(action: "adminLoginForm", controller: "login")
-
-            }        }
-    }
-    def save(){
-        try{
-            if(session.adminUser){
-                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-                if (!params.id) {
-                    def product = new Product()
-                    product.productColor = ProductColor.get(params.productColor)
-                    product.productDetails = ProductDetails.get(params.productDetails)
-                    product.isFeatured = params.isFeatured as byte
-                    product.isLatest = params.isLatest as byte
-                    product.seasons = SeasonManagement.list()[1].seasons
-                    product.productSpecificationName = productService.convertToOriginalUrl(product.productDetails.productBrand.urlName + "-" + product.productColor.colorName+ "-" + product.productDetails.briefDescription)
-                    product.frontImageName = upLoadFrontImage()
-                    product.sideImageName = uploadSideImage()
-                    product.backImageName = uploadBackImage()
-                    product.specialImageName = uploadSpecialImage()
-                    product.delFlag = false
-                    product.soldNumbers=0
-                    product.save(flush: true)
-                    product.productSpecificationName = product.productSpecificationName+ "-" + product.id
-product.save(flush: true)
-                    redirect(action: "show", id: product.id)
-                } else {
-                    def product = Product.get(params.id)
-                    if (product) {
-                        product.productColor = ProductColor.get(params.productColor)
-                        product.productDetails = ProductDetails.get(params.productDetails)
-                        product.isFeatured = params.isFeatured as byte
-                        product.isLatest = params.isLatest as byte
-                        product.productSpecificationName = product.productDetails.productCategory.categoryName + "-" + product.productColor.colorName + " " + product.productDetails.productBrand.brandName + " " + product.productDetails.productName
-                        product.seasons = SeasonManagement.list()[1].seasons
-                        product.productSpecificationName = productService.convertToOriginalUrl(product.productDetails.productBrand.urlName + "-" + product.productColor.colorName+ "-" + product.productDetails.briefDescription + "-" + product.id)
-                        product.frontImageName = editFrontImage(product.frontImageName)
-                        product.sideImageName = editSideImage(product.sideImageName)
-                        product.backImageName = editBackImage(product.backImageName)
-                        product.specialImageName = editSpecialImage(product.specialImageName)
-                        product.save(flush: true)
-                        redirect(action: "show", id: product.id)
-                    } else {
-                        redirect(action: "notfound", controller: "errorPage")
-                    }
-                }
+            def product = Product.findByDelFlagAndId(false,params.id)
+            if (product) {
+                product.productColor = ProductColor.get(params.productColor)
+                product.productDetails = ProductDetails.get(params.productDetails)
+                product.isFeatured = params.isFeatured as byte
+                product.isLatest = params.isLatest as byte
+                product.productSpecificationName = product.productDetails.productCategory.categoryName + "-" + product.productColor.colorName + " " + product.productDetails.productBrand.brandName + " " + product.productDetails.productName
+                product.productSpecificationName = productService.convertToOriginalUrl(product.productDetails.productBrand.urlName + "-" + product.productColor.colorName+ "-" + product.productDetails.briefDescription + "-" + product.id)
+                product.specialImageName = editSpecialImage(product.specialImageName)
+                product.save(flush: true)
+                redirect(action: "show", id: product.id)
+            } else {
+                redirect(action: "notfound", controller: "errorPage")
             }
-            else{
-                redirect(action: "adminLoginForm",controller: "login")
-
-            }
-        }}
+        }}}}
         catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
+            redirect(action: "notfound", controller: "errorPage")
+
         }
     }
-//    def bloodHound(){
-//        def criteria = ProductDetails.createCriteria();
-//        def productDetails = criteria.list {
-//            or {
-//
-//                like("productName", "%" + params.keyCode + "%")
-//                like("briefDescription", "%" + params.keyCode + "%")
-//
-//            }
-//        }
-//        print productDetails
-//        def productNameList=[]
-//        for(int i=0;i<productDetails.size();i++){
-//            productNameList.add(productDetails[i].productName)
-//        }
-//        print productNameList
-//
-//    }
+    def saveViewOfImages(){
+        try{
+            if(session.adminUser) {
 
-    def uploadSpecialImage(){
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+        def numberOfImageSets = params.numberOfImageSets as int
+        def product=Product.findByDelFlagAndId(false,params.id as long)
+        if(product){
+        for (int i = 0; i < numberOfImageSets; i++) {
+            def productView=new ProductView()
+            productView.thumbnailImageName=uploadThumbnailImage(i)
+            productView.mediumImageName=uploadMediumImage(i)
+            productView.zoomImageName=uploadZoomImage(i)
+            productView.product=product
+            productView.save()
+        }
+        redirect(action: "show",id: product.id)}
+        else{
+            redirect(action: "notfound",controller: "errorPage")
+
+        }}}}
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+    }
+    def edit(){
+        try {
+            if(session.adminUser) {
+
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                    def productInstance = Product.findByDelFlagAndId(false,params.id)
+
+                    if (productInstance) {
+                        [productInstance: productInstance]
+                    } else {
+                        redirect(action: "list")
+                    }
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+
+                }
+            }        }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+    }
+    def show(Long id){
+        try {
+            if(session.adminUser) {
+
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def productInstance = Product.findByDelFlagAndId(false,id)
+                    if (productInstance) {
+                        def productViewList=ProductView.findAllByProductAndDelFlag(productInstance,false)
+                        [productInstance: productInstance,productViewList:productViewList]
+                    } else {
+                        redirect(action: "list")
+                    }
+                } else {
+                    redirect(action: "adminLoginForm", controller: "login")
+
+                }
+            }            }
+        catch (Exception e){
+            redirect(action: "notfound",controller: "errorPage")
+
+        }
+    }
+    def uploadMediumImage(int i){
         if(session.adminUser){
 
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def mp = (MultipartHttpServletRequest) request
-                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialImageName")
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("mediumImageName"+i)
                 def fileName = file.originalFilename
                 def homeDir = new File(System.getProperty("user.home"))
                 File theDir = new File(homeDir, "yarsaa");
@@ -360,134 +407,14 @@ product.save(flush: true)
                 }
             }        }    }
 
-    def editFrontImage(String imageNameOld){
+
+    def uploadZoomImage(int i){
         if(session.adminUser){
 
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def mp = (MultipartHttpServletRequest) request
-                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("frontImageName")
-                def homeDir = new File(System.getProperty("user.home"))
-                File theDir = new File(homeDir, "yarsaa");
-                if (!theDir.exists()) {
-                    theDir.mkdir();
-                    print "yes"
-                }
-                if (file.size > 0) {
-                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                    fileOld.delete();
-                    String fileName = file.originalFilename
-                    abc:
-                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                    if (check == true) {
-                        Matcher m = PATTERN.matcher(fileName);
-                        if (m.matches()) {
-                            String prefix = m.group(1);
-                            String last = m.group(2);
-                            String suffix = m.group(3);
-                            if (suffix == null) suffix = "";
-                            int count = last != null ? Integer.parseInt(last) : 0;
-                            count++;
-                            fileName = prefix + "(" + count + ")" + suffix;
-                            continue abc
-                        }
-                    }
-                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                    file.transferTo(fileDest)
-                    return fileName
-
-                } else {
-                    return imageNameOld
-                }
-
-            }        }    }
-    def editBackImage(String imageNameOld){
-        if(session.adminUser){
-
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def mp = (MultipartHttpServletRequest) request
-                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backImageName")
-                def homeDir = new File(System.getProperty("user.home"))
-                File theDir = new File(homeDir, "yarsaa");
-                if (!theDir.exists()) {
-                    theDir.mkdir();
-                    print "yes"
-                }
-                if (file.size > 0) {
-                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                    fileOld.delete();
-                    String fileName = file.originalFilename
-                    abc:
-                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                    if (check == true) {
-                        Matcher m = PATTERN.matcher(fileName);
-                        if (m.matches()) {
-                            String prefix = m.group(1);
-                            String last = m.group(2);
-                            String suffix = m.group(3);
-                            if (suffix == null) suffix = "";
-                            int count = last != null ? Integer.parseInt(last) : 0;
-                            count++;
-                            fileName = prefix + "(" + count + ")" + suffix;
-                            continue abc
-                        }
-                    }
-                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                    file.transferTo(fileDest)
-                    return fileName
-
-                } else {
-                    return imageNameOld
-                }
-            }        }    }
-    def editSideImage(String imageNameOld){
-        if(session.adminUser){
-
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def mp = (MultipartHttpServletRequest) request
-                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("sideImageName")
-                def homeDir = new File(System.getProperty("user.home"))
-                File theDir = new File(homeDir, "yarsaa");
-                if (!theDir.exists()) {
-                    theDir.mkdir();
-                    print "yes"
-                }
-                if (file.size > 0) {
-                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
-                    fileOld.delete();
-                    String fileName = file.originalFilename
-                    abc:
-                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-                    if (check == true) {
-                        Matcher m = PATTERN.matcher(fileName);
-                        if (m.matches()) {
-                            String prefix = m.group(1);
-                            String last = m.group(2);
-                            String suffix = m.group(3);
-                            if (suffix == null) suffix = "";
-                            int count = last != null ? Integer.parseInt(last) : 0;
-                            count++;
-                            fileName = prefix + "(" + count + ")" + suffix;
-                            continue abc
-                        }
-                    }
-                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
-                    file.transferTo(fileDest)
-                    return fileName
-
-                } else {
-                    return imageNameOld
-                }
-            }        }    }
-    def upLoadFrontImage(){
-        if(session.adminUser){
-
-            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                def mp = (MultipartHttpServletRequest) request
-                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("frontImageName")
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("zoomImageName"+i)
                 def fileName = file.originalFilename
                 def homeDir = new File(System.getProperty("user.home"))
                 File theDir = new File(homeDir, "yarsaa");
@@ -515,13 +442,16 @@ product.save(flush: true)
                 return fileName
 
             }        }    }
-    def uploadSideImage(){
+
+
+
+    def uploadThumbnailImage(i) {
         if(session.adminUser){
 
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
                 def mp = (MultipartHttpServletRequest) request
-                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("sideImageName")
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("thumbnailImageName"+i)
                 def fileName = file.originalFilename
                 def homeDir = new File(System.getProperty("user.home"))
                 File theDir = new File(homeDir, "yarsaa");
@@ -547,92 +477,49 @@ product.save(flush: true)
                 File fileDest = new File(homeDir, "yarsaa/${fileName}")
                 file.transferTo(fileDest)
                 return fileName
+
             }        }    }
-    def uploadBackImage(){
+    def uploadSpecialImage(){
         if(session.adminUser){
 
-        if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-            def mp = (MultipartHttpServletRequest) request
-            CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("backImageName")
-            def fileName = file.originalFilename
-            def homeDir = new File(System.getProperty("user.home"))
-            File theDir = new File(homeDir, "yarsaa");
-            if (!theDir.exists()) {
-                theDir.mkdir();
-            }
-
-            abc:
-            boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
-            if (check == true) {
-                Matcher m = PATTERN.matcher(fileName);
-                if (m.matches()) {
-                    String prefix = m.group(1);
-                    String last = m.group(2);
-                    String suffix = m.group(3);
-                    if (suffix == null) suffix = "";
-                    int count = last != null ? Integer.parseInt(last) : 0;
-                    count++;
-                    fileName = prefix + "(" + count + ")" + suffix;
-                    continue abc
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("specialImageName")
+                def fileName = file.originalFilename
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
                 }
-            }
-            File fileDest = new File(homeDir, "yarsaa/${fileName}")
-            file.transferTo(fileDest)
-            return fileName
 
-        }        }    }
-    def show(Long id){
-        try {
-            if(session.adminUser) {
-
-                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-                    def productInstance = Product.get(id)
-                    if (productInstance) {
-                        [productInstance: productInstance]
-                    } else {
-                        redirect(action: "list")
+                abc:
+                boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                if (check == true) {
+                    Matcher m = PATTERN.matcher(fileName);
+                    if (m.matches()) {
+                        String prefix = m.group(1);
+                        String last = m.group(2);
+                        String suffix = m.group(3);
+                        if (suffix == null) suffix = "";
+                        int count = last != null ? Integer.parseInt(last) : 0;
+                        count++;
+                        fileName = prefix + "(" + count + ")" + suffix;
+                        continue abc
                     }
-                } else {
-                    redirect(action: "adminLoginForm", controller: "login")
-
                 }
-            }            }
-        catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
+                File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                file.transferTo(fileDest)
+                return fileName
 
-        }
-    }
-    def edit(){
-        try {
-            if(session.adminUser) {
-
-                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
-                    def productInstance = Product.get(params.id)
-
-                    if (productInstance) {
-                        [productInstance: productInstance]
-                    } else {
-                        redirect(action: "list")
-                    }
-                } else {
-                    redirect(action: "adminLoginForm", controller: "login")
-
-                }
-            }        }
-        catch (Exception e){
-            redirect(action: "notfound",controller: "errorPage")
-
-        }
-    }
-    def delete(){
+            }        }    }
+    def delFlag(){
         try{
             if(session.adminUser) {
 
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-                    def productInstance = Product.get(params.id)
+                    def productInstance = YarsaaProducts.get(params.id)
                     if (productInstance) {
                         if (!productInstance.delFlag) {
                             productInstance.delFlag = true
@@ -655,40 +542,6 @@ product.save(flush: true)
         catch (Exception e){
             redirect(action: "notfound", controller: "errorPage")
         }
-//        try{
-//        def productInstance=Product.get(params.id)
-//
-//
-//        if(productInstance) {
-//            productInstance.delete(flush: true)
-//            def homeDir = new File(System.getProperty("user.home"))
-//            File frontImage= new File(homeDir,"yarsaa/${productInstance.frontImageName}")
-//                File backImage= new File(homeDir,"yarsaa/${productInstance.backImageName}")
-//                File sideImage= new File(homeDir,"yarsaa/${productInstance.sideImageName}")
-//            File specialImage= new File(homeDir,"yarsaa/${productInstance.specialImageName}")
-//
-//            frontImage.delete();
-//                backImage.delete();
-//                sideImage.delete();
-//            specialImage.delete()
-//            flash.message="Successfully deleted."
-//        }
-//        else{
-//            flash.message="Unable to delete the already deleted item."
-//
-//
-//        }
-//        redirect(action: "list")
-//
-//    }
-//        catch (DataIntegrityViolationException e) {
-//            flash.message = "Sorry! cannot delete this data."
-//            redirect(action: "list")
-//        }
-//        catch (Exception e) {
-//            redirect(action: "notfound", controller: "errorPage")
-//
-//        }
     }
 }
 

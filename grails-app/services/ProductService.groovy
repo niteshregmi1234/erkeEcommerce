@@ -343,7 +343,8 @@ return totalArray}
                 }
             }
             Collections.shuffle(relatedProductList)
-            def totalArray=[productInstance1,productSizeList,moreColorsList,relatedProductList]
+            def productViewList=ProductView.findAllByProductAndDelFlag(productInstance1,false)
+            def totalArray=[productInstance1,productSizeList,moreColorsList,relatedProductList,productViewList]
             return totalArray
         }}
         catch (Exception e){

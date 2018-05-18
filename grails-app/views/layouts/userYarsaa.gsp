@@ -7,7 +7,8 @@
     <meta name="googlebot" content="index,follow,snippet,archive">
     <meta name="keywords" content="">
     <meta name="google-site-verification" content="ukYH3gaQ4LcRA-6yCKNwKZGIv2FKj6l8WubNurI13mc"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    %{--<meta name="viewport" content="width=device-width, initial-scale=1.0">--}%
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
     <meta name="author" content="Anoj And Bikash">
 
@@ -85,6 +86,13 @@
             charset="utf-8"></script>
     <script src="${resource(dir: 'js', file: 'yarsaa/lazyLoad.min.js')}" type="text/javascript"
             charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/jquery.elevateZoom-3.0.8.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="${resource(dir: 'js', file: 'yarsaa/fancybox.min.js')}" type="text/javascript"
+            charset="utf-8"></script>
+
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/fancybox.min.css')}" type="text/css"
+          media="all"/>
 
     <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/yarsaalogosmall.png')}">
 

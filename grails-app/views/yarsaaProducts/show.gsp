@@ -14,8 +14,8 @@
 </head>
 
 <body>
-<g:link action="create" controller="Product" class="btn btn-primary navbar-btn">New</g:link>
-<g:link action="list" controller="Product" class="btn btn-primary navbar-btn">List</g:link>
+<g:link action="create" controller="yarsaaProducts" class="btn btn-primary navbar-btn">New</g:link>
+<g:link action="list" controller="yarsaaProducts" class="btn btn-primary navbar-btn">List</g:link>
 <form class="form-horizontal">
     <div class="col-lg-6">
         <div class="form-group ">
@@ -114,7 +114,7 @@
 
 </form>
 <g:if test="${productViewList.size()==0}">
-    <g:form action="saveViewOfImages" controller="Product" class="form-horizontal" enctype="multipart/form-data" onsubmit="return Validate(this);">
+    <g:form action="saveViewOfImages" controller="yarsaaProducts" class="form-horizontal" enctype="multipart/form-data">
     <g:hiddenField name="id" value="${productInstance.id}"></g:hiddenField>
         <table class="table" style="margin-left: 205px;width: 800px;">
         <thead>
@@ -129,18 +129,18 @@
         <div data-role="dynamic-fields" style="margin-left: 170px;">
             <div class="form-inline">
                 <div class="form-group">
-                    <label class="sr-only" for="thumbnailImageName0">Thumbnail Image</label>
-                    <input type="file" class="form-control thumbnailImageName" id="thumbnailImageName0" name="thumbnailImageName0">
+                    <label class="sr-only" for="thumbnailImageName">Thumbnail Image</label>
+                    <input type="file" class="form-control thumbnailImageName" id="thumbnailImageName" name="thumbnailImageName0">
                 </div>
                 <span>--</span>
                 <div class="form-group">
-                    <label class="sr-only" for="mediumImageName0">Medium Image</label>
-                    <input type="file" class="form-control mediumImageName" id="mediumImageName0" name="mediumImageName0">
+                    <label class="sr-only" for="mediumImageName">Medium Image</label>
+                    <input type="file" class="form-control mediumImageName" id="mediumImageName" name="mediumImageName0">
                 </div>
                 <span>--</span>
                 <div class="form-group">
-                    <label class="sr-only" for="zoomImageName0">Large Image</label>
-                    <input type="file" class="form-control zoomImageName" id="zoomImageName0" name="zoomImageName0">
+                    <label class="sr-only" for="zoomImageName">Large Image</label>
+                    <input type="file" class="form-control zoomImageName" id="zoomImageName" name="zoomImageName0">
                 </div>
                 <span>--</span>
 
@@ -170,8 +170,8 @@
     </g:form>
 </g:if>
 <div class="col-lg-12">
-    <g:link action="edit" id="${productInstance?.id}" controller="Product" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
-    <g:link action="delete" id="${productInstance?.id}" controller="Product" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Delete</g:link>
+    <g:link action="edit" id="${productInstance?.id}" controller="yarsaaProducts" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Edit</g:link>
+    <g:link action="delete" id="${productInstance?.id}" controller="yarsaaProducts" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Delete</g:link>
 
 </div>
 <style>
@@ -190,10 +190,6 @@
 }
 </style>
 <script>
-    var thumbnailImageName=document.getElementsByClassName("thumbnailImageName");
-    var mediumImageName=document.getElementsByClassName("mediumImageName");
-    var zoomImageName=document.getElementsByClassName("zoomImageName");
-
     $(function() {
         // Remove button click
         $(document).on(
@@ -215,17 +211,14 @@
                     }
 
                 }
-                thumbnailImageName=document.getElementsByClassName("thumbnailImageName");
-                mediumImageName=document.getElementsByClassName("mediumImageName");
-                zoomImageName=document.getElementsByClassName("zoomImageName");
+                var thumbnailImageName=document.getElementsByClassName("thumbnailImageName");
+                var mediumImageName=document.getElementsByClassName("mediumImageName");
+                var zoomImageName=document.getElementsByClassName("zoomImageName");
 
                 for(i=0;i<thumbnailImageName.length;i++){
                     thumbnailImageName[i].setAttribute("name","thumbnailImageName"+i);
                     mediumImageName[i].setAttribute("name","mediumImageName"+i);
                     zoomImageName[i].setAttribute("name","zoomImageName"+i);
-                    thumbnailImageName[i].setAttribute("id","thumbnailImageName"+i);
-                    mediumImageName[i].setAttribute("id","mediumImageName"+i);
-                    zoomImageName[i].setAttribute("id","zoomImageName"+i);
 
                 }
                 document.getElementById("numberOfImageSets").value=thumbnailImageName.length;
@@ -255,17 +248,14 @@
 
                     }
                 }
-                thumbnailImageName=document.getElementsByClassName("thumbnailImageName");
-                mediumImageName=document.getElementsByClassName("mediumImageName");
-                zoomImageName=document.getElementsByClassName("zoomImageName");
+                var thumbnailImageName=document.getElementsByClassName("thumbnailImageName");
+                var mediumImageName=document.getElementsByClassName("mediumImageName");
+                var zoomImageName=document.getElementsByClassName("zoomImageName");
 
                 for(i=0;i<thumbnailImageName.length;i++){
                     thumbnailImageName[i].setAttribute("name","thumbnailImageName"+i);
                     mediumImageName[i].setAttribute("name","mediumImageName"+i);
                     zoomImageName[i].setAttribute("name","zoomImageName"+i);
-                    thumbnailImageName[i].setAttribute("id","thumbnailImageName"+i);
-                    mediumImageName[i].setAttribute("id","mediumImageName"+i);
-                    zoomImageName[i].setAttribute("id","zoomImageName"+i);
 
                 }
                 document.getElementById("numberOfImageSets").value=thumbnailImageName.length;
@@ -273,174 +263,6 @@
             }
         );
     });
-
-</script>
-<script>
-    function preventMultipleSubmissions() {
-        $('#submit_Id').prop('disabled', true);
-    }
-
-    window.onbeforeunload = preventMultipleSubmissions;
-    var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
-
-    function Validate(oForm) {
-        var responseValue;
-        var arrInputs = oForm.getElementsByTagName("input");
-        for (var i = 0; i < arrInputs.length; i++) {
-            var oInput = arrInputs[i];
-            if (oInput.type == "file") {
-                var sFileName = oInput.value;
-                if (sFileName.length > 0) {
-                    var blnValid = false;
-                    for (var j = 0; j < _validFileExtensions.length; j++) {
-                        var sCurExtension = _validFileExtensions[j];
-                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
-                            blnValid = true;
-                            break;
-                        }
-                    }
-
-                    if (!blnValid) {
-                        bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
-                        return false;
-                    }
-
-                }
-
-            }
-        }
-        for(i=0;i<thumbnailImageName.length;i++) {
-            var thumbnailImage=document.getElementById("thumbnailImageName"+i).value;
-            var mediumImage=document.getElementById("mediumImageName"+i).value;
-            var zoomImage=document.getElementById("zoomImageName"+i).value;
-            if (thumbnailImage.length > 0) {
-
-                var jForm = new FormData();
-
-                jForm.append("Image", $("#thumbnailImageName"+i).get(0).files[0]);
-                $.ajax({
-                    url: "${createLink(controller:'product', action:'checkPhoto')}",
-                    type: "POST",
-                    data: jForm,
-                    mimeType: "multipart/form-data",
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    async: false,
-                    success: function (result) {
-                        if (result == "Photo bad format") {
-                            bootbox.alert({
-                                message: "Image bad format",
-                                size: 'small'
-                            });
-                            responseValue = false;
-
-                        }
-
-
-                    }
-                });
-
-            }
-            if (mediumImage.length > 0) {
-                jForm = new FormData();
-
-                jForm.append("Image", $('#mediumImageName'+i).get(0).files[0]);
-                $.ajax({
-                    url: "${createLink(controller:'product', action:'checkPhoto')}",
-                    type: "POST",
-                    data: jForm,
-                    mimeType: "multipart/form-data",
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    async: false,
-                    success: function (result) {
-                        if (result == "Photo bad format") {
-                            bootbox.alert({
-                                message: "Image bad format",
-                                size: 'small'
-                            });
-                            responseValue = false;
-
-                        }
-
-
-                    }
-                });
-            }
-            if (zoomImage.length > 0) {
-                jForm = new FormData();
-
-                jForm.append("Image", $('#zoomImageName'+i).get(0).files[0]);
-                $.ajax({
-                    url: "${createLink(controller:'product', action:'checkPhoto')}",
-                    type: "POST",
-                    data: jForm,
-                    mimeType: "multipart/form-data",
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    async: false,
-                    success: function (result) {
-                        if (result == "Photo bad format") {
-                            bootbox.alert({
-                                message: "Image bad format",
-                                size: 'small'
-                            });
-                            responseValue = false;
-
-                        }
-
-
-                    }
-                });
-            }
-        }
-
-
-
-        for(i=0;i<thumbnailImageName.length;i++) {
-            thumbnailImage=document.getElementById("thumbnailImageName"+i).value;
-            mediumImage=document.getElementById("mediumImageName"+i).value;
-            zoomImage=document.getElementById("zoomImageName"+i).value;
-
-
-            if (thumbnailImage.length==0) {
-                bootbox.alert({
-                    message: "thumbnail Image must be choosen",
-                    size: 'small'
-                });
-                return false;
-
-            }
-            else if(mediumImage.length==0) {
-                bootbox.alert({
-                    message: "medium Image must be choosen",
-                    size: 'small'
-                });
-                return false;
-            }
-
-
-            else if (zoomImage.length ==0) {
-                bootbox.alert({
-                    message: "zoom Image must be choosen",
-                    size: 'small'
-                });
-                return false;
-            }
-
-
-
-
-
-        }
-
-
-
-        return responseValue;
-    }
 
 </script>
 
