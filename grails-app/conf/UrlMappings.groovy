@@ -30,7 +30,7 @@ class UrlMappings {
         "/saveEndUser"(action: "save",controller: "endUserInformation")
         "/register"(action: "register",controller: "endUserInformation")
         "/sendQuery"(action: "placeOrder",controller: "checkOut")
-        "/login-YarsaaAnojAndBikash"(action: "adminLoginForm",controller: "login")
+        "/control-panel"(action: "adminLoginForm",controller: "login")
         "500"(controller:"errorPage",action:"notfound")
         "404"(controller:"errorPage",action:"notFoundUrl")
         "405"(controller: "errorPage",action: "notfound")

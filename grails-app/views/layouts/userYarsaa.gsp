@@ -7,13 +7,12 @@
     <meta name="googlebot" content="index,follow,snippet,archive">
     <meta name="keywords" content="">
     <meta name="google-site-verification" content="ukYH3gaQ4LcRA-6yCKNwKZGIv2FKj6l8WubNurI13mc"/>
-    %{--<meta name="viewport" content="width=device-width, initial-scale=1.0">--}%
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
     <meta name="author" content="Anoj And Bikash">
 
     <g:if test="${productInstance}">
-        <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.frontImageName}"/>
+        <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.specialImageName}"/>
 
     </g:if>
 
@@ -65,7 +64,7 @@
     <script src="${resource(dir: 'js', file: 'yamsaa/bootstrapvalidator.js')}" type="text/javascript"
             charset="utf-8"></script>
 
-    <script src="${resource(dir: 'js', file: 'yarsaa/bootstrap.min.js')}" type="text/javascript"
+    <script src="${resource(dir: 'js', file: 'yamsaa/bootv3.5.min.js')}" type="text/javascript"
             charset="utf-8"></script>
 
 

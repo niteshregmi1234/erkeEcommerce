@@ -62,58 +62,61 @@
             </div>
         </div>
     </div>
-    <g:if test="${productViewList}">
+    &nbsp;
+    <g:if test="${ProductView.findAllByDelFlagAndProduct(false,productInstance)}">
 <div class="container">
-    <table class="table" style="margin-left: 100px;width: 970px;">
+    <div class="col-lg-12">
+    <p class="text-muted" id="deleteView" style=" margin-left: 155px;"></p>
+    </div>
+        <table class="table" style="margin-left: 170px;width: 845px;">
         <thead>
         <tr>
-            <th>SN</th>
             <th>Thumbnail Image</th>
             <th>Medium Image</th>
             <th>Large Image</th>
+<th>Action</th>
         </tr>
         </thead>
         </table>
-    <div class="col-lg-12">
-        <g:each in="${productViewList}" var="list" status="i">
-        <div data-role="dynamic-fields" style="margin-left: 170px;">
-            <div class="form-inline">
-<div style="margin-left: -70px;">
-                   ${i}
-</div>
-                <div>
-                <div class="col-sm-4">
+    <div class="col-lg-12" id="listView">
+        <g:each in="${ProductView.findAllByDelFlagAndProduct(false,productInstance)}" var="list" status="i">
+        <div class="viewsProduct" style="margin-left: 170px;">
+                <div class="col-sm-3">
                     <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.thumbnailImageName])}" width="100">
 
                 </div>
-
-                <div class="col-sm-4">
+                <div class="col-sm-3">
 
                     <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.mediumImageName])}" width="100">
 
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.zoomImageName])}" width="100">
 
                 </div>
+                    <div class="col-sm-3">
+
+                        <a href="#" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn" style="width: 67px;">Edit</a><br>
+                    <a class="deleteView btn btn-danger navbar-btn" onclick="deleteView(${list.id},this);">Delete</a>
+                    </div>
+
                 </div>
-                %{--<button class="btn btn-primary add" data-role="add">--}%
+            -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        </g:each>
+
+    %{--<button class="btn btn-primary add" data-role="add">--}%
                     %{--<span class="glyphicon glyphicon-plus"></span>--}%
                 %{--</button>--}%
                 %{--<button class="btn btn-danger remove" data-role="remove" id="remove">--}%
                     %{--<span class="glyphicon glyphicon-remove"></span>--}%
                 %{--</button>--}%
-                <br><br>
             </div>  <!-- /div.form-inline -->
         </div>  <!-- /div[data-role="dynamic-fields"] -->
-        </g:each>
-    </div>  <!-- /div.col-md-12 -->
 
-</div>
     </g:if>
 
 </form>
-<g:if test="${productViewList.size()==0}">
+<g:if test="${ProductView.findAllByDelFlagAndProduct(false,productInstance).size()==0}">
     <g:form action="saveViewOfImages" controller="Product" class="form-horizontal" enctype="multipart/form-data" onsubmit="return Validate(this);">
     <g:hiddenField name="id" value="${productInstance.id}"></g:hiddenField>
         <table class="table" style="margin-left: 205px;width: 800px;">
@@ -440,6 +443,45 @@
 
 
         return responseValue;
+    }
+    function deleteView(id,evt){
+        bootbox.confirm({
+//                    title: "Destroy planet?",
+            message: "Are you sure want to delete this view?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm'
+                }
+            },
+            callback: function (result) {
+                if(result==true){
+                    $.ajax({
+                        url: "${createLink(controller:'product', action:'deleteView')}",
+                        global: false,
+                        type: "POST",
+                        data: { "id":id },
+                        cache: false,
+                        async: false,
+                        success: function (text) {
+                            if(text=="successfully deleted the view"){
+                            $('#listView').load(document.URL +  ' #listView');
+                        }
+                            $('#deleteView').html(text);
+                            if ($(".viewsProduct").length < 2)
+                            {
+                                location.reload();
+                            }
+                        }
+
+                    });
+                }
+            }
+        });
+
+        evt.preventDefault();
     }
 
 </script>

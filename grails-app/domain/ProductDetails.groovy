@@ -1,7 +1,6 @@
 
 
 class ProductDetails {
-    String detailId = UUID.randomUUID().toString()
     String productSizes
     ProductCategory productCategory
     ProductSubCategory productSubCategory
@@ -14,7 +13,6 @@ class ProductDetails {
     String detailDescription
 String productNameWithBrand
     static constraints = {
-        detailId (generator:'assigned',unique:true,nullable: true)
         productNameWithBrand(nullable: true)
         price scale: 2
     }

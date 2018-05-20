@@ -6,11 +6,33 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductController extends BaseController {
-    static allowedMethods = [saveViewOfImages:'POST',checkPhoto: 'POST',save: 'POST',uploadSpecialImage: 'POST',editSpecialImage: 'POST',uploadThumbnailImage: 'POST',uploadMediumImage: 'POST',uploadZoomImage: 'POST',changeDiscount: 'POST',changeIsLatest: 'POST']
+    static allowedMethods = [saveViewOfImages:'POST',checkPhoto: 'POST',save: 'POST',uploadSpecialImage: 'POST',editSpecialImage: 'POST',uploadThumbnailImage: 'POST',uploadMediumImage: 'POST',uploadZoomImage: 'POST',changeDiscount: 'POST',changeIsLatest: 'POST',deleteView: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def productService
     def create(){
 
+    }
+    def deleteView(){
+        try{
+        if(session.adminUser) {
+
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+          def productView=ProductView.findByDelFlagAndId(false,params.id)
+            if(productView){
+                productView.delFlag=true
+                productView.save(flush: true)
+            render "successfully deleted the view"
+            }
+                else{
+                render "unable to delete view"
+            }
+            }
+        }
+        }
+        catch (Exception e){
+            render "server encountered problem"
+
+        }
     }
     def changeIsLatest(){
         try{
@@ -218,9 +240,6 @@ def checkPhoto(){
             product.isFeatured = params.isFeatured as byte
             product.isLatest = params.isLatest as byte
             product.productSpecificationName = productService.convertToOriginalUrl(product.productDetails.productBrand.urlName + "-" + product.productColor.colorName + "-" + product.productDetails.briefDescription)
-            product.frontImageName="frontImageName"
-            product.backImageName="backImageName"
-            product.sideImageName="sideImageName"
             product.specialImageName = uploadSpecialImage()
             product.delFlag = false
             product.soldNumbers = 0
@@ -317,8 +336,7 @@ def checkPhoto(){
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
                     def productInstance = Product.findByDelFlagAndId(false,id)
                     if (productInstance) {
-                        def productViewList=ProductView.findAllByProductAndDelFlag(productInstance,false)
-                        [productInstance: productInstance,productViewList:productViewList]
+                        [productInstance: productInstance]
                     } else {
                         redirect(action: "list")
                     }
