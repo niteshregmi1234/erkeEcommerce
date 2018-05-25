@@ -317,7 +317,8 @@
                                 <div class="text">
 
 
-                                    <div class="productDescription">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</div>
+                                    <div class="productDescription">${list.productDetails.briefDescription}</div>
+
                                     <g:if test="${list.productDetails.isSale==true}">
                                         <p class="price priceWithDiscount" style="text-align:left;color:#202020;font-weight: 400;font-size: 14px;margin-top: 2px;width: 190px;word-wrap: break-word;"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" />
                                             <del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.${list.productDetails.price}</del></p>
