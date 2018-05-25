@@ -25,7 +25,7 @@
 		<div class="col-md-12">
 			<div id="main-slider">
 				<div class="item">
-					<img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:companyInformation.coverImageName])}" class="img-responsive lazy">
+					<img src="${resource(dir: 'images', file: 'spinner-cover.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:companyInformation.coverImageName])}" class="img-responsive lazy">
 
 				</div>
 			</div>

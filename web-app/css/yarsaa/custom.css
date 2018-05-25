@@ -26,7 +26,6 @@
 }
 .textHeight{
     margin-top: -20px;
-
 }
 .moreBrand{
     margin-top: 178px;
@@ -35,38 +34,38 @@
     font-style: italic;
     margin-bottom: -40px;
 }
-.tooltips {
-    position: relative;
-}
+/*.tooltips {*/
+    /*position: relative;*/
+/*}*/
 
-.tooltips .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #41b39c;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 150%;
-    left: 50%;
-    margin-left: -60px;
-}
-.tooltips .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #41b39c transparent transparent transparent;
-}
+/*.tooltips .tooltiptext {*/
+    /*visibility: hidden;*/
+    /*width: 120px;*/
+    /*background-color: #41b39c;*/
+    /*color: #fff;*/
+    /*text-align: center;*/
+    /*border-radius: 6px;*/
+    /*padding: 5px 0;*/
+    /*position: absolute;*/
+    /*z-index: 1;*/
+    /*bottom: 150%;*/
+    /*left: 50%;*/
+    /*margin-left: -60px;*/
+/*}*/
+/*.tooltips .tooltiptext::after {*/
+    /*content: "";*/
+    /*position: absolute;*/
+    /*top: 100%;*/
+    /*left: 50%;*/
+    /*margin-left: -5px;*/
+    /*border-width: 5px;*/
+    /*border-style: solid;*/
+    /*border-color: #41b39c transparent transparent transparent;*/
+/*}*/
 
-.tooltips:hover .tooltiptext {
-    visibility: visible;
-}
+/*.tooltips:hover .tooltiptext {*/
+    /*visibility: visible;*/
+/*}*/
 
 .box{
     text-overflow: ellipsis;
@@ -79,32 +78,32 @@
     overflow: hidden;
 }
 
- .tooltip {
-     position: relative;
-     display: inline-block;
-     border-bottom: 1px dotted black;
- }
+ /*.tooltip {*/
+     /*position: relative;*/
+     /*display: inline-block;*/
+     /*border-bottom: 1px dotted black;*/
+ /*}*/
 
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
+/*.tooltip .tooltiptext {*/
+    /*visibility: hidden;*/
+    /*width: 120px;*/
+    /*background-color: black;*/
+    /*color: #fff;*/
+    /*text-align: center;*/
+    /*border-radius: 6px;*/
+    /*padding: 5px 0;*/
 
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: 100%;
-    left: 50%;
-    margin-left: -60px;
-}
+    /*!* Position the tooltip *!*/
+    /*position: absolute;*/
+    /*z-index: 1;*/
+    /*top: 100%;*/
+    /*left: 50%;*/
+    /*margin-left: -60px;*/
+/*}*/
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-}
+/*.tooltip:hover .tooltiptext {*/
+    /*visibility: visible;*/
+/*}*/
 
 .wthreeshop-a {
     margin-top: 30px;
@@ -221,7 +220,8 @@
     /*padding-top: 110px;*/
 /*}*/
 .product-height{
-    height: 372px;
+    height: 300px;
+    width: 210px;
 }
 .flip-height{
     height: 241px;
@@ -242,8 +242,6 @@
     width: 539px;
 }
 #content .product .text del.del-price{
-    font-size: 12px;
-    text-align: center;
     font-style: italic;
 }
 /*.sildeshow1{*/
@@ -342,6 +340,23 @@
 {
     background-color: #41b39c;
 }
+.discountBox {
+    border: 2px solid #f68b1e;
+    color: #f68b1e;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 700;
+    padding: 4px 2px;
+    float: right;
+    text-align: right;
+    margin-top: -45px;
+}
+.productDescription{
+    color: #000;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
 
 @media screen and (max-width:240px){
     .bigButton {
@@ -795,10 +810,6 @@
     .goToDescription{
         margin-top: -20px!important;
     }
-    .price{
-        font-size: 20px!important;
-        margin-top: -20px!important;
-    }
     .bigName{
         font-size: 18px!important;
         margin-top: -13px!important;
@@ -866,9 +877,6 @@
     .height-same{
         height: 450px;
     }
-    .product-height {
-        height: 435px;
-    }
     .wthreeshop-a a{
         font-size: 7px;
     }
@@ -902,9 +910,7 @@
     .img-texts{
         height: 200px;
     }
-    .about-product{
-        height: 645px;
-    }
+
     .text-margin{
         margin-top: -50px;
     }
@@ -921,6 +927,26 @@
         width: 55%;
         margin-bottom: 30px;
     }
+    .product-height{
+        width: 238px;
+        height: 325px;
+    }
+    .discountBox {
+        margin-left: 220px!important;
+    }
+    .productDescription{
+        font-weight: 400!important;
+        font-size: 12px!important;
+    }
+    .priceWithDiscount{
+        font-size: 18px!important;
+        width: 187px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 18px!important;
+
+    }
+
 
 }
 @media screen and (min-width: 321px) and (max-width:360px){
@@ -930,10 +956,6 @@
     }
     .goToDescription{
 margin-top: -20px!important;
-    }
-    .price{
-        font-size: 20px!important;
-        margin-top: -20px!important;
     }
     .bigName{
     font-size: 18px!important;
@@ -957,13 +979,6 @@ margin-top: -20px!important;
     }
     .height-img{
         height: 142px!important;
-
-    }
-    .product-color img{
-        height:260px!important;
-    }
-    .product-color{
-        height:260px!important;
 
     }
     .smallAbout img{
@@ -1071,7 +1086,21 @@ margin-top: -20px!important;
         margin-bottom: 10px;
     }
     .product-height{
-        height: 550px!important;
+        width: 278px;
+        height: 355px;
+    }
+
+    .productDescription{
+        font-weight: 400!important;
+        font-size: 16px!important;
+    }
+    .priceWithDiscount{
+        font-size: 18px!important;
+        width: 200px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 18px!important;;
+
     }
 
 }
@@ -1081,10 +1110,6 @@ margin-top: -20px!important;
     }
     .goToDescription{
         margin-top: -20px!important;
-    }
-    .price{
-        font-size: 20px!important;
-        margin-top: -10px!important;
     }
     .bigName{
         font-size: 18px!important;
@@ -1219,8 +1244,24 @@ margin-top: -20px!important;
     }
 
     .product-height{
-        height: 550px!important;
+        width: 302px;
+        height: 370px;
     }
+
+    .productDescription{
+        font-weight: 400!important;
+        font-size: 16px!important;
+    }
+    .priceWithDiscount{
+        font-size: 18px!important;
+        margin-top: -2px!important;
+width: 250px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 18px!important;
+        margin-top: -2px!important;
+    }
+
 }
 
 @media screen and (min-width: 412px) and (max-width:413px){
@@ -1234,10 +1275,7 @@ margin-top: -20px!important;
     .goToDescription{
         margin-top: -20px!important;
     }
-    .price{
-        font-size: 20px!important;
-        margin-top: -20px!important;
-    }
+
     .bigName{
         font-size: 18px!important;
         margin-top: -13px!important;
@@ -1265,13 +1303,7 @@ margin-top: -20px!important;
         height: 142px!important;
 
     }
-    .product-color img{
-        height:300px!important;
-    }
-    .product-color{
-        height:300px!important;
 
-    }
     .smallAbout img{
         height: 230px!important;
         width:400px!important;
@@ -1375,8 +1407,22 @@ margin-top: -20px!important;
         margin-bottom: 10px;
     }
     .product-height{
-        height: 550px!important;
+        width: 340px;
+        height: 420px;
     }
+
+    .productDescription{
+        font-weight: 400!important;
+        font-size: 18px!important;
+    }
+.priceWithDiscount{
+    font-size: 18px!important;
+    width: 250px!important;
+}
+.priceWithoutDiscount{
+    font-size: 18px!important;;
+
+}
 }
 
 @media screen and (min-width: 414px) and (max-width:440px){
@@ -1384,10 +1430,6 @@ margin-top: -20px!important;
         margin-top: -5px!important;
     }
     .goToDescription{
-        margin-top: -20px!important;
-    }
-    .price{
-        font-size: 20px!important;
         margin-top: -20px!important;
     }
     .bigName{
@@ -1417,13 +1459,7 @@ margin-top: -20px!important;
         height: 142px!important;
 
     }
-    .product-color img{
-        height:260px!important;
-    }
-    .product-color{
-        height:260px!important;
 
-    }
     .smallAbout img{
         height: 360px!important;
         width:450px!important;
@@ -1508,9 +1544,7 @@ margin-top: -20px!important;
         font-size: 10px!important;
     }
 
-    .about-product {
-        height: 700px;
-    }
+
     .contact-img{
         height: 240px;
     }
@@ -1529,18 +1563,24 @@ margin-top: -20px!important;
     }
 
     .product-height{
-        height: 380px!important;
+        width: 332px;
+        height: 395px;
+    }
+
+    .productDescription{
+        font-weight: 400!important;
+        font-size: 12px!important;
+    }
+    .priceWithDiscount{
+        font-size: 18px!important;
+        width: 250px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 18px!important;
     }
 
 
 
-    .product-color img{
-        height:350px!important;
-    }
-    .product-color{
-        height:350px!important;
-
-    }
 
 
 }
@@ -1549,10 +1589,6 @@ margin-top: -20px!important;
         margin-top: -5px!important;
     }
     .goToDescription{
-        margin-top: -20px!important;
-    }
-    .price{
-        font-size: 20px!important;
         margin-top: -20px!important;
     }
     .bigName{
@@ -1690,9 +1726,6 @@ margin-top: -20px!important;
         height: 845px!important;
     }
 
-    .product-height{
-        height: 380px!important;
-    }
 
 
     .product-color img{
@@ -1703,7 +1736,17 @@ margin-top: -20px!important;
 
     }
 
-
+    .product-height{
+        width: 173px;
+        height: 270px;
+    }
+    .priceWithDiscount{
+        font-size: 16px!important;
+        width: 135px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 16px!important;
+    }
 }
 
 @media screen and (min-width:481px) and (max-width: 520px){
@@ -1750,10 +1793,6 @@ margin-top: -20px!important;
     .goToDescription{
         margin-top: -20px!important;
     }
-    .price{
-        font-size: 20px!important;
-        margin-top: -20px!important;
-    }
     .bigName{
         font-size: 18px!important;
         margin-top: -13px!important;
@@ -1769,7 +1808,7 @@ margin-top: -20px!important;
     }
 
     .more{
-        margin-top: -85px!important;
+        margin-top: -70px!important;
         margin-right: 35px!important;
     }
     .moreBrand{
@@ -1815,14 +1854,6 @@ margin-top: -20px!important;
     .about-product{
         height: 945px!important;
     }
-    .product img{
-        width: 360px!important;
-        height: 700px!important;
-    }
-
-    .product-height{
-        height: 450px!important;
-    }
 
     .height-img{
         height: 500px!important;
@@ -1834,14 +1865,25 @@ margin-top: -20px!important;
     .boxsize-small{
         margin-top: 30px;
     }
-    .product-color img{
-        height:400px!important;
+    .product-height{
+        width: 200px;
+        height: 295px;
     }
 
-    .product-color{
-        height:400px!important;
-
+    .productDescription{
+        font-weight: 500!important;
+        font-size: 14px!important;
     }
+    .priceWithDiscount{
+        font-size: 15px!important;
+        width: 135px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 15px!important;
+    }
+
+
+
 }
 @media screen and (min-width:569px) and (max-width: 599px){
     .lead1{
@@ -1885,10 +1927,6 @@ margin-top: -20px!important;
         margin-top: -5px!important;
     }
     .goToDescription{
-        margin-top: -20px!important;
-    }
-    .price{
-        font-size: 20px!important;
         margin-top: -20px!important;
     }
     .bigName{
@@ -1950,16 +1988,6 @@ margin-top: -20px!important;
         margin-top: 30px;
     }
 
-    .product-height{
-        height: 440px!important;
-    }
-
-
-    .about-product{
-        height: 755px!important;
-        width: 568px!important;
-    }
-
     .height-img{
         height: 500px!important;
     }
@@ -1980,6 +2008,24 @@ margin-top: -20px!important;
         font-family: 'Montserrat', sans-serif;
         display: inline-block;
     }
+    .product-height{
+        width: 233px;
+        height: 340px;
+    }
+    .productDescription{
+        font-weight: 400!important;
+        font-size: 16px!important;
+    }
+    .priceWithDiscount{
+        font-size: 18px!important;
+        margin-top: -2px!important;
+width: 187px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 18px!important;
+margin-top: -2px!important;
+    }
+
 
 }
 @media screen and (min-width:621px) and (max-width: 640px){
@@ -1987,10 +2033,6 @@ margin-top: -20px!important;
         margin-top: -5px!important;
     }
     .goToDescription{
-        margin-top: -20px!important;
-    }
-    .price{
-        font-size: 20px!important;
         margin-top: -20px!important;
     }
     .bigName{
@@ -2050,26 +2092,7 @@ margin-top: -20px!important;
         margin-top: 30px;
     }
 
-    .product-height{
-        height: 440px!important;
-    }
 
-    .product-color img{
-        height:530px!important;
-    }
-
-    .product-color{
-        height:530px!important;
-
-    }
-    .about-product{
-        height: 765px!important;
-        width: 610px!important;
-    }
-
-    .height-img{
-        height: 500px!important;
-    }
     .lead1{
         font-size:10px !important;
         margin-top: -15%!important;
@@ -2087,6 +2110,26 @@ margin-top: -20px!important;
         font-family: 'Montserrat', sans-serif;
         display: inline-block;
     }
+    .product-height{
+        width: 278px;
+        height: 350px;
+    }
+    .discountBox {
+        margin-left: 220px!important;
+    }
+    .productDescription{
+        font-weight: 400!important;
+        font-size: 16px!important;
+    }
+    .priceWithDiscount{
+        font-size: 18px!important;
+        width: 200px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 18px!important;
+
+    }
+
 
 }
 
@@ -2174,18 +2217,6 @@ margin-top: -20px!important;
         height:300px!important;
     }
 
-    .about-product{
-        height: 945px!important;
-    }
-
-    .product-height{
-        height: 450px!important;
-    }
-
-
-    .height-img{
-        height: 500px!important;
-    }
 
     .w3lsshoesaits-info{
         top: 10%;
@@ -2193,24 +2224,15 @@ margin-top: -20px!important;
     .boxsize-small{
         margin-top: 30px;
     }
-    .product-color img{
-        height:470px!important;
-    }
 
-    .product-color{
-        height:470px!important;
 
-    }
     .text-center{
         margin-top: -5px!important;
     }
     .goToDescription{
         margin-top: -20px!important;
     }
-    .price{
-        font-size: 20px!important;
-        margin-top: -20px!important;
-    }
+
     .bigName{
         font-size: 18px!important;
         margin-top: -13px!important;
@@ -2223,6 +2245,23 @@ margin-top: -20px!important;
     }
     .box-height{
         height: 200px!important;
+    }
+    .product-height{
+        width: 267px;
+        height: 335px;
+    }
+
+    .productDescription{
+        font-weight: 400!important;
+        font-size: 14px!important;
+    }
+    .priceWithDiscount{
+        font-size: 15px!important;
+        width: 218px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 15px!important;;
+
     }
 
 }
@@ -2314,10 +2353,7 @@ margin-top: -20px!important;
     .goToDescription{
         margin-top: -20px!important;
     }
-    .price{
-        font-size: 20px!important;
-        margin-top: -20px!important;
-    }
+
     .bigName{
         font-size: 18px!important;
         margin-top: -13px!important;
@@ -2333,7 +2369,7 @@ margin-top: -20px!important;
     }
 
     .more{
-        margin-top: -87px!important;
+        margin-top: -70px!important;
         margin-right: 35px!important;
     }
     .agileinfonewsl {
@@ -2376,26 +2412,10 @@ margin-top: -20px!important;
         margin-top: 30px;
     }
 
-    .product-height{
-        height: 500px!important;
-    }
 
-    .product-color img{
-        height:550px!important;
-    }
 
-    .product-color{
-        height:550px!important;
 
-    }
-    .about-product{
-        height: 1040px!important;
-        width: 675px!important;
-    }
 
-    .height-img{
-        height: 500px!important;
-    }
     .lead1{
              font-size:16px !important;
              margin-top: -8%!important;
@@ -2405,6 +2425,23 @@ margin-top: -20px!important;
 .lead2{
     font-size: 10px!important;
 }
+    .product-height{
+        width: 299px;
+        height: 400px;
+    }
+
+    .productDescription{
+        font-weight: 400!important;
+        font-size: 18px!important;
+    }
+    .priceWithDiscount{
+        font-size: 18px!important;
+        width: 250px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 18px!important;;
+
+    }
 }
 @media screen and (min-width: 736px) and (max-width: 749px) {
     .more{
@@ -2417,9 +2454,7 @@ margin-top: -20px!important;
         width: 100% !important;
         height: 600px !important;
     }
-    .product-img{
-        height: 490px;
-    }
+
     .smallAbout img{
         height: 440px!important;
         width:710px!important;
@@ -2443,35 +2478,14 @@ margin-top: -20px!important;
         top: 15%!important;
         height: 172px!important;
     }
-    .height-img{
-        height: 365px;
-    }
+
     .contact-img{
         height: 270px;
     }
     .boxsize-small{
         margin-top: 30px;
     }
-    .product-height{
-        height: 500px!important;
-    }
 
-    .product-color img{
-        height:540px!important;
-    }
-
-    .product-color{
-        height:540px!important;
-
-    }
-    .about-product{
-        height: 941px!important;
-        width: 675px!important;
-    }
-
-    .height-img{
-        height: 500px!important;
-    }
     .lead1{
         font-size:16px !important;
         margin-top: -8%!important;
@@ -2487,10 +2501,7 @@ margin-top: -20px!important;
     .goToDescription{
         margin-top: -20px!important;
     }
-    .price{
-        font-size: 20px!important;
-        margin-top: -20px!important;
-    }
+
     .bigName{
         font-size: 18px!important;
         margin-top: -13px!important;
@@ -2504,6 +2515,23 @@ margin-top: -20px!important;
     .box-height{
         height: 200px!important;
     }
+    .product-height{
+        width: 301px;
+        height: 380px;
+    }
+
+    .productDescription{
+        font-weight: 500!important;
+        font-size: 14px!important;
+    }
+    .priceWithDiscount{
+        font-size: 15px!important;
+        width: 235px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 15px!important;
+    }
+
 
 }
 @media screen and (min-width: 750px) and (max-width: 768px) {
@@ -2548,12 +2576,6 @@ margin-top: -20px!important;
     .boxsize-small{
         margin-top: 30px;
     }
-
-    .product-height{
-        height: 500px!important;
-    }
-
-
     .about-product{
         height: 640px!important;
         width: 345px!important;
@@ -2570,6 +2592,20 @@ margin-top: -20px!important;
     }
     .lead2{
         font-size: 10px!important;
+    }
+    .product-height{
+        width: 308px;
+        height: 385px!important;
+    }
+    .product-height img{
+     width: 100%;
+    }
+    .priceWithDiscount{
+        font-size: 16px!important;
+        width: 285px!important;
+    }
+    .priceWithoutDiscount{
+        font-size: 16px!important;
     }
 }
 
@@ -2593,7 +2629,7 @@ margin-top: -20px!important;
     }
 
     .product-height{
-        height: 400px!important;
+        height: 300px!important;
     }
     .lead1{
         font-size:16px !important;

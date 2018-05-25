@@ -50,8 +50,6 @@ class AboutUsController extends BaseController {
             aboutUsInstance.quote = params.quote
 
             aboutUsInstance.videoDescription = params.videoDescription
-//            aboutUsInstance.specialProduct1 = Product.get(params.specialProduct1)
-//            aboutUsInstance.specialProduct2 = Product.get(params.specialProduct2)
             aboutUsInstance.specialProductSubCategory = ProductSubCategory.get(params.specialProductSubCategory)
             aboutUsInstance.coverImage = updateCoverImage(aboutUsInstance.coverImage)
             aboutUsInstance.aboutUs1Image = updateAboutUs1Image(aboutUsInstance.aboutUs1Image)

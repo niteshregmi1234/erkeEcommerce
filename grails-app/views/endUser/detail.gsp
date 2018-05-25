@@ -271,7 +271,7 @@
                         %{--</a>--}%
                         <a href="#" class="thumb" id="thumb${i}" data-image="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.mediumImageName])}" data-zoom-image="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.zoomImageName])}">
 
-                            <img src="${resource(dir: 'images', file: 'product-thumb-spinner.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.thumbnailImageName])}" class="img-responsive lazy" >
+                            <img src="${resource(dir: 'images', file: 'spinner-product-small.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.thumbnailImageName])}" class="img-responsive lazy" >
                         </a>
                         &nbsp;
 
@@ -290,7 +290,7 @@
                             <div id="mainImage">
                                             %{--<img id="myImg" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].frontImageName])}" class="img-responsive lazy">--}%
                            <g:if test="${totalArray[4]}">
-                            <img id="zoom" src="${resource(dir: 'images', file: 'product-medium-spinner.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[4][0].mediumImageName])}" data-zoom-image="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[4][0].zoomImageName])}" class="img-responsive lazy">
+                            <img id="zoom" src="${resource(dir: 'images', file: 'spinner-product-medium.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[4][0].mediumImageName])}" data-zoom-image="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[4][0].zoomImageName])}" class="img-responsive lazy">
                            </g:if>
                         </div>
 

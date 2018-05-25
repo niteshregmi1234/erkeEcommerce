@@ -241,7 +241,7 @@ def deleteCart(Map params,EndUserInformation endUserInformation){
         def upCoverImageList = CoverImage.findAllByStatusShowAndSlidePlace(true, "UP")
         def latestProductList = Product.findAllByIsLatestAndDelFlag(true,false,[max:10])
         def productTopSalesList = Product.findAllBySoldNumbersGreaterThanAndDelFlag(0,false, [max:10,sort: "soldNumbers", order: "desc"])
-        def brandList=ProductBrand.findAllByIsTop(true,[max:6])
+        def brandList=ProductBrand.findAllByIsTop(true)
         def totalArray=[upCoverImageList,brandList,latestProductList,productTopSalesList,listListProduct]
 return totalArray}
         catch (Exception e){
@@ -257,7 +257,6 @@ return totalArray}
             def product=Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
             if(product){
                 productList.add(product)
-
             }
         }
         Collections.shuffle(productList)

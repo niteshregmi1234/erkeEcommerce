@@ -20,7 +20,7 @@
             <div id="main-slider">
 <g:each in="${totalArray[0]}" var="list">
                 <div class="item">
-                   <g:link action="topBrand" controller="endUser" params="[brandNames:list.productBrand.urlName]"> <img src="${resource(dir: 'images', file: 'cover.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive lazy"></g:link>
+                   <g:link action="topBrand" controller="endUser" params="[brandNames:list.productBrand.urlName]"> <img src="${resource(dir: 'images', file: 'spinner-cover.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive lazy"></g:link>
 
                 </div>
                </g:each>
@@ -35,16 +35,18 @@
 
             <div class="social">
             <h2 style="color: #4fbfa8; margin-left: 8px;">Top Brands</h2>
-<g:each in="${totalArray[1]}" var="list">
+                <% int j=0 %>
+<g:each in="${totalArray[1]}" var="list" status="i">
     <g:if test="${Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductBrand(list),false)}">
-
+               <% if(j<6) {%>
                 <div class="col-md-2 col-sm-4 col-xs-4" style="margin-bottom: 10px;">
         <g:link action="topBrand" controller="endUser" params="[brandNames:list.urlName]">
 
-            <img src="${resource(dir: 'images', file: 'product-special-spinner.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive lazy">
+            <img src="${resource(dir: 'images', file: 'spinner-brand-logo.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive lazy">
 </g:link>
                 </div>
-
+<%}%>
+        <% j=j+1%>
 
     </g:if>
 </g:each>
@@ -134,71 +136,38 @@
             <div class="product-slider">
 <g:each in="${totalArray[2]}" var="list">
     <div class="item">
-                    <div class="product">
+                    <div class="product product-height">
                         <div class="flip-container">
                             <div class="flipper">
                                 <div class="front">
                                     <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                        <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
                                     </g:link>
                                 </div>
                                 <div class="back">
     <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+        <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
     </g:link>
                                 </div>
                             </div>
                         </div>
                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible food1">
-                            <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                            <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
                         </g:link>
                         <div class="text">
-                            <div class="tooltips">
-                                <h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
-                                <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
-                            </div>
+                                %{--<h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>--}%
+                                <div class="productDescription">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</div>
                             <g:if test="${list.productDetails.isSale==true}">
-                                <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-
-                                    <del class="del-price">Rs.${list.productDetails.price}</del></p>
+                                <p class="price priceWithDiscount" style="text-align:left;color:#202020;font-weight: 400;font-size: 14px;margin-top: 2px;width: 135px;word-wrap: break-word;"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" />
+                                    <del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.${list.productDetails.price}</del></p>
+                                <div class="discountBox">-${list.productDetails.discountPercentage}%</div>
                             </g:if>
                             <g:if test="${list.productDetails.isSale==false}">
 
-                                <p class="price">Rs.${list.productDetails.price}</p>
+                                <p class="price priceWithoutDiscount" style="color:#202020;font-weight: 400;font-size: 14px;text-align: left;width: 163px;">Rs.${list.productDetails.price}</p>
                             </g:if>
                         </div>
-                        %{--<div class="text">--}%
-                            %{--<div class="tooltips">--}%
-                                %{--<h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>--}%
-                                %{--<span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>--}%
-                            %{--</div>--}%
-                            %{--<g:if test="${list.productDetails.isSale==true}">--}%
-                                %{--<p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>--}%
 
-                                    %{--<del class="del-price">Rs.${list.productDetails.price}</del></p>--}%
-                            %{--</g:if>--}%
-                            %{--<g:if test="${list.productDetails.isSale==false}">--}%
-
-                                %{--<p class="price">Rs.${list.productDetails.price}</p>--}%
-                            %{--</g:if>--}%
-                        %{--</div>--}%
-
-
-                    <!-- /.text -->
-                        <g:if test="${list.productDetails.isSale==true}">
-                        <div class="ribbon sale">
-                            <div class="theribbon">SALE</div>
-                            <div class="ribbon-background"></div>
-                        </div>
-                        </g:if>
-                        <g:if test="${list.isLatest==true}">
-                            <div class="ribbon new">
-                                <div class="theribbon">NEW</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                        </g:if>
-
-                    <!-- /.ribbon -->
                     </div>
 
         <!-- /.product -->
@@ -216,7 +185,7 @@
         <!-- /.container -->
 
     </div>
-        <div class="col-md-12">
+               <div class="col-md-12">
         <h4><p class="loadMore more" >
             <g:link action="latestProducts" controller="endUser">See more..</g:link>
         </p>
@@ -273,54 +242,40 @@
                                 <div class="flipper">
                                     <div class="front">
                                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                                            <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                            <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                                         </g:link>
                                     </div>
                                     <div class="back">
                                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
 
-                                            <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                            <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                                         </g:link>
                                     </div>
                                 </div>
                             </div>
                             <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible food1">
-                                <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
 
                             </g:link>
                             <div class="text">
-                                <div class="tooltips">
-                                    <h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
-                                    <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
-                                </div>
+                                %{--<h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>--}%
+                                <div class="productDescription">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</div>
                                 <g:if test="${list.productDetails.isSale==true}">
-                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-
-                                        <del class="del-price">Rs.${list.productDetails.price}</del></p>
+                                    <p class="price priceWithDiscount" style="text-align:left;color:#202020;font-weight: 400;font-size: 14px;margin-top: 2px;width: 135px;word-wrap: break-word;"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" />
+                                        <del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.${list.productDetails.price}</del></p>
+                                    <div class="discountBox">-${list.productDetails.discountPercentage}%</div>
                                 </g:if>
                                 <g:if test="${list.productDetails.isSale==false}">
 
-                                    <p class="price">Rs.${list.productDetails.price}</p>
+                                    <p class="price priceWithoutDiscount" style="color:#202020;font-weight: 400;font-size: 14px;text-align: left;width: 163px;">Rs.${list.productDetails.price}</p>
                                 </g:if>
                             </div>
-                        <!-- /.text -->
-                            <g:if test="${list.productDetails.isSale==true}">
-                                <div class="ribbon sale">
-                                    <div class="theribbon">SALE</div>
-                                    <div class="ribbon-background"></div>
-                                </div>
-                            </g:if>
-                            <g:if test="${list.isLatest==true}">
-                                <div class="ribbon new">
-                                    <div class="theribbon">NEW</div>
-                                    <div class="ribbon-background"></div>
-                                </div>
-                            </g:if>
 
-                        <!-- /.ribbon -->
+
+                            <!-- /.ribbon -->
                         </div>
                         <!-- /.product -->
                     </div>
@@ -347,19 +302,19 @@
 <div class="row">
                 <div class="col-md-6 ">
 
-                    <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'ad-01-spinner.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
+                    <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'spinner-home-ad-full.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
 
                 </div>
                 <div class="col-md-6 ">
                     <g:link controller="endUser" action="specifiedProducts"  params="[category:'electronics',subCategorySpecify: 'laptop-computer']">
 
-                        <img src="${resource(dir: 'images', file: 'ad-02-spinner.gif.gif')}" data-src="${resource(dir: 'images', file: 'hp3.jpg')}" class="img-responsive lazy" >
+                        <img src="${resource(dir: 'images', file: 'spinner-home-ad-half.gif')}" data-src="${resource(dir: 'images', file: 'hp3.jpg')}" class="img-responsive lazy" >
                     </g:link>
                 </div>
                     <div class="col-md-6 ">
                                                 <g:link action="allCategoryProducts" params="[category:'women']" controller="endUser">
 
-    <img src="${resource(dir: 'images', file: 'ad-02-spinner.gif.gif')}" data-src="${resource(dir: 'images', file: 'Ph4.jpg')}" class="img-responsive lazy" >
+    <img src="${resource(dir: 'images', file: 'spinner-home-ad-half.gif')}" data-src="${resource(dir: 'images', file: 'Ph4.jpg')}" class="img-responsive lazy" >
                                                 </g:link>
                     </div>
 </div>
@@ -389,54 +344,40 @@
                                     <div class="flipper">
                                         <div class="front">
                                             <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                                                <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                                <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                                             </g:link>
                                         </div>
                                         <div class="back">
                                             <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
 
-                                                <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                                <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                                             </g:link>
                                         </div>
                                     </div>
                                 </div>
                                 <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible food1">
-                                    <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
+                                    <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
 
                                 </g:link>
                                 <div class="text">
-                                    <div class="tooltips">
-                                        <h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
-                                        <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
-                                    </div>
+                                    %{--<h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>--}%
+                                    <div class="productDescription">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</div>
                                     <g:if test="${list.productDetails.isSale==true}">
-                                        <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-
-                                            <del class="del-price">Rs.${list.productDetails.price}</del></p>
+                                        <p class="price priceWithDiscount" style="text-align:left;color:#202020;font-weight: 400;font-size: 14px;margin-top: 2px;width: 135px;word-wrap: break-word;"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" />
+                                            <del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.${list.productDetails.price}</del></p>
+                                        <div class="discountBox">-${list.productDetails.discountPercentage}%</div>
                                     </g:if>
                                     <g:if test="${list.productDetails.isSale==false}">
 
-                                        <p class="price">Rs.${list.productDetails.price}</p>
+                                        <p class="price priceWithoutDiscount" style="color:#202020;font-weight: 400;font-size: 14px;text-align: left;width: 163px;">Rs.${list.productDetails.price}</p>
                                     </g:if>
                                 </div>
-                            <!-- /.text -->
-                                <g:if test="${list.productDetails.isSale==true}">
-                                    <div class="ribbon sale">
-                                        <div class="theribbon">SALE</div>
-                                        <div class="ribbon-background"></div>
-                                    </div>
-                                </g:if>
-                                <g:if test="${list.isLatest==true}">
-                                    <div class="ribbon new">
-                                        <div class="theribbon">NEW</div>
-                                        <div class="ribbon-background"></div>
-                                    </div>
-                                </g:if>
 
-                            <!-- /.ribbon -->
+
+                                <!-- /.ribbon -->
                             </div>
                             <!-- /.product -->
                         </div>

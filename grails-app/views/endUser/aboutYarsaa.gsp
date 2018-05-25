@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div id="main-slider">
                     <div class="item">
-                        <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.coverImage])}" class="img-responsive lazy">
+                        <img src="${resource(dir: 'images', file: 'spinner-cover.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.coverImage])}" class="img-responsive lazy">
                     </div>
                 </div>
                 <!-- /#main-slider -->
@@ -30,14 +30,14 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 ">
+            <div class="col-md-6 col-sm-12">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-xs-6">
                         <div class="imgwrapper">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs1Image])}" class="img-responsive lazy">
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-xs-6">
                         <div class="imgwrapper">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs2Image])}" class="img-responsive lazy">
                         </div>
@@ -45,12 +45,12 @@
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-xs-6">
                         <div class="imgwrapper">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs3Image])}" class="img-responsive lazy">
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-xs-6 ">
                         <div class="imgwrapper">
                             <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.aboutUs4Image])}" class="img-responsive lazy">
                         </div>

@@ -206,165 +206,164 @@
                         }
                     },
                     callback: function (result) {
-                        if(result==true){
-                            var d=document.getElementsByClassName("modal");
-                            for(j=0;j<d.length;j++){
-                                $(d[j]).modal('toggle');}
-                            var response;
-                            var editThumbnailImage=document.getElementById("editThumbnailImageName"+i);
-                            var editMediumImage=document.getElementById("editMediumImageName"+i);
-                            var editZoomImage=document.getElementById("editZoomImageName"+i);
-                            var arrInput=[editThumbnailImage,editMediumImage,editZoomImage];
-                            for (var k = 0; k < arrInput.length; k++) {
-                                var oInputs = arrInput[k];
-                                if (oInputs.type == "file") {
-                                    var sFileName = oInputs.value;
-                                    if (sFileName.length > 0) {
-                                        var blnValid = false;
-                                        for (var j = 0; j < _validFileExtensions.length; j++) {
-                                            var sCurExtension = _validFileExtensions[j];
-                                            if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
-                                                blnValid = true;
-                                                break;
-                                            }
-                                        }
-
-                                        if (!blnValid) {
-                                            bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
-                                            return false;
-                                        }
-
-                                    }
-                                    else{
-                                        bootbox.alert({
-                                            message: "Image must be choosen",
-                                            size: 'small'
-                                        });
-                                        return false;
-                                    }
-
-
+if(result==true){
+    var d=document.getElementsByClassName("modal");
+    for(j=0;j<d.length;j++){
+        $(d[j]).modal('toggle');}
+                        var response;
+                var editThumbnailImage=document.getElementById("editThumbnailImageName"+i);
+                var editMediumImage=document.getElementById("editMediumImageName"+i);
+                var editZoomImage=document.getElementById("editZoomImageName"+i);
+                var arrInput=[editThumbnailImage,editMediumImage,editZoomImage];
+                for (var k = 0; k < arrInput.length; k++) {
+                    var oInputs = arrInput[k];
+                    if (oInputs.type == "file") {
+                        var sFileName = oInputs.value;
+                        if (sFileName.length > 0) {
+                            var blnValid = false;
+                            for (var j = 0; j < _validFileExtensions.length; j++) {
+                                var sCurExtension = _validFileExtensions[j];
+                                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                                    blnValid = true;
+                                    break;
                                 }
                             }
-                            if(editThumbnailImage.value.length>0){
-                                jForm = new FormData();
-                                jForm.append("Image", $("#editThumbnailImageName"+i).get(0).files[0]);
-                                $.ajax({
-                                    url: "${createLink(controller:'product', action:'checkPhoto')}",
-                                    type: "POST",
-                                    data: jForm,
-                                    mimeType: "multipart/form-data",
-                                    contentType: false,
-                                    cache: false,
-                                    processData: false,
-                                    async: false,
-                                    success: function (result) {
-                                        if (result == "Photo bad format") {
-                                            bootbox.alert({
-                                                message: "Image bad format",
-                                                size: 'small'
-                                            });
-                                            response= false;
 
-                                        }
-                                        else{
-                                            response=true;
-                                        }
-                                    }
-                                });
-
-                            }
-                            if(editMediumImage.value.length>0){
-                                jForm = new FormData();
-                                jForm.append("Image", $("#editMediumImageName"+i).get(0).files[0]);
-                                $.ajax({
-                                    url: "${createLink(controller:'product', action:'checkPhoto')}",
-                                    type: "POST",
-                                    data: jForm,
-                                    mimeType: "multipart/form-data",
-                                    contentType: false,
-                                    cache: false,
-                                    processData: false,
-                                    async: false,
-                                    success: function (result) {
-                                        if (result == "Photo bad format") {
-                                            bootbox.alert({
-                                                message: "Image bad format",
-                                                size: 'small'
-                                            });
-                                            response= false;
-
-                                        }
-                                        else{
-                                            response=true;
-                                        }
-
-
-                                    }
-                                });
-
-                            }
-                            if(editZoomImage.value.length>0){
-                                jForm = new FormData();
-                                jForm.append("Image", $("#editZoomImageName"+i).get(0).files[0]);
-                                $.ajax({
-                                    url: "${createLink(controller:'product', action:'checkPhoto')}",
-                                    type: "POST",
-                                    data: jForm,
-                                    mimeType: "multipart/form-data",
-                                    contentType: false,
-                                    cache: false,
-                                    processData: false,
-                                    async: false,
-                                    success: function (result) {
-                                        if (result == "Photo bad format") {
-                                            bootbox.alert({
-                                                message: "Image bad format",
-                                                size: 'small'
-                                            });
-                                            response= false;
-
-                                        }
-                                        else{
-                                            response=true;
-
-                                        }
-
-
-                                    }
-                                });
-
-                            }
-                            if(response){
-                                jForm = new FormData();
-                                jForm.append("editThumbnailImage", $("#editThumbnailImageName"+i).get(0).files[0]);
-                                jForm.append("editMediumImage", $("#editMediumImageName"+i).get(0).files[0]);
-                                jForm.append("editZoomImage", $("#editZoomImageName"+i).get(0).files[0]);
-                                jForm.append("viewId",id);
-                                $.ajax({
-                                    url: "${createLink(controller:'product', action:'saveViewOfImages')}",
-                                    type: "POST",
-                                    data: jForm,
-                                    mimeType: "multipart/form-data",
-                                    contentType: false,
-                                    cache: false,
-                                    processData: false,
-                                    async: false,
-                                    success: function (result) {
-                                        if(result=="successfully edited the view") {
-                                            $('#listView').load(document.URL +  ' #listView');
-                                        $('#deleteView').html(result);
-                                        }
-                                    }
-                                });
-
+                            if (!blnValid) {
+                                bootbox.alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                                return false;
                             }
 
+                        }
+                        else{
+                            bootbox.alert({
+                                message: "Image must be choosen",
+                                size: 'small'
+                            });
+                            return false;
                         }
 
 
                     }
-                });
+                }
+                if(editThumbnailImage.value.length>0){
+                    jForm = new FormData();
+                    jForm.append("Image", $("#editThumbnailImageName"+i).get(0).files[0]);
+                    $.ajax({
+                        url: "${createLink(controller:'product', action:'checkPhoto')}",
+                        type: "POST",
+                        data: jForm,
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        async: false,
+                        success: function (result) {
+                            if (result == "Photo bad format") {
+                                bootbox.alert({
+                                    message: "Image bad format",
+                                    size: 'small'
+                                });
+                                response= false;
+
+                            }
+                            else{
+                                response=true;
+                            }
+                        }
+                    });
+
+                }
+                if(editMediumImage.value.length>0){
+                    jForm = new FormData();
+                    jForm.append("Image", $("#editMediumImageName"+i).get(0).files[0]);
+                    $.ajax({
+                        url: "${createLink(controller:'product', action:'checkPhoto')}",
+                        type: "POST",
+                        data: jForm,
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        async: false,
+                        success: function (result) {
+                            if (result == "Photo bad format") {
+                                bootbox.alert({
+                                    message: "Image bad format",
+                                    size: 'small'
+                                });
+                                response= false;
+
+                            }
+                            else{
+                                response=true;
+                            }
+
+
+                        }
+                    });
+
+                }
+                if(editZoomImage.value.length>0){
+                    jForm = new FormData();
+                    jForm.append("Image", $("#editZoomImageName"+i).get(0).files[0]);
+                    $.ajax({
+                        url: "${createLink(controller:'product', action:'checkPhoto')}",
+                        type: "POST",
+                        data: jForm,
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        async: false,
+                        success: function (result) {
+                            if (result == "Photo bad format") {
+                                bootbox.alert({
+                                    message: "Image bad format",
+                                    size: 'small'
+                                });
+                                response= false;
+
+                            }
+                            else{
+                                response=true;
+
+                            }
+
+
+                        }
+                    });
+
+                }
+                if(response){
+                    jForm = new FormData();
+                    jForm.append("editThumbnailImage", $("#editThumbnailImageName"+i).get(0).files[0]);
+                    jForm.append("editMediumImage", $("#editMediumImageName"+i).get(0).files[0]);
+                    jForm.append("editZoomImage", $("#editZoomImageName"+i).get(0).files[0]);
+                    jForm.append("viewId",id);
+                    $.ajax({
+                        url: "${createLink(controller:'product', action:'saveViewOfImages')}",
+                        type: "POST",
+                        data: jForm,
+                        mimeType: "multipart/form-data",
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        async: false,
+                        success: function (result) {
+                            if(result=="successfully edited the view") {
+                               location.reload();
+                            }
+                        }
+                    });
+
+                }
+
+}
+
+
+                    }
+            });
             }
             function undo(id,i){
                 $("#rowOfViews"+i).show();
@@ -376,12 +375,12 @@
             }
 
         </script>
-        %{--<button class="btn btn-primary add" data-role="add">--}%
-        %{--<span class="glyphicon glyphicon-plus"></span>--}%
-        %{--</button>--}%
-        %{--<button class="btn btn-danger remove" data-role="remove" id="remove">--}%
-        %{--<span class="glyphicon glyphicon-remove"></span>--}%
-        %{--</button>--}%
+    %{--<button class="btn btn-primary add" data-role="add">--}%
+    %{--<span class="glyphicon glyphicon-plus"></span>--}%
+    %{--</button>--}%
+    %{--<button class="btn btn-danger remove" data-role="remove" id="remove">--}%
+    %{--<span class="glyphicon glyphicon-remove"></span>--}%
+    %{--</button>--}%
     </div>  <!-- /div.form-inline -->
 </div>  <!-- /div[data-role="dynamic-fields"] -->
 

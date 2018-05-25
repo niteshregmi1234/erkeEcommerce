@@ -44,7 +44,7 @@
         <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"style.default.css")}" type="text/css"
               media="all"/>
     </g:if>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.3')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.4')}" type="text/css"
           media="all"/>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/respond.min.js')}" type="text/javascript"
@@ -618,7 +618,33 @@ if(sizeId=='' && productId==''){
         $(function() {
             $('.lazy').lazy();
         });
-    </script>
+        $("body").click(function() {
+            var allimages= document.getElementsByTagName('img');
+            for (var i=0; i<allimages.length; i++) {
+                if (allimages[i].getAttribute('data-src')) {
+                    allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+                }
+            }
+        });
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchmove', handleTouchMove, false);
+        function handleTouchStart() {
+            var allimages= document.getElementsByTagName('img');
+            for (var i=0; i<allimages.length; i++) {
+                if (allimages[i].getAttribute('data-src')) {
+                    allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+                }
+            }
+        }
+        function handleTouchMove() {
+            var allimages= document.getElementsByTagName('img');
+            for (var i=0; i<allimages.length; i++) {
+                if (allimages[i].getAttribute('data-src')) {
+                    allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+                }
+            }
+            }
+</script>
 
     <!-- /#content -->
 

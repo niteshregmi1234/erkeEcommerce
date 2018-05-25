@@ -13,8 +13,6 @@ String aboutUsDescription
     String videoName
     String videoDescrptionImage
     String videoDescription
-    Product specialProduct1
-    Product specialProduct2
     ProductSubCategory specialProductSubCategory
     String specialProductSubCategoryImage
     String backgroundImage

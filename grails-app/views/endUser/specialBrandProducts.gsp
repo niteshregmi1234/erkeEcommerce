@@ -8,18 +8,6 @@
 </head>
 
 <body>
-<!-- *** TOPBAR ***
- _________________________________________________________ -->
-
-<!-- *** TOP BAR END *** -->
-
-<!-- *** NAVBAR ***
- _________________________________________________________ -->
-
-<!-- /#navbar -->
-
-<!-- *** NAVBAR END *** -->
-
 
 <div id="content">
 
@@ -42,141 +30,64 @@
                 <p>${specialBrandInstance.brandDescription}.</p>
             </div>
 
-            %{--<div class="box info-bar">--}%
-            %{--<div class="row">--}%
-            %{--<div class="col-sm-12 col-md-4 products-showing">--}%
-            %{--Showing <strong>12</strong> of <strong>${productList.size()}</strong> products--}%
-            %{--</div>--}%
-
-            %{--<div class="col-sm-12 col-md-8  products-number-sort">--}%
-            %{--<div class="row">--}%
-            %{--<form class="form-inline">--}%
-            %{--<div class="col-md-6 col-sm-6">--}%
-            %{--<div class="products-number">--}%
-            %{--<strong>Show</strong>  <a href="#" class="btn btn-default btn-sm btn-primary">12</a>  <a href="#" class="btn btn-default btn-sm">24</a>  <a href="#" class="btn btn-default btn-sm">All</a> products--}%
-            %{--</div>--}%
-            %{--</div>--}%
-            %{--<div class="col-md-6 col-sm-6">--}%
-            %{--<div class="products-sort-by">--}%
-            %{--<strong>Sort by</strong>--}%
-            %{--<select name="sort-by" class="form-control">--}%
-            %{--<option>Price</option>--}%
-            %{--<option>Name</option>--}%
-            %{--<option>Sales first</option>--}%
-            %{--</select>--}%
-            %{--</div>--}%
-            %{--</div>--}%
-            %{--</form>--}%
-            %{--</div>--}%
-            %{--</div>--}%
-            %{--</div>--}%
-            %{--</div>--}%
-
             <div class="row products" id="myList">
             <g:each in="${productList}" var="list" status="i">
-                <g:if test="${list.productDetails.isSale==false}">
-                    <div class="col-md-3 col-sm-4 a">
+                <div class="grid-products">
+                    <div class="category hidden">${list.productDetails.productCategory.categoryName}</div>
+                    <div class="subCategory hidden">${list.productDetails.productSubCategory.subCategoryName}</div>
+                    <div class="brand hidden">${list.productDetails.productBrand.brandName}</div>
+                    <div class="discount hidden">${list.productDetails.discountPercentage}</div>
+                    <div class="priceProduct hidden">${list.productDetails.price}</div>
+                    <div class="soldNumbers hidden">${list.soldNumbers}</div>
+                    <div class="col-md-4 col-sm-4 a">
                         <div class="product">
                             <div class="flip-container">
                                 <div class="flipper">
-                                    <div class="front product">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
+                                    <div class="front">
+                                        <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
+                                            <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                                         </g:link>
                                     </div>
-                                    <div class="back product">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.backImageName])}" class="img-responsive">
+                                    <div class="back">
+                                        <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
+
+                                            <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy" >
 
                                         </g:link>
                                     </div>
                                 </div>
                             </div>
-                            <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
-                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
+                            <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible">
+                                <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
 
                             </g:link>
                             <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
-                                <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-                                    <del class="del-price" style="visibility:hidden;">Rs.${list.productDetails.price}</del></p>
+
+
+                                <div class="productDescription">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</div>
+                                <g:if test="${list.productDetails.isSale==true}">
+                                    <p class="price priceWithDiscount" style="text-align:left;color:#202020;font-weight: 400;font-size: 14px;margin-top: 2px;width: 190px;word-wrap: break-word;"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" />
+                                        <del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.${list.productDetails.price}</del></p>
+                                    <div class="discountBox">-${list.productDetails.discountPercentage}%</div>
+                                </g:if>
+                                <g:if test="${list.productDetails.isSale==false}">
+
+                                    <p class="price priceWithoutDiscount" style="color:#202020;font-weight: 400;font-size: 14px;text-align: left;width: 163px;">Rs.${list.productDetails.price}</p>
+                                </g:if>
                                 <p class="buttons">
-                                    <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
-                                    <a href="#" data-toggle="modal" data-target="#smallModal${i}" onclick="addValueToField(${list.id});" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-
-                                </p>
-                            </div>
-                            <g:if test="${list.isLatest==true}">
-                                <div class="ribbon new">
-                                    <div class="theribbon">NEW</div>
-                                    <div class="ribbon-background"></div>
-                                </div>
-                            </g:if>
-
-                        <!-- /.text -->
-                        </div>
-                        <!-- /.product -->
-                    </div>
-
-                </g:if>
-                <g:if test="${list.productDetails.isSale==true}">
-
-                    <div class="col-md-3 col-sm-4 a">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front product">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
-
-                                        </g:link>
-                                    </div>
-                                    <div class="back product">
-                                        <g:link action="singleProduct" controller="endUser" id="${list.productId}">
-
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.backImageName])}" class="img-responsive">
-
-                                        </g:link>
-                                    </div>
-                                </div>
-                            </div>
-                            <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="invisible product">
-                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.frontImageName])}" class="img-responsive">
-
-                            </g:link>
-                            <div class="text">
-                                <h3><g:link action="singleProduct" controller="endUser" id="${list.productId}">${list.productDetails.productBrand.brandName+" "+list.productDetails.productName}</g:link></h3>
-                                <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-                                    <del class="del-price">Rs.${list.productDetails.price}</del></p>
-                                <p class="buttons">
-                                    <g:link action="singleProduct" controller="endUser" id="${list.productId}" class="btn btn-default">View detail</g:link>
+                                    <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="btn btn-default">View detail</g:link>
                                     <a href="#" data-toggle="modal" data-target="#smallModal${i}"  class="btn btn-primary" onclick="addValueToField(${list.id});"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </p>
                             </div>
                             <!-- /.text -->
 
-                            <div class="ribbon sale">
-                                <div class="theribbon">SALE</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon -->
 
-                            %{--<div class="ribbon new">--}%
-                            %{--<div class="theribbon">NEW</div>--}%
-                            %{--<div class="ribbon-background"></div>--}%
-                            %{--</div>--}%
-                            %{--<!-- /.ribbon -->--}%
-
-                            %{--<div class="ribbon gift">--}%
-                            %{--<div class="theribbon">GIFT</div>--}%
-                            %{--<div class="ribbon-background"></div>--}%
-                            %{--</div>--}%
-                            %{--<!-- /.ribbon -->--}%
                         </div>
                         <!-- /.product -->
                     </div>
-                </g:if>
+                </div>
+
             </g:each>
 
         <!-- /.col-md-4 -->

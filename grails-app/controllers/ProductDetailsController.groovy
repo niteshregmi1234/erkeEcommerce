@@ -1,4 +1,3 @@
-import org.apache.commons.lang.ArrayUtils
 import org.springframework.dao.DataIntegrityViolationException
 class ProductDetailsController extends BaseController{
 static allowedMethods = [save: 'POST']

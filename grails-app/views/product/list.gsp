@@ -23,7 +23,6 @@
 
     <thead>
     <tr>
-<th>Id</th>
         <th>SN</th>
         <th>View</th>
         <th>Name</th>
@@ -36,7 +35,6 @@
     </thead>
     <tfoot>
     <tr>
-        <th>Id</th>
         <th>SN</th>
         <th>View</th>
         <th>Name</th>
@@ -52,7 +50,6 @@
     <g:each in="${productList}" var="list" status='i'>
         <tr>
             <td>${i+1}</td>
-            <td>${list.id}</td>
             <td> <g:link action="show" id="${list?.id}" controller="Product" class="btn btn-primary btn-sm">view</g:link></td>
             <td>${list.productDetails.productNameWithBrand}</td>
             <td>${list.productDetails.productCategory.categoryName}</td>

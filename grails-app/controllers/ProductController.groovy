@@ -6,7 +6,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 class ProductController extends BaseController {
-    static allowedMethods = [saveViewOfImages:'POST',checkPhoto: 'POST',save: 'POST',uploadSpecialImage: 'POST',editSpecialImage: 'POST',uploadThumbnailImage: 'POST',uploadMediumImage: 'POST',uploadZoomImage: 'POST',changeDiscount: 'POST',changeIsLatest: 'POST',deleteView: 'POST']
+    static allowedMethods = [saveViewOfImages:'POST',checkPhoto: 'POST',save: 'POST',uploadSpecialImage: 'POST',editSpecialImage: 'POST',uploadThumbnailImage: 'POST',uploadMediumImage: 'POST',uploadZoomImage: 'POST',changeDiscount: 'POST',changeIsLatest: 'POST',deleteView: 'POST',editMediumImage: 'POST',editThumbnailImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
     def productService
     def create(){
@@ -188,7 +188,6 @@ def checkPhoto(){
         if(session.adminUser) {
 
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-
                 def Image = request.getFile('Image')
 
                 def checkFile
@@ -285,7 +284,8 @@ def checkPhoto(){
             if(session.adminUser) {
 
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-        def numberOfImageSets = params.numberOfImageSets as int
+        if(params.id){
+                    def numberOfImageSets = params.numberOfImageSets as int
         def product=Product.findByDelFlagAndId(false,params.id as long)
         if(product){
         for (int i = 0; i < numberOfImageSets; i++) {
@@ -300,12 +300,145 @@ def checkPhoto(){
         else{
             redirect(action: "notfound",controller: "errorPage")
 
-        }}}}
+        }}
+                    else if(params.viewId){
+            def productView=ProductView.get(params.viewId)
+            if(productView) {
+                productView.thumbnailImageName = editThumbnailImage(productView.thumbnailImageName)
+                productView.mediumImageName = editMediumImage(productView.mediumImageName)
+                productView.zoomImageName = editZoomImage(productView.zoomImageName)
+                productView.save(flush: true)
+                render "successfully edited the view"
+            }
+
+        }
+                }}}
         catch (Exception e){
             redirect(action: "notfound",controller: "errorPage")
 
         }
     }
+    def editThumbnailImage(String imageNameOld){
+        if(session.adminUser){
+
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("editThumbnailImage")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
+                }
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
+
+                } else {
+                    return imageNameOld
+                }
+            }        }    }
+    def editMediumImage(String imageNameOld){
+        if(session.adminUser){
+
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("editMediumImage")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
+                }
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
+
+                } else {
+                    return imageNameOld
+                }
+            }        }    }
+    def editZoomImage(String imageNameOld){
+        if(session.adminUser){
+
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+
+                def mp = (MultipartHttpServletRequest) request
+                CommonsMultipartFile file = (CommonsMultipartFile) mp.getFile("editZoomImage")
+                def homeDir = new File(System.getProperty("user.home"))
+                File theDir = new File(homeDir, "yarsaa");
+                if (!theDir.exists()) {
+                    theDir.mkdir();
+                    print "yes"
+                }
+                if (file.size > 0) {
+                    File fileOld = new File(homeDir, "yarsaa/${imageNameOld}")
+                    fileOld.delete();
+                    String fileName = file.originalFilename
+                    abc:
+                    boolean check = new File(homeDir, "yarsaa/" + fileName).exists()
+                    if (check == true) {
+                        Matcher m = PATTERN.matcher(fileName);
+                        if (m.matches()) {
+                            String prefix = m.group(1);
+                            String last = m.group(2);
+                            String suffix = m.group(3);
+                            if (suffix == null) suffix = "";
+                            int count = last != null ? Integer.parseInt(last) : 0;
+                            count++;
+                            fileName = prefix + "(" + count + ")" + suffix;
+                            continue abc
+                        }
+                    }
+                    File fileDest = new File(homeDir, "yarsaa/${fileName}")
+                    file.transferTo(fileDest)
+                    return fileName
+
+                } else {
+                    return imageNameOld
+                }
+            }        }    }
+
     def edit(){
         try {
             if(session.adminUser) {
