@@ -1,4 +1,3 @@
-import grails.converters.JSON
 class EndUserInformationController {
     static allowedMethods = [save: 'POST',login: 'POST',checkEmail: 'POST',checkLogin: 'POST',checkPassword: 'POST',editEndUserPassword:'POST' ,editEndUserPersonalDetails: 'POST']
     def endUserInformationService

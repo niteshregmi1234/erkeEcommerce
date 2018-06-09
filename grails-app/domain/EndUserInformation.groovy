@@ -1,11 +1,7 @@
 
 
 class EndUserInformation {
-String firstName
-    String lastName
-    String phone
-    String address
-    String city
+    CustomerPersonalDetails customerPersonalDetails
     String email
     String password
     static constraints = {

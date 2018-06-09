@@ -767,40 +767,25 @@
                 var productId=document.getElementById("productId").value;
                 var sizeId=document.getElementById("size"+i).value;
                 var array = [];
-                array[0]=sizeId;
-                array[1]=productId;
-                var responseValue;
+                array[0]=productId;
+                array[1]=sizeId;
                 $.ajax({
                     url: "${createLink(controller:'cart', action:'checkAddToCart')}",
                     type: "POST",
                     data: { "array": JSON.stringify(array) },
                     async : false,
                     cache:false,
-                    success: function(result) {
-                        if(result=="ok"){
-                            bootbox.alert({
-                                message: "successfully added to cart.",
-                                size: 'small',
-                                callback: function(){
-                                    $('#cartShow').load(document.URL +  ' #cartShow');
-
-                                }
-
-                            });
-                            responseValue=false;
-
-                        }
-                        else if(result=="notOk"){
-                            $('#login-modal').modal('toggle');
-                            document.getElementById("sizeIdLogin").value = sizeId;
-                            document.getElementById("productIdLogin").value = productId;
-
-                        }
+                    success: function() {
+                        $('#cart').load(document.URL +  ' #cart');
+                        $('#cartShow').load(document.URL +  ' #cartShow');
+                        $('#messageModelCart').modal('toggle');
                     }
+
+
                 });
-                return responseValue;
 
             }
+
         </script>
 
 

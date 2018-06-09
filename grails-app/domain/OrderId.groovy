@@ -1,7 +1,8 @@
 
 
 class OrderId {
-EndUserInformation endUserInformation
+String email
+    String orderId
     static constraints = {
     }
 }

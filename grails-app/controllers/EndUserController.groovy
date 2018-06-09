@@ -1,6 +1,14 @@
-class EndUserController {
+import grails.converters.JSON
+
+class EndUserController extends SessionCreateController{
     def productService
-    static allowedMethods = [search: "POST"]
+    static allowedMethods = [search: "POST",findView: 'POST']
+    def findView(){
+        def id=params.id as long
+      def productInstance=Product.findByIdAndDelFlag(id,false)
+        def productView=ProductView.findAllByDelFlagAndProduct(false,productInstance)
+  render productView as JSON
+    }
 def test1(){
 
 }

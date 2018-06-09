@@ -25,15 +25,7 @@
 <div id="content">
     <div class="container">
 
-        <div class="col-md-12" id="basketBar">
-            <ul class="breadcrumb">
-                <li><g:link action="userHome" controller="endUser">Home</g:link>
-                </li>
-                <li>Basket</li>
-
-            </ul>
-        </div>
-        <div class="col-md-12" id="addressBar" style="display: none;">
+        <div class="col-md-12" id="addressBar">
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
@@ -62,219 +54,15 @@
             </ul>
         </div>
 
-        <div class="col-md-9" id="basket">
-            <div class="box" >
 
-                <form method="POST">
-
-                    <h1 class="bigName">Shopping cart</h1>
-                    <p class="text-muted" id="itemsInCart">You currently have ${Cart.findAllByEndUserInformation(session.endUser).size()} item(s) in your cart.</p>
-                    <p class="text-muted updateCart" id="updateItem" style="display: none;">Cart has been updated successfully.</p>
-                    <p class="text-muted updateCart" id="deleteItem" style="display: none;">Item has been successfully removed from cart.</p>
-                    <g:if test="${Cart.findAllByEndUserInformation(session.endUser)}">
-                    <div class="table-responsive" id="tableResponsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th colspan="2">Product</th>
-                                <th>Size</th>
-                                <th>Quantity</th>
-                                <th>Unit price</th>
-                                <th>Discount</th>
-                                <th colspan="2">Total</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <g:each in="${Cart.findAllByEndUserInformation(session.endUser)}" var="list">
-                                <g:hiddenField name="id" value="${list?.product.id}"> </g:hiddenField>
-
-                                <g:hiddenField name="size" value="${list?.productSize.id}"> </g:hiddenField>
-
-                                <tr>
-                                    <td><a>
-                                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.product.specialImageName])}">
-
-                                    </a>
-                                    </td>
-                                    <td>${list.product.productColor.colorName+" "+list.product.productDetails.productName+" "+list.product.productDetails.productBrand.brandName}
-                                    </td>
-                                    <td>${list.productSize.sizeName}</td>
-
-                                    <td>
-
-                                        <g:field  type="number" name="quantity" value="${list?.quantity}" class="form-control quantity" onchange="handleChange(this);"/>
-                                    </td>
-                                    <td>Rs.<g:formatNumber number="${list.product.productDetails.price}" type="number" maxFractionDigits="2" /></td>
-                                    <td>${list.product.productDetails.discountPercentage}%</td>
-                                    <td>Rs.<g:formatNumber number="${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}" type="number" maxFractionDigits="2" /></td>
-                                    <td><a class="deleteCart" onclick="deleteProduct(${list.id},this);"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
-                            </g:each>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th colspan="6">Total</th>
-                                <th colspan="2" class="totalPrice">Rs.${totalArray[0]}</th>
-                            </tr>
-                            </tfoot>
-                        </table>
-
-                    </div>
-                        <script>
-                            function handleChange(input) {
-                                if (input.value < 1) input.value =1 ;
-                            }
-                        </script>
-                    </g:if>
-                    <g:if test="${!Cart.findAllByEndUserInformation(session.endUser)}">
-                        <h3>Your cart is empty.Yo can shop by clicking the button below. Thank you.</h3>
-                        </g:if>
-                    <!-- /.table-responsive -->
-
-                    <div class="box-footer">
-                        <div class="pull-left">
-                            <g:link action="allProducts" controller="endUser" class="btn btn-default bigButton"><i class="fa fa-chevron-left"></i> Continue shopping</g:link>
-                        </div>
-                    <g:if test="${Cart.findAllByEndUserInformation(session.endUser).size()!=0}">
-                        <div class="pull-right">
-                            <button type="submit" class="btn btn-default bigButton" id="updateBasket"><i class="fa fa-refresh" ></i> Update basket</button>
-                            <div class="btn btn-primary bigButton" onclick="showAddress(this);">Proceed to checkout <i class="fa fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </g:if>
-                    </div>
-
-
-</form>
-            </div>
-
-
-            <!-- /.box -->
-<g:if test="${Cart.findAllByEndUserInformation(session.endUser)}">
-            <div class="row same-height-row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="box same-height">
-                        <h3>You may also like these products</h3>
-                    </div>
-                </div>
-                <g:each in="${totalArray[1]}" var="list" status="i">
-                    <g:if test="${i<3}">
-
-                        <div class="col-md-3 col-sm-6">
-                        <div class="product same-height">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front">
-                                        <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
-
-                                        </g:link>
-                                    </div>
-                                    <div class="back">
-                                        <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
-
-
-                                        </g:link>
-                                    </div>
-                                </div>
-                            </div>
-                            <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible">
-
-                                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
-
-                            </g:link>
-                            <div class="text">
-                                <div class="tooltips">
-                                    <h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>
-                                    <span class="tooltiptext">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</span>
-                                </div>
-                                <g:if test="${list.productDetails.isSale==true}">
-                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-
-                                        <del class="del-price">Rs.<g:formatNumber number="${list.productDetails.price}" type="number" maxFractionDigits="2" /></del></p>
-                                </g:if>
-                                <g:if test="${list.productDetails.isSale==false}">
-
-                                    <p class="price"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" /><br>
-
-                                        <del class="del-price" style="visibility: hidden;">Rs.<g:formatNumber number="${list.productDetails.price}" type="number" maxFractionDigits="2" /></del></p>                                </g:if>
-                            </div>
-                        <!-- /.text -->
-                            <g:if test="${list.productDetails.isSale==true}">
-                                <div class="ribbon sale">
-                                    <div class="theribbon">SALE</div>
-                                    <div class="ribbon-background"></div>
-                                </div>
-                            </g:if>
-                            <g:if test="${list.isLatest==true}">
-                                <div class="ribbon new">
-                                    <div class="theribbon">NEW</div>
-                                    <div class="ribbon-background"></div>
-                                </div>
-                            </g:if>
-
-
-                        </div>
-                        <!-- /.product -->
-                    </div>
-                        </g:if>
-                </g:each>
-
-
-
-            </div>
-</g:if>
-            </div>
-<g:if test="${Cart.findAllByEndUserInformation(session.endUser)}">
-
-    <div class="col-md-3" id="basketSummary">
-            <div class="box" id="order-summary">
-                <div class="box-header">
-                    <h3>Order summary</h3>
-                </div>
-                <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
-
-                <div class="table-responsive">
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td>Order subtotal</td>
-                            <th class="totalPrice">Rs.${totalArray[0]}</th>
-                        </tr>
-                        <tr>
-                            <td>Shipping and handling</td>
-                            <th class="shippingAndHandling">Rs.${totalArray[2]}</th>
-                        </tr>
-                        <tr>
-                            <td>Tax</td>
-                            <th class="tax">Rs.${totalArray[3]}</th>
-                        </tr>
-                        <tr class="total">
-                            <td>Total</td>
-                            <th class="totalPriceTotal">Rs.${totalArray[4]}</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-
-
-
-        </div>
-
-</g:if>
-
-        <div class="col-md-9" id="checkout">
+        <div class="col-md-12" id="checkout">
             <form action="/checkOut/placeOrder" method="post" id="myForm">
 
-                <div class="box" style="display: none;" id="deliveryAddress">
+                <div class="box"  id="deliveryAddress">
 
                 <h1 class="bigName">Checkout-Address</h1>
                     <ul class="nav nav-pills nav-justified">
-                        <li class="active"><a onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Address</a>
+                        <li class="active"><a onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Billing Address</a>
                         </li>
                         <li class="disabled"><a href="#"><i class="fa fa-truck"></i><br>Delivery Method</a>
                         </li>
@@ -286,77 +74,353 @@
 
 
                     <div class="content">
-                      <div class="row">
+<g:if test="${!session.endUser}">
+
+    <button type="button" class="btn btn-primary btn-arrow-right" style="margin-left: 30px;" onclick="$('#login-modal').modal('toggle');">Returning Customer?Click here to login</button>
+                        <br><br>
+</g:if>
                         <div class="col-sm-6">
+                                <div class="box">
+                                    <h1 class="checkOutHead">Billing Details</h1>
+
+                                    <style>
+                                    .btn-arrow-right{
+                                        position: relative;
+                                        padding-left: 18px;
+                                        padding-right: 18px;
+                                    }
+
+                                    .btn-arrow-right {
+                                        padding-left: 36px;
+                                    }
+
+
+
+                                    .btn-arrow-right:before,
+                                    .btn-arrow-right:after{
+                                        /* make two squares (before and after), looking similar to the button */
+
+                                        content: "";
+                                        position: absolute;
+                                        top: 5px;
+                                        /* move it down because of rounded corners */
+
+                                        width: 22px;
+                                        /* same as height */
+
+                                        height: 22px;
+                                        /* button_outer_height / sqrt(2) */
+
+                                        background: inherit;
+                                        /* use parent background */
+
+                                        border: inherit;
+                                        /* use parent border */
+
+                                        border-left-color: transparent;
+                                        /* hide left border */
+
+                                        border-bottom-color: transparent;
+                                        /* hide bottom border */
+
+                                        border-radius: 0px 4px 0px 0px;
+                                        /* round arrow corner, the shorthand property doesn't accept "inherit" so it is set to 4px */
+
+                                        -webkit-border-radius: 0px 4px 0px 0px;
+                                        -moz-border-radius: 0px 4px 0px 0px;
+                                    }
+
+                                    .btn-arrow-right:before,
+                                    .btn-arrow-right:after {
+                                        transform: rotate(45deg);
+                                        /* rotate right arrow squares 45 deg to point right */
+
+                                        -webkit-transform: rotate(45deg);
+                                        -moz-transform: rotate(45deg);
+                                        -o-transform: rotate(45deg);
+                                        -ms-transform: rotate(45deg);
+                                    }
+
+
+
+                                    .btn-arrow-right:before{
+                                        /* align the "before" square to the left */
+
+                                        left: -11px;
+                                    }
+
+                                    .btn-arrow-right:after
+                                     {
+                                        /* align the "after" square to the right */
+
+                                        right: -11px;
+                                    }
+
+                                    .btn-arrow-right:after
+                                     {
+                                        /* bring arrow pointers to front */
+
+                                        z-index: 1;
+                                    }
+
+                                    .btn-arrow-right:before{
+                                        /* hide arrow tails background */
+
+                                        background-color: white;
+                                    }
+                                    </style>
+                        <hr>
+
+                        <!-- Form Name -->
+
+                        <div class="form-horizontal" >
+                            <fieldset>
+                                <legend> Personal Information </legend>
+
+<g:if test="${!session.endUser}">
+
+    <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>First Name*</label>
+                                    <input name="firstNameBilling" id="firstNameBilling" placeholder="first Name" value="${endUserInformation?.customerPersonalDetails?.firstName}" type="text" class="form-control billingFieldSmall red-tooltip">
+                                </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label >Last Name*</label>
+                                    <input name="lastNameBilling" id="lastNameBilling" placeholder="last name" type="text" value="${endUserInformation?.customerPersonalDetails?.lastName}" class="form-control billingFieldSmall red-tooltip" >
+                                </div>
+                                </div>
+</g:if>
+                                <g:if test="${session.endUser}">
+
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label>First Name*</label>
+                                            <input placeholder="first Name" disabled="disabled" value="${endUserInformation?.customerPersonalDetails?.firstName}" type="text" class="form-control billingFieldSmall red-tooltip">
+                                            <input name="firstNameBilling" id="firstNameBilling" placeholder="first Name" value="${endUserInformation?.customerPersonalDetails?.firstName}" type="hidden" class="form-control billingFieldSmall red-tooltip">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label >Last Name*</label>
+                                            <input placeholder="last name" disabled="disabled" type="text" value="${endUserInformation?.customerPersonalDetails?.lastName}" class="form-control billingFieldSmall red-tooltip" >
+                                            <input name="lastNameBilling" id="lastNameBilling" placeholder="last name" type="hidden" value="${endUserInformation?.customerPersonalDetails?.lastName}" class="form-control billingFieldSmall red-tooltip" >
+
+                                        </div>
+                                    </div>
+                                </g:if>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Company Name</label>
+                                        <input name="companyNameBilling" id="companyNameBilling" placeholder="company Name" type="text" value="${endUserInformation?.customerPersonalDetails?.companyName}" class="form-control billingFieldLarge">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                    <label>mobile No*</label>
+                                    <input name="mobileOrPhoneCumpolsoryBilling" id="mobileOrPhoneCumpolsoryBilling" placeholder="mobile No" type="text" value="${endUserInformation?.customerPersonalDetails?.mobileOrPhoneCumpolsory}" class="form-control billingFieldSmall red-tooltip" onkeypress="return isNumber(event)">
+
+                                    </div>
+                                </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>mobile No Additional</label>
+                                            <input name="mobileOrPhoneOptionalBilling" placeholder="mobile No" type="text" class="form-control billingFieldSmall red-tooltip" value="${endUserInformation?.customerPersonalDetails?.mobileOrPhoneOptional}" onkeypress="return isNumber(event)">
+                                        </div>
+                                    </div>
+<g:if test="${!session.endUser}">
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group" >
+                                        <label>Email*</label>
+                                        <input name="email" placeholder="email@hostname.com" type="text" class="form-control billingFieldLarge red-tooltip" value="${endUserInformation?.email}" id="email" >
+                                    </div>
+                                    </div>
+</g:if>
+                                <g:if test="${session.endUser}">
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group" >
+                                            <label>Email*</label>
+                                            <input placeholder="email@hostname.com" disabled="disabled" type="text" class="form-control billingFieldLarge red-tooltip" value="${endUserInformation?.email}" >
+                                            <input name="email" placeholder="email@hostname.com" type="hidden" class="form-control billingFieldLarge red-tooltip" value="${endUserInformation?.email}" id="email" >
+
+                                        </div>
+                                    </div>
+                                </g:if>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                    <label>Address*</label>
+                                    <input name="cumpolsoryAddressBilling" id="cumpolsoryAddressBilling" placeholder="street address" value="${endUserInformation?.customerPersonalDetails?.cumpolsoryAddress}" type="text" class="form-control billingFieldSmall red-tooltip">
+                                </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Address Optional</label>
+                                        <input name="optionalAddressBilling" id="optionalAddressBilling" placeholder="apartment,suite,unit etc." value="${endUserInformation?.customerPersonalDetails?.optionalAddress}" type="text" class="form-control billingFieldSmall">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>City*</label>
+                                        <input name="cityBilling" id="cityBilling" placeholder="kathmandu,lalitpur,bhaktapur etc." type="text" value="${endUserInformation?.customerPersonalDetails?.townOrCity}" class="form-control billingFieldLarge red-tooltip">
+                                    </div>
+                                </div>
+                                <g:if test="${!session.endUser}">
+                                <div class="col-sm-12">
+                                    <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="isCreateAccount" id="isCreateAccount" onclick="checkBox();">
+                                    <label class="form-check-label" for="isCreateAccount">Create an account</label>
+                                    </div>
+                                    </div>
+                                </g:if>
+                            </fieldset>
+<g:if test="${!session.endUser}">
+
+    <script>
+                                        function checkBox(){
+                                            var checkedValue = $('#isCreateAccount:checked').val();
+                                           if(checkedValue){
+                                               document.getElementById("createAccount").style.display='block';
+                                           }
+                                           else{
+                                               document.getElementById("createAccount").style.display='none';
+
+                                           }
+                                        }
+                                    </script>
+                                    <div id="createAccount" style="display:none;">
+                                    <fieldset>
+                            <legend> Create an account by entering the information below. If you are a returning customer please login at the top of the page.
+                            </legend>
+                                        <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                <label for="userPw">Account Password*</label>
+                                <input class="form-control billingFieldSmall red-tooltip" id="userPw" type="password" placeholder="password"
+                                       name="password"/>
+                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+
                             <div class="form-group">
-                                <label for="firstName">Firstname</label>
-                                <input type="text" name="firstName" placeholder="firstName" class="form-control" id="firstName">
-                                <small style="color: #a94442; display: none;" id="firstNameBlank">
-                                    Please supply your firstName</small>
-
+                                <label for="userPw2">Confirm Password*</label>
+                                <input class="form-control billingFieldSmall red-tooltip" id="userPw2" type="password" placeholder="Confirm password"
+                                       name="confirmPassword"/>
                             </div>
+                                        </div>
+                        </fieldset>
+                                    </div>
+</g:if>
                         </div>
                     </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="lastName">Lastname</label>
-                                    <input type="text" name="lastName" placeholder="lastName" class="form-control" id="lastName">
-                                    <small style="color: #a94442; display: none;" id="lastNameBlank">
-                                        Please supply your lastName</small>
+                </div>
+                        <div class="col-sm-6">
+                            <div class="box">
+                                <h1 class="checkOutHead">Ship to a different address?</h1>
+
+                                <hr>
+
+                                <!-- Form Name -->
+
+                                <div class="form-horizontal">
+
+                                    <fieldset>
+                                        <input type="checkbox" name="isShipping" class="form-check-input" id="isShipping" onclick="checkBox1();"/>
+<div id="shipping_form" style="display:none;">
+
+
+                                        <legend> Personal Information </legend>
+                                        <div class="col-sm-6">
+
+                                            <div class="form-group">
+                                                <label>First Name*</label>
+                                                <input name="firstNameShipping" id="firstNameShipping" placeholder="first Name" type="text" class="form-control billingFieldSmall red-tooltip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+
+                                            <div class="form-group">
+                                                <label >Last Name*</label>
+                                                <input name="lastNameShipping" placeholder="last name" id="lastNameShipping" type="text" class="form-control billingFieldSmall red-tooltip" >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Company Name</label>
+                                                <input name="companyNameShipping" placeholder="company Name" id="companyNameShipping" type="text" class="form-control billingFieldLarge">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Address*</label>
+                                                <input name="cumpolsoryAddressShipping" placeholder="street address" id="cumpolsoryAddressShipping" type="text" class="form-control billingFieldSmall red-tooltip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Address Optional</label>
+                                                <input name="optionalAddressShipping" placeholder="apartment,suite,unit etc." id="optionalAddressShipping" type="text" class="form-control billingFieldSmall red-tooltip">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>City*</label>
+                                                <input name="cityShipping" placeholder="kathmandu,lalitpur,bhaktapur etc." id="cityShipping" type="text" class="form-control billingFieldLarge red-tooltip">
+                                            </div>
+                                        </div>
+</div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Order Notes</label>
+                                                <textArea name="orderNotesShipping" placeholder="notes about your order,eg special notes for delivery" id="orderNotesShipping" class="form-control billingFieldLarge" style="resize: none;"></textArea>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                    <script>
+                                        function checkBox1(){
+                                            var checkedValue = $('#isShipping:checked').val();
+                                            if(checkedValue){
+                                                document.getElementById("shipping_form").style.display='block';
+                                            }
+                                            else{
+                                                document.getElementById("shipping_form").style.display='none';
+
+                                            }
+                                        }
+                                    </script>
 
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="address">Delivery Address</label>
-                                    <input type="text" name="address" placeholder="address" class="form-control" id="address">
-                                    <small style="color: #a94442; display: none;" id="addressBlank">
-                                        Please supply your delivery address</small>
 
+
+                        <div class="col-sm-6">
+                                <div class="pull-left">
+                                    <g:link action="cart" controller="cart" class="btn btn-default bigButton"><i class="fa fa-chevron-left"></i>Back to basket</g:link>
+                                </div>
+                                <div class="pull-right">
+                                    <div class="btn btn-primary bigButton" onclick="deliveryMethod(this);">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="phone">Mobile</label>
-                                    <input type="text" name="phone" placeholder="mobile No" class="form-control" id="phone">
-                                    <small style="color: #a94442; display: none;" id="phoneBlank">
-                                        Please supply your phone number</small>
-                                    <small style="color: #a94442; display: none;" id="phoneInvalid">
-                                        Please supply your valid phone number</small>
 
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- /.row -->
-
-
-                        <!-- /.row -->
-
-                        <!-- /.row -->
                     </div>
+                </div>
 
-                    <div class="box-footer">
-                        <div class="pull-left">
-                            <div class="btn btn-default bigButton" onclick="backToBasket(this);"><i class="fa fa-chevron-left"></i>Back to basket</div>
-                        </div>
-                        <div class="pull-right">
-                            <div class="btn btn-primary bigButton" onclick="deliveryMethod(this);">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
-                            </div>
-                        </div>
-                    </div>
-
-            </div>
             <div class="box" style="display: none;" id="deliveryMethod">
-
-                    <h1 class="bigName">Checkout - Delivery method</h1>
+                 <h1 class="bigName">Checkout - Delivery method</h1>
                     <ul class="nav nav-pills nav-justified">
-                        <li><div onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Address</div>
+                        <li><div onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Billing Address</div>
                         </li>
                         <li class="active"><a onclick="deliveryMethod(this);"><i class="fa fa-truck"></i><br>Delivery Method</a>
                         </li>
@@ -365,8 +429,7 @@
                         <li class="disabled"><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
                         </li>
                     </ul>
-
-                    <div class="content">
+                <div class="content">
                         <div class="row">
                             <g:each in="${DeliveryMethod.findAllByIsShowStatus(true)}" var="list">
                             <div class="col-sm-6">
@@ -404,7 +467,7 @@
 
                     <h1 class="bigName">Checkout - Payment method</h1>
                     <ul class="nav nav-pills nav-justified">
-                        <li><div onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Address</div>
+                        <li><div onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Billing Address</div>
                         </li>
                         <li><div onclick="deliveryMethod(this);"><i class="fa fa-truck"></i><br>Delivery Method</div>
                         </li>
@@ -448,10 +511,12 @@
                     </div>
 
             </div>
-            <div class="box" style="display: none;" id="orderReview">
+                <div id="orderReview" style="display: none;">
+                   <div class="col-sm-9">
+            <div class="box">
                     <h1 class="bigName">Checkout - Order review</h1>
                     <ul class="nav nav-pills nav-justified">
-                        <li><div onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Address</div>
+                        <li><div onclick="showAddress(this);"><i class="fa fa-map-marker"></i><br>Billing Address</div>
                         </li>
                         <li><div onclick="deliveryMethod(this);"><i class="fa fa-truck"></i><br>Delivery Method</div>
                         </li>
@@ -475,23 +540,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <g:each in="${Cart.findAllByEndUserInformation(session.endUser)}" var="list">
+                                <g:each in="${session.cart}" var="list">
                                     <tr>
                                         <td><a>
                                             <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.product.specialImageName])}">
 
                                         </a>
                                         </td>
-                                        <td>${list.product.productColor.colorName+" "+list.product.productDetails.productName+" "+list.product.productDetails.productBrand.brandName}
+                                        <td>${list.productDetails.productName+" "+list.productBrand.brandName}
                                         </td>
                                         <td>${list.productSize.sizeName}</td>
 
                                         <td>
 ${list.quantity}
                                         </td>
-                                        <td>Rs.<g:formatNumber number="${list.product.productDetails.price}" type="number" maxFractionDigits="2" /></td>
-                                        <td>${list.product.productDetails.discountPercentage}%</td>
-                                        <td>Rs.<g:formatNumber number="${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}" type="number" maxFractionDigits="2" /></td>
+                                        <td>Rs.<g:formatNumber number="${list.productDetails.price}" type="number" maxFractionDigits="2" /></td>
+                                        <td>${list.productDetails.discountPercentage}%</td>
+                                        <td>Rs.<g:formatNumber number="${(list.productDetails.price*list.quantity)-(list.productDetails.discountPercentage*(list.productDetails.price*list.quantity)/100)}" type="number" maxFractionDigits="2" /></td>
 
                                     </tr>
 
@@ -511,7 +576,6 @@ ${list.quantity}
                     <!-- /.content -->
 <style>
                 td img{
-                    height:65px;
                     width: 50px;
                 }
             </style>
@@ -540,45 +604,50 @@ ${list.quantity}
                         </div>
                     </div>
             </div>
+                   </div>
+                <g:if test="${session.cart}">
 
+                    <div class="col-sm-3" id="basketSummary1">
+                        <div class="box" id="order-summary">
+                            <div class="box-header">
+                                <h3>Order summary</h3>
+                            </div>
+                            <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Order subtotal</td>
+                                        <th class="totalPrice">Rs.${totalArray[0]}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping and handling</td>
+                                        <th class="shippingAndHandling">Rs.${totalArray[2]}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Tax</td>
+                                        <th class="tax">Rs.${totalArray[3]}</th>
+                                    </tr>
+                                    <tr class="total">
+                                        <td>Total</td>
+                                        <th class="totalPriceTotal">Rs.${totalArray[4]}</th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </g:if>
+                </div>
             <!-- /.box -->
 
             </form>
-
-        </div>
-        <div class="col-md-3" style="display: none;" id="checkoutSummary">
-
-            <div class="box" id="order-summary">
-                <div class="box-header">
-                    <h3>Order summary</h3>
-                </div>
-                <p class="text-muted">Shipping and additional costs are calculated based on the values you have entered.</p>
-
-                <div class="table-responsive">
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td>Order subtotal</td>
-                            <th class="totalPrice">Rs.${totalArray[0]}</th>
-                        </tr>
-                        <tr>
-                            <td>Shipping and handling</td>
-                            <th class="shippingAndHandling">Rs.${totalArray[2]}</th>
-                        </tr>
-                        <tr>
-                            <td>Tax</td>
-                            <th class="tax">Rs.${totalArray[3]}</th>
-                        </tr>
-                        <tr class="total">
-                            <td>Total</td>
-                            <th class="totalPriceTotal">Rs.${totalArray[4]}</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-
 
         </div>
 
@@ -589,11 +658,17 @@ ${list.quantity}
             $( document ).ready(function() {
                 document.getElementsByName("payment")[0].checked = true;
                 document.getElementsByName("delivery")[0].checked = true;
-                $('.quantity').keydown(function() {
-                    return false;
-                });
             });
 
+            function isNumber(evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+
+                    return false;
+                }
+                return true;
+            }
 
             function preventMultipleSubmissions() {
                 $('#submit_IdOrder').prop('disabled', true);
@@ -612,9 +687,9 @@ ${list.quantity}
         success: function (text) {
             if(text=="sessionNull"){
                 bootbox.alert({
-                    message: "Sorry, your session has expired or you are not logged in. Try to login again.",
+                    message: "Sorry, your cart session has expired as you are inactive for long time.",
                     callback: function(){
-                        location.reload();
+                        window.location="/cart/cart";
                     }
 
                 });
@@ -626,7 +701,8 @@ responseValue=false;
                 bootbox.alert({
                     message: "Sorry, your cart is empty. You must have something in your cart to send enquiry!!!.",
                     callback: function(){
-                        location.reload();
+                        window.location="/cart/cart";
+
                     }
 
                 });
@@ -643,125 +719,10 @@ responseValue=false;
     });
 return responseValue
 }
-            $(function() {
-                $("#updateBasket").click(function(evt) {
-                    var quantity=document.getElementsByName("quantity");
-                    var size=document.getElementsByName("size");
-
-                    var id=document.getElementsByName("id");
-                    var idList=[];
-                    var quantityList=[];
-                    var sizeList=[];
-                    for (var i = 0; i < id.length; i++) {
-                        idList.push(id[i].value);
-                        quantityList.push(quantity[i].value);
-                        sizeList.push(size[i].value)
-
-                    }
-                    var array = [];
-                    array[0] = idList;
-                    array[1] = quantityList;
-                    array[2]=sizeList;
-                    bootbox.confirm({
-//                        title: "Destroy planet?",
-                        message: "Are you sure want to update the basket?",
-                        buttons: {
-                            cancel: {
-                                label: '<i class="fa fa-times"></i> Cancel'
-                            },
-                            confirm: {
-                                label: '<i class="fa fa-check"></i> Confirm'
-                            }
-                        },
-                        callback: function (result) {
-                            if(result==true){
-                                $.ajax({
-                                    url: "${createLink(controller:'cart', action:'updateBasket')}",
-                                    global: false,
-                                    type: "POST",
-                                    data: { "array": JSON.stringify(array) },
-                                    cache: false,
-                                    async: false,
-                                    success: function (text) {
-                                        $('#tableResponsive').load(document.URL +  ' #tableResponsive');
-                                        $('.totalPrice').html("Rs."+text[0]);
-                                        $('.shippingAndHandling').html("Rs."+text[1]);
-                                        $('.tax').html("Rs."+text[2]);
-                                        $('.totalPriceTotal').html("Rs."+text[3]);
-                                        $('.hidden-sm').load(document.URL +  ' .hidden-sm');
-                                        $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
-                                        $('#itemsInCart').load(document.URL +  ' #itemsInCart');
-                                        $('#deleteItem').hide();
-                                        $('#updateItem').show();
-                                        $('#totalPrice1').html("Rs."+text[0]);
-                                        if ($(".deleteCart").length < 2){
-                                            location.reload();
-                                        }
-
-                                    }
-
-                                });
-
-                            }
-                        }
-                    });
-
-                    evt.preventDefault();
-                })
-            });
-            function deleteProduct(id,evt){
-                bootbox.confirm({
-//                    title: "Destroy planet?",
-                    message: "Are you sure want to remove this item from basket?",
-                    buttons: {
-                        cancel: {
-                            label: '<i class="fa fa-times"></i> Cancel'
-                        },
-                        confirm: {
-                            label: '<i class="fa fa-check"></i> Confirm'
-                        }
-                    },
-                    callback: function (result) {
-                        if(result==true){
-                            $.ajax({
-                                url: "${createLink(controller:'cart', action:'delete')}",
-                                global: false,
-                                type: "POST",
-                                data: { "id":id },
-                                cache: false,
-                                async: false,
-                                success: function (text) {
-                                    $('#tableResponsive').load(document.URL +  ' #tableResponsive');
-                                    $('.totalPrice').html("Rs."+text[0]);
-                                    $('.shippingAndHandling').html("Rs."+text[1]);
-                                    $('.tax').html("Rs."+text[2]);
-                                    $('.totalPriceTotal').html("Rs."+text[3]);
-                                    $('.hidden-sm').load(document.URL +  ' .hidden-sm');
-                                    $('#itemsInCart').load(document.URL +  ' #itemsInCart');
-                                    $('#deleteItem').show();
-                                    $('#updateItem').hide();
-                                    $('#tableResponsive1').load(document.URL +  ' #tableResponsive1');
-                                    $('#totalPrice1').html("Rs."+text[0]);
-                                    if ($(".deleteCart").length < 2)
-                                    {
-                                        location.reload();
-                                    }
-
-
-                                }
-
-                            });
-                        }
-                    }
-                });
-
-evt.preventDefault();
-            }
             function showAddress(evt){
-                $('#basketBar').hide();
+                $('#deliveryBar').hide();
 
-                $('#basket').hide();
-                $('#basketSummary').hide();
+                $('#deliveryMethod').hide();
                 $('#paymentBar').hide();
 
                 $('#paymentMethod').hide();
@@ -770,66 +731,248 @@ evt.preventDefault();
 
                 $('#orderReview').hide();
 
-
                 $('#addressBar').show();
                 $('#deliveryAddress').show();
-                $('#checkoutSummary').show();
                 evt.preventDefault();
             }
-            function backToBasket(evt){
-                $('#addressBar').hide();
-                $('#deliveryAddress').hide();
-                $('#checkoutSummary').hide();
-                $('#basketBar').show();
-                $('#basket').show();
-                $('#basketSummary').show();
-                evt.preventDefault();
-            }
+
             function deliveryMethod(evt){
-                var phoneNumber=$('#phone').val();
+                var phoneNumberCumpolsory=$('#mobileOrPhoneCumpolsoryBilling').val();
+                var email=$('#email').val()
                 var phoneno = /^\d{10}$/;
-                if($('#firstName').val()==''){
-                    $('#firstNameBlank').show();
-                    $("#firstName").css("border", "1px solid #a94442");
-                    document.getElementById("firstName").focus();
+             if(${!session.endUser}){
+                if(!($('#firstNameBilling').val())){
+                    $('#firstNameBilling').attr('data-toggle', 'tooltip');
+                    $('#firstNameBilling').attr('data-placement', 'top');
+                    $('#firstNameBilling').attr('data-original-title', 'first name must not be blank');
+                    $("#firstNameBilling").tooltip();
+                    $("#firstNameBilling").css("border", "1px solid #a94442");
+                    document.getElementById("firstNameBilling").focus();
                     return false;
                 }
-                if($('#lastName').val()==''){
-                    $('#lastNameBlank').show();
-                    $("#lastName").css("border", "1px solid #a94442");
-                    document.getElementById("lastName").focus();
+                if(!($('#lastNameBilling').val())){
+                    $('#lastNameBilling').attr('data-toggle', 'tooltip');
+                    $('#lastNameBilling').attr('data-placement', 'top');
+                    $('#lastNameBilling').attr('data-original-title', 'last name must not be blank');
+                    $("#lastNameBilling").tooltip();
+                    $("#lastNameBilling").css("border", "1px solid #a94442");
+                    document.getElementById("lastNameBilling").focus();
                     return false;
                 }
-                if($('#address').val()==''){
-                    $('#addressBlank').show();
-                    $("#address").css("border", "1px solid #a94442");
-                    document.getElementById("address").focus();
+                if(!($('#mobileOrPhoneCumpolsoryBilling').val())){
+                    $('#mobileOrPhoneCumpolsoryBilling').attr('data-toggle', 'tooltip');
+                    $('#mobileOrPhoneCumpolsoryBilling').attr('data-placement', 'top');
+                    $('#mobileOrPhoneCumpolsoryBilling').attr('data-original-title', 'mobile no must not be blank');
+                    $("#mobileOrPhoneCumpolsoryBilling").tooltip();
+                    $("#mobileOrPhoneCumpolsoryBilling").css("border", "1px solid #a94442");
+                    document.getElementById("mobileOrPhoneCumpolsoryBilling").focus();
                     return false;
                 }
-                if($('#phone').val()==''){
-                    $('#phoneBlank').show();
-                    $("#phone").css("border", "1px solid #a94442");
+
+
+                if(!(phoneNumberCumpolsory.match(phoneno)))
+                {
+                    $('#mobileOrPhoneCumpolsoryBilling').attr('data-toggle', 'tooltip');
+                    $('#mobileOrPhoneCumpolsoryBilling').attr('data-placement', 'top');
+                    $('#mobileOrPhoneCumpolsoryBilling').attr('data-original-title', 'invalid mobile number format');
+                    $("#mobileOrPhoneCumpolsoryBilling").tooltip();
+                    $("#mobileOrPhoneCumpolsoryBilling").css("border", "1px solid #a94442");
                     document.getElementById("phone").focus();
                     return false;
+
+                }
+                if($('#mobileOrPhoneOptionalBilling').val()){
+                    var phoneNumberOptional=$('#mobileOrPhoneOptionalBilling').val();
+                    if(!(phoneNumberOptional.match(phoneno)))
+                    {
+                        $('#mobileOrPhoneOptionalBilling').attr('data-toggle', 'tooltip');
+                        $('#mobileOrPhoneOptionalBilling').attr('data-placement', 'top');
+                        $('#mobileOrPhoneOptionalBilling').attr('data-original-title', 'invalid mobile number format. ');
+                        $("#mobileOrPhoneOptionalBilling").tooltip();
+                        $("#mobileOrPhoneOptionalBilling").css("border", "1px solid #a94442");
+                        document.getElementById("mobileOrPhoneOptionalBilling").focus();
+                        return false;
+
+                    }
                 }
 
+                if(!email){
+                    $('#email').attr('data-toggle', 'tooltip');
+                    $('#email').attr('data-placement', 'top');
+                    $('#email').attr('data-original-title', 'email must not be blank');
+                    $("#email").tooltip();
+                    $("#email").css("border", "1px solid #a94442");
+                    document.getElementById("email").focus();
+                    return false;
+                }
+                if(!validate(email)){
+                    $('#email').attr('data-toggle', 'tooltip');
+                    $('#email').attr('data-placement', 'top');
+                    $('#email').attr('data-original-title', 'invalid email format. Email must end with @gmail.com,@yahoo.com etc');
+                    $("#email").tooltip();
+                    $("#email").css("border", "1px solid #a94442");
+                    document.getElementById("email").focus();
+                    return false;
+                }
+                if(!($('#cumpolsoryAddressBilling').val())){
+                    $('#cumpolsoryAddressBilling').attr('data-toggle', 'tooltip');
+                    $('#cumpolsoryAddressBilling').attr('data-placement', 'top');
+                    $('#cumpolsoryAddressBilling').attr('data-original-title', 'address must not be blank');
+                    $("#cumpolsoryAddressBilling").tooltip();
+                    $("#cumpolsoryAddressBilling").css("border", "1px solid #a94442");
+                    document.getElementById("cumpolsoryAddressBilling").focus();
+                    return false;
+                }
+                if(!($('#cityBilling').val())){
+                    $('#cityBilling').attr('data-toggle', 'tooltip');
+                    $('#cityBilling').attr('data-placement', 'top');
+                    $('#cityBilling').attr('data-original-title', 'city must not be blank');
+                    $("#cityBilling").tooltip();
+                    $("#cityBilling").css("border", "1px solid #a94442");
+                    document.getElementById("cityBilling").focus();
+                    return false;
+                }
+                if($('#isCreateAccount:checked').val()){
+                    var userPw=$('#userPw').val();
+                    var userPw2=$('#userPw2').val();
+if(!userPw){
+    $('#userPw').attr('data-toggle', 'tooltip');
+    $('#userPw').attr('data-placement', 'top');
+    $('#userPw').attr('data-original-title', 'password must not be blank');
+    $("#userPw").tooltip();
+    $("#userPw").css("border", "1px solid #a94442");
+    document.getElementById("userPw").focus();
+}
+                    if(userPw){
+    if(userPw.length<6){
+                        $('#userPw').attr('data-toggle', 'tooltip');
+                        $('#userPw').attr('data-placement', 'top');
+                        $('#userPw').attr('data-original-title', 'password must not be less than six character');
+                        $("#userPw").tooltip();
+                        $("#userPw").css("border", "1px solid #a94442");
+                        document.getElementById("userPw").focus();
+                    }
+                    if(userPw!=userPw2){
+                        $('#userPw2').attr('data-toggle', 'tooltip');
+                        $('#userPw2').attr('data-placement', 'top');
+                        $('#userPw2').attr('data-original-title', 'account password and confirm password must be same to proceed');
+                        $("#userPw2").tooltip();
+                        $("#userPw2").css("border", "1px solid #a94442");
+                        document.getElementById("userPw2").focus();
+                    }
+                    else{
+                        showDivs();
+                    }
 
-                            if(!(phoneNumber.match(phoneno)))
-                            {
-                                $('#phoneBlank').hide();
-                                $('#phoneInvalid').show();
+                    }
 
-                                $("#phone").css("border", "1px solid #a94442");
-                                document.getElementById("phone").focus();
-                                return false;
+                }
 
-                            }
+else{
 
-
-
-
+                    showDivs();
+                }}
                 else{
+                 if(!($('#firstNameBilling').val())){
+                     $('#firstNameBilling').attr('data-toggle', 'tooltip');
+                     $('#firstNameBilling').attr('data-placement', 'top');
+                     $('#firstNameBilling').attr('data-original-title', 'first name must not be blank');
+                     $("#firstNameBilling").tooltip();
+                     $("#firstNameBilling").css("border", "1px solid #a94442");
+                     document.getElementById("firstNameBilling").focus();
+                     return false;
+                 }
+                 if(!($('#lastNameBilling').val())){
+                     $('#lastNameBilling').attr('data-toggle', 'tooltip');
+                     $('#lastNameBilling').attr('data-placement', 'top');
+                     $('#lastNameBilling').attr('data-original-title', 'last name must not be blank');
+                     $("#lastNameBilling").tooltip();
+                     $("#lastNameBilling").css("border", "1px solid #a94442");
+                     document.getElementById("lastNameBilling").focus();
+                     return false;
+                 }
+                 if(!($('#mobileOrPhoneCumpolsoryBilling').val())){
+                     $('#mobileOrPhoneCumpolsoryBilling').attr('data-toggle', 'tooltip');
+                     $('#mobileOrPhoneCumpolsoryBilling').attr('data-placement', 'top');
+                     $('#mobileOrPhoneCumpolsoryBilling').attr('data-original-title', 'mobile no must not be blank');
+                     $("#mobileOrPhoneCumpolsoryBilling").tooltip();
+                     $("#mobileOrPhoneCumpolsoryBilling").css("border", "1px solid #a94442");
+                     document.getElementById("mobileOrPhoneCumpolsoryBilling").focus();
+                     return false;
+                 }
 
+
+                 if(!(phoneNumberCumpolsory.match(phoneno)))
+                 {
+                     $('#mobileOrPhoneCumpolsoryBilling').attr('data-toggle', 'tooltip');
+                     $('#mobileOrPhoneCumpolsoryBilling').attr('data-placement', 'top');
+                     $('#mobileOrPhoneCumpolsoryBilling').attr('data-original-title', 'invalid mobile number format');
+                     $("#mobileOrPhoneCumpolsoryBilling").tooltip();
+                     $("#mobileOrPhoneCumpolsoryBilling").css("border", "1px solid #a94442");
+                     document.getElementById("phone").focus();
+                     return false;
+
+                 }
+                 if($('#mobileOrPhoneOptionalBilling').val()){
+                     var phoneNumberOptional=$('#mobileOrPhoneOptionalBilling').val();
+                     if(!(phoneNumberOptional.match(phoneno)))
+                     {
+                         $('#mobileOrPhoneOptionalBilling').attr('data-toggle', 'tooltip');
+                         $('#mobileOrPhoneOptionalBilling').attr('data-placement', 'top');
+                         $('#mobileOrPhoneOptionalBilling').attr('data-original-title', 'invalid mobile number format. ');
+                         $("#mobileOrPhoneOptionalBilling").tooltip();
+                         $("#mobileOrPhoneOptionalBilling").css("border", "1px solid #a94442");
+                         document.getElementById("mobileOrPhoneOptionalBilling").focus();
+                         return false;
+
+                     }
+                 }
+
+                 if(!email){
+                     $('#email').attr('data-toggle', 'tooltip');
+                     $('#email').attr('data-placement', 'top');
+                     $('#email').attr('data-original-title', 'email must not be blank');
+                     $("#email").tooltip();
+                     $("#email").css("border", "1px solid #a94442");
+                     document.getElementById("email").focus();
+                     return false;
+                 }
+                 if(!validate(email)){
+                     $('#email').attr('data-toggle', 'tooltip');
+                     $('#email').attr('data-placement', 'top');
+                     $('#email').attr('data-original-title', 'invalid email format. Email must end with @gmail.com,@yahoo.com etc');
+                     $("#email").tooltip();
+                     $("#email").css("border", "1px solid #a94442");
+                     document.getElementById("email").focus();
+                     return false;
+                 }
+                 if(!($('#cumpolsoryAddressBilling').val())){
+                     $('#cumpolsoryAddressBilling').attr('data-toggle', 'tooltip');
+                     $('#cumpolsoryAddressBilling').attr('data-placement', 'top');
+                     $('#cumpolsoryAddressBilling').attr('data-original-title', 'address must not be blank');
+                     $("#cumpolsoryAddressBilling").tooltip();
+                     $("#cumpolsoryAddressBilling").css("border", "1px solid #a94442");
+                     document.getElementById("cumpolsoryAddressBilling").focus();
+                     return false;
+                 }
+                 if(!($('#cityBilling').val())){
+                     $('#cityBilling').attr('data-toggle', 'tooltip');
+                     $('#cityBilling').attr('data-placement', 'top');
+                     $('#cityBilling').attr('data-original-title', 'city must not be blank');
+                     $("#cityBilling").tooltip();
+                     $("#cityBilling").css("border", "1px solid #a94442");
+                     document.getElementById("cityBilling").focus();
+                     return false;
+                 }
+                 else{
+
+                     showDivs();
+                 }
+             }
+
+evt.preventDefault();
+            }
+            function showDivs(){
                 $('#paymentBar').hide();
 
                 $('#paymentMethod').hide();
@@ -844,8 +987,6 @@ evt.preventDefault();
                 $('#deliveryBar').show();
 
                 $('#deliveryMethod').show();
-                evt.preventDefault();}
-
             }
             function backToAddress(evt){
                 $('#deliveryBar').hide();
@@ -880,6 +1021,21 @@ evt.preventDefault();
 
 
             }
+            function validate(sEmail) {
+                var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+                if (filter.test(sEmail)) {
+
+                    return true;
+
+                }
+
+            else {
+
+                    return false;
+
+                }
+            }
             function backToDeliveryMethod(evt){
                 $('#paymentBar').hide();
 
@@ -912,7 +1068,7 @@ evt.preventDefault();
                 evt.preventDefault();
 
             }
-            function backToPayment(){
+            function backToPayment(e){
                 $('#orderReview').hide();
 
                 $('#orderReviewBar').hide();
@@ -928,68 +1084,6 @@ evt.preventDefault();
         <!-- /.col-md-3 -->
 
     </div>
-    <div class="bootbox modal fade bootbox-confirm in" id="messageModel" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
-
-                                <p class="text-center">
-                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
-
-
-                                </p>
-
-                                <h3 class="alert alert-success fade in">Dear,Customer. Your order has been successfully kept under process. And Your order Id is</h3>-<h2 style="text-align: center;">Order Id: ${flash.message1}</h2>
-                                <h4>Dear Customer, you are requested to remember your order Id. Thank you!!</h4>
-
-                </div>
-                <div class="modal-footer">
-                <div data-bb-handler="cancel" type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadPage();">Okey</div>
-            </div>
-            </div>
-        </div>
-    </div>
-    <div class="bootbox modal fade bootbox-confirm in" id="messageModel1" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
-
-                    <p class="text-center">
-                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
-
-
-                    </p>
-
-                    <h3 class="alert alert-danger fade in">${flash.message}.</h3>
-
-                </div>
-                <div class="modal-footer">
-                    <div data-bb-handler="cancel" type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadPage();">Okey</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <g:if test="${flash.message1}">
-        <script>
-            function reloadPage(){
-                location.reload();
-            }
-            $('#messageModel').modal('toggle');
-        </script>
-    </g:if>
-    <g:if test="${flash.message}">
-
-            <script>
-            function reloadPage(){
-                location.reload();
-            }
-            $('#messageModel1').modal('toggle');
-        </script>
-
-    </g:if>
 
 <!-- /.container -->
 </div>

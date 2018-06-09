@@ -26,10 +26,13 @@
     <!-- styles -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/font-awesome.css')}" type="text/css"
           media="all"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.css')}" type="text/css"
-          media="all"/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    %{--<link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.min.css')}" type="text/css"--}%
+          %{--media="all"/>--}%
+
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/iframex.css')}" type="text/css"
           media="all"/>
+
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/animate.min.css')}" type="text/css"
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/owl.carousel.css')}" type="text/css"
@@ -94,10 +97,11 @@
           media="all"/>
 
     <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/yarsaalogosmall.png')}">
-
 </head>
 
 <body>
+
+
 <noscript>
 
     <div id="content" style="margin:20px;">
@@ -136,7 +140,6 @@
 </noscript>
 
 <div id="total">
-
 
 <div id="top">
     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
@@ -373,8 +376,14 @@ if(sizeId=='' && productId==''){
                     <i class="fa fa-search"></i>
                 </button>
                 <g:link class="btn btn-default navbar-toggle" action="cart" controller="cart">
-                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">${Cart.findAllByEndUserInformation(session.endUser).size()} items in cart</span>
-                </g:link>
+                    <g:if test="${session.cart}">
+                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">${session.cart.size()} items in cart</span>
+                    </g:if>
+                    <g:else>
+                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">0 items in cart</span>
+
+                    </g:else>
+                    </g:link>
             </div>
         </div>
         <!--/.navbar-header -->
@@ -522,7 +531,8 @@ if(sizeId=='' && productId==''){
         <div class="navbar-buttons">
 
 
-            <!--/.nav-collapse -->
+
+        <!--/.nav-collapse -->
 
             <div class="navbar-collapse collapse right dropdown">
                 <button type="button" class="btn navbar-btn btn-primary dropbtn">
@@ -550,8 +560,13 @@ if(sizeId=='' && productId==''){
         <div class="navbar-buttons" id="cartShow">
 
             <div class="navbar-collapse collapse right" id="basket-overview">
-                <g:link action="cart" controller="cart" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">${Cart.findAllByEndUserInformation(session.endUser).size()} items in cart</span></g:link>
-            </div>
+                <g:if test="${session.cart}">
+                <g:link action="cart" controller="cart" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">${session.cart.size()} items in cart</span></g:link>
+                </g:if>
+                <g:else>
+                    <g:link action="cart" controller="cart" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">0 items in cart</span></g:link>
+                </g:else>
+                    </div>
             <!--/.nav-collapse -->
 
             <div class="navbar-collapse collapse right" id="search-not-mobile">
@@ -796,19 +811,100 @@ if(sizeId=='' && productId==''){
             </div>
         </div>
     </div>
-    <!-- *** COPYRIGHT END *** -->
 
 
+    <div class="bootbox modal fade bootbox-confirm in" id="messageModelCart" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="cartSuccessful">Product Successfully Added To Shopping Cart</div>
+
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+
+                    <table id="cart" class="table table-fixed">
+
+                        <tbody>
+                        <g:each in="${session.cart}" var="list">
+                            <tr><td data-th="Product">
+                                <div class="row">
+                                    <div class="col-sm-6 hidden-xs">
+                                        <img src="/imageRender/renderImage?imageName=${list.product.specialImageName}" alt="..." class="img-responsive" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="text" style="margin-top: 90px;">
+                                            <div class="productDescription">${list.productDetails.briefDescription}<br>
+                                                Size-${list.productSize.sizeName}<br>
+                                                Qty-${list.quantity}
+
+                                                </div>
+                                            <br>
+                                            <p class="price priceWithDiscount" style="text-align:left;color:#202020;font-weight: 400;font-size: 14px;margin-top:-15px;width: 135px;word-wrap: break-word;">Price-Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" />
+                                                <br>
+                                                <g:if test="${list.productDetails.isSale}">
+                                                <del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.<g:formatNumber number="${list.productDetails.price}" type="number" maxFractionDigits="2" />
+                                            </del>
+                                                </g:if>
+                                            </p>
+                            <br>
+                            <g:if test="${list.productDetails.isSale}">
+
+                               <div class="discountBox1">-${list.productDetails.discountPercentage}%</div>
+                            </g:if>
+                                </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-danger btn-sm" style="margin-top: 208px;"><i class="fa fa-trash-o"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                            </tr>
+
+                        </g:each>
+                        </tbody>
+                        <tfoot>
+
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-9">
+
+                                        <a data-dismiss="modal" class="btn btn-default"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <g:link action="cart" controller="cart" class="btn btn-success">Checkout<i class="fa fa-angle-right"></i></g:link>
+
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+    .table-fixed tbody {
+        display: block;
+        height: 255px;
+        overflow-y: auto;
+        width: 100%;
+        overflow-x: hidden;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+
+
+    </style>
+</div>
 
 </div>
-<!-- /#all -->
 
-
-
-
-<!-- *** SCRIPTS TO INCLUDE ***
- _________________________________________________________ -->
-</div>
 </body>
 
 </html>

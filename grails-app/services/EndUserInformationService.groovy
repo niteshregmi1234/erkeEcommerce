@@ -8,51 +8,79 @@ import java.security.spec.InvalidKeySpecException
 
 @Transactional
 class EndUserInformationService {
-    def getOrderId(List<Cart> cartList,EndUserInformation endUserInformation,Map params){
+    def getOrderId(List<CartWithoutEndUser> cartList,Map params){
        try{
-        def date=new Date()
+           def customerPersonalDetails=new CustomerPersonalDetails()
+           customerPersonalDetails.firstName=params.firstNameBilling
+           customerPersonalDetails.lastName=params.lastNameBilling
+           customerPersonalDetails.companyName=params.companyNameBilling
+           customerPersonalDetails.country="Nepal"
+           customerPersonalDetails.cumpolsoryAddress=params.cumpolsoryAddressBilling
+           customerPersonalDetails.optionalAddress=params.optionalAddressBilling
+           customerPersonalDetails.townOrCity=params.cityBilling
+           customerPersonalDetails.mobileOrPhoneCumpolsory=params.mobileOrPhoneCumpolsoryBilling
+           customerPersonalDetails.mobileOrPhoneOptional=params.mobileOrPhoneOptionalBilling
+           customerPersonalDetails.save(flush: true)
+           if(params.isCreateAccount){
+               saveEndUser(customerPersonalDetails,params)
+           }
+           def date=new Date()
         def orderIdInstance=new OrderId()
-        orderIdInstance.endUserInformation=endUserInformation
+        orderIdInstance.email=params.email
+           orderIdInstance.orderId="yarsaa/"
         orderIdInstance.save(flush: true)
-        def orderId="yarsaa/"+orderIdInstance.id
-        for(Cart cart:cartList){
-            def cartHistoryInstance=new CartHistory()
-            cartHistoryInstance.productSize=cart.productSize
-            cartHistoryInstance.quantity=cart.quantity
-            cartHistoryInstance.endUserInformation=cart.endUserInformation
-            cartHistoryInstance.product=cart.product
-            cartHistoryInstance.isDelivered=false
-            cartHistoryInstance.date=date
-            cartHistoryInstance.deliveryAddress=params.address
-            cartHistoryInstance.mobileNumber=params.phone
-            cartHistoryInstance.deliveryMethod=DeliveryMethod.get(params.delivery)
-            cartHistoryInstance.paymentMethod=PaymentMethod.get(params.payment)
-            cartHistoryInstance.orderId=orderId
-            cartHistoryInstance.isFakeOrder=false
-            cartHistoryInstance.successfulOrderDelFlag=false
-            cartHistoryInstance.save(flush: true)
-            cart.delete(flush: true)
-        }
-        return orderIdInstance.id
+           def orderId=orderIdInstance.orderId+orderIdInstance.id
+           orderIdInstance.orderId=orderId
+           orderIdInstance.save(flush: true)
+           if(params.isShipping){
+               saveShipping(params,orderIdInstance)
+
+           }
+           for(CartWithoutEndUser cart:cartList){
+            def cartHistoryWithoutEndUserInstance=new CartHistoryWithoutEndUser()
+               cartHistoryWithoutEndUserInstance.isFakeOrder=false
+               cartHistoryWithoutEndUserInstance.orderId=orderIdInstance
+               cartHistoryWithoutEndUserInstance.date=date
+               cartHistoryWithoutEndUserInstance.isDelivered=false
+               cartHistoryWithoutEndUserInstance.successfulOrderDelFlag=false
+               cartHistoryWithoutEndUserInstance.product=cart.product
+               cartHistoryWithoutEndUserInstance.quantity=cart.quantity
+               cartHistoryWithoutEndUserInstance.productSize=cart.productSize
+               cartHistoryWithoutEndUserInstance.customerPersonalDetails=customerPersonalDetails
+               cartHistoryWithoutEndUserInstance.save(flush: true)
+           }
+        return orderId
     }
        catch (Exception e){
 
        }
     }
-    def cartList(EndUserInformation endUserInformation){
-        try{
-        def cartList=Cart.findAllByEndUserInformation(endUserInformation)
-        return cartList
-    }
-        catch (Exception e){
 
-        }
+    def saveShipping(Map params,OrderId orderId){
+        def shippingDetails=new ShippingDetails()
+        shippingDetails.firstNameShipping=params.firstNameShipping
+        shippingDetails.lastNameShipping=params.lastNameShipping
+        shippingDetails.companyNameShipping=params.companyNameShipping
+        shippingDetails.cumpolsoryAddressShipping=params.cumpolsoryAddressShipping
+        shippingDetails.optionalAddressShipping=params.optionalAddressShipping
+        shippingDetails.cityShipping=params.cityShipping
+        shippingDetails.orderId=orderId
+        shippingDetails.save(flush: true)
     }
-    def getTotalPriceOfCartList(List<Cart> cartList){
+//    def cartList(List<CartWithoutEndUser> cartWithoutEndUserList){
+//        try{
+//        def cartList=Cart.findAllByEndUserInformation(endUserInformation)
+//        return cartList
+//    }
+//        catch (Exception e){
+//
+//        }
+//    }
+    def getTotalPriceOfCartList(List<CartWithoutEndUser> cartList){
         try{
         def totalPrice=0
-        for(Cart cart:cartList){
-            totalPrice=totalPrice+((cart.product.productDetails.price*cart.quantity)-(cart.product.productDetails.discountPercentage*(cart.product.productDetails.price*cart.quantity)/100))
+        for(CartWithoutEndUser cart:cartList){
+            totalPrice=totalPrice+((cart.productDetails.price*cart.quantity)-(cart.productDetails.discountPercentage*(cart.productDetails.price*cart.quantity)/100))
         }
             return totalPrice
         }
@@ -89,24 +117,22 @@ return totalArray}
 
         }
     }
-    def saveEndUser(Map params){
+    def saveEndUser(CustomerPersonalDetails customerPersonalDetails,Map params){
         try{
             def endUserInformationInstance = new EndUserInformation()
-            endUserInformationInstance.firstName = params.first_name
-            endUserInformationInstance.lastName = params.last_name
-            endUserInformationInstance.phone = params.phone
-            endUserInformationInstance.address = params.address
-            endUserInformationInstance.city = params.city
-            endUserInformationInstance.email = params.email
-            endUserInformationInstance.password = encryptedPassword(params.password)
-            if (endUserInformationInstance.validate()) {
-                endUserInformationInstance.save(flush: true)
-                def message1="you are successfully registered"
-                return message1
-            } else {
-                def message = "Please don't enter already used email "
-                return message
-            }
+            endUserInformationInstance.email=params.email
+            endUserInformationInstance.password=encryptedPassword(params.password)
+            endUserInformationInstance.customerPersonalDetails=customerPersonalDetails
+            endUserInformationInstance.save(flush: true)
+            return endUserInformationInstance
+//            if (endUserInformationInstance.validate()) {
+//                endUserInformationInstance.save(flush: true)
+//                def message1="you are successfully registered"
+//                return message1
+//            } else {
+//                def message = "Please don't enter already used email "
+//                return message
+//            }
         }
         catch (Exception e){
         }

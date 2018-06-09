@@ -1,6 +1,6 @@
 class CheckOutController {
     static allowedMethods = [placeOrder: 'POST',checkCart: 'POST',sendFeedBackMessage: 'POST']
-def endUserInformationService
+    def endUserInformationService
     def sendFeedBackMessage(){
         try{
         sendMail {
@@ -23,9 +23,8 @@ def endUserInformationService
     }
     def checkCart(){
         try{
-        if(session.endUser!=null){
-            def cartList=endUserInformationService.cartList(session.endUser)
-            if(cartList.size()==0){
+        if(session.cart){
+            if(session.cart.size()==0){
                 render "cartEmpty"
             }
             else{
@@ -43,16 +42,17 @@ def endUserInformationService
     }
     def placeOrder(){
         try{
-            def cartList=endUserInformationService.cartList(session.endUser)
+            def cartList=session.cart
         def totalPrice=endUserInformationService.getTotalPriceOfCartList(cartList)
-                sendMail {
+        def orderId=endUserInformationService.getOrderId(cartList,params)
+        sendMail {
                     to "${MailSetUp.list()[0].toEmail}"
                     subject "Shopping mail from customers"
                     html g.render(template:"/cart/mail",model: [totalPrice: totalPrice])
 
                 }
-           def orderId=endUserInformationService.getOrderId(cartList,session.endUser,params)
-                    flash.message1="yarsaa/"+orderId
+                    flash.message1=orderId
+            session.cart.clear()
                     redirect(action: "cart",controller: "cart")
         }
     catch(Exception e){

@@ -16,14 +16,17 @@
 <div id="content">
 
     <div class="container">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <div id="main-slider">
 <g:each in="${totalArray[0]}" var="list">
+
                 <div class="item">
                    <g:link action="topBrand" controller="endUser" params="[brandNames:list.productBrand.urlName]"> <img src="${resource(dir: 'images', file: 'spinner-cover.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive lazy"></g:link>
 
                 </div>
-               </g:each>
+
+     
+          </g:each>
             </div>
             <!-- /#main-slider -->
         </div>

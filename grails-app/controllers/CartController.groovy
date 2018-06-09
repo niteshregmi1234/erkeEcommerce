@@ -1,5 +1,5 @@
 import grails.converters.JSON
-class CartController {
+class CartController extends SessionCreateController{
 static  allowedMethods = [checkSession: 'POST', checkAddToCart: 'POST', addToCart:'POST',updateBasket: 'POST',delete: 'POST']
     def productService
     def checkSession(){
@@ -16,8 +16,7 @@ static  allowedMethods = [checkSession: 'POST', checkAddToCart: 'POST', addToCar
     }
     def checkAddToCart(){
         try{
-      def text=productService.checkAddToCart(params,session.endUser)
-        render text
+            session.cart=productService.checkAddToCart(params,session.cart)
         }
         catch (Exception e){
 
@@ -25,49 +24,77 @@ static  allowedMethods = [checkSession: 'POST', checkAddToCart: 'POST', addToCar
     }
     def updateBasket(){
         try {
-            def totalArray = productService.updateBasket(params, session.endUser)
+            if(session.cart.size()>0){
+            def totalArray = productService.updateBasket(params, session.cart)
+            session.cart=totalArray[4]
             render totalArray as JSON
+            }
+            else{
+                render "cartEmpty"
+            }
         }
         catch(Exception e){
 
         }
     }
     def addToCart() {
+
+        session.cart=productService.addToCart(params,session.cart)
+    }
+    def checkout(){
         try{
-        def productInstance=Product.get(params.id)
-        if(productInstance){
-        def cartInstanceCheck=Cart.findByEndUserInformationAndProductAndProductSize(session.endUser,productInstance,ProductSize.get(params.size))
-        if(cartInstanceCheck){
-         cartInstanceCheck.quantity=cartInstanceCheck.quantity+1
-            cartInstanceCheck.save(flush: true)
-        }
-        else{
-        def cartInstance=new Cart()
-        cartInstance.product=productInstance
-        cartInstance.quantity=1
-            cartInstance.productSize=ProductSize.get(params.size)
-            cartInstance.endUserInformation=session.endUser
-        cartInstance.save(flush: true)}
-        redirect(action: "cart")
+            if(session.cart.size()==0){
+redirect(action: "cart",params: [cartEmptyMessage:"cannot proceed while cart is empty"])
+            }
+            else{
+
+            def totalArray=productService.cart(session.cart)
+            if(session.endUser){
+                def endUserInformation=EndUserInformation.findById(session.endUser.id)
+                render(view: "checkout", model:[totalArray:totalArray,endUserInformation:endUserInformation])}
+            else{
+                render(view: "checkout", model:[totalArray:totalArray])}
+
+            }
         }
 
-        }
+
+
         catch (Exception e){
+
         }
     }
+
     def cart()
     {
         try{
-      def totalArray=productService.cart(session.endUser)
-        render(view: "checkout", model:[totalArray:totalArray])}
+            def totalArray=productService.cart(session.cart)
+            if(!params.cartEmptyMessage){
+            render(view: "cart", model:[totalArray:totalArray])
+        }
+            else{
+             render(view: "cart",model: [totalArray:totalArray,cartEmptyMessage:params.cartEmptyMessage])
+            }
+        }
+
+
+
+
+
         catch (Exception e){
 
         }
+
 }
     def delete(){
         try{
-       def totalArray=productService.deleteCart(params,session.endUser)
-        render totalArray as JSON
+            if(session.cart.size()>0){
+       def totalArray=productService.deleteCart(params,session.cart)
+            session.cart=totalArray[4]
+        render totalArray as JSON}
+            else{
+                render "cartEmpty"
+            }
     }
         catch (Exception e){
 

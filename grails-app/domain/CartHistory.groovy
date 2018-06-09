@@ -1,5 +1,3 @@
-
-
 class CartHistory {
     boolean isFakeOrder
     String orderId

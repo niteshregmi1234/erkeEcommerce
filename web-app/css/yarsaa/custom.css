@@ -1,20 +1,19 @@
+.billingFieldSmall{
+    width: 201px;
+}
+.billingFieldLarge{
+width: 432px;
+}
+.red-tooltip + .tooltip > .tooltip-inner {background-color: #a94442;}
+.checkOutHead{
+    font-size: 35px;
+}
+.cartSuccessful{
 
-/*p span*/
-/*{*/
-    /*display: block;*/
-/*}*/
-/*#some-element {*/
-    /*!*display: none;*!*/
-    /*!*z-index: 3;*!*/
-    /*font-size: 10px;*/
-
-    /*text-transform: uppercase;*/
-/*}*/
-
-/*#some-div:hover #some-element,*/
-/*#some-div:focus #some-element{*/
-    /*display: block;*/
-/*}*/
+height: 20px;
+font-size: 20px;
+color: #000;
+}
 .updateCart{
     color:#4fbfa8;
 }
@@ -351,12 +350,33 @@
     text-align: right;
     margin-top: -45px;
 }
+.discountBox1 {
+    border: 2px solid #f68b1e;
+    color: #f68b1e;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 700;
+    padding: 4px 2px;
+    float: left;
+    margin-left: 80px;
+    margin-top: -63px;
+}
 .productDescription{
     color: #000;
     font-weight: 500;
     word-wrap: break-word;
 }
-
+.discountBoxDetail {
+    border: 2px solid #f68b1e;
+    color: #f68b1e;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 700;
+    padding: 4px 2px;
+    float: right;
+    margin-top: -45px;
+    margin-right: 306px;
+}
 
 @media screen and (max-width:240px){
     .bigButton {
@@ -2117,6 +2137,7 @@ margin-top: -2px!important;
     .discountBox {
         margin-left: 220px!important;
     }
+
     .productDescription{
         font-weight: 400!important;
         font-size: 16px!important;

@@ -34,22 +34,22 @@
 </tr>
 
 
-    <g:each in="${Cart.findAllByEndUserInformation(session.endUser)}" var="list">
+    <g:each in="${session.cart}" var="list">
         <tr>
 
-            <td>${list.product.productColor.colorName+" "+list.product.productDetails.productName+" "+list.product.productDetails.productBrand.brandName}
+            <td>${list.productColor.colorName+" "+list.productDetails.productName+" "+list.productBrand.brandName}
             </td>
             <td>${list.productSize.sizeName}</td>
             <td>
 ${list.quantity}
 
             </td>
-            <td>Rs.<g:formatNumber number="${list.product.productDetails.price}" type="number"
+            <td>Rs.<g:formatNumber number="${list.productDetails.price}" type="number"
                                    maxFractionDigits="2" roundingMode="HALF_DOWN" />
 
                 </td>
-            <td>${list.product.productDetails.discountPercentage}%</td>
-            <td>Rs.<g:formatNumber number="${(list.product.productDetails.price*list.quantity)-(list.product.productDetails.discountPercentage*(list.product.productDetails.price*list.quantity)/100)}" type="number"
+            <td>${list.productDetails.discountPercentage}%</td>
+            <td>Rs.<g:formatNumber number="${(list.productDetails.price*list.quantity)-(list.productDetails.discountPercentage*(list.productDetails.price*list.quantity)/100)}" type="number"
                                    maxFractionDigits="2" roundingMode="HALF_DOWN" />
 
         </tr>
@@ -105,11 +105,15 @@ ${list.quantity}
 
     </tr>
 </table >
-<h3>User Information:</h3>
-<table border="3px" width="50px"><tr><td>FirstName:${session.endUser.firstName}</td></tr><tr><td>LastName:${session.endUser.lastName}</td></tr><tr><td>City:${session.endUser.city}</td></tr><tr><td>Address:${session.endUser.address}</td></tr><tr><td>Contact_no:${session.endUser.phone}</td></tr><tr><td>E-mail:${session.endUser.email}</td></tr></table>
+<h3>Billing Information:</h3>
+<table border="3px" width="50px"><tr><td>FirstName:${params.firstNameBilling}</td></tr><tr><td>LastName:${params.lastNameBilling}</td></tr><tr><td>Company Name:${params.companyNameBilling}</td></tr><tr><td>Contact_no1:${params.mobileOrPhoneCumpolsoryBilling}</td></tr><tr><td>Contact_no2:${params.mobileOrPhoneOptionalBilling}</td></tr><tr><td>E-mail:${params.email}</td></tr><tr><td>Address1:${params.cumpolsoryAddressBilling}</td></tr><tr><td>Address2:${params.optionalAddressBilling}</td></tr><tr><td>City:${params.cityBilling}</td></tr><tr><td>Customer Type:<g:if test="${session.endUser}">Returning or logged in Customer</g:if> <g:else>new customer or not logged in Customer</g:else></td></tr></table>
 
 <h3>Delivery Information:</h3>
-<table border="3px" width="50px"><tr><td>FirstName:${params.firstName}</td></tr><tr><td>LastName:${params.lastName}</td></tr><tr><td>Address:${params.address}</td></tr><tr><td>Contact_no:${params.phone}</td></tr><tr><td>Delivery Method:${DeliveryMethod.get(params.delivery).briefDescribe}</td></tr><tr><td>Payment Method:${PaymentMethod.get(params.payment).briefDescribe}</td></tr></table>
+<table border="3px" width="50px"><tr><td>Delivery Method:${DeliveryMethod.get(params.delivery).briefDescribe}</td></tr><tr><td>Payment Method:${PaymentMethod.get(params.payment).briefDescribe}</td></tr><tr><td>Order notes:${params.orderNotesShipping}</td></tr></table>
+<g:if test="${params.isShipping}">
+<h3>Shipping To Address</h3>
+    <table border="3px" width="50px"><tr><td>FirstName:${params.firstNameShipping}</td></tr><tr><td>LastName:${params.lastNameShipping}</td></tr><tr><td>Company Name:${params.companyNameShipping}</td></tr><tr><td>Address1:${params.cumpolsoryAddressShipping}</td></tr><tr><td>Address2:${params.optionalAddressShipping}</td></tr><tr><td>City:${params.cityShipping}</td></tr></table>
 
+</g:if>
 </body>
 </html>

@@ -18,6 +18,8 @@ jQuery(function($) {
             {
                 gallery: $gallery.attr('id'),
                 cursor: 'pointer',
+                zoomWindowWidth:500,
+                zoomWindowHeight:500,
                 galleryActiveClass: 'active',
                 responsive: true,
                 imageCrossfade: true
@@ -37,13 +39,12 @@ jQuery(function($) {
     // Bind Fancybox to clicking the zoom image.
     // Open it to the currently active index.
     $("#zoom").on("click", function(e) {
-        e.preventDefault();
         $.fancybox.open($imgs, false,index);
+        e.preventDefault();
     });
 });
 $(".thumb").click(function(e) {
-
-        switchImage($(this));
+     switchImage($(this));
         index = $(".thumb").index(this);
         e.preventDefault();
     }
@@ -51,7 +52,6 @@ $(".thumb").click(function(e) {
 
 
 function switchImage(thumb) {
-
     $('.thumb').removeClass('active');
     thumb.addClass('active');
 }

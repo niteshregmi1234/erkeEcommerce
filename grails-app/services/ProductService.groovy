@@ -7,23 +7,57 @@ import java.text.DecimalFormat
 @Transactional
 class ProductService {
     private static final DecimalFormat df = new DecimalFormat("0.00")
-def deleteCart(Map params,EndUserInformation endUserInformation){
-    try{
-        def id=params.id as long
-        def cartInstance=Cart.get(id)
-        if(cartInstance){
-            cartInstance.delete(flush: true)
+    def addToCart(Map params,List<CartWithoutEndUser> cartWithoutEndUserList){
+        def obj= JSON.parse(params.array)
+        def id=obj[0] as long
+        def size=obj[1] as String
+        CartWithoutEndUser cartWithoutEndUser=new CartWithoutEndUser()
+        cartWithoutEndUser.product=Product.get(id)
+        cartWithoutEndUser.productSize=ProductSize.findBySizeNameAndStatusShow(size,true)
+        cartWithoutEndUser.quantity=obj[2] as int
+        cartWithoutEndUser.productDetails=cartWithoutEndUser.product.productDetails
+        cartWithoutEndUser.productBrand=cartWithoutEndUser.productDetails.productBrand
+        cartWithoutEndUser.productColor=cartWithoutEndUser.product.productColor
+        cartWithoutEndUserList.add(cartWithoutEndUser)
+        for(int i=cartWithoutEndUserList.size()-1;i>0;i--){
+            Collections.swap(cartWithoutEndUserList,i,i-1)
         }
-        def cartList=Cart.findAllByEndUserInformation(endUserInformation)
-        def totalPrice=0
-        for(Cart cart:cartList){
-            totalPrice=totalPrice+((cart.product.productDetails.price*cart.quantity)-(cart.product.productDetails.discountPercentage*(cart.product.productDetails.price*cart.quantity)/100))
+        for (int i = 0; i < cartWithoutEndUserList.size() - 1; i++) {
+            for (int j = i + 1; j < cartWithoutEndUserList.size(); j++) {
+                if (cartWithoutEndUserList[i].product.id == cartWithoutEndUserList[j].product.id && cartWithoutEndUserList[i].productSize.sizeName == cartWithoutEndUserList[j].productSize.sizeName) {
+                    cartWithoutEndUserList[i].quantity = cartWithoutEndUserList[i].quantity + cartWithoutEndUserList[j].quantity
+                    cartWithoutEndUserList.remove(cartWithoutEndUserList[j])
+                    j--
+                }
+
+            }
+        }
+        return cartWithoutEndUserList
+    }
+def deleteCart(Map params,List<CartWithoutEndUser> cartWithoutEndUserList){
+    try{
+        def idList= JSON.parse(params.idList)
+        def index=idList[0] as int
+        def productId=idList[1] as long
+        def sizeId=idList[2] as long
+        def success
+        def cartWithoutEndUserDelete=cartWithoutEndUserList[index]
+        if(cartWithoutEndUserDelete.productSize.id==sizeId && cartWithoutEndUserDelete.product.id==productId) {
+            cartWithoutEndUserList.removeAt(index)
+            success="yes"
+        }
+        else{
+          success="no"
+        }
+            def totalPrice=0
+        for(CartWithoutEndUser cartWithoutEndUser:cartWithoutEndUserList){
+            totalPrice=totalPrice+((cartWithoutEndUser.productDetails.price*cartWithoutEndUser.quantity)-(cartWithoutEndUser.productDetails.discountPercentage*(cartWithoutEndUser.productDetails.price*cartWithoutEndUser.quantity)/100))
         }
         def shippingAndHandling= OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100
         def totalPrice1=totalPrice+shippingAndHandling
         def tax=OtherCosts.list()[0].taxPercentage*totalPrice1/100
         def totalPriceTotal=totalPrice1+tax
-        def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal)]
+        def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal),cartWithoutEndUserList,success]
         return totalUnits
 
     }
@@ -31,95 +65,89 @@ def deleteCart(Map params,EndUserInformation endUserInformation){
 
     }
 }
-    def cart(EndUserInformation endUserInformation){
+    def cart(List<CartWithoutEndUser> cartList){
     try{
-        def cartList=Cart.findAllByEndUserInformation(endUserInformation)
         def totalPrice=0
         def shippingAndHandling=0
         def tax=0
         def totalPriceTotal=0
-        List<Product> relatedProductList = new ArrayList<>()
         if(cartList.size()>0){
-            for(Cart cart:cartList){
-                totalPrice=totalPrice+((cart.product.productDetails.price*cart.quantity)-(cart.product.productDetails.discountPercentage*(cart.product.productDetails.price*cart.quantity)/100))
+            for(CartWithoutEndUser cart:cartList){
+                totalPrice=totalPrice+((cart.productDetails.price*cart.quantity)-(cart.productDetails.discountPercentage*(cart.productDetails.price*cart.quantity)/100))
             }
             shippingAndHandling= OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100
             def totalPrice1=totalPrice+shippingAndHandling
             tax=OtherCosts.list()[0].taxPercentage*totalPrice1/100
             totalPriceTotal=totalPrice1+tax
-            def productDetailsList=ProductDetails.findAllByProductSubCategoryAndProductCategoryAndIdNotEqual(cartList[cartList.size()-1].product.productDetails.productSubCategory,cartList[cartList.size()-1].product.productDetails.productCategory,cartList[cartList.size()-1].product.productDetails.id)
-
-
-            for (ProductDetails productDetails : productDetailsList) {
-                def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)
-                if (product) {
-                    relatedProductList.add(product[0])
-                }
-            }
-            Collections.shuffle(relatedProductList)}
-        def totalArray=[df.format(totalPrice),relatedProductList,df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal)]
+        }
+        def totalArray=[df.format(totalPrice),"abc",df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal)]
         return totalArray
     }
     catch (Exception e){
     }
 
 }
-    def updateBasket(Map params,EndUserInformation endUserInformation){
+    def updateBasket(Map params,List<CartWithoutEndUser> cartWithoutEndUserList){
         try{
             def totalPrice=0
-            def obj= JSON.parse(params.array)
-            for(int i=0;i<obj[0].size();i++){
-                def id=obj[0][i] as long
-                def sizeId=obj[2][i] as long
-                def cartInstance=Cart.findByEndUserInformationAndProductAndProductSize(endUserInformation,Product.get(id),ProductSize.get(sizeId))
-                def quantity=obj[1][i] as int
-                if(quantity<1){
-                    cartInstance.quantity=cartInstance.quantity
+            def success
+            def quantityList= JSON.parse(params.array)
+            if(quantityList.size()==cartWithoutEndUserList.size()) {
+                for (int i = 0; i < quantityList.size(); i++) {
+                    def quantity = quantityList[i] as int
+                    if (quantity < 1) {
+                        cartWithoutEndUserList[i].quantity = cartWithoutEndUserList[i].quantity
+                    } else {
+                        cartWithoutEndUserList[i].quantity = quantity
+                    }
+                    totalPrice = totalPrice + ((cartWithoutEndUserList[i].productDetails.price * cartWithoutEndUserList[i].quantity) - (cartWithoutEndUserList[i].productDetails.discountPercentage * (cartWithoutEndUserList[i].productDetails.price * cartWithoutEndUserList[i].quantity) / 100))
                 }
-                else{
-                    cartInstance.quantity=quantity
+                success="yes"
+            }
+            else{
+                for(CartWithoutEndUser cartWithoutEndUser:cartWithoutEndUserList){
+                    totalPrice=totalPrice+((cartWithoutEndUser.productDetails.price*cartWithoutEndUser.quantity)-(cartWithoutEndUser.productDetails.discountPercentage*(cartWithoutEndUser.productDetails.price*cartWithoutEndUser.quantity)/100))
                 }
-                cartInstance.save(flush: true)
-                totalPrice=totalPrice+((cartInstance.product.productDetails.price*cartInstance.quantity)-(cartInstance.product.productDetails.discountPercentage*(cartInstance.product.productDetails.price*cartInstance.quantity)/100))
+                success="no"
             }
             def shippingAndHandling= OtherCosts.list()[0].shippingAndHandlingPercentage*totalPrice/100
             def totalPrice1=totalPrice+shippingAndHandling
             def tax=OtherCosts.list()[0].taxPercentage*totalPrice1/100
             def totalPriceTotal=totalPrice1+tax
-            def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal)]
+            def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal),cartWithoutEndUserList,success]
             return totalUnits
         }
         catch (Exception e){
 
         }
     }
-    def checkAddToCart(Map params,EndUserInformation endUserInformation){
+    def checkAddToCart(Map params,List<CartWithoutEndUser> cartWithoutEndUserList){
         try{
-            if(endUserInformation){
-                def obj= JSON.parse(params.array)
-                def id=obj[1] as long
-                def sizeId=obj[0] as long
-                def productInstance=Product.get(id)
-                def cartInstanceCheck=Cart.findByEndUserInformationAndProductAndProductSize(endUserInformation,productInstance,ProductSize.get(sizeId))
-                if(cartInstanceCheck){
-                    cartInstanceCheck.quantity=cartInstanceCheck.quantity+1
-                    cartInstanceCheck.save(flush: true)
-                }
-                else{
-                    def cartInstance=new Cart()
-                    cartInstance.product=productInstance
-                    cartInstance.quantity=1
-                    cartInstance.productSize=ProductSize.get(sizeId)
-                    cartInstance.endUserInformation=endUserInformation
-                    cartInstance.save(flush: true)
-                }
-                return "ok"
+            def obj= JSON.parse(params.array)
+            def id=obj[0] as long
+            def size=obj[1] as long
+            CartWithoutEndUser cartWithoutEndUser=new CartWithoutEndUser()
+            cartWithoutEndUser.product=Product.get(id)
+            cartWithoutEndUser.productSize=ProductSize.findByIdAndStatusShow(size,true)
+            cartWithoutEndUser.quantity=1
+            cartWithoutEndUser.productDetails=cartWithoutEndUser.product.productDetails
+            cartWithoutEndUser.productBrand=cartWithoutEndUser.productDetails.productBrand
+            cartWithoutEndUser.productColor=cartWithoutEndUser.product.productColor
+            cartWithoutEndUserList.add(cartWithoutEndUser)
+            for(int i=cartWithoutEndUserList.size()-1;i>0;i--){
+                Collections.swap(cartWithoutEndUserList,i,i-1)
             }
-            else{
+            for (int i = 0; i < cartWithoutEndUserList.size() - 1; i++) {
+                for (int j = i + 1; j < cartWithoutEndUserList.size(); j++) {
+                    if (cartWithoutEndUserList[i].product.id == cartWithoutEndUserList[j].product.id && cartWithoutEndUserList[i].productSize.sizeName == cartWithoutEndUserList[j].productSize.sizeName) {
+                        cartWithoutEndUserList[i].quantity = cartWithoutEndUserList[i].quantity + cartWithoutEndUserList[j].quantity
+                        cartWithoutEndUserList.remove(cartWithoutEndUserList[j])
+                        j--
+                    }
 
-                return "notOk"
-
+                }
             }
+            return cartWithoutEndUserList
         }
         catch (Exception e){
 
