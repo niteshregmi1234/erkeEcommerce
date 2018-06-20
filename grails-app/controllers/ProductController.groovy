@@ -670,7 +670,7 @@ def checkPhoto(){
 
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-                    def productInstance = YarsaaProducts.get(params.id)
+                    def productInstance = Product.get(params.id)
                     if (productInstance) {
                         if (!productInstance.delFlag) {
                             productInstance.delFlag = true

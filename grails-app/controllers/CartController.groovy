@@ -44,7 +44,8 @@ static  allowedMethods = [checkSession: 'POST', checkAddToCart: 'POST', addToCar
     def checkout(){
         try{
             if(session.cart.size()==0){
-redirect(action: "cart",params: [cartEmptyMessage:"cannot proceed while cart is empty"])
+                flash.cartEmptyMessage="cannot proceed while cart is empty"
+redirect(action: "cart")
             }
             else{
 
@@ -69,18 +70,8 @@ redirect(action: "cart",params: [cartEmptyMessage:"cannot proceed while cart is 
     {
         try{
             def totalArray=productService.cart(session.cart)
-            if(!params.cartEmptyMessage){
             render(view: "cart", model:[totalArray:totalArray])
         }
-            else{
-             render(view: "cart",model: [totalArray:totalArray,cartEmptyMessage:params.cartEmptyMessage])
-            }
-        }
-
-
-
-
-
         catch (Exception e){
 
         }

@@ -303,22 +303,22 @@
 
 
           <div class="col-sm-6">
-            <div class="box" style="height:500px;">
-              <h3>${totalArray[0].productDetails.productBrand.brandName+" "+totalArray[0].productDetails.productName+" "+totalArray[0].productDetails.briefDescription+"("+totalArray[0].productColor.colorName+")"}</h3>
+            <div class="box detailBox" style="height:500px;">
+              <h3 class="detailName">${totalArray[0].productDetails.productBrand.brandName+" "+totalArray[0].productDetails.productName+" "+totalArray[0].productDetails.briefDescription+"("+totalArray[0].productColor.colorName+")"}</h3>
               <p class="goToDescription" style="text-align: left;"><a href="#details" class="scroll-to" style="color: #4fbfa8;">click here! go to description tab</a>
               </p>
 <g:hiddenField name="productIdWithColor" id="productIdWithColor" value="${totalArray[0].id}"></g:hiddenField>
               %{--<h5 style="color:#337ab7">vendido por <a href="#">Samsung</a> · <small style="color:#337ab7">(5054 ventas)</small></h5>--}%
 
               <!-- Precios -->
-              <h3 style="margin-top:0px;">Rs. <g:formatNumber number="${totalArray[0].productDetails.price-(totalArray[0].productDetails.discountPercentage*totalArray[0].productDetails.price/100)}" type="number" maxFractionDigits="2"/></h3>
+              <h3 style="margin-top:0px;" class="productDetailPrice">Rs. <g:formatNumber number="${totalArray[0].productDetails.price-(totalArray[0].productDetails.discountPercentage*totalArray[0].productDetails.price/100)}" type="number" maxFractionDigits="2"/></h3>
               <g:if test="${totalArray[0].productDetails.isSale==true}">
                 <p style="margin-top: -10px;"><del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.${totalArray[0].productDetails.price}</del>
                 <div class="discountBoxDetail">-${totalArray[0].productDetails.discountPercentage}%</div></p>
               </g:if>
 
             <!-- Detalles especificos del producto -->
-              <div class="section">
+              <div class="section colorSection">
                 <h6 class="title-attr" style="margin-top:15px;"><small>color</small></h6>
                 <div>
                   <div class="attr active" style="width:50px;"><img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:totalArray[0].specialImageName])}" class="img-responsive lazy">
@@ -702,60 +702,6 @@
                   </div>
                 </div>
               </div>
-              <g:if test="${totalArray[2]}">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        More Colors (${totalArray[2].size()})</a>
-                      <i class="indicator glyphicon glyphicon-plus  pull-right"></i>
-                    </h4>
-                  </div>
-                  <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <div class="accordion-image">
-                        <g:each in="${totalArray[2]}" var="list">
-                          <div class="ac-img">
-                            <div class="col-md-3 col-sm-6">
-                              <div class="product">
-                                <div class="flip-container">
-                                  <div class="flipper">
-                                    <div class="front">
-                                      <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                                        <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
-
-                                      </g:link>
-                                    </div>
-                                    <div class="back">
-                                      <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                                        <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
-
-                                      </g:link>
-                                    </div>
-                                  </div>
-                                </div>
-                                <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible">
-                                  <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
-
-                                </g:link>
-
-                              <!-- /.text -->
-
-
-                              </div>
-                              <!-- /.product -->
-                            </div>
-                          </div>
-                        </g:each>
-                      %{--<div class="ac-img">--}%
-                      %{--<a href="#"><img src="images/product-12.jpg" alt="Groovy Apparel"></a>--}%
-                      %{--</div>--}%
-                        <div class="clearfix"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </g:if>
             </div>
           </div>
           <hr>

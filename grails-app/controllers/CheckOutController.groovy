@@ -1,3 +1,5 @@
+import grails.converters.JSON
+
 class CheckOutController {
     static allowedMethods = [placeOrder: 'POST',checkCart: 'POST',sendFeedBackMessage: 'POST']
     def endUserInformationService
@@ -41,23 +43,75 @@ class CheckOutController {
 
     }
     def placeOrder(){
+        def text
         try{
             def cartList=session.cart
-        def totalPrice=endUserInformationService.getTotalPriceOfCartList(cartList)
-        def orderId=endUserInformationService.getOrderId(cartList,params)
-        sendMail {
+        def billingInfo=JSON.parse(params.billingInfo);
+        if(params.isCreateAccount){
+                def endUserInformation=EndUserInformation.findByEmail(billingInfo[5])
+                if(!endUserInformation){
+                def orderId=endUserInformationService.getOrderId(cartList,params,session.endUser)
+                def totalPrice=endUserInformationService.getTotalPriceOfCartList(cartList)
+                    if(params.isShipping){
+                        def shippingInfo= JSON.parse(params.isShipping)
+
+                        sendMail {
                     to "${MailSetUp.list()[0].toEmail}"
                     subject "Shopping mail from customers"
-                    html g.render(template:"/cart/mail",model: [totalPrice: totalPrice])
+                    html g.render(template:"/cart/mail",model: [totalPrice: totalPrice,billingInfo:billingInfo,shippingInfo:shippingInfo])
+
+                }}
+                        else{
+                            sendMail {
+                                to "${MailSetUp.list()[0].toEmail}"
+                                subject "Shopping mail from customers"
+                                html g.render(template:"/cart/mail",model: [totalPrice: totalPrice,billingInfo:billingInfo])
+
+                            }
+
+                        }
+
+                    session.cart.clear()
+                    text=[]
+                    text=[orderId,billingInfo[5],params.isCreateAccount] as JSON
+                    print text
+                    render text
+
+            }
+                else{
+                    text="email is already taken"
+                    render text
+                }
+            }
+            else{
+            def orderId=endUserInformationService.getOrderId(cartList,params,session.endUser)
+            def totalPrice=endUserInformationService.getTotalPriceOfCartList(cartList)
+            if(params.isShipping){
+                def shippingInfo= JSON.parse(params.isShipping)
+
+
+                sendMail {
+                    to "${MailSetUp.list()[0].toEmail}"
+                    subject "Shopping mail from customers"
+                    html g.render(template: "/cart/mail", model: [totalPrice: totalPrice, billingInfo: billingInfo,shippingInfo:shippingInfo])
+
+                }                }
+            else{
+                sendMail {
+                    to "${MailSetUp.list()[0].toEmail}"
+                    subject "Shopping mail from customers"
+                    html g.render(template: "/cart/mail", model: [totalPrice: totalPrice, billingInfo: billingInfo])
 
                 }
-                    flash.message1=orderId
-            session.cart.clear()
-                    redirect(action: "cart",controller: "cart")
+            }
+                session.cart.clear()
+            text=orderId
+                render text
+            }
         }
-    catch(Exception e){
-        flash.message="your enquiry has been not been sent due to some problems.Please try again later"
-        redirect(action: "cart",controller: "cart")
+        catch(Exception e){
+            text="enquiry not sent"
+render text
     }
     }
 }

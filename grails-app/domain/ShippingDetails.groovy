@@ -6,6 +6,7 @@ String firstNameShipping
     String optionalAddressShipping
     String cityShipping
     OrderId orderId
+    String mobileOrPhoneShipping
     static constraints = {
 
     }

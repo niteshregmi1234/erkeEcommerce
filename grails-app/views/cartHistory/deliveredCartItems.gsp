@@ -37,7 +37,7 @@
                            href="#collapse${i}"
                            aria-expanded="true"
                            aria-controls="collapse${i}" style="color: white;">
-                            Order Id-${list[0].orderId}
+                            Order Id-${list[0].orderId.orderId}
                         </a>
                     </h4>
                 </div>
@@ -47,54 +47,59 @@
                      aria-labelledby="heading${i}">
                     <div class="panel-body">
             <g:form controller="cartHistory" action="deleteSuccessfulOrders" >
-
-                            <div class="container">
+                <div class="container">
                                 <h4><u>Time-${list[0].date}</u></h4>
-                                <h3><u>Customer Information</u></h3>
+                                <h3><u>Billing Details</u></h3>
                                 <div class="table-responsive">
-
                                     <table class="table table-bordered" style="width: 1108px;">
                                         <tbody>
                                         <tr>
                                             <th scope="row">Full Name</th>
-                                            <td>${list[0].endUserInformation.firstName+" "+list[0].endUserInformation.lastName}</td>
-
+                                            <td>${list[0].customerPersonalDetails.firstName+" "+list[0].customerPersonalDetails.lastName}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Company Name</th>
+                                            <td>${list[0].customerPersonalDetails.companyName}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Email Id</th>
-                                            <td>${list[0].endUserInformation.email}</td>
+                                            <td>${list[0].orderId.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Mobile Number Cumpolsory</th>
+                                            <td>${list[0].customerPersonalDetails.mobileOrPhoneCumpolsory}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"> Optional Mobile Number</th>
+                                            <td>${list[0].customerPersonalDetails.mobileOrPhoneOptional}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Cumpolsory Address</th>
+                                            <td>${list[0].customerPersonalDetails.cumpolsoryAddress}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Optional Address</th>
+                                            <td>${list[0].customerPersonalDetails.optionalAddress}</td>
 
                                         </tr>
                                         <tr>
                                             <th scope="row">City</th>
-                                            <td>${list[0].endUserInformation.city}</td>
-
+                                            <td>${list[0].customerPersonalDetails.townOrCity}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Mobile Number</th>
-                                            <td>${list[0].endUserInformation.phone}</td>
-
+                                            <th scope="row">Customer Type</th>
+                                            <td>${list[0].customerType}</td>
                                         </tr>
-
-                                        <tr>
-                                            <th scope="row">Address</th>
-                                            <td>${list[0].endUserInformation.address}</td>
-
-                                        </tr>
-
-                                        </tbody>
+                                              </tbody>
                                     </table>
                                 </div>
-                                <h3><u>Delivery Information</u></h3>
+                                <h3><u>Delivery And Payment Methods</u></h3>
                                 <div class="table-responsive">
 
                                     <table class="table table-bordered" style="width: 1108px;">
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">Delivery Address</th>
-                                            <td>${list[0].deliveryAddress}</td>
 
-                                        </tr>
                                         <tr>
                                             <th scope="row">Payment Method</th>
                                             <td>${list[0].paymentMethod.briefDescribe}</td>
@@ -106,14 +111,54 @@
 
                                         </tr>
                                         <tr>
-                                            <th scope="row">Mobile Number</th>
-                                            <td>${list[0].mobileNumber}</td>
-
+                                            <th scope="row">Order Notes</th>
+                                            <td>${list[0].orderNotes}</td>
                                         </tr>
+
 
                                         </tbody>
                                     </table>
                                 </div>
+                    <%
+                        def shippingDetails=ShippingDetails.findByOrderId(list[0].orderId)
+                        %>
+                    <g:if test="${shippingDetails}">
+                    <h3><u>Shipping To Different Address</u></h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" style="width: 1108px;">
+                                <tbody>
+                                <tr>
+                                    <th scope="row">Full Name</th>
+                                    <td>${shippingDetails.firstNameShipping+" "+shippingDetails.lastNameShipping}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Company Name</th>
+                                    <td>${shippingDetails.companyNameShipping}</td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Mobile Number</th>
+                                    <td>${shippingDetails.mobileOrPhoneShipping}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Cumpolsory Address</th>
+                                    <td>${shippingDetails.cumpolsoryAddressShipping}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">Optional Address</th>
+                                    <td>${shippingDetails.optionalAddressShipping}</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">City</th>
+                                    <td>${shippingDetails.cityShipping}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </g:if>
                                 <h3><u>Orders List</u></h3>
                                 <div class="table-responsive">
 

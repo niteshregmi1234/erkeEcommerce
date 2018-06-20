@@ -801,6 +801,9 @@ color: #000;
 }
 
 @media screen and (min-width:301px) and (max-width:320px){
+    .discountBoxDetail{
+        margin-right: 50px;
+    }
     .more{
         margin-top: -65px!important;
         margin-right: 35px!important;
@@ -970,7 +973,10 @@ color: #000;
 
 }
 @media screen and (min-width: 321px) and (max-width:360px){
+    .discountBoxDetail {
 
+        margin-right: 85px;
+    }
     .text-center{
         margin-top: -5px!important;
     }
@@ -1125,6 +1131,9 @@ margin-top: -20px!important;
 
 }
 @media screen and (min-width: 361px) and (max-width:411px){
+    .discountBoxDetail{
+        margin-right: 110px;
+    }
     .text-center{
         margin-top: -5px!important;
     }
@@ -1285,6 +1294,10 @@ width: 250px!important;
 }
 
 @media screen and (min-width: 412px) and (max-width:413px){
+    .discountBoxDetail {
+
+        margin-right: 145px;
+    }
     #mainImage img{
         width: 350px!important;
     }
@@ -2049,6 +2062,9 @@ margin-top: -2px!important;
 
 }
 @media screen and (min-width:621px) and (max-width: 640px){
+    #zoom{
+    width: 580px;
+    }
     .text-center{
         margin-top: -5px!important;
     }
@@ -2632,6 +2648,37 @@ margin-top: -2px!important;
 
 
 @media screen and (min-width: 769px) and (max-width: 855px) {
+    #errorSize{
+        font-size: 7px;
+        margin-top: -3px;
+    }
+    .goToDescription{
+        margin-top: -10px!important;
+    }
+    .detailName{
+        font-size: 13px;
+        margin-top: -5px;
+    }
+    .detailBox{
+        height:330px!important;
+    }
+    .productDetailPrice{
+        font-size: 13px;
+        margin-top: -15px!important;
+    }
+    .discountBoxDetail{
+        margin-right: 140px;
+    }
+    .colorSection{
+        margin-top: -15px!important;
+    }
+    .title-attr{
+        margin-top: -5px!important;
+
+    }
+    #addToCart{
+        margin-top: -15px!important;
+    }
     .more{
 
         margin-right: 60px!important;

@@ -2,13 +2,13 @@ class CartHistoryController extends BaseController{
     static allowedMethods = [deliveredToCustomer:'POST',addToPending: 'POST']
     def recentOrders(){
         try{
-def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,false)
-            List<List<CartHistory>> listListCartList=new ArrayList<>()
+def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFakeOrder(false,false)
+            List<List<CartHistoryWithoutEndUser>> listListCartList=new ArrayList<>()
 
-        def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.endUserInformation},{undeliveredCartItem -> undeliveredCartItem.date})
-        for(CartHistory cartHistory:undeliveredCartItems) {
-            def abc = cartItemsByEndUserAndDate[cartHistory.endUserInformation]
-            def cartList = abc[cartHistory.date] as List<CartHistory>
+        def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.customerPersonalDetails},{undeliveredCartItem -> undeliveredCartItem.date})
+        for(CartHistoryWithoutEndUser cartHistory:undeliveredCartItems) {
+            def abc = cartItemsByEndUserAndDate[cartHistory.customerPersonalDetails]
+            def cartList = abc[cartHistory.date] as List<CartHistoryWithoutEndUser>
             if(!listListCartList.contains(cartList)){
                 listListCartList.add(cartList)
 
@@ -16,8 +16,7 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
          }
         }
             render(view: "undeliveredCartItems",model:[listListCartList:listListCartList])
-
-}
+        }
         catch (Exception e){
         }
 
@@ -27,7 +26,7 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
         def cartHistoryIdList=params.list("cartHistoryId")
         for(int i=0;i<cartHistoryIdList.size();i++){
             def cartHistoryId=cartHistoryIdList[i] as long
-            def cartHistory=CartHistory.findById(cartHistoryId)
+            def cartHistory=CartHistoryWithoutEndUser.findById(cartHistoryId)
             cartHistory.isDelivered=false
             cartHistory.isFakeOrder=true
             cartHistory.save(flush: true)
@@ -42,7 +41,7 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
             def cartHistoryIdList=params.list("cartHistoryId")
             for(int i=0;i<cartHistoryIdList.size();i++){
                 def cartHistoryId=cartHistoryIdList[i] as long
-                def cartHistory=CartHistory.findById(cartHistoryId)
+                def cartHistory=CartHistoryWithoutEndUser.findById(cartHistoryId)
                 cartHistory.isDelivered=true
                 cartHistory.isFakeOrder=false
                 cartHistory.save(flush: true)
@@ -58,11 +57,11 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
 
     def successFullOrders(){
         try{
-            def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrderAndSuccessfulOrderDelFlag(true,false,false)
-            List<List<CartHistory>> listListCartList=new ArrayList<>()
-             def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.endUserInformation},{undeliveredCartItem -> undeliveredCartItem.date})
-                for(CartHistory cartHistory:undeliveredCartItems) {
-                    def abc = cartItemsByEndUserAndDate[cartHistory.endUserInformation]
+            def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFakeOrderAndSuccessfulOrderDelFlag(true,false,false)
+            List<List<CartHistoryWithoutEndUser>> listListCartList=new ArrayList<>()
+             def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.customerPersonalDetails},{undeliveredCartItem -> undeliveredCartItem.date})
+                for(CartHistoryWithoutEndUser cartHistory:undeliveredCartItems) {
+                    def abc = cartItemsByEndUserAndDate[cartHistory.customerPersonalDetails]
                     def cartList = abc[cartHistory.date] as List<CartHistory>
                     if(!listListCartList.contains(cartList)){
                         listListCartList.add(cartList)
@@ -77,12 +76,12 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
     }
     def pendingOrders(){
         try{
-            def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,true)
-            List<List<CartHistory>> listListCartList=new ArrayList<>()
+            def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFakeOrder(false,true)
+            List<List<CartHistoryWithoutEndUser>> listListCartList=new ArrayList<>()
 
-            def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.endUserInformation},{undeliveredCartItem -> undeliveredCartItem.date})
-            for(CartHistory cartHistory:undeliveredCartItems) {
-                def abc = cartItemsByEndUserAndDate[cartHistory.endUserInformation]
+            def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.customerPersonalDetails},{undeliveredCartItem -> undeliveredCartItem.date})
+            for(CartHistoryWithoutEndUser cartHistory:undeliveredCartItems) {
+                def abc = cartItemsByEndUserAndDate[cartHistory.customerPersonalDetails]
                 def cartList = abc[cartHistory.date] as List<CartHistory>
                 if(!listListCartList.contains(cartList)){
                     listListCartList.add(cartList)
@@ -100,7 +99,7 @@ def undeliveredCartItems=CartHistory.findAllByIsDeliveredAndIsFakeOrder(false,fa
                 def cartHistoryIdList=params.list("cartHistoryId")
             for(int i=0;i<cartHistoryIdList.size();i++){
                 def cartHistoryId=cartHistoryIdList[i] as long
-                def cartHistory=CartHistory.findById(cartHistoryId)
+                def cartHistory=CartHistoryWithoutEndUser.findById(cartHistoryId)
                 cartHistory.successfulOrderDelFlag=true
                 cartHistory.save(flush: true)
             }

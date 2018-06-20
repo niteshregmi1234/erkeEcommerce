@@ -7,5 +7,14 @@
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url(/images/AjaxLoader.gif) center no-repeat #fff;
+    background: url(../img/AjaxLoader.gif) center no-repeat #fff;
+}
+#newLoaderYarsaa {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('../img/loading-please-wait-gif.gif') 50% 50% no-repeat rgb(249,249,249);
 }

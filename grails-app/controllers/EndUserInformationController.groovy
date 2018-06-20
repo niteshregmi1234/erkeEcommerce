@@ -9,6 +9,7 @@ def editEndUserPersonalDetails(){
 
     }
 }
+
     def checkPassword(){
         try {
             def status = endUserInformationService.checkPassword(params, session.endUser)
@@ -78,7 +79,15 @@ if(session.endUser){
         flash.message="successfully logged in."
 redirect(action: "allProducts",controller: "endUser")
     }
+    def testEmail(){
+        try{
+            def isAvailable=endUserInformationService.checkEmail(params)
+           render isAvailable
+        }
+        catch (Exception e){
 
+        }
+    }
     def checkEmail() {
         try{
             def isAvailable=endUserInformationService.checkEmail(params)

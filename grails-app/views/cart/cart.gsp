@@ -154,75 +154,16 @@
         </div>
     </g:if>
 </div>
-    <div class="bootbox modal fade bootbox-confirm in" id="messageModel" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
-
-                    <p class="text-center">
-                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
 
 
-                    </p>
-
-                    <h3 class="alert alert-success fade in">Dear,Customer. Your order has been successfully kept under process. And Your order Id is</h3>-<h2 style="text-align: center;">Order Id: ${flash.message1}</h2>
-                    <h4>Dear Customer, you are requested to remember your order Id. Thank you!!</h4>
-
-                </div>
-                <div class="modal-footer">
-                    <div data-bb-handler="cancel" type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadPage();">Okey</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bootbox modal fade bootbox-confirm in" id="messageModel1" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
-
-                    <p class="text-center">
-                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
-
-
-                    </p>
-
-                    <h3 class="alert alert-danger fade in">${flash.message}.</h3>
-
-                </div>
-                <div class="modal-footer">
-                    <div data-bb-handler="cancel" type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadPage();">Okey</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <g:if test="${flash.message1}">
-        <script>
-            function reloadPage(){
-                location.reload();
-            }
-            $('#messageModel').modal('toggle');
-        </script>
-    </g:if>
-    <g:if test="${flash.message}">
-
-        <script>
-            function reloadPage(){
-                location.reload();
-            }
-            $('#messageModel1').modal('toggle');
-        </script>
-
-    </g:if>
-    <g:if test="${cartEmptyMessage}">
+    <g:if test="${flash.cartEmptyMessage}">
 
         <script>
             bootbox.alert({
-                message: '${cartEmptyMessage}',
+                message: '${flash.cartEmptyMessage}',
                 size: 'small',
                 callback: function(){
-                    window.location="/cart/cart";
+                    window.location="/basket";
                 }
 
             });
@@ -242,7 +183,7 @@
         $("#updateBasket").click(function(evt) {
             var quantity=document.getElementsByName("quantity");
             var quantityList=[];
-            for (var i = 0; i < id.length; i++) {
+            for (var i = 0; i < quantity.length; i++) {
                 quantityList.push(quantity[i].value);
 
             }
@@ -289,7 +230,7 @@ else if(text[5]=="yes"){
                                     $('#unableToPerformAction').hide();
 
                                     $('#updateItem').show();
-                                    if ($(".deleteCart").length < 2) {
+                                    if ($(".deleteCart").length < 1) {
                                         location.reload();
                                     }
 
@@ -306,7 +247,7 @@ else if(text[5]=="yes"){
                                     $('#updateItem').hide();
                                     $('#unableToPerformAction').show();
 
-                                    if ($(".deleteCart").length < 2) {
+                                    if ($(".deleteCart").length < 1) {
                                         location.reload();
                                     }
                                 }

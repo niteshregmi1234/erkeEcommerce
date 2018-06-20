@@ -8,29 +8,30 @@ import java.security.spec.InvalidKeySpecException
 
 @Transactional
 class EndUserInformationService {
-    def getOrderId(List<CartWithoutEndUser> cartList,Map params){
+    def getOrderId(List<CartWithoutEndUser> cartList,Map params,EndUserInformation endUserInformation){
        try{
-           def customerPersonalDetails=new CustomerPersonalDetails()
-           customerPersonalDetails.firstName=params.firstNameBilling
-           customerPersonalDetails.lastName=params.lastNameBilling
-           customerPersonalDetails.companyName=params.companyNameBilling
+           def billingInfo= JSON.parse(params.billingInfo)
+               def customerPersonalDetails=new CustomerPersonalDetails()
+           customerPersonalDetails.firstName=billingInfo[0]
+           customerPersonalDetails.lastName=billingInfo[1]
+           customerPersonalDetails.companyName=billingInfo[2]
            customerPersonalDetails.country="Nepal"
-           customerPersonalDetails.cumpolsoryAddress=params.cumpolsoryAddressBilling
-           customerPersonalDetails.optionalAddress=params.optionalAddressBilling
-           customerPersonalDetails.townOrCity=params.cityBilling
-           customerPersonalDetails.mobileOrPhoneCumpolsory=params.mobileOrPhoneCumpolsoryBilling
-           customerPersonalDetails.mobileOrPhoneOptional=params.mobileOrPhoneOptionalBilling
+           customerPersonalDetails.cumpolsoryAddress=billingInfo[6]
+           customerPersonalDetails.optionalAddress=billingInfo[7]
+           customerPersonalDetails.townOrCity=billingInfo[8]
+           customerPersonalDetails.mobileOrPhoneCumpolsory=billingInfo[3]
+           customerPersonalDetails.mobileOrPhoneOptional=billingInfo[4]
            customerPersonalDetails.save(flush: true)
            if(params.isCreateAccount){
-               saveEndUser(customerPersonalDetails,params)
+               saveEndUser(customerPersonalDetails,billingInfo[5],params.isCreateAccount)
            }
            def date=new Date()
         def orderIdInstance=new OrderId()
-        orderIdInstance.email=params.email
+        orderIdInstance.email=billingInfo[5]
            orderIdInstance.orderId="yarsaa/"
         orderIdInstance.save(flush: true)
            def orderId=orderIdInstance.orderId+orderIdInstance.id
-           orderIdInstance.orderId=orderId
+        orderIdInstance.orderId=orderId
            orderIdInstance.save(flush: true)
            if(params.isShipping){
                saveShipping(params,orderIdInstance)
@@ -46,7 +47,17 @@ class EndUserInformationService {
                cartHistoryWithoutEndUserInstance.product=cart.product
                cartHistoryWithoutEndUserInstance.quantity=cart.quantity
                cartHistoryWithoutEndUserInstance.productSize=cart.productSize
-               cartHistoryWithoutEndUserInstance.customerPersonalDetails=customerPersonalDetails
+               cartHistoryWithoutEndUserInstance.orderNotes=params.orderNotes
+               cartHistoryWithoutEndUserInstance.deliveryMethod=DeliveryMethod.findByIsShowStatusAndId(true,params.delivery as long)
+               cartHistoryWithoutEndUserInstance.paymentMethod=PaymentMethod.findByIsShowStatusAndId(true,params.payment as long)
+               if(endUserInformation){
+               cartHistoryWithoutEndUserInstance.customerType="Returning or logged in Customer"
+               }
+               else {
+
+                   cartHistoryWithoutEndUserInstance.customerType = "new customer or not logged in Customer"
+               }
+                   cartHistoryWithoutEndUserInstance.customerPersonalDetails=customerPersonalDetails
                cartHistoryWithoutEndUserInstance.save(flush: true)
            }
         return orderId
@@ -57,14 +68,17 @@ class EndUserInformationService {
     }
 
     def saveShipping(Map params,OrderId orderId){
+        def shippingInfo= JSON.parse(params.isShipping)
+        print shippingInfo+"yessssshippimg"
         def shippingDetails=new ShippingDetails()
-        shippingDetails.firstNameShipping=params.firstNameShipping
-        shippingDetails.lastNameShipping=params.lastNameShipping
-        shippingDetails.companyNameShipping=params.companyNameShipping
-        shippingDetails.cumpolsoryAddressShipping=params.cumpolsoryAddressShipping
-        shippingDetails.optionalAddressShipping=params.optionalAddressShipping
-        shippingDetails.cityShipping=params.cityShipping
+        shippingDetails.firstNameShipping=shippingInfo[0]
+        shippingDetails.lastNameShipping=shippingInfo[1]
+        shippingDetails.companyNameShipping=shippingInfo[2]
+        shippingDetails.cumpolsoryAddressShipping=shippingInfo[4]
+        shippingDetails.optionalAddressShipping=shippingInfo[5]
+        shippingDetails.cityShipping=shippingInfo[6]
         shippingDetails.orderId=orderId
+        shippingDetails.mobileOrPhoneShipping=shippingInfo[3]
         shippingDetails.save(flush: true)
     }
 //    def cartList(List<CartWithoutEndUser> cartWithoutEndUserList){
@@ -117,14 +131,13 @@ return totalArray}
 
         }
     }
-    def saveEndUser(CustomerPersonalDetails customerPersonalDetails,Map params){
+    def saveEndUser(CustomerPersonalDetails customerPersonalDetails,String email,String password){
         try{
             def endUserInformationInstance = new EndUserInformation()
-            endUserInformationInstance.email=params.email
-            endUserInformationInstance.password=encryptedPassword(params.password)
+            endUserInformationInstance.email=email
+            endUserInformationInstance.password=encryptedPassword(password)
             endUserInformationInstance.customerPersonalDetails=customerPersonalDetails
             endUserInformationInstance.save(flush: true)
-            return endUserInformationInstance
 //            if (endUserInformationInstance.validate()) {
 //                endUserInformationInstance.save(flush: true)
 //                def message1="you are successfully registered"

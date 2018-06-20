@@ -9,6 +9,10 @@
 </head>
 
 <body>
+<div id="newLoaderYarsaa" style="display:none;">
+
+</div>
+
 <!-- *** TOPBAR ***
  _________________________________________________________ -->
 
@@ -231,7 +235,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>mobile No Additional</label>
-                                            <input name="mobileOrPhoneOptionalBilling" placeholder="mobile No" type="text" class="form-control billingFieldSmall red-tooltip" value="${endUserInformation?.customerPersonalDetails?.mobileOrPhoneOptional}" onkeypress="return isNumber(event)">
+                                            <input name="mobileOrPhoneOptionalBilling" id="mobileOrPhoneOptionalBilling" placeholder="mobile No" type="text" class="form-control billingFieldSmall red-tooltip" value="${endUserInformation?.customerPersonalDetails?.mobileOrPhoneOptional}" onkeypress="return isNumber(event)">
                                         </div>
                                     </div>
 <g:if test="${!session.endUser}">
@@ -249,7 +253,7 @@
                                         <div class="form-group" >
                                             <label>Email*</label>
                                             <input placeholder="email@hostname.com" disabled="disabled" type="text" class="form-control billingFieldLarge red-tooltip" value="${endUserInformation?.email}" >
-                                            <input name="email" placeholder="email@hostname.com" type="hidden" class="form-control billingFieldLarge red-tooltip" value="${endUserInformation?.email}" id="email" >
+                                            <input name="email"  type="hidden"  value="${endUserInformation?.email}" id="email" >
 
                                         </div>
                                     </div>
@@ -359,7 +363,14 @@
                                                 <input name="companyNameShipping" placeholder="company Name" id="companyNameShipping" type="text" class="form-control billingFieldLarge">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+    <div class="col-sm-12">
+        <div class="form-group">
+            <label>mobile No*</label>
+            <input name="mobileOrPhoneShipping" id="mobileOrPhoneShipping" placeholder="mobile No" type="text"  class="form-control billingFieldLarge red-tooltip" onkeypress="return isNumber(event)">
+        </div>
+    </div>
+
+    <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Address*</label>
                                                 <input name="cumpolsoryAddressShipping" placeholder="street address" id="cumpolsoryAddressShipping" type="text" class="form-control billingFieldSmall red-tooltip">
@@ -398,24 +409,40 @@
                                             }
                                         }
                                     </script>
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6">
+
+                                        <div class="pull-left">
+                                        <g:link action="cart" controller="cart" class="btn btn-default bigButton"><i class="fa fa-chevron-left"></i>Back to basket</g:link>
+                                    </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="pull-right">
+                                        <div class="btn btn-primary bigButton" onclick="deliveryMethod(this);">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
 
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="col-sm-6">
-                                <div class="pull-left">
-                                    <g:link action="cart" controller="cart" class="btn btn-default bigButton"><i class="fa fa-chevron-left"></i>Back to basket</g:link>
-                                </div>
-                                <div class="pull-right">
-                                    <div class="btn btn-primary bigButton" onclick="deliveryMethod(this);">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
-                                    </div>
-                                </div>
-                            </div>
 
                     </div>
                 </div>
+                <g:if test="${flash.uniqueEmail}">
+                    <script>
+                        $('#email').attr('data-toggle', 'tooltip');
+                        $('#email').attr('data-placement', 'top');
+                        $('#email').attr('data-original-title', 'email is already in use. Take another email.');
+                        $("#email").tooltip();
+                        $("#email").css("border", "1px solid #a94442");
+                        document.getElementById("email").focus();
+                    </script>
+                </g:if>
 
             <div class="box" style="display: none;" id="deliveryMethod">
                  <h1 class="bigName">Checkout - Delivery method</h1>
@@ -512,6 +539,9 @@
 
             </div>
                 <div id="orderReview" style="display: none;">
+
+
+
                    <div class="col-sm-9">
             <div class="box">
                     <h1 class="bigName">Checkout - Order review</h1>
@@ -585,21 +615,8 @@ ${list.quantity}
                         </div>
                         <div class="pull-right">
 
-                            <button type="button"  class="btn btn-primary bigButton" data-toggle="modal" data-target="#confirmModel" id="submit_IdOrder">Place an order<i class="fa fa-chevron-right"></i>
+                            <button type="button"  class="btn btn-primary bigButton"  id="submit_IdOrder">Place an order<i class="fa fa-chevron-right"></i>
                             </button>
-                            <div class="bootbox modal fade bootbox-confirm in" id="confirmModel" tabindex="-1" role="dialog"  aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-                                            <div class="bootbox-body">Are you sure want to place your order?</div>
-                                        </div><div class="modal-footer">
-                                        <div data-bb-handler="cancel" type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</div>
-                                        <button  type="button" class="btn btn-primary"  data-dismiss="modal" onclick="ValidCheckOut();"><i class="fa fa-check"></i> Confirm</button>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
@@ -669,16 +686,24 @@ ${list.quantity}
                 }
                 return true;
             }
-
             function preventMultipleSubmissions() {
                 $('#submit_IdOrder').prop('disabled', true);
             }
-
             window.onbeforeunload = preventMultipleSubmissions;
-
+            $('#submit_IdOrder').click(function(){
+                $('#newLoaderYarsaa').show();
+                $('#submit_IdOrder').prop('disabled', true);
+                setTimeout(function() {
+                    $('#newLoaderYarsaa').fadeOut();
+                }, 5000);
+                ValidCheckOut();
+            });
             function ValidCheckOut(){
-
-    var responseValue;
+                var responseValue;
+                $('#newLoaderYarsaa').show();
+                setTimeout(function() {
+                    $('#newLoaderYarsaa').fadeOut();
+                }, 5000);
     $.ajax({
         url: "${createLink(controller:'checkOut', action:'checkCart')}",
         type: "POST",
@@ -711,14 +736,36 @@ responseValue=false;
 
             }
             else if(text=="ok"){
-                document.getElementById("myForm").submit();
-
+                var payment=$("input[name='payment']:checked").val();
+                var delivery=$("input[name='delivery']:checked").val();
+                var orderNotes=document.getElementById("orderNotesShipping").value;
+                var firstNameBilling=document.getElementById("firstNameBilling").value;
+                var lastNameBilling=document.getElementById("lastNameBilling").value;
+                var companyNameShipping=document.getElementById("companyNameBilling").value;
+                var mobileOrPhoneCumpolsoryBilling=document.getElementById("mobileOrPhoneCumpolsoryBilling").value;
+                var mobileOrPhoneOptionalBilling=document.getElementById("mobileOrPhoneOptionalBilling").value;
+                var email=document.getElementById("email").value;
+                var cumpolsoryAddressBilling=document.getElementById("cumpolsoryAddressBilling").value;
+                var optionalAddressBilling=document.getElementById("optionalAddressBilling").value;
+                var cityBilling=document.getElementById("cityBilling").value;
+                var billingInfo=[];
+                billingInfo[0]=firstNameBilling;
+                billingInfo[1]=lastNameBilling;
+                billingInfo[2]=companyNameShipping;
+                billingInfo[3]=mobileOrPhoneCumpolsoryBilling;
+                billingInfo[4]=mobileOrPhoneOptionalBilling;
+                billingInfo[5]=email;
+                billingInfo[6]=cumpolsoryAddressBilling;
+                billingInfo[7]=optionalAddressBilling;
+                billingInfo[8]=cityBilling;
+                placeOrder(orderNotes,billingInfo,delivery,payment);
             }
         }
 
     });
 return responseValue
 }
+
             function showAddress(evt){
                 $('#deliveryBar').hide();
 
@@ -737,6 +784,10 @@ return responseValue
             }
 
             function deliveryMethod(evt){
+                var isChecked=$('#isShipping:checked');
+                var passwordCheck=true;
+                var responseValue=true;
+                var check=true;
                 var phoneNumberCumpolsory=$('#mobileOrPhoneCumpolsoryBilling').val();
                 var email=$('#email').val()
                 var phoneno = /^\d{10}$/;
@@ -832,46 +883,79 @@ return responseValue
                     document.getElementById("cityBilling").focus();
                     return false;
                 }
-                if($('#isCreateAccount:checked').val()){
+                 if($('#isCreateAccount:checked').val()){
                     var userPw=$('#userPw').val();
                     var userPw2=$('#userPw2').val();
-if(!userPw){
-    $('#userPw').attr('data-toggle', 'tooltip');
-    $('#userPw').attr('data-placement', 'top');
-    $('#userPw').attr('data-original-title', 'password must not be blank');
-    $("#userPw").tooltip();
-    $("#userPw").css("border", "1px solid #a94442");
-    document.getElementById("userPw").focus();
-}
-                    if(userPw){
-    if(userPw.length<6){
-                        $('#userPw').attr('data-toggle', 'tooltip');
-                        $('#userPw').attr('data-placement', 'top');
-                        $('#userPw').attr('data-original-title', 'password must not be less than six character');
-                        $("#userPw").tooltip();
-                        $("#userPw").css("border", "1px solid #a94442");
-                        document.getElementById("userPw").focus();
-                    }
-                    if(userPw!=userPw2){
-                        $('#userPw2').attr('data-toggle', 'tooltip');
-                        $('#userPw2').attr('data-placement', 'top');
-                        $('#userPw2').attr('data-original-title', 'account password and confirm password must be same to proceed');
-                        $("#userPw2").tooltip();
-                        $("#userPw2").css("border", "1px solid #a94442");
-                        document.getElementById("userPw2").focus();
-                    }
-                    else{
-                        showDivs();
-                    }
+                    $.ajax({
+                        url: "${createLink(controller:'endUserInformation', action:'testEmail')}",
+                        global: false,
+                        type: "POST",
+                        data: { "email": email },
+                        cache: false,
+                        async: false,
+                        success: function (text) {
+                            if(text=="false"){
+                                $('#email').attr('data-toggle', 'tooltip');
+                                $('#email').attr('data-placement', 'top');
+                                $('#email').attr('data-original-title', 'email is already in use.Take another email.');
+                                $("#email").tooltip();
+                                $("#email").css("border", "1px solid #a94442");
+                                document.getElementById("email").focus();
+                                responseValue=false;
+                            }
+                        }
 
-                    }
+                    });
+if(responseValue) {
+    if (!userPw) {
+        $('#userPw').attr('data-toggle', 'tooltip');
+        $('#userPw').attr('data-placement', 'top');
+        $('#userPw').attr('data-original-title', 'password must not be blank');
+        $("#userPw").tooltip();
+        $("#userPw").css("border", "1px solid #a94442");
+        document.getElementById("userPw").focus();
+        passwordCheck=false;
+    }
+    if (userPw) {
+        if (userPw.length < 6) {
+            $('#userPw').attr('data-toggle', 'tooltip');
+            $('#userPw').attr('data-placement', 'top');
+            $('#userPw').attr('data-original-title', 'password must not be less than six character');
+            $("#userPw").tooltip();
+            $("#userPw").css("border", "1px solid #a94442");
+            document.getElementById("userPw").focus();
+            passwordCheck=false;
+
+        }
+        if (userPw != userPw2) {
+            $('#userPw2').attr('data-toggle', 'tooltip');
+            $('#userPw2').attr('data-placement', 'top');
+            $('#userPw2').attr('data-original-title', 'account password and confirm password must be same to proceed');
+            $("#userPw2").tooltip();
+            $("#userPw2").css("border", "1px solid #a94442");
+            document.getElementById("userPw2").focus();
+            passwordCheck=false;
+        }
+        if(isChecked.val()){
+check=checkShipping();
+        }
+
+        else if(check && passwordCheck) {
+            showDivs();
+        }
+
+    }
+}
+                }
+                 if(isChecked.val()) {
+                     check=checkShipping();
 
                 }
 
-else{
-
+                 if(check && responseValue && passwordCheck){
                     showDivs();
-                }}
+                }
+             }
                 else{
                  if(!($('#firstNameBilling').val())){
                      $('#firstNameBilling').attr('data-toggle', 'tooltip');
@@ -964,7 +1048,11 @@ else{
                      document.getElementById("cityBilling").focus();
                      return false;
                  }
-                 else{
+                 if(isChecked.val()) {
+                     check=checkShipping();
+
+                 }
+                 if(check){
 
                      showDivs();
                  }
@@ -972,6 +1060,73 @@ else{
 
 evt.preventDefault();
             }
+            function checkShipping(){
+                var phoneNumber=$('#mobileOrPhoneShipping').val();
+                var phoneno = /^\d{10}$/;
+                if(!($('#firstNameShipping').val())){
+                    $('#firstNameShipping').attr('data-toggle', 'tooltip');
+                    $('#firstNameShipping').attr('data-placement', 'top');
+                    $('#firstNameShipping').attr('data-original-title', 'first name must not be blank');
+                    $("#firstNameShipping").tooltip();
+                    $("#firstNameShipping").css("border", "1px solid #a94442");
+                    document.getElementById("firstNameShipping").focus();
+                    return false;
+                }
+                if(!($('#lastNameShipping').val())){
+                    $('#lastNameShipping').attr('data-toggle', 'tooltip');
+                    $('#lastNameShipping').attr('data-placement', 'top');
+                    $('#lastNameShipping').attr('data-original-title', 'last name must not be blank');
+                    $("#lastNameShipping").tooltip();
+                    $("#lastNameShipping").css("border", "1px solid #a94442");
+                    document.getElementById("lastNameShipping").focus();
+                    return false;
+                }
+                if(!($('#mobileOrPhoneShipping').val())){
+                    $('#mobileOrPhoneShipping').attr('data-toggle', 'tooltip');
+                    $('#mobileOrPhoneShipping').attr('data-placement', 'top');
+                    $('#mobileOrPhoneShipping').attr('data-original-title', 'mobile no must not be blank');
+                    $("#mobileOrPhoneShipping").tooltip();
+                    $("#mobileOrPhoneShipping").css("border", "1px solid #a94442");
+                    document.getElementById("mobileOrPhoneShipping").focus();
+                    return false;
+                }
+
+
+                if(!(phoneNumber.match(phoneno)))
+                {
+                    $('#mobileOrPhoneShipping').attr('data-toggle', 'tooltip');
+                    $('#mobileOrPhoneShipping').attr('data-placement', 'top');
+                    $('#mobileOrPhoneShipping').attr('data-original-title', 'invalid mobile number format');
+                    $("#mobileOrPhoneShipping").tooltip();
+                    $("#mobileOrPhoneShipping").css("border", "1px solid #a94442");
+                    document.getElementById("mobileOrPhoneShipping").focus();
+                    return false;
+
+                }
+
+                if(!($('#cumpolsoryAddressShipping').val())){
+                    $('#cumpolsoryAddressShipping').attr('data-toggle', 'tooltip');
+                    $('#cumpolsoryAddressShipping').attr('data-placement', 'top');
+                    $('#cumpolsoryAddressShipping').attr('data-original-title', 'address must not be blank');
+                    $("#cumpolsoryAddressShipping").tooltip();
+                    $("#cumpolsoryAddressShipping").css("border", "1px solid #a94442");
+                    document.getElementById("cumpolsoryAddressShipping").focus();
+                    return false;
+                }
+                if(!($('#cityShipping').val())){
+                    $('#cityShipping').attr('data-toggle', 'tooltip');
+                    $('#cityShipping').attr('data-placement', 'top');
+                    $('#cityShipping').attr('data-original-title', 'city must not be blank');
+                    $("#cityShipping").tooltip();
+                    $("#cityShipping").css("border", "1px solid #a94442");
+                    document.getElementById("cityShipping").focus();
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+
             function showDivs(){
                 $('#paymentBar').hide();
 
@@ -1079,12 +1234,286 @@ evt.preventDefault();
 
             }
         </script>
+        <g:if test="${session.endUser}">
+        <script>
+                function placeOrder(orderNotes,billingInfo,delivery,payment) {
+                    var isCheckedShipping=$("#isShipping").prop('checked');
+
+if(isCheckedShipping){
+    var shippingInfo = [];
+    shippingInfo[0]=document.getElementById("firstNameShipping").value;
+    shippingInfo[1]=document.getElementById("lastNameShipping").value;
+    shippingInfo[2]=document.getElementById("companyNameShipping").value;
+    shippingInfo[3]=document.getElementById("mobileOrPhoneShipping").value;
+    shippingInfo[4]=document.getElementById("cumpolsoryAddressShipping").value;
+    shippingInfo[5]=document.getElementById("optionalAddressShipping").value;
+    shippingInfo[6]=document.getElementById("cityShipping").value;
+    $.ajax({
+        url: "${createLink(controller:'checkOut', action:'placeOrder')}",
+        type: "POST",
+        data: { "isShipping": JSON.stringify(shippingInfo) ,"billingInfo": JSON.stringify(billingInfo) ,"orderNotes":orderNotes ,"delivery":delivery ,"payment":payment},
+        async : false,
+        cache:false,
+        success: function(result) {
+if(result=="enquiry not sent"){
+    $('#messageModel1').modal({backdrop: 'static', keyboard: false});
+
+}
+else{
+    document.getElementById('orderIdWithoutAccount').innerHTML+="Order Id:"+result;
+    $('#messageModelWithoutAccount').modal({backdrop: 'static', keyboard: false});
+
+}
+        }
+    });
+
+}
+else{
+    $.ajax({
+        url: "${createLink(controller:'checkOut', action:'placeOrder')}",
+        type: "POST",
+        data: { "billingInfo": JSON.stringify(billingInfo) ,"orderNotes":orderNotes,"delivery":delivery ,"payment":payment},
+        async : false,
+        cache:false,
+        success: function(result) {
+            if(result=="enquiry not sent"){
+                $('#messageModel1').modal({backdrop: 'static', keyboard: false});
+            }
+            else{
+                document.getElementById('orderIdWithoutAccount').innerHTML+="Order Id:"+result;
+                $('#messageModelWithoutAccount').modal({backdrop: 'static', keyboard: false});
+            }
+        }
+    });
+
+}
+                }
+        </script>
+        </g:if>
+        <g:else>
+            <script>
+                function placeOrder(orderNotes,billingInfo,delivery,payment) {
+                    var isCheckedShipping=$("#isShipping").prop('checked');
+                    var isCheckedCreateAccount=$("#isCreateAccount").prop('checked');
+                    var shippingInfo = [];
+                    var password = document.getElementById("userPw").value;
+                    if(isCheckedShipping && isCheckedCreateAccount){
+    shippingInfo[0]=document.getElementById("firstNameShipping").value;
+    shippingInfo[1]=document.getElementById("lastNameShipping").value;
+    shippingInfo[2]=document.getElementById("companyNameShipping").value;
+    shippingInfo[3]=document.getElementById("mobileOrPhoneShipping").value;
+    shippingInfo[4]=document.getElementById("cumpolsoryAddressShipping").value;
+    shippingInfo[5]=document.getElementById("optionalAddressShipping").value;
+    shippingInfo[6]=document.getElementById("cityShipping").value;
+                        $.ajax({
+                            url: "${createLink(controller:'checkOut', action:'placeOrder')}",
+                            type: "POST",
+                            data: { "isShipping": JSON.stringify(shippingInfo) ,"billingInfo": JSON.stringify(billingInfo) ,"isCreateAccount":password,"orderNotes":orderNotes,"delivery":delivery ,"payment":payment},
+                            async : false,
+                            cache:false,
+                            success: function(result) {
+                                if(result=="enquiry not sent"){
+                                    $('#messageModel1').modal({backdrop: 'static', keyboard: false});
+
+                                }
+                                else if(result=="email is already taken"){
+                                    $('#deliveryBar').hide();
+
+                                    $('#deliveryMethod').hide();
+                                    $('#paymentBar').hide();
+
+                                    $('#paymentMethod').hide();
+
+                                    $('#orderReviewBar').hide();
+
+                                    $('#orderReview').hide();
+
+                                    $('#addressBar').show();
+                                    $('#deliveryAddress').show();
+                                    $('#email').attr('data-toggle', 'tooltip');
+                                    $('#email').attr('data-placement', 'top');
+                                    $('#email').attr('data-original-title', 'email is already in use.Take another email.');
+                                    $("#email").tooltip();
+                                    $("#email").css("border", "1px solid #a94442");
+                                    document.getElementById("email").focus();
+                                }
+                                else{
+                                    document.getElementById('createdEmail').innerHTML+="Email:"+result[1];
+                                    document.getElementById('createdPassword').innerHTML+="Password:"+result[2];
+                                    document.getElementById('orderIdWithAccount').innerHTML+="Order Id:"+result[0];
+                                    $('#messageModelWithAccount').modal({backdrop: 'static', keyboard: false});
+
+                                }
+                            }
+                        });
+
+                    }
+else if(!isCheckedShipping && isCheckedCreateAccount){
+                        $.ajax({
+                            url: "${createLink(controller:'checkOut', action:'placeOrder')}",
+                            type: "POST",
+                            data: { "billingInfo": JSON.stringify(billingInfo) ,"isCreateAccount":password,"orderNotes":orderNotes,"delivery":delivery ,"payment":payment},
+                            async : false,
+                            cache:false,
+                            success: function(result) {
+                                if(result=="enquiry not sent"){
+                                    $('#messageModel1').modal({backdrop: 'static', keyboard: false});
+                                }
+                                else if(result=="email is already taken"){
+                                    $('#deliveryBar').hide();
+
+                                    $('#deliveryMethod').hide();
+                                    $('#paymentBar').hide();
+
+                                    $('#paymentMethod').hide();
+
+                                    $('#orderReviewBar').hide();
+
+                                    $('#orderReview').hide();
+
+                                    $('#addressBar').show();
+                                    $('#deliveryAddress').show();
+                                    $('#email').attr('data-toggle', 'tooltip');
+                                    $('#email').attr('data-placement', 'top');
+                                    $('#email').attr('data-original-title', 'email is already in use.Take another email.');
+                                    $("#email").tooltip();
+                                    $("#email").css("border", "1px solid #a94442");
+                                    document.getElementById("email").focus();
+
+                                }
+                                else{
+                                    document.getElementById('createdEmail').innerHTML+="Email:"+result[1];
+                                    document.getElementById('createdPassword').innerHTML+="Password:"+result[2];
+                                    document.getElementById('orderIdWithAccount').innerHTML+="Order Id:"+result[0];
+                                    $('#messageModelWithAccount').modal({backdrop: 'static', keyboard: false});
+                                }
+                            }
+                        });
+
+}
+else if(!isCheckedCreateAccount && isCheckedShipping){
+    shippingInfo[0]=document.getElementById("firstNameShipping").value;
+    shippingInfo[1]=document.getElementById("lastNameShipping").value;
+    shippingInfo[2]=document.getElementById("companyNameShipping").value;
+    shippingInfo[3]=document.getElementById("mobileOrPhoneShipping").value;
+    shippingInfo[4]=document.getElementById("cumpolsoryAddressShipping").value;
+    shippingInfo[5]=document.getElementById("optionalAddressShipping").value;
+    shippingInfo[6]=document.getElementById("cityShipping").value;
+                        $.ajax({
+                            url: "${createLink(controller:'checkOut', action:'placeOrder')}",
+                            type: "POST",
+                            data: { "isShipping": JSON.stringify(shippingInfo) ,"billingInfo": JSON.stringify(billingInfo),"orderNotes":orderNotes,"delivery":delivery ,"payment":payment},
+                            async : false,
+                            cache:false,
+                            success: function(result) {
+                                if(result=="enquiry not sent"){
+                                    $('#messageModel1').modal({backdrop: 'static', keyboard: false});
+                                }
+                                else{
+                                    document.getElementById('orderIdWithoutAccount').innerHTML+="Order Id:"+result;
+                                    $('#messageModelWithoutAccount').modal({backdrop: 'static', keyboard: false});
+
+                                }
+                            }
+                        });
+
+                    }
+else if(!isCheckedCreateAccount && !isCheckedShipping){
+                        $.ajax({
+                            url: "${createLink(controller:'checkOut', action:'placeOrder')}",
+                            type: "POST",
+                            data: { "billingInfo": JSON.stringify(billingInfo),"orderNotes":orderNotes,"delivery":delivery ,"payment":payment},
+                            async : false,
+                            cache:false,
+                            success: function(result) {
+                                if(result=="enquiry not sent"){
+                                    $('#messageModel1').modal({backdrop: 'static', keyboard: false});
+
+                                }
+                                else{
+                                    document.getElementById('orderIdWithoutAccount').innerHTML+="Order Id:"+result;
+                                    $('#messageModelWithoutAccount').modal({backdrop: 'static', keyboard: false});
+
+                                }
+                            }
+                        });
+
+}
+
+                                  }
+            </script>
+
+        </g:else>
         <!-- /.col-md-9 -->
 
         <!-- /.col-md-3 -->
 
     </div>
+    <div class="bootbox modal fade bootbox-confirm in" id="messageModelWithAccount" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="modalBodyWithAccount">
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
 
+                    <p class="text-center">
+                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
+
+
+                    </p>
+                        <h3 class="alert alert-success fade in">You have successfully created account. This login information is one time notification. You are requested to remember your email and password</h3><h5 style="text-align: center;" id="createdEmail"></h5><h5 style="text-align: center;" id="createdPassword"></h5>
+                    <h3 class="alert alert-success fade in">Dear,Customer. Your order has been successfully kept under process.</h3><h2 style="text-align: center;" id="orderIdWithAccount"></h2>
+                    <h4>Dear Customer, you are requested to remember your order Id. Thank you!!</h4>
+
+                </div>
+                <div class="modal-footer">
+                    <div data-bb-handler="cancel" type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadPage();">Okey</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bootbox modal fade bootbox-confirm in" id="messageModelWithoutAccount" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="modalBodyWithoutAccount">
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
+
+                    <p class="text-center">
+                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
+
+
+                    </p>
+                    <h3 class="alert alert-success fade in">Dear,Customer. Your order has been successfully kept under process.</h3><h2 style="text-align: center;" id="orderIdWithoutAccount"></h2>
+                    <h4>Dear Customer, you are requested to remember your order Id. Thank you!!</h4>
+
+                </div>
+                <div class="modal-footer">
+                    <div data-bb-handler="cancel" type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadPage();">Okey</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bootbox modal fade bootbox-confirm in" id="messageModel1" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;" onclick="reloadPage();">×</button>
+
+                    <p class="text-center">
+                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:CompanyInformation.list()[0].logoImageName])}">
+
+
+                    </p>
+
+                    <h3 class="alert alert-danger fade in">your enquiry has been not been sent due to some problems.Please try again later.</h3>
+
+                </div>
+                <div class="modal-footer">
+                    <div data-bb-handler="cancel" type="button" class="btn btn-primary" data-dismiss="modal" onclick="reloadPage();">Okey</div>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- /.container -->
 </div>
 <!-- /#content -->
@@ -1116,7 +1545,13 @@ evt.preventDefault();
 
 
 
+<script>
 
+    function reloadPage(){
+        window.location="/basket";
+    }
+
+</script>
 </body>
 
 </html>

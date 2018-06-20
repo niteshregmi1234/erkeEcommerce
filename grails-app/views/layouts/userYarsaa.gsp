@@ -26,9 +26,10 @@
     <!-- styles -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/font-awesome.css')}" type="text/css"
           media="all"/>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    %{--<link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.min.css')}" type="text/css"--}%
-          %{--media="all"/>--}%
+    
+   
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.min.css')}" type="text/css"
+          media="all"/>
 
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/iframex.css')}" type="text/css"
           media="all"/>
@@ -47,7 +48,9 @@
         <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"style.default.css")}" type="text/css"
               media="all"/>
     </g:if>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.4')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.5')}" type="text/css"
+          media="all"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/loader.css')}" type="text/css"
           media="all"/>
 
     <script src="${resource(dir: 'js', file: 'yarsaa/respond.min.js')}" type="text/javascript"
@@ -260,7 +263,7 @@ if(sizeId=='' && productId==''){
                                 }
 
                             });
-                            $('#login-modal').modal('toggle');
+                     $('#login-modal').modal('toggle');
                             responseValue=false;
                         }
                             else{
