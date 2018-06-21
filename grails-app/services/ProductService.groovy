@@ -57,7 +57,7 @@ def deleteCart(Map params,List<CartWithoutEndUser> cartWithoutEndUserList){
         def totalPrice1=totalPrice+shippingAndHandling
         def tax=OtherCosts.list()[0].taxPercentage*totalPrice1/100
         def totalPriceTotal=totalPrice1+tax
-        def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal),cartWithoutEndUserList,success]
+        def totalUnits=[df.format(totalPrice),df.format(shippingAndHandling),df.format(tax),df.format(totalPriceTotal),cartWithoutEndUserList,success,cartWithoutEndUserList.size()]
         return totalUnits
 
     }

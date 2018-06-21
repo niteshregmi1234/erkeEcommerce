@@ -178,8 +178,9 @@
                         <!-- Form Name -->
 
                         <div class="form-horizontal" >
+                                    <legend> Personal Information </legend>
+
                             <fieldset>
-                                <legend> Personal Information </legend>
 
 <g:if test="${!session.endUser}">
 
@@ -301,9 +302,10 @@
                                         }
                                     </script>
                                     <div id="createAccount" style="display:none;">
+                                        <legend> Create an account by entering the information below. If you are a returning customer please login at the top of the page.
+                                        </legend>
                                     <fieldset>
-                            <legend> Create an account by entering the information below. If you are a returning customer please login at the top of the page.
-                            </legend>
+
                                         <div class="col-sm-6">
 
                                         <div class="form-group">
@@ -329,6 +331,7 @@
                         <div class="col-sm-6">
                             <div class="box">
                                 <h1 class="checkOutHead">Ship to a different address?</h1>
+                                <input type="checkbox" name="isShipping" class="form-check-input" id="isShipping" onclick="checkBox1();"/>
 
                                 <hr>
 
@@ -337,7 +340,6 @@
                                 <div class="form-horizontal">
 
                                     <fieldset>
-                                        <input type="checkbox" name="isShipping" class="form-check-input" id="isShipping" onclick="checkBox1();"/>
 <div id="shipping_form" style="display:none;">
 
 
@@ -409,6 +411,7 @@
                                             }
                                         }
                                     </script>
+                                <br>
                                 <div class="col-sm-12">
                                     <div class="col-sm-6">
 

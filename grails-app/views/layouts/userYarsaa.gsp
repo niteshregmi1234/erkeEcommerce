@@ -26,10 +26,11 @@
     <!-- styles -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/font-awesome.css')}" type="text/css"
           media="all"/>
-    
-   
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/bootstrap.min.css')}" type="text/css"
           media="all"/>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet" id="bootstrap-css">
+
 
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/iframex.css')}" type="text/css"
           media="all"/>
@@ -820,21 +821,23 @@ if(sizeId=='' && productId==''){
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div class="cartSuccessful">Product Successfully Added To Shopping Cart</div>
+                    <div class="cartSuccessful" id="cartSuccessful">Product Successfully Added To Shopping Cart</div>
+                    <div class="cartSuccessful" id="cartDelete" style="display: none;">Product Successfully removed from cart</div>
+                    <div class="cartSuccessful" id="cartUnableToDelete" style="display: none;color:rgb(169, 68, 66);">Sorry,unable to perform delete operation</div>
 
                     <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
 
                     <table id="cart" class="table table-fixed">
 
                         <tbody>
-                        <g:each in="${session.cart}" var="list">
+                        <g:each in="${session.cart}" var="list" status="i">
                             <tr><td data-th="Product">
                                 <div class="row">
-                                    <div class="col-sm-6 hidden-xs">
+                                    <div class="col-sm-6 col-xs-5">
                                         <img src="/imageRender/renderImage?imageName=${list.product.specialImageName}" alt="..." class="img-responsive" />
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="text" style="margin-top: 90px;">
+                                    <div class="col-sm-4 col-xs-5">
+                                        <div class="popUpText" style="margin-top: 90px;">
                                             <div class="productDescription">${list.productDetails.briefDescription}<br>
                                                 Size-${list.productSize.sizeName}<br>
                                                 Qty-${list.quantity}
@@ -855,59 +858,126 @@ if(sizeId=='' && productId==''){
                             </g:if>
                                 </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <button class="btn btn-danger btn-sm" style="margin-top: 208px;"><i class="fa fa-trash-o"></i></button>
+                                    <div class="col-sm-2 col-xs-2 ">
+                                        <button class="btn btn-danger btn-sm deleteCartFromPopUp" style="margin-top: 208px;" onclick="deleteProductFromPopUp(${i},${list.product.id},${list.productSize.id},this);"><i class="fa fa-trash-o"></i></button>
                                     </div>
                                 </div>
                             </td>
                             </tr>
 
                         </g:each>
+
+
                         </tbody>
-                        <tfoot>
 
-                        <tr>
-                            <td>
-                                <div class="row">
-                                    <div class="col-sm-9">
-
-                                        <a data-dismiss="modal" class="btn btn-default"><i class="fa fa-angle-left"></i> Continue Shopping</a>
-
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <g:link action="cart" controller="cart" class="btn btn-success">Checkout<i class="fa fa-angle-right"></i></g:link>
-
-                                    </div>
-
-                                </div>
-                            </td>
-                        </tr>
-                        </tfoot>
                     </table>
-
-
-
+                    <div class="row">
+                        <div class="col-sm-9 col-xs-7">
+                            <a data-dismiss="modal" class="btn btn-default"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+                        </div>
+                        <div class="col-sm-3 col-xs-5" id="checkOutFromPopUp">
+                            <g:link action="cart" controller="cart" class="btn btn-success" >Checkout<i class="fa fa-angle-right"></i></g:link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <style>
-    .table-fixed tbody {
-        display: block;
-        height: 255px;
-        overflow-y: auto;
-        width: 100%;
-        overflow-x: hidden;
-        -ms-overflow-style: -ms-autohiding-scrollbar;
+    <div class="bootbox modal fade bootbox-confirm in" id="messageModelCartEmpty" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+                    <table class="table">
+                        <tbody>
+                            <tr><td class="noItem" style="font-size: 30px;">Your cart is empty. Continue shopping!!!!</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-9 col-xs-7">
+                            <a data-dismiss="modal" class="btn btn-default"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/customCssTable.css')}" type="text/css"
+      media="all"/>
+<script>
+    function deleteProductFromPopUp(index,productId,productSizeId,evt){
+        var idList=[index,productId,productSizeId];
+
+        $.ajax({
+            url: "${createLink(controller:'cart', action:'delete')}",
+            global: false,
+            type: "POST",
+            data: { "idList": JSON.stringify(idList) },
+            cache: false,
+            async: false,
+            success: function (text) {
+                if(text=="cartEmpty"){
+                    $('.hidden-sm').load(document.URL + ' .hidden-sm');
+                    $('#cart').load(document.URL +  ' #cart');
+                    $('#cartShow').load(document.URL +  ' #cartShow');
+                    $('#cartSuccessful').hide();
+                    $('#cartDelete').hide();
+                    $('#checkOutFromPopUp').hide();
+                    $('#cartUnableToDelete').show();
+                    $('#messageModelCart').modal('toggle');
+                    $('#messageModelCartEmpty').modal('toggle');
+
+                }
+                else if(text[5]=="yes"){
+                    $('.hidden-sm').load(document.URL + ' .hidden-sm');
+                    $('#cart').load(document.URL +  ' #cart');
+                    $('#cartShow').load(document.URL +  ' #cartShow');
+                    $('#cartSuccessful').hide();
+                    $('#cartUnableToDelete').hide();
+                    $('#cartDelete').show();
+                    $('#checkOutFromPopUp').show();
+                    if(text[6]==0){
+                        $('#checkOutFromPopUp').hide();
+                        $('#messageModelCart').modal('toggle');
+                        $('#messageModelCartEmpty').modal('toggle');
+                    }
+                    else if(text[6]>0){
+                        $('#checkOutFromPopUp').show();
+
+                    }
+
+                }
+                else if(text[5]=="no"){
+                    $('.hidden-sm').load(document.URL + ' .hidden-sm');
+                    $('#cart').load(document.URL +  ' #cart');
+                    $('#cartShow').load(document.URL +  ' #cartShow');
+                    $('#cartSuccessful').hide();
+                    $('#cartDelete').hide();
+                    $('#cartUnableToDelete').show();
+                    $('#checkOutFromPopUp').show();
+                    if(text[6]==0){
+                        $('#checkOutFromPopUp').hide();
+                        $('#messageModelCart').modal('toggle');
+                        $('#messageModelCartEmpty').modal('toggle');
+                    }
+                    else{
+                        $('#checkOutFromPopUp').show();
+
+                    }
+                }
+
+            }
+
+        });
+        evt.preventDefault();
     }
 
-
-
-    </style>
-</div>
-
-</div>
-
+</script>
 </body>
 
 </html>

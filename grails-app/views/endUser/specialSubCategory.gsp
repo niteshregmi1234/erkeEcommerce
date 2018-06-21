@@ -767,6 +767,10 @@
                     success: function() {
                         $('#cart').load(document.URL +  ' #cart');
                         $('#cartShow').load(document.URL +  ' #cartShow');
+                        $('#cartDelete').hide();
+                        $('#cartUnableToDelete').hide();
+                        $('#cartSuccessful').show();
+                        $('#checkOutFromPopUp').show();
                         $('#messageModelCart').modal('toggle');
                     }
 

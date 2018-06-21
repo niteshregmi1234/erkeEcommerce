@@ -267,7 +267,7 @@ else if(text[5]=="yes"){
 
         bootbox.confirm({
 //                    title: "Destroy planet?",
-            message: "Are you sure want to remove this item from basket?",
+            message: "Are you sure want to remove this item from cart?",
             buttons: {
                 cancel: {
                     label: '<i class="fa fa-times"></i> Cancel'

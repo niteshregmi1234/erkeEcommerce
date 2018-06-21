@@ -313,7 +313,7 @@
               <!-- Precios -->
               <h3 style="margin-top:0px;" class="productDetailPrice">Rs. <g:formatNumber number="${totalArray[0].productDetails.price-(totalArray[0].productDetails.discountPercentage*totalArray[0].productDetails.price/100)}" type="number" maxFractionDigits="2"/></h3>
               <g:if test="${totalArray[0].productDetails.isSale==true}">
-                <p style="margin-top: -10px;"><del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.${totalArray[0].productDetails.price}</del>
+                <p style="margin-top: -10px;" class="delPriceDetail"><del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.${totalArray[0].productDetails.price}</del>
                 <div class="discountBoxDetail">-${totalArray[0].productDetails.discountPercentage}%</div></p>
               </g:if>
 
@@ -340,7 +340,7 @@
                   <g:each in="${totalArray[1]}" var="list">
                   <div class="attr2">${list.sizeName}</div>
                   </g:each>
-                  <h6 id="errorSize" style="display: none;"><small style="font-size: 10px;color: #D10B23;">Please select an option to continue</small></h6>
+                  <h6 id="errorSize" style="display: none;"><small class="errorSize" style="font-size: 10px;color: #D10B23;">Please select an option to continue</small></h6>
                 </div>
               </div>
 
@@ -410,6 +410,10 @@
                                   success: function() {
                                       $('#cart').load(document.URL +  ' #cart');
                                       $('#cartShow').load(document.URL +  ' #cartShow');
+                                      $('#cartDelete').hide();
+                                      $('#cartUnableToDelete').hide();
+                                      $('#cartSuccessful').show();
+                                      $('#checkOutFromPopUp').show();
                                       $('#messageModelCart').modal('toggle');
                                   }
                               });
