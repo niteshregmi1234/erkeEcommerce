@@ -38,199 +38,255 @@
 
                         <!-- Form Name -->
 
-                    <form action="/endUserInformation/save" class="form-horizontal" method="post" id="reg_form" >
-                        <fieldset>
-                            <legend> Personal Information </legend>
+                    <form action="/endUserInformation/saved" class="form-horizontal" method="post" id="reg_form" >
+                    <legend> Personal Information </legend>
 
-                            <div class="form-group">
-                            <label>First Name</label>
-                            <input name="first_name" placeholder="first Name" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label >Last Name</label>
-                            <input name="last_name" placeholder="last name" type="text" class="form-control" >
-                        </div>
-                        <div class="form-group">
-                            <label>mobile</label>
-                            <input name="phone" placeholder="mobile No" type="text" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <input name="address" placeholder="address" type="text" class="form-control">
-                        </div>
-                        <div class="form-group" id="c">
-                            <label>City</label>
-                            <input name="city" placeholder="city" type="text" class="form-control">
-                        </div>
-</fieldset><fieldset>
-                        <legend> Account Information </legend>
-                        <div class="form-group" >
-                            <label>Email</label>
-                            <input name="email" placeholder="email@hostname.com" type="text" class="form-control" id="a" >
+                    <fieldset>
+                        <div class="col-sm-12">
 
-
-                            <small style="color: #a94442;"><g:if test="${flash.message}">${flash.message}
-                            <script>
-                                $("#a").css("border", "1px solid #a94442");
-                                $('html, body').animate({
-                                    scrollTop: $("#c").offset().top
-                                }, 2000);
-                            </script>
-                            </g:if>
-                            </small>
-
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="userPw">Password</label>
-                            <input class="form-control" id="userPw" type="password" placeholder="password"
-                                   name="password" data-minLength="5"
-                                   data-error="some error"
-                                   required/>
-                        </div>
-                            <div class="form-group">
-                                <label for="userPw2">Confirm Password</label>
-                                <input class="form-control {$borderColor}" id="userPw2" type="password" placeholder="Confirm password"
-                                       name="confirmPassword" data-match="#confirmPassword" data-minLength="5"
-                                       data-match-error="some error 2"
-                                       required/>
+                                <div class="form-group">
+                                    <label>First Name*</label>
+                                    <input name="firstNameBilling" id="firstNameBilling" placeholder="first Name"  type="text" class="form-control">
+                                </div>
                             </div>
+                            <div class="col-sm-12">
 
-                    </fieldset>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</button>
+                                <div class="form-group">
+                                    <label >Last Name*</label>
+                                    <input name="lastNameBilling" id="lastNameBilling" placeholder="last name" type="text"  class="form-control" >
+                                </div>
+                            </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input name="companyNameBilling" id="companyNameBilling" placeholder="company Name" type="text" class="form-control">
+                            </div>
                         </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>mobile No*</label>
+                                <input name="mobileOrPhoneCumpolsoryBilling" id="mobileOrPhoneCumpolsoryBilling" placeholder="mobile No" type="text"  class="form-control" >
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>mobile No Additional</label>
+                                <input name="mobileOrPhoneOptionalBilling" id="mobileOrPhoneOptionalBilling" placeholder="mobile No" type="text" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Address*</label>
+                                <input name="cumpolsoryAddressBilling" id="cumpolsoryAddressBilling" placeholder="street address"  type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Address Optional</label>
+                                <input name="optionalAddressBilling" id="optionalAddressBilling" placeholder="apartment,suite,unit etc."  type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>City*</label>
+                                <input name="cityBilling" id="cityBilling" placeholder="kathmandu,lalitpur,bhaktapur etc." type="text"  class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <legend> Account Information </legend>
+
+                    <fieldset>
+                        <div class="col-sm-12">
+                            <div class="form-group" >
+                                <label>Email*</label>
+                                <input name="email" placeholder="email@hostname.com" type="text" class="form-control"  id="email" onkeypress="myFunction()">
+                                <small class="help-block" style="display: none; color:#a94442;" id="notUniqueEmail">The email is already in use</small>
+                            </div>
+                        </div><script>
+                        function myFunction() {
+                            if(validateEmail(document.getElementById("email").value)){
+                            $.ajax({
+                                type: "POST",
+                                url: "${createLink(controller:'endUserInformation', action:'checkEmail')}",
+                                data: { "email":document.getElementById("email").value  },
+                                async:false,
+                                success: function (msg) {
+                                    if(msg["valid"]){
+                                        $("#email").css("border", "1px solid #3c763d");
+                                        $("#notUniqueEmail").hide();
+                                    }
+                                }
+                            });}
+
+                        }
+                        function validateEmail(email) {
+                            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            return re.test(email);
+
+                        }
+                    </script>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="userPw">Account Password*</label>
+                                <input class="form-control" id="userPw" type="password" placeholder="password"
+                                       name="password"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password*</label>
+                                <input class="form-control" id="confirmPassword" type="password" placeholder="Confirm password"
+                                       name="confirmPassword"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br>
+                    <div class="col-sm-12 col-md-12 col-xs-12 text-center">
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</button>
+
+
+                        </div>
+                    </div>
+
                     </form>
                 </div>
             </div>
             <script type="text/javascript">
-
                 $(document).ready(function() {
                     $('#reg_form').bootstrapValidator({
-                                // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+                        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
 
-                                fields: {
-                                    first_name: {
-                                        validators: {
-                                            stringLength: {
-                                                min: 2,
-                                            },
-                                            notEmpty: {
-                                                message: 'Please supply your first name'
-                                            }
-                                        }
-                                    },
-                                    last_name: {
-                                        validators: {
-                                            stringLength: {
-                                                min: 2,
-                                            },
-                                            notEmpty: {
-                                                message: 'Please supply your last name'
-                                            }
-                                        }
-                                    },
+                        fields: {
+                            firstNameBilling: {
+                                validators: {
 
+                                    notEmpty: {
+                                        message: 'Please supply your first name'
+                                    }
+                                }
+                            },
+                            lastNameBilling: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Please supply your last name'
+                                    }
+                                }
+                            },
+                            mobileOrPhoneCumpolsoryBilling: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Please supply your phone number'
+                                    },
                                     phone: {
-                                        validators: {
-                                            notEmpty: {
-                                                message: 'Please supply your phone number'
-                                            },
-                                            phone: {
-                                                country: 'NEPAL',
-                                                message: 'Please supply a vaild mobile number'
-                                            }
-                                        }
+                                        country: 'US',
+                                        message: 'Please supply a vaild phone number with area code'
+                                    }
+                                }
+                            },
+                            mobileOrPhoneOptionalBilling: {
+                                validators: {
+                                    phone: {
+                                        country: 'US',
+                                        message: 'Please supply a vaild phone number with area code'
+                                    }
+                                }
+                            },
+
+                            cumpolsoryAddressBilling: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Please supply your address'
+                                    }
+                                }
+                            },
+                            cityBilling: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Please supply your city'
+                                    }
+                                }
+                            },
+                            email: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Please supply your email address'
                                     },
-                                    address: {
-                                        validators: {
-                                            stringLength: {
-                                                min: 8,
-                                            },
-                                            notEmpty: {
-                                                message: 'Please supply your address'
-                                            }
-                                        }
+                                    emailAddress: {
+                                        message: 'Please supply a valid email address'
+
                                     },
-                                    city: {
-                                        validators: {
-                                            stringLength: {
-                                                min: 4,
-                                            },
-                                            notEmpty: {
-                                                message: 'Please supply your city'
-                                            }
-                                        }
-                                    },
+                                    remote: {
+                                        url: "${createLink(controller:'endUserInformation', action:'checkEmail')}",
+                                        // Send { username: 'its value', email: 'its value' } to the back-end
+                                        data: function(validator, $field, value) {
+                                            return {
+                                                email: validator.getFieldElements('email').val()
+                                            };
 
-                                    email: {
-                                        validators: {
-                                            notEmpty: {
-                                                message: 'Please supply your email address'
-                                            },
-                                            emailAddress: {
-                                                message: 'Please supply a valid email address'
-
-                                            },
-                                            remote: {
-                                                url: "${createLink(controller:'endUserInformation', action:'checkEmail')}",
-                                                // Send { username: 'its value', email: 'its value' } to the back-end
-                                                data: function(validator, $field, value) {
-                                                    return {
-                                                        email: validator.getFieldElements('email').val()
-                                                    };
-
-                                                },
-                                                message: 'The email is already in use',
-                                                type: 'POST'
-                                            }
-
-                                        }
-                                    },
-
-                                    password: {
-                                        validators: {
-                                            notEmpty: {
-                                                message: 'Please supply your password'
-                                            },
-
-                                            identical: {
-                                                field: 'confirmPassword',
-                                                message: 'Confirm your password below - type same password please'
-                                            }
-                                        }
-                                    },
-                                    confirmPassword: {
-                                        validators: {
-                                            identical: {
-                                                field: 'password',
-                                                message: 'The password and its confirm are not the same'
-                                            }
-                                        }
-                                    },
-
+                                        },
+                                        message: 'The email is already in use',
+                                        type: 'POST'
+                                    }
 
                                 }
-                            })
+                            },
+
+                            password: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Please supply your password'
+                                    },
+
+                                    identical: {
+                                        field: 'confirmPassword',
+                                        message: 'Confirm your password below - type same password please'
+                                    }
+                                }
+                            },
+                            confirmPassword: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'Please supply your confirm password'
+                                    },
+                                    identical: {
+                                        field: 'password',
+                                        message: 'The password and its confirm are not the same'
+                                    }
+                                }
+                            }
 
 
-                            .on('success.form.bv', function(e) {
-                                $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-                                $('#reg_form').data('bootstrapValidator').resetForm();
+                                                  },
 
-                                // Prevent form submission
-                                e.preventDefault();
-
-                                // Get the form instance
-                                var $form = $(e.target);
-
-                                // Get the BootstrapValidator instance
-                                var bv = $form.data('bootstrapValidator');
-
-                                // Use Ajax to submit form data
+                        submitHandler: function(form) {
+                            $("#notUniqueEmail").hide();
+                            $.ajax({
+                                type: "POST",
+                                url: "${createLink(controller:'endUserInformation', action:'checkSubmit')}",
+                                data: $('form.form-horizontal').serialize(),
+                                async:false,
+                                success: function (msg) {
+                                    if(msg=="already exist email"){
+                                        $("#email").css("border", "1px solid #a94442");
+$("#notUniqueEmail").show();
+                                    }
+                                    else{
+                                        $("#notUniqueEmail").hide();
+                                        bootbox.alert("You are successfully registered. You can easily login by submitting button of login form.");
+                                        document.getElementById("login_email1").value=document.getElementById("email").value;
+                                        document.getElementById("login_password1").value=document.getElementById("userPw").value;
+                                        document.getElementById("reg_form").reset();
+                                        document.getElementById("login_email1").focus();
+                                    }
+                                }
                             });
+                        }
+                    });
                 });
 
             </script>
@@ -360,22 +416,6 @@
  _________________________________________________________ -->
 
 
-<g:if test="${flash.message1}">
-    <script>
-        window.addEventListener("load",function(){
-            bootbox.alert({
-                message:"${flash.message1}",
-                size: 'small',
-                callback: function(){
-                    location.reload();
-                }
-
-            });
-
-        });
-
-    </script>
-</g:if>
 
 </body>
 

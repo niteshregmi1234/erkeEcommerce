@@ -8,6 +8,19 @@ import java.security.spec.InvalidKeySpecException
 
 @Transactional
 class EndUserInformationService {
+    def saveCustomerPersonalDetails(Map params){
+        CustomerPersonalDetails customerPersonalDetails=new CustomerPersonalDetails()
+        customerPersonalDetails.firstName=params.firstNameBilling
+        customerPersonalDetails.lastName=params.lastNameBilling
+        customerPersonalDetails.companyName=params.companyNameBilling
+        customerPersonalDetails.country="Nepal"
+        customerPersonalDetails.cumpolsoryAddress=params.cumpolsoryAddressBilling
+        customerPersonalDetails.optionalAddress=params.optionalAddressBilling
+        customerPersonalDetails.townOrCity=params.cityBilling
+        customerPersonalDetails.mobileOrPhoneCumpolsory=params.mobileOrPhoneCumpolsoryBilling
+        customerPersonalDetails.mobileOrPhoneOptional=params.mobileOrPhoneOptionalBilling
+        return customerPersonalDetails
+    }
     def getOrderId(List<CartWithoutEndUser> cartList,Map params,EndUserInformation endUserInformation){
        try{
            def billingInfo= JSON.parse(params.billingInfo)
@@ -152,58 +165,31 @@ return totalArray}
     }
     def editEndUserPassword(Map params,EndUserInformation endUserInformation){
         try{
-            def status=false
             if(endUserInformation){
                 endUserInformation.password = encryptedPassword(params.newPassword)
-                status=true
-                return status
+                endUserInformation.save(flush: true)
             }
-            else{
-                return status
-            }
+
         }
         catch (Exception e){
 
-            return  "serverError"
         }
     }
-def editEndUserPersonalDetails(Map params,EndUserInformation endUserInformation){
+def editEndUserPersonalDetails(Map params,CustomerPersonalDetails customerPersonalDetails){
     try{
-        def status=false
-        def obj= JSON.parse(params.array)
-        if(endUserInformation){
-            endUserInformation.firstName =obj[0]
-            endUserInformation.lastName =obj[1]
-            endUserInformation.phone =obj[2]
-            endUserInformation.address =obj[3]
-            endUserInformation.city =obj[4]
-            status=true
-            return status
-        }
-        else{
-            return status
-        }
+        customerPersonalDetails.firstName=params.firstNameBilling
+        customerPersonalDetails.lastName=params.lastNameBilling
+        customerPersonalDetails.companyName=params.companyNameBilling
+        customerPersonalDetails.cumpolsoryAddress=params.cumpolsoryAddressBilling
+        customerPersonalDetails.optionalAddress=params.optionalAddressBilling
+        customerPersonalDetails.townOrCity=params.cityBilling
+        customerPersonalDetails.mobileOrPhoneCumpolsory=params.mobileOrPhoneCumpolsoryBilling
+        customerPersonalDetails.mobileOrPhoneOptional=params.mobileOrPhoneOptionalBilling
+        customerPersonalDetails.save(flush: true)
     }
     catch (Exception e){
-
-        return "serverError"
     }
 }
-    def checkPassword(Map params,EndUserInformation endUserInformation){
-        try{
-            def status=false
-            if (endUserInformation) {
-                status = decryptPassword(params.oldPassword, endUserInformation.password)
-                return status
-            }
-            else{
-                return status
-            }
-        }
-        catch (Exception e){
-
-        }
-    }
     def encryptedPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String originalPassword = password;
         String generatedSecuredPasswordHash = generateStorngPasswordHash(originalPassword);
@@ -241,7 +227,7 @@ def editEndUserPersonalDetails(Map params,EndUserInformation endUserInformation)
 
     }
     def decryptPassword(String inputPassword,String encryptedPassword) throws NoSuchAlgorithmException, InvalidKeySpecException{
-        String  originalPassword = inputPassword;
+        String  originalPassword = inputPassword
         boolean matched = validatePassword(originalPassword, encryptedPassword);
         return matched
 

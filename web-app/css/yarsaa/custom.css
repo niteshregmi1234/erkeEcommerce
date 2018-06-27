@@ -1,9 +1,9 @@
-.billingFieldSmall{
-    width: 201px;
-}
-.billingFieldLarge{
-width: 432px;
-}
+/*.billingFieldSmall{*/
+    /*width: 201px;*/
+/*}*/
+/*.billingFieldLarge{*/
+/*width: 432px;*/
+/*}*/
 .red-tooltip + .tooltip > .tooltip-inner {background-color: #a94442;}
 .checkOutHead{
     font-size: 35px;

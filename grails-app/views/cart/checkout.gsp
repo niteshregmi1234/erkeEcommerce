@@ -79,9 +79,9 @@
 
                     <div class="content">
 <g:if test="${!session.endUser}">
+    <button type="button" class="btn btn-primary btn-arrow-right" style="margin-left: 30px;" onclick="$('#login-modal').modal('toggle');">Returning Customer?login!!!</button>
 
-    <button type="button" class="btn btn-primary btn-arrow-right" style="margin-left: 30px;" onclick="$('#login-modal').modal('toggle');">Returning Customer?Click here to login</button>
-                        <br><br>
+    <br><br>
 </g:if>
                         <div class="col-sm-6">
                                 <div class="box">
@@ -412,25 +412,25 @@
                                         }
                                     </script>
                                 <br>
-                                <div class="col-sm-12">
-                                    <div class="col-sm-6">
+                                <div class="col-sm-8 col-md-7 col-xs-6">
 
-                                        <div class="pull-left">
-                                        <g:link action="cart" controller="cart" class="btn btn-default bigButton"><i class="fa fa-chevron-left"></i>Back to basket</g:link>
+                                    <div class="form-group">
+
+
+                                        <g:link action="cart" controller="cart" class="btn btn-default bigButton"><i class="fa fa-chevron-left"></i>Cart</g:link>
                                     </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4 col-md-5 col-xs-6">
+                                        <div class="form-group">
 
-                                        <div class="pull-right">
-                                        <div class="btn btn-primary bigButton" onclick="deliveryMethod(this);">Continue to Delivery Method<i class="fa fa-chevron-right"></i>
+                                        <div class="btn btn-primary bigButton" onclick="deliveryMethod(this);">Delivery<i class="fa fa-chevron-right"></i>
+                                    </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
 
                                 </div>
                             </div>
-                        </div>
 
 
 
@@ -481,16 +481,20 @@
 
                     </div>
                     <!-- /.content -->
+                <div class="col-sm-8 col-md-7 col-xs-6">
 
-                    <div class="box-footer">
-                        <div class="pull-left">
-                            <div class="btn btn-default bigButton" onclick="backToAddress(this);"><i class="fa fa-chevron-left" ></i>Back to Addresses</div>
-                        </div>
-                        <div class="pull-right">
-                            <div class="btn btn-primary bigButton" onclick="paymentMethod(this);">Continue to Payment Method<i class="fa fa-chevron-right"></i>
-                            </div>
+                    <div class="form-group">
+
+                        <div class="btn btn-default bigButton" onclick="backToAddress(this);"><i class="fa fa-chevron-left" ></i>Billing</div>
+
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-5 col-xs-6">
+                    <div class="form-group">
+                        <div class="btn btn-primary bigButton" onclick="paymentMethod(this);">Payment<i class="fa fa-chevron-right"></i>
                         </div>
                     </div>
+                </div>
 
             </div>
             <div class="box" style="display: none;" id="paymentMethod">
@@ -530,15 +534,20 @@
                     </div>
                     <!-- /.content -->
 
-                    <div class="box-footer">
-                        <div class="pull-left">
-                            <div class="btn btn-default bigButton" onclick="backToDeliveryMethod(this);"><i class="fa fa-chevron-left"></i>Back to Shipping method</div>
-                        </div>
-                        <div class="pull-right">
-                            <div class="btn btn-primary bigButton" onclick="orderReview(this);">Continue to Order review<i class="fa fa-chevron-right"></i>
-                            </div>
+                <div class="col-sm-8 col-md-7 col-xs-6">
+
+                    <div class="form-group">
+
+                        <div class="btn btn-default bigButton" onclick="backToDeliveryMethod(this);"><i class="fa fa-chevron-left"></i>Delivery</div>
+
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-5 col-xs-6">
+                    <div class="form-group">
+                        <div class="btn btn-primary bigButton" onclick="orderReview(this);">Order review<i class="fa fa-chevron-right"></i>
                         </div>
                     </div>
+                </div>
 
             </div>
                 <div id="orderReview" style="display: none;">
@@ -612,17 +621,22 @@ ${list.quantity}
                     width: 50px;
                 }
             </style>
-                    <div class="box-footer">
-                        <div class="pull-left">
-                            <div class="btn btn-default bigButton" onclick="backToPayment(this);"><i class="fa fa-chevron-left"></i>Back to Payment method</div>
-                        </div>
-                        <div class="pull-right">
+                <div class="col-sm-8 col-md-7 col-xs-6">
 
-                            <button type="button"  class="btn btn-primary bigButton"  id="submit_IdOrder">Place an order<i class="fa fa-chevron-right"></i>
-                            </button>
+                    <div class="form-group">
+                        <div class="btn btn-default bigButton" onclick="backToPayment(this);"><i class="fa fa-chevron-left"></i>Payment</div>
 
-                        </div>
+
                     </div>
+                </div>
+                <div class="col-sm-4 col-md-5 col-xs-6">
+                    <div class="form-group">
+                        <button type="button"  class="btn btn-primary bigButton"  id="submit_IdOrder">Place 0rder<i class="fa fa-chevron-right"></i>
+                        </button>
+
+                    </div>
+                </div>
+
             </div>
                    </div>
                 <g:if test="${session.cart}">
@@ -1551,7 +1565,7 @@ else if(!isCheckedCreateAccount && !isCheckedShipping){
 <script>
 
     function reloadPage(){
-        window.location="/basket";
+        window.location="/cart";
     }
 
 </script>
