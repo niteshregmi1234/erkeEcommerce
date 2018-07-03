@@ -100,8 +100,8 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="newPasswordOne">New password</label>
-                                <g:passwordField class="form-control" id="newPasswordOne" placeholder="new password"
-                                                 name="newPassword"/>
+                                <g:passwordField name="newPassword" class="form-control" id="newPasswordOne" placeholder="new password"
+                                                 />
 
                             </div>
                         </div>

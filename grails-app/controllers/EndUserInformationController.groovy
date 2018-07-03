@@ -6,7 +6,7 @@ def editPassword(){
     render(view:"changePassword")
   }
     else{
-      render(view: "/errorPage/notfound")
+      redirect(action: "userHome",controller:"endUser" )
   }
 }
     def checkOldPassword(){
@@ -74,9 +74,10 @@ render(view:"/errorPage/notfound")
 
     def editEndUserPassword(){
     try{
-  endUserInformationService.editEndUserPassword(params,session.endUser)
-       flash.message="password changed successfully"
-        redirect(action: "myProfile",controller: "endUserInformation")
+  def endUserInformation=endUserInformationService.editEndUserPassword(params,session.endUser.id)
+       session.endUser=endUserInformation
+        flash.message="password changed successfully"
+        redirect(action: "myProfile")
     }
     catch (Exception e){
 
@@ -102,6 +103,7 @@ if(session.endUser){
     def logout(){
         try{
         if(session.endUser){
+            session.customerDetails=null
         session.endUser=null
             render "logoutSuccess"
         }
@@ -147,7 +149,7 @@ redirect(action: "allProducts",controller: "endUser")
         def totalArray=endUserInformationService.checkLogin(params)
         if(totalArray[1]==true){
 
-            session.endUser = totalArray[0] as EndUserInformation
+            session.endUser = totalArray[0]
 session.customerDetails=session.endUser.customerPersonalDetails
         }
           render totalArray[1]

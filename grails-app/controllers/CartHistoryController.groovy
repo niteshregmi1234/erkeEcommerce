@@ -62,7 +62,7 @@ def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFake
              def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.customerPersonalDetails},{undeliveredCartItem -> undeliveredCartItem.date})
                 for(CartHistoryWithoutEndUser cartHistory:undeliveredCartItems) {
                     def abc = cartItemsByEndUserAndDate[cartHistory.customerPersonalDetails]
-                    def cartList = abc[cartHistory.date] as List<CartHistory>
+                    def cartList = abc[cartHistory.date] as List<CartHistoryWithoutEndUser>
                     if(!listListCartList.contains(cartList)){
                         listListCartList.add(cartList)
 
@@ -82,7 +82,7 @@ def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFake
             def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.customerPersonalDetails},{undeliveredCartItem -> undeliveredCartItem.date})
             for(CartHistoryWithoutEndUser cartHistory:undeliveredCartItems) {
                 def abc = cartItemsByEndUserAndDate[cartHistory.customerPersonalDetails]
-                def cartList = abc[cartHistory.date] as List<CartHistory>
+                def cartList = abc[cartHistory.date] as List<CartHistoryWithoutEndUser>
                 if(!listListCartList.contains(cartList)){
                     listListCartList.add(cartList)
                 }

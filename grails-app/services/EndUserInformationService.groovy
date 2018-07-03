@@ -163,11 +163,13 @@ return totalArray}
         catch (Exception e){
         }
     }
-    def editEndUserPassword(Map params,EndUserInformation endUserInformation){
+    def editEndUserPassword(Map params,Long id){
         try{
+            EndUserInformation endUserInformation=EndUserInformation.findById(id)
             if(endUserInformation){
-                endUserInformation.password = encryptedPassword(params.newPassword)
+                endUserInformation.password =encryptedPassword(params.newPassword)
                 endUserInformation.save(flush: true)
+                return endUserInformation
             }
 
         }

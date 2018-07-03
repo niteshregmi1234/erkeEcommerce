@@ -149,7 +149,7 @@
                         <div class="col-sm-12 col-md-12 col-xs-12 text-center">
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Update</button>
 
 
                             </div>
