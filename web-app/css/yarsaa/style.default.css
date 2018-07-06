@@ -191,6 +191,7 @@ h1 {
 #hot .product-slider .owl-controls {
   position: relative;
   top: -30px;
+  margin-left: 30px;
 }
 #hot .product-slider .owl-controls .owl-buttons {
   display: none;
@@ -1096,7 +1097,7 @@ h1 {
 .navbar {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   min-height: 70px;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   border: none;
   border-bottom: 1px solid transparent;
 }

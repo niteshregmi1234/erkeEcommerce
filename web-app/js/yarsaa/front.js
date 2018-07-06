@@ -115,6 +115,8 @@ function carousels() {
 		navigation: true, // Show next and prev buttons
 		slideSpeed: 300,
 		paginationSpeed: 400,
+		items:4,
+		center:true,
 		afterInit: function() {
 			$('.product-slider .item').css('visibility', 'visible');
 		}

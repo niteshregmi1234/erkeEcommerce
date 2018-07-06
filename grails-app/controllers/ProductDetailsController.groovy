@@ -1,6 +1,20 @@
 import org.springframework.dao.DataIntegrityViolationException
 class ProductDetailsController extends BaseController{
-static allowedMethods = [save: 'POST']
+static allowedMethods = [checkProductName: 'POST', save: 'POST']
+    def checkProductName(){
+        try{
+        def productDetailsInstance=ProductDetails.findByProductName(params.productName)
+        if(productDetailsInstance){
+            render "notOk"
+        }
+        else{
+            render "ok"
+        }}
+        catch (Exception e){
+
+        }
+
+    }
     def list() {
         try{
             if(session.adminUser) {

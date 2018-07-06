@@ -664,25 +664,20 @@ def checkPhoto(){
                 return fileName
 
             }        }    }
-    def delFlag(){
+    def delete(){
         try{
             if(session.adminUser) {
 
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-                    def productInstance = Product.get(params.id)
+                    def productInstance = Product.findByDelFlagAndId(false,params.id)
                     if (productInstance) {
-                        if (!productInstance.delFlag) {
                             productInstance.delFlag = true
                             productInstance.save(flush: true)
                             flash.message = "Successfully deleted."
 
-                        } else {
-                            flash.message = "Unable to delete the already deleted item."
-                        }
                     } else {
                         flash.message = "Unable to delete unexisted item."
-
                     }
                     redirect(action: "list")
                 } else {

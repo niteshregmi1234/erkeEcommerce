@@ -125,6 +125,7 @@
         window.onbeforeunload = preventMultipleSubmissions;
 
         function Validate() {
+            var responseValue;
             var productCategory = document.getElementById("productCategory").value;
             var productSubCategory = document.getElementById("productSubCategory").value;
             var productBrand = document.getElementById("productBrand").value;
@@ -152,6 +153,7 @@
 
                 }
             }
+
             if(productCategory==''){
                 bootbox.alert({
                     message: "Category must be selected",
@@ -179,7 +181,7 @@
                 return false;
             }
 
-            else if(productBrand==''){
+            if(productBrand==''){
                 bootbox.alert({
                     message: "brand must be selected",
                     size: 'small'
@@ -260,7 +262,31 @@
                 document.getElementById("detailDescription").focus();
                 return false;
             }
+            if(productName.length>0){
+                $.ajax({
+                    url: "${createLink(controller:'productDetails', action:'checkProductName')}",
+                    type: "POST",
+                    data: {"productName":productName},
+                    cache: false,
+                    async: false,
+                    success: function (result) {
+                        if(result=="notOk"){
+                            bootbox.alert({
+                                message: "product name already exists",
+                                size: 'small'
+                            });
+                            document.getElementById("productName").focus();
+responseValue=false;
+                        }
+                        else{
+                            responseValue=true;
+                        }
 
+                    }
+                });
+                return responseValue
+
+            }
 
 
 

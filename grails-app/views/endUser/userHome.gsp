@@ -15,8 +15,8 @@
 <body>
 <div id="content">
 
-    <div class="container">
-        <div class="col-lg-12">
+    %{--<div class="container coverImage" style="width: 1346px;">--}%
+        %{--<div class="col-lg-12">--}%
             <div id="main-slider">
 <g:each in="${totalArray[0]}" var="list">
 
@@ -27,34 +27,38 @@
 
      
           </g:each>
-            </div>
+            %{--</div>--}%
             <!-- /#main-slider -->
         </div>
 
-    </div>
-    <div class="container">
-        <div class="col-md-12">
-            <div class="box">
+    %{--</div>--}%
+    %{--<div class="container">--}%
+        %{--<div class="col-md-12">--}%
+    <div id="wrapperTopBrand">
+            <div class="box topBrandDiv">
 
             <div class="social">
-            <h2 style="color: #4fbfa8; margin-left: 8px;">Top Brands</h2>
-                <% int j=0 %>
+            <h2 style="color: #4fbfa8; margin-left: 8px;">Top Brands <g:link action="allBrands" controller="endUser"><i class="fa fa-angle-double-right green-tooltip" data-toggle="tooltip" title="see more"></i></g:link></h2>
+                <% int j=0
+                k=0%>
 <g:each in="${totalArray[1]}" var="list" status="i">
     <g:if test="${Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductBrand(list),false)}">
-               <% if(j<6) {%>
+               <% if(j<12) {%>
                 <div class="col-md-2 col-sm-4 col-xs-4" style="margin-bottom: 10px;">
         <g:link action="topBrand" controller="endUser" params="[brandNames:list.urlName]">
 
             <img src="${resource(dir: 'images', file: 'spinner-brand-logo.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive lazy">
 </g:link>
                 </div>
-<%}%>
+
+        <%}%>
         <% j=j+1%>
 
     </g:if>
 </g:each>
 
-                %{--<p>--}%
+
+            %{--<p>--}%
                 %{--<a id="btn_shareFacebook" class="facebook customer share" title="Facebook share" data-animate-hover="pulse" target="_blank"><i class="fa fa-facebook"></i></a>--}%
                 %{--<a id="btn_shareTWI" class="twitter customer share" href="" title="Twitter share" data-animate-hover="pulse" target="_blank"><i class="fa fa-twitter"></i></a>--}%
                 %{--<a id="btn_shareExternalGplus" class="gplus google_plus customer share" data-animate-hover="pulse" href="" title="Google Plus Share" target="_blank"><i class="fa fa-google-plus"></i></a>--}%
@@ -65,15 +69,15 @@
                 %{--</a>--}%
             %{--</p>--}%
         </div>
-                <h4><p class="loadMore moreBrand" >
-                    <g:link action="allBrands" controller="endUser">See more..</g:link>
-                </p>
                 </h4>
             </div>
+    <div class="box topBrandDivSide">
 
     </div>
-
 </div>
+    %{--</div>--}%
+
+%{--</div>--}%
 
     <!-- *** ADVANTAGES HOMEPAGE ***
  _________________________________________________________ -->
@@ -125,20 +129,16 @@
     <!-- *** HOT PRODUCT SLIDESHOW ***
  _________________________________________________________ -->
     <g:if test="${totalArray[2]}">
-    <div id="hot">
+        <div id="wrapperHotProduct">
 
-        <div class="box">
-            <div class="container">
-                <div class="col-md-12">
-                    <h2>Hot this week</h2>
-                </div>
-            </div>
+        <div id="hot" class="hot">
+
+        <div class="boxBar">
+            <h2>Hot this week <g:link action="latestProducts" controller="endUser"><i class="fa fa-angle-double-right green-tooltip" data-toggle="tooltip" title="see more"></i></g:link></h2>
         </div>
-
-        <div class="container">
-            <div class="product-slider">
+            <div class="product-slider productHot" id="topDIv">
 <g:each in="${totalArray[2]}" var="list">
-    <div class="item">
+    <div class="item ">
                     <div class="product product-height">
                         <div class="flip-container">
                             <div class="flipper">
@@ -174,69 +174,35 @@
                     </div>
 
         <!-- /.product -->
-                </div>
 
+    </div>
            </g:each>
 
             </div>
-
-            <!-- /.product-slider -->
         </div>
+    <div class="box hotProductSide">
 
+    </div>
+            <!-- /.product-slider -->
+</div>
 
 
         <!-- /.container -->
 
-    </div>
-               <div class="col-md-12">
-        <h4><p class="loadMore more" >
-            <g:link action="latestProducts" controller="endUser">See more..</g:link>
-        </p>
-        </h4>
-        </div>
+
+
     </g:if>
-    <!-- /#hot -->
-    <!-- *** HOT END *** -->
-
-    <!-- *** GET INSPIRED ***
- _________________________________________________________ -->
-    %{--<div class="container" data-animate="fadeInUpBig">--}%
-        %{--<div class="col-md-12">--}%
-            %{--<div class="box slideshow">--}%
-                %{--<h3>${homeContent.coverDownImageTitle}</h3>--}%
-                %{--<p class="lead">${homeContent.coverDownImageDescription}</p>--}%
-                %{--<div id="get-inspired" class="owl-carousel owl-theme">--}%
-%{--<g:each in="${downCoverImageList}" var="list">--}%
-
-    %{--<div class="item coverDown">--}%
-        %{--<img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive">--}%
-
-                    %{--</div>--}%
-    %{--</g:each>--}%
-
-                %{--</div>--}%
-            %{--</div>--}%
-        %{--</div>--}%
-    %{--</div>--}%
-
-    <!-- *** GET INSPIRED END *** -->
-
-    <!-- *** BLOG HOMEPAGE ***
- _________________________________________________________ -->
 <g:if test="${totalArray[3]}">
+    <div class="wrapperSalesProduct">
 
-    <div id="hot">
+<div id="hot" class="sales">
 
-        <div class="box">
-            <div class="container">
-                <div class="col-md-12">
-                    <h2>Top Sales</h2>
-                </div>
-            </div>
+    <div class="boxBarSales">
+        <h2>Top Sales <g:link action="topSales" controller="endUser"><i class="fa fa-angle-double-right green-tooltip" data-toggle="tooltip" title="see more"></i></g:link></h2>
+
         </div>
 
-        <div class="container">
-            <div class="product-slider">
+            <div class="product-slider productHot">
                 <g:each in="${totalArray[3]}" var="list">
 
                     <div class="item">
@@ -287,54 +253,75 @@
             </div>
 
             <!-- /.product-slider -->
-        </div>
         <!-- /.container -->
 
 
     </div>
+        <div class="box salesProductSide">
 
-    <div class="col-md-12">
-        <h4><p class="loadMore more" >
-            <g:link action="topSales" controller="endUser">See more..</g:link>
-        </p>
-        </h4>
+        </div>
+
     </div>
+
 </g:if>
 
-        <div class="container">
-<div class="row">
-                <div class="col-md-6 ">
+<div class="row aid">
+    <div class="col-md-6 col-xs-6 col-sm-6">
+        <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
 
                     <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'spinner-home-ad-full.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
 
                 </div>
-                <div class="col-md-6 ">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+
+        <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'spinner-home-ad-full.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
+
+    </div>
+        </div><br>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+
+    <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'spinner-home-ad-full.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
+
+</div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+
+        <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'spinner-home-ad-full.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
+
+    </div>
+    </div>
+    </div>
+    <div class="col-md-6 col-xs-6 col-sm-6">
+<div class="row">
+    <div class="col-md-12 ">
                     <g:link controller="endUser" action="specifiedProducts"  params="[category:'electronics',subCategorySpecify: 'laptop-computer']">
 
                         <img src="${resource(dir: 'images', file: 'spinner-home-ad-half.gif')}" data-src="${resource(dir: 'images', file: 'hp3.jpg')}" class="img-responsive lazy" >
                     </g:link>
                 </div>
-                    <div class="col-md-6 ">
+</div><br>
+        <div class="row">
+
+            <div class="col-md-12 ">
                                                 <g:link action="allCategoryProducts" params="[category:'women']" controller="endUser">
 
     <img src="${resource(dir: 'images', file: 'spinner-home-ad-half.gif')}" data-src="${resource(dir: 'images', file: 'Ph4.jpg')}" class="img-responsive lazy" >
                                                 </g:link>
                     </div>
-</div>
+        </div>
+    </div>
+    </div>
 
 
             <!-- /#blog-homepage -->
-        </div>
 <br>
     <g:each in="${totalArray[4]}" var="listProducts">
         <div id="hot">
 
-            <div class="box">
-                <div class="container">
-                    <div class="col-md-12">
-                        <h2>${listProducts[0].productDetails.productSubCategory.subCategoryName}</h2>
-                    </div>
-                </div>
+            <div class="boxBar">
+
+                        <h2>${listProducts[0].productDetails.productSubCategory.subCategoryName} <g:link action="subCategory" controller="endUser" params="[subCategory:listProducts[0].productDetails.productSubCategory.urlName]"><i class="fa fa-angle-double-right green-tooltip" data-toggle="tooltip" title="see more"></i></g:link></h2>
             </div>
 
             <div class="container">
@@ -395,28 +382,9 @@
 
         </div>
 
-        <div class="col-md-12">
-            <h4><p class="loadMore more" >
-                <g:link action="subCategory" controller="endUser" params="[subCategory:listProducts[0].productDetails.productSubCategory.urlName]">See more..</g:link>
-            </p>
-            </h4>
-        </div>
+
     </g:each>
 
-    <div class="container">
-        <div class="row">
-        <div class="col-md-12">
-
-            <div class="agileinfonewsl about-background lazy" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:BackgroundImage.list()[0].imageName])}')">
-
-
-                <!-- Popup-Box -->
-                <!-- //Popup-Box -->
-
-            </div>
-        </div>
-        </div>
-    </div>
 
 </div>    <!-- /.container -->
 </body>

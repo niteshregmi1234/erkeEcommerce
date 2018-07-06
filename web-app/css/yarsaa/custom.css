@@ -4,6 +4,113 @@
 /*.billingFieldLarge{*/
 /*width: 432px;*/
 /*}*/
+.icon {
+    background: rgba(255, 255, 255, .6);
+    color: rgba(0, 0, 0, .3);
+    font-family: 'FontAwesome';
+    font-size: 40px;
+    line-height: 60px;
+    margin-top: -30px;
+    position: absolute; top: 50%;
+    text-align: center;
+    width: 60px; height: 60px;
+}
+.owl-next,
+.owl-prev {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 33.33333333%;
+}
+.owl-next {
+    right: 0;
+}
+.owl-prev {
+    left: 0;
+}
+.owl-next:hover .icon,
+.owl-prev:hover .icon {
+    background: rgba(48, 117, 70, .8);
+    color: rgba(255, 255, 255, .9);
+}
+.icon-arrow-left7 { left: 0; }
+.icon-arrow-left7:before { content: "\f053"; }
+.icon-arrow-right7 { right: 0; }
+.icon-arrow-right7:before { content: "\f054"; }
+
+@media (min-width: 768px) {
+
+    .owl-next {
+        right: 60px;
+    }
+    .owl-prev {
+        left: 60px;
+    }
+    .icon-arrow-left7 { left: auto; right: 0; }
+    .icon-arrow-right7{ left: 0; right: autp; }
+}
+#wrapperHotProduct{
+    overflow:auto;
+}
+.wrapperSalesProduct{
+    margin-top: -40px;
+    overflow:auto;
+}
+
+.hot{
+    width: 70%;
+    float:left;
+}
+.sales{
+    width: 70%;
+    float:left;
+}
+.hotProductSide{
+    margin-top: 34px;
+    width: 29%;
+    float:right;
+}
+.salesProductSide{
+    margin-top: 39px;
+    width: 29%;
+    float:right;
+}
+.topBrandDiv{
+
+    margin-top: -20px;
+}
+.aid{
+    margin-top: -50px;
+}
+.boxBarSales{
+    margin-top: -15px;
+}
+.boxBar{
+    margin-top: -20px;
+}
+.productHot{
+    margin-top: -25px;
+}
+.green-tooltip + .tooltip > .tooltip-inner {background-color: #4fbfa8;}
+
+
+.social h2{
+    font-size: 20px!important;
+}
+#wrapperTopBrand{
+    margin-top: -20px;
+    overflow:auto;
+}
+
+.topBrandDiv{
+    width: 50%;
+    float:left;
+}
+
+.topBrandDivSide{
+width: 49%;
+    float:right;
+}​
 .red-tooltip + .tooltip > .tooltip-inner {background-color: #a94442;}
 .checkOutHead{
     font-size: 35px;
@@ -27,7 +134,7 @@ color: #000;
     margin-top: -20px;
 }
 .moreBrand{
-    margin-top: 178px;
+    margin-top: 150px;
     margin-right: -16px;
     text-align:right;
     font-style: italic;

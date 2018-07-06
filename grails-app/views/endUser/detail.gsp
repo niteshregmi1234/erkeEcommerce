@@ -304,7 +304,7 @@
 
           <div class="col-sm-6">
             <div class="box detailBox" style="height:500px;">
-              <h3 class="detailName">${totalArray[0].productDetails.productBrand.brandName+" "+totalArray[0].productDetails.productName+" "+totalArray[0].productDetails.briefDescription+"("+totalArray[0].productColor.colorName+")"}</h3>
+              <h3 class="detailName">${totalArray[0].productDetails.productBrand.brandName+" "+totalArray[0].productDetails.briefDescription}</h3>
               <p class="goToDescription" style="text-align: left;"><a href="#details" class="scroll-to" style="color: #4fbfa8;">click here! go to description tab</a>
               </p>
 <g:hiddenField name="productIdWithColor" id="productIdWithColor" value="${totalArray[0].id}"></g:hiddenField>
