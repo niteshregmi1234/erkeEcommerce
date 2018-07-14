@@ -556,7 +556,8 @@ def checkPhoto(){
                 } else {
                     return imageNameOld
                 }
-            }        }    }
+            }        }
+    }
 
 
     def uploadZoomImage(int i){

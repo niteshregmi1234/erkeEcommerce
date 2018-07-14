@@ -106,13 +106,11 @@
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
         $(document).ready(function() {
             <%
             def stringArray1="${stringArray}";
                 %>
-
             $('#productSizeId').selectpicker('val', ${stringArray1});
         });
     </script>
@@ -263,10 +261,19 @@
                 return false;
             }
             if(productName.length>0){
+                var id;
+
+                if($("#productId").length == 0){
+                    id=null;
+                }
+                else{
+                    id=document.getElementById("productId").value;
+
+                }
                 $.ajax({
                     url: "${createLink(controller:'productDetails', action:'checkProductName')}",
                     type: "POST",
-                    data: {"productName":productName},
+                    data: {"productName":productName,"id":id},
                     cache: false,
                     async: false,
                     success: function (result) {

@@ -50,6 +50,7 @@
     .icon-arrow-right7{ left: 0; right: autp; }
 }
 #wrapperHotProduct{
+    margin-top: -20px;
     overflow:auto;
 }
 .wrapperSalesProduct{
@@ -908,6 +909,54 @@ color: #000;
 }
 
 @media screen and (min-width:301px) and (max-width:320px){
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     .deleteCartFromPopUp{
         margin-top: 45px!important;
     }
@@ -1098,6 +1147,45 @@ color: #000;
 
 }
 @media screen and (min-width: 321px) and (max-width:360px){
+    #lastAd{
+        margin-top: 10px;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 358px;
+    }
+    .hotProductSide img{
+        width: 358px;
+    }
+    .salesProductSide{
+        width: 358px;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 358px;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     .deleteCartFromPopUp{
         margin-top: 115px!important;
     }
@@ -1279,6 +1367,54 @@ margin-top: -20px!important;
 
 }
 @media screen and (min-width: 361px) and (max-width:411px){
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     .deleteCartFromPopUp{
         margin-top: 125px!important;
     }
@@ -1465,6 +1601,45 @@ width: 250px!important;
 }
 
 @media screen and (min-width: 412px) and (max-width:413px){
+    #lastAd{
+        margin-top: 10px;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 414px;
+    }
+    .hotProductSide img{
+        width: 414px;
+    }
+    .salesProductSide{
+        width: 414px;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 414px;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     .noItem{
         font-size: 17px!important;
     }
@@ -1649,6 +1824,54 @@ width: 250px!important;
 }
 
 @media screen and (min-width: 414px) and (max-width:440px){
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     .deleteCartFromPopUp{
         margin-top: 70px!important;
     }
@@ -1832,6 +2055,54 @@ width: 250px!important;
 
 }
 @media screen and (min-width: 441px) and (max-width:480px){
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     .discountBoxDetail{
         margin-right: 215px;
     }
@@ -2037,6 +2308,54 @@ width: 250px!important;
 
 }
 @media screen and (min-width:521px) and (max-width: 568px){
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     .text-center{
         margin-top: -5px!important;
     }
@@ -2170,6 +2489,45 @@ width: 250px!important;
 
 }
 @media screen and (min-width:600px) and (max-width: 620px){
+    #lastAd{
+        margin-top: 10px;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 595px;
+    }
+    .hotProductSide img{
+        width: 595px;
+    }
+    .salesProductSide{
+        width: 595px;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 595px;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
  #mainImage img{
      width: 100%;
  }
@@ -2279,6 +2637,54 @@ margin-top: -2px!important;
 
 }
 @media screen and (min-width:621px) and (max-width: 640px){
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     #zoom{
     width: 580px;
     }
@@ -2425,6 +2831,54 @@ margin-top: -2px!important;
     }
 }
 @media screen and (min-width: 667px) and (max-width: 700px) {
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     #zoom{
         width: 100%;
     }
@@ -2605,6 +3059,54 @@ margin-top: -2px!important;
 }
 
 @media screen and (min-width: 726px) and (max-width: 735px) {
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     #zoom{
         width: 100%;
     }
@@ -2705,6 +3207,54 @@ margin-top: -2px!important;
     }
 }
 @media screen and (min-width: 736px) and (max-width: 749px) {
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     #zoom{
         width: 100%;
     }
@@ -2799,6 +3349,54 @@ margin-top: -2px!important;
 
 }
 @media screen and (min-width: 750px) and (max-width: 768px) {
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     .detailBox{
         height: 330px!important;
     }
@@ -2901,6 +3499,54 @@ margin-top: -2px!important;
 
 
 @media screen and (min-width: 769px) and (max-width: 855px) {
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     .errorSize{
         font-size: 7px!important;
         margin-top: -3px!important;
@@ -2979,6 +3625,54 @@ margin-top: -2px!important;
 }
 
 @media screen and (min-width: 856px) and (max-width: 961px) {
+    #lastAd{
+        margin-top: 10px;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+    .smallBoxAd{
+        width: 100%;
+    }
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+    .topBrandDivSide{
+        margin-top: -18px;
+        width: 100%;
+    }
+    .topBrandDivSide img{
+        width: 100%;
+    }
+    .topBrandDiv{
+        width: 100%;
+    }
     #zoom{
         width: 100%;
     }
@@ -3044,6 +3738,36 @@ margin-top: -2px!important;
 
 }
 @media screen and (min-width: 962px) and (max-width: 1024px) {
+    .aid{
+        margin-top: 10px;
+    }
+    .boxBarSales{
+        margin-top: 40px;
+    }
+    .sales{
+        width: 100%;
+    }
+    .hotProductSide{
+        margin-top: -50px;
+        width: 100%;
+    }
+    .hotProductSide img{
+        width: 100%;
+    }
+    .salesProductSide{
+        width: 100%;
+        margin-top: -50px;
+    }
+    .salesProductSide img{
+        width: 100%;
+    }
+    .boxBar{
+        margin-top: 0px;
+    }
+    .hot{
+        width: 100%;
+    }
+
     #zoom{
         width: 400px!important;
     }
@@ -3087,6 +3811,7 @@ margin-top: -2px!important;
     }
 }
 @media screen and (min-width: 1025px) and (max-width: 1200px) {
+
     .agileinfonewsl {
         width: 100% !important;
         height: 800px !important;
@@ -3101,3 +3826,15 @@ margin-top: -2px!important;
         font-size: 25px;
     }
 }
+@media screen and (min-width: 1440px){
+.topBrandDivSide img{
+    width: 100%;
+}
+    .smallBoxAd{
+        width: 100%;
+    }
+    #lastAd img{
+        width: 100%;
+    }
+}
+

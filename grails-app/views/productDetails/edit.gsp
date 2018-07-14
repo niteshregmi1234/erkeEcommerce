@@ -13,7 +13,7 @@
 </head>
 <body>
 <g:form action="save" controller="productDetails" class="form-horizontal"  onsubmit="return Validate();">
-    <g:hiddenField name="id" value="${productDetailsInstance?.id}"></g:hiddenField>
+    <g:hiddenField name="id" id="productId" value="${productDetailsInstance?.id}"></g:hiddenField>
 
 <g:render template="form"></g:render>
 

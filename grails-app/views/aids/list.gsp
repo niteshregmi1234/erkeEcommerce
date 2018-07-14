@@ -14,9 +14,10 @@
 
 <body>
 <nav class="navbar">
+    <g:if test="${Aids.list().size()<=9}">
     <g:link action="create" controller="aids" class="btn btn-primary navbar-btn">New</g:link>
-</nav>
-<h6 style="color: #761c19;">${flash.message}</h6>
+    </g:if>
+        </nav>
 <caption><h3>List</h3></caption>
 <table id="example" class="display nowrap" cellspacing="0" width="100%">
 
@@ -39,7 +40,7 @@
     <g:each in="${aidsList}" var="list" status='i'>
         <tr>
             <td>${i+1}</td>
-            <td> <g:link action="show" id="${list?.id}" controller="aids" class="btn btn-primary btn-sm">view</g:link></td>
+            <td> <g:link action="edit" id="${list?.id}" controller="aids" class="btn btn-primary btn-sm">view</g:link></td>
             <td>${list.divPosition}</td>
         </tr>
     </g:each>

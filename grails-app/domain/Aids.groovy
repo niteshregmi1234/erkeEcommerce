@@ -1,4 +1,7 @@
 class Aids {
+    String adDescribeRaw
+    String adDescribe
+    String isDiscountForProduct
     String discountType
     String divPosition
     String aidType
@@ -12,6 +15,7 @@ class Aids {
     String productIds
     String imageName
     static constraints = {
+        discountType nullable: true
         discountFrom nullable:true
         discountTo nullable:true
         discount nullable:true

@@ -53,10 +53,7 @@
         function preventMultipleSubmissions() {
             $('#submit_Id').prop('disabled', true);
         }
-
         window.onbeforeunload = preventMultipleSubmissions;
-
-
         function Validate(oForm) {
             var responseValue;
             var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];

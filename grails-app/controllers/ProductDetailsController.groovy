@@ -3,6 +3,7 @@ class ProductDetailsController extends BaseController{
 static allowedMethods = [checkProductName: 'POST', save: 'POST']
     def checkProductName(){
         try{
+            if(!params.id){
         def productDetailsInstance=ProductDetails.findByProductName(params.productName)
         if(productDetailsInstance){
             render "notOk"
@@ -10,6 +11,17 @@ static allowedMethods = [checkProductName: 'POST', save: 'POST']
         else{
             render "ok"
         }}
+            else{
+                def productDetailsName=ProductDetails.findById(params.id as long).productName
+                def productDetailsInstance=ProductDetails.findByProductNameAndProductNameNotEqual(params.productName,productDetailsName)
+                if(productDetailsInstance){
+                    render "notOk"
+                }
+                else{
+                    render "ok"
+                }
+            }
+        }
         catch (Exception e){
 
         }

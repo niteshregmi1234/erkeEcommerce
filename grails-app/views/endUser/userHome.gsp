@@ -44,7 +44,7 @@
 <g:each in="${totalArray[1]}" var="list" status="i">
     <g:if test="${Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductBrand(list),false)}">
                <% if(j<12) {%>
-                <div class="col-md-2 col-sm-4 col-xs-4" style="margin-bottom: 10px;">
+                <div class="col-md-2 col-sm-2 col-xs-2" style="margin-bottom: 10px;">
         <g:link action="topBrand" controller="endUser" params="[brandNames:list.urlName]">
 
             <img src="${resource(dir: 'images', file: 'spinner-brand-logo.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.logoName])}" class="img-responsive lazy">
@@ -58,76 +58,19 @@
 </g:each>
 
 
-            %{--<p>--}%
-                %{--<a id="btn_shareFacebook" class="facebook customer share" title="Facebook share" data-animate-hover="pulse" target="_blank"><i class="fa fa-facebook"></i></a>--}%
-                %{--<a id="btn_shareTWI" class="twitter customer share" href="" title="Twitter share" data-animate-hover="pulse" target="_blank"><i class="fa fa-twitter"></i></a>--}%
-                %{--<a id="btn_shareExternalGplus" class="gplus google_plus customer share" data-animate-hover="pulse" href="" title="Google Plus Share" target="_blank"><i class="fa fa-google-plus"></i></a>--}%
-                %{--<a id="btn_shareLinkedIn" class="a btn btn-linkedin customer share" href="" title="linkedin Share" target="_blank" data-animate-hover="pulse"><i class="fa fa-linkedin"></i>--}%
-                %{--</a>--}%
-                %{--<a id="btn_shareInstagram" title="instagram Share" class="btn btn-instagram a" data-animate-hover="pulse" href="">--}%
-                %{--<i class="fa fa-instagram"></i>--}%
-                %{--</a>--}%
-            %{--</p>--}%
+
         </div>
                 </h4>
             </div>
-    <div class="box topBrandDivSide">
-
+    <g:if test="${Aids.list()[0]}">
+    <div class="topBrandDivSide ">
+        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[0].adDescribe]">
+        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[0].imageName])}" class="img-responsive lazy">
+        </g:link>
     </div>
+    </g:if>
 </div>
-    %{--</div>--}%
 
-%{--</div>--}%
-
-    <!-- *** ADVANTAGES HOMEPAGE ***
- _________________________________________________________ -->
-
-    %{--<div id="advantages">--}%
-
-        %{--<div class="container">--}%
-            %{--<div class="same-height-row">--}%
-                %{--<div class="col-sm-4">--}%
-                    %{--<div class="box same-height">--}%
-                        %{--<div class="icon"><i class="fa fa-heart"></i>--}%
-                        %{--</div>--}%
-
-                        %{--<h3>${homeContent.box1Title}</h3>--}%
-                        %{--<p>${homeContent.box1Description}</p>--}%
-                    %{--</div>--}%
-                %{--</div>--}%
-
-                %{--<div class="col-sm-4">--}%
-                    %{--<div class="box same-height">--}%
-                        %{--<div class="icon"><i class="fa fa-tags"></i>--}%
-                        %{--</div>--}%
-
-                        %{--<h3>${homeContent.box2Title}</h3>--}%
-                        %{--<p>${homeContent.box2Description}.</p>--}%
-                    %{--</div>--}%
-                %{--</div>--}%
-
-                %{--<div class="col-sm-4">--}%
-                    %{--<div class="box same-height">--}%
-                        %{--<div class="icon"><i class="fa fa-thumbs-up"></i>--}%
-                        %{--</div>--}%
-
-                        %{--<h3>${homeContent.box3Title}</h3>--}%
-                        %{--<p>${homeContent.box3Description}.</p>--}%
-                    %{--</div>--}%
-                %{--</div>--}%
-            %{--</div>--}%
-            %{--<!-- /.row -->--}%
-
-        %{--</div>--}%
-        %{--<!-- /.container -->--}%
-
-    %{--</div>--}%
-    <!-- /#advantages -->
-
-    <!-- *** ADVANTAGES END *** -->
-
-    <!-- *** HOT PRODUCT SLIDESHOW ***
- _________________________________________________________ -->
     <g:if test="${totalArray[2]}">
         <div id="wrapperHotProduct">
 
@@ -173,21 +116,25 @@
 
                     </div>
 
-        <!-- /.product -->
 
     </div>
            </g:each>
 
             </div>
         </div>
-    <div class="box hotProductSide">
+            <g:if test="${Aids.list()[1]}">
+
+                <div class="hotProductSide">
+                <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[1].adDescribe]">
+
+                            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[1].imageName])}" class="img-responsive lazy">
+                </g:link>
 
     </div>
-            <!-- /.product-slider -->
+            </g:if>
 </div>
 
 
-        <!-- /.container -->
 
 
 
@@ -244,77 +191,96 @@
                             </div>
 
 
-                            <!-- /.ribbon -->
                         </div>
-                        <!-- /.product -->
                     </div>
 
                 </g:each>
             </div>
 
-            <!-- /.product-slider -->
-        <!-- /.container -->
 
 
     </div>
-        <div class="box salesProductSide">
+    <g:if test="${Aids.list()[2]}">
 
+        <div class="salesProductSide">
+        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[2].adDescribe]">
+
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[2].imageName])}" class="img-responsive lazy">
+        </g:link>
         </div>
-
+    </g:if>
     </div>
 
 </g:if>
 
 <div class="row aid">
-    <div class="col-md-6 col-xs-6 col-sm-6">
+    <div class="col-md-6 col-xs-12 col-sm-12">
         <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
-
-                    <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'spinner-home-ad-full.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
+<g:if test="${Aids.list()[3]}">
+    <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[3].adDescribe]">
+                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[3].imageName])}" class="img-responsive lazy smallBoxAd">
+                    </g:link>
+</g:if>
 
                 </div>
     <div class="col-md-6 col-sm-6 col-xs-6">
 
-        <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'spinner-home-ad-full.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
+            <g:if test="${Aids.list()[4]}">
+                <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[4].adDescribe]">
 
-    </div>
-        </div><br>
+                <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[4].imageName])}" class="img-responsive lazy smallBoxAd">
+                </g:link>
+            </g:if>
+            </div>
+                </div><br>
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-6">
 
-    <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'spinner-home-ad-full.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
+        <g:if test="${Aids.list()[5]}">
+            <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[5].adDescribe]">
 
-</div>
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[5].imageName])}" class="img-responsive lazy smallBoxAd">
+            </g:link>
+        </g:if>
+        </div>
     <div class="col-md-6 col-sm-6 col-xs-6">
 
-        <g:link action="nepaliProducts" controller="endUser">    <img src="${resource(dir: 'images', file: 'spinner-home-ad-full.gif')}" data-src="${resource(dir: 'images', file: 'hp1.jpg')}" class="img-responsive lazy"></g:link>
+            <g:if test="${Aids.list()[6]}">
+                <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[6].adDescribe]">
 
-    </div>
-    </div>
-    </div>
-    <div class="col-md-6 col-xs-6 col-sm-6">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[6].imageName])}" class="img-responsive lazy smallBoxAd">
+                </g:link>
+                </g:if>
+            </div>
+            </div>
+            </div>
+    <div class="col-md-6 col-xs-12 col-sm-12" id="lastAd">
 <div class="row">
     <div class="col-md-12 ">
-                    <g:link controller="endUser" action="specifiedProducts"  params="[category:'electronics',subCategorySpecify: 'laptop-computer']">
+                        <g:if test="${Aids.list()[7]}">
+                            <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[7].adDescribe]">
 
-                        <img src="${resource(dir: 'images', file: 'spinner-home-ad-half.gif')}" data-src="${resource(dir: 'images', file: 'hp3.jpg')}" class="img-responsive lazy" >
-                    </g:link>
+                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[7].imageName])}" class="img-responsive lazy">
+                            </g:link>
+                        </g:if>
                 </div>
 </div><br>
         <div class="row">
 
             <div class="col-md-12 ">
-                                                <g:link action="allCategoryProducts" params="[category:'women']" controller="endUser">
+                                                    <g:if test="${Aids.list()[8]}">
+                                                        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[8].adDescribe]">
 
-    <img src="${resource(dir: 'images', file: 'spinner-home-ad-half.gif')}" data-src="${resource(dir: 'images', file: 'Ph4.jpg')}" class="img-responsive lazy" >
-                                                </g:link>
+                                                    <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[8].imageName])}" class="img-responsive lazy">
+                                                        </g:link>
+                                                    </g:if>
                     </div>
         </div>
     </div>
     </div>
 
 
-            <!-- /#blog-homepage -->
 <br>
     <g:each in="${totalArray[4]}" var="listProducts">
         <div id="hot">
@@ -367,17 +333,13 @@
                                 </div>
 
 
-                                <!-- /.ribbon -->
                             </div>
-                            <!-- /.product -->
                         </div>
 
                     </g:each>
                 </div>
 
-                <!-- /.product-slider -->
             </div>
-            <!-- /.container -->
 
 
         </div>
@@ -386,6 +348,6 @@
     </g:each>
 
 
-</div>    <!-- /.container -->
+</div>
 </body>
 </html>

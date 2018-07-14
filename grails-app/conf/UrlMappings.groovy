@@ -7,6 +7,7 @@ class UrlMappings {
 
             }
         }
+        "/$aidsDescribe/_"(action: "ad",controller: "endUser")
         "/"(action: "userHome",controller: "endUser")
             "/error"(action: "notfound",controller: "errorPage")
         "/search"(action: "result",controller: "endUser")

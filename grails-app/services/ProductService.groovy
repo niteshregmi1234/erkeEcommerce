@@ -247,8 +247,12 @@ def deleteCart(Map params,List<CartWithoutEndUser> cartWithoutEndUserList){
         catch (Exception e) {
         }
     }
+    def advertisementList(){
+
+    }
     def homeContent(){
         try{
+//            def advertisementList=advertisementList()
         List<List<Product>> listListProduct=new ArrayList<>()
         def subCategoryList=ProductSubCategory.findAllByShowInHomePage(true)
         for(ProductSubCategory productSubCategory:subCategoryList){
@@ -581,6 +585,31 @@ def topSales(){
 
     }
 }
+    def ad(List<Product> productList){
+        try{
+            List<List<ProductSize>> listList=new ArrayList<>()
+            def prices=pricesArray(productList)
+            Collections.shuffle(productList)
+            for(Product productInstance:productList){
+                def sizeString = productInstance.productDetails.productSizes
+                String[] stringArraySize = sizeString.split(",")
+                List<ProductSize> productSizeList = new ArrayList<>()
+                for (int i = 0; i < stringArraySize.size(); i++) {
+                    def sizeId = stringArraySize[i] as long
+                    if (ProductSize.get(sizeId)) {
+
+                        productSizeList.add(ProductSize.get(sizeId))
+                    }
+                }
+                listList.add(productSizeList)
+            }
+
+            def totalArray=[productList,prices,listList]
+            return totalArray
+        }
+        catch (Exception e){
+        }
+    }
     def allProducts(){
 
         try{
@@ -723,8 +752,1633 @@ return prices}
 
         }
     }
-    def changeDiscountIfAll(ArrayList brandIds,ArrayList categoryIds,ArrayList specificationIds,ArrayList subCategoryIds,float discountPercentage) {
+    def productIfAllDiscountWithRange(String[] brandIds,String[] categoryIds,String[] specificationIds,String[] subCategoryIds,float discountFrom,float discountTo) {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,k,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(k=0;k<categoryIds.size();k++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
+                for(l=0;l<specificationIds.size();l++) {
+                    def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+                    for(m=0;m<subCategoryIds.size();m++) {
+                        def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                        def productDetailsList=ProductDetails.findAllByProductBrandAndProductCategoryAndProductSubCategoryAndDiscountPercentageBetween(brandInstance,categoryInstance,subCategoryInstance,discountFrom,discountTo)
+                        if(productDetailsList){
+                            for(ProductDetails productDetails:productDetailsList){
+                                if(!productDetailsListTotal.contains(productDetails)){
+                                    productDetailsListTotal.add(productDetails)
+                                }
+                            }
+                        }
+
+                    }
+                    m=0
+                }
+                l=0;
+
+            }
+            k=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSpecificationAndSubCategoryDiscountWithRange(String[] brandIds,String[] specificationIds,String[] subCategoryIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<specificationIds.size();l++) {
+                def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+
+                for(m=0;m<subCategoryIds.size();m++) {
+                    def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                    def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndDiscountPercentageBetween(brandInstance,subCategoryInstance,discountFrom,discountTo)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfCategoryAndSpecificationAndSubCategoryDiscountWithRange(String[] specificationIds,String[] categoryIds,String[] subCategoryIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<categoryIds.size();j++){
+            def categoryInstance=ProductCategory.findById(categoryIds[j] as long)
+            for(l=0;l<specificationIds.size();l++) {
+                def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+
+                for(m=0;m<subCategoryIds.size();m++) {
+                    def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                    def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCategoryAndDiscountPercentageBetween(categoryInstance,subCategoryInstance,discountFrom,discountTo)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndCategoryAndSubCategoryDiscountWithRange(String[] brandIds,String[] categoryIds,String[] subCategoryIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                for(m=0;m<subCategoryIds.size();m++) {
+                    def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
+                    def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndProductCategoryAndDiscountPercentageBetween(brandInstance,subCategoryInstance,categoryInstance,discountFrom,discountTo)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSpecificationAndCategoryDiscountWithRange(String[] brandIds, String[] categoryIds ,String[] specificationIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                for(m=0;m<specificationIds.size();m++) {
+                    def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+                    for(ProductSubCategory productSubCategory:subCategoryList){
+                        def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndProductCategoryAndDiscountPercentageBetween(brandInstance,productSubCategory,categoryInstance,discountFrom,discountTo)
+                        if(productDetailsList){
+                            for(ProductDetails productDetails:productDetailsList){
+                                if(!productDetailsListTotal.contains(productDetails)){
+                                    productDetailsListTotal.add(productDetails)
+                                }
+                            }
+                        }
+                    }
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndCategoryDiscountWithRange(String[] brandIds,String[] categoryIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                def productDetailsList=ProductDetails.findAllByProductBrandAndProductCategoryAndDiscountPercentageBetween(brandInstance,categoryInstance,discountFrom,discountTo)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSpecificationDiscountWithRange(String[] brandIds,String[] specificationIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(m=0;m<specificationIds.size();m++) {
+                def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+                for(ProductSubCategory productSubCategory:subCategoryList){
+                    def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndDiscountPercentageBetween(brandInstance,productSubCategory,discountFrom,discountTo)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+
+                }
+            }
+            m=0
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSubCategoryDiscountWithRange(String[] brandIds,String[] subCategoryIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+
+            for(m=0;m<subCategoryIds.size();m++) {
+                def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
+                def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndDiscountPercentageBetween(brandInstance,subCategoryInstance,discountFrom,discountTo)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+            m=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfSpecificationAndCategoryDiscountWithRange(String[] categoryIds, String[] specificationIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,m
+        for(j=0;j<categoryIds.size();j++){
+            def categoryInstance=ProductCategory.findById(categoryIds[j] as long)
+            for(m=0;m<specificationIds.size();m++) {
+                def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+                for(ProductSubCategory productSubCategory:subCategoryList){
+                    def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCategoryAndDiscountPercentageBetween(categoryInstance,productSubCategory,discountFrom,discountTo)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+
+                }
+            }
+            m=0
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfSpecificationAndSubCategoryDiscountWithRange(String[] subCategoryIds,String[] specificationIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int l,m
+        for(l=0;l<specificationIds.size();l++) {
+            def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+
+            for(m=0;m<subCategoryIds.size();m++) {
+                def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                def productDetailsList=ProductDetails.findAllByProductSubCategoryAndDiscountPercentageBetween(subCategoryInstance,discountFrom,discountTo)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+            m=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfCategoryAndSubCategoryDiscountWithRange(String[] subCategoryIds,String[] categoryIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l
+        for(j=0;j<subCategoryIds.size();j++){
+            def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                def productDetailsList=ProductDetails.findAllByProductSubCategoryAndProductCategoryAndDiscountPercentageBetween(subCategoryInstance,categoryInstance,discountFrom,discountTo)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+            l=0;
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+        def totalArray=ad(productList)
+        return totalArray
+
+    }
+    def productIfBrandDiscountWithRange(String[] brandIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+
+            def productDetailsList=ProductDetails.findAllByProductBrandAndDiscountPercentageBetween(brandInstance,discountFrom,discountTo)
+            if(productDetailsList){
+                for(ProductDetails productDetails:productDetailsList){
+                    if(!productDetailsListTotal.contains(productDetails)){
+                        productDetailsListTotal.add(productDetails)
+                    }
+                }
+            }
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfCategoryDiscountWithRange(String[] categoryIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int l
+        for(l=0;l<categoryIds.size();l++) {
+            def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+            def productDetailsList=ProductDetails.findAllByProductCategoryAndDiscountPercentageBetween(categoryInstance,discountFrom,discountTo)
+            if(productDetailsList){
+                for(ProductDetails productDetails:productDetailsList){
+                    if(!productDetailsListTotal.contains(productDetails)){
+                        productDetailsListTotal.add(productDetails)
+                    }
+                }
+            }
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfSpecificationDiscountWithRange(String[] specificationIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int m
+        for(m=0;m<specificationIds.size();m++) {
+            def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+            for(ProductSubCategory productSubCategory:subCategoryList){
+                def productDetailsList=ProductDetails.findAllByProductSubCategoryAndDiscountPercentageBetween(productSubCategory,discountFrom,discountTo)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+
+    }
+    def productIfSubCategoryDiscountWithRange(String[] subCategoryIds,float discountFrom,float discountTo)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j
+        for(j=0;j<subCategoryIds.size();j++){
+            def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[j] as long)
+            def productDetailsList=ProductDetails.findAllByProductSubCategoryAndDiscountPercentageBetween(subCategoryInstance,discountFrom,discountTo)
+            if(productDetailsList){
+                for(ProductDetails productDetails:productDetailsList){
+                    if(!productDetailsListTotal.contains(productDetails)){
+                        productDetailsListTotal.add(productDetails)
+                    }
+                }
+            }
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+
+    def productIfAllDiscountWithNoRange(String[] brandIds,String[] categoryIds,String[] specificationIds,String[] subCategoryIds,float discount) {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,k,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(k=0;k<categoryIds.size();k++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
+                for(l=0;l<specificationIds.size();l++) {
+                    def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+                    for(m=0;m<subCategoryIds.size();m++) {
+                        def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                        def productDetailsList=ProductDetails.findAllByProductBrandAndProductCategoryAndProductSubCategoryAndDiscountPercentage(brandInstance,categoryInstance,subCategoryInstance,discount)
+                        if(productDetailsList){
+                            for(ProductDetails productDetails:productDetailsList){
+                                if(!productDetailsListTotal.contains(productDetails)){
+                                    productDetailsListTotal.add(productDetails)
+                                }
+                            }
+                        }
+
+                    }
+                    m=0
+                }
+                l=0;
+
+            }
+            k=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSpecificationAndSubCategoryDiscountWithNoRange(String[] brandIds,String[] specificationIds,String[] subCategoryIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<specificationIds.size();l++) {
+                def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+
+                for(m=0;m<subCategoryIds.size();m++) {
+                    def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                    def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndDiscountPercentage(brandInstance,subCategoryInstance,discount)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfCategoryAndSpecificationAndSubCategoryDiscountWithNoRange(String[] specificationIds,String[] categoryIds,String[] subCategoryIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<categoryIds.size();j++){
+            def categoryInstance=ProductCategory.findById(categoryIds[j] as long)
+            for(l=0;l<specificationIds.size();l++) {
+                def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+
+                for(m=0;m<subCategoryIds.size();m++) {
+                    def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                    def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCategoryAndDiscountPercentage(categoryInstance,subCategoryInstance,discount)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndCategoryAndSubCategoryDiscountWithNoRange(String[] brandIds,String[] categoryIds,String[] subCategoryIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                for(m=0;m<subCategoryIds.size();m++) {
+                    def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
+                    def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndProductCategoryAndDiscountPercentage(brandInstance,subCategoryInstance,categoryInstance,discount)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSpecificationAndCategoryDiscountWithNoRange(String[] brandIds, String[] categoryIds ,String[] specificationIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                for(m=0;m<specificationIds.size();m++) {
+                    def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+                    for(ProductSubCategory productSubCategory:subCategoryList){
+                        def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndProductCategoryAndDiscountPercentage(brandInstance,productSubCategory,categoryInstance,discount)
+                        if(productDetailsList){
+                            for(ProductDetails productDetails:productDetailsList){
+                                if(!productDetailsListTotal.contains(productDetails)){
+                                    productDetailsListTotal.add(productDetails)
+                                }
+                            }
+                        }
+                    }
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndCategoryDiscountWithNoRange(String[] brandIds,String[] categoryIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                def productDetailsList=ProductDetails.findAllByProductBrandAndProductCategoryAndDiscountPercentage(brandInstance,categoryInstance,discount)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSpecificationDiscountWithNoRange(String[] brandIds,String[] specificationIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(m=0;m<specificationIds.size();m++) {
+                def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+                for(ProductSubCategory productSubCategory:subCategoryList){
+                    def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndDiscountPercentage(brandInstance,productSubCategory,discount)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+
+                }
+            }
+            m=0
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSubCategoryDiscountWithNoRange(String[] brandIds,String[] subCategoryIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+
+            for(m=0;m<subCategoryIds.size();m++) {
+                def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
+                def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndDiscountPercentage(brandInstance,subCategoryInstance,discount)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+            m=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfSpecificationAndCategoryDiscountWithNoRange(String[] categoryIds, String[] specificationIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,m
+        for(j=0;j<categoryIds.size();j++){
+            def categoryInstance=ProductCategory.findById(categoryIds[j] as long)
+            for(m=0;m<specificationIds.size();m++) {
+                def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+                for(ProductSubCategory productSubCategory:subCategoryList){
+                    def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCategoryAndDiscountPercentage(categoryInstance,productSubCategory,discount)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+
+                }
+            }
+            m=0
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfSpecificationAndSubCategoryDiscountWithNoRange(String[] subCategoryIds,String[] specificationIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int l,m
+        for(l=0;l<specificationIds.size();l++) {
+            def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+
+            for(m=0;m<subCategoryIds.size();m++) {
+                def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                def productDetailsList=ProductDetails.findAllByProductSubCategoryAndDiscountPercentage(subCategoryInstance,discount)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+            m=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfCategoryAndSubCategoryDiscountWithNoRange(String[] subCategoryIds,String[] categoryIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l
+        for(j=0;j<subCategoryIds.size();j++){
+            def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                def productDetailsList=ProductDetails.findAllByProductSubCategoryAndProductCategoryAndDiscountPercentage(subCategoryInstance,categoryInstance,discount)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+            l=0;
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+        def totalArray=ad(productList)
+        return totalArray
+
+    }
+    def productIfBrandDiscountWithNoRange(String[] brandIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+
+            def productDetailsList=ProductDetails.findAllByProductBrandAndDiscountPercentage(brandInstance,discount)
+            if(productDetailsList){
+                for(ProductDetails productDetails:productDetailsList){
+                    if(!productDetailsListTotal.contains(productDetails)){
+                        productDetailsListTotal.add(productDetails)
+                    }
+                }
+            }
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfCategoryDiscountWithNoRange(String[] categoryIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int l
+        for(l=0;l<categoryIds.size();l++) {
+            def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+            def productDetailsList=ProductDetails.findAllByProductCategoryAndDiscountPercentage(categoryInstance,discount)
+            if(productDetailsList){
+                for(ProductDetails productDetails:productDetailsList){
+                    if(!productDetailsListTotal.contains(productDetails)){
+                        productDetailsListTotal.add(productDetails)
+                    }
+                }
+            }
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfSpecificationDiscountWithNoRange(String[] specificationIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int m
+        for(m=0;m<specificationIds.size();m++) {
+            def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+            for(ProductSubCategory productSubCategory:subCategoryList){
+                def productDetailsList=ProductDetails.findAllByProductSubCategoryAndDiscountPercentage(productSubCategory,discount)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+
+    }
+    def productIfSubCategoryDiscountWithNoRange(String[] subCategoryIds,float discount)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j
+        for(j=0;j<subCategoryIds.size();j++){
+            def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[j] as long)
+            def productDetailsList=ProductDetails.findAllByProductSubCategoryAndDiscountPercentage(subCategoryInstance,discount)
+            if(productDetailsList){
+                for(ProductDetails productDetails:productDetailsList){
+                    if(!productDetailsListTotal.contains(productDetails)){
+                        productDetailsListTotal.add(productDetails)
+                    }
+                }
+            }
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+
+    def productIfAll(String[] brandIds,String[] categoryIds,String[] specificationIds,String[] subCategoryIds) {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
                int j,k,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(k=0;k<categoryIds.size();k++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
+                for(l=0;l<specificationIds.size();l++) {
+                    def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+                    for(m=0;m<subCategoryIds.size();m++) {
+                        def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                        def productDetailsList=ProductDetails.findAllByProductBrandAndProductCategoryAndProductSubCategory(brandInstance,categoryInstance,subCategoryInstance)
+                        if(productDetailsList){
+                            for(ProductDetails productDetails:productDetailsList){
+                                if(!productDetailsListTotal.contains(productDetails)){
+                                    productDetailsListTotal.add(productDetails)
+                                }
+                            }
+                        }
+
+                    }
+                    m=0
+                }
+                l=0;
+
+            }
+            k=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+        def totalArray=ad(productList)
+        return totalArray
+    }
+def productIfBrandAndSpecificationAndSubCategory(String[] brandIds,String[] specificationIds,String[] subCategoryIds)
+{List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+    List<Product> productList=new ArrayList<>()
+
+    int j,l,m
+    for(j=0;j<brandIds.size();j++){
+        def brandInstance=ProductBrand.findById(brandIds[j] as long)
+        for(l=0;l<specificationIds.size();l++) {
+            def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+
+            for(m=0;m<subCategoryIds.size();m++) {
+                def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategory(brandInstance,subCategoryInstance)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+            }
+            m=0
+        }
+        l=0;
+
+
+    }
+    if(productDetailsListTotal){
+        for(ProductDetails productDetails:productDetailsListTotal){
+            def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+            if(product){
+                productList.add(product)
+            }
+        }
+    }
+
+    def totalArray=ad(productList)
+    return totalArray
+    }
+    def productIfCategoryAndSpecificationAndSubCategory(String[] specificationIds,String[] categoryIds,String[] subCategoryIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<categoryIds.size();j++){
+            def categoryInstance=ProductCategory.findById(categoryIds[j] as long)
+            for(l=0;l<specificationIds.size();l++) {
+                def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+
+                for(m=0;m<subCategoryIds.size();m++) {
+                    def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                    def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCategory(categoryInstance,subCategoryInstance)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndCategoryAndSubCategory(String[] brandIds,String[] categoryIds,String[] subCategoryIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                for(m=0;m<subCategoryIds.size();m++) {
+                    def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
+                    def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndProductCategory(brandInstance,subCategoryInstance,categoryInstance)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSpecificationAndCategory(String[] brandIds, String[] categoryIds ,String[] specificationIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                for(m=0;m<specificationIds.size();m++) {
+                    def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+                    for(ProductSubCategory productSubCategory:subCategoryList){
+                        def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategoryAndProductCategory(brandInstance,productSubCategory,categoryInstance)
+                        if(productDetailsList){
+                            for(ProductDetails productDetails:productDetailsList){
+                                if(!productDetailsListTotal.contains(productDetails)){
+                                    productDetailsListTotal.add(productDetails)
+                                }
+                            }
+                        }
+                    }
+                }
+                m=0
+            }
+            l=0;
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndCategory(String[] brandIds,String[] categoryIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                def productDetailsList=ProductDetails.findAllByProductBrandAndProductCategory(brandInstance,categoryInstance)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+            }
+            l=0;
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSpecification(String[] brandIds,String[] specificationIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(m=0;m<specificationIds.size();m++) {
+                def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+                for(ProductSubCategory productSubCategory:subCategoryList){
+                    def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategory(brandInstance,productSubCategory)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+                }
+            }
+            m=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrandAndSubCategory(String[] brandIds,String[] subCategoryIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+
+            for(m=0;m<subCategoryIds.size();m++) {
+                def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
+                def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategory(brandInstance,subCategoryInstance)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+            m=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfSpecificationAndCategory(String[] categoryIds, String[] specificationIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,m
+        for(j=0;j<categoryIds.size();j++){
+            def categoryInstance=ProductCategory.findById(categoryIds[j] as long)
+            for(m=0;m<specificationIds.size();m++) {
+                def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+                for(ProductSubCategory productSubCategory:subCategoryList){
+                    def productDetailsList=ProductDetails.findAllByProductCategoryAndProductSubCategory(categoryInstance,productSubCategory)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(!productDetailsListTotal.contains(productDetails)){
+                                productDetailsListTotal.add(productDetails)
+                            }
+                        }
+                    }
+
+
+                }
+            }
+            m=0
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfSpecificationAndSubCategory(String[] subCategoryIds,String[] specificationIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int l,m
+        for(l=0;l<specificationIds.size();l++) {
+            def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+
+            for(m=0;m<subCategoryIds.size();m++) {
+                def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                def productDetailsList=ProductDetails.findAllByProductSubCategory(subCategoryInstance)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+            m=0
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfCategoryAndSubCategory(String[] subCategoryIds,String[] categoryIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j,l
+        for(j=0;j<subCategoryIds.size();j++){
+            def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[j] as long)
+            for(l=0;l<categoryIds.size();l++) {
+                def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+
+                def productDetailsList=ProductDetails.findAllByProductSubCategoryAndProductCategory(subCategoryInstance,categoryInstance)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+            }
+            l=0;
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfBrand(String[] brandIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+
+            def productDetailsList=ProductDetails.findAllByProductBrand(brandInstance)
+            if(productDetailsList){
+                for(ProductDetails productDetails:productDetailsList){
+                    if(!productDetailsListTotal.contains(productDetails)){
+                        productDetailsListTotal.add(productDetails)
+                    }
+                }
+            }
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfCategory(String[] categoryIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int l
+        for(l=0;l<categoryIds.size();l++) {
+            def categoryInstance=ProductCategory.findById(categoryIds[l] as long)
+            def productDetailsList=ProductDetails.findAllByProductCategory(categoryInstance)
+            if(productDetailsList){
+                for(ProductDetails productDetails:productDetailsList){
+                    if(!productDetailsListTotal.contains(productDetails)){
+                        productDetailsListTotal.add(productDetails)
+                    }
+                }
+            }
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+    def productIfSpecification(String[] specificationIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int m
+        for(m=0;m<specificationIds.size();m++) {
+            def subCategoryList=ProductSubCategory.findAllByProductSubCategorySpecify(ProductSubCategorySpecify.findById(specificationIds[m] as long))
+            for(ProductSubCategory productSubCategory:subCategoryList){
+                def productDetailsList=ProductDetails.findAllByProductSubCategory(productSubCategory)
+                if(productDetailsList){
+                    for(ProductDetails productDetails:productDetailsList){
+                        if(!productDetailsListTotal.contains(productDetails)){
+                            productDetailsListTotal.add(productDetails)
+                        }
+                    }
+                }
+
+
+            }
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+
+    }
+    def productIfSubCategory(String[] subCategoryIds)
+    {
+        List<ProductDetails> productDetailsListTotal=new ArrayList<>()
+        List<Product> productList=new ArrayList<>()
+        int j
+        for(j=0;j<subCategoryIds.size();j++){
+            def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[j] as long)
+            def productDetailsList=ProductDetails.findAllByProductSubCategory(subCategoryInstance)
+            if(productDetailsList){
+                for(ProductDetails productDetails:productDetailsList){
+                    if(!productDetailsListTotal.contains(productDetails)){
+                        productDetailsListTotal.add(productDetails)
+                    }
+                }
+            }
+
+
+        }
+        if(productDetailsListTotal){
+            for(ProductDetails productDetails:productDetailsListTotal){
+                def product=Product.findAllByDelFlagAndProductDetails(false,productDetails)[0]
+                if(product){
+                    productList.add(product)
+                }
+            }
+        }
+
+        def totalArray=ad(productList)
+        return totalArray
+    }
+
+    def changeDiscountIfAll(ArrayList brandIds,ArrayList categoryIds,ArrayList specificationIds,ArrayList subCategoryIds,float discountPercentage) {
+        int j,k,l,m
         for(j=0;j<brandIds.size();j++){
             def brandInstance=ProductBrand.findById(brandIds[j] as long)
             for(k=0;k<categoryIds.size();k++) {
@@ -759,39 +2413,39 @@ return prices}
         }
 
     }
-def changeDiscountIfBrandAndSpecificationAndSubCategory(ArrayList brandIds,ArrayList specificationIds,ArrayList subCategoryIds,float discountPercentage)
-{
-    int j,l,m
-    for(j=0;j<brandIds.size();j++){
-        def brandInstance=ProductBrand.findById(brandIds[j] as long)
-        for(l=0;l<specificationIds.size();l++) {
-            def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
+    def changeDiscountIfBrandAndSpecificationAndSubCategory(ArrayList brandIds,ArrayList specificationIds,ArrayList subCategoryIds,float discountPercentage)
+    {
+        int j,l,m
+        for(j=0;j<brandIds.size();j++){
+            def brandInstance=ProductBrand.findById(brandIds[j] as long)
+            for(l=0;l<specificationIds.size();l++) {
+                def specificationInstance=ProductSubCategorySpecify.findById(specificationIds[l] as long)
 
-            for(m=0;m<subCategoryIds.size();m++) {
-                def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
-                def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategory(brandInstance,subCategoryInstance)
-                if(productDetailsList){
-                    for(ProductDetails productDetails:productDetailsList){
-                        if(discountPercentage==0f){
-                            productDetails.isSale=false
-                            productDetails.discountPercentage=0
-                            productDetails.save(flush: true)
-                        }
-                        else{
-                            productDetails.isSale=true
-                            productDetails.discountPercentage=discountPercentage
-                            productDetails.save(flush: true)
-                        }
+                for(m=0;m<subCategoryIds.size();m++) {
+                    def subCategoryInstance=ProductSubCategory.findByIdAndProductSubCategorySpecify(subCategoryIds[m] as long,specificationInstance)
+                    def productDetailsList=ProductDetails.findAllByProductBrandAndProductSubCategory(brandInstance,subCategoryInstance)
+                    if(productDetailsList){
+                        for(ProductDetails productDetails:productDetailsList){
+                            if(discountPercentage==0f){
+                                productDetails.isSale=false
+                                productDetails.discountPercentage=0
+                                productDetails.save(flush: true)
+                            }
+                            else{
+                                productDetails.isSale=true
+                                productDetails.discountPercentage=discountPercentage
+                                productDetails.save(flush: true)
+                            }
 
+                        }
                     }
                 }
+                m=0
             }
-            m=0
+            l=0;
+
+
         }
-        l=0;
-
-
-    }
 
     }
     def changeDiscountIfCategoryAndSpecificationAndSubCategory(ArrayList specificationIds,ArrayList categoryIds,ArrayList subCategoryIds,float discountPercentage)
@@ -1173,354 +2827,14 @@ def changeDiscountIfBrandAndSpecificationAndSubCategory(ArrayList brandIds,Array
         }
 
     }
-    def brandIdsAndSubCategoryIdsAndDiscountListAndCategoryIds(ArrayList brandIds,ArrayList subCategoryIds,ArrayList discountList, ArrayList categoryIds,float minPrice,float maxPrice){
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        int j,k,l,m
-        for(j=0;j<brandIds.size();j++){
-            def brandInstance=ProductBrand.findById(brandIds[j] as long)
-            for(k=0;k<categoryIds.size();k++) {
-
-                def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
-                for(l=0;l<discountList.size();l++) {
-                    for(m=0;m<subCategoryIds.size();m++) {
-                        def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
-                        def productDetailsList1=ProductDetails.findAllByProductBrandAndProductCategoryAndProductSubCategoryAndDiscountPercentageAndPriceGreaterThanEqualsAndPriceLessThanEquals(brandInstance,categoryInstance,subCategoryInstance,discountList[l] as float,minPrice,maxPrice)
-                        if(productDetailsList1){
-                            for(ProductDetails productDetails:productDetailsList1){
-                                if(!productDetailsList.contains(productDetails)){
-                                    productDetailsList.add(productDetails)
-                                }
-                            }
-                        }
-                    }
-                    m=0
-                }
-                l=0;
-
-            }
-            k=0
+    def checkFloat(Map params){
+        def isFloat=false
+        def string=params.discount
+        if (string.matches("[-+]?[0-9]*\\.?[0-9]+")) { // You can use the `\\d` instead of `0-9` too!
+            isFloat=true
         }
-return productDetailsList
+        return isFloat
     }
-    def brandIdsAndSubCategoryIdsAndCategoryIds(ArrayList brandIds,ArrayList subCategoryIds,ArrayList categoryIds,float minPrice,float maxPrice){
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        int j,k,m
-        for(j=0;j<brandIds.size();j++){
-            def brandInstance=ProductBrand.findById(brandIds[j] as long)
-            for(k=0;k<categoryIds.size();k++) {
-
-                def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
-                for(m=0;m<subCategoryIds.size();m++) {
-                    def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
-                    def productDetailsList1=ProductDetails.findAllByProductBrandAndProductCategoryAndProductSubCategoryAndPriceGreaterThanEqualsAndPriceLessThanEquals(brandInstance,categoryInstance,subCategoryInstance,minPrice,maxPrice)
-                    if(productDetailsList1){
-                        for(ProductDetails productDetails:productDetailsList1){
-                            if(!productDetailsList.contains(productDetails)){
-                                productDetailsList.add(productDetails)
-                            }
-                        }
-                    }
-                }
-                m=0
-            }
-
-            k=0
-        }
-return productDetailsList
-    }
-    def brandIdsAndDiscountListAndCategoryIds(ArrayList brandIds,ArrayList discountList, ArrayList categoryIds,float minPrice,float maxPrice){
-       int j,k,l
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(j=0;j<brandIds.size();j++){
-            def brandInstance=ProductBrand.findById(brandIds[j] as long)
-            for(k=0;k<categoryIds.size();k++) {
-                def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
-                for(l=0;l<discountList.size();l++) {
-                    def productDetailsList1=ProductDetails.findAllByProductBrandAndProductCategoryAndDiscountPercentageAndPriceGreaterThanEqualsAndPriceLessThanEquals(brandInstance,categoryInstance,discountList[l] as float,minPrice,maxPrice)
-                    if(productDetailsList1){
-                        for(ProductDetails productDetails:productDetailsList1){
-                            if(!productDetailsList.contains(productDetails)){
-                                productDetailsList.add(productDetails)
-                            }
-                        }
-                    }
-
-                }
-                l=0;
-
-            }
-            k=0
-        }
-return productDetailsList
-    }
-    def brandIdsAndSubCategoryIdsAndDiscountList(ArrayList brandIds,ArrayList subCategoryIds,ArrayList discountList,float minPrice,float maxPrice){
-        int j,l,m
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(j=0;j<brandIds.size();j++){
-            def brandInstance=ProductBrand.findById(brandIds[j] as long)
-
-            for(l=0;l<discountList.size();l++) {
-                for(m=0;m<subCategoryIds.size();m++) {
-                    print subCategoryIds
-                    def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
-                    def productDetailsList1=ProductDetails.findAllByProductBrandAndProductSubCategoryAndDiscountPercentageAndPriceGreaterThanEqualsAndPriceLessThanEquals(brandInstance,subCategoryInstance,discountList[l] as float,minPrice,maxPrice)
-                    if(productDetailsList1){
-                        for(ProductDetails productDetails:productDetailsList1){
-                            if(!productDetailsList.contains(productDetails)){
-                                productDetailsList.add(productDetails)
-                            }
-                        }
-                    }
-                }
-                m=0
-            }
-            l=0;
-
-
-        }
-        return productDetailsList
-
-    }
-    def subCategoryIdsAndDiscountListAndCategoryIds(ArrayList subCategoryIds,ArrayList discountList, ArrayList categoryIds,float minPrice,float maxPrice){
-       int k,l,m
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(k=0;k<categoryIds.size();k++) {
-
-            def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
-            for(l=0;l<discountList.size();l++) {
-                for(m=0;m<subCategoryIds.size();m++) {
-                    def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
-                    def productDetailsList1=ProductDetails.findAllByProductCategoryAndProductSubCategoryAndDiscountPercentageAndPriceGreaterThanEqualsAndPriceLessThanEquals(categoryInstance,subCategoryInstance,discountList[l] as float,minPrice,maxPrice)
-                    if(productDetailsList1){
-                        for(ProductDetails productDetails:productDetailsList1){
-                            if(!productDetailsList.contains(productDetails)){
-                                productDetailsList.add(productDetails)
-                            }
-                        }
-                    }
-
-                }
-                m=0
-            }
-            l=0;
-
-        }
-        return productDetailsList
-
-    }
-    def brandIdsAndCategoryIds(ArrayList brandIds, ArrayList categoryIds,float minPrice,float maxPrice){
-       int j,k
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(j=0;j<brandIds.size();j++){
-            def brandInstance=ProductBrand.findById(brandIds[j] as long)
-            for(k=0;k<categoryIds.size();k++) {
-                def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
-                def productDetailsList1=ProductDetails.findAllByProductBrandAndProductCategoryAndPriceGreaterThanEqualsAndPriceLessThanEquals(brandInstance,categoryInstance,minPrice,maxPrice)
-                if(productDetailsList1){
-                    for(ProductDetails productDetails:productDetailsList1){
-                        if(!productDetailsList.contains(productDetails)){
-                            productDetailsList.add(productDetails)
-                        }
-                    }
-                }
-            }
-            k=0
-        }
-        return productDetailsList
-
-    }
-    def brandIdsAndSubCategoryIds(ArrayList brandIds,ArrayList subCategoryIds,float minPrice,float maxPrice){
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        int j,m
-        for(j=0;j<brandIds.size();j++){
-            def brandInstance=ProductBrand.findById(brandIds[j] as long)
-            for(m=0;m<subCategoryIds.size();m++) {
-                def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
-                def productDetailsList1=ProductDetails.findAllByProductBrandAndProductSubCategoryAndPriceGreaterThanEqualsAndPriceLessThanEquals(brandInstance,subCategoryInstance,minPrice,maxPrice)
-                if(productDetailsList1){
-                    for(ProductDetails productDetails:productDetailsList1){
-                        if(!productDetailsList.contains(productDetails)){
-                            productDetailsList.add(productDetails)
-                        }
-                    }
-                }
-
-            }
-            m=0
-
-
-        }
-        return productDetailsList
-
-    }
-    def brandIdsAndDiscountList(ArrayList brandIds,ArrayList discountList, float minPrice,float maxPrice){
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-   int j,l
-        for(j=0;j<brandIds.size();j++){
-            def brandInstance=ProductBrand.findById(brandIds[j] as long)
-            for(l=0;l<discountList.size();l++) {
-                def productDetailsList1=ProductDetails.findAllByProductBrandAndDiscountPercentageAndPriceGreaterThanEqualsAndPriceLessThanEquals(brandInstance,discountList[l] as float,minPrice,maxPrice)
-                if(productDetailsList1){
-                    for(ProductDetails productDetails:productDetailsList1){
-                        if(!productDetailsList.contains(productDetails)){
-                            productDetailsList.add(productDetails)
-                        }
-                    }
-                }
-
-            }
-            l=0
-
-        }
-
-    }
-    def subCategoryIdsAndDiscountList(ArrayList subCategoryIds,ArrayList discountList,float minPrice,float maxPrice){
-        int l,m
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(l=0;l<discountList.size();l++) {
-            for(m=0;m<subCategoryIds.size();m++) {
-                def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
-                def productDetailsList1=ProductDetails.findAllByProductSubCategoryAndDiscountPercentageAndPriceGreaterThanEqualsAndPriceLessThanEquals(subCategoryInstance,discountList[l] as float,minPrice,maxPrice)
-                if(productDetailsList1){
-                    for(ProductDetails productDetails:productDetailsList1){
-                        if(!productDetailsList.contains(productDetails)){
-                            productDetailsList.add(productDetails)
-                        }
-                    }
-                }
-
-            }
-            m=0
-        }
-        return productDetailsList
-
-    }
-    def subCategoryIdsAndCategoryIds(ArrayList subCategoryIds, ArrayList categoryIds,float minPrice,float maxPrice){
-     int k,m
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(k=0;k<categoryIds.size();k++) {
-            def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
-            for(m=0;m<subCategoryIds.size();m++) {
-                def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
-                def productDetailsList1=ProductDetails.findAllByProductCategoryAndProductSubCategoryAndPriceGreaterThanEqualsAndPriceLessThanEquals(categoryInstance,subCategoryInstance,minPrice,maxPrice)
-                if(productDetailsList1){
-                    for(ProductDetails productDetails:productDetailsList1){
-                        if(!productDetailsList.contains(productDetails)){
-                            productDetailsList.add(productDetails)
-                        }
-                    }
-                }
-
-            }
-            m=0;
-
-        }
-        return productDetailsList
-
-    }
-    def discountListAndCategoryIds(ArrayList discountList, ArrayList categoryIds,float minPrice,float maxPrice){
-    int k,l
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(k=0;k<categoryIds.size();k++) {
-            def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
-            for(l=0;l<discountList.size();l++) {
-                def productDetailsList1=ProductDetails.findAllByProductCategoryAndDiscountPercentageAndPriceGreaterThanEqualsAndPriceLessThanEquals(categoryInstance,discountList[l] as float,minPrice,maxPrice)
-                if(productDetailsList1){
-                    for(ProductDetails productDetails:productDetailsList1){
-                        if(!productDetailsList.contains(productDetails)){
-                            productDetailsList.add(productDetails)
-                        }
-                    }
-                }
-
-            }
-            l=0;
-
-        }
-        return productDetailsList
-
-    }
-    def subCategoryIds(ArrayList subCategoryIds,float minPrice,float maxPrice){
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(int m=0;m<subCategoryIds.size();m++) {
-            def subCategoryInstance=ProductSubCategory.findById(subCategoryIds[m] as long)
-            def productDetailsList1=ProductDetails.findAllByProductSubCategoryAndPriceGreaterThanEqualsAndPriceLessThanEquals(subCategoryInstance,minPrice,maxPrice)
-            if(productDetailsList1){
-                for(ProductDetails productDetails:productDetailsList1){
-                    if(!productDetailsList.contains(productDetails)){
-                        productDetailsList.add(productDetails)
-                    }
-                }
-            }
-
-        }
-        return productDetailsList
-
-    }
-    def discountList(ArrayList discountList,float minPrice,float maxPrice){
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(int l=0;l<discountList.size();l++) {
-            def productDetailsList1=ProductDetails.findAllByDiscountPercentageAndPriceGreaterThanEqualsAndPriceLessThanEquals(discountList[l] as float,minPrice,maxPrice)
-            if(productDetailsList1){
-                for(ProductDetails productDetails:productDetailsList1){
-                    if(!productDetailsList.contains(productDetails)){
-                        productDetailsList.add(productDetails)
-                    }
-                }
-            }
-
-        }
-        return productDetailsList
-
-    }
-    def brandIds(ArrayList brandIds,float minPrice,float maxPrice){
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        for(int j=0;j<brandIds.size();j++){
-            def brandInstance=ProductBrand.findById(brandIds[j] as long)
-            def productDetailsList1=ProductDetails.findAllByProductBrandAndPriceGreaterThanEqualsAndPriceLessThanEquals(brandInstance,minPrice,maxPrice)
-            if(productDetailsList1){
-                for(ProductDetails productDetails:productDetailsList1){
-                    if(!productDetailsList.contains(productDetails)){
-                        productDetailsList.add(productDetails)
-                    }
-                }
-            }
-
-        }
-        return productDetailsList
-
-    }
-    def categoryIds(ArrayList categoryIds,float minPrice,float maxPrice){
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        int k;
-        for(k=0;k<categoryIds.size();k++) {
-            def categoryInstance=ProductCategory.findById(categoryIds[k] as long)
-            def productDetailsList1=ProductDetails.findAllByProductCategoryAndPriceGreaterThanEqualsAndPriceLessThanEquals(categoryInstance,minPrice,maxPrice)
-            if(productDetailsList1){
-                for(ProductDetails productDetails:productDetailsList1){
-                    if(!productDetailsList.contains(productDetails)){
-                        productDetailsList.add(productDetails)
-                    }
-                }
-            }
-        }
-        return productDetailsList
-
-    }
-    def maxPriceAndMinPrice(float minPrice,float maxPrice){
-        List<ProductDetails> productDetailsList=new ArrayList<>()
-        def productDetailsList1=ProductDetails.findAllByPriceGreaterThanEqualsAndPriceLessThanEquals(minPrice,maxPrice)
-        if(productDetailsList1){
-            for(ProductDetails productDetails:productDetailsList1){
-                if(!productDetailsList.contains(productDetails)){
-                    productDetailsList.add(productDetails)
-                }
-            }
-        }
-        return productDetailsList
-
-    }
-
 
 }
 
