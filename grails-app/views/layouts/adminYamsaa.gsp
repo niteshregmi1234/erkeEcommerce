@@ -122,7 +122,6 @@
                     <li><g:link action="list" controller="product">Product</g:link></li>
                     <li><g:link action="list" controller="coverImage">Cover Image</g:link></li>
                     <li><g:link action="list" controller="aids">Advertisement</g:link></li>
-                    <li><g:link action="show" controller="specialBrand">Special Brand</g:link></li>
                     <li><g:link action="show" controller="backgroundImage" >Home Background Image</g:link></li>
                     <li><g:link action="discountShortcut" controller="product" >Discount Shortcut</g:link></li>
                     <li><g:link action="latestShortcut" controller="product" >Change Latest Product?</g:link></li>
