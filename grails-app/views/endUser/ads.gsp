@@ -47,7 +47,8 @@
             <ul class="breadcrumb">
                 <li><g:link action="userHome" controller="endUser">Home</g:link>
                 </li>
-                <li>Store</li>
+                <li>Ads</li>
+                <li>${adName}</li>
             </ul>
         </div>
         <div id="search-results">

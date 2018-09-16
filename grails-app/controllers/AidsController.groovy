@@ -85,13 +85,8 @@ def create(){
                     }
                 }
                 List<ProductSubCategorySpecify> productSubCategorySpecifyArrayList = new ArrayList<>()
-                def specifyListSubCategory = ProductSubCategorySpecify.list()
-                for (ProductSubCategorySpecify productSubCategorySpecify : specifyListSubCategory) {
-                    def Product = Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategory(ProductSubCategory.findByProductSubCategorySpecify(productSubCategorySpecify)), false)
-                    if (Product) {
-                        productSubCategorySpecifyArrayList.add(productSubCategorySpecify)
-                    }
-                }
+                 productSubCategorySpecifyArrayList = ProductSubCategorySpecify.list()
+
                 List<ProductSubCategory> productSubCategoryArrayList = new ArrayList<>()
                 def subCategoryList = ProductSubCategory.findAllByStatusShow(true)
                 for (ProductSubCategory productSubCategory : subCategoryList) {
@@ -426,13 +421,8 @@ def edit(){
                         }
                     }
                     List<ProductSubCategorySpecify> productSubCategorySpecifyArrayList = new ArrayList<>()
-                    def specifyListSubCategory = ProductSubCategorySpecify.list()
-                    for (ProductSubCategorySpecify productSubCategorySpecify : specifyListSubCategory) {
-                        def Product = Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductSubCategory(ProductSubCategory.findByProductSubCategorySpecify(productSubCategorySpecify)), false)
-                        if (Product) {
-                            productSubCategorySpecifyArrayList.add(productSubCategorySpecify)
-                        }
-                    }
+                    productSubCategorySpecifyArrayList = ProductSubCategorySpecify.list()
+
                     List<ProductSubCategory> productSubCategoryArrayList = new ArrayList<>()
                     def subCategoryList = ProductSubCategory.findAllByStatusShow(true)
                     for (ProductSubCategory productSubCategory : subCategoryList) {

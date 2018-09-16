@@ -280,7 +280,10 @@ if (aidsInstance.discountType=="noRange"){
 }
             }
             if (totalArray[0]) {
-                render(view: "ad", model: [totalArray: totalArray])
+                render(view: "ads", model: [totalArray: totalArray, adName:aidsInstance.adDescribeRaw])
+            }
+            else{
+
             }
         }
         else if(aidsInstance.aidType=="product"){
@@ -295,7 +298,7 @@ productList.add(productInstance)
     def totalArray = productService.ad(productList)
     if (totalArray[0]) {
 
-        render(view: "ad", model: [totalArray: totalArray])
+        render(view: "ads", model: [totalArray: totalArray, adName:aidsInstance.adDescribeRaw])
     }
 }
     else{
@@ -326,7 +329,7 @@ if(aidsInstance.discountType=="noRange"){
 
 }
     def totalArray = productService.ad(productList)
-    render(view: "ad", model: [totalArray: totalArray])
+    render(view: "ads", model: [totalArray: totalArray, adName:aidsInstance.adDescribeRaw])
 }
         }}
         else{
