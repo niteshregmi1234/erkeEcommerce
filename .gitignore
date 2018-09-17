@@ -1,0 +1,4 @@
+.idea
+.slcache
+grails-app/conf/Config.groovy
+grails-app/conf/DataSource.groovy

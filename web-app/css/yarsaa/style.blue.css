@@ -153,15 +153,15 @@ h1 {
 .navbar #basket-overview {
   padding: 0;
 }
-#hot h2 {
+.boxBar h2 {
   text-transform: uppercase;
   font-size: 36px;
-  color: #4993e4;
-  font-weight: 100;
-  text-align: center;
+  color: #ac623f;
+  font-weight: 400;
+  /*text-align: center;*/
 }
 #hot .product-slider {
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
 }
 #hot .product-slider:before,
 #hot .product-slider:after {
@@ -223,7 +223,7 @@ h1 {
   z-index: 2;
 }
 #main-slider {
-  margin-bottom: 30px;
+  /*margin-bottom: 30px;*/
   border: solid 1px #fff;
   opacity: 0;
   filter: alpha(opacity=0);
@@ -976,7 +976,7 @@ h1 {
 /*!
  * Yamm!3
  * Yet another megamenu for Bootstrap 3
- * 
+ *
  * http://geedmo.github.com/yamm3
  */
 .yamm .nav,
@@ -1095,8 +1095,8 @@ h1 {
 .navbar-collapse {
   max-height: 340px;
   overflow-x: visible;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 .navbar-collapse.in {
   overflow-y: auto;
@@ -1283,8 +1283,8 @@ h1 {
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #555555;
-  background-color: #4993e4;
+  color: #eee;
+  background-color: #09175E
 }
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
@@ -1308,8 +1308,8 @@ h1 {
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  background-color: #4993e4;
-  color: #555555;
+  background-color: #09175e;
+  color: #eee;
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
@@ -1348,7 +1348,7 @@ body {
   background-color: #f0f0f0;
 }
 a {
-  color: #4993e4;
+  color: #ac623f;
   text-decoration: none;
 }
 a:hover,
@@ -1400,9 +1400,9 @@ hr {
   border-radius: 3px;
 }
 .btn-primary {
-  color: #ffffff;
-  background-color: #4993e4;
-  border-color: #3386e1;
+  color: #eee;
+  background-color: #09175E;
+  border-color: #09175E;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -1593,8 +1593,9 @@ h2,
 .h2,
 h3,
 .h3 {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  /*margin-top: 20px;*/
+  /*margin-bottom: 20px;*/
+  padding: 0px 25px;
 }
 p,
 ul,
