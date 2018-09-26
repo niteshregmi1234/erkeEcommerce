@@ -60,7 +60,7 @@
             <td>${list.productDetails.productNameWithBrand}</td>
             <td id="pnText${i+1}" ondblclick="myFunction(${i+1});">${list.priorityNumber}</td>
             <td id="pnEdit${i+1}" style="display: none;"><g:textField name="priorityNumber${i+1}" id="priorityNumber${i+1}" class="form-control" value="${list.priorityNumber}" onkeypress="return isNumber(event)" /></td>
-            <td><div class="btn btn-primary navbar-btn" id="buttons${i+1}" onclick="updatePriorityNumber(${list.id},${i+1});" disabled>Ok</div></td>
+            <td><div class="btn btn-primary btn-sm" id="buttons${i+1}" onclick="updatePriorityNumber(${list.id},${i+1});" disabled>Ok</div></td>
             <td>${list.productDetails.productCategory.categoryName}</td>
             <td>${list.productDetails.productSubCategory.subCategoryName}</td>
             <td>${list.productColor.colorName}</td>
