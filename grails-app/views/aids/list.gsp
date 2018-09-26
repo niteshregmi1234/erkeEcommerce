@@ -14,7 +14,7 @@
 
 <body>
 <nav class="navbar">
-    <g:if test="${Aids.list().size()<=9}">
+    <g:if test="${Aids.list().size()<=12}">
     <g:link action="create" controller="aids" class="btn btn-primary navbar-btn">New</g:link>
     </g:if>
         </nav>
