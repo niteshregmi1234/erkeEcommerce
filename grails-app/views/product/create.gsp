@@ -60,6 +60,15 @@
     </div>
     <div class="col-lg-6">
         <div class="form-group">
+            <label class="control-label col-sm-4">Priority Number:</label>
+            <div class="col-sm-6">
+                <g:textField name="priorityNumber" id="priorityNumber" class="form-control" onkeypress="return isNumber(event)"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
             <label class="control-label col-sm-4">Special Image:</label>
             <div class="col-sm-6">
                 <g:field type="file" name="specialImageName" class="form-control" id="specialImageName"/>
@@ -137,6 +146,18 @@
     var thumbnailImageName=document.getElementsByClassName("thumbnailImageName");
     var mediumImageName=document.getElementsByClassName("mediumImageName");
     var zoomImageName=document.getElementsByClassName("zoomImageName");
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode <= 48 || charCode > 57)) {
+            bootbox.alert({
+                message: "not allowed must be number",
+                size: 'small'
+            });
+            return false;
+        }
+        return true;
+    }
 
     $(function() {
         // Remove button click
@@ -230,6 +251,7 @@ for(var i=0;i<addClass.length;i++){
 
     function Validate(oForm) {
         var responseValue;
+        var priorityNumber = document.getElementById("priorityNumber").value;
         var productColor = document.getElementById("productColor").value;
         var productDetails = document.getElementById("productDetails").value;
         var specialImageName = document.getElementById("specialImageName").value;
@@ -272,6 +294,13 @@ for(var i=0;i<addClass.length;i++){
                 size: 'small'
             });
             document.getElementById("productColor").focus();
+            return false;
+        }
+        if(priorityNumber==''){
+            bootbox.alert({
+                message: "priority number  must not be blank",
+                size: 'small'
+            });
             return false;
         }
         if (specialImageName.length > 0) {
@@ -398,6 +427,7 @@ for(var i=0;i<addClass.length;i++){
             });
             return false;
         }
+
 
 
 for(i=0;i<thumbnailImageName.length;i++) {

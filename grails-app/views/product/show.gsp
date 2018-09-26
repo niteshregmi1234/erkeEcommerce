@@ -50,7 +50,14 @@
             </div>
         </div>
     </div>
-
+    <div class="col-lg-6">
+        <div class="form-group ">
+            <label class="control-label col-sm-4">Priority Number:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;">${productInstance.priorityNumber}</div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-6">
         <div class="form-group ">
             <label class="control-label col-sm-4">Special Image:</label>
