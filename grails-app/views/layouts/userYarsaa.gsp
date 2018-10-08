@@ -644,7 +644,7 @@
         <div id="footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-3 col-sm-6">
                         <h4>Pages</h4>
 
                         <ul>
@@ -673,7 +673,7 @@
                     </div>
                     <!-- /.col-md-3 -->
 
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-3 col-sm-6">
 
                         <h4>Top categories</h4>
                         <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
@@ -700,7 +700,34 @@
                     </div>
                     <!-- /.col-md-3 -->
 
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-3 col-sm-6">
+
+                        <h4>Related Products</h4>
+                        <g:each in="${ProductCategory.findAllByStatusShow(true)}" var="categoryList">
+                            <g:if test="${Product.findByProductDetailsAndDelFlag(ProductDetails.findByProductCategory(categoryList),false)}">
+
+                                <h5>${categoryList.categoryName}</h5>
+
+                                <ul>
+                                    <g:each in="${ProductSubCategory.findAllByIsFooterAndStatusShow(true,true)}" var="subCategoryList">
+                                        <g:if test="${Product.findAllByProductDetailsAndDelFlag(ProductDetails.findByProductCategoryAndProductSubCategory(categoryList,subCategoryList),false)}">
+
+                                            <li><g:link action="subCategoryList" controller="endUser" params="[category:categoryList.urlName,subCategorySpecify: subCategoryList.productSubCategorySpecify.urlName,subCategory: subCategoryList.urlName]">${subCategoryList.subCategoryName}</g:link>
+                                            </li>
+                                        </g:if>
+                                    </g:each>
+
+                                </ul>
+                            </g:if>
+                        </g:each>
+
+
+                        <hr class="hidden-md hidden-lg">
+
+                    </div>
+                    <!-- /.col-md-3 -->
+
+                    <div class="col-md-3 col-sm-6">
 
                         <h4>Where to find us</h4>
 
@@ -781,6 +808,13 @@
 
                 </div>
                 <div class="col-md-6">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-facebook"></i></a>
+                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-twitter"></i></a>
+                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-instagram"></i></a>
+                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-linkedin"></i></a>
+                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-youtube"></i></a>
+                    </div>
                     <p class="pull-right">ALL RIGHTS RESERVED BY ONLINE YARSAA
                     <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
                     </p>

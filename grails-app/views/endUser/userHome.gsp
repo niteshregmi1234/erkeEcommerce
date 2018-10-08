@@ -318,7 +318,30 @@
         <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
     </g:else>
 
-
+    <div class="container info">
+        <h4>Yarsaa - “The Quality and Genuineness is still alive”</h4>
+        <p>
+            The concept of Online shopping is ever growing in Nepal in past couple of years. We clearly can see the
+            customers nowadays shifting towards Online shopping as it brings them comfort. The increment of customers
+            towards online has now given platform for many innovator and designers come up with unique ideas and convert
+            them into unique services. Similarly, this is how we evolved. “Yarsaa” is the only place where you will find
+            genuine, quality and original brand. As our primary product is “Shoes”, our website won’t let you down.
+            We have shoes available in various varieties and forms. From teenagers to adult to aged, categories from
+            casual to party wears to formal wears and many more, you will find anything you are looking for. Our secondary
+            products include Clothing, Apparels, Electronics, and Accessories etc. Our theme clearly symbolizes what our
+            motive is. “We believe in quality”, “We believe in genuineness”, we only deal on original brands because we
+            believe customers need to understand and realize what does quality means.
+        </p>
+        <h4>What makes Yarsaa unique?</h4>
+        <p>
+            We want customers to know the importance of representing themselves through the view of brand wears.  “Yarsaa”
+            is now one very e-store striving to grow customers and sellers base with every passing day. “Yarsaa” provides
+            a unique digital market platform where sellers and buyers can interact and a one stop shop for buying and
+            selling as we are associated with various brands in Nepal. This is what makes Yarsaa one of the unique e-store
+            from other online shopping sites in Nepal and provides the best online shopping experience to its customers.
+            Because “we believe in quality”, “We believe in genuineness”.
+        </p>
+    </div>
 
     <br>
     <g:each in="${totalArray[4]}" var="listProducts">
