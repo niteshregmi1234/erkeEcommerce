@@ -60,6 +60,14 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">Priority Number:</label>
+            <div class="col-sm-6">
+                <g:textField name="priorityNumber" id="priorityNumber" class="form-control" value="${productInstance?.priorityNumber}" onkeypress="return isNumber(event)"/>
+            </div>
+        </div>
+    </div>
 
 <div class="col-lg-6">
     <div class="form-group">
@@ -84,6 +92,18 @@
 
 </g:form>
 <script>
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode <= 48 || charCode > 57)) {
+            bootbox.alert({
+                message: "not allowed must be number",
+                size: 'small'
+            });
+            return false;
+        }
+        return true;
+    }
     function preventMultipleSubmissions() {
         $('#submit_Id').prop('disabled', true);
     }
@@ -93,9 +113,9 @@
 
     function ValidateUpdate(oForm) {
         var responseValue;
-        var productColor = document.getElementById("productColor").value;
+        var priorityNumber = document.getElementById("priorityNumber").value;
         var productDetails = document.getElementById("productDetails").value;
-
+        var productColor = document.getElementById("productColor").value;
         var specialImageName = document.getElementById("specialImageName").value;
 
         if(specialImageName.length>0) {
@@ -172,7 +192,13 @@
             document.getElementById("productDetails").focus();
             return false;
         }
-
+        else if(priorityNumber==''){
+            bootbox.alert({
+                message: "priority number  must not be blank",
+                size: 'small'
+            });
+            return false;
+        }
 
 
 

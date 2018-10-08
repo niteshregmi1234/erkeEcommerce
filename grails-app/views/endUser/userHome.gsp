@@ -34,7 +34,16 @@
     %{--</div>--}%
     %{--<div class="container">--}%
     %{--<div class="col-md-12">--}%
-    <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+    <g:if test="${Aids.list()[9]}">
+
+        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[9].adDescribe]">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[9].imageName])}" class="img-responsive ad-image lazy">
+        </g:link>
+    </g:if>
+    <g:else>
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+    </g:else>
+
     <div id="wrapperTopBrand">
         <div class="box topBrandDiv">
 
@@ -71,7 +80,15 @@
             </div>
         </g:if>
     </div>
-    <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+    <g:if test="${Aids.list()[10]}">
+
+        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[10].adDescribe]">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[10].imageName])}" class="img-responsive ad-image lazy">
+        </g:link>
+    </g:if>
+    <g:else>
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+    </g:else>
     <g:if test="${totalArray[2]}">
         <div id="wrapperHotProduct">
             <div class="boxBar">
@@ -137,9 +154,18 @@
 
 
 
-        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+
 
     </g:if>
+    <g:if test="${Aids.list()[11]}">
+
+        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[11].adDescribe]">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[11].imageName])}" class="img-responsive ad-image lazy">
+        </g:link>
+    </g:if>
+    <g:else>
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+    </g:else>
     <g:if test="${totalArray[3]}">
         <div class="wrapperSalesProduct">
 
@@ -282,8 +308,16 @@
             </div>
         </div>
     </div>
+    <g:if test="${Aids.list()[12]}">
 
-    <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[12].adDescribe]">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[12].imageName])}" class="img-responsive ad-image lazy">
+        </g:link>
+    </g:if>
+    <g:else>
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+    </g:else>
+
 
 
     <br>

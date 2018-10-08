@@ -67,7 +67,7 @@ def create(){
         if(session.adminUser) {
 
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
-             if(Aids.list().size()<=9){
+             if(Aids.list().size()<=12){
                 List<ProductBrand> productBrandList = new ArrayList<>()
                 def brandList = ProductBrand.findAllByStatusShow(true)
                 for (ProductBrand productBrand : brandList) {

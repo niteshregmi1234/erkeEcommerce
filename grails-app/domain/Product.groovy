@@ -8,11 +8,13 @@ class Product {
     String specialImageName
     boolean delFlag
     int soldNumbers
+    long priorityNumber
     static constraints = {
         delFlag nullable: true
+        priorityNumber nullable:true
     }
     static mapping = {
-        sort id: "desc"
+        sort priorityNumber: "asc" // or "desc"
     }
 
 }
