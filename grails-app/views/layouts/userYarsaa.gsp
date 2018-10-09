@@ -809,11 +809,11 @@
                 </div>
                 <div class="col-md-6">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-facebook"></i></a>
-                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-twitter"></i></a>
-                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-instagram"></i></a>
-                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-linkedin"></i></a>
-                        <a href="#" type="button" class="btn btn-primary"><i class="fa fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/OnlineYarsa/" type="button" class="btn btn-primary"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.pinterest.com/yarsaa/" type="button" class="btn btn-primary"><i class="fa fa-pinterest"></i></a>
+                        <a href="https://www.instagram.com/yarsaa/" type="button" class="btn btn-primary"><i class="fa fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/yarsaa-online-1017b6171/" type="button" class="btn btn-primary"><i class="fa fa-linkedin"></i></a>
+                        <a href="https://www.youtube.com/channel/UCJv3WpkW_BnYha1aKmSEdUQ" type="button" class="btn btn-primary"><i class="fa fa-youtube"></i></a>
                     </div>
                     <p class="pull-right">ALL RIGHTS RESERVED BY ONLINE YARSAA
                     <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
