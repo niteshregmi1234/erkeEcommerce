@@ -14,11 +14,11 @@ class BootStrap {
 //        new DivPosition(divPositionName: "above hot this week div 1400 x 100").save(flush: true)
 //        new DivPosition(divPositionName: "above top sales div 1400 x 100").save(flush: true)
 //        new DivPosition(divPositionName: "at the bottom 1400 x 100").save(flush: true)
-        def productList=Product.list()
-        for(Product product:productList){
-            product.priorityNumber=Product.list()[Product.list().size()-1].id
-            product.save(flush: true)
-        }
+//        def productList=Product.list()
+//        for(Product product:productList){
+//            product.priorityNumber=Product.list()[Product.list().size()-1].id
+//            product.save(flush: true)
+//        }
     }
     def destroy = {
     }
