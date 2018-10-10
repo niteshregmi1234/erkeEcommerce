@@ -19,9 +19,14 @@ class ProductController extends BaseController {
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
                     def product=Product.findByDelFlagAndId(false,params.id as long)
                     if (product){
-                        product.priorityNumber=params.priorityNumber as long
+                        if(params.priorityNumber) {
+                            product.priorityNumber = params.priorityNumber as long
+                        }
+                        else{
+                            product.priorityNumber=Product.list()[Product.list().size()-1].id +1
+                        }
                         product.save(flush: true)
-                        render "ok"
+                        render product.priorityNumber
                     }
                     else{
                         render "notOk"
@@ -262,7 +267,12 @@ def checkPhoto(){
             product.isFeatured = params.isFeatured as byte
             product.isLatest = params.isLatest as byte
             product.productSpecificationName = productService.convertToOriginalUrl(product.productDetails.productBrand.urlName + "-" + product.productColor.colorName + "-" + product.productDetails.briefDescription)
-            product.priorityNumber=params.priorityNumber as long
+            if(params.priorityNumber) {
+                product.priorityNumber = params.priorityNumber as long
+            }
+            else{
+                product.priorityNumber=Product.list()[Product.list().size()-1].id + 1
+            }
             product.specialImageName = uploadSpecialImage()
             product.delFlag = false
             product.soldNumbers = 0
@@ -291,7 +301,12 @@ def checkPhoto(){
                 product.isLatest = params.isLatest as byte
                 product.productSpecificationName = product.productDetails.productCategory.categoryName + "-" + product.productColor.colorName + " " + product.productDetails.productBrand.brandName + " " + product.productDetails.productName
                 product.productSpecificationName = productService.convertToOriginalUrl(product.productDetails.productBrand.urlName + "-" + product.productColor.colorName+ "-" + product.productDetails.briefDescription + "-" + product.id)
-                product.priorityNumber=params.priorityNumber as long
+                if(params.priorityNumber) {
+                    product.priorityNumber = params.priorityNumber as long
+                }
+                else{
+                    product.priorityNumber=Product.list()[Product.list().size()-1].id+1
+                }
                 product.specialImageName = editSpecialImage(product.specialImageName)
                 product.save(flush: true)
                 redirect(action: "show", id: product.id)

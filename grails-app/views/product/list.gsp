@@ -77,14 +77,8 @@ document.getElementById("pnText"+sn).style.display="none";
         $('#buttons'+sn).removeAttr('disabled');
     }
     function updatePriorityNumber(id,sn) {
-        var priorityNumber=document.getElementById("priorityNumber"+sn).value;
-        if(priorityNumber==''){
-            bootbox.alert({
-                message: "priority number must not be blank",
-                size: 'small'
-            });
-        }
-        else{
+
+var priorityNumber=document.getElementById("priorityNumber"+sn).value;
         $.ajax({
             url: "${createLink(controller:'product', action:'updatePriorityNumber')}",
             type: "POST",
@@ -104,8 +98,8 @@ document.getElementById("pnText"+sn).style.display="none";
                         message: "successfully updated priority number",
                         size: 'small'
                     });
-                    document.getElementById("pnText"+sn).innerHTML=priorityNumber;
-                    document.getElementById("pnEdit"+sn).value=priorityNumber
+                    document.getElementById("pnText"+sn).innerHTML=result;
+                    document.getElementById("pnEdit"+sn).value=result;
                     document.getElementById("pnText"+sn).style.display="block";
                     document.getElementById("pnEdit"+sn).style.display="none";
                     $('#buttons'+sn).attr('disabled','disabled');
@@ -118,11 +112,12 @@ document.getElementById("pnText"+sn).style.display="none";
 
             }
         });
-    }}
+    }
     function isNumber(evt) {
         evt = (evt) ? evt : window.event;
         var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode > 31 && (charCode <= 48 || charCode > 57)) {
+
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
             bootbox.alert({
                 message: "not allowed must be number",
                 size: 'small'

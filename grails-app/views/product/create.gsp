@@ -149,7 +149,8 @@
     function isNumber(evt) {
         evt = (evt) ? evt : window.event;
         var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode > 31 && (charCode <= 48 || charCode > 57)) {
+
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
             bootbox.alert({
                 message: "not allowed must be number",
                 size: 'small'
@@ -251,7 +252,6 @@ for(var i=0;i<addClass.length;i++){
 
     function Validate(oForm) {
         var responseValue;
-        var priorityNumber = document.getElementById("priorityNumber").value;
         var productColor = document.getElementById("productColor").value;
         var productDetails = document.getElementById("productDetails").value;
         var specialImageName = document.getElementById("specialImageName").value;
@@ -294,13 +294,6 @@ for(var i=0;i<addClass.length;i++){
                 size: 'small'
             });
             document.getElementById("productColor").focus();
-            return false;
-        }
-        if(priorityNumber==''){
-            bootbox.alert({
-                message: "priority number  must not be blank",
-                size: 'small'
-            });
             return false;
         }
         if (specialImageName.length > 0) {
