@@ -18,12 +18,15 @@ class ProductController extends BaseController {
 
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
                     def product=Product.findByDelFlagAndId(false,params.id as long)
+                    Product.list().size()
+
+
                     if (product){
                         if(params.priorityNumber) {
                             product.priorityNumber = params.priorityNumber as long
                         }
                         else{
-                            product.priorityNumber=Product.list()[Product.list().size()-1].id +1
+                            product.priorityNumber=Product.list().size()
                         }
                         product.save(flush: true)
                         render product.priorityNumber
@@ -271,7 +274,8 @@ def checkPhoto(){
                 product.priorityNumber = params.priorityNumber as long
             }
             else{
-                product.priorityNumber=Product.list()[Product.list().size()-1].id + 1
+                product.priorityNumber=Product.list().size()
+
             }
             product.specialImageName = uploadSpecialImage()
             product.delFlag = false
@@ -305,7 +309,8 @@ def checkPhoto(){
                     product.priorityNumber = params.priorityNumber as long
                 }
                 else{
-                    product.priorityNumber=Product.list()[Product.list().size()-1].id+1
+                    product.priorityNumber=Product.list().size()
+
                 }
                 product.specialImageName = editSpecialImage(product.specialImageName)
                 product.save(flush: true)
