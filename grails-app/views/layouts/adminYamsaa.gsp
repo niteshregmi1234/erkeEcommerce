@@ -167,103 +167,122 @@
 </nav>
 <script>
     function resetProductPriority() {
-        $.ajax({
-            url: "${createLink(controller:'product', action:'resetPriority')}",
-            type: "POST",
-            cache: false,
-            async: false,
-            success: function (result) {
-                if (result == "successfull") {
-                    bootbox.alert({
-                        message: "product priority has been successfully reset",
-                        size: 'small',
-                        callback: function(){
-                            location.reload();
+        bootbox.confirm("Are you sure want to reset Product Priority?", function(resultConfirm){
+            if(resultConfirm){
+                $.ajax({
+                    url: "${createLink(controller:'product', action:'resetPriority')}",
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    success: function (result) {
+                        if (result == "successfull") {
+                            bootbox.alert({
+                                message: "product priority has been successfully reset",
+                                size: 'small',
+                                callback: function(){
+                                    location.reload();
+                                }
+                            });
                         }
-                    });
-                }
-                else {
-                    bootbox.alert({
-                        message: "unable to reset product priority",
-                        size: 'small'
-                    });
+                        else {
+                            bootbox.alert({
+                                message: "unable to reset product priority",
+                                size: 'small'
+                            });
 
 
 
-                    // DataTable
+                            // DataTable
 
 
-                }
+                        }
 
+                    }
+                });
             }
+
         });
+
     }
     function resetCoverImagePriority() {
-        $.ajax({
-            url: "${createLink(controller:'coverImage', action:'resetPriority')}",
-            type: "POST",
-            cache: false,
-            async: false,
-            success: function (result) {
-                if (result == "successfull") {
-                    bootbox.alert({
-                        message: "coverImage priority has been successfully reset",
-                        size: 'small',
-                        callback: function(){
-                            location.reload();
+
+        bootbox.confirm("Are you sure want to reset Cover Image Priority?", function(resultConfirm){
+            if(resultConfirm){
+                $.ajax({
+                    url: "${createLink(controller:'coverImage', action:'resetPriority')}",
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    success: function (result) {
+                        if (result == "successfull") {
+                            bootbox.alert({
+                                message: "coverImage priority has been successfully reset",
+                                size: 'small',
+                                callback: function(){
+                                    location.reload();
+                                }
+                            });
+
                         }
-                    });
-
-                }
-                else {
-                    bootbox.alert({
-                        message: "unable to reset CoverImage priority",
-                        size: 'small'
-                    });
+                        else {
+                            bootbox.alert({
+                                message: "unable to reset CoverImage priority",
+                                size: 'small'
+                            });
 
 
 
-                    // DataTable
+                            // DataTable
 
 
-                }
+                        }
+
+                    }
+                });
 
             }
+
         });
     }
     function resetBrandPriority() {
-        $.ajax({
-            url: "${createLink(controller:'productBrand', action:'resetPriority')}",
-            type: "POST",
-            cache: false,
-            async: false,
-            success: function (result) {
-                if (result == "successfull") {
-                    bootbox.alert({
-                        message: "productBrand priority has been successfully reset",
-                        size: 'small',
-                        callback: function(){
-                            location.reload();
+        bootbox.confirm("Are you sure want to reset Product Brand Priority?", function(resultConfirm){
+            if(resultConfirm){
+                $.ajax({
+                    url: "${createLink(controller:'productBrand', action:'resetPriority')}",
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    success: function (result) {
+                        if (result == "successfull") {
+                            bootbox.alert({
+                                message: "productBrand priority has been successfully reset",
+                                size: 'small',
+                                callback: function(){
+                                    location.reload();
+                                }
+                            });
+
                         }
-                    });
-
-                }
-                else {
-                    bootbox.alert({
-                        message: "unable to reset brand priority",
-                        size: 'small'
-                    });
+                        else {
+                            bootbox.alert({
+                                message: "unable to reset brand priority",
+                                size: 'small'
+                            });
 
 
 
-                    // DataTable
+                            // DataTable
 
 
-                }
+                        }
+
+                    }
+                });
 
             }
+
         });
-    }
+          }
 
     $(function () {
 
