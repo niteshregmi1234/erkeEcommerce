@@ -9,7 +9,26 @@ import java.util.regex.Pattern
 class CoverImageController extends BaseController{
     static allowedMethods = [checkPhoto: 'POST',editCoverImage: 'POST',uploadCoverImage: 'POST',save: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
-def checkPhoto(){
+    def resetPriority(){
+        try{
+            if(session.adminUser) {
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def coverImageList=CoverImage.list()
+                    for(CoverImage coverImage:coverImageList){
+                        coverImage.priorityNumber=CoverImage.list().size()
+                        coverImage.save(flush: true)
+                    }
+                    render "successfull"
+
+                }
+            }
+        }
+        catch (Exception e){
+            render "unsuccessfull"
+        }
+    }
+
+    def checkPhoto(){
     try{
         if(session.adminUser){
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {

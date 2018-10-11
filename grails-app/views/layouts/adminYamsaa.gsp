@@ -125,9 +125,18 @@
                     <li><g:link action="show" controller="backgroundImage" >Home Background Image</g:link></li>
                     <li><g:link action="discountShortcut" controller="product" >Discount Shortcut</g:link></li>
                     <li><g:link action="latestShortcut" controller="product" >Change Latest Product?</g:link></li>
+                    <li><g:link action="resetPriority" controller="product" onclick="resetPriorityNumber();" >Reset Product Priority</g:link></li>
 
                 </ul>
             </li>
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Reset<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="#" onclick="resetProductPriority();" >Product Priority</a></li>
+            <li><a href="#" onclick="resetCoverImagePriority();" >Cover Image Priority</a></li>
+            <li><a href="#" onclick="resetBrandPriority();" >Brand Priority</a></li>
+
+        </ul>
+    </li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Manage<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="show" controller="mailSetUp">SetUp Email</g:link></li>
@@ -158,6 +167,97 @@
     </div>
 </nav>
 <script>
+    function resetProductPriority() {
+        $.ajax({
+            url: "${createLink(controller:'product', action:'resetPriority')}",
+            type: "POST",
+            cache: false,
+            async: false,
+            success: function (result) {
+                if (result == "successfull") {
+                    bootbox.alert({
+                        message: "product priority has been successfully reset",
+                        size: 'small'
+                    });
+
+                }
+                else {
+                    bootbox.alert({
+                        message: "unable to reset product priority",
+                        size: 'small'
+                    });
+
+
+
+                    // DataTable
+
+
+                }
+
+            }
+        });
+    }
+    function resetCoverImagePriority() {
+        $.ajax({
+            url: "${createLink(controller:'coverImage', action:'resetPriority')}",
+            type: "POST",
+            cache: false,
+            async: false,
+            success: function (result) {
+                if (result == "successfull") {
+                    bootbox.alert({
+                        message: "CoverImage priority has been successfully reset",
+                        size: 'small'
+                    });
+
+                }
+                else {
+                    bootbox.alert({
+                        message: "unable to reset CoverImage priority",
+                        size: 'small'
+                    });
+
+
+
+                    // DataTable
+
+
+                }
+
+            }
+        });
+    }
+    function resetBrandPriority() {
+        $.ajax({
+            url: "${createLink(controller:'brand', action:'resetPriority')}",
+            type: "POST",
+            cache: false,
+            async: false,
+            success: function (result) {
+                if (result == "successfull") {
+                    bootbox.alert({
+                        message: "brand priority has been successfully reset",
+                        size: 'small'
+                    });
+
+                }
+                else {
+                    bootbox.alert({
+                        message: "unable to reset brand priority",
+                        size: 'small'
+                    });
+
+
+
+                    // DataTable
+
+
+                }
+
+            }
+        });
+    }
+
     $(function () {
 
         var url = window.location.pathname;

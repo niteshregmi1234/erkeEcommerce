@@ -12,6 +12,24 @@ class ProductController extends BaseController {
     def create(){
 
     }
+    def resetPriority(){
+        try{
+        if(session.adminUser) {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                def productList=Product.list()
+                  for(Product product:productList){
+            product.priorityNumber=Product.list().size()
+                      product.save(flush: true)
+        }
+                render "successfull"
+
+            }
+        }
+        }
+        catch (Exception e){
+          render "unsuccessfull"
+        }
+    }
     def updatePriorityNumber(){
         try{
             if(session.adminUser) {

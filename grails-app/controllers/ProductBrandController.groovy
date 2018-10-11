@@ -124,6 +124,25 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
             redirect(action: "notfound",controller: "errorPage")
         }
     }
+    def resetPriority(){
+        try{
+            if(session.adminUser) {
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def productBrandList=ProductBrand.list()
+                    for(ProductBrand productBrand:productBrandList){
+                        productBrand.priorityNumber=ProductBrand.list().size()
+                        productBrand.save(flush: true)
+                    }
+                    render "successfull"
+
+                }
+            }
+        }
+        catch (Exception e){
+            render "unsuccessfull"
+        }
+    }
+
     def uploadLogoImage(){
         if(session.adminUser){
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {
