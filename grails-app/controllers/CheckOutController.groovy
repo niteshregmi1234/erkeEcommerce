@@ -44,7 +44,7 @@ class CheckOutController {
     }
     def placeOrder(){
         def text
-        try{
+          try{
             def cartList=session.cart
         def billingInfo=JSON.parse(params.billingInfo);
         if(params.isCreateAccount){
@@ -60,7 +60,9 @@ class CheckOutController {
                     subject "Shopping mail from customers"
                     html g.render(template:"/cart/mail",model: [totalPrice: totalPrice,billingInfo:billingInfo,shippingInfo:shippingInfo])
 
-                }}
+                }
+
+                    }
                         else{
                             sendMail {
                                 to "${MailSetUp.list()[0].toEmail}"
@@ -70,7 +72,16 @@ class CheckOutController {
                             }
 
                         }
+for(CartWithoutEndUser cartWithoutEndUser:cartList){
+ if(cartWithoutEndUser.productBrand.email){
+     sendMail {
+         to "${cartWithoutEndUser.productBrand.email}"
+         subject "Shopping mail from customers"
+         html g.render(template:"/cart/order",model: [cartWithoutEndUser: cartWithoutEndUser])
 
+     }
+ }
+}
                     session.cart.clear()
                     text=[]
                     text=[orderId,billingInfo[5],params.isCreateAccount] as JSON
@@ -104,6 +115,15 @@ class CheckOutController {
 
                 }
             }
+            for(CartWithoutEndUser cartWithoutEndUser:cartList){
+                if(cartWithoutEndUser.productBrand.email){
+                    sendMail {
+                        to "${cartWithoutEndUser.productBrand.email}"
+                        subject "Shopping mail from customers"
+                        html g.render(template:"/cart/order",model: [cartWithoutEndUser: cartWithoutEndUser])
+
+                    }
+                }}
                 session.cart.clear()
             text=orderId
                 render text

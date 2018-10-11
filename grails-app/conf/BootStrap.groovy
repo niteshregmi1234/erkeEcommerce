@@ -21,6 +21,11 @@ class BootStrap {
 
             coverImage.save(flush: true)
         }
+        def productBrandList=ProductBrand.list()
+        for(ProductBrand productBrand:productBrandList){
+            productBrand.priorityNumber=ProductBrand.list().size()
+            productBrand.save(flush: true)
+        }
     }
     def destroy = {
     }

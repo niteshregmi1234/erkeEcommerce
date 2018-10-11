@@ -11,6 +11,25 @@
         </div>
     </div>
     <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2" for="brandName">Company Email:</label>
+
+            <div class="col-sm-4">
+                <g:textField name="email" id="email" value="${productBrandInstance?.email}" class="form-control"/>
+                %{--<g:formatDate format="yyyy-MM-dd" class="form-control"/>--}%
+                %{--<input type="email" class="form-control" id="email" placeholder="Enter email">--}%
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Priority Number:</label>
+            <div class="col-sm-4">
+                <g:textField name="priorityNumber" id="priorityNumber" class="form-control" onkeypress="return isNumber(event)" value="${productBrandInstance?.priorityNumber}"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
         <div class="form-group">
             <label class="control-label col-sm-2">Upload LogoImage:</label>
             <div class="col-sm-4">
@@ -55,6 +74,36 @@
 
 
     <script>
+        function validate(sEmail) {
+            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+            if (filter.test(sEmail)) {
+
+                return true;
+
+            }
+
+            else {
+
+                return false;
+
+            }
+        }
+
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                bootbox.alert({
+                    message: "not allowed must be number",
+                    size: 'small'
+                });
+                return false;
+            }
+            return true;
+        }
+
         var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 
         function preventMultipleSubmissions() {
@@ -66,6 +115,8 @@
             var responseValue;
 
             var brandName = document.getElementById("brandName").value;
+            var email = document.getElementById("email").value;
+
             var brandDescription = document.getElementById("brandDescription").value;
             var logoName = document.getElementById("logoName").value;
 
@@ -120,7 +171,15 @@
 
                 }
             }
-
+if(!validate(email)){
+    $("#email").css("border", "1px solid red");
+    bootbox.alert({
+        message: "email is invalid eg. abc@companyname.com!",
+        size: 'small'
+    });
+    document.getElementById("email").focus();
+    return false;
+}
             if(brandName==''){
                 $("#brandName").css("border", "1px solid red");
                 bootbox.alert({
