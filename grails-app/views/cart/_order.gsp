@@ -22,34 +22,31 @@
     </style>
 </head>
 <body>
+<h3>Message sent by: yarsaa online pvt. Ltd.,Mitrapark,Chabhil,Kathmandu</h3>
+<h3>Contact No:014488486/9849408344</h3>
+<h3>email:yarsaa2017@gmail.com</h3>
 <h3>Product</h3>
 <table border="3px" width="50px">
     <tr>
         <th>Product</th>
+        <th>Color</th>
         <th>Size</th>
         <th>Quantity</th>
-        <th>Unit price</th>
-        <th>Discount</th>
-        <th colspan="2">Total</th>
+
     </tr>
 
 
         <tr>
 
-            <td>${cartWithoutEndUser.productColor.colorName+" "+cartWithoutEndUser.productDetails.productName+" "+cartWithoutEndUser.productBrand.brandName}
+            <td>${cartWithoutEndUser.productDetails.productName+" "+cartWithoutEndUser.productBrand.brandName}
             </td>
+            <td>${cartWithoutEndUser.productColor.colorName}</td>
             <td>${cartWithoutEndUser.productSize.sizeName}</td>
             <td>
                 ${cartWithoutEndUser.quantity}
 
             </td>
-            <td>Rs.<g:formatNumber number="${cartWithoutEndUser.productDetails.price}" type="number"
-                                   maxFractionDigits="2" roundingMode="HALF_DOWN" />
 
-            </td>
-            <td>${cartWithoutEndUser.productDetails.discountPercentage}%</td>
-            <td>Rs.<g:formatNumber number="${(cartWithoutEndUser.productDetails.price*cartWithoutEndUser.quantity)-(cartWithoutEndUser.productDetails.discountPercentage*(cartWithoutEndUser.productDetails.price*cartWithoutEndUser.quantity)/100)}" type="number"
-                                   maxFractionDigits="2" roundingMode="HALF_DOWN" />
 
         </tr>
 

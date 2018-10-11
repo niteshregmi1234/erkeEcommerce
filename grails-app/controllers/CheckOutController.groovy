@@ -76,7 +76,7 @@ for(CartWithoutEndUser cartWithoutEndUser:cartList){
  if(cartWithoutEndUser.productBrand.email){
      sendMail {
          to "${cartWithoutEndUser.productBrand.email}"
-         subject "Shopping mail from customers"
+         subject "Order mail from customers of yarsaa.com"
          html g.render(template:"/cart/order",model: [cartWithoutEndUser: cartWithoutEndUser])
 
      }
@@ -119,7 +119,7 @@ for(CartWithoutEndUser cartWithoutEndUser:cartList){
                 if(cartWithoutEndUser.productBrand.email){
                     sendMail {
                         to "${cartWithoutEndUser.productBrand.email}"
-                        subject "Shopping mail from customers"
+                        subject "Order mail from customers of yarsaa.com"
                         html g.render(template:"/cart/order",model: [cartWithoutEndUser: cartWithoutEndUser])
 
                     }
