@@ -18,7 +18,6 @@ class ProductController extends BaseController {
 
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
                     def product=Product.findByDelFlagAndId(false,params.id as long)
-                    Product.list().size()
 
 
                     if (product){

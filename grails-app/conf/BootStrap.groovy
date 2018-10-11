@@ -15,12 +15,12 @@ class BootStrap {
 //        new DivPosition(divPositionName: "above top sales div 1400 x 100").save(flush: true)
 //        new DivPosition(divPositionName: "at the bottom 1400 x 100").save(flush: true)
 
-//        def productList=Product.list()
-//        for(Product product:productList){
-//            product.priorityNumber=Product.list().size()
-//
-//            product.save(flush: true)
-//        }
+        def coverImageList=CoverImage.list()
+        for(CoverImage coverImage:coverImageList){
+            coverImage.priorityNumber=CoverImage.list().size()
+
+            coverImage.save(flush: true)
+        }
     }
     def destroy = {
     }
