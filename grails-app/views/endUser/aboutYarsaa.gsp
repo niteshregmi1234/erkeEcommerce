@@ -154,7 +154,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 ">
-                <div class="agilenwew3lsfashions about-background lazy" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.backgroundImage])}')">
+                <div class="agilenwew3lsfashions about-background lazy" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.backgroundImage])}');background-size:contain;">
                 </div>
             </div>
         </div>

@@ -306,15 +306,14 @@
 }
 .agileinfonewsl {
     /*background-image: url("../../imagess/yamsaa/newsletter.jpg");*/
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
     background-position: center center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-attachment: fixed;
     text-align: center;
     height: 600px;
-    width: 1110px;
+
 }
 .text1 {
 
@@ -396,10 +395,9 @@
 .agilenwew3lsfashions {
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background-size: contain;
+    /*-webkit-background-size: cover;*/
+    -moz-background-size: contain;
     background-attachment: fixed;
     padding: 150px 0;
     text-align: center;
