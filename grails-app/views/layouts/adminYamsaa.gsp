@@ -125,14 +125,13 @@
                     <li><g:link action="show" controller="backgroundImage" >Home Background Image</g:link></li>
                     <li><g:link action="discountShortcut" controller="product" >Discount Shortcut</g:link></li>
                     <li><g:link action="latestShortcut" controller="product" >Change Latest Product?</g:link></li>
-                    <li><g:link action="resetPriority" controller="product" onclick="resetPriorityNumber();" >Reset Product Priority</g:link></li>
 
                 </ul>
             </li>
     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Reset<span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a href="#" onclick="resetProductPriority();" >Product Priority</a></li>
-            <li><a href="#" onclick="resetCoverImagePriority();" >Cover Image Priority</a></li>
+            <li><a href="#" onclick="resetCoverImagePriority();">Cover Image Priority</a></li>
             <li><a href="#" onclick="resetBrandPriority();" >Brand Priority</a></li>
 
         </ul>
@@ -177,9 +176,11 @@
                 if (result == "successfull") {
                     bootbox.alert({
                         message: "product priority has been successfully reset",
-                        size: 'small'
+                        size: 'small',
+                        callback: function(){
+                            location.reload();
+                        }
                     });
-
                 }
                 else {
                     bootbox.alert({
@@ -206,8 +207,11 @@
             success: function (result) {
                 if (result == "successfull") {
                     bootbox.alert({
-                        message: "CoverImage priority has been successfully reset",
-                        size: 'small'
+                        message: "coverImage priority has been successfully reset",
+                        size: 'small',
+                        callback: function(){
+                            location.reload();
+                        }
                     });
 
                 }
@@ -229,15 +233,18 @@
     }
     function resetBrandPriority() {
         $.ajax({
-            url: "${createLink(controller:'brand', action:'resetPriority')}",
+            url: "${createLink(controller:'productBrand', action:'resetPriority')}",
             type: "POST",
             cache: false,
             async: false,
             success: function (result) {
                 if (result == "successfull") {
                     bootbox.alert({
-                        message: "brand priority has been successfully reset",
-                        size: 'small'
+                        message: "productBrand priority has been successfully reset",
+                        size: 'small',
+                        callback: function(){
+                            location.reload();
+                        }
                     });
 
                 }
