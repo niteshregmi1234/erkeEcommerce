@@ -219,9 +219,10 @@ def deleteCart(Map params,List<CartWithoutEndUser> cartWithoutEndUserList){
             List<List<ProductSize>> listList = new ArrayList<>()
             List<Product> productList = new ArrayList<>()
             for (ProductDetails productDetails : productDetailsList) {
-                def product = Product.findByProductDetailsAndDelFlag(productDetails, false)
+                def product = Product.findAllByProductDetailsAndDelFlag(productDetails, false)
                 if (product) {
-                    productList.add(product)
+                    for(Product product1:product){
+                    productList.add(product1)}
 
                 }
 
@@ -429,9 +430,11 @@ return totalArray}
         List<List<ProductSize>> listList=new ArrayList<>()
         List<Product> productList = new ArrayList<>()
         for (ProductDetails productDetails : productDetailsList) {
-            def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
+            def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)
             if (product) {
-                productList.add(product)
+                for(Product product1:product){
+                    productList.add(product1)}
+
             }
         }
         def prices=pricesArray(productList)
@@ -491,7 +494,9 @@ return totalArray
         for (ProductDetails productDetails : productDetailsList) {
             def product = Product.findByProductDetailsAndDelFlag(productDetails,false)
             if (product) {
-                productList.add(product)
+                for(Product product1:product){
+                    productList.add(product1)}
+
 
             }
         }
@@ -534,9 +539,10 @@ return totalArray
         }
         List<Product> productList = new ArrayList<>()
         for (ProductDetails productDetails : productDetailsList) {
-            def product = Product.findAllByProductDetailsAndDelFlag(productDetails, false)[0]
+            def product = Product.findAllByProductDetailsAndDelFlag(productDetails, false)
             if (product) {
-                productList.add(product)
+                for(Product product1:product){
+                    productList.add(product1)}
             }
         }
         def prices = pricesArray(productList)
@@ -639,14 +645,17 @@ def topSales(){
             List<List<ProductSize>> listList=new ArrayList<>()
             List<Product> productList = new ArrayList<>()
             for (ProductDetails productDetails : productDetailsList) {
-                def productInstance = Product.findAllByProductDetailsAndDelFlag(productDetails,false)[0]
-                if (productInstance) {
-                    productList.add(productInstance)
+                def product = Product.findAllByProductDetailsAndDelFlag(productDetails,false)
+                if (product) {
+                    for(Product product1:product){
+                        productList.add(product1)}
 
                 }
             }
             def prices=pricesArray(productList)
-            Collections.shuffle(productList)
+            productList=productListWithPriority(productList)
+
+//            Collections.shuffle(productList)
             for(Product productInstance:productList){
                 def sizeString = productInstance.productDetails.productSizes
                 String[] stringArraySize = sizeString.split(",")
@@ -674,9 +683,10 @@ return totalArray
             def productDetailsList = ProductDetails.findAllByProductCategory(productCategory)
             List<Product> productList = new ArrayList<>()
             for (ProductDetails productDetails : productDetailsList) {
-                def product = Product.findAllByProductDetailsAndDelFlag(productDetails, false)[0]
+                def product = Product.findAllByProductDetailsAndDelFlag(productDetails, false)
                 if (product) {
-                    productList.add(product)
+                    for(Product product1:product){
+                        productList.add(product1)}
                 }
             }
             def prices = pricesArray(productList)
