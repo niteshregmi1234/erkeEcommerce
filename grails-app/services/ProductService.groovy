@@ -226,7 +226,10 @@ def deleteCart(Map params,List<CartWithoutEndUser> cartWithoutEndUserList){
                 }
 
             }
-            Collections.shuffle(productList)
+
+
+//            Collections.shuffle(productList)
+            productList=productListWithPriority(productList)
             def prices = pricesArray(productList)
             for(Product productInstance:productList){
                 def sizeString = productInstance.productDetails.productSizes
@@ -406,6 +409,19 @@ return totalArray}
 
         }
     }
+    List<Product> productListWithPriority(List<Product> productList){
+        for (int i=0;i<productList.size()-1;i++){
+            for (int j=i+1;j<productList.size();j++){
+                if(productList[i].priorityNumber>productList[j].priorityNumber){
+                    def temp=new Product()
+                    temp=productList[i]
+                    productList[i]=productList[j]
+                    productList[j]=temp
+                }
+            }
+        }
+        return productList
+    }
     def topBrandProducts(String brandNames){
         try{
             def productBrand=ProductBrand.findByUrlName(brandNames)
@@ -419,7 +435,9 @@ return totalArray}
             }
         }
         def prices=pricesArray(productList)
-        Collections.shuffle(productList)
+             productList=productListWithPriority(productList)
+
+//        Collections.shuffle(productList)
             for(Product productInstance:productList){
                 def sizeString = productInstance.productDetails.productSizes
                 String[] stringArraySize = sizeString.split(",")
@@ -441,6 +459,7 @@ return totalArray
 
         }
     }
+
     def getAllBrands(){
         try {
             def brandsList = new ArrayList<>()
@@ -478,7 +497,8 @@ return totalArray
         }
 
         def prices=pricesArray(productList)
-        Collections.shuffle(productList)
+            productList=productListWithPriority(productList)
+//        Collections.shuffle(productList)
             for(Product productInstance:productList){
                 def sizeString = productInstance.productDetails.productSizes
                 String[] stringArraySize = sizeString.split(",")
@@ -520,7 +540,9 @@ return totalArray
             }
         }
         def prices = pricesArray(productList)
-        Collections.shuffle(productList)
+            productList=productListWithPriority(productList)
+
+//        Collections.shuffle(productList)
             for(Product productInstance:productList){
                 def sizeString = productInstance.productDetails.productSizes
                 String[] stringArraySize = sizeString.split(",")
@@ -658,7 +680,9 @@ return totalArray
                 }
             }
             def prices = pricesArray(productList)
-            Collections.shuffle(productList)
+            productList=productListWithPriority(productList)
+
+//            Collections.shuffle(productList)
             for(Product productInstance:productList){
                 def sizeString = productInstance.productDetails.productSizes
                 String[] stringArraySize = sizeString.split(",")

@@ -171,6 +171,7 @@
 
                 }
             }
+            if(email!=''){
 if(!validate(email)){
     $("#email").css("border", "1px solid red");
     bootbox.alert({
@@ -179,7 +180,7 @@ if(!validate(email)){
     });
     document.getElementById("email").focus();
     return false;
-}
+}}
             if(brandName==''){
                 $("#brandName").css("border", "1px solid red");
                 bootbox.alert({
