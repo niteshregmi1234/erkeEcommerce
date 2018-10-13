@@ -28,6 +28,7 @@
         <th>Author</th>
         <th>Description</th>
         <th>Robots</th>
+        <th>Google Bots</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -39,6 +40,7 @@
         <th>Author</th>
         <th>Description</th>
         <th>Robots</th>
+        <th>Google Bots</th>
     </tr>
     </tfoot>
     <tbody>
@@ -50,7 +52,7 @@
             <td>${list?.author}</td>
             <td>${list?.description}</td>
             <td>${list?.robots}</td>
-
+<td>${list.googleBots}</td>
         </tr>
     </g:each>
     </tbody>
