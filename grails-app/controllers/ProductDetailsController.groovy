@@ -4,7 +4,8 @@ static allowedMethods = [checkProductName: 'POST', save: 'POST']
     def checkProductName(){
         try{
             if(!params.id){
-        def productDetailsInstance=ProductDetails.findByProductName(params.productName)
+                def productCategory=ProductCategory.get(params.categoryId)
+        def productDetailsInstance=ProductDetails.findByProductNameAndProductCategory(params.productName,productCategory)
         if(productDetailsInstance){
             render "notOk"
         }
@@ -13,8 +14,9 @@ static allowedMethods = [checkProductName: 'POST', save: 'POST']
         }}
             else{
                 def productDetailsName=ProductDetails.findById(params.id as long).productName
+                def productCategory=ProductCategory.get(params.categoryId)
                 def productDetailsInstance=ProductDetails.findByProductNameAndProductNameNotEqual(params.productName,productDetailsName)
-                if(productDetailsInstance){
+                if(productDetailsInstance.productCategory==productCategory){
                     render "notOk"
                 }
                 else{
