@@ -9,7 +9,6 @@
 <html>
 <head>
     <meta name="layout" content="userYarsaa">
-    <title></title>
 </head>
 
 <body>

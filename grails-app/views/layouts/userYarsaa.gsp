@@ -15,11 +15,12 @@
         <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.specialImageName}"/>
 
     </g:if>
-
-    <title>
-        Yarsaa
-    </title>
-
+<g:if test="${title}">
+    <title>${title}</title>
+</g:if>
+    <g:else>
+        <title>yarsaa</title>
+    </g:else>
     <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
     %{--<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>--}%
 

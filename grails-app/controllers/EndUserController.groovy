@@ -280,7 +280,7 @@ if (aidsInstance.discountType=="noRange"){
 }
             }
             if (totalArray[0]) {
-                render(view: "ads", model: [totalArray: totalArray, adName:aidsInstance.adDescribeRaw])
+                render(view: "ads", model: [totalArray: totalArray, adName:aidsInstance.adDescribeRaw,title:aidsInstance.adDescribeRaw+"@ Best price in Nepal|www.yarsaa.com"])
             }
             else{
 
@@ -298,12 +298,12 @@ productList.add(productInstance)
     def totalArray = productService.ad(productList)
     if (totalArray[0]) {
 
-        render(view: "ads", model: [totalArray: totalArray, adName:aidsInstance.adDescribeRaw])
+        render(view: "ads", model: [totalArray: totalArray, adName:aidsInstance.adDescribeRaw,title:aidsInstance.adDescribeRaw+"@ Best price in Nepal|www.yarsaa.com"])
     }
 }
     else{
    def product= Product.findByDelFlagAndId(false,productIdsArray[0] as long)
-    redirect(action: "singleProduct",params: [specificationName:product.productSpecificationName])
+    redirect(action: "singleProduct",params: [specificationName:product.productSpecificationName,title:product.productDetails.briefDescription+"-"+product.productColor.colorName+"@ Best price in Nepal|www.yarsaa.com"])
 }
 }
             else if(aidsInstance.isDiscountForProduct=="discount"){
@@ -329,7 +329,7 @@ if(aidsInstance.discountType=="noRange"){
 
 }
     def totalArray = productService.ad(productList)
-    render(view: "ads", model: [totalArray: totalArray, adName:aidsInstance.adDescribeRaw])
+    render(view: "ads", model: [totalArray: totalArray, adName:aidsInstance.adDescribeRaw,title:aidsInstance.adDescribeRaw+"@ Best price in Nepal|www.yarsaa.com"])
 }
         }}
         else{
@@ -364,7 +364,7 @@ def test1(){
         try {
             if (params.subCategory) {
                 def totalArray = productService.subCategory(params.subCategory)
-                render(view: "specialSubCategory", model: [totalArray: totalArray])
+                render(view: "specialSubCategory", model: [totalArray: totalArray,title:totalArray[3].subCategoryDescription+"@ Best price in Nepal|www.yarsaa.com"])
             }
         }
         catch (Exception e) {
@@ -376,7 +376,7 @@ def test1(){
         try {
             def totalArray = productService.topSales()
             if (totalArray[0]) {
-                render(view: "topSale", model: [totalArray: totalArray])
+                render(view: "topSale", model: [totalArray: totalArray,title:"top sales of yarsaa.com@ Best price in Nepal|www.yarsaa.com"])
             }
         }
         catch (Exception e) {
@@ -437,8 +437,9 @@ def test1(){
         try {
             if (params.specificationName) {
                 def totalArray = productService.singleProduct(params.specificationName)
+                def productInstance=Product.findByProductSpecificationName(params.specificationName)
                 if (totalArray[0]) {
-                    render(view: "detail", model: [totalArray: totalArray,productInstance:Product.findByProductSpecificationName(params.specificationName)])
+                    render(view: "detail", model: [totalArray: totalArray,productInstance:productInstance,title:productInstance.productDetails.briefDescription+"-"+productInstance.productColor.colorName+"@ Best price in Nepal|www.yarsaa.com"])
                 }
             }
         }
@@ -451,7 +452,7 @@ def test1(){
         try {
             def totalArray = productService.latestProducts()
             if (totalArray[0]) {
-                render(view: "latestProduct", model: [totalArray: totalArray])
+                render(view: "latestProduct", model: [totalArray: totalArray,title:"hot products of yarsaa.com@ Best price in Nepal|www.yarsaa.com"])
             }
         }
         catch (Exception e) {
@@ -477,7 +478,7 @@ def test1(){
 
             def totalArray = productService.subCategoryList(params.subCategory, params.category)
             if (totalArray[0]) {
-                render(view: "subCategoryProduct", model: [totalArray: totalArray])
+                render(view: "subCategoryProduct", model: [totalArray: totalArray,title:totalArray[3].categoryDescription+"-"+totalArray[4].subCategoryDescription+"@ Best price in Nepal|www.yarsaa.com"])
             }
         }
         catch (Exception e) {
@@ -494,7 +495,7 @@ def test1(){
                 if (ProductCategory.findByUrlName(params.category)) {
                     def totalArray = productService.allCategoryProducts(params.category)
                     if (totalArray[0]) {
-                        render(view: "categoryList", model: [totalArray: totalArray])
+                        render(view: "categoryList", model: [totalArray: totalArray,title:totalArray[3].categoryDescription+"@ Best price in Nepal|www.yarsaa.com"])
                     }
                 }
             }
@@ -511,7 +512,7 @@ def test1(){
 
                     def totalArray = productService.topBrandProducts(params.brandNames)
                     if (totalArray[0]) {
-                        render(view: "brandProducts", model: [totalArray: totalArray])
+                        render(view: "brandProducts", model: [totalArray: totalArray,title:"top brand products of yarsaa.com@ Best price in Nepal|www.yarsaa.com"])
                     }
                 }
 
@@ -525,7 +526,7 @@ def test1(){
     def allBrands() {
         try {
             def brandsList = productService.getAllBrands()
-            render(view: "allBrand", model: [brandsList: brandsList])
+            render(view: "allBrand", model: [brandsList: brandsList,title:"available brands of yarsaa.com@ Best price in Nepal|www.yarsaa.com"])
         }
         catch (Exception e) {
 
@@ -538,7 +539,7 @@ def test1(){
             if (productList1) {
                 def totalArray = productService.specifiedProducts(params.subCategorySpecify, params.category)
                 if (totalArray[0]) {
-                    render(view: "specifiedProduct", model: [totalArray: totalArray])
+                    render(view: "specifiedProduct", model: [totalArray: totalArray,title:totalArray[3].categoryDescription+"-"+totalArray[4].specificationName+"@ Best price in Nepal|www.yarsaa.com"])
                 }
             }
 
