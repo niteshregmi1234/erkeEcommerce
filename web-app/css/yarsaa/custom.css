@@ -4,6 +4,10 @@
 /*.billingFieldLarge{*/
 /*width: 432px;*/
 /*}*/
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 .icon {
     background: rgba(255, 255, 255, .6);
     color: rgba(0, 0, 0, .3);
@@ -81,7 +85,7 @@
     margin-top: -20px;
 }
 .aid{
-    margin-top: -50px;
+    margin-top: -30px;
 }
 .boxBarSales{
     /*margin-top: -15px;*/

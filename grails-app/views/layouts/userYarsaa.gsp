@@ -731,12 +731,14 @@
 
                         <h4>Where to find us</h4>
 
-                        <p><strong>${CompanyInformation.list()[0].companyName}.</strong>
+                        <p style="color: #eee;"><strong>${CompanyInformation.list()[0].companyName}.</strong>
+
                             <br>${CompanyInformation.list()[0].location1}
                             <br>${CompanyInformation.list()[0].location2}
                             <br>${CompanyInformation.list()[0].location3}
+
                             <br>
-                            <strong>${CompanyInformation.list()[0].location4}</strong>
+                            <strong >${CompanyInformation.list()[0].location4}</strong>
                         </p>
 
                         <g:link action="contact" controller="endUser">Go to contact page</g:link>
