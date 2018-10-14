@@ -21,7 +21,7 @@ environments {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost/productionDatabase"
             username="root"
-            password=""
+            password="hem123..."
         }
     }
     test {
@@ -35,7 +35,7 @@ environments {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost/productionDatabase"
             username="root"
-            password=""
+            password="hem123..."
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true

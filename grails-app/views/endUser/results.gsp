@@ -324,7 +324,8 @@
                                     </g:if>
                                     <g:if test="${list.productDetails.isSale==false}">
 
-                                        <p class="price priceWithoutDiscount" style="color:#202020;font-weight: 400;font-size: 14px;text-align: left;width: 163px;">Rs.${list.productDetails.price}</p>
+                                        <p class="price priceWithoutDiscount" style="color:#202020;font-weight: 400;font-size: 14px;text-align: left;width: 163px;">Rs.${list.productDetails.price}                     ${list.priorityNumber}
+                                        </p>
                                     </g:if>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="btn btn-default">View detail</g:link>

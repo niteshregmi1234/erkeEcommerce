@@ -273,7 +273,7 @@
                 $.ajax({
                     url: "${createLink(controller:'productDetails', action:'checkProductName')}",
                     type: "POST",
-                    data: {"productName":productName,"id":id},
+                    data: {"productName":productName,"id":id,categoryId:productCategory},
                     cache: false,
                     async: false,
                     success: function (result) {

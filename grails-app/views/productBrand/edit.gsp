@@ -109,16 +109,17 @@
 
             }
         }
-        if(!validate(email)){
-            $("#email").css("border", "1px solid red");
-            bootbox.alert({
-                message: "email is invalid eg. abc@companyname.com!",
-                size: 'small'
-            });
-            document.getElementById("email").focus();
-            return false;
+        if(email) {
+            if (!validate(email)) {
+                $("#email").css("border", "1px solid red");
+                bootbox.alert({
+                    message: "email is invalid eg. abc@companyname.com!",
+                    size: 'small'
+                });
+                document.getElementById("email").focus();
+                return false;
+            }
         }
-
         if(brandName==''){
             $("#brandName").css("border", "1px solid red");
             bootbox.alert({

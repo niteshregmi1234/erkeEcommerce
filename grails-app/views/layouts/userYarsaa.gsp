@@ -15,11 +15,12 @@
         <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.specialImageName}"/>
 
     </g:if>
-
-    <title>
-        Yarsaa
-    </title>
-
+<g:if test="${title}">
+    <title>${title}</title>
+</g:if>
+    <g:else>
+        <title>yarsaa</title>
+    </g:else>
     <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
     %{--<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>--}%
 
@@ -731,12 +732,14 @@
 
                         <h4>Where to find us</h4>
 
-                        <p><strong>${CompanyInformation.list()[0].companyName}.</strong>
+                        <p style="color: #eee;"><strong>${CompanyInformation.list()[0].companyName}.</strong>
+
                             <br>${CompanyInformation.list()[0].location1}
                             <br>${CompanyInformation.list()[0].location2}
                             <br>${CompanyInformation.list()[0].location3}
+
                             <br>
-                            <strong>${CompanyInformation.list()[0].location4}</strong>
+                            <strong >${CompanyInformation.list()[0].location4}</strong>
                         </p>
 
                         <g:link action="contact" controller="endUser">Go to contact page</g:link>

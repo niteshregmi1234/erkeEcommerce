@@ -892,7 +892,7 @@ h1 {
   font-weight: 300;
 }
 #footer {
-  background: #e0e0e0;
+  background: #272424;
   padding: 20px 0;
 }
 #footer ul {
@@ -900,7 +900,7 @@ h1 {
   list-style: none;
 }
 #footer ul a {
-  color: #999999;
+  color: #eee;
 }
 #footer .social {
   text-align: left;
@@ -1348,7 +1348,7 @@ body {
   background-color: #f0f0f0;
 }
 a {
-  color: #ac623f;
+  color: #ec5f1d;
   text-decoration: none;
 }
 a:hover,
@@ -1696,9 +1696,9 @@ address {
 }
 
 #footer h4{
-  color: #09175e;
+  color: #ec5f1d;
 }
 
 #footer h5{
-  color:#565f8c;
+  color:#eee;
 }

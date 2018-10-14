@@ -9,7 +9,6 @@
 <html>
 <head>
     <meta name="layout" content="userYarsaa">
-    <title></title>
 </head>
 
 <body>
@@ -21,7 +20,7 @@
         <g:each in="${totalArray[0]}" var="list">
 
             <div class="item">
-                <g:link action="topBrand" controller="endUser" params="[brandNames:list.productBrand.urlName]"> <img src="${resource(dir: 'images', file: 'spinner-cover.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive lazy"></g:link>
+                <g:link action="topBrand" controller="endUser" params="[brandNames:list.productBrand.urlName]"> <img src="${resource(dir: 'images', file: 'spinner-cover-1500_500.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.imageName])}" class="img-responsive lazy"></g:link>
 
             </div>
 

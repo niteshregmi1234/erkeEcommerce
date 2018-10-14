@@ -22,7 +22,6 @@ class UrlMappings {
         "/$category/$subCategorySpecify/$subCategory/ "(action: "subCategoryList",controller: "endUser")
         "/$category/$subCategorySpecify/ "(action: "specifiedProducts",controller: "endUser")
         "/$category/"(action: "allCategoryProducts",controller: "endUser")
-        "/specialBrand"(action: "specialBrandProducts",controller: "endUser")
         "/all-$subCategory/ "(action: "subCategory",controller: "endUser")
         "/season"(action: "upcomingSeasonProducts",controller: "endUser")
         "/about"(action: "about",controller: "endUser")
