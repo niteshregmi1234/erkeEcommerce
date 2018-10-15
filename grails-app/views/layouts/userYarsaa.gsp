@@ -55,7 +55,7 @@
         <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"style.default.css")}" type="text/css"
               media="all"/>
     </g:if>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.5')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.6')}" type="text/css"
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/loader.css')}" type="text/css"
           media="all"/>
