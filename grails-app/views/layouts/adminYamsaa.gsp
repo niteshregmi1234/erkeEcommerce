@@ -114,6 +114,8 @@
                     <li><g:link action="list" controller="productBrand">Product Brand</g:link></li>
                     <li><g:link action="list" controller="paymentMethod">Payment</g:link></li>
                     <li><g:link action="list" controller="deliveryMethod">Delivery</g:link></li>
+                    <li><g:link action="list" controller="seoOptimization">Seo Optimization</g:link></li>
+
                 </ul>
             </li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Items<span class="caret"></span></a>

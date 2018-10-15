@@ -21,7 +21,10 @@
     <title>${title}</title>
 </g:if>
     <g:else>
-        <title>yarsaa</title>
+        <g:if test="${SeoOptimization.list()[0]}">
+        <title>${SeoOptimization.list()[0].title}</title>
+        </g:if>
+        <g:else><title>Yarsaa</title></g:else>
     </g:else>
     <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
     %{--<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>--}%

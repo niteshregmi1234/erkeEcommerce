@@ -12,7 +12,7 @@
     <title></title>
 </head>
 <body>
-<g:form action="save" controller="productBrand" class="form-horizontal" >
+<g:form action="save" controller="seoOptimization" class="form-horizontal" >
     <g:hiddenField name="id" value="${seoOptimizationInstance?.id}"></g:hiddenField>
 
 <g:render template="form"></g:render>
