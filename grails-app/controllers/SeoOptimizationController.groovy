@@ -52,6 +52,7 @@ class SeoOptimizationController extends  BaseController{
                         seoOptimizationInstance.robots=params.robots
                           seoOptimizationInstance.googleBots=params.googleBots
                           seoOptimizationInstance.title=params.title
+                          seoOptimizationInstance.googleSiteVerification=params.googleSiteVerification
 
                         seoOptimizationInstance.save(flush: true)
                         redirect(action: "show" ,id:seoOptimizationInstance.id)}
@@ -66,7 +67,8 @@ class SeoOptimizationController extends  BaseController{
                             seoOptimizationInstance.googleBots=params.googleBots
                             seoOptimizationInstance.title=params.title
                             seoOptimizationInstance.save(flush: true)
-
+                            seoOptimizationInstance.googleSiteVerification=params.googleSiteVerification
+                            seoOptimizationInstance.save(flush: true)
                             redirect(action: "show" ,id:seoOptimizationInstance.id)}
                         else{
                             redirect(action: "notfound", controller: "errorPage")

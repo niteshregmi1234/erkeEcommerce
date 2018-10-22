@@ -4,15 +4,7 @@
 
     <meta charset="utf-8">
 
-    <meta name="google-site-verification" content="ukYH3gaQ4LcRA-6yCKNwKZGIv2FKj6l8WubNurI13mc"/>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
-    <g:if test="${SeoOptimization.list()[0]}">
-    <meta name="robots" content="${SeoOptimization.list()[0].robots}">
-    <meta name="googlebot" content="${SeoOptimization.list()[0].googleBots}">
-    <meta name="keywords" content="${SeoOptimization.list()[0].keywords}">
-    <meta name="description" content="${SeoOptimization.list()[0].description}">
-    <meta name="author" content="${SeoOptimization.list()[0].author}">
-    </g:if>
     <g:if test="${productInstance}">
         <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.specialImageName}"/>
 
@@ -26,6 +18,15 @@
         </g:if>
         <g:else><title>Yarsaa</title></g:else>
     </g:else>
+    <g:if test="${SeoOptimization.list()[0]}">
+        <meta name="google-site-verification" content="${SeoOptimization.list()[0].googleSiteVerification}"/>
+        <meta name="robots" content="${SeoOptimization.list()[0].robots}">
+        <meta name="googlebot" content="${SeoOptimization.list()[0].googleBots}">
+        <meta name="keywords" content="${SeoOptimization.list()[0].keywords}">
+        <meta name="description" content="${SeoOptimization.list()[0].description}">
+        <meta name="author" content="${SeoOptimization.list()[0].author}">
+    </g:if>
+
     <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
     %{--<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>--}%
 

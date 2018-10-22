@@ -30,6 +30,7 @@
         <th>Robots</th>
         <th>Google Bots</th>
         <th>Title</th>
+        <th>Google Site Verification</th>
     </tr>
     </thead>
     <tfoot>
@@ -42,6 +43,7 @@
         <th>Robots</th>
         <th>Google Bots</th>
         <th>Title</th>
+        <th>Google Site Verification</th>
 
     </tr>
     </tfoot>
@@ -56,6 +58,7 @@
             <td>${list?.robots}</td>
 <td>${list.googleBots}</td>
             <td>${list.title}</td>
+            <td>${list.googleSiteVerification}</td>
         </tr>
     </g:each>
     </tbody>
