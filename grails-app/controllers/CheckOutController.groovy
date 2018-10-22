@@ -72,16 +72,6 @@ class CheckOutController {
                             }
 
                         }
-for(CartWithoutEndUser cartWithoutEndUser:cartList){
- if(cartWithoutEndUser.productBrand.email){
-     sendMail {
-         to "${cartWithoutEndUser.productBrand.email}"
-         subject "Order mail from customers of yarsaa.com"
-         html g.render(template:"/cart/order",model: [cartWithoutEndUser: cartWithoutEndUser])
-
-     }
- }
-}
                     session.cart.clear()
                     text=[]
                     text=[orderId,billingInfo[5],params.isCreateAccount] as JSON
@@ -115,15 +105,6 @@ for(CartWithoutEndUser cartWithoutEndUser:cartList){
 
                 }
             }
-            for(CartWithoutEndUser cartWithoutEndUser:cartList){
-                if(cartWithoutEndUser.productBrand.email){
-                    sendMail {
-                        to "${cartWithoutEndUser.productBrand.email}"
-                        subject "Order mail from customers of yarsaa.com"
-                        html g.render(template:"/cart/order",model: [cartWithoutEndUser: cartWithoutEndUser])
-
-                    }
-                }}
                 session.cart.clear()
             text=orderId
                 render text

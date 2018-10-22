@@ -154,7 +154,8 @@
                 <ul class="dropdown-menu">
                     <li><g:link action="recentOrders" controller="cartHistory">Recent Orders</g:link></li>
                     <li><g:link action="successFullOrders" controller="cartHistory">Successful Orders</g:link></li>
-                    <li><g:link action="pendingOrders" controller="cartHistory">Pending Orders</g:link></li>
+                    <li><g:link action="pendingOrdersMailNotSent" controller="cartHistory">Pending Orders(order not sent)</g:link></li>
+                    <li><g:link action="pendingOrdersMailSent" controller="cartHistory">Pending Orders(sent order)</g:link></li>
 
 
                 </ul>

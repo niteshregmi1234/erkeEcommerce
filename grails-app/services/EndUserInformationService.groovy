@@ -61,6 +61,7 @@ class EndUserInformationService {
                cartHistoryWithoutEndUserInstance.quantity=cart.quantity
                cartHistoryWithoutEndUserInstance.productSize=cart.productSize
                cartHistoryWithoutEndUserInstance.orderNotes=params.orderNotes
+               cartHistoryWithoutEndUserInstance.productBrand=cart.productBrand
                cartHistoryWithoutEndUserInstance.deliveryMethod=DeliveryMethod.findByIsShowStatusAndId(true,params.delivery as long)
                cartHistoryWithoutEndUserInstance.paymentMethod=PaymentMethod.findByIsShowStatusAndId(true,params.payment as long)
                if(endUserInformation){

@@ -74,9 +74,9 @@ def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFake
         catch (Exception e){
         }
     }
-    def pendingOrders(){
+    def pendingOrdersMailNotSent(){
         try{
-            def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFakeOrder(false,true)
+            def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFakeOrderAndIsSentForPurchaseOrder(false,true,false)
             List<List<CartHistoryWithoutEndUser>> listListCartList=new ArrayList<>()
 
             def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.customerPersonalDetails},{undeliveredCartItem -> undeliveredCartItem.date})
@@ -87,7 +87,25 @@ def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFake
                     listListCartList.add(cartList)
                 }
             }
-            render(view: "fakeOrders",model:[listListCartList:listListCartList])
+            render(view: "mailNotSentPendingOrders",model:[listListCartList:listListCartList])
+        }
+        catch (Exception e){
+        }
+    }
+    def pendingOrdersMailSent(){
+        try{
+            def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFakeOrderAndIsSentForPurchaseOrder(false,true,true)
+            List<List<CartHistoryWithoutEndUser>> listListCartList=new ArrayList<>()
+
+            def cartItemsByEndUserAndDate = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.customerPersonalDetails},{undeliveredCartItem -> undeliveredCartItem.date})
+            for(CartHistoryWithoutEndUser cartHistory:undeliveredCartItems) {
+                def abc = cartItemsByEndUserAndDate[cartHistory.customerPersonalDetails]
+                def cartList = abc[cartHistory.date] as List<CartHistoryWithoutEndUser>
+                if(!listListCartList.contains(cartList)){
+                    listListCartList.add(cartList)
+                }
+            }
+            render(view: "mailSentPendingOrders",model:[listListCartList:listListCartList])
         }
         catch (Exception e){
         }
@@ -111,6 +129,43 @@ def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFake
         }}
         catch (Exception e){
         }
+    }
+    def sendMailForOrders(){
+        def undeliveredCartItems=CartHistoryWithoutEndUser.findAllByIsDeliveredAndIsFakeOrderAndIsSentForPurchaseOrder(false,true,false)
+        if(undeliveredCartItems.size()>0) {
+            def cartItemsForPurchaseBrandWise = undeliveredCartItems.groupBy({ undeliveredCartItem -> undeliveredCartItem.productBrand })
+            List<List<CartHistoryWithoutEndUser>> listListCartList=new ArrayList<>()
+            for(CartHistoryWithoutEndUser cartHistory:undeliveredCartItems) {
+                def cartList = cartItemsForPurchaseBrandWise[cartHistory.productBrand] as List<CartHistoryWithoutEndUser>
+                if(!listListCartList.contains(cartList)){
+                    listListCartList.add(cartList)
+                }
+            }
+for(List<CartHistoryWithoutEndUser> listOfCartBrandWise:listListCartList){
+    if (listOfCartBrandWise[0].productBrand) {
+        if (listOfCartBrandWise[0].productBrand.email) {
+            sendMail {
+                to "${listOfCartBrandWise[0].productBrand.email}"
+                subject "Order mail from customers of yarsaa.com"
+                html g.render(template: "/cart/order", model: [cartWithoutEndUser: listOfCartBrandWise])
+
+            }
+        }
+    }
+    for (CartHistoryWithoutEndUser cartHistoryWithoutEndUser : undeliveredCartItems) {
+        cartHistoryWithoutEndUser.isSentForPurchaseOrder = true
+        cartHistoryWithoutEndUser.save(flush: true)
+    }
+}
+
+            flash.message = "purchase order successfully sent"
+        }
+        else{
+            flash.message = "unable to send purchase order. Pending order is empty"
+
+        }
+
+        redirect(action: "pendingOrdersMailNotSent")
     }
 
 }
