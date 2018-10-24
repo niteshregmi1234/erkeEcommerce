@@ -111,6 +111,27 @@ function carousels() {
 		afterInit: ''
 	});
 
+    $('.product-slider1').owlCarousel({
+        navigation: true, // Show next and prev buttons
+        slideSpeed: 300,
+        paginationSpeed: 400,
+        items:5,
+        center:true,
+        afterInit: function() {
+            $('.product-slider1 .item').css('visibility', 'visible');
+        }
+    });
+    $('.product-slider2').owlCarousel({
+        navigation: true, // Show next and prev buttons
+        slideSpeed: 300,
+        paginationSpeed: 400,
+        items:4,
+        center:true,
+        afterInit: function() {
+            $('.product-slider2 .item').css('visibility', 'visible');
+        }
+    });
+
 	$('.product-slider').owlCarousel({
 		navigation: true, // Show next and prev buttons
 		slideSpeed: 300,
@@ -121,7 +142,6 @@ function carousels() {
 			$('.product-slider .item').css('visibility', 'visible');
 		}
 	});
-
 	$('#main-slider').owlCarousel({
 		navigation: true, // Show next and prev buttons
 		slideSpeed: 300,

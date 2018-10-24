@@ -3842,5 +3842,6 @@ html, body {
 
 
 .ad-image{
+    width: 100%;
     padding: 15px 0px;
 }
