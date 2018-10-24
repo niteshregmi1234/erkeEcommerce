@@ -27,7 +27,7 @@
 <div id="all">
 
   <div id="content">
-    <div class="container">
+    <div class="container-fluid">
 
       <div class="col-md-12">
         <ul class="breadcrumb">
@@ -816,7 +816,7 @@
           </div>
           <g:each in="${totalArray[3]}" var="list" status="i">
             <g:if test="${i<3}">
-              <div class="col-md-3 col-sm-6">
+              <div class="col-md-2 col-sm-6">
                 <div class="product same-height">
                   <div class="flip-container">
                     <div class="flipper">

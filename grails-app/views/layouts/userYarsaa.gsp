@@ -116,7 +116,7 @@
 <noscript>
 
     <div id="content" style="margin:20px;">
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="col-md-12">
                 <div class="row" id="error-page">
@@ -345,7 +345,7 @@
  _________________________________________________________ -->
 
     <div class="navbar navbar-default yamm" role="navigation" id="navbar">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
 
                 <g:link class="navbar-brand home "  action="userHome" controller="endUser" data-animate-hover="bounce">
@@ -649,7 +649,7 @@
         <!-- *** FOOTER ***
  _________________________________________________________ -->
         <div id="footer">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
                         <h4>Pages</h4>
@@ -811,7 +811,7 @@
  _________________________________________________________ -->
 
         <div id="copyright">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="col-md-6">
                     <p class="pull-left">© <g:formatDate format="yyyy" date="${new Date()}"/>.</p>
 

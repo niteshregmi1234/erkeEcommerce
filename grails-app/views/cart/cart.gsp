@@ -15,7 +15,7 @@
 
 <body>
 <div id="content">
-<div class="container">
+<div class="container-fluid">
     <div class="col-md-12" id="basketBar">
         <ul class="breadcrumb">
             <li><g:link action="userHome" controller="endUser">Home</g:link>

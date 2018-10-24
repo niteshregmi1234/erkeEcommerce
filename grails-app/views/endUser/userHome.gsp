@@ -13,7 +13,7 @@
 
 <body>
 <div id="content">
-
+<div class="container-fluid">
     %{--<div class="container coverImage" style="width: 1346px;">--}%
     %{--<div class="col-lg-12">--}%
     <div id="main-slider">
@@ -567,7 +567,7 @@
 
     <br>
 
-
+</div>
 </div>
 </body>
 </html>

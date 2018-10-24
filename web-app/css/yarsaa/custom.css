@@ -4,6 +4,9 @@
 /*.billingFieldLarge{*/
 /*width: 432px;*/
 /*}*/
+.item img{
+    width: 100%;
+}
 html, body {
     max-width: 100%;
     overflow-x: hidden;
