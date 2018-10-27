@@ -426,7 +426,7 @@
 
                 var options = {
                     valueNames: ['category', 'subCategory', 'brand','discount','priceProduct','soldNumbers'],
-                    page: 15,
+                    page: 20,
                     plugins: [
                         ListPagination(paginationTopOptions), ListPagination(paginationBottomOptions)
                     ]
@@ -614,8 +614,10 @@
                         }
                         return  false;
                     }
+
                 });
-                $('#prev').on('click', function() {
+
+                    $('#prev').on('click', function() {
                     var element=$( ".pagination li.active" ).prev('li');
                     if(element.length){
                         $( element.click());
@@ -634,6 +636,9 @@
                     }
                 });
                 $("#nexts").on('click', function() {
+                    $('html, body').animate({
+                        scrollTop: $("#myList").offset().top
+                    }, 2000);
                     var element=$( ".pagination li.active" ).next('li');
                     if(element.length){
                         $( element.click());
@@ -650,8 +655,13 @@
                         }
                         return  false;
                     }
+
                 });
+
                 $('#prevs').on('click', function() {
+                    $('html, body').animate({
+                        scrollTop: $("#myList").offset().top
+                    }, 2000);
                     var element=$( ".pagination li.active" ).prev('li');
                     if(element.length){
                         $( element.click());
@@ -668,6 +678,7 @@
                         }
                         return  false;
                     }
+
                 });
 
             </script>
@@ -675,6 +686,7 @@
                 $("body").click(function(event){
                     var allimages= document.getElementsByTagName('img');
                     lazyDisplayImage(allimages);
+
                 });
                 function lazyDisplayImage(allimages){
                     var element=$( ".pagination li.active" );
@@ -740,7 +752,6 @@
                             scrollTop: $("#myList").offset().top
                         }, 2000);
                     });
-
                 </script>
             </g:if>
 

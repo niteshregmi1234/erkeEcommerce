@@ -440,7 +440,7 @@
 
             var options = {
                 valueNames: ['category', 'subCategory', 'brand','discount','priceProduct','soldNumbers'],
-                page: 15,
+                page: 20,
                 plugins: [
                     ListPagination(paginationTopOptions), ListPagination(paginationBottomOptions)
                 ]
