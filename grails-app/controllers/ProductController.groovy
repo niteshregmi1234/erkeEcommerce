@@ -733,7 +733,7 @@ def checkPhoto(){
 
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-                    def productInstance = Product.findByDelFlagAndId(false,params.id)
+                    def productInstance = Product.findById(params.id)
                     if (productInstance) {
                             productInstance.delFlag = true
                             productInstance.save(flush: true)

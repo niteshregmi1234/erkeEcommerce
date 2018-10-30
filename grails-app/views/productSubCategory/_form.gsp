@@ -67,7 +67,14 @@
         </div>
     </div>
 </div>
-
+<div class="col-lg-12">
+    <div class="form-group">
+        <label class="control-label col-sm-2">Priority Number:</label>
+        <div class="col-sm-4">
+            <g:textField name="priorityNumber" id="priorityNumber" class="form-control" onkeypress="return isNumber(event)" value="${productSubCategoryInstance?.priorityNumber}"/>
+        </div>
+    </div>
+</div>
 <div class="col-lg-12">
     <div class="form-group ">
         <label class="control-label col-sm-2" for="statusShow">Description:</label>

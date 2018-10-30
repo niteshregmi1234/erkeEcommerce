@@ -135,6 +135,7 @@
             <li><a href="#" onclick="resetProductPriority();" >Product Priority</a></li>
             <li><a href="#" onclick="resetCoverImagePriority();">Cover Image Priority</a></li>
             <li><a href="#" onclick="resetBrandPriority();" >Brand Priority</a></li>
+            <li><a href="#" onclick="resetSubCategoryPriority();" >SubCategory Priority</a></li>
 
         </ul>
     </li>
@@ -286,6 +287,46 @@
 
         });
           }
+
+    function resetSubCategoryPriority() {
+        bootbox.confirm("Are you sure want to reset Product Brand Priority?", function(resultConfirm){
+            if(resultConfirm){
+                $.ajax({
+                    url: "${createLink(controller:'productSubCategory', action:'resetPriority')}",
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    success: function (result) {
+                        if (result == "successfull") {
+                            bootbox.alert({
+                                message: "productSubCategory priority has been successfully reset",
+                                size: 'small',
+                                callback: function(){
+                                    location.reload();
+                                }
+                            });
+
+                        }
+                        else {
+                            bootbox.alert({
+                                message: "unable to reset productSubCategory priority",
+                                size: 'small'
+                            });
+
+
+
+                            // DataTable
+
+
+                        }
+
+                    }
+                });
+
+            }
+
+        });
+    }
 
     $(function () {
 

@@ -139,7 +139,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="imgwrapper">
-                    <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProductSubCategoryImage])}" class="img-responsive lazy">
+                    <img data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.specialProductSubCategoryImage])}" class="img-responsive lazy" style="width: 100%;">
                     <div class="w3lsshoesaits-info">
                         <h3>${aboutUsInstance.specialProductSubCategory.subCategoryName} TO DIE FOR</h3>
                         <p>${aboutUsInstance.specialProductSubCategory.subCategoryDescription}</p>
@@ -151,12 +151,13 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-            <div class="col-md-12 ">
-                <div class="agilenwew3lsfashions about-background lazy" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.backgroundImage])}');background-size:contain;">
-                </div>
-            </div>
-    </div>
+    <br>
+    %{--<div class="container-fluid">--}%
+            %{--<div class="col-md-12 ">--}%
+                %{--<div class="agilenwew3lsfashions about-background lazy" style="background-image:url('${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:aboutUsInstance.backgroundImage])}');background-size:contain;">--}%
+                %{--</div>--}%
+            %{--</div>--}%
+    %{--</div>--}%
 </div>
 
 <script>
