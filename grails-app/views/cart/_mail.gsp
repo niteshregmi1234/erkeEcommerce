@@ -71,6 +71,10 @@ ${list.quantity}
     </th>
 </tr>
 </table >
+<g:if test="${mobileNumberQuick}">
+    <h3>Sent from mobile number : ${mobileNumberQuick}</h3>
+</g:if>
+<g:else>
 <table border="3px" width="50px">
     <tr>
         <th>Pre-Total</th>
@@ -117,5 +121,6 @@ ${list.quantity}
     <table border="3px" width="50px"><tr><td>FirstName:${shippingInfo[0]}</td></tr><tr><td>LastName:${shippingInfo[1]}</td></tr><tr><td>Company Name:${shippingInfo[2]}</td></tr><tr><td>Mobile No:${shippingInfo[3]}</td></tr><tr><td>Address1:${shippingInfo[4]}</td></tr><tr><td>Address2:${shippingInfo[5]}</td></tr><tr><td>City:${shippingInfo[6]}</td></tr></table>
 
 </g:if>
+</g:else>
 </body>
 </html>

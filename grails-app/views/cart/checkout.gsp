@@ -78,11 +78,15 @@
 
 
                     <div class="content">
-<g:if test="${!session.endUser}">
+
+                        <button type="button" class="btn btn-primary btn-arrow-right" style="margin-left: 30px;" onclick="$('#smallModalNumber').modal('toggle');">Its easy!! Just enter your mobile number for quick checkout!!!</button>
+<br><br>
+                        <g:if test="${!session.endUser}">
     <button type="button" class="btn btn-primary btn-arrow-right" style="margin-left: 30px;" onclick="$('#login-modal').modal('toggle');">Returning Customer?login!!!</button>
 
     <br><br>
 </g:if>
+
                         <div class="col-sm-6">
                                 <div class="box">
                                     <h1 class="checkOutHead">Billing Details</h1>
@@ -639,7 +643,8 @@ ${list.quantity}
 
             </div>
                    </div>
-                <g:if test="${session.cart}">
+
+                    <g:if test="${session.cart}">
 
                     <div class="col-sm-3" id="basketSummary1">
                         <div class="box" id="order-summary">
@@ -686,6 +691,24 @@ ${list.quantity}
         </div>
 
 
+        <div class="modal fade" id="smallModalNumber" tabindex="-1" role="dialog" aria-labelledby="smallModal" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Enter Mobile number here:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <g:textField class="form-control" name="mobileNumber" id="mobileNumber" onkeypress="return isNumber(event)"
+                        />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                        <div class="btn btn-primary" id="submit_IdOrderNumber" >Place Order<i class="fa fa-chevron-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script>
 
@@ -707,6 +730,17 @@ ${list.quantity}
                 $('#submit_IdOrder').prop('disabled', true);
             }
             window.onbeforeunload = preventMultipleSubmissions;
+            $('#submit_IdOrderNumber').click(function(){
+                $('#smallModalNumber').modal('toggle');
+
+                $('#newLoaderYarsaa').show();
+                $('#submit_IdOrderNumber').prop('disabled', true);
+                setTimeout(function() {
+                    $('#newLoaderYarsaa').fadeOut();
+                }, 5000);
+                ValidCheckOutNumber();
+            });
+
             $('#submit_IdOrder').click(function(){
                 $('#newLoaderYarsaa').show();
                 $('#submit_IdOrder').prop('disabled', true);
@@ -715,6 +749,55 @@ ${list.quantity}
                 }, 5000);
                 ValidCheckOut();
             });
+            function ValidCheckOutNumber(){
+                var responseValue;
+                $('#newLoaderYarsaa').show();
+                setTimeout(function() {
+                    $('#newLoaderYarsaa').fadeOut();
+                }, 5000);
+                $.ajax({
+                    url: "${createLink(controller:'checkOut', action:'checkCart')}",
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    success: function (text) {
+                        if(text=="sessionNull"){
+                            bootbox.alert({
+                                message: "Sorry, your cart session has expired as you are inactive for long time.",
+                                callback: function(){
+                                    window.location="/cart";
+                                }
+
+                            });
+
+
+                            responseValue=false;
+                        }
+                        else if(text=="cartEmpty"){
+                            bootbox.alert({
+                                message: "Sorry, your cart is empty. You must have something in your cart to send enquiry!!!.",
+                                callback: function(){
+                                    window.location="/cart";
+
+                                }
+
+                            });
+
+                            responseValue=false;
+
+                        }
+                        else if(text=="ok"){
+
+                            var mobileNumber=document.getElementById("mobileNumber").value;
+
+                            quickPlaceOrder(mobileNumber);
+                        }
+                    }
+
+                });
+                return responseValue
+            }
+
             function ValidCheckOut(){
                 var responseValue;
                 $('#newLoaderYarsaa').show();
@@ -731,7 +814,7 @@ ${list.quantity}
                 bootbox.alert({
                     message: "Sorry, your cart session has expired as you are inactive for long time.",
                     callback: function(){
-                        window.location="/cart/cart";
+                        window.location="/cart";
                     }
 
                 });
@@ -743,7 +826,7 @@ responseValue=false;
                 bootbox.alert({
                     message: "Sorry, your cart is empty. You must have something in your cart to send enquiry!!!.",
                     callback: function(){
-                        window.location="/cart/cart";
+                        window.location="/cart";
 
                     }
 
@@ -753,6 +836,7 @@ responseValue=false;
 
             }
             else if(text=="ok"){
+
                 var payment=$("input[name='payment']:checked").val();
                 var delivery=$("input[name='delivery']:checked").val();
                 var orderNotes=document.getElementById("orderNotesShipping").value;
@@ -782,6 +866,28 @@ responseValue=false;
     });
 return responseValue
 }
+            function quickPlaceOrder(mobileNumber) {
+                $.ajax({
+                    url: "${createLink(controller:'checkOut', action:'placeOrder')}",
+                    type: "POST",
+                    data: { "mobileNumberQuick":mobileNumber },
+                    async : false,
+                    cache:false,
+                    success: function(result) {
+                        if(result=="enquiry not sent"){
+                            $('#messageModel1').modal({backdrop: 'static', keyboard: false});
+
+                        }
+                        else{
+                            document.getElementById('orderIdWithoutAccount').innerHTML+="Order Id:"+result;
+                            $('#messageModelWithoutAccount').modal({backdrop: 'static', keyboard: false});
+
+                        }
+                    }
+                });
+
+            }
+
 
             function showAddress(evt){
                 $('#deliveryBar').hide();
