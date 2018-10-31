@@ -541,13 +541,13 @@
                 <!--/.nav-collapse -->
 
                 <div class="navbar-collapse collapse" id="search-not-mobile">
-                    <g:form controller="endUser" action="search" class="" role="search" onsubmit="return validSearch();">
+                    <g:form controller="endUser" action="search" class="" role="search" onsubmit="return validSearchNotMobile();">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="searchProduct" name="search" placeholder="Search by product,category,brand wise..." value="${params?.q}">
+                            <input type="text" class="form-control" id="searchProductNotMobile" name="search" placeholder="Search by product,category,brand wise..." value="${params?.q}">
 
                             <span class="input-group-btn">
 
-                                <button type="submit" class="btn btn-primary" id="submit_Id"><i class="fa fa-search"></i></button>
+                                <button type="submit" class="btn btn-primary" id="submit_IdNotMobile"><i class="fa fa-search"></i></button>
 
                             </span>
 
@@ -585,8 +585,21 @@
     <script type="text/javascript">
         function preventMultipleSubmissions() {
             $('#submit_Id').prop('disabled', true);
+            $('#submit_IdNotMobile').prop('disabled', true);
+
         }
         window.onbeforeunload = preventMultipleSubmissions;
+        function validSearchNotMobile(){
+            var searchKey=document.getElementById("searchProductNotMobile").value;
+            if(searchKey==''){
+                bootbox.alert({
+                    message: "Please enter search keyword",
+                    size: 'small'
+                });
+                $('#searchProduct').focus();
+                return false;
+            }
+        }
         function validSearch(){
             var searchKey=document.getElementById("searchProduct").value;
             if(searchKey==''){
@@ -598,7 +611,8 @@
                 return false;
             }
         }
-    </script>
+
+</script>
 
     <div id="all">
 
