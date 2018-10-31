@@ -46,7 +46,7 @@
                      role="tabpanel"
                      aria-labelledby="heading${i}">
                     <div class="panel-body">
-            <g:form controller="cartHistory" action="deleteSuccessfulOrders" >
+            <g:form controller="quickCheckOutWithCart" action="deleteSuccessfulOrders" >
                 <div class="container">
                                 <h4><u>Time-${list[0].date}</u></h4>
                     <h4><u>Mobile Number-${list[0].mobileNumber}</u></h4>

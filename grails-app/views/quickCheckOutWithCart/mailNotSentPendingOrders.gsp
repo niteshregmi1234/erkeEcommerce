@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<g:link action="sendMailForOrders" controller="cartHistory" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Send Purchase Order</g:link>
+<g:link action="sendMailForOrders" controller="quickCheckOutWithCart" onclick="return confirm('Are you sure want to confirm?')" class="btn btn-primary navbar-btn">Send Purchase Order</g:link>
 
 <h1>Pending Orders(Order not mailed)-</h1><br>
 <div class="container"

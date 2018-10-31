@@ -48,7 +48,7 @@
                      role="tabpanel"
                      aria-labelledby="heading${i}">
                     <div class="panel-body">
-                        <g:form action="deliveredToCustomer" method="post" controller="cartHistory" >
+                        <g:form action="deliveredToCustomer" method="post" controller="quickCheckOutWithCart" >
 
                             <div class="container">
                                 <h4><u>Time-${list[0].date}</u></h4>
