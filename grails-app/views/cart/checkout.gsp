@@ -731,6 +731,24 @@ ${list.quantity}
             }
             window.onbeforeunload = preventMultipleSubmissions;
             $('#submit_IdOrderNumber').click(function(){
+                var phoneno = /^\d{10}$/;
+
+                var mobileNumber=document.getElementById("mobileNumber").value;
+if(mobileNumber==''){
+    bootbox.alert({
+        message: "mobile number must not be blank",
+        size: 'small'
+    });
+    document.getElementById("mobileNumber").focus();
+}
+else if(!(mobileNumber.match(phoneno))){
+    bootbox.alert({
+        message: "invalid mobile number",
+        size: 'small'
+    });
+    document.getElementById("mobileNumber").focus();
+}
+else{
                 $('#smallModalNumber').modal('toggle');
 
                 $('#newLoaderYarsaa').show();
@@ -738,7 +756,7 @@ ${list.quantity}
                 setTimeout(function() {
                     $('#newLoaderYarsaa').fadeOut();
                 }, 5000);
-                ValidCheckOutNumber();
+                ValidCheckOutNumber();}
             });
 
             $('#submit_IdOrder').click(function(){

@@ -161,6 +161,16 @@
 
                 </ul>
             </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Quick Orders<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><g:link action="recentOrders" controller="cartHistory">Recent Orders</g:link></li>
+                    <li><g:link action="successFullOrders" controller="cartHistory">Successful Orders</g:link></li>
+                    <li><g:link action="pendingOrdersMailNotSent" controller="cartHistory">Pending Orders(order not sent)</g:link></li>
+                    <li><g:link action="pendingOrdersMailSent" controller="cartHistory">Pending Orders(sent order)</g:link></li>
+
+
+                </ul>
+            </li>
 
 
             <li><g:link action="logout" controller="logout">Logout</g:link></li>
