@@ -259,7 +259,6 @@ Order Id-${list[0].orderId.orderId}
                                     <label class="control-label col-sm-2"></label>
 
                                     <div class="col-sm-6">
-                                        <g:actionSubmit action="deliveredToCustomer" name="delivered" value="Delivered" class="btn btn-success a" onclick="return confirm('Are you sure the order is delivered?')"></g:actionSubmit><br><br>
                                         <g:actionSubmit action="addToPending" name="pending" value="Add to Pending" class="btn btn-danger a" onclick="return confirm('Are you sure add the order to pending list?')"></g:actionSubmit>
 
                                     </div>

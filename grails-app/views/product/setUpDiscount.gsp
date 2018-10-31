@@ -124,7 +124,7 @@
                 return false;
 
             }
-            else if (discountPercentage < 0 || discountPercentage >= 100 || discountPercentage == 0) {
+            else if (discountPercentage < 0 || discountPercentage >= 100 ||) {
                 document.getElementById("discountPercentage").focus();
                 bootbox.alert({
                     message: "discount % must be between 0 and 100",

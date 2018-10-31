@@ -43,7 +43,7 @@
     %{--}--}%
     %{--</style>--}%
 
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="col-md-12">
             <ul class="breadcrumb">
@@ -59,7 +59,7 @@
 
         <script src="${resource(dir: 'js', file: 'yamsaa/jquery-ui.js')}" type="text/javascript"
                 charset="utf-8"></script>
-        <div class="col-md-3" id="filterColumn" style="visibility:hidden;">
+        <div class="col-md-2" id="filterColumn" style="visibility:hidden;">
 
             <!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
@@ -247,7 +247,7 @@
                 %{--</div>--}%
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="pages">
 
                 <ul id="prevPage">
@@ -290,7 +290,7 @@
                         <div class="discount hidden">${list.productDetails.discountPercentage}</div>
                         <div class="priceProduct hidden">${list.productDetails.price}</div>
                         <div class="soldNumbers hidden">${list.soldNumbers}</div>
-                        <div class="col-md-4 col-sm-4 a">
+                        <div class="col-md-3 col-sm-4 a">
                             <div class="product">
                                 <div class="flip-container">
                                     <div class="flipper">
@@ -324,7 +324,8 @@
                                     </g:if>
                                     <g:if test="${list.productDetails.isSale==false}">
 
-                                        <p class="price priceWithoutDiscount" style="color:#202020;font-weight: 400;font-size: 14px;text-align: left;width: 163px;">Rs.${list.productDetails.price}</p>
+                                        <p class="price priceWithoutDiscount" style="color:#202020;font-weight: 400;font-size: 14px;text-align: left;width: 163px;">Rs.${list.productDetails.price}                     ${list.priorityNumber}
+                                        </p>
                                     </g:if>
                                     <p class="buttons">
                                         <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="btn btn-default">View detail</g:link>
@@ -428,7 +429,7 @@
 
             var options = {
                 valueNames: ['category', 'subCategory', 'brand','discount','priceProduct','soldNumbers'],
-                page: 15,
+                page: 20,
                 plugins: [
                     ListPagination(paginationTopOptions), ListPagination(paginationBottomOptions)
                 ]

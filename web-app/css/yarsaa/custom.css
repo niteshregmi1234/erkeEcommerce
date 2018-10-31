@@ -4,6 +4,13 @@
 /*.billingFieldLarge{*/
 /*width: 432px;*/
 /*}*/
+.item img{
+    width: 100%;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 .icon {
     background: rgba(255, 255, 255, .6);
     color: rgba(0, 0, 0, .3);
@@ -81,7 +88,7 @@
     margin-top: -20px;
 }
 .aid{
-    margin-top: -50px;
+    margin-top: -30px;
 }
 .boxBarSales{
     /*margin-top: -15px;*/
@@ -306,15 +313,14 @@
 }
 .agileinfonewsl {
     /*background-image: url("../../imagess/yamsaa/newsletter.jpg");*/
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
     background-position: center center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-attachment: fixed;
     text-align: center;
     height: 600px;
-    width: 1110px;
+
 }
 .text1 {
 
@@ -396,10 +402,9 @@
 .agilenwew3lsfashions {
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background-size: contain;
+    /*-webkit-background-size: cover;*/
+    -moz-background-size: contain;
     background-attachment: fixed;
     padding: 150px 0;
     text-align: center;
@@ -3840,5 +3845,6 @@
 
 
 .ad-image{
+    width: 100%;
     padding: 15px 0px;
 }

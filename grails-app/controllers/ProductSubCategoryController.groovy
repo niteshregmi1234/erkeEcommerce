@@ -8,6 +8,55 @@ class ProductSubCategoryController extends BaseController{
 def productService
     static allowedMethods = [save: "POST",uploadCoverImage:"POST",editCoverImage: "POST",renderImage: "POST"]
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
+    def resetPriority(){
+        try{
+            if(session.adminUser) {
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def productSubCategoryList=ProductSubCategory.list()
+                    for(ProductSubCategory productSubCategory:productSubCategoryList){
+                        productSubCategory.priorityNumber=ProductBrand.list().size()
+                        productSubCategory.save(flush: true)
+                    }
+                    render "successfull"
+
+                }
+            }
+        }
+        catch (Exception e){
+            render "unsuccessfull"
+        }
+    }
+
+    def updatePriorityNumber(){
+        try{
+            if(session.adminUser) {
+
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def productSubCategory=ProductSubCategory.findById(params.id as long)
+
+
+                    if (productSubCategory){
+                        if(params.priorityNumber) {
+                            productSubCategory.priorityNumber = params.priorityNumber as long
+                        }
+                        else{
+                            productSubCategory.priorityNumber=ProductSubCategory.list().size()
+                        }
+                        productSubCategory.save(flush: true)
+                        render productSubCategory.priorityNumber
+                    }
+                    else{
+                        render "notOk"
+                    }
+
+                }
+            }
+        }
+        catch (Exception e){
+            render "notOk"
+
+        }
+    }
 
     def list() {
         try{
@@ -51,6 +100,13 @@ def productService
                         productSubCategoryInstance.isFooter = params.isFooter as byte
                         productSubCategoryInstance.subCategoryDescription = params.subCategoryDescription
                         productSubCategoryInstance.showInHomePage = params.showInHomePage as byte
+                        if(params.priorityNumber) {
+                            productSubCategoryInstance.priorityNumber = params.priorityNumber as long
+                        }
+                        else{
+                            productSubCategoryInstance.priorityNumber=ProductSubCategory.list().size()
+
+                        }
                         productSubCategoryInstance.urlName = productService.convertToOriginalUrl(productSubCategoryInstance.subCategoryName)
                         productSubCategoryInstance.coverImageName = uploadCoverImage()
                         productSubCategoryInstance.save(flush: true)
@@ -64,6 +120,13 @@ def productService
                             productSubCategoryInstance.isFooter = params.isFooter as byte
                             productSubCategoryInstance.subCategoryDescription = params.subCategoryDescription
                             productSubCategoryInstance.showInHomePage = params.showInHomePage as byte
+                            if(params.priorityNumber) {
+                                productSubCategoryInstance.priorityNumber = params.priorityNumber as long
+                            }
+                            else{
+                                productSubCategoryInstance.priorityNumber=ProductSubCategory.list().size()
+
+                            }
                             productSubCategoryInstance.urlName = productService.convertToOriginalUrl(productSubCategoryInstance.subCategoryName)
                             productSubCategoryInstance.coverImageName = editCoverImage(productSubCategoryInstance.coverImageName)
                             productSubCategoryInstance.save(flush: true)

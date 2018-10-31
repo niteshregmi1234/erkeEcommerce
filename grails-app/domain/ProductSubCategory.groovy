@@ -10,13 +10,17 @@ String subCategoryDescription
     boolean isFooter
     boolean showInHomePage
     String urlName
+    long priorityNumber
+
     static constraints = {
+        priorityNumber nullable:true
         subCategoryId (generator:'assigned',unique:true)
         showInHomePage (nullable: true)
         urlName (nullable: true)
 
     }
     static mapping = {
+        sort priorityNumber: "asc"
     }
 
 }

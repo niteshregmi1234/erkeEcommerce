@@ -12,18 +12,38 @@ class ProductController extends BaseController {
     def create(){
 
     }
+    def resetPriority(){
+        try{
+        if(session.adminUser) {
+            if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                def productList=Product.list()
+                  for(Product product:productList){
+            product.priorityNumber=Product.list().size()
+                      product.save(flush: true)
+        }
+                render "successfull"
+
+            }
+        }
+        }
+        catch (Exception e){
+          render "unsuccessfull"
+        }
+    }
     def updatePriorityNumber(){
         try{
             if(session.adminUser) {
 
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
                     def product=Product.findByDelFlagAndId(false,params.id as long)
+
+
                     if (product){
                         if(params.priorityNumber) {
                             product.priorityNumber = params.priorityNumber as long
                         }
                         else{
-                            product.priorityNumber=Product.list()[Product.list().size()-1].id +1
+                            product.priorityNumber=Product.list().size()
                         }
                         product.save(flush: true)
                         render product.priorityNumber
@@ -271,7 +291,8 @@ def checkPhoto(){
                 product.priorityNumber = params.priorityNumber as long
             }
             else{
-                product.priorityNumber=Product.list()[Product.list().size()-1].id + 1
+                product.priorityNumber=Product.list().size()
+
             }
             product.specialImageName = uploadSpecialImage()
             product.delFlag = false
@@ -305,7 +326,8 @@ def checkPhoto(){
                     product.priorityNumber = params.priorityNumber as long
                 }
                 else{
-                    product.priorityNumber=Product.list()[Product.list().size()-1].id+1
+                    product.priorityNumber=Product.list().size()
+
                 }
                 product.specialImageName = editSpecialImage(product.specialImageName)
                 product.save(flush: true)
@@ -711,7 +733,7 @@ def checkPhoto(){
 
                 if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
 
-                    def productInstance = Product.findByDelFlagAndId(false,params.id)
+                    def productInstance = Product.findById(params.id)
                     if (productInstance) {
                             productInstance.delFlag = true
                             productInstance.save(flush: true)

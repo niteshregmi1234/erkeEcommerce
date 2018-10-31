@@ -27,7 +27,7 @@
 <div id="all">
 
   <div id="content">
-    <div class="container">
+    <div class="container-fluid">
 
       <div class="col-md-12">
         <ul class="breadcrumb">
@@ -357,7 +357,7 @@
 
               <!-- Botones de compra -->
               <div class="section" style="padding-bottom:20px;">
-                <button class="btn btn-primary" id="addToCart"><span style="margin-right:20px" class="fa fa-shopping-cart" aria-hidden="true"></span> Add to cart</button>
+                <button class="btn btn-primary AddTocartButton" id="addToCart"><span style="margin-right:20px" class="fa fa-shopping-cart" aria-hidden="true"></span> Add to cart</button>
                 %{--<h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Agregar a lista de deseos</a></h6>--}%
               </div>
                   <script>
@@ -540,7 +540,7 @@
 
         .item-photo{display:flex;justify-content:center;align-items:center;border-right:1px solid #f6f6f6;}
         .menu-items{list-style-type:none;font-size:11px;display:inline-flex;margin-bottom:0;margin-top:20px}
-        .btn-primary{width:100%;border-radius:0;}
+        .AddTocartButton{width:100%;border-radius:0;}
         .section{width:100%;margin-left:-15px;padding:2px;padding-left:15px;padding-right:15px;background:#f8f9f9}
         .title-price{margin-top:30px;margin-bottom:0;color:black}
         .title-attr{margin-top:0;margin-bottom:0;color:black;}
@@ -816,7 +816,7 @@
           </div>
           <g:each in="${totalArray[3]}" var="list" status="i">
             <g:if test="${i<3}">
-              <div class="col-md-3 col-sm-6">
+              <div class="col-md-2 col-sm-6">
                 <div class="product same-height">
                   <div class="flip-container">
                     <div class="flipper">

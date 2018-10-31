@@ -3,22 +3,29 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="robots" content="all,follow">
-    <meta name="googlebot" content="index,follow,snippet,archive">
-    <meta name="keywords" content="">
-    <meta name="google-site-verification" content="ukYH3gaQ4LcRA-6yCKNwKZGIv2FKj6l8WubNurI13mc"/>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
-    <meta name="description" content="Yarsaa online shopping for young generations and youths.You can have amazing shopping through our shop.">
-    <meta name="author" content="Anoj And Bikash">
 
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <g:if test="${productInstance}">
         <meta property="og:image" content="https://www.yarsaa.com/imageRender/renderImage?imageName=${productInstance.specialImageName}"/>
 
     </g:if>
-
-    <title>
-        Yarsaa
-    </title>
+<g:if test="${title}">
+    <title>${title}</title>
+</g:if>
+    <g:else>
+        <g:if test="${SeoOptimization.list()[0]}">
+        <title>${SeoOptimization.list()[0].title}</title>
+        </g:if>
+        <g:else><title>Yarsaa</title></g:else>
+    </g:else>
+    <g:if test="${SeoOptimization.list()[0]}">
+        <meta name="google-site-verification" content="${SeoOptimization.list()[0].googleSiteVerification}"/>
+        <meta name="robots" content="${SeoOptimization.list()[0].robots}">
+        <meta name="googlebot" content="${SeoOptimization.list()[0].googleBots}">
+        <meta name="keywords" content="${SeoOptimization.list()[0].keywords}">
+        <meta name="description" content="${SeoOptimization.list()[0].description}">
+        <meta name="author" content="${SeoOptimization.list()[0].author}">
+    </g:if>
 
     <link href='//fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
     %{--<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>--}%
@@ -49,7 +56,7 @@
         <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"style.default.css")}" type="text/css"
               media="all"/>
     </g:if>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.5')}" type="text/css"
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/custom.css?v=1.6')}" type="text/css"
           media="all"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/loader.css')}" type="text/css"
           media="all"/>
@@ -109,7 +116,7 @@
 <noscript>
 
     <div id="content" style="margin:20px;">
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="col-md-12">
                 <div class="row" id="error-page">
@@ -338,7 +345,7 @@
  _________________________________________________________ -->
 
     <div class="navbar navbar-default yamm" role="navigation" id="navbar">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
 
                 <g:link class="navbar-brand home "  action="userHome" controller="endUser" data-animate-hover="bounce">
@@ -656,7 +663,7 @@
         <!-- *** FOOTER ***
  _________________________________________________________ -->
         <div id="footer">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
                         <h4>Pages</h4>
@@ -745,12 +752,14 @@
 
                         <h4>Where to find us</h4>
 
-                        <p><strong>${CompanyInformation.list()[0].companyName}.</strong>
+                        <p style="color: #eee;"><strong>${CompanyInformation.list()[0].companyName}.</strong>
+
                             <br>${CompanyInformation.list()[0].location1}
                             <br>${CompanyInformation.list()[0].location2}
                             <br>${CompanyInformation.list()[0].location3}
+
                             <br>
-                            <strong>${CompanyInformation.list()[0].location4}</strong>
+                            <strong >${CompanyInformation.list()[0].location4}</strong>
                         </p>
 
                         <g:link action="contact" controller="endUser">Go to contact page</g:link>
@@ -816,7 +825,7 @@
  _________________________________________________________ -->
 
         <div id="copyright">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="col-md-6">
                     <p class="pull-left">© <g:formatDate format="yyyy" date="${new Date()}"/>.</p>
 

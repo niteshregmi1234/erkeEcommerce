@@ -44,8 +44,9 @@ class CheckOutController {
     }
     def placeOrder(){
         def text
-        try{
+          try{
             def cartList=session.cart
+              if(!params.mobileNumberQuick){
         def billingInfo=JSON.parse(params.billingInfo);
         if(params.isCreateAccount){
                 def endUserInformation=EndUserInformation.findByEmail(billingInfo[5])
@@ -60,7 +61,9 @@ class CheckOutController {
                     subject "Shopping mail from customers"
                     html g.render(template:"/cart/mail",model: [totalPrice: totalPrice,billingInfo:billingInfo,shippingInfo:shippingInfo])
 
-                }}
+                }
+
+                    }
                         else{
                             sendMail {
                                 to "${MailSetUp.list()[0].toEmail}"
@@ -70,7 +73,6 @@ class CheckOutController {
                             }
 
                         }
-
                     session.cart.clear()
                     text=[]
                     text=[orderId,billingInfo[5],params.isCreateAccount] as JSON
@@ -107,7 +109,20 @@ class CheckOutController {
                 session.cart.clear()
             text=orderId
                 render text
-            }
+            }}
+              else{
+                  def orderId=endUserInformationService.getOrderIdQuick(cartList,params)
+                  def totalPrice=endUserInformationService.getTotalPriceOfCartList(cartList)
+                  sendMail {
+                      to "${MailSetUp.list()[0].toEmail}"
+                      subject "Shopping mail from customers"
+                      html g.render(template: "/cart/mail", model: [totalPrice: totalPrice, mobileNumberQuick: params.mobileNumberQuick])
+
+                  }
+                  session.cart.clear()
+                  text=orderId
+                  render text
+              }
         }
         catch(Exception e){
             text="enquiry not sent"

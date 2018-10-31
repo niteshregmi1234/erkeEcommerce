@@ -12,7 +12,8 @@
 </head>
 
 <body>
-<h1>Pending Orders-</h1><br>
+
+<h1>Pending Orders(Order mailed)-</h1><br>
 <div class="container"
      id="page_container">
     <div id="accordion_search_bar_container">
@@ -38,7 +39,7 @@
                            href="#collapse${i}"
                            aria-expanded="true"
                            aria-controls="collapse${i}" style="color: white;">
-                            Order Id-${list[0].orderId}
+                            Order Id-${list[0].orderId.orderId}
                         </a>
                     </h4>
                 </div>

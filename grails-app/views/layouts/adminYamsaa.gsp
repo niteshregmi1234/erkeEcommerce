@@ -114,6 +114,8 @@
                     <li><g:link action="list" controller="productBrand">Product Brand</g:link></li>
                     <li><g:link action="list" controller="paymentMethod">Payment</g:link></li>
                     <li><g:link action="list" controller="deliveryMethod">Delivery</g:link></li>
+                    <li><g:link action="list" controller="seoOptimization">Seo Optimization</g:link></li>
+
                 </ul>
             </li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Items<span class="caret"></span></a>
@@ -128,6 +130,15 @@
 
                 </ul>
             </li>
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Reset<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="#" onclick="resetProductPriority();" >Product Priority</a></li>
+            <li><a href="#" onclick="resetCoverImagePriority();">Cover Image Priority</a></li>
+            <li><a href="#" onclick="resetBrandPriority();" >Brand Priority</a></li>
+            <li><a href="#" onclick="resetSubCategoryPriority();" >SubCategory Priority</a></li>
+
+        </ul>
+    </li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Manage<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><g:link action="show" controller="mailSetUp">SetUp Email</g:link></li>
@@ -144,7 +155,18 @@
                 <ul class="dropdown-menu">
                     <li><g:link action="recentOrders" controller="cartHistory">Recent Orders</g:link></li>
                     <li><g:link action="successFullOrders" controller="cartHistory">Successful Orders</g:link></li>
-                    <li><g:link action="pendingOrders" controller="cartHistory">Pending Orders</g:link></li>
+                    <li><g:link action="pendingOrdersMailNotSent" controller="cartHistory">Pending Orders(order not sent)</g:link></li>
+                    <li><g:link action="pendingOrdersMailSent" controller="cartHistory">Pending Orders(sent order)</g:link></li>
+
+
+                </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">Quick Orders<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><g:link action="recentOrders" controller="quickCheckOutWithCart">Recent Orders</g:link></li>
+                    <li><g:link action="successFullOrders" controller="quickCheckOutWithCart">Successful Orders</g:link></li>
+                    <li><g:link action="pendingOrdersMailNotSent" controller="quickCheckOutWithCart">Pending Orders(order not sent)</g:link></li>
+                    <li><g:link action="pendingOrdersMailSent" controller="quickCheckOutWithCart">Pending Orders(sent order)</g:link></li>
 
 
                 </ul>
@@ -158,6 +180,164 @@
     </div>
 </nav>
 <script>
+    function resetProductPriority() {
+        bootbox.confirm("Are you sure want to reset Product Priority?", function(resultConfirm){
+            if(resultConfirm){
+                $.ajax({
+                    url: "${createLink(controller:'product', action:'resetPriority')}",
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    success: function (result) {
+                        if (result == "successfull") {
+                            bootbox.alert({
+                                message: "product priority has been successfully reset",
+                                size: 'small',
+                                callback: function(){
+                                    location.reload();
+                                }
+                            });
+                        }
+                        else {
+                            bootbox.alert({
+                                message: "unable to reset product priority",
+                                size: 'small'
+                            });
+
+
+
+                            // DataTable
+
+
+                        }
+
+                    }
+                });
+            }
+
+        });
+
+    }
+    function resetCoverImagePriority() {
+
+        bootbox.confirm("Are you sure want to reset Cover Image Priority?", function(resultConfirm){
+            if(resultConfirm){
+                $.ajax({
+                    url: "${createLink(controller:'coverImage', action:'resetPriority')}",
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    success: function (result) {
+                        if (result == "successfull") {
+                            bootbox.alert({
+                                message: "coverImage priority has been successfully reset",
+                                size: 'small',
+                                callback: function(){
+                                    location.reload();
+                                }
+                            });
+
+                        }
+                        else {
+                            bootbox.alert({
+                                message: "unable to reset CoverImage priority",
+                                size: 'small'
+                            });
+
+
+
+                            // DataTable
+
+
+                        }
+
+                    }
+                });
+
+            }
+
+        });
+    }
+    function resetBrandPriority() {
+        bootbox.confirm("Are you sure want to reset Product Brand Priority?", function(resultConfirm){
+            if(resultConfirm){
+                $.ajax({
+                    url: "${createLink(controller:'productBrand', action:'resetPriority')}",
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    success: function (result) {
+                        if (result == "successfull") {
+                            bootbox.alert({
+                                message: "productBrand priority has been successfully reset",
+                                size: 'small',
+                                callback: function(){
+                                    location.reload();
+                                }
+                            });
+
+                        }
+                        else {
+                            bootbox.alert({
+                                message: "unable to reset brand priority",
+                                size: 'small'
+                            });
+
+
+
+                            // DataTable
+
+
+                        }
+
+                    }
+                });
+
+            }
+
+        });
+          }
+
+    function resetSubCategoryPriority() {
+        bootbox.confirm("Are you sure want to reset Product Brand Priority?", function(resultConfirm){
+            if(resultConfirm){
+                $.ajax({
+                    url: "${createLink(controller:'productSubCategory', action:'resetPriority')}",
+                    type: "POST",
+                    cache: false,
+                    async: false,
+                    success: function (result) {
+                        if (result == "successfull") {
+                            bootbox.alert({
+                                message: "productSubCategory priority has been successfully reset",
+                                size: 'small',
+                                callback: function(){
+                                    location.reload();
+                                }
+                            });
+
+                        }
+                        else {
+                            bootbox.alert({
+                                message: "unable to reset productSubCategory priority",
+                                size: 'small'
+                            });
+
+
+
+                            // DataTable
+
+
+                        }
+
+                    }
+                });
+
+            }
+
+        });
+    }
+
     $(function () {
 
         var url = window.location.pathname;

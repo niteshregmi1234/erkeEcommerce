@@ -48,8 +48,30 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Priority Number:</label>
+            <div class="col-sm-4">
+                <g:textField name="priorityNumber" id="priorityNumber" class="form-control" onkeypress="return isNumber(event)" value="${coverImageInstance?.priorityNumber}"/>
+            </div>
+        </div>
+    </div>
 
     <script>
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                bootbox.alert({
+                    message: "not allowed must be number",
+                    size: 'small'
+                });
+                return false;
+            }
+            return true;
+        }
+
         function preventMultipleSubmissions() {
             $('#submit_Id').prop('disabled', true);
         }

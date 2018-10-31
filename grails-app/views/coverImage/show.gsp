@@ -53,6 +53,14 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-12">
+        <div class="form-group ">
+            <label class="control-label col-sm-2">Priority Number:</label>
+            <div class="col-sm-6">
+                <div style="margin-top: 7px;">${coverImageInstance.priorityNumber}</div>
+            </div>
+        </div>
+    </div>
 
 </form>
 <div class="col-lg-12">

@@ -8,6 +8,36 @@ class ProductBrandController extends BaseController{
     def productService
 static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'POST']
     final static Pattern PATTERN = Pattern.compile("(.*?)(?:\\((\\d+)\\))?(\\.[^.]*)?");
+    def updatePriorityNumber(){
+        try{
+            if(session.adminUser) {
+
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def productBrand=ProductBrand.findById(params.id as long)
+
+
+                    if (productBrand){
+                        if(params.priorityNumber) {
+                            productBrand.priorityNumber = params.priorityNumber as long
+                        }
+                        else{
+                            productBrand.priorityNumber=Product.list().size()
+                        }
+                        productBrand.save(flush: true)
+                        render productBrand.priorityNumber
+                    }
+                    else{
+                        render "notOk"
+                    }
+
+                }
+            }
+        }
+        catch (Exception e){
+            render "notOk"
+
+        }
+    }
 
     def list() {
         try{
@@ -48,7 +78,16 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
                     productBrandInstance.statusShow=params.statusShow as byte
             productBrandInstance.brandDescription=params.brandDescription
                     productBrandInstance.urlName=productService.convertToOriginalUrl(productBrandInstance.brandName)
-                    productBrandInstance.save(flush: true)
+                        if(params.priorityNumber) {
+                            productBrandInstance.priorityNumber = params.priorityNumber as long
+                        }
+                        else{
+                            productBrandInstance.priorityNumber=Product.list().size()
+
+                        }
+                        productBrandInstance.email=params.email
+
+                        productBrandInstance.save(flush: true)
             redirect(action: "show" ,id:productBrandInstance.id)
         }
         else{
@@ -60,6 +99,14 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
                 productBrandInstance.statusShow=params.statusShow as byte
                 productBrandInstance.brandDescription=params.brandDescription
                 productBrandInstance.urlName=productService.convertToOriginalUrl(productBrandInstance.brandName)
+                if(params.priorityNumber) {
+                    productBrandInstance.priorityNumber = params.priorityNumber as long
+                }
+                else{
+                    productBrandInstance.priorityNumber=Product.list().size()
+
+                }
+                productBrandInstance.email=params.email
                 productBrandInstance.save(flush: true)
             redirect(action: "show" ,id:productBrandInstance.id)
         }
@@ -77,6 +124,25 @@ static allowedMethods = [save: 'POST',uploadLogoImage: 'POST',editLogoImage: 'PO
             redirect(action: "notfound",controller: "errorPage")
         }
     }
+    def resetPriority(){
+        try{
+            if(session.adminUser) {
+                if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role == "Content Manager") {
+                    def productBrandList=ProductBrand.list()
+                    for(ProductBrand productBrand:productBrandList){
+                        productBrand.priorityNumber=ProductBrand.list().size()
+                        productBrand.save(flush: true)
+                    }
+                    render "successfull"
+
+                }
+            }
+        }
+        catch (Exception e){
+            render "unsuccessfull"
+        }
+    }
+
     def uploadLogoImage(){
         if(session.adminUser){
             if (session.adminUser.role == "CEO" || session.adminUser.role == "MD" || session.adminUser.role=="Content Manager") {

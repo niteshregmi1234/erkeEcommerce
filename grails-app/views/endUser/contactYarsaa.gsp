@@ -21,7 +21,7 @@
 
 
 	<div id="content">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="col-md-12">
 			<div id="main-slider">
 				<div class="item">
@@ -33,7 +33,7 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container-fluid">
 		<div class="col-md-12">
 				<ul class="breadcrumb">
 					<li><g:link action="userHome" controller="endUser">Home</g:link>
@@ -43,12 +43,12 @@
 
 			</div>
 	</div>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="col-md-12">
 			&nbsp;
 		</div>
 	</div>
-	<div class="container">
+	<div class="container-fluid">
 		<div>
 			<div class="col-md-6">
 				<div class="imgwrapper">
@@ -66,7 +66,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="col-md-12">
 			&nbsp;
 		</div>

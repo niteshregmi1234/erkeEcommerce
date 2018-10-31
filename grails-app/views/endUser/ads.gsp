@@ -41,7 +41,7 @@
     %{--}--}%
     %{--</style>--}%
 
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="col-md-12 topBar">
             <ul class="breadcrumb">
@@ -57,7 +57,7 @@
 
             <script src="${resource(dir: 'js', file: 'yamsaa/jquery-ui.js')}" type="text/javascript"
                     charset="utf-8"></script>
-            <div class="col-md-3" id="filterColumn" style="visibility:hidden;">
+            <div class="col-md-2" id="filterColumn" style="visibility:hidden;">
 
                 <!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
@@ -245,7 +245,7 @@
                     %{--</div>--}%
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <div class="pages">
 
                     <ul id="prevPage">
@@ -288,7 +288,7 @@
                             <div class="discount hidden">${list.productDetails.discountPercentage}</div>
                             <div class="priceProduct hidden">${list.productDetails.price}</div>
                             <div class="soldNumbers hidden">${list.soldNumbers}</div>
-                            <div class="col-md-4 col-sm-4 a">
+                            <div class="col-md-3 col-sm-4 a">
                                 <div class="product">
                                     <div class="flip-container">
                                         <div class="flipper">
@@ -426,7 +426,7 @@
 
                 var options = {
                     valueNames: ['category', 'subCategory', 'brand','discount','priceProduct','soldNumbers'],
-                    page: 15,
+                    page: 20,
                     plugins: [
                         ListPagination(paginationTopOptions), ListPagination(paginationBottomOptions)
                     ]
@@ -614,8 +614,10 @@
                         }
                         return  false;
                     }
+
                 });
-                $('#prev').on('click', function() {
+
+                    $('#prev').on('click', function() {
                     var element=$( ".pagination li.active" ).prev('li');
                     if(element.length){
                         $( element.click());
@@ -634,6 +636,9 @@
                     }
                 });
                 $("#nexts").on('click', function() {
+                    $('html, body').animate({
+                        scrollTop: $("#myList").offset().top
+                    }, 2000);
                     var element=$( ".pagination li.active" ).next('li');
                     if(element.length){
                         $( element.click());
@@ -650,8 +655,13 @@
                         }
                         return  false;
                     }
+
                 });
+
                 $('#prevs').on('click', function() {
+                    $('html, body').animate({
+                        scrollTop: $("#myList").offset().top
+                    }, 2000);
                     var element=$( ".pagination li.active" ).prev('li');
                     if(element.length){
                         $( element.click());
@@ -668,6 +678,7 @@
                         }
                         return  false;
                     }
+
                 });
 
             </script>
@@ -675,6 +686,7 @@
                 $("body").click(function(event){
                     var allimages= document.getElementsByTagName('img');
                     lazyDisplayImage(allimages);
+
                 });
                 function lazyDisplayImage(allimages){
                     var element=$( ".pagination li.active" );
@@ -740,7 +752,6 @@
                             scrollTop: $("#myList").offset().top
                         }, 2000);
                     });
-
                 </script>
             </g:if>
 

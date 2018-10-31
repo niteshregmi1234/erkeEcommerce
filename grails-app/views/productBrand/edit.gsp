@@ -27,6 +27,22 @@
 </div>
 </g:form>
 <script>
+    function validate(sEmail) {
+        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+        if (filter.test(sEmail)) {
+
+            return true;
+
+        }
+
+        else {
+
+            return false;
+
+        }
+    }
+
     var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 
     function preventMultipleSubmissions() {
@@ -36,6 +52,7 @@
     window.onbeforeunload = preventMultipleSubmissions;
     function ValidateUpdate(oForm) {
         var responseValue;
+        var email = document.getElementById("email").value;
 
         var brandName = document.getElementById("brandName").value;
         var brandDescription = document.getElementById("brandDescription").value;
@@ -92,7 +109,17 @@
 
             }
         }
-
+        if(email) {
+            if (!validate(email)) {
+                $("#email").css("border", "1px solid red");
+                bootbox.alert({
+                    message: "email is invalid eg. abc@companyname.com!",
+                    size: 'small'
+                });
+                document.getElementById("email").focus();
+                return false;
+            }
+        }
         if(brandName==''){
             $("#brandName").css("border", "1px solid red");
             bootbox.alert({

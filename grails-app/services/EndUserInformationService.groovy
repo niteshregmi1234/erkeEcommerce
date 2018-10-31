@@ -61,6 +61,7 @@ class EndUserInformationService {
                cartHistoryWithoutEndUserInstance.quantity=cart.quantity
                cartHistoryWithoutEndUserInstance.productSize=cart.productSize
                cartHistoryWithoutEndUserInstance.orderNotes=params.orderNotes
+               cartHistoryWithoutEndUserInstance.productBrand=cart.productBrand
                cartHistoryWithoutEndUserInstance.deliveryMethod=DeliveryMethod.findByIsShowStatusAndId(true,params.delivery as long)
                cartHistoryWithoutEndUserInstance.paymentMethod=PaymentMethod.findByIsShowStatusAndId(true,params.payment as long)
                if(endUserInformation){
@@ -78,6 +79,37 @@ class EndUserInformationService {
        catch (Exception e){
 
        }
+    }
+    def getOrderIdQuick(List<CartWithoutEndUser> cartList,Map params){
+        try{
+
+            def date=new Date()
+            def orderIdInstance=new OrderId()
+            orderIdInstance.orderId="yarsaa/"
+            orderIdInstance.save(flush: true)
+            def orderId=orderIdInstance.orderId+orderIdInstance.id
+            orderIdInstance.orderId=orderId
+            orderIdInstance.save(flush: true)
+
+            for(CartWithoutEndUser cart:cartList){
+                def quickCheckOutWithCart=new QuickCheckOutWithCart()
+                quickCheckOutWithCart.mobileNumber=params.mobileNumberQuick as long
+                quickCheckOutWithCart.isFakeOrder=false
+                quickCheckOutWithCart.orderId=orderIdInstance
+                quickCheckOutWithCart.date=date
+                quickCheckOutWithCart.isDelivered=false
+                quickCheckOutWithCart.successfulOrderDelFlag=false
+                quickCheckOutWithCart.product=cart.product
+                quickCheckOutWithCart.quantity=cart.quantity
+                quickCheckOutWithCart.productSize=cart.productSize
+                quickCheckOutWithCart.productBrand=cart.productBrand
+                quickCheckOutWithCart.save(flush: true)
+            }
+            return orderId
+        }
+        catch (Exception e){
+
+        }
     }
 
     def saveShipping(Map params,OrderId orderId){
