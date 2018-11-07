@@ -12,8 +12,9 @@
 </head>
 
 <body>
+
 <div id="content">
-<div class="container-fluid">
+<div class="container-fluid coverHome">
     %{--<div class="container coverImage" style="width: 1346px;">--}%
     %{--<div class="col-lg-12">--}%
     <div id="main-slider">
@@ -158,6 +159,7 @@
     </g:if>
     <g:each in="${totalArray[4]}" var="listProducts" status="i">
         <g:if test="${i<2}">
+            <div class="subBoxBar">
         <div id="wrapperHotProduct">
 
             <div class="boxBar">
@@ -264,18 +266,18 @@
 
 
         </div>
+            </div>
         </g:if>
 
     </g:each>
-
     <g:if test="${Aids.list()[11]}">
 
         <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[11].adDescribe]">
-            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[11].imageName])}" class="img-responsive ad-image lazy">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[11].imageName])}" class="img-responsive ad-image lazy" >
         </g:link>
     </g:if>
     <g:else>
-        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive  ad-image" style="margin-top: -45px;"/>
     </g:else>
     <g:if test="${totalArray[3]}">
         <div class="wrapperSalesProduct">
@@ -354,6 +356,8 @@
     </g:if>
     <g:each in="${totalArray[4]}" var="listProducts" status="i">
         <g:if test="${i>=2 && i<4}">
+            <div class="subBoxBar">
+
             <div id="wrapperHotProduct">
 
                 <div class="boxBar">
@@ -459,6 +463,7 @@
                 %{--</div>--}%
 
 
+            </div>
             </div>
         </g:if>
 

@@ -4,6 +4,16 @@
 /*.billingFieldLarge{*/
 /*width: 432px;*/
 /*}*/
+.boxBar h2 {
+    text-transform: uppercase;
+    font-size: 36px;
+    color: #ac623f;
+    font-weight: 400;
+    /*text-align: center;*/
+}
+.coverHome{
+    margin-top: -20px;
+}
 .item img{
     width: 100%;
 }
@@ -94,7 +104,10 @@ html, body {
     /*margin-top: -15px;*/
 }
 .boxBar{
-    /*margin-top: -20px;*/
+    margin-top: -20px;
+}
+.subBoxBar{
+    margin-top: -55px!important;
 }
 .productHot{
     /*margin-top: -25px;*/
@@ -1152,6 +1165,11 @@ html, body {
 
 }
 @media screen and (min-width: 321px) and (max-width:360px){
+    .boxBar h2 {
+
+        font-size: 29px;
+
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -1178,9 +1196,7 @@ html, body {
     .salesProductSide img{
         width: 358px;
     }
-    .boxBar{
-        margin-top: 0px;
-    }
+
     .hot{
         width: 100%;
     }
@@ -1370,8 +1386,10 @@ html, body {
 
     }
 
+
 }
 @media screen and (min-width: 361px) and (max-width:411px){
+
     #lastAd{
         margin-top: 10px;
     }

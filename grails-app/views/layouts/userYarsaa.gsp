@@ -546,8 +546,8 @@
                     </g:else>
                 </div>
                 <!--/.nav-collapse -->
-
-                <div class="navbar-collapse collapse" id="search-not-mobile">
+<div class="col-md-12">
+                <div class="navbar-collapse collapse" id="search-not-mobile" style="width:100%;">
                     <g:form controller="endUser" action="search" class="" role="search" onsubmit="return validSearchNotMobile();">
                         <div class="input-group">
                             <input type="text" class="form-control" id="searchProductNotMobile" name="search" placeholder="Search by product,category,brand wise..." value="${params?.q}">
@@ -561,25 +561,26 @@
                         </div>
                     </g:form>
                 </div>
+            </div>
+                <div class="collapse clearfix" id="search">
+
+                    <g:form controller="endUser" action="search" class="navbar-form" role="search" onsubmit="return validSearch();">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="searchProduct" name="search" placeholder="Search by product,category,brand wise..." value="${params?.q}">
+
+                            <span class="input-group-btn">
+
+                                <button type="submit" class="btn btn-primary" id="submit_Id"><i class="fa fa-search"></i></button>
+
+                            </span>
+
+                        </div>
+                    </g:form>
+
+                </div>
 
             </div>
 
-            <div class="collapse clearfix" id="search">
-
-                <g:form controller="endUser" action="search" class="navbar-form" role="search" onsubmit="return validSearch();">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="searchProduct" name="search" placeholder="Search by product,category,brand wise..." value="${params?.q}">
-
-                        <span class="input-group-btn">
-
-                            <button type="submit" class="btn btn-primary" id="submit_Id"><i class="fa fa-search"></i></button>
-
-                        </span>
-
-                    </div>
-                </g:form>
-
-            </div>
             <!--/.nav-collapse -->
 
         </div>
@@ -656,6 +657,18 @@
                     }
                 }
             }
+            function fetchdata(){
+                var allimages= document.getElementsByTagName('img');
+                for (var i=0; i<allimages.length; i++) {
+                    if (allimages[i].getAttribute('data-src')) {
+                        allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+                    }
+                }
+            }
+
+            $(document).ready(function(){
+                setInterval(fetchdata,1000);
+            });
         </script>
 
         <!-- /#content -->

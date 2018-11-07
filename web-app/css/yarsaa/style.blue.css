@@ -153,13 +153,7 @@ h1 {
 .navbar #basket-overview {
   padding: 0;
 }
-.boxBar h2 {
-  text-transform: uppercase;
-  font-size: 36px;
-  color: #ac623f;
-  font-weight: 400;
-  /*text-align: center;*/
-}
+
 #hot .product-slider {
   /*margin-bottom: 20px;*/
 }
