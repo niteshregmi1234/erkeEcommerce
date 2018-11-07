@@ -83,11 +83,11 @@
     <g:if test="${Aids.list()[10]}">
 
         <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[10].adDescribe]">
-            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[10].imageName])}" class="img-responsive ad-image lazy">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[10].imageName])}" class="img-responsive ad-image adImageF lazy">
         </g:link>
     </g:if>
     <g:else>
-        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image adImageF" />
     </g:else>
     <g:if test="${totalArray[2]}">
         <div id="wrapperHotProduct">
@@ -273,11 +273,11 @@
     <g:if test="${Aids.list()[11]}">
 
         <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[11].adDescribe]">
-            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[11].imageName])}" class="img-responsive ad-image lazy" >
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[11].imageName])}" class="img-responsive ad-image adimage1 lazy" >
         </g:link>
     </g:if>
     <g:else>
-        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive  ad-image" style="margin-top: -45px;"/>
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive adimage1 ad-image" style="margin-top: -45px;"/>
     </g:else>
     <g:if test="${totalArray[3]}">
         <div class="wrapperSalesProduct">

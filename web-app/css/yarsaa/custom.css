@@ -121,6 +121,7 @@ html, body {
 #wrapperTopBrand{
     /*margin-top: -20px;*/
     overflow:auto;
+    margin-bottom: -25px;
 }
 
 .topBrandDiv{
@@ -927,6 +928,18 @@ html, body {
 }
 
 @media screen and (min-width:301px) and (max-width:320px){
+    .adImageF{
+        margin-top: 20px;
+    }
+    .adimage1{
+        margin-top: -70px!important;
+    }
+    .subBoxBar{
+        height: 458px;
+    }
+    .boxBar h2{
+        font-size:28px
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -937,7 +950,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -55px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -946,21 +959,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 68px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -25px;
     }
     .hot{
         width: 100%;
@@ -1165,6 +1180,19 @@ html, body {
 
 }
 @media screen and (min-width: 321px) and (max-width:360px){
+    .adImageF{
+        margin-top: 25px!important;
+    }
+    .wrapperSalesProduct{
+        margin-top: -5px!important;
+    }
+    .adimage1{
+        margin-top: -5px!important;
+    }
+.subBoxBar{
+    height:425px;
+    margin-top: 10px!important;
+}
     .boxBar h2 {
 
         font-size: 29px;
@@ -1183,7 +1211,7 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 358px;
     }
     .hotProductSide img{
@@ -1191,7 +1219,7 @@ html, body {
     }
     .salesProductSide{
         width: 358px;
-        margin-top: -50px;
+        margin-top: -30px;
     }
     .salesProductSide img{
         width: 358px;
@@ -1389,7 +1417,15 @@ html, body {
 
 }
 @media screen and (min-width: 361px) and (max-width:411px){
-
+    .boxBar h2{
+        font-size: 35px;
+    }
+    .adimage1{
+        margin-top: -75px!important;
+    }
+.subBoxBar{
+    height:510px;
+}
     #lastAd{
         margin-top: 10px;
     }
@@ -1400,7 +1436,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -55px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -1409,21 +1445,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 75px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -25px;
     }
     .hot{
         width: 100%;
@@ -1624,11 +1662,20 @@ html, body {
 }
 
 @media screen and (min-width: 412px) and (max-width:413px){
+    .adImageF{
+        margin-top: 20px;
+    }
+    .adimage1{
+        margin-top:-65px!important;
+    }
+    .subBoxBar{
+        height: 560px;
+    }
     #lastAd{
         margin-top: 10px;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -50px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -1637,21 +1684,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 414px;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 414px;
     }
     .salesProductSide{
         width: 414px;
-        margin-top: -50px;
+        margin-top: -35px;
+        margin-bottom: 65px;
     }
     .salesProductSide img{
         width: 414px;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -20px;
     }
     .hot{
         width: 100%;
@@ -1847,6 +1896,12 @@ html, body {
 }
 
 @media screen and (min-width: 414px) and (max-width:440px){
+    .adimage1{
+        margin-top: -65px!important;
+    }
+    .subBoxBar{
+        height: 535px!important;
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -1857,7 +1912,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -45px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -1866,21 +1921,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -20px;
     }
     .hot{
         width: 100%;
@@ -2078,6 +2135,12 @@ html, body {
 
 }
 @media screen and (min-width: 441px) and (max-width:480px){
+    .adImageF{
+        margin-top: 25px!important;
+    }
+    .subBoxBar{
+        height: 400px;
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -2088,7 +2151,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -45px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -2097,21 +2160,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -25px;
     }
     .hot{
         width: 100%;
@@ -2331,6 +2396,9 @@ html, body {
 
 }
 @media screen and (min-width:521px) and (max-width: 568px){
+    .adImageF{
+        margin-top: 20px!important;
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -2341,7 +2409,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -25px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -2350,21 +2418,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -25px;
     }
     .hot{
         width: 100%;
@@ -2516,7 +2586,7 @@ html, body {
         margin-top: 10px;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -30px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -2525,21 +2595,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 595px;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 595px;
     }
     .salesProductSide{
         width: 595px;
-        margin-top: -50px;
+        margin-top: -45px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 595px;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -22px;
     }
     .hot{
         width: 100%;
@@ -2660,6 +2732,9 @@ html, body {
 
 }
 @media screen and (min-width:621px) and (max-width: 640px){
+    .adImageF{
+        margin-top: 20px!important;
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -2670,7 +2745,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -30px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -2679,21 +2754,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -25px;
     }
     .hot{
         width: 100%;
@@ -2854,6 +2931,9 @@ html, body {
     }
 }
 @media screen and (min-width: 667px) and (max-width: 700px) {
+    .adImageF{
+        margin-top: 25px!important;
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -2864,7 +2944,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -25px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -2873,21 +2953,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -25px;
     }
     .hot{
         width: 100%;
@@ -3082,6 +3164,9 @@ html, body {
 }
 
 @media screen and (min-width: 726px) and (max-width: 735px) {
+    .adImageF{
+        margin-top: 25px;
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -3092,7 +3177,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -20px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -3101,21 +3186,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -20px;
     }
     .hot{
         width: 100%;
@@ -3230,6 +3317,9 @@ html, body {
     }
 }
 @media screen and (min-width: 736px) and (max-width: 749px) {
+    .adImageF{
+        margin-top: 25px!important;
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -3240,7 +3330,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -25px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -3249,7 +3339,8 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
         width: 100%;
     }
     .hotProductSide img{
@@ -3257,13 +3348,14 @@ html, body {
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -20px;
     }
     .hot{
         width: 100%;
@@ -3382,7 +3474,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -25px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -3391,21 +3483,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -24px;
     }
     .hot{
         width: 100%;
@@ -3522,6 +3616,9 @@ html, body {
 
 
 @media screen and (min-width: 769px) and (max-width: 855px) {
+    .adImageF{
+        margin-top: 25px!important;
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -3532,7 +3629,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -30px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -3541,21 +3638,23 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 65px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -25px;
     }
     .hot{
         width: 100%;
@@ -3648,6 +3747,9 @@ html, body {
 }
 
 @media screen and (min-width: 856px) and (max-width: 961px) {
+    .adImageF{
+        margin-top: 25px!important;
+    }
     #lastAd{
         margin-top: 10px;
     }
@@ -3658,7 +3760,7 @@ html, body {
         width: 100%;
     }
     .aid{
-        margin-top: 10px;
+        margin-top: -20px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -3667,21 +3769,25 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
+
         width: 100%;
     }
     .salesProductSide{
+
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -20px;
     }
     .hot{
         width: 100%;
@@ -3762,7 +3868,7 @@ html, body {
 }
 @media screen and (min-width: 962px) and (max-width: 1024px) {
     .aid{
-        margin-top: 10px;
+        margin-top: -20px;
     }
     .boxBarSales{
         margin-top: 40px;
@@ -3771,22 +3877,25 @@ html, body {
         width: 100%;
     }
     .hotProductSide{
-        margin-top: -50px;
+        margin-top: -30px;
         width: 100%;
+        margin-bottom: 70px;
     }
     .hotProductSide img{
         width: 100%;
     }
     .salesProductSide{
         width: 100%;
-        margin-top: -50px;
+        margin-top: -30px;
+        margin-bottom: 70px;
     }
     .salesProductSide img{
         width: 100%;
     }
     .boxBar{
-        margin-top: 0px;
+        margin-top: -20px;
     }
+
     .hot{
         width: 100%;
     }
@@ -3848,6 +3957,7 @@ html, body {
     .price ul li:nth-child(1) {
         font-size: 25px;
     }
+
 }
 @media screen and (min-width: 1440px){
     .topBrandDivSide img{
