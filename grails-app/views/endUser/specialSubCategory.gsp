@@ -124,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default sidebar-menu">
+                <div class="panel panel-default sidebar-menu" style="display: none;">
 
                     <div class="panel-heading">
                         <h3 class="panel-title">Brands </h3>

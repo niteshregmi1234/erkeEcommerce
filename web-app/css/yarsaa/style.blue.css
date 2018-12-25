@@ -886,7 +886,7 @@ h1 {
   font-weight: 300;
 }
 #footer {
-  background:rgb(17, 102, 183);
+  background:rgb(68, 71, 160);
   padding: 20px 0;
 }
 #footer ul {
@@ -925,7 +925,7 @@ h1 {
 #footer .social a.gplus:hover {
   background-color: #c21f25;
 }
-#footer .social a.twitter:hover {
+#footer .social a.contactPage:hover {
   background-color: #3cf;
 }
 #footer .social a.instagram:hover {
@@ -1342,7 +1342,7 @@ body {
   background-color: #f0f0f0;
 }
 a {
-  color: #000000;
+  color: black;
   text-decoration: none;
 }
 a:hover,

@@ -16,7 +16,7 @@
         <g:if test="${SeoOptimization.list()[0]}">
         <title>${SeoOptimization.list()[0].title}</title>
         </g:if>
-        <g:else><title>Erke</title></g:else>
+        <g:else><title>Yarsaa</title></g:else>
     </g:else>
     <g:if test="${SeoOptimization.list()[0]}">
         <meta name="google-site-verification" content="${SeoOptimization.list()[0].googleSiteVerification}"/>
@@ -775,8 +775,9 @@
                             <strong >${CompanyInformation.list()[0].location4}</strong>
                         </p>
 
-                        <g:link action="contact" controller="endUser">Go to contact page</g:link>
+                    <g:link action="contact" controller="endUser" ><div class="contactPage">Go to contact page</div></g:link>
 
+                </div>
                         <hr class="hidden-md hidden-lg">
 
                     </div>

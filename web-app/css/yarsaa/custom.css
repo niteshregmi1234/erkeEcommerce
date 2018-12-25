@@ -4,9 +4,7 @@
 /*.billingFieldLarge{*/
 /*width: 432px;*/
 /*}*/
-.ad-image2{
 
-}
 .boxBar h2 {
     text-transform: uppercase;
     font-size: 36px;
@@ -106,7 +104,7 @@ html, body {
 .productHot{
     /*margin-top: -25px;*/
 }
-.green-tooltip + .tooltip > .tooltip-inner {background-color: #4fbfa8;}
+.green-tooltip + .tooltip > .tooltip-inner {background-color: rgb(17, 102, 183);}
 
 
 .social h2{
@@ -138,7 +136,7 @@ html, body {
     color: #000;
 }
 .updateCart{
-    color:#4fbfa8;
+    color:rgb(17, 102, 183);
 }
 .more{
     margin-top: -65px;

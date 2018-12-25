@@ -163,7 +163,7 @@
       %{--}--}%
 
       %{--.dropdown-contentA a:hover {background-color: #f1f1f1;--}%
-      %{--color:#4fbfa8;--}%
+      %{--color:rgb(17, 102, 183);--}%
       %{--text-decoration: none;--}%
       %{--}--}%
 
@@ -305,7 +305,7 @@
           <div class="col-sm-6">
             <div class="box detailBox" style="height:500px;">
               <h3 class="detailName">${totalArray[0].productDetails.productBrand.brandName+" "+totalArray[0].productDetails.briefDescription}</h3>
-              <p class="goToDescription" style="text-align: left;"><a href="#details" class="scroll-to" style="color: #4fbfa8;">click here! go to description tab</a>
+              <p class="goToDescription" style="text-align: left;"><a href="#details" class="scroll-to" style="color: rgb(17, 102, 183);">click here! go to description tab</a>
               </p>
 <g:hiddenField name="productIdWithColor" id="productIdWithColor" value="${totalArray[0].id}"></g:hiddenField>
               %{--<h5 style="color:#337ab7">vendido por <a href="#">Samsung</a> · <small style="color:#337ab7">(5054 ventas)</small></h5>--}%
