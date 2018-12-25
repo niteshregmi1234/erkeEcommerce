@@ -52,7 +52,7 @@ class QuickCheckOutWithCartController extends BaseController{
                 productInstance.soldNumbers=cartHistory.product.soldNumbers+cartHistory.quantity
                 productInstance.save(flush: true)
             }
-            redirect(action: "recentOrders")
+            redirect(action: "pendingOrdersMailSent")
         }
         catch (Exception e){
         }

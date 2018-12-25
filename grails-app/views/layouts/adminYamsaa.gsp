@@ -43,7 +43,7 @@
     document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
     //]]>
     </script>
-    <title>Yarsaa</title>
+    <title>ERKE</title>
     <style>
     li a:focus, .active {
         background-color: rgba(15, 13, 16, 0.99);
@@ -95,7 +95,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand">Yarsaa</a>
+            <a class="navbar-brand">Erke</a>
         </div>
         <ul class="nav navbar-nav">
             <li><g:link action="adminHome" controller="adminHome">Home</g:link></li>

@@ -14,7 +14,8 @@
 <body>
 
 <div id="content">
-<div class="container-fluid coverHome">
+    <div class="container-fluid">
+<div class="coverHome">
     %{--<div class="container coverImage" style="width: 1346px;">--}%
     %{--<div class="col-lg-12">--}%
     <div id="main-slider">
@@ -30,6 +31,15 @@
     %{--</div>--}%
     <!-- /#main-slider -->
     </div>
+    <g:if test="${Aids.list()[0]}">
+
+        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[0].adDescribe]">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[0].imageName])}" class="img-responsive ad-image lazy">
+        </g:link>
+    </g:if>
+    <g:else>
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
+    </g:else>
 
     %{--</div>--}%
     %{--<div class="container">--}%
@@ -39,7 +49,7 @@
     <g:if test="${totalArray[2]}">
         <div id="wrapperHotProduct">
             <div class="boxBar">
-                <h2>Hot this week <g:link action="latestProducts" controller="endUser"><i class="fa fa-angle-double-right green-tooltip" data-toggle="tooltip" title="see more"></i></g:link></h2>
+                <h2>Latest Arrivals <g:link action="latestProducts" controller="endUser"><i class="fa fa-angle-double-right green-tooltip" data-toggle="tooltip" title="see more"></i></g:link></h2>
             </div>
             <div id="hot" class="hot">
 
@@ -87,16 +97,7 @@
 
                 </div>
             </div>
-            <g:if test="${Aids.list()[1]}">
 
-                <div class="hotProductSide">
-                    <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[1].adDescribe]">
-
-                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[1].imageName])}" class="img-responsive lazy">
-                    </g:link>
-
-                </div>
-            </g:if>
         </div>
 
 
@@ -104,9 +105,19 @@
 
 
     </g:if>
+    <div class="container-fluid">
+
+        <g:if test="${Aids.list()[1]}">
+        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[1].adDescribe]">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[1].imageName])}" class="img-responsive ad-image adimage1 lazy" >
+        </g:link>
+    </g:if>
+    <g:else>
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive adimage1 ad-image" style="margin-top: -45px;"/>
+    </g:else>
+</div>
     <g:each in="${totalArray[4]}" var="listProducts" status="i">
         <g:if test="${i<2}">
-            <div class="subBoxBar">
         <div id="wrapperHotProduct">
 
             <div class="boxBar">
@@ -213,12 +224,18 @@
 
 
         </div>
-            </div>
         </g:if>
 
     </g:each>
+    <g:if test="${Aids.list()[2]}">
 
-    <g:if test="${totalArray[3]}">
+        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[2].adDescribe]">
+            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[2].imageName])}" class="img-responsive ad-image adimage1 lazy" >
+        </g:link>
+    </g:if>
+    <g:else>
+        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive adimage1 ad-image" style="margin-top: -45px;"/>
+    </g:else>
         <div class="wrapperSalesProduct">
 
             <div class="boxBar">
@@ -281,18 +298,9 @@
 
 
             </div>
-            <g:if test="${Aids.list()[2]}">
 
-                <div class="salesProductSide">
-                    <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[2].adDescribe]">
-
-                        <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[2].imageName])}" class="img-responsive lazy">
-                    </g:link>
-                </div>
-            </g:if>
         </div>
 
-    </g:if>
     <g:each in="${totalArray[4]}" var="listProducts" status="i">
         <g:if test="${i>=2 && i<4}">
             <div class="subBoxBar">
@@ -412,19 +420,12 @@
         <p>
             Erke sport shoes, appeal and accessories Established in 2000 by the China Hongxing ERKE Group, ERKE is a clothing brand that specializes in the manufacturing, research and development, and retail of sports shoes, apparel and accessories. Within ten years, the ERKE Group has successfully developed the brand into one of the most renowned lifestyle brands. To date, the brand has received some of the most prestigious recognition such as Asia Top Brand, “ Asia’s best 200 under one billion” and the Certificate of “Eco-labeling”.
         </p>
-        <h4>What makes Erke unique?</h4>
-        <p>
-            We want customers to know the importance of representing themselves through the view of brand wears.  “Yarsaa”
-            is now one very e-store striving to grow customers and sellers base with every passing day. “Yarsaa” provides
-            a unique digital market platform where sellers and buyers can interact and a one stop shop for buying and
-            selling as we are associated with various brands in Nepal. This is what makes Yarsaa one of the unique e-store
-            from other online shopping sites in Nepal and provides the best online shopping experience to its customers.
-            Because “we believe in quality”, “We believe in genuineness”.
-        </p>
+
     </div>
 
     <br>
 
+</div>
 </div>
 </div>
 </body>

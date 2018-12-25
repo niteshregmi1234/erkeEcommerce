@@ -41,7 +41,7 @@ class EndUserInformationService {
            def date=new Date()
         def orderIdInstance=new OrderId()
         orderIdInstance.email=billingInfo[5]
-           orderIdInstance.orderId="yarsaa/"
+           orderIdInstance.orderId="erke/"
         orderIdInstance.save(flush: true)
            def orderId=orderIdInstance.orderId+orderIdInstance.id
         orderIdInstance.orderId=orderId
@@ -85,7 +85,7 @@ class EndUserInformationService {
 
             def date=new Date()
             def orderIdInstance=new OrderId()
-            orderIdInstance.orderId="yarsaa/"
+            orderIdInstance.orderId="Erke/"
             orderIdInstance.save(flush: true)
             def orderId=orderIdInstance.orderId+orderIdInstance.id
             orderIdInstance.orderId=orderId
@@ -114,7 +114,6 @@ class EndUserInformationService {
 
     def saveShipping(Map params,OrderId orderId){
         def shippingInfo= JSON.parse(params.isShipping)
-        print shippingInfo+"yessssshippimg"
         def shippingDetails=new ShippingDetails()
         shippingDetails.firstNameShipping=shippingInfo[0]
         shippingDetails.lastNameShipping=shippingInfo[1]

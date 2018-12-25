@@ -16,7 +16,7 @@
         <g:if test="${SeoOptimization.list()[0]}">
         <title>${SeoOptimization.list()[0].title}</title>
         </g:if>
-        <g:else><title>Yarsaa</title></g:else>
+        <g:else><title>Erke</title></g:else>
     </g:else>
     <g:if test="${SeoOptimization.list()[0]}">
         <meta name="google-site-verification" content="${SeoOptimization.list()[0].googleSiteVerification}"/>

@@ -50,9 +50,9 @@ grails {
 
         port = 465
 
-        username = "yarsaacustomermail@gmail.com"
+        username = "erkenepalcustomermail@gmail.com"
 
-        password = "hem1234...."
+        password = "Erke2019"
 
         props = ["mail.smtp.auth":"true",
 
