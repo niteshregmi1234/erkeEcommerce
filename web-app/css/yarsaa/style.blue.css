@@ -19,7 +19,7 @@ h1 {
   font-size: 40px;
 }
 .pannel-tab .panel-heading{
-  background-color: #4993e4;
+  background-color: rgb(17, 102, 183);
 }
 #top {
   background: #555555;
@@ -886,7 +886,7 @@ h1 {
   font-weight: 300;
 }
 #footer {
-  background: #272424;
+  background:rgb(17, 102, 183);
   padding: 20px 0;
 }
 #footer ul {
@@ -1278,7 +1278,7 @@ h1 {
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   color: #eee;
-  background-color: #09175E
+  background-color: rgb(17, 102, 183)
 }
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
@@ -1342,7 +1342,7 @@ body {
   background-color: #f0f0f0;
 }
 a {
-  color: #ec5f1d;
+  color: #000000;
   text-decoration: none;
 }
 a:hover,
@@ -1395,7 +1395,7 @@ hr {
 }
 .btn-primary {
   color: #eee;
-  background-color: #09175E;
+  background-color: #rgb(17, 102, 183);
   border-color: #09175E;
 }
 .btn-primary:hover,
@@ -1690,7 +1690,7 @@ address {
 }
 
 #footer h4{
-  color: #ec5f1d;
+  color: #000000;
 }
 
 #footer h5{
