@@ -16,7 +16,7 @@
         <g:if test="${SeoOptimization.list()[0]}">
         <title>${SeoOptimization.list()[0].title}</title>
         </g:if>
-        <g:else><title>Yarsaa</title></g:else>
+        <g:else><title>Erke</title></g:else>
     </g:else>
     <g:if test="${SeoOptimization.list()[0]}">
         <meta name="google-site-verification" content="${SeoOptimization.list()[0].googleSiteVerification}"/>
@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/owl.theme.css')}" type="text/css"
           media="all"/>
     <g:if test="${StyleManagement.list()[0]}">
-        <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"${"style."+StyleManagement.list()[0].style.name+".css"}")}" type="text/css"
+        <link rel="stylesheet" href="${resource(dir: 'css/yarsaa', file:"${"style."+StyleManagement.list()[0].style.name+".css?v=1.6"}")}" type="text/css"
               media="all"/>
     </g:if>
     <g:if test="${StyleManagement.list()[0]==null}">
@@ -107,7 +107,7 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'yarsaa/fancybox.min.css')}" type="text/css"
           media="all"/>
 
-    <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/yarsaalogosmall.png')}">
+    <link rel="shortcut icon" href="${resource(dir: 'js', file: 'yarsaa/erke-logo-only.png')}">
 </head>
 
 <body>
@@ -518,14 +518,14 @@
                     </button>
                     <div class="dropdown-content" id="logoutClass">
                         <g:if test="${session.endUser==null}">
-                            <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                            <a href="#" data-toggle="modal" data-target="#login-modal" style="color: rgb(17, 102, 183);">Login</a>
                         </g:if>
-                        <g:if test="${session.endUser}"><a href="#" onclick="logoutUser();">Logout</a>
+                        <g:if test="${session.endUser}"><a href="#" onclick="logoutUser();" style="color: rgb(17, 102, 183);">Logout</a>
 
-                            <g:link action="myProfile" controller="endUserInformation">My Profile</g:link>
+                            <g:link action="myProfile" controller="endUserInformation" style="color: rgb(17, 102, 183);">My Profile</g:link>
 
                         </g:if>
-                        <g:link action="register" controller="endUserInformation">Register</g:link>
+                        <g:link action="register" controller="endUserInformation" style="color: rgb(17, 102, 183);">Register</g:link>
 
 
 
@@ -765,7 +765,7 @@
 
                         <h4>Where to find us</h4>
 
-                        <p style="color: #eee;"><strong>${CompanyInformation.list()[0].companyName}.</strong>
+                        <p style="color: #060606;"><strong>${CompanyInformation.list()[0].companyName}.</strong>
 
                             <br>${CompanyInformation.list()[0].location1}
                             <br>${CompanyInformation.list()[0].location2}
@@ -849,7 +849,7 @@
                         <a href="https://www.facebook.com/Erke-Nepal-916897545081335/" type="button" class="btn btn-primary"><i class="fa fa-facebook"></i></a>
 
                     </div>
-                    <p class="pull-right">ALL RIGHTS RESERVED BY ONLINE ERKE
+                    <p class="pull-right">ALL RIGHTS RESERVED BY ERKE
                     <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
                     </p>
                 </div>

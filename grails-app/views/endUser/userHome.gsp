@@ -30,16 +30,8 @@
         </g:each>
     %{--</div>--}%
     <!-- /#main-slider -->
-    </div>
-    <g:if test="${Aids.list()[0]}">
+    </div><br><br><br>
 
-        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[0].adDescribe]">
-            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[0].imageName])}" class="img-responsive ad-image lazy">
-        </g:link>
-    </g:if>
-    <g:else>
-        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive ad-image" />
-    </g:else>
 
     %{--</div>--}%
     %{--<div class="container">--}%
@@ -107,14 +99,6 @@
     </g:if>
     <div class="container-fluid">
 
-        <g:if test="${Aids.list()[1]}">
-        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[1].adDescribe]">
-            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[1].imageName])}" class="img-responsive ad-image adimage1 lazy" >
-        </g:link>
-    </g:if>
-    <g:else>
-        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive adimage1 ad-image" style="margin-top: -45px;"/>
-    </g:else>
 </div>
     <g:each in="${totalArray[4]}" var="listProducts" status="i">
         <g:if test="${i<2}">
@@ -227,15 +211,7 @@
         </g:if>
 
     </g:each>
-    <g:if test="${Aids.list()[2]}">
 
-        <g:link action="ad" controller="endUser" params="[aidsDescribe:Aids.list()[2].adDescribe]">
-            <img src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:Aids.list()[2].imageName])}" class="img-responsive ad-image adimage1 lazy" >
-        </g:link>
-    </g:if>
-    <g:else>
-        <img src="https://dummyimage.com/1400x100/000/fff" class="img img-responsive adimage1 ad-image" style="margin-top: -45px;"/>
-    </g:else>
         <div class="wrapperSalesProduct">
 
             <div class="boxBar">
@@ -415,13 +391,6 @@
         </g:if>
 
     </g:each>
-    <div class="container info">
-        <h4>Erke,A Brand</h4>
-        <p>
-            Erke sport shoes, appeal and accessories Established in 2000 by the China Hongxing ERKE Group, ERKE is a clothing brand that specializes in the manufacturing, research and development, and retail of sports shoes, apparel and accessories. Within ten years, the ERKE Group has successfully developed the brand into one of the most renowned lifestyle brands. To date, the brand has received some of the most prestigious recognition such as Asia Top Brand, “ Asia’s best 200 under one billion” and the Certificate of “Eco-labeling”.
-        </p>
-
-    </div>
 
     <br>
 

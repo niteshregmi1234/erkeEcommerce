@@ -5,10 +5,15 @@
 /*width: 432px;*/
 /*}*/
 
+#total{
+
+    background-color: white;
+
+}
 .boxBar h2 {
     text-transform: uppercase;
     font-size: 36px;
-    color: #ac623f;
+    color: rgb(17, 102, 183);
     font-weight: 400;
     /*text-align: center;*/
 }
@@ -19,6 +24,7 @@
     width: 100%;
 }
 html, body {
+    font-family: cursive;
     max-width: 100%;
     overflow-x: hidden;
 }

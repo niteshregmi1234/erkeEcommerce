@@ -305,8 +305,7 @@
           <div class="col-sm-6">
             <div class="box detailBox" style="height:500px;">
               <h3 class="detailName">${totalArray[0].productDetails.productBrand.brandName+" "+totalArray[0].productDetails.briefDescription}</h3>
-              <p class="goToDescription" style="text-align: left;"><a href="#details" class="scroll-to" style="color: rgb(17, 102, 183);">click here! go to description tab</a>
-              </p>
+
 <g:hiddenField name="productIdWithColor" id="productIdWithColor" value="${totalArray[0].id}"></g:hiddenField>
               %{--<h5 style="color:#337ab7">vendido por <a href="#">Samsung</a> · <small style="color:#337ab7">(5054 ventas)</small></h5>--}%
 
@@ -686,26 +685,6 @@
                   </div>
                 </div>
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                      Sizes And Fits</a>
-                    <i class="indicator glyphicon glyphicon-plus  pull-right"></i>
-                  </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <ul>
-                      <g:each in="${totalArray[1]}" var="list">
-
-                        <li>${list.sizeName}-${list.sizeDetails}</li>
-                      </g:each>
-                    </ul>
-
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
           <hr>
@@ -808,60 +787,6 @@
         }
 
         </style>
-        <div class="row same-height-row">
-          <div class="col-md-3 col-sm-6">
-            <div class="box same-height">
-              <h3>You may also like these products</h3>
-            </div>
-          </div>
-          <g:each in="${totalArray[3]}" var="list" status="i">
-            <g:if test="${i<3}">
-              <div class="col-md-2 col-sm-6">
-                <div class="product same-height">
-                  <div class="flip-container">
-                    <div class="flipper">
-                      <div class="front">
-                        <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                          <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
-                        </g:link>
-                      </div>
-                      <div class="back">
-                        <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">
-                          <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
-                        </g:link>
-                      </div>
-                    </div>
-                  </div>
-                  <g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]" class="invisible food1">
-
-                    <img src="${resource(dir: 'images', file: 'Spinner-1s-25px.gif')}" data-src="${createLink(controller: 'imageRender', action:'renderImage',params: [imageName:list.specialImageName])}" class="img-responsive lazy">
-
-                  </g:link>
-                  <div class="text">
-                    %{--<h3><g:link action="singleProduct" controller="endUser" params="[specificationName:list.productSpecificationName]">${list.productDetails.productBrand.brandName+"-"+list.productDetails.briefDescription}</g:link></h3>--}%
-                    <div class="productDescription">${list.productDetails.briefDescription}</div>
-                    <g:if test="${list.productDetails.isSale==true}">
-                      <p class="price priceWithDiscount" style="text-align:left;color:#202020;font-weight: 400;font-size: 14px;margin-top: 2px;width: 135px;word-wrap: break-word;"> Rs.<g:formatNumber number="${list.productDetails.price-(list.productDetails.discountPercentage*list.productDetails.price/100)}" type="number" maxFractionDigits="2" />
-                        <del class="del-price" style="font-size: 13px;font-weight: 400;color: #606060;">Rs.${list.productDetails.price}</del></p>
-                      <div class="discountBox">-${list.productDetails.discountPercentage}%</div>
-                    </g:if>
-                    <g:if test="${list.productDetails.isSale==false}">
-
-                      <p class="price priceWithoutDiscount" style="color:#202020;font-weight: 400;font-size: 14px;text-align: left;width: 163px;">Rs.${list.productDetails.price}</p>
-                    </g:if>
-                  </div>
-
-                  <!-- /.text -->
-                </div>
-                <!-- /.product -->
-              </div>
-
-            </g:if>
-          </g:each>
-
-
-
-        </div>
 
         %{--<div class="row same-height-row">--}%
         %{--<div class="col-md-3 col-sm-6">--}%
